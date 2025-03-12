@@ -17,24 +17,31 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.reflect.PublicStaticHelper;
+import walkingkooka.convert.FakeConverterContext;
+import walkingkooka.environment.EnvironmentValueName;
+import walkingkooka.net.email.EmailAddress;
 
-/**
- * A collection of factory methods to create {@link ValidationContext}
- */
-public final class ValidationContexts implements PublicStaticHelper {
+import java.util.Optional;
+import java.util.Set;
 
-    /**
-     * {@see FakeValidationContext}
-     */
-    public static ValidationContext fake() {
-        return new FakeValidationContext();
+public class FakeValidationContext extends FakeConverterContext implements ValidationContext {
+
+    public FakeValidationContext() {
+        super();
     }
 
-    /**
-     * Stop creation
-     */
-    private ValidationContexts() {
+    @Override
+    public <T> Optional<T> environmentValue(final EnvironmentValueName<T> environmentValueName) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Set<EnvironmentValueName<?>> environmentValueNames() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Optional<EmailAddress> user() {
         throw new UnsupportedOperationException();
     }
 }
