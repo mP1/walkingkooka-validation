@@ -28,4 +28,11 @@ public interface ValidatorContext<T extends ValidationReference> extends Convert
      * Useful when creating a {@link ValidationError} to report an error.
      */
     T validationReference();
+
+    default ValidationError<T> validationError(final String message) {
+        return ValidationError.with(
+            this.validationReference(),
+            message
+        );
+    }
 }
