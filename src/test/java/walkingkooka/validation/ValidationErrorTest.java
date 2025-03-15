@@ -22,6 +22,7 @@ import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.text.printer.TreePrintableTesting;
 
 import java.util.Optional;
 
@@ -29,7 +30,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<ValidationError>,
     ToStringTesting<ValidationError>,
-    ClassTesting<ValidationError> {
+    ClassTesting<ValidationError>,
+    TreePrintableTesting {
 
     private final static ValidationReference REFERENCE = new ValidationReference() {
         @Override
@@ -190,6 +192,35 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
         this.toStringAndCheck(
             this.createObject(),
             "Hello \"Error too many xyz\" \"Value999\""
+        );
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Test
+    public void testTreePrintWithoutValue() {
+        this.treePrintAndCheck(
+            ValidationError.with(
+                REFERENCE,
+                MESSAGE,
+                Optional.empty()
+            ),
+            "ValidationError\n" +
+                "  HelloError too many xyz\n"
+        );
+    }
+
+    @Test
+    public void testTreePrintWithValue() {
+        this.treePrintAndCheck(
+            ValidationError.with(
+                REFERENCE,
+                MESSAGE,
+                VALUE
+            ),
+            "ValidationError\n" +
+                "  HelloError too many xyz\n" +
+                "      Value999"
         );
     }
 
