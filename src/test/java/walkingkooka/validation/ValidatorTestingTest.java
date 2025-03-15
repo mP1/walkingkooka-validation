@@ -64,6 +64,11 @@ public class ValidatorTestingTest implements ValidatorTesting2<TestValidator> {
         return new TestValidator();
     }
 
+    @Override
+    public ValidationContext createContext() {
+        return ValidationContexts.fake();
+    }
+
     static class TestValidator implements Validator {
 
         TestValidator(final ValidationError... errors) {

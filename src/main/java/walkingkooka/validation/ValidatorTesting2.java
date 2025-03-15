@@ -53,4 +53,6 @@ public interface ValidatorTesting2<T extends Validator> extends ValidatorTesting
     }
 
     T createValidator();
+
+    ValidationContext createContext();
 }
