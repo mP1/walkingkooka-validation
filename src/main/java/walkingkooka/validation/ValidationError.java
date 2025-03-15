@@ -22,6 +22,8 @@ import walkingkooka.ToStringBuilder;
 import walkingkooka.UsesToStringBuilder;
 import walkingkooka.Value;
 import walkingkooka.text.Whitespace;
+import walkingkooka.text.printer.IndentingPrinter;
+import walkingkooka.text.printer.TreePrintable;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -30,7 +32,8 @@ import java.util.Optional;
  * Reports a single error for the identified field or component.
  */
 public final class ValidationError implements Value<Optional<Object>>,
-    UsesToStringBuilder {
+    UsesToStringBuilder,
+    TreePrintable {
 
     public static ValidationError with(final ValidationReference reference,
                                        final String message,
@@ -107,5 +110,40 @@ public final class ValidationError implements Value<Optional<Object>>,
         builder.value(this.reference)
             .value(this.message)
             .value(this.value);
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public void printTree(final IndentingPrinter printer) {
+        printer.println(this.getClass().getSimpleName());
+
+        printer.indent();
+        {
+            TreePrintable.printTreeOrToString(
+                this.reference,
+                printer
+            );
+
+            printer.indent();
+            {
+                printer.println(this.message);
+
+                final Object valueOrNull = this.value.orElse(null);
+                if(null != valueOrNull) {
+
+                    printer.indent();
+                    {
+                        TreePrintable.printTreeOrToString(
+                            valueOrNull,
+                            printer
+                        );
+                    }
+                    printer.outdent();
+                }
+            }
+            printer.outdent();
+        }
+        printer.outdent();
     }
 }
