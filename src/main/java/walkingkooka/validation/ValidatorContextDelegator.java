@@ -24,16 +24,16 @@ import walkingkooka.environment.EnvironmentContextDelegator;
 
 import java.time.LocalDateTime;
 
-public interface ValidatorContextDelegator extends ValidatorContext,
+public interface ValidatorContextDelegator<T extends ValidationReference> extends ValidatorContext<T>,
     ConverterContextDelegator,
     EnvironmentContextDelegator {
 
     // ValidatorContextDelegator.......................................................................................
 
-    ValidatorContext validationContext();
+    ValidatorContext<T> validationContext();
 
     @Override
-    default ValidationReference validationReference() {
+    default T validationReference() {
         return this.validationContext()
             .validationReference();
     }

@@ -24,7 +24,7 @@ import walkingkooka.net.email.EmailAddress;
 import java.util.Optional;
 import java.util.Set;
 
-public class FakeValidatorContext<T extends ValidationReference> extends FakeConverterContext implements ValidatorContext {
+public class FakeValidatorContext<T extends ValidationReference> extends FakeConverterContext implements ValidatorContext<T> {
 
     public FakeValidatorContext() {
         super();
