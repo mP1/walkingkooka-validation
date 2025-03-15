@@ -110,7 +110,7 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
 
     @Test
     public void testWith() {
-        final ValidationError error = ValidationError.with(
+        final ValidationError<TestReference> error = ValidationError.with(
             REFERENCE,
             MESSAGE,
             VALUE
