@@ -24,10 +24,15 @@ import walkingkooka.net.email.EmailAddress;
 import java.util.Optional;
 import java.util.Set;
 
-public class FakeValidationContext extends FakeConverterContext implements ValidationContext {
+public class FakeValidationContext<T extends ValidationReference> extends FakeConverterContext implements ValidationContext {
 
     public FakeValidationContext() {
         super();
+    }
+
+    @Override
+    public T validationReference() {
+        throw new UnsupportedOperationException();
     }
 
     @Override

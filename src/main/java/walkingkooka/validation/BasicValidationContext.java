@@ -29,19 +29,30 @@ final class BasicValidationContext implements ValidationContext,
     ConverterContextDelegator,
     EnvironmentContextDelegator {
 
-    static BasicValidationContext with(final ConverterContext converterContext,
+    static BasicValidationContext with(final ValidationReference validationReference,
+                                       final ConverterContext converterContext,
                                        final EnvironmentContext environmentContext) {
         return new BasicValidationContext(
+            Objects.requireNonNull(validationReference, "validationReference"),
             Objects.requireNonNull(converterContext, "converterContext"),
             Objects.requireNonNull(environmentContext, "environmentContext")
         );
     }
 
-    private BasicValidationContext(final ConverterContext converterContext,
+    private BasicValidationContext(final ValidationReference validationReference,
+                                   final ConverterContext converterContext,
                                    final EnvironmentContext environmentContext) {
+        this.validationReference = validationReference;
         this.converterContext = converterContext;
         this.environmentContext = environmentContext;
     }
+
+    @Override
+    public ValidationReference validationReference() {
+        return this.validationReference;
+    }
+
+    private final ValidationReference validationReference;
 
     @Override
     public LocalDateTime now() {
@@ -70,6 +81,6 @@ final class BasicValidationContext implements ValidationContext,
 
     @Override
     public String toString() {
-        return this.converterContext + " " + this.environmentContext;
+        return this.validationReference + " " + this.converterContext + " " + this.environmentContext;
     }
 }

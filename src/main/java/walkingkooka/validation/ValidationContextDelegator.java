@@ -33,6 +33,12 @@ public interface ValidationContextDelegator extends ValidationContext,
     ValidationContext validationContext();
 
     @Override
+    default ValidationReference validationReference() {
+        return this.validationContext()
+            .validationReference();
+    }
+
+    @Override
     default LocalDateTime now() {
         return this.converterContext()
             .now();

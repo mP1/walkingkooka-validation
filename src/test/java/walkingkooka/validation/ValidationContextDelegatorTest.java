@@ -35,6 +35,13 @@ import java.util.Optional;
 
 public final class ValidationContextDelegatorTest implements ValidationContextTesting<TestValidationContext> {
 
+    private final static ValidationReference VALIDATION_REFERENCE = new ValidationReference() {
+        @Override
+        public String text() {
+            return "A1";
+        }
+    };
+
     private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
     private final static ConverterContext CONVERTER_CONTEXT = ConverterContexts.basic(
@@ -66,6 +73,7 @@ public final class ValidationContextDelegatorTest implements ValidationContextTe
         @Override
         public ValidationContext validationContext() {
             return ValidationContexts.basic(
+                VALIDATION_REFERENCE,
                 CONVERTER_CONTEXT,
                 ENVIRONMENT_CONTEXT
             );

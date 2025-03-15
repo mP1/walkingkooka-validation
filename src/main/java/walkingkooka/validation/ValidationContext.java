@@ -20,6 +20,12 @@ package walkingkooka.validation;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.environment.EnvironmentContext;
 
-public interface ValidationContext extends ConverterContext,
+public interface ValidationContext<T extends ValidationReference> extends ConverterContext,
     EnvironmentContext {
+
+    /**
+     * The current {@link ValidationReference}.
+     * Useful when creating a {@link ValidationError} to report an error.
+     */
+    T validationReference();
 }
