@@ -19,10 +19,23 @@ package walkingkooka.validation;
 
 import walkingkooka.reflect.PublicStaticHelper;
 
+import java.util.List;
+
 /**
  * A collection of {@link Validator} factory methods.
  */
 public final class Validators implements PublicStaticHelper {
+
+    /**
+     * {@link ValidatorCollection}
+     */
+    public static <T extends ValidationReference> Validator<T> collection(final int maxErrors,
+                                       final List<Validator<T>> validators) {
+        return ValidatorCollection.with(
+            maxErrors,
+            validators
+        );
+    }
 
     /**
      * {@see FakeValidator}
