@@ -114,23 +114,61 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
             VALUE
         );
 
+        this.referenceAndCheck(error);
+        this.messageAndCheck(error);
+        this.valueAndCheck(error);
+    }
+
+    // helper...........................................................................................................
+
+    private void referenceAndCheck(final ValidationError<TestReference> error) {
+        this.referenceAndCheck(
+            error,
+            REFERENCE
+        );
+    }
+    
+    private void referenceAndCheck(final ValidationError<TestReference> error,
+                                   final TestReference expected) {
         this.checkEquals(
-            REFERENCE,
+            expected,
             error.reference(),
-            "reference"
-        );
-        this.checkEquals(
-            MESSAGE,
-            error.message(),
-            "message"
-        );
-        this.checkEquals(
-            VALUE,
-            error.value(),
-            "value"
+            error::toString
         );
     }
 
+    private void messageAndCheck(final ValidationError<TestReference> error) {
+        this.messageAndCheck(
+            error,
+            MESSAGE
+        );
+    }
+
+    private void messageAndCheck(final ValidationError<TestReference> error,
+                                 final String expected) {
+        this.checkEquals(
+            expected,
+            error.message(),
+            error::toString
+        );
+    }
+
+    private void valueAndCheck(final ValidationError<TestReference> error) {
+        this.valueAndCheck(
+            error,
+            VALUE
+        );
+    }
+
+    private void valueAndCheck(final ValidationError<TestReference> error,
+                               final Optional<Object> expected) {
+        this.checkEquals(
+            expected,
+            error.value(),
+            error::toString
+        );
+    }
+    
     // class............................................................................................................
 
     @Test
