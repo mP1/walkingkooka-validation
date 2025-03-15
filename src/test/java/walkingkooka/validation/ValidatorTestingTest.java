@@ -76,7 +76,8 @@ public class ValidatorTestingTest implements ValidatorTesting2<TestValidator> {
         }
 
         @Override
-        public List<ValidationError> validate(Object value, ValidatorContext context) {
+        public List<ValidationError> validate(final Object value,
+                                              final ValidatorContext<?> context) {
             return this.errors;
         }
 
