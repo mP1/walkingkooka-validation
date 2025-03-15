@@ -23,7 +23,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public interface ValidatorTesting2<T extends Validator<R>, R extends ValidationReference> extends ValidatorTesting<R> {
+public interface ValidatorTesting2<T extends Validator<R>, R extends ValidationReference> extends ValidatorTesting {
 
     @Test
     default void testValidateWithNullContextFails() {
