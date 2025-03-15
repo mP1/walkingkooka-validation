@@ -80,8 +80,7 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
         public List<ValidationError<TestValidationReference>> validate(final Object value,
                                                                        final ValidatorContext<TestValidationReference> context) {
             return List.of(
-                ValidationError.with(
-                    context.validationReference(),
+                context.validationError(
                     message(
                         context.validationReference(),
                         3
@@ -104,8 +103,7 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
         public List<ValidationError<TestValidationReference>> validate(final Object value,
                                               final ValidatorContext<TestValidationReference> context) {
             return List.of(
-                ValidationError.with(
-                    context.validationReference(),
+                context.validationError(
                     message(
                         context.validationReference(),
                         4
