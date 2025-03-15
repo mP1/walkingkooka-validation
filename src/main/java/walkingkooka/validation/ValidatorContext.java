@@ -20,6 +20,9 @@ package walkingkooka.validation;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.environment.EnvironmentContext;
 
+/**
+ * {@link walkingkooka.Context} that accompanies a {@link Validator} during validation.
+ */
 public interface ValidatorContext<T extends ValidationReference> extends ConverterContext,
     EnvironmentContext {
 
@@ -29,6 +32,9 @@ public interface ValidatorContext<T extends ValidationReference> extends Convert
      */
     T validationReference();
 
+    /**
+     * Factory that creates a {@link ValidationError} using the current {@link ValidationReference}.
+     */
     default ValidationError<T> validationError(final String message) {
         return ValidationError.with(
             this.validationReference(),
