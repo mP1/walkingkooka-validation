@@ -19,7 +19,6 @@ package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.validation.ValidatorCollectionTest.TestValidationReference;
 import walkingkooka.validation.ValidatorTesting2Test.TestValidator;
 
 import java.util.List;

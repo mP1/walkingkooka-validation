@@ -19,7 +19,6 @@ package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.validation.ValidatorCollectionTest.TestValidationReference;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,25 +28,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class ValidatorCollectionTest implements ValidatorTesting2<ValidatorCollection<TestValidationReference>, TestValidationReference> {
 
     private final static Object VALUE = "Value111";
-
-    static final class TestValidationReference implements ValidationReference {
-
-        TestValidationReference(final String field) {
-            this.field = field;
-        }
-
-        @Override
-        public String text() {
-            return this.field;
-        }
-
-        private final String field;
-
-        @Override
-        public String toString() {
-            return this.field;
-        }
-    }
 
     private final static TestValidationReference REFERENCE1 = new TestValidationReference("Field1");
 
