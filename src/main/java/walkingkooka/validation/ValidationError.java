@@ -78,6 +78,16 @@ public final class ValidationError<T extends ValidationReference> implements Val
         return this.value;
     }
 
+    public ValidationError<T> setValue(final Optional<Object> value) {
+        return this.value.equals(value) ?
+            this :
+            new ValidationError<>(
+                this.reference,
+                this.message,
+                Objects.requireNonNull(value, "value")
+            );
+    }
+
     private final Optional<Object> value;
 
     // Object...........................................................................................................

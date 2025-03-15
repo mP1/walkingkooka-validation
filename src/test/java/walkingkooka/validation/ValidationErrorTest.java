@@ -30,6 +30,8 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<ValidationError<TestReference>>,
@@ -119,6 +121,51 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
         this.valueAndCheck(error);
     }
 
+    // setValue.........................................................................................................
+
+    @Test
+    public void testSetValueWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createObject().setValue(null)
+        );
+    }
+
+    @Test
+    public void testSetValueSame() {
+        final ValidationError<TestReference> error = this.createObject();
+
+        assertSame(
+            error,
+            error.setValue(VALUE)
+        );
+    }
+
+    @Test
+    public void testSetValueWithDifferent() {
+        final ValidationError<TestReference> error = this.createObject();
+
+        final Optional<Object> differentValue = Optional.of("Different");
+        final ValidationError<TestReference> different = error.setValue(differentValue);
+
+        assertNotSame(
+            error,
+            different
+        );
+
+        this.referenceAndCheck(error);
+        this.referenceAndCheck(different);
+
+        this.messageAndCheck(error);
+        this.messageAndCheck(different);
+
+        this.valueAndCheck(error);
+        this.valueAndCheck(
+            different,
+            differentValue
+        );
+    }
+    
     // helper...........................................................................................................
 
     private void referenceAndCheck(final ValidationError<TestReference> error) {
