@@ -201,7 +201,7 @@ public final class ValidationError<T extends ValidationReference> implements Val
             JsonNodeUnmarshallContext.missingProperty(MESSAGE_PROPERTY, node);
         }
 
-        return new ValidationError(
+        return new ValidationError<>(
             kind,
             message,
             Optional.ofNullable(value)
