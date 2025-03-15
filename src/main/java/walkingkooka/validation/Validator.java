@@ -28,5 +28,5 @@ public interface Validator {
      * Validates the given value returning zero or more {@link ValidationError}.
      */
     List<ValidationError> validate(final Object value,
-                                   final ValidatorContext context);
+                                   final ValidatorContext<?> context);
 }
