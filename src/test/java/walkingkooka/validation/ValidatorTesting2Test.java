@@ -73,6 +73,6 @@ public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, T
             return this.errors;
         }
 
-        private List<ValidationError<TestValidationReference>> errors;
+        private final List<ValidationError<TestValidationReference>> errors;
     }
 }
