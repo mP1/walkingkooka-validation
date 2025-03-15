@@ -9,7 +9,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY REFERENCE, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -22,7 +22,13 @@ import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.text.CharSequences;
 import walkingkooka.text.printer.TreePrintableTesting;
+import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.marshall.JsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Optional;
 
@@ -31,19 +37,57 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<ValidationError>,
     ToStringTesting<ValidationError>,
     ClassTesting<ValidationError>,
-    TreePrintableTesting {
+    TreePrintableTesting,
+    JsonNodeMarshallingTesting<ValidationError> {
 
-    private final static ValidationReference REFERENCE = new ValidationReference() {
+    static class TestReference implements ValidationReference {
+
+        TestReference(final String field) {
+            this.field = CharSequences.failIfNullOrEmpty(field, "field");
+        }
+
         @Override
         public String text() {
-            return "Hello";
+            return this.field;
+        }
+
+        private final String field;
+
+        @Override
+        public int hashCode() {
+            return this.field.hashCode();
+        }
+
+        @Override
+        public boolean equals(final Object other) {
+            return this ==other || other instanceof TestReference && this.field.equals(((TestReference) other).field);
         }
 
         @Override
         public String toString() {
-            return this.text();
+            return this.field;
         }
-    };
+
+        private JsonNode marshall(final JsonNodeMarshallContext context) {
+            return JsonNode.string(this.field);
+        }
+
+        static TestReference unmarshall(final JsonNode node,
+                                        final JsonNodeUnmarshallContext context) {
+            return new TestReference(node.stringOrFail());
+        }
+    }
+
+    static {
+        JsonNodeContext.register(
+            JsonNodeContext.computeTypeName(TestReference.class),
+            TestReference::unmarshall,
+            TestReference::marshall,
+            TestReference.class
+        );
+    }
+
+    private final static TestReference REFERENCE = new TestReference("Hello");
 
     private final static String MESSAGE = "Error too many xyz";
 
@@ -222,6 +266,63 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
                 "  HelloError too many xyz\n" +
                 "      Value999"
         );
+    }
+
+    // json.............................................................................................................
+
+    @Test
+    public void testUnmarshallNonObjectFails() {
+        this.unmarshallFails(
+            JsonNode.string("")
+        );
+    }
+
+    @Test
+    public void testUnmarshall() {
+        this.unmarshallAndCheck(
+            JsonNode.object()
+                .set(ValidationError.REFERENCE_PROPERTY, this.marshallContext().marshallWithType(REFERENCE))
+                .set(ValidationError.MESSAGE_PROPERTY, JsonNode.string(MESSAGE))
+                .set(
+                    ValidationError.VALUE_PROPERTY,
+                    this.marshallContext()
+                        .marshallWithType(VALUE.get())
+                ),
+            ValidationError.with(
+                REFERENCE,
+                MESSAGE,
+                VALUE
+            )
+        );
+    }
+
+    @Test
+    public void testMarshall() {
+        this.marshallAndCheck(
+            this.createObject(),
+            JsonNode.object()
+                .set(ValidationError.REFERENCE_PROPERTY, this.marshallContext().marshallWithType(REFERENCE))
+                .set(ValidationError.MESSAGE_PROPERTY, JsonNode.string(MESSAGE))
+                .set(
+                    ValidationError.VALUE_PROPERTY,
+                    this.marshallContext()
+                        .marshallWithType(VALUE.get())
+                )
+        );
+    }
+
+    @Override
+    public ValidationError unmarshall(final JsonNode json,
+                                      final JsonNodeUnmarshallContext context) {
+        return ValidationError.unmarshall(
+            json,
+            context
+        );
+    }
+
+    @Override
+    public ValidationError createJsonNodeMarshallingValue() {
+        return this.createObject();
     }
 
     // class............................................................................................................
