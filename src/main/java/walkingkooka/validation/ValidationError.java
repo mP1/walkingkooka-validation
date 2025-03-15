@@ -9,7 +9,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY REFERENCE, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
@@ -24,6 +24,12 @@ import walkingkooka.Value;
 import walkingkooka.text.Whitespace;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
+import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.JsonObject;
+import walkingkooka.tree.json.JsonPropertyName;
+import walkingkooka.tree.json.marshall.JsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -145,5 +151,81 @@ public final class ValidationError implements Value<Optional<Object>>,
             printer.outdent();
         }
         printer.outdent();
+    }
+
+    // json.............................................................................................................
+
+    static ValidationError unmarshall(final JsonNode node,
+                                       final JsonNodeUnmarshallContext context) {
+        ValidationReference kind = null;
+        String message = null;
+        Object value = null;
+
+        for (final JsonNode child : node.objectOrFail().children()) {
+            final JsonPropertyName name = child.name();
+            switch (name.value()) {
+                case REFERENCE_PROPERTY_STRING:
+                    kind = context.unmarshallWithType(child);
+                    break;
+                case MESSAGE_PROPERTY_STRING:
+                    message = child.stringOrFail();
+                    break;
+                case VALUE_PROPERTY_STRING:
+                    value = context.unmarshallWithType(child);
+                    break;
+                default:
+                    JsonNodeUnmarshallContext.unknownPropertyPresent(name, node);
+                    break;
+            }
+        }
+
+        if (null == kind) {
+            JsonNodeUnmarshallContext.missingProperty(REFERENCE_PROPERTY, node);
+        }
+        if (null == message) {
+            JsonNodeUnmarshallContext.missingProperty(MESSAGE_PROPERTY, node);
+        }
+
+        return new ValidationError(
+            kind,
+            message,
+            Optional.ofNullable(value)
+        );
+    }
+
+    private JsonNode marshall(final JsonNodeMarshallContext context) {
+        JsonObject json = JsonNode.object()
+            .set(REFERENCE_PROPERTY, context.marshallWithType(this.reference))
+            .set(MESSAGE_PROPERTY, JsonNode.string(this.message));
+
+        final Object value = this.value()
+            .orElse(null);
+        if (null != value) {
+            json = json.set(
+                VALUE_PROPERTY,
+                context.marshallWithType(value)
+            );
+        }
+
+        return json;
+    }
+
+    private final static String REFERENCE_PROPERTY_STRING = "reference";
+    private final static String MESSAGE_PROPERTY_STRING = "message";
+    private final static String VALUE_PROPERTY_STRING = "value";
+
+    // @VisibleForTesting
+
+    final static JsonPropertyName REFERENCE_PROPERTY = JsonPropertyName.with(REFERENCE_PROPERTY_STRING);
+    final static JsonPropertyName MESSAGE_PROPERTY = JsonPropertyName.with(MESSAGE_PROPERTY_STRING);
+    final static JsonPropertyName VALUE_PROPERTY = JsonPropertyName.with(VALUE_PROPERTY_STRING);
+
+    static {
+        JsonNodeContext.register(
+            JsonNodeContext.computeTypeName(ValidationError.class),
+            ValidationError::unmarshall,
+            ValidationError::marshall,
+            ValidationError.class
+        );
     }
 }
