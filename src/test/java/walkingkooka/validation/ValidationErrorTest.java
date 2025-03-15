@@ -54,8 +54,7 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
             NullPointerException.class,
             () -> ValidationError.with(
                 null,
-                MESSAGE,
-                VALUE
+                MESSAGE
             )
         );
     }
@@ -66,8 +65,7 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
             NullPointerException.class,
             () -> ValidationError.with(
                 REFERENCE,
-                null,
-                VALUE
+                null
             )
         );
     }
@@ -78,8 +76,7 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
             IllegalArgumentException.class,
             () -> ValidationError.with(
                 REFERENCE,
-                "",
-                VALUE
+                ""
             )
         );
     }
@@ -90,20 +87,7 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
             IllegalArgumentException.class,
             () -> ValidationError.with(
                 REFERENCE,
-                " ",
-                VALUE
-            )
-        );
-    }
-
-    @Test
-    public void testWithNullValueFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> ValidationError.with(
-                REFERENCE,
-                MESSAGE,
-                null
+                " "
             )
         );
     }
@@ -112,13 +96,12 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
     public void testWith() {
         final ValidationError<TestValidationReference> error = ValidationError.with(
             REFERENCE,
-            MESSAGE,
-            VALUE
+            MESSAGE
         );
 
         this.referenceAndCheck(error);
         this.messageAndCheck(error);
-        this.valueAndCheck(error);
+        this.valueAndCheck(error, ValidationError.NO_VALUE);
     }
 
     // setValue.........................................................................................................
@@ -133,7 +116,8 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
 
     @Test
     public void testSetValueSame() {
-        final ValidationError<TestValidationReference> error = this.createObject();
+        final ValidationError<TestValidationReference> error = this.createObject()
+            .setValue(VALUE);
 
         assertSame(
             error,
@@ -143,7 +127,8 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
 
     @Test
     public void testSetValueWithDifferent() {
-        final ValidationError<TestValidationReference> error = this.createObject();
+        final ValidationError<TestValidationReference> error = this.createObject()
+            .setValue(VALUE);
 
         final Optional<Object> differentValue = Optional.of("Different");
         final ValidationError<TestValidationReference> different = error.setValue(differentValue);
@@ -170,7 +155,8 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
 
     @Test
     public void testClearValueWhenNotEmpty() {
-        final ValidationError<TestValidationReference> error = this.createObject();
+        final ValidationError<TestValidationReference> error = this.createObject()
+            .setValue(VALUE);
 
         final ValidationError<TestValidationReference> different = error.clearValue();
 
@@ -259,8 +245,7 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
                         return "different";
                     }
                 },
-                MESSAGE,
-                VALUE
+                MESSAGE
             )
         );
     }
@@ -270,8 +255,7 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
         this.checkNotEquals(
             ValidationError.with(
                 REFERENCE,
-                "different",
-                VALUE
+                "different"
             )
         );
     }
@@ -281,7 +265,8 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
         this.checkNotEquals(
             ValidationError.with(
                 REFERENCE,
-                MESSAGE,
+                MESSAGE
+            ).setValue(
                 Optional.of("different")
             )
         );
@@ -291,8 +276,7 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
     public ValidationError<TestValidationReference> createObject() {
         return ValidationError.with(
             REFERENCE,
-            MESSAGE,
-            VALUE
+            MESSAGE
         );
     }
 
@@ -301,7 +285,8 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
     @Test
     public void testToString() {
         this.toStringAndCheck(
-            this.createObject(),
+            this.createObject()
+                .setValue(VALUE),
             "Hello \"Error too many xyz\" \"Value999\""
         );
     }
@@ -313,8 +298,7 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
         this.treePrintAndCheck(
             ValidationError.with(
                 REFERENCE,
-                MESSAGE,
-                Optional.empty()
+                MESSAGE
             ),
             "ValidationError\n" +
                 "  HelloError too many xyz\n"
@@ -326,9 +310,8 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
         this.treePrintAndCheck(
             ValidationError.with(
                 REFERENCE,
-                MESSAGE,
-                VALUE
-            ),
+                MESSAGE
+            ).setValue(VALUE),
             "ValidationError\n" +
                 "  HelloError too many xyz\n" +
                 "      Value999"
@@ -357,16 +340,16 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
                 ),
             ValidationError.with(
                 REFERENCE,
-                MESSAGE,
-                VALUE
-            )
+                MESSAGE
+            ).setValue(VALUE)
         );
     }
 
     @Test
     public void testMarshall() {
         this.marshallAndCheck(
-            this.createObject(),
+            this.createObject()
+                .setValue(VALUE),
             JsonNode.object()
                 .set(ValidationError.REFERENCE_PROPERTY, this.marshallContext().marshallWithType(REFERENCE))
                 .set(ValidationError.MESSAGE_PROPERTY, JsonNode.string(MESSAGE))
