@@ -23,14 +23,10 @@ import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
-import walkingkooka.text.CharSequences;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeContext;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
-import walkingkooka.validation.ValidationErrorTest.TestReference;
 
 import java.util.Optional;
 
@@ -41,53 +37,6 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
     ClassTesting<ValidationError<TestReference>>,
     TreePrintableTesting,
     JsonNodeMarshallingTesting<ValidationError<TestReference>> {
-
-    static class TestReference implements ValidationReference {
-
-        TestReference(final String field) {
-            this.field = CharSequences.failIfNullOrEmpty(field, "field");
-        }
-
-        @Override
-        public String text() {
-            return this.field;
-        }
-
-        private final String field;
-
-        @Override
-        public int hashCode() {
-            return this.field.hashCode();
-        }
-
-        @Override
-        public boolean equals(final Object other) {
-            return this ==other || other instanceof TestReference && this.field.equals(((TestReference) other).field);
-        }
-
-        @Override
-        public String toString() {
-            return this.field;
-        }
-
-        private JsonNode marshall(final JsonNodeMarshallContext context) {
-            return JsonNode.string(this.field);
-        }
-
-        static TestReference unmarshall(final JsonNode node,
-                                        final JsonNodeUnmarshallContext context) {
-            return new TestReference(node.stringOrFail());
-        }
-    }
-
-    static {
-        JsonNodeContext.register(
-            JsonNodeContext.computeTypeName(TestReference.class),
-            TestReference::unmarshall,
-            TestReference::marshall,
-            TestReference.class
-        );
-    }
 
     private final static TestReference REFERENCE = new TestReference("Hello");
 
