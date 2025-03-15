@@ -165,7 +165,38 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
             differentValue
         );
     }
-    
+
+    // clearValue.......................................................................................................
+
+    @Test
+    public void testClearValueWhenNotEmpty() {
+        final ValidationError<TestReference> error = this.createObject();
+
+        final ValidationError<TestReference> different = error.clearValue();
+
+        assertNotSame(
+            error,
+            different
+        );
+
+        this.referenceAndCheck(error);
+        this.referenceAndCheck(different);
+
+        this.messageAndCheck(error);
+        this.messageAndCheck(different);
+
+        this.valueAndCheck(error);
+        this.valueAndCheck(
+            different,
+            Optional.empty()
+        );
+
+        assertSame(
+            different,
+            different.clearValue()
+        );
+    }
+
     // helper...........................................................................................................
 
     private void referenceAndCheck(final ValidationError<TestReference> error) {

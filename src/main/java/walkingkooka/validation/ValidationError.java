@@ -90,6 +90,9 @@ public final class ValidationError<T extends ValidationReference> implements Val
 
     private final Optional<Object> value;
 
+    public ValidationError<T> clearValue() {
+        return this.setValue(Optional.empty());
+    }
     // Object...........................................................................................................
 
     @Override
