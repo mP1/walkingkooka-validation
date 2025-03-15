@@ -21,13 +21,19 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public interface ValidatorTesting2<T extends Validator<R>, R extends ValidationReference> extends ValidatorTesting<R> {
 
     @Test
     default void testValidateWithNullContextFails() {
-        this.validateAndCheck(
-            "Hello",
-            null
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createValidator()
+                .validate(
+                    "Hello",
+                    null
+                )
         );
     }
 
