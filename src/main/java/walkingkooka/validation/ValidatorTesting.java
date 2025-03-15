@@ -23,7 +23,7 @@ import java.util.List;
 
 public interface ValidatorTesting<T extends ValidationReference> extends Testing {
 
-    default void validateAndCheck(final Validator validator,
+    default void validateAndCheck(final Validator<T> validator,
                                   final Object value,
                                   final ValidatorContext<T> context,
                                   ValidationError... expected) {
@@ -35,7 +35,7 @@ public interface ValidatorTesting<T extends ValidationReference> extends Testing
         );
     }
 
-    default void validateAndCheck(final Validator validator,
+    default void validateAndCheck(final Validator<T> validator,
                                   final Object value,
                                   final ValidatorContext<T> context,
                                   final List<ValidationError> expected) {
