@@ -39,12 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class BasicValidatorContextTest implements ValidatorContextTesting<BasicValidatorContext>,
     ToStringTesting<BasicValidatorContext> {
 
-    private final static ValidationReference VALIDATION_REFERENCE = new ValidationReference() {
-        @Override
-        public String text() {
-            return "A1";
-        }
-    };
+    private final static TestValidationReference VALIDATION_REFERENCE = new TestValidationReference("A1");
 
     private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
@@ -104,7 +99,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
     }
 
     @Override
-    public BasicValidatorContext createContext() {
+    public BasicValidatorContext<TestValidationReference> createContext() {
         return BasicValidatorContext.with(
             VALIDATION_REFERENCE,
             CONVERTER_CONTEXT,
