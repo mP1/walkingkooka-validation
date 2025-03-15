@@ -22,6 +22,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.validation.ValidatorTestingTest.TestValidator;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class ValidatorTestingTest implements ValidatorTesting2<TestValidator, ValidationReference> {
@@ -78,6 +79,7 @@ public class ValidatorTestingTest implements ValidatorTesting2<TestValidator, Va
         @Override
         public List<ValidationError> validate(final Object value,
                                               final ValidatorContext<ValidationReference> context) {
+            Objects.requireNonNull(context, "context");
             return this.errors;
         }
 
