@@ -18,6 +18,7 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.Cast;
 import walkingkooka.ToStringTesting;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.ConverterContexts;
@@ -36,8 +37,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class BasicValidatorContextTest implements ValidatorContextTesting<BasicValidatorContext>,
-    ToStringTesting<BasicValidatorContext> {
+public final class BasicValidatorContextTest implements ValidatorContextTesting<BasicValidatorContext<TestValidationReference>, TestValidationReference>,
+    ToStringTesting<BasicValidatorContext<TestValidationReference>> {
 
     private final static TestValidationReference VALIDATION_REFERENCE = new TestValidationReference("A1");
 
@@ -164,8 +165,8 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
     // class............................................................................................................
 
     @Override
-    public Class<BasicValidatorContext> type() {
-        return BasicValidatorContext.class;
+    public Class<BasicValidatorContext<TestValidationReference>> type() {
+        return Cast.to(BasicValidatorContext.class);
     }
 
     @Override

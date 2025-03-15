@@ -33,7 +33,7 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Optional;
 
-public final class ValidatorContextTestingTest implements ValidatorContextTesting<TestValidatorContext> {
+public final class ValidatorContextTestingTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference> {
     @Override
     public TestValidatorContext createContext() {
         return new TestValidatorContext();

@@ -20,10 +20,10 @@ package walkingkooka.validation;
 import walkingkooka.convert.ConverterContextTesting;
 import walkingkooka.environment.EnvironmentContextTesting2;
 
-public interface ValidatorContextTesting<C extends ValidatorContext> extends ConverterContextTesting<C>, EnvironmentContextTesting2<C> {
+public interface ValidatorContextTesting<C extends ValidatorContext<R>, R extends ValidationReference> extends ConverterContextTesting<C>, EnvironmentContextTesting2<C> {
 
     default void validationReferenceAndCheck(final C context,
-                                             final ValidationReference expected) {
+                                             final R expected) {
         this.checkEquals(
             expected,
             context.validationReference(),
