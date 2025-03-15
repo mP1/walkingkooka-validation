@@ -77,12 +77,12 @@ public class ValidatorTestingTest implements ValidatorTesting2<TestValidator, Va
         }
 
         @Override
-        public List<ValidationError> validate(final Object value,
-                                              final ValidatorContext<ValidationReference> context) {
+        public List<ValidationError<ValidationReference>> validate(final Object value,
+                                                                   final ValidatorContext<ValidationReference> context) {
             Objects.requireNonNull(context, "context");
             return this.errors;
         }
 
-        private List<ValidationError> errors;
+        private List<ValidationError<ValidationReference>> errors;
     }
 }

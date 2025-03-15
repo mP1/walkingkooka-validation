@@ -18,6 +18,7 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.Cast;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
 import walkingkooka.reflect.ClassTesting;
@@ -29,16 +30,17 @@ import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
+import walkingkooka.validation.ValidationErrorTest.TestReference;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<ValidationError>,
-    ToStringTesting<ValidationError>,
-    ClassTesting<ValidationError>,
+public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<ValidationError<TestReference>>,
+    ToStringTesting<ValidationError<TestReference>>,
+    ClassTesting<ValidationError<TestReference>>,
     TreePrintableTesting,
-    JsonNodeMarshallingTesting<ValidationError> {
+    JsonNodeMarshallingTesting<ValidationError<TestReference>> {
 
     static class TestReference implements ValidationReference {
 
@@ -221,7 +223,7 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
     }
 
     @Override
-    public ValidationError createObject() {
+    public ValidationError<TestReference> createObject() {
         return ValidationError.with(
             REFERENCE,
             MESSAGE,
@@ -312,7 +314,7 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
     }
 
     @Override
-    public ValidationError unmarshall(final JsonNode json,
+    public ValidationError<TestReference> unmarshall(final JsonNode json,
                                       final JsonNodeUnmarshallContext context) {
         return ValidationError.unmarshall(
             json,
@@ -321,15 +323,15 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
     }
 
     @Override
-    public ValidationError createJsonNodeMarshallingValue() {
+    public ValidationError<TestReference> createJsonNodeMarshallingValue() {
         return this.createObject();
     }
 
     // class............................................................................................................
 
     @Override
-    public Class<ValidationError> type() {
-        return ValidationError.class;
+    public Class<ValidationError<TestReference>> type() {
+        return Cast.to(ValidationError.class);
     }
 
     @Override

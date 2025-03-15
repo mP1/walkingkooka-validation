@@ -26,8 +26,8 @@ public class FakeValidator<T extends ValidationReference> implements Validator<T
     }
 
     @Override
-    public List<ValidationError> validate(final Object value,
-                                          final ValidatorContext<T> context) {
+    public List<ValidationError<T>> validate(final Object value,
+                                             final ValidatorContext<T> context) {
         throw new UnsupportedOperationException();
     }
 }

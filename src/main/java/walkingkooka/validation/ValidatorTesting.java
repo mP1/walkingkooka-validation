@@ -26,7 +26,7 @@ public interface ValidatorTesting<T extends ValidationReference> extends Testing
     default void validateAndCheck(final Validator<T> validator,
                                   final Object value,
                                   final ValidatorContext<T> context,
-                                  ValidationError... expected) {
+                                  ValidationError<T>... expected) {
         this.validateAndCheck(
             validator,
             value,
@@ -38,7 +38,7 @@ public interface ValidatorTesting<T extends ValidationReference> extends Testing
     default void validateAndCheck(final Validator<T> validator,
                                   final Object value,
                                   final ValidatorContext<T> context,
-                                  final List<ValidationError> expected) {
+                                  final List<ValidationError<T>> expected) {
         this.checkEquals(
             expected,
             validator.validate(

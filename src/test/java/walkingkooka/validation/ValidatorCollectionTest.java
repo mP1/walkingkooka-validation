@@ -53,9 +53,9 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
 
     private final static TestValidationReference REFERENCE2 = new TestValidationReference("Field2");
 
-    private static ValidationError error(final TestValidationReference reference,
-                                         final int messageNumber,
-                                         final Object value) {
+    private static ValidationError<TestValidationReference> error(final TestValidationReference reference,
+                                                                  final int messageNumber,
+                                                                  final Object value) {
         return ValidationError.with(
             reference,
             message(reference, messageNumber),
@@ -71,8 +71,8 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
     private final static Validator<TestValidationReference> VALIDATOR1 = new Validator<>() {
 
         @Override
-        public List<ValidationError> validate(final Object value,
-                                              final ValidatorContext<TestValidationReference> context) {
+        public List<ValidationError<TestValidationReference>> validate(final Object value,
+                                                                       final ValidatorContext<TestValidationReference> context) {
             return List.of(
                 error(
                     context.validationReference(),
@@ -96,8 +96,8 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
     private final static Validator<TestValidationReference> VALIDATOR2 = new Validator<>() {
 
         @Override
-        public List<ValidationError> validate(final Object value,
-                                              final ValidatorContext<TestValidationReference> context) {
+        public List<ValidationError<TestValidationReference>> validate(final Object value,
+                                                                       final ValidatorContext<TestValidationReference> context) {
             return List.of(
                 ValidationError.with(
                     context.validationReference(),
@@ -119,7 +119,7 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
     private final static Validator<TestValidationReference> VALIDATOR3 = new Validator<>() {
 
         @Override
-        public List<ValidationError> validate(final Object value,
+        public List<ValidationError<TestValidationReference>> validate(final Object value,
                                               final ValidatorContext<TestValidationReference> context) {
             return List.of(
                 ValidationError.with(
@@ -247,7 +247,7 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
                     new Validator<TestValidationReference>() {
 
                         @Override
-                        public List<ValidationError> validate(final Object value,
+                        public List<ValidationError<TestValidationReference>> validate(final Object value,
                                                               final ValidatorContext<TestValidationReference> context) {
                             return Lists.empty();
                         }
@@ -285,6 +285,7 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
 
     private ValidatorContext<TestValidationReference> createContext(final TestValidationReference reference) {
         return new FakeValidatorContext<>() {
+            @Override
             public TestValidationReference validationReference() {
                 return reference;
             }
