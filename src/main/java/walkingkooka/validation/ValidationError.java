@@ -44,12 +44,11 @@ public final class ValidationError<T extends ValidationReference> implements Val
     public final static Optional<Object> NO_VALUE = Optional.empty();
 
     public static <T extends ValidationReference> ValidationError<T> with(final T reference,
-                                                                          final String message,
-                                                                          final Optional<Object> value) {
+                                                                          final String message) {
         return new ValidationError<>(
             Objects.requireNonNull(reference, "reference"),
             Whitespace.failIfNullOrEmptyOrWhitespace(message, "message"),
-            Objects.requireNonNull(value, "value")
+            NO_VALUE
         );
     }
 

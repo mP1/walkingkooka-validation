@@ -38,7 +38,8 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
                                                                   final Object value) {
         return ValidationError.with(
             reference,
-            message(reference, messageNumber),
+            message(reference, messageNumber)
+        ).setValue(
             Optional.ofNullable(value)
         );
     }
@@ -84,7 +85,8 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
                     message(
                         context.validationReference(),
                         3
-                    ),
+                    )
+                ).setValue(
                     Optional.ofNullable(value)
                 )
             );
@@ -107,7 +109,8 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
                     message(
                         context.validationReference(),
                         4
-                    ),
+                    )
+                ).setValue(
                     Optional.ofNullable(value)
                 )
             );
