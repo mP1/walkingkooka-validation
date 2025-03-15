@@ -19,7 +19,7 @@ package walkingkooka.validation;
 
 import java.util.List;
 
-public class FakeValidator implements Validator {
+public class FakeValidator<T extends ValidationReference> implements Validator<T> {
 
     public FakeValidator() {
         super();
@@ -27,7 +27,7 @@ public class FakeValidator implements Validator {
 
     @Override
     public List<ValidationError> validate(final Object value,
-                                          final ValidatorContext<?> context) {
+                                          final ValidatorContext<T> context) {
         throw new UnsupportedOperationException();
     }
 }

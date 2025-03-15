@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public interface ValidatorTesting2<T extends Validator> extends ValidatorTesting {
+public interface ValidatorTesting2<T extends Validator<R>, R extends ValidationReference> extends ValidatorTesting<R> {
 
     @Test
     default void testValidateWithNullContextFails() {
@@ -32,7 +32,7 @@ public interface ValidatorTesting2<T extends Validator> extends ValidatorTesting
     }
 
     default void validateAndCheck(final Object value,
-                                  final ValidatorContext context,
+                                  final ValidatorContext<R> context,
                                   ValidationError... expected) {
         this.validateAndCheck(
             value,
@@ -42,7 +42,7 @@ public interface ValidatorTesting2<T extends Validator> extends ValidatorTesting
     }
 
     default void validateAndCheck(final Object value,
-                                  final ValidatorContext context,
+                                  final ValidatorContext<R> context,
                                   final List<ValidationError> expected) {
         this.validateAndCheck(
             this.createValidator(),
@@ -54,5 +54,5 @@ public interface ValidatorTesting2<T extends Validator> extends ValidatorTesting
 
     T createValidator();
 
-    ValidatorContext createContext();
+    ValidatorContext<R> createContext();
 }

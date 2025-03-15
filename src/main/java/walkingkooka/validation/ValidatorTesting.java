@@ -21,11 +21,11 @@ import walkingkooka.test.Testing;
 
 import java.util.List;
 
-public interface ValidatorTesting extends Testing {
+public interface ValidatorTesting<T extends ValidationReference> extends Testing {
 
     default void validateAndCheck(final Validator validator,
                                   final Object value,
-                                  final ValidatorContext context,
+                                  final ValidatorContext<T> context,
                                   ValidationError... expected) {
         this.validateAndCheck(
             validator,
@@ -37,7 +37,7 @@ public interface ValidatorTesting extends Testing {
 
     default void validateAndCheck(final Validator validator,
                                   final Object value,
-                                  final ValidatorContext context,
+                                  final ValidatorContext<T> context,
                                   final List<ValidationError> expected) {
         this.checkEquals(
             expected,

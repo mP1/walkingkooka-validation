@@ -24,7 +24,7 @@ import walkingkooka.validation.ValidatorTestingTest.TestValidator;
 import java.util.List;
 import java.util.Optional;
 
-public class ValidatorTestingTest implements ValidatorTesting2<TestValidator> {
+public class ValidatorTestingTest implements ValidatorTesting2<TestValidator, ValidationReference> {
 
     @Test
     public void testValidateAndCheck() {
@@ -65,11 +65,11 @@ public class ValidatorTestingTest implements ValidatorTesting2<TestValidator> {
     }
 
     @Override
-    public ValidatorContext createContext() {
+    public ValidatorContext<ValidationReference> createContext() {
         return ValidatorContexts.fake();
     }
 
-    static class TestValidator implements Validator {
+    static class TestValidator implements Validator<ValidationReference> {
 
         TestValidator(final ValidationError... errors) {
             this.errors = Lists.of(errors);
@@ -77,7 +77,7 @@ public class ValidatorTestingTest implements ValidatorTesting2<TestValidator> {
 
         @Override
         public List<ValidationError> validate(final Object value,
-                                              final ValidatorContext<?> context) {
+                                              final ValidatorContext<ValidationReference> context) {
             return this.errors;
         }
 
