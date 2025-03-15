@@ -55,6 +55,17 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
     private final T validationReference;
 
     @Override
+    public ValidatorContext<T> setValidationReference(final T validationReference) {
+        return this.validationReference.equals(validationReference) ?
+            this :
+            new BasicValidatorContext<>(
+                Objects.requireNonNull(validationReference, "validationReference"),
+                this.converterContext,
+                this.environmentContext
+            );
+    }
+
+    @Override
     public LocalDateTime now() {
         return this.converterContext.now();
     }
@@ -66,7 +77,8 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
         return this.converterContext;
     }
 
-    private final ConverterContext converterContext;
+    // @VisibleForTesting
+    final ConverterContext converterContext;
 
     // EnvironmentContextDelegator......................................................................................
 
@@ -75,7 +87,8 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
         return this.environmentContext;
     }
 
-    private final EnvironmentContext environmentContext;
+    // @VisibleForTesting
+    final EnvironmentContext environmentContext;
 
     // Object...........................................................................................................
 

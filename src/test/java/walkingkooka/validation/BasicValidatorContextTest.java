@@ -35,6 +35,7 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class BasicValidatorContextTest implements ValidatorContextTesting<BasicValidatorContext<TestValidationReference>, TestValidationReference>,
@@ -96,6 +97,36 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
                 CONVERTER_CONTEXT,
                 null
             )
+        );
+    }
+
+    // setValidationReference...........................................................................................
+
+    @Test
+    public void testSetValidationReferenceWithDifferent() {
+        final TestValidationReference differentReference = new TestValidationReference("Different");
+
+        final BasicValidatorContext<TestValidationReference> context = this.createContext();
+        final BasicValidatorContext<TestValidationReference> different = Cast.to(
+            context.setValidationReference(differentReference)
+        );
+
+        assertSame(
+            differentReference,
+            different.validationReference(),
+            "validationReference"
+        );
+
+        assertSame(
+            CONVERTER_CONTEXT,
+            different.converterContext,
+            "converterContext"
+        );
+
+        assertSame(
+            ENVIRONMENT_CONTEXT,
+            different.environmentContext,
+            "environmentContext"
         );
     }
 

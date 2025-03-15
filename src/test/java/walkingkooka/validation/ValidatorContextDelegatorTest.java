@@ -65,14 +65,38 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
 
     final static class TestValidatorContext implements ValidatorContextDelegator<TestValidationReference> {
 
-        @Override
-        public ValidatorContext<TestValidationReference> validationContext() {
-            return ValidatorContexts.basic(
+        TestValidatorContext() {
+            this(
+                ValidatorContexts.basic(
                 VALIDATION_REFERENCE,
                 CONVERTER_CONTEXT,
                 ENVIRONMENT_CONTEXT
+                )
             );
         }
+
+        TestValidatorContext(final ValidatorContext<TestValidationReference> context) {
+            this.context = context;
+        }
+
+        @Override
+        public ValidatorContext<TestValidationReference> setValidationReference(final TestValidationReference reference) {
+            if(this.validationContext().validationReference().equals(reference)) {
+                return this;
+            }
+
+            return new TestValidatorContext(
+                this.validationContext()
+                    .setValidationReference(reference)
+            );
+        }
+
+        @Override
+        public ValidatorContext<TestValidationReference> validationContext() {
+            return this.context;
+        }
+
+        private final ValidatorContext<TestValidationReference> context;
 
         @Override
         public String toString() {

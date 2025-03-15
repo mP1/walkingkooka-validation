@@ -31,6 +31,7 @@ import walkingkooka.validation.ValidatorContextTestingTest.TestValidatorContext;
 import java.math.MathContext;
 import java.time.LocalDateTime;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Optional;
 
 public final class ValidatorContextTestingTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference> {
@@ -43,9 +44,28 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         ConverterContextDelegator,
         EnvironmentContextDelegator {
 
+        TestValidatorContext() {
+            this(new TestValidationReference("A1"));
+        }
+
+        TestValidatorContext(final TestValidationReference reference) {
+            this.reference = reference;
+        }
+
         @Override
         public TestValidationReference validationReference() {
-            return new TestValidationReference("A1");
+            return this.reference;
+        }
+
+        private final TestValidationReference reference;
+
+        @Override
+        public ValidatorContext<TestValidationReference> setValidationReference(final TestValidationReference reference) {
+            return this.reference.equals(reference) ?
+                this :
+                new TestValidatorContext(
+                    Objects.requireNonNull(reference, "reference")
+                );
         }
 
         @Override
