@@ -23,9 +23,9 @@ import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
-final class TestReference implements ValidationReference {
+final class TestValidationReference implements ValidationReference {
 
-    TestReference(final String field) {
+    TestValidationReference(final String field) {
         this.field = CharSequences.failIfNullOrEmpty(field, "field");
     }
 
@@ -43,7 +43,7 @@ final class TestReference implements ValidationReference {
 
     @Override
     public boolean equals(final Object other) {
-        return this ==other || other instanceof TestReference && this.field.equals(((TestReference) other).field);
+        return this ==other || other instanceof TestValidationReference && this.field.equals(((TestValidationReference) other).field);
     }
 
     @Override
@@ -55,17 +55,17 @@ final class TestReference implements ValidationReference {
         return JsonNode.string(this.field);
     }
 
-    static TestReference unmarshall(final JsonNode node,
-                                    final JsonNodeUnmarshallContext context) {
-        return new TestReference(node.stringOrFail());
+    static TestValidationReference unmarshall(final JsonNode node,
+                                              final JsonNodeUnmarshallContext context) {
+        return new TestValidationReference(node.stringOrFail());
     }
 
     static {
         JsonNodeContext.register(
-            JsonNodeContext.computeTypeName(TestReference.class),
-            TestReference::unmarshall,
-            TestReference::marshall,
-            TestReference.class
+            JsonNodeContext.computeTypeName(TestValidationReference.class),
+            TestValidationReference::unmarshall,
+            TestValidationReference::marshall,
+            TestValidationReference.class
         );
     }
 }

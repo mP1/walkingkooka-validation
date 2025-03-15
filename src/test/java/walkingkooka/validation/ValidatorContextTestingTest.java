@@ -39,13 +39,13 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         return new TestValidatorContext();
     }
 
-    static class TestValidatorContext implements ValidatorContext<TestReference>,
+    static class TestValidatorContext implements ValidatorContext<TestValidationReference>,
         ConverterContextDelegator,
         EnvironmentContextDelegator {
 
         @Override
-        public TestReference validationReference() {
-            return new TestReference("A1");
+        public TestValidationReference validationReference() {
+            return new TestValidationReference("A1");
         }
 
         @Override

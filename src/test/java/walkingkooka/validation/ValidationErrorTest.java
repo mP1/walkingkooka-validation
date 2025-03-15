@@ -34,13 +34,13 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<ValidationError<TestReference>>,
-    ToStringTesting<ValidationError<TestReference>>,
-    ClassTesting<ValidationError<TestReference>>,
+public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<ValidationError<TestValidationReference>>,
+    ToStringTesting<ValidationError<TestValidationReference>>,
+    ClassTesting<ValidationError<TestValidationReference>>,
     TreePrintableTesting,
-    JsonNodeMarshallingTesting<ValidationError<TestReference>> {
+    JsonNodeMarshallingTesting<ValidationError<TestValidationReference>> {
 
-    private final static TestReference REFERENCE = new TestReference("Hello");
+    private final static TestValidationReference REFERENCE = new TestValidationReference("Hello");
 
     private final static String MESSAGE = "Error too many xyz";
 
@@ -110,7 +110,7 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
 
     @Test
     public void testWith() {
-        final ValidationError<TestReference> error = ValidationError.with(
+        final ValidationError<TestValidationReference> error = ValidationError.with(
             REFERENCE,
             MESSAGE,
             VALUE
@@ -133,7 +133,7 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
 
     @Test
     public void testSetValueSame() {
-        final ValidationError<TestReference> error = this.createObject();
+        final ValidationError<TestValidationReference> error = this.createObject();
 
         assertSame(
             error,
@@ -143,10 +143,10 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
 
     @Test
     public void testSetValueWithDifferent() {
-        final ValidationError<TestReference> error = this.createObject();
+        final ValidationError<TestValidationReference> error = this.createObject();
 
         final Optional<Object> differentValue = Optional.of("Different");
-        final ValidationError<TestReference> different = error.setValue(differentValue);
+        final ValidationError<TestValidationReference> different = error.setValue(differentValue);
 
         assertNotSame(
             error,
@@ -170,9 +170,9 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
 
     @Test
     public void testClearValueWhenNotEmpty() {
-        final ValidationError<TestReference> error = this.createObject();
+        final ValidationError<TestValidationReference> error = this.createObject();
 
-        final ValidationError<TestReference> different = error.clearValue();
+        final ValidationError<TestValidationReference> different = error.clearValue();
 
         assertNotSame(
             error,
@@ -199,15 +199,15 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
 
     // helper...........................................................................................................
 
-    private void referenceAndCheck(final ValidationError<TestReference> error) {
+    private void referenceAndCheck(final ValidationError<TestValidationReference> error) {
         this.referenceAndCheck(
             error,
             REFERENCE
         );
     }
     
-    private void referenceAndCheck(final ValidationError<TestReference> error,
-                                   final TestReference expected) {
+    private void referenceAndCheck(final ValidationError<TestValidationReference> error,
+                                   final TestValidationReference expected) {
         this.checkEquals(
             expected,
             error.reference(),
@@ -215,14 +215,14 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
         );
     }
 
-    private void messageAndCheck(final ValidationError<TestReference> error) {
+    private void messageAndCheck(final ValidationError<TestValidationReference> error) {
         this.messageAndCheck(
             error,
             MESSAGE
         );
     }
 
-    private void messageAndCheck(final ValidationError<TestReference> error,
+    private void messageAndCheck(final ValidationError<TestValidationReference> error,
                                  final String expected) {
         this.checkEquals(
             expected,
@@ -231,14 +231,14 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
         );
     }
 
-    private void valueAndCheck(final ValidationError<TestReference> error) {
+    private void valueAndCheck(final ValidationError<TestValidationReference> error) {
         this.valueAndCheck(
             error,
             VALUE
         );
     }
 
-    private void valueAndCheck(final ValidationError<TestReference> error,
+    private void valueAndCheck(final ValidationError<TestValidationReference> error,
                                final Optional<Object> expected) {
         this.checkEquals(
             expected,
@@ -288,7 +288,7 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
     }
 
     @Override
-    public ValidationError<TestReference> createObject() {
+    public ValidationError<TestValidationReference> createObject() {
         return ValidationError.with(
             REFERENCE,
             MESSAGE,
@@ -379,8 +379,8 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
     }
 
     @Override
-    public ValidationError<TestReference> unmarshall(final JsonNode json,
-                                      final JsonNodeUnmarshallContext context) {
+    public ValidationError<TestValidationReference> unmarshall(final JsonNode json,
+                                                               final JsonNodeUnmarshallContext context) {
         return ValidationError.unmarshall(
             json,
             context
@@ -388,14 +388,14 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
     }
 
     @Override
-    public ValidationError<TestReference> createJsonNodeMarshallingValue() {
+    public ValidationError<TestValidationReference> createJsonNodeMarshallingValue() {
         return this.createObject();
     }
 
     // class............................................................................................................
 
     @Override
-    public Class<ValidationError<TestReference>> type() {
+    public Class<ValidationError<TestValidationReference>> type() {
         return Cast.to(ValidationError.class);
     }
 
