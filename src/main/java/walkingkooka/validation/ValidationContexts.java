@@ -21,8 +21,6 @@ import walkingkooka.convert.ConverterContext;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.reflect.PublicStaticHelper;
 
-import java.util.Objects;
-
 /**
  * A collection of factory methods to create {@link ValidationContext}
  */
@@ -31,9 +29,11 @@ public final class ValidationContexts implements PublicStaticHelper {
     /**
      * {@see BasicValidationContext}
      */
-    public static ValidationContext basic(final ConverterContext converterContext,
-                                          final EnvironmentContext environmentContext) {
+    public static <T extends ValidationReference> ValidationContext<T> basic(final T validationReference,
+                                                                             final ConverterContext converterContext,
+                                                                             final EnvironmentContext environmentContext) {
         return BasicValidationContext.with(
+            validationReference,
             converterContext,
             environmentContext
         );
@@ -42,8 +42,8 @@ public final class ValidationContexts implements PublicStaticHelper {
     /**
      * {@see FakeValidationContext}
      */
-    public static ValidationContext fake() {
-        return new FakeValidationContext();
+    public static <T extends ValidationReference> ValidationContext<T> fake() {
+        return new FakeValidationContext<>();
     }
 
     /**

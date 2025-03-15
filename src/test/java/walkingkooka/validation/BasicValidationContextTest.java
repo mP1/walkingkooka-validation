@@ -39,6 +39,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class BasicValidationContextTest implements ValidationContextTesting<BasicValidationContext>,
     ToStringTesting<BasicValidationContext> {
 
+    private final static ValidationReference VALIDATION_REFERENCE = new ValidationReference() {
+        @Override
+        public String text() {
+            return "A1";
+        }
+    };
+
     private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
     private final static ConverterContext CONVERTER_CONTEXT = ConverterContexts.basic(
@@ -61,10 +68,23 @@ public final class BasicValidationContextTest implements ValidationContextTestin
     );
 
     @Test
+    public void testWithNullValidationReferenceFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> BasicValidationContext.with(
+                null,
+                CONVERTER_CONTEXT,
+                ENVIRONMENT_CONTEXT
+            )
+        );
+    }
+
+    @Test
     public void testWithNullConverterContextFails() {
         assertThrows(
             NullPointerException.class,
             () -> BasicValidationContext.with(
+                VALIDATION_REFERENCE,
                 null,
                 ENVIRONMENT_CONTEXT
             )
@@ -76,6 +96,7 @@ public final class BasicValidationContextTest implements ValidationContextTestin
         assertThrows(
             NullPointerException.class,
             () -> BasicValidationContext.with(
+                VALIDATION_REFERENCE,
                 CONVERTER_CONTEXT,
                 null
             )
@@ -85,6 +106,7 @@ public final class BasicValidationContextTest implements ValidationContextTestin
     @Override
     public BasicValidationContext createContext() {
         return BasicValidationContext.with(
+            VALIDATION_REFERENCE,
             CONVERTER_CONTEXT,
             ENVIRONMENT_CONTEXT
         );
@@ -136,10 +158,11 @@ public final class BasicValidationContextTest implements ValidationContextTestin
     public void testToString() {
         this.toStringAndCheck(
             BasicValidationContext.with(
+                VALIDATION_REFERENCE,
                 CONVERTER_CONTEXT,
                 ENVIRONMENT_CONTEXT
             ).toString(),
-            CONVERTER_CONTEXT + " " + ENVIRONMENT_CONTEXT
+            VALIDATION_REFERENCE + " " + CONVERTER_CONTEXT + " " + ENVIRONMENT_CONTEXT
         );
     }
 

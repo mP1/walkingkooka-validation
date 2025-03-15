@@ -18,8 +18,15 @@
 package walkingkooka.validation;
 
 import walkingkooka.convert.ConverterContextTesting;
-import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextTesting2;
 
 public interface ValidationContextTesting<C extends ValidationContext> extends ConverterContextTesting<C>, EnvironmentContextTesting2<C> {
+
+    default void validationReferenceAndCheck(final C context,
+                                             final ValidationReference expected) {
+        this.checkEquals(
+            expected,
+            context.validationReference(),
+            context::toString);
+    }
 }
