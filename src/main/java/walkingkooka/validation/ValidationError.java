@@ -41,6 +41,8 @@ public final class ValidationError<T extends ValidationReference> implements Val
     UsesToStringBuilder,
     TreePrintable {
 
+    public final static Optional<Object> NO_VALUE = Optional.empty();
+
     public static <T extends ValidationReference> ValidationError<T> with(final T reference,
                                                                           final String message,
                                                                           final Optional<Object> value) {
@@ -91,7 +93,7 @@ public final class ValidationError<T extends ValidationReference> implements Val
     private final Optional<Object> value;
 
     public ValidationError<T> clearValue() {
-        return this.setValue(Optional.empty());
+        return this.setValue(NO_VALUE);
     }
     // Object...........................................................................................................
 
