@@ -17,24 +17,17 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.reflect.PublicStaticHelper;
+import java.util.List;
 
-/**
- * A collection of {@link Validator} factory methods.
- */
-public final class Validators implements PublicStaticHelper {
+public class FakeValidator implements Validator {
 
-    /**
-     * {@see FakeValidator}
-     */
-    public static Validator fake() {
-        return new FakeValidator();
+    public FakeValidator() {
+        super();
     }
 
-    /**
-     * Private constructor to stop creation
-     */
-    private Validators() {
+    @Override
+    public List<ValidationError> validate(final Object value,
+                                          final ValidationContext context) {
         throw new UnsupportedOperationException();
     }
 }
