@@ -33,6 +33,11 @@ public interface ValidatorContext<T extends ValidationReference> extends Convert
     T validationReference();
 
     /**
+     * May be used to return a {@link ValidatorContext} with a new or different {@link ValidationReference}.
+     */
+    ValidatorContext<T> setValidationReference(final T reference);
+
+    /**
      * Factory that creates a {@link ValidationError} using the current {@link ValidationReference}.
      */
     default ValidationError<T> validationError(final String message) {

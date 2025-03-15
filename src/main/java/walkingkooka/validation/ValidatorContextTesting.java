@@ -17,10 +17,36 @@
 
 package walkingkooka.validation;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.convert.ConverterContextTesting;
 import walkingkooka.environment.EnvironmentContextTesting2;
 
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public interface ValidatorContextTesting<C extends ValidatorContext<R>, R extends ValidationReference> extends ConverterContextTesting<C>, EnvironmentContextTesting2<C> {
+
+    @Test
+    default void testSetValidationReferenceWithNullFails() {
+        final C context = this.createContext();
+
+        assertThrows(
+            NullPointerException.class,
+            () -> context.setValidationReference(null)
+        );
+    }
+
+    @Test
+    default void testSetValidationReferenceSame() {
+        final C context = this.createContext();
+
+        assertSame(
+            context,
+            context.setValidationReference(
+                context.validationReference()
+            )
+        );
+    }
 
     default void validationReferenceAndCheck(final C context,
                                              final R expected) {
