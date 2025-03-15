@@ -26,14 +26,14 @@ import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
-import walkingkooka.validation.ValidationContextDelegatorTest.TestValidationContext;
+import walkingkooka.validation.ValidatorContextDelegatorTest.TestValidatorContext;
 
 import java.math.MathContext;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Optional;
 
-public final class ValidationContextDelegatorTest implements ValidationContextTesting<TestValidationContext> {
+public final class ValidatorContextDelegatorTest implements ValidatorContextTesting<TestValidatorContext> {
 
     private final static ValidationReference VALIDATION_REFERENCE = new ValidationReference() {
         @Override
@@ -64,15 +64,15 @@ public final class ValidationContextDelegatorTest implements ValidationContextTe
     );
 
     @Override
-    public TestValidationContext createContext() {
-        return new TestValidationContext();
+    public TestValidatorContext createContext() {
+        return new TestValidatorContext();
     }
 
-    final static class TestValidationContext implements ValidationContextDelegator {
+    final static class TestValidatorContext implements ValidatorContextDelegator {
 
         @Override
-        public ValidationContext validationContext() {
-            return ValidationContexts.basic(
+        public ValidatorContext validationContext() {
+            return ValidatorContexts.basic(
                 VALIDATION_REFERENCE,
                 CONVERTER_CONTEXT,
                 ENVIRONMENT_CONTEXT
@@ -128,8 +128,8 @@ public final class ValidationContextDelegatorTest implements ValidationContextTe
     // class............................................................................................................
 
     @Override
-    public Class<TestValidationContext> type() {
-        return TestValidationContext.class;
+    public Class<TestValidatorContext> type() {
+        return TestValidatorContext.class;
     }
 
     @Override

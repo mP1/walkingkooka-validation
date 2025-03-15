@@ -53,7 +53,7 @@ public class ValidatorTestingTest implements ValidatorTesting2<TestValidator> {
         this.validateAndCheck(
             new TestValidator(error1, error2),
             "Value",
-            ValidationContexts.fake(),
+            ValidatorContexts.fake(),
             error1,
             error2
         );
@@ -65,8 +65,8 @@ public class ValidatorTestingTest implements ValidatorTesting2<TestValidator> {
     }
 
     @Override
-    public ValidationContext createContext() {
-        return ValidationContexts.fake();
+    public ValidatorContext createContext() {
+        return ValidatorContexts.fake();
     }
 
     static class TestValidator implements Validator {
@@ -76,7 +76,7 @@ public class ValidatorTestingTest implements ValidatorTesting2<TestValidator> {
         }
 
         @Override
-        public List<ValidationError> validate(Object value, ValidationContext context) {
+        public List<ValidationError> validate(Object value, ValidatorContext context) {
             return this.errors;
         }
 

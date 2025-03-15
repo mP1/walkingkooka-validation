@@ -20,7 +20,7 @@ package walkingkooka.validation;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.environment.EnvironmentContext;
 
-public interface ValidationContext<T extends ValidationReference> extends ConverterContext,
+public interface ValidatorContext<T extends ValidationReference> extends ConverterContext,
     EnvironmentContext {
 
     /**

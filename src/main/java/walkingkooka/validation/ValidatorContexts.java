@@ -22,17 +22,17 @@ import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.reflect.PublicStaticHelper;
 
 /**
- * A collection of factory methods to create {@link ValidationContext}
+ * A collection of factory methods to create {@link ValidatorContext}
  */
-public final class ValidationContexts implements PublicStaticHelper {
+public final class ValidatorContexts implements PublicStaticHelper {
 
     /**
-     * {@see BasicValidationContext}
+     * {@see BasicValidatorContext}
      */
-    public static <T extends ValidationReference> ValidationContext<T> basic(final T validationReference,
-                                                                             final ConverterContext converterContext,
-                                                                             final EnvironmentContext environmentContext) {
-        return BasicValidationContext.with(
+    public static <T extends ValidationReference> ValidatorContext<T> basic(final T validationReference,
+                                                                            final ConverterContext converterContext,
+                                                                            final EnvironmentContext environmentContext) {
+        return BasicValidatorContext.with(
             validationReference,
             converterContext,
             environmentContext
@@ -40,16 +40,16 @@ public final class ValidationContexts implements PublicStaticHelper {
     }
 
     /**
-     * {@see FakeValidationContext}
+     * {@see FakeValidatorContext}
      */
-    public static <T extends ValidationReference> ValidationContext<T> fake() {
-        return new FakeValidationContext<>();
+    public static <T extends ValidationReference> ValidatorContext<T> fake() {
+        return new FakeValidatorContext<>();
     }
 
     /**
      * Stop creation
      */
-    private ValidationContexts() {
+    private ValidatorContexts() {
         throw new UnsupportedOperationException();
     }
 }

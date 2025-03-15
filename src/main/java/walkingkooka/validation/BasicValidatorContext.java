@@ -25,23 +25,23 @@ import walkingkooka.environment.EnvironmentContextDelegator;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-final class BasicValidationContext implements ValidationContext,
+final class BasicValidatorContext implements ValidatorContext,
     ConverterContextDelegator,
     EnvironmentContextDelegator {
 
-    static BasicValidationContext with(final ValidationReference validationReference,
-                                       final ConverterContext converterContext,
-                                       final EnvironmentContext environmentContext) {
-        return new BasicValidationContext(
+    static BasicValidatorContext with(final ValidationReference validationReference,
+                                      final ConverterContext converterContext,
+                                      final EnvironmentContext environmentContext) {
+        return new BasicValidatorContext(
             Objects.requireNonNull(validationReference, "validationReference"),
             Objects.requireNonNull(converterContext, "converterContext"),
             Objects.requireNonNull(environmentContext, "environmentContext")
         );
     }
 
-    private BasicValidationContext(final ValidationReference validationReference,
-                                   final ConverterContext converterContext,
-                                   final EnvironmentContext environmentContext) {
+    private BasicValidatorContext(final ValidationReference validationReference,
+                                  final ConverterContext converterContext,
+                                  final EnvironmentContext environmentContext) {
         this.validationReference = validationReference;
         this.converterContext = converterContext;
         this.environmentContext = environmentContext;
