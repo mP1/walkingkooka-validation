@@ -39,7 +39,7 @@ public interface ValidatorTesting2<T extends Validator<R>, R extends ValidationR
 
     default void validateAndCheck(final Object value,
                                   final ValidatorContext<R> context,
-                                  ValidationError... expected) {
+                                  final ValidationError<R>... expected) {
         this.validateAndCheck(
             value,
             context,
@@ -49,7 +49,7 @@ public interface ValidatorTesting2<T extends Validator<R>, R extends ValidationR
 
     default void validateAndCheck(final Object value,
                                   final ValidatorContext<R> context,
-                                  final List<ValidationError> expected) {
+                                  final List<ValidationError<R>> expected) {
         this.validateAndCheck(
             this.createValidator(),
             value,

@@ -53,20 +53,20 @@ final class ValidatorCollection<T extends ValidationReference> implements Valida
     }
 
     @Override
-    public List<ValidationError> validate(final Object value,
-                                          final ValidatorContext<T> context) {
+    public List<ValidationError<T>> validate(final Object value,
+                                             final ValidatorContext<T> context) {
         Objects.requireNonNull(context, "context");
 
         final int maxErrors = this.maxErrors;
-        final List<ValidationError> errors = Lists.array();
+        final List<ValidationError<T>> errors = Lists.array();
 
         for (final Validator<T> validator : this.validators) {
-            final List<ValidationError> newErrors = validator.validate(
+            final List<ValidationError<T>> newErrors = validator.validate(
                 value,
                 context
             );
 
-            for (final ValidationError error : newErrors) {
+            for (final ValidationError<T> error : newErrors) {
                 if (false == errors.contains(error)) {
                     errors.add(error);
                 }

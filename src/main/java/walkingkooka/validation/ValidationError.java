@@ -37,21 +37,21 @@ import java.util.Optional;
 /**
  * Reports a single error for the identified field or component.
  */
-public final class ValidationError implements Value<Optional<Object>>,
+public final class ValidationError<T extends ValidationReference> implements Value<Optional<Object>>,
     UsesToStringBuilder,
     TreePrintable {
 
-    public static ValidationError with(final ValidationReference reference,
-                                       final String message,
-                                       final Optional<Object> value) {
-        return new ValidationError(
+    public static <T extends ValidationReference> ValidationError<T> with(final T reference,
+                                                                          final String message,
+                                                                          final Optional<Object> value) {
+        return new ValidationError<>(
             Objects.requireNonNull(reference, "reference"),
             Whitespace.failIfNullOrEmptyOrWhitespace(message, "message"),
             Objects.requireNonNull(value, "value")
         );
     }
 
-    private ValidationError(final ValidationReference reference,
+    private ValidationError(final T reference,
                             final String message,
                             final Optional<Object> value) {
         this.reference = reference;
@@ -59,11 +59,11 @@ public final class ValidationError implements Value<Optional<Object>>,
         this.value = value;
     }
 
-    public ValidationReference reference() {
+    public T reference() {
         return this.reference;
     }
 
-    private final ValidationReference reference;
+    private final T reference;
 
     public String message() {
         return this.message;
@@ -98,7 +98,7 @@ public final class ValidationError implements Value<Optional<Object>>,
                 this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final ValidationError error) {
+    private boolean equals0(final ValidationError<?> error) {
         return this.reference.equals(error.reference) &&
             this.message.equals(error.message) &&
             this.value.equals(error.value);
@@ -136,7 +136,7 @@ public final class ValidationError implements Value<Optional<Object>>,
                 printer.println(this.message);
 
                 final Object valueOrNull = this.value.orElse(null);
-                if(null != valueOrNull) {
+                if (null != valueOrNull) {
 
                     printer.indent();
                     {
@@ -155,9 +155,9 @@ public final class ValidationError implements Value<Optional<Object>>,
 
     // json.............................................................................................................
 
-    static ValidationError unmarshall(final JsonNode node,
-                                       final JsonNodeUnmarshallContext context) {
-        ValidationReference kind = null;
+    static <T extends ValidationReference> ValidationError<T> unmarshall(final JsonNode node,
+                                                                         final JsonNodeUnmarshallContext context) {
+        T kind = null;
         String message = null;
         Object value = null;
 
