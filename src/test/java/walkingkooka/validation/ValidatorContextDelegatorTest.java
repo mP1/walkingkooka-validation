@@ -33,14 +33,9 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Optional;
 
-public final class ValidatorContextDelegatorTest implements ValidatorContextTesting<TestValidatorContext> {
+public final class ValidatorContextDelegatorTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference> {
 
-    private final static ValidationReference VALIDATION_REFERENCE = new ValidationReference() {
-        @Override
-        public String text() {
-            return "A1";
-        }
-    };
+    private final static TestValidationReference VALIDATION_REFERENCE = new TestValidationReference("A1");
 
     private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
@@ -68,10 +63,10 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
         return new TestValidatorContext();
     }
 
-    final static class TestValidatorContext implements ValidatorContextDelegator {
+    final static class TestValidatorContext implements ValidatorContextDelegator<TestValidationReference> {
 
         @Override
-        public ValidatorContext validationContext() {
+        public ValidatorContext<TestValidationReference> validationContext() {
             return ValidatorContexts.basic(
                 VALIDATION_REFERENCE,
                 CONVERTER_CONTEXT,
