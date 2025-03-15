@@ -27,8 +27,8 @@ public final class Validators implements PublicStaticHelper {
     /**
      * {@see FakeValidator}
      */
-    public static Validator fake() {
-        return new FakeValidator();
+    public static <T extends ValidationReference> Validator<T> fake() {
+        return new FakeValidator<>();
     }
 
     /**

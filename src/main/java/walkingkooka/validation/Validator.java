@@ -22,11 +22,11 @@ import java.util.List;
 /**
  * A validator accepts a value and potentially produces {@link ValidationError}.
  */
-public interface Validator {
+public interface Validator<T extends ValidationReference> {
 
     /**
      * Validates the given value returning zero or more {@link ValidationError}.
      */
     List<ValidationError> validate(final Object value,
-                                   final ValidatorContext<?> context);
+                                   final ValidatorContext<T> context);
 }
