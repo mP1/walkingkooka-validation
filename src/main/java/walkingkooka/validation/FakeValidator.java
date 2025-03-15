@@ -27,7 +27,7 @@ public class FakeValidator implements Validator {
 
     @Override
     public List<ValidationError> validate(final Object value,
-                                          final ValidationContext context) {
+                                          final ValidatorContext context) {
         throw new UnsupportedOperationException();
     }
 }

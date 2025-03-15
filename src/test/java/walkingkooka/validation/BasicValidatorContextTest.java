@@ -36,8 +36,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class BasicValidationContextTest implements ValidationContextTesting<BasicValidationContext>,
-    ToStringTesting<BasicValidationContext> {
+public final class BasicValidatorContextTest implements ValidatorContextTesting<BasicValidatorContext>,
+    ToStringTesting<BasicValidatorContext> {
 
     private final static ValidationReference VALIDATION_REFERENCE = new ValidationReference() {
         @Override
@@ -71,7 +71,7 @@ public final class BasicValidationContextTest implements ValidationContextTestin
     public void testWithNullValidationReferenceFails() {
         assertThrows(
             NullPointerException.class,
-            () -> BasicValidationContext.with(
+            () -> BasicValidatorContext.with(
                 null,
                 CONVERTER_CONTEXT,
                 ENVIRONMENT_CONTEXT
@@ -83,7 +83,7 @@ public final class BasicValidationContextTest implements ValidationContextTestin
     public void testWithNullConverterContextFails() {
         assertThrows(
             NullPointerException.class,
-            () -> BasicValidationContext.with(
+            () -> BasicValidatorContext.with(
                 VALIDATION_REFERENCE,
                 null,
                 ENVIRONMENT_CONTEXT
@@ -95,7 +95,7 @@ public final class BasicValidationContextTest implements ValidationContextTestin
     public void testWithNullEnvironmentContextFails() {
         assertThrows(
             NullPointerException.class,
-            () -> BasicValidationContext.with(
+            () -> BasicValidatorContext.with(
                 VALIDATION_REFERENCE,
                 CONVERTER_CONTEXT,
                 null
@@ -104,8 +104,8 @@ public final class BasicValidationContextTest implements ValidationContextTestin
     }
 
     @Override
-    public BasicValidationContext createContext() {
-        return BasicValidationContext.with(
+    public BasicValidatorContext createContext() {
+        return BasicValidatorContext.with(
             VALIDATION_REFERENCE,
             CONVERTER_CONTEXT,
             ENVIRONMENT_CONTEXT
@@ -157,7 +157,7 @@ public final class BasicValidationContextTest implements ValidationContextTestin
     @Test
     public void testToString() {
         this.toStringAndCheck(
-            BasicValidationContext.with(
+            BasicValidatorContext.with(
                 VALIDATION_REFERENCE,
                 CONVERTER_CONTEXT,
                 ENVIRONMENT_CONTEXT
@@ -169,8 +169,8 @@ public final class BasicValidationContextTest implements ValidationContextTestin
     // class............................................................................................................
 
     @Override
-    public Class<BasicValidationContext> type() {
-        return BasicValidationContext.class;
+    public Class<BasicValidatorContext> type() {
+        return BasicValidatorContext.class;
     }
 
     @Override

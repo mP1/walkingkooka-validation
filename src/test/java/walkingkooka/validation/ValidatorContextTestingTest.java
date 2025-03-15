@@ -26,17 +26,17 @@ import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.math.DecimalNumberContexts;
-import walkingkooka.validation.ValidationContextTestingTest.TestValidationContext;
+import walkingkooka.validation.ValidatorContextTestingTest.TestValidatorContext;
 
 import java.math.MathContext;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Optional;
 
-public final class ValidationContextTestingTest implements ValidationContextTesting<TestValidationContext>{
+public final class ValidatorContextTestingTest implements ValidatorContextTesting<TestValidatorContext> {
     @Override
-    public TestValidationContext createContext() {
-        return new TestValidationContext();
+    public TestValidatorContext createContext() {
+        return new TestValidatorContext();
     }
 
     static class TestReference implements ValidationReference {
@@ -46,7 +46,7 @@ public final class ValidationContextTestingTest implements ValidationContextTest
         }
     }
 
-    static class TestValidationContext implements ValidationContext<TestReference>,
+    static class TestValidatorContext implements ValidatorContext<TestReference>,
         ConverterContextDelegator,
         EnvironmentContextDelegator {
 
@@ -136,8 +136,8 @@ public final class ValidationContextTestingTest implements ValidationContextTest
     // class............................................................................................................
 
     @Override
-    public Class<TestValidationContext> type() {
-        return TestValidationContext.class;
+    public Class<TestValidatorContext> type() {
+        return TestValidatorContext.class;
     }
 
     @Override

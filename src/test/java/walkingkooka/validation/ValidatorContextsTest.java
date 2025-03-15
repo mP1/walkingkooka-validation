@@ -22,15 +22,15 @@ import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
 
-public final class ValidationContextsTest implements PublicStaticHelperTesting<ValidationContexts> {
+public final class ValidatorContextsTest implements PublicStaticHelperTesting<ValidatorContexts> {
     @Override
     public boolean canHavePublicTypes(final Method method) {
         return false;
     }
 
     @Override
-    public Class<ValidationContexts> type() {
-        return ValidationContexts.class;
+    public Class<ValidatorContexts> type() {
+        return ValidatorContexts.class;
     }
 
     @Override
