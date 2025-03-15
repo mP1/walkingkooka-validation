@@ -19,13 +19,13 @@ package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.validation.ValidatorTestingTest.TestValidator;
+import walkingkooka.validation.ValidatorTesting2Test.TestValidator;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class ValidatorTestingTest implements ValidatorTesting2<TestValidator, ValidationReference> {
+public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, ValidationReference> {
 
     @Test
     public void testValidateAndCheck() {
