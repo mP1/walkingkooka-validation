@@ -19,34 +19,25 @@ package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.validation.ValidatorCollectionTest.TestValidationReference;
 import walkingkooka.validation.ValidatorTesting2Test.TestValidator;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, ValidationReference> {
+public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, TestValidationReference> {
 
     @Test
     public void testValidateAndCheck() {
-        final ValidationError error1 = ValidationError.with(
-            new ValidationReference() {
-                @Override
-                public String text() {
-                    return "A1";
-                }
-            },
+        final ValidationError<TestValidationReference> error1 = ValidationError.with(
+            new TestValidationReference("A1"),
             "Message1",
             Optional.empty()
         );
 
-        final ValidationError error2 = ValidationError.with(
-            new ValidationReference() {
-                @Override
-                public String text() {
-                    return "B2";
-                }
-            },
+        final ValidationError<TestValidationReference> error2 = ValidationError.with(
+            new TestValidationReference("B2"),
             "Message2",
             Optional.empty()
         );
@@ -66,23 +57,23 @@ public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, V
     }
 
     @Override
-    public ValidatorContext<ValidationReference> createContext() {
+    public ValidatorContext<TestValidationReference> createContext() {
         return ValidatorContexts.fake();
     }
 
-    static class TestValidator implements Validator<ValidationReference> {
+    static class TestValidator implements Validator<TestValidationReference> {
 
-        TestValidator(final ValidationError... errors) {
+        TestValidator(final ValidationError<TestValidationReference>... errors) {
             this.errors = Lists.of(errors);
         }
 
         @Override
-        public List<ValidationError<ValidationReference>> validate(final Object value,
-                                                                   final ValidatorContext<ValidationReference> context) {
+        public List<ValidationError<TestValidationReference>> validate(final Object value,
+                                                                       final ValidatorContext<TestValidationReference> context) {
             Objects.requireNonNull(context, "context");
             return this.errors;
         }
 
-        private List<ValidationError<ValidationReference>> errors;
+        private List<ValidationError<TestValidationReference>> errors;
     }
 }
