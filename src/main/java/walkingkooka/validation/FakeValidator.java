@@ -19,15 +19,15 @@ package walkingkooka.validation;
 
 import java.util.List;
 
-public class FakeValidator<T extends ValidationReference> implements Validator<T> {
+public class FakeValidator<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
 
     public FakeValidator() {
         super();
     }
 
     @Override
-    public List<ValidationError<T>> validate(final Object value,
-                                             final ValidatorContext<T> context) {
+    public List<ValidationError<R>> validate(final Object value,
+                                             final C context) {
         throw new UnsupportedOperationException();
     }
 }

@@ -29,8 +29,8 @@ public final class Validators implements PublicStaticHelper {
     /**
      * {@link ValidatorCollection}
      */
-    public static <T extends ValidationReference> Validator<T> collection(final int maxErrors,
-                                                                          final List<Validator<T>> validators) {
+    public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> collection(final int maxErrors,
+                                                                                                            final List<Validator<R, C>> validators) {
         return ValidatorCollection.with(
             maxErrors,
             validators
@@ -40,7 +40,7 @@ public final class Validators implements PublicStaticHelper {
     /**
      * {@see FakeValidator}
      */
-    public static <T extends ValidationReference> Validator<T> fake() {
+    public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> fake() {
         return new FakeValidator<>();
     }
 

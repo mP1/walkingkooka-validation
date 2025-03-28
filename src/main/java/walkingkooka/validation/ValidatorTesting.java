@@ -23,10 +23,10 @@ import java.util.List;
 
 public interface ValidatorTesting extends Testing {
 
-    default <T extends ValidationReference> void validateAndCheck(final Validator<T> validator,
-                                                                  final Object value,
-                                                                  final ValidatorContext<T> context,
-                                                                  ValidationError<T>... expected) {
+    default <R extends ValidationReference, C extends ValidatorContext<R>> void validateAndCheck(final Validator<R, C> validator,
+                                                                                                 final Object value,
+                                                                                                 final C context,
+                                                                                                 final ValidationError<R>... expected) {
         this.validateAndCheck(
             validator,
             value,
@@ -35,10 +35,10 @@ public interface ValidatorTesting extends Testing {
         );
     }
 
-    default <T extends ValidationReference> void validateAndCheck(final Validator<T> validator,
-                                                                  final Object value,
-                                                                  final ValidatorContext<T> context,
-                                                                  final List<ValidationError<T>> expected) {
+    default <R extends ValidationReference, C extends ValidatorContext<R>> void validateAndCheck(final Validator<R, C> validator,
+                                                                                                 final Object value,
+                                                                                                 final C context,
+                                                                                                 final List<ValidationError<R>> expected) {
         this.checkEquals(
             expected,
             validator.validate(

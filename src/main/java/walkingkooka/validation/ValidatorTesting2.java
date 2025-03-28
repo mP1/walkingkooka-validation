@@ -23,7 +23,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public interface ValidatorTesting2<T extends Validator<R>, R extends ValidationReference> extends ValidatorTesting {
+public interface ValidatorTesting2<V extends Validator<R, C>, R extends ValidationReference, C extends ValidatorContext<R>> extends ValidatorTesting {
 
     @Test
     default void testValidateWithNullContextFails() {
@@ -38,7 +38,7 @@ public interface ValidatorTesting2<T extends Validator<R>, R extends ValidationR
     }
 
     default void validateAndCheck(final Object value,
-                                  final ValidatorContext<R> context,
+                                  final C context,
                                   final ValidationError<R>... expected) {
         this.validateAndCheck(
             value,
@@ -48,7 +48,7 @@ public interface ValidatorTesting2<T extends Validator<R>, R extends ValidationR
     }
 
     default void validateAndCheck(final Object value,
-                                  final ValidatorContext<R> context,
+                                  final C context,
                                   final List<ValidationError<R>> expected) {
         this.validateAndCheck(
             this.createValidator(),
@@ -58,7 +58,7 @@ public interface ValidatorTesting2<T extends Validator<R>, R extends ValidationR
         );
     }
 
-    T createValidator();
+    V createValidator();
 
-    ValidatorContext<R> createContext();
+    C createContext();
 }

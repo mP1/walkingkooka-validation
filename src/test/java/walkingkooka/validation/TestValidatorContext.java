@@ -17,16 +17,6 @@
 
 package walkingkooka.validation;
 
-import java.util.List;
+public class TestValidatorContext extends FakeValidatorContext<TestValidationReference> implements ValidatorContext<TestValidationReference> {
 
-/**
- * A validator accepts a value and potentially produces {@link ValidationError}.
- */
-public interface Validator<R extends ValidationReference, C extends ValidatorContext<R>> {
-
-    /**
-     * Validates the given value returning zero or more {@link ValidationError}.
-     */
-    List<ValidationError<R>> validate(final Object value,
-                                      final C context);
 }
