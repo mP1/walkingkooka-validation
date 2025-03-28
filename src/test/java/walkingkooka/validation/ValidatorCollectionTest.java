@@ -25,7 +25,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class ValidatorCollectionTest implements ValidatorTesting2<ValidatorCollection<TestValidationReference>, TestValidationReference> {
+public final class ValidatorCollectionTest implements ValidatorTesting2<ValidatorCollection<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext> {
 
     private final static Object VALUE = "Value111";
 
@@ -49,11 +49,11 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
         return reference + ": Message " + messageNumber;
     }
 
-    private final static Validator<TestValidationReference> VALIDATOR1 = new Validator<>() {
+    private final static Validator<TestValidationReference, TestValidatorContext> VALIDATOR1 = new Validator<>() {
 
         @Override
         public List<ValidationError<TestValidationReference>> validate(final Object value,
-                                                                       final ValidatorContext<TestValidationReference> context) {
+                                                                       final TestValidatorContext context) {
             return List.of(
                 error(
                     context.validationReference(),
@@ -74,11 +74,11 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
         }
     };
 
-    private final static Validator<TestValidationReference> VALIDATOR2 = new Validator<>() {
+    private final static Validator<TestValidationReference, TestValidatorContext> VALIDATOR2 = new Validator<>() {
 
         @Override
         public List<ValidationError<TestValidationReference>> validate(final Object value,
-                                                                       final ValidatorContext<TestValidationReference> context) {
+                                                                       final TestValidatorContext context) {
             return List.of(
                 context.validationError(
                     message(
@@ -97,11 +97,11 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
         }
     };
 
-    private final static Validator<TestValidationReference> VALIDATOR3 = new Validator<>() {
+    private final static Validator<TestValidationReference, TestValidatorContext> VALIDATOR3 = new Validator<>() {
 
         @Override
         public List<ValidationError<TestValidationReference>> validate(final Object value,
-                                              final ValidatorContext<TestValidationReference> context) {
+                                                                       final TestValidatorContext context) {
             return List.of(
                 context.validationError(
                     message(
@@ -120,7 +120,7 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
         }
     };
 
-    private final static List<Validator<TestValidationReference>> VALIDATORS = Lists.of(
+    private final static List<Validator<TestValidationReference, TestValidatorContext>> VALIDATORS = Lists.of(
         VALIDATOR1,
         VALIDATOR2,
         VALIDATOR3
@@ -225,11 +225,11 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
             ValidatorCollection.with(
                 10,
                 Lists.of(
-                    new Validator<TestValidationReference>() {
+                    new Validator<TestValidationReference, TestValidatorContext>() {
 
                         @Override
                         public List<ValidationError<TestValidationReference>> validate(final Object value,
-                                                              final ValidatorContext<TestValidationReference> context) {
+                                                                                       final TestValidatorContext context) {
                             return Lists.empty();
                         }
 
@@ -241,18 +241,18 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
                 )
             ),
             VALUE,
-            ValidatorContexts.fake()
+            new TestValidatorContext()
         );
     }
 
     // helpers..........................................................................................................
 
     @Override
-    public ValidatorCollection<TestValidationReference> createValidator() {
+    public ValidatorCollection<TestValidationReference, TestValidatorContext> createValidator() {
         return this.createValidator(3);
     }
 
-    private ValidatorCollection<TestValidationReference> createValidator(final int maxErrors) {
+    private ValidatorCollection<TestValidationReference, TestValidatorContext> createValidator(final int maxErrors) {
         return ValidatorCollection.with(
             maxErrors,
             VALIDATORS
@@ -260,12 +260,12 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
     }
 
     @Override
-    public ValidatorContext<TestValidationReference> createContext() {
-        return new FakeValidatorContext<>();
+    public TestValidatorContext createContext() {
+        return new TestValidatorContext();
     }
 
-    private ValidatorContext<TestValidationReference> createContext(final TestValidationReference reference) {
-        return new FakeValidatorContext<>() {
+    private TestValidatorContext createContext(final TestValidationReference reference) {
+        return new TestValidatorContext() {
             @Override
             public TestValidationReference validationReference() {
                 return reference;

@@ -24,7 +24,7 @@ import walkingkooka.validation.ValidatorTesting2Test.TestValidator;
 import java.util.List;
 import java.util.Objects;
 
-public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, TestValidationReference> {
+public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, TestValidationReference, TestValidatorContext> {
 
     @Test
     public void testValidateAndCheck() {
@@ -41,7 +41,7 @@ public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, T
         this.validateAndCheck(
             new TestValidator(error1, error2),
             "Value",
-            ValidatorContexts.fake(),
+            new TestValidatorContext(),
             error1,
             error2
         );
@@ -53,11 +53,11 @@ public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, T
     }
 
     @Override
-    public ValidatorContext<TestValidationReference> createContext() {
-        return ValidatorContexts.fake();
+    public TestValidatorContext createContext() {
+        return new TestValidatorContext();
     }
 
-    static class TestValidator implements Validator<TestValidationReference> {
+    static class TestValidator implements Validator<TestValidationReference, TestValidatorContext> {
 
         TestValidator(final ValidationError<TestValidationReference>... errors) {
             this.errors = Lists.of(errors);
@@ -65,7 +65,7 @@ public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, T
 
         @Override
         public List<ValidationError<TestValidationReference>> validate(final Object value,
-                                                                       final ValidatorContext<TestValidationReference> context) {
+                                                                       final TestValidatorContext context) {
             Objects.requireNonNull(context, "context");
             return this.errors;
         }
