@@ -45,6 +45,13 @@ public final class Validators implements PublicStaticHelper {
     }
 
     /**
+     * {@see NonNullValidator}
+     */
+    public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> nonNull() {
+        return NonNullValidator.instance();
+    }
+
+    /**
      * Private constructor to stop creation
      */
     private Validators() {
