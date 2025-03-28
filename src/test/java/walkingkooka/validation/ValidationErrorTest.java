@@ -301,7 +301,8 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
                 MESSAGE
             ),
             "ValidationError\n" +
-                "  HelloError too many xyz\n"
+                "  Hello (walkingkooka.validation.TestValidationReference)\n" +
+                "    Error too many xyz\n"
         );
     }
 
@@ -313,8 +314,9 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
                 MESSAGE
             ).setValue(VALUE),
             "ValidationError\n" +
-                "  HelloError too many xyz\n" +
-                "      Value999"
+                "  Hello (walkingkooka.validation.TestValidationReference)\n" +
+                "    Error too many xyz\n" +
+                "      \"Value999\"\n"
         );
     }
 
