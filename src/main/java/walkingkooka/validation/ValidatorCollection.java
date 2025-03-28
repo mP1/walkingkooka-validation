@@ -17,6 +17,7 @@
 
 package walkingkooka.validation;
 
+import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 
 import java.util.List;
@@ -82,6 +83,28 @@ final class ValidatorCollection<R extends ValidationReference, C extends Validat
 
     private final int maxErrors;
     private final List<Validator<R, C>> validators;
+
+    // Object...........................................................................................................
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            this.maxErrors,
+            this.validators
+        );
+    }
+
+    @Override
+    public boolean equals(final Object other) {
+        return this == other ||
+            other instanceof ValidatorCollection &&
+                this.equals0(Cast.to(other));
+    }
+
+    private boolean equals0(final ValidatorCollection<?, ?> other) {
+        return this.maxErrors == other.maxErrors &&
+            this.validators.equals(other.validators);
+    }
 
     @Override
     public String toString() {

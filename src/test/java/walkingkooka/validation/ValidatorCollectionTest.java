@@ -18,6 +18,7 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.collect.list.Lists;
 
 import java.util.List;
@@ -25,7 +26,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class ValidatorCollectionTest implements ValidatorTesting2<ValidatorCollection<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext> {
+public final class ValidatorCollectionTest implements ValidatorTesting2<ValidatorCollection<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
+    HashCodeEqualsDefinedTesting2<ValidatorCollection<TestValidationReference, TestValidatorContext>> {
 
     private final static Object VALUE = "Value111";
 
@@ -247,9 +249,11 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
 
     // helpers..........................................................................................................
 
+    private final static int MAX_ERRORS = 3;
+
     @Override
     public ValidatorCollection<TestValidationReference, TestValidatorContext> createValidator() {
-        return this.createValidator(3);
+        return this.createValidator(MAX_ERRORS);
     }
 
     private ValidatorCollection<TestValidationReference, TestValidatorContext> createValidator(final int maxErrors) {
@@ -271,5 +275,37 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
                 return reference;
             }
         };
+    }
+
+    // equals...........................................................................................................
+
+    @Test
+    public void testEqualsDifferentMaxErrors() {
+        this.checkNotEquals(
+            ValidatorCollection.with(
+                MAX_ERRORS+1,
+                VALIDATORS
+            )
+        );
+    }
+
+    @Test
+    public void testEqualsDifferentValidators() {
+        this.checkNotEquals(
+            ValidatorCollection.with(
+                MAX_ERRORS,
+                Lists.of(
+                    VALIDATOR1
+                )
+            )
+        );
+    }
+
+    @Override
+    public ValidatorCollection<TestValidationReference, TestValidatorContext> createObject() {
+        return ValidatorCollection.with(
+            MAX_ERRORS,
+            VALIDATORS
+        );
     }
 }
