@@ -23,9 +23,9 @@ import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
-final class TestValidationReference implements ValidationReference {
+public final class TestValidationReference implements ValidationReference {
 
-    TestValidationReference(final String field) {
+    public TestValidationReference(final String field) {
         this.field = CharSequences.failIfNullOrEmpty(field, "field");
     }
 
