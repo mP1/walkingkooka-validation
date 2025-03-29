@@ -55,4 +55,11 @@ public interface ValidatorContextTesting<C extends ValidatorContext<R>, R extend
             context.validationReference(),
             context::toString);
     }
+
+    // class............................................................................................................
+
+    @Override
+    default String typeNameSuffix() {
+        return ValidatorContext.class.getSimpleName();
+    }
 }
