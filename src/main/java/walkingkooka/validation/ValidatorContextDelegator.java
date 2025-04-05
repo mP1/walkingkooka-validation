@@ -30,11 +30,11 @@ public interface ValidatorContextDelegator<T extends ValidationReference> extend
 
     // ValidatorContextDelegator.......................................................................................
 
-    ValidatorContext<T> validationContext();
+    ValidatorContext<T> validatorContext();
 
     @Override
     default T validationReference() {
-        return this.validationContext()
+        return this.validatorContext()
             .validationReference();
     }
 
@@ -48,13 +48,13 @@ public interface ValidatorContextDelegator<T extends ValidationReference> extend
 
     @Override
     default ConverterContext converterContext() {
-        return this.validationContext();
+        return this.validatorContext();
     }
 
     // EnvironmentContextDelegator......................................................................................
 
     @Override
     default EnvironmentContext environmentContext() {
-        return this.validationContext();
+        return this.validatorContext();
     }
 }
