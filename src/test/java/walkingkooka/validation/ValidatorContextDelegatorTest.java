@@ -81,18 +81,18 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
 
         @Override
         public ValidatorContext<TestValidationReference> setValidationReference(final TestValidationReference reference) {
-            if(this.validationContext().validationReference().equals(reference)) {
+            if(this.validatorContext().validationReference().equals(reference)) {
                 return this;
             }
 
             return new TestValidatorContext(
-                this.validationContext()
+                this.validatorContext()
                     .setValidationReference(reference)
             );
         }
 
         @Override
-        public ValidatorContext<TestValidationReference> validationContext() {
+        public ValidatorContext<TestValidationReference> validatorContext() {
             return this.context;
         }
 
