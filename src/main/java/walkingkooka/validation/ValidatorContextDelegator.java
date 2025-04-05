@@ -17,15 +17,13 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.convert.ConverterContext;
-import walkingkooka.convert.ConverterContextDelegator;
+import walkingkooka.convert.CanConvert;
+import walkingkooka.convert.CanConvertDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 
-import java.time.LocalDateTime;
-
 public interface ValidatorContextDelegator<T extends ValidationReference> extends ValidatorContext<T>,
-    ConverterContextDelegator,
+    CanConvertDelegator,
     EnvironmentContextDelegator {
 
     // ValidatorContextDelegator.......................................................................................
@@ -38,16 +36,10 @@ public interface ValidatorContextDelegator<T extends ValidationReference> extend
             .validationReference();
     }
 
-    @Override
-    default LocalDateTime now() {
-        return this.converterContext()
-            .now();
-    }
-
-    // ConverterContextDelegator........................................................................................
+    // CanConvertDelegator..............................................................................................
 
     @Override
-    default ConverterContext converterContext() {
+    default CanConvert canConvert() {
         return this.validatorContext();
     }
 

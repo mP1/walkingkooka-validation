@@ -17,13 +17,13 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.convert.ConverterContext;
+import walkingkooka.convert.CanConvert;
 import walkingkooka.environment.EnvironmentContext;
 
 /**
  * {@link walkingkooka.Context} that accompanies a {@link Validator} during validation.
  */
-public interface ValidatorContext<T extends ValidationReference> extends ConverterContext,
+public interface ValidatorContext<T extends ValidationReference> extends CanConvert,
     EnvironmentContext {
 
     /**
