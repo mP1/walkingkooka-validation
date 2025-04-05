@@ -18,13 +18,14 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.convert.ConverterContextTesting;
+import walkingkooka.convert.CanConvertTesting;
 import walkingkooka.environment.EnvironmentContextTesting2;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public interface ValidatorContextTesting<C extends ValidatorContext<R>, R extends ValidationReference> extends ConverterContextTesting<C>, EnvironmentContextTesting2<C> {
+public interface ValidatorContextTesting<C extends ValidatorContext<R>, R extends ValidationReference> extends CanConvertTesting<C>,
+    EnvironmentContextTesting2<C> {
 
     @Test
     default void testSetValidationReferenceWithNullFails() {
@@ -54,6 +55,11 @@ public interface ValidatorContextTesting<C extends ValidatorContext<R>, R extend
             expected,
             context.validationReference(),
             context::toString);
+    }
+
+    @Override
+    default C createCanConvert() {
+        return this.createContext();
     }
 
     // class............................................................................................................

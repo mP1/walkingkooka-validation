@@ -106,46 +106,6 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         )
     );
 
-    @Override
-    public String currencySymbol() {
-        return CONVERTER_CONTEXT.currencySymbol();
-    }
-
-    @Override
-    public char decimalSeparator() {
-        return CONVERTER_CONTEXT.decimalSeparator();
-    }
-
-    @Override
-    public String exponentSymbol() {
-        return CONVERTER_CONTEXT.exponentSymbol();
-    }
-
-    @Override
-    public char groupSeparator() {
-        return CONVERTER_CONTEXT.groupSeparator();
-    }
-
-    @Override
-    public MathContext mathContext() {
-        return CONVERTER_CONTEXT.mathContext();
-    }
-
-    @Override
-    public char negativeSign() {
-        return CONVERTER_CONTEXT.negativeSign();
-    }
-
-    @Override
-    public char percentageSymbol() {
-        return CONVERTER_CONTEXT.percentageSymbol();
-    }
-
-    @Override
-    public char positiveSign() {
-        return CONVERTER_CONTEXT.positiveSign();
-    }
-
     // class............................................................................................................
 
     @Override

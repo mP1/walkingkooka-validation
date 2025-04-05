@@ -104,46 +104,6 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
         }
     }
 
-    @Override
-    public String currencySymbol() {
-        return DECIMAL_NUMBER_CONTEXT.currencySymbol();
-    }
-
-    @Override
-    public char decimalSeparator() {
-        return DECIMAL_NUMBER_CONTEXT.decimalSeparator();
-    }
-
-    @Override
-    public String exponentSymbol() {
-        return DECIMAL_NUMBER_CONTEXT.exponentSymbol();
-    }
-
-    @Override
-    public char groupSeparator() {
-        return DECIMAL_NUMBER_CONTEXT.groupSeparator();
-    }
-
-    @Override
-    public MathContext mathContext() {
-        return DECIMAL_NUMBER_CONTEXT.mathContext();
-    }
-
-    @Override
-    public char negativeSign() {
-        return DECIMAL_NUMBER_CONTEXT.negativeSign();
-    }
-
-    @Override
-    public char percentageSymbol() {
-        return DECIMAL_NUMBER_CONTEXT.percentageSymbol();
-    }
-
-    @Override
-    public char positiveSign() {
-        return DECIMAL_NUMBER_CONTEXT.positiveSign();
-    }
-
     // class............................................................................................................
 
     @Override
