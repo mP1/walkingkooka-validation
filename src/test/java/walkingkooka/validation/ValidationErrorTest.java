@@ -23,6 +23,7 @@ import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
@@ -34,7 +35,8 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<ValidationError<TestValidationReference>>,
+public final class ValidationErrorTest implements HasTextTesting,
+    HashCodeEqualsDefinedTesting2<ValidationError<TestValidationReference>>,
     ToStringTesting<ValidationError<TestValidationReference>>,
     ClassTesting<ValidationError<TestValidationReference>>,
     TreePrintableTesting,
@@ -180,6 +182,21 @@ public final class ValidationErrorTest implements HashCodeEqualsDefinedTesting2<
         assertSame(
             different,
             different.clearValue()
+        );
+    }
+
+    // HasText..........................................................................................................
+
+    @Test
+    public void testText() {
+        final String message = "Hello message 123";
+
+        this.textAndCheck(
+            ValidationError.with(
+                new TestValidationReference("Z99"),
+                message
+            ),
+            message
         );
     }
 

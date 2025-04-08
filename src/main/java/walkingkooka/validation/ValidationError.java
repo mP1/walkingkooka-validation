@@ -21,6 +21,7 @@ import walkingkooka.Cast;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.UsesToStringBuilder;
 import walkingkooka.Value;
+import walkingkooka.text.HasText;
 import walkingkooka.text.Whitespace;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
@@ -38,6 +39,7 @@ import java.util.Optional;
  * Reports a single error for the identified field or component.
  */
 public final class ValidationError<T extends ValidationReference> implements Value<Optional<Object>>,
+    HasText,
     UsesToStringBuilder,
     TreePrintable {
 
@@ -71,6 +73,13 @@ public final class ValidationError<T extends ValidationReference> implements Val
     }
 
     private final String message;
+
+    // HasText..........................................................................................................
+
+    @Override
+    public String text() {
+        return this.message;
+    }
 
     // Value............................................................................................................
 
