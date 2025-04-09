@@ -29,11 +29,13 @@ import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.tree.expression.ExpressionEvaluationContext;
 
 import java.math.MathContext;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -42,6 +44,10 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
     ToStringTesting<BasicValidatorContext<TestValidationReference>> {
 
     private final static TestValidationReference VALIDATION_REFERENCE = new TestValidationReference("A1");
+
+    private final static Function<TestValidationReference, ExpressionEvaluationContext> REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION = (final TestValidationReference validationReference) -> {
+        throw new UnsupportedOperationException();
+    };
 
     private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
@@ -70,6 +76,20 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
             NullPointerException.class,
             () -> BasicValidatorContext.with(
                 null,
+                REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
+                CONVERTER_CONTEXT,
+                ENVIRONMENT_CONTEXT
+            )
+        );
+    }
+
+    @Test
+    public void testWithNullValidationReferenceToExpressionEvaluationContextFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> BasicValidatorContext.with(
+                VALIDATION_REFERENCE,
+                null,
                 CONVERTER_CONTEXT,
                 ENVIRONMENT_CONTEXT
             )
@@ -82,6 +102,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
             NullPointerException.class,
             () -> BasicValidatorContext.with(
                 VALIDATION_REFERENCE,
+                REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
                 null,
                 ENVIRONMENT_CONTEXT
             )
@@ -94,6 +115,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
             NullPointerException.class,
             () -> BasicValidatorContext.with(
                 VALIDATION_REFERENCE,
+                REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
                 CONVERTER_CONTEXT,
                 null
             )
@@ -134,6 +156,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
     public BasicValidatorContext<TestValidationReference> createContext() {
         return BasicValidatorContext.with(
             VALIDATION_REFERENCE,
+            REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
             CONVERTER_CONTEXT,
             ENVIRONMENT_CONTEXT
         );
@@ -146,10 +169,11 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
         this.toStringAndCheck(
             BasicValidatorContext.with(
                 VALIDATION_REFERENCE,
+                REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
                 CONVERTER_CONTEXT,
                 ENVIRONMENT_CONTEXT
             ).toString(),
-            VALIDATION_REFERENCE + " " + CONVERTER_CONTEXT + " " + ENVIRONMENT_CONTEXT
+            VALIDATION_REFERENCE + " " + REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION + " " + CONVERTER_CONTEXT + " " + ENVIRONMENT_CONTEXT
         );
     }
 

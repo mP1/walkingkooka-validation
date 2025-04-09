@@ -19,6 +19,8 @@ package walkingkooka.validation;
 
 import walkingkooka.convert.CanConvert;
 import walkingkooka.environment.EnvironmentContext;
+import walkingkooka.tree.expression.Expression;
+import walkingkooka.tree.expression.ExpressionEvaluationContext;
 
 /**
  * {@link walkingkooka.Context} that accompanies a {@link Validator} during validation.
@@ -46,4 +48,9 @@ public interface ValidatorContext<T extends ValidationReference> extends CanConv
             message
         );
     }
+
+    /**
+     * Factory that returns a {@link ExpressionEvaluationContext} which may be used to evaluate an {@link Expression}.
+     */
+    ExpressionEvaluationContext expressionEvaluationContext();
 }

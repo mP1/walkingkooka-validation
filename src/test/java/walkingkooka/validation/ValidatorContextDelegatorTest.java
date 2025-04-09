@@ -26,16 +26,22 @@ import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.ValidatorContextDelegatorTest.TestValidatorContext;
 
 import java.math.MathContext;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.function.Function;
 
 public final class ValidatorContextDelegatorTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference> {
 
     private final static TestValidationReference VALIDATION_REFERENCE = new TestValidationReference("A1");
+
+    private final static Function<TestValidationReference, ExpressionEvaluationContext> REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION = (final TestValidationReference validationReference) -> {
+        throw new UnsupportedOperationException();
+    };
 
     private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
@@ -68,9 +74,10 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
         TestValidatorContext() {
             this(
                 ValidatorContexts.basic(
-                VALIDATION_REFERENCE,
-                CONVERTER_CONTEXT,
-                ENVIRONMENT_CONTEXT
+                    VALIDATION_REFERENCE,
+                    REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
+                    CONVERTER_CONTEXT,
+                    ENVIRONMENT_CONTEXT
                 )
             );
         }
