@@ -21,28 +21,34 @@ import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.ConverterContextDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
+import walkingkooka.tree.expression.ExpressionEvaluationContext;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.function.Function;
 
 final class BasicValidatorContext<T extends ValidationReference> implements ValidatorContext<T>,
     ConverterContextDelegator,
     EnvironmentContextDelegator {
 
     static <T extends ValidationReference> BasicValidatorContext<T> with(final T validationReference,
+                                                                         final Function<T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
                                                                          final ConverterContext converterContext,
                                                                          final EnvironmentContext environmentContext) {
         return new BasicValidatorContext<>(
             Objects.requireNonNull(validationReference, "validationReference"),
+            Objects.requireNonNull(referenceToExpressionEvaluationContext, "referenceToExpressionEvaluationContext"),
             Objects.requireNonNull(converterContext, "converterContext"),
             Objects.requireNonNull(environmentContext, "environmentContext")
         );
     }
 
     private BasicValidatorContext(final T validationReference,
+                                  final Function<T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
                                   final ConverterContext converterContext,
                                   final EnvironmentContext environmentContext) {
         this.validationReference = validationReference;
+        this.referenceToExpressionEvaluationContext = referenceToExpressionEvaluationContext;
         this.converterContext = converterContext;
         this.environmentContext = environmentContext;
     }
@@ -60,10 +66,18 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
             this :
             new BasicValidatorContext<>(
                 Objects.requireNonNull(validationReference, "validationReference"),
+                this.referenceToExpressionEvaluationContext,
                 this.converterContext,
                 this.environmentContext
             );
     }
+
+    @Override
+    public ExpressionEvaluationContext expressionEvaluationContext() {
+        return this.referenceToExpressionEvaluationContext.apply(this.validationReference);
+    }
+
+    private final Function<T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext;
 
     @Override
     public LocalDateTime now() {
@@ -94,6 +108,6 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
 
     @Override
     public String toString() {
-        return this.validationReference + " " + this.converterContext + " " + this.environmentContext;
+        return this.validationReference + " " + this.referenceToExpressionEvaluationContext + " " + this.converterContext + " " + this.environmentContext;
     }
 }

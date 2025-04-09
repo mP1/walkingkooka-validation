@@ -20,6 +20,7 @@ package walkingkooka.validation;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.tree.expression.ExpressionEvaluationContext;
 
 import java.util.Optional;
 import java.util.Set;
@@ -37,6 +38,11 @@ public class FakeValidatorContext<T extends ValidationReference> extends FakeCon
 
     @Override
     public ValidatorContext<T> setValidationReference(final T reference) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public ExpressionEvaluationContext expressionEvaluationContext() {
         throw new UnsupportedOperationException();
     }
 

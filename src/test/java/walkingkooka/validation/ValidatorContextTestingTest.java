@@ -26,6 +26,8 @@ import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.math.DecimalNumberContexts;
+import walkingkooka.tree.expression.ExpressionEvaluationContext;
+import walkingkooka.tree.expression.ExpressionEvaluationContexts;
 import walkingkooka.validation.ValidatorContextTestingTest.TestValidatorContext;
 
 import java.math.MathContext;
@@ -66,6 +68,11 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
                 new TestValidatorContext(
                     Objects.requireNonNull(reference, "reference")
                 );
+        }
+
+        @Override
+        public ExpressionEvaluationContext expressionEvaluationContext() {
+            return ExpressionEvaluationContexts.fake();
         }
 
         @Override
