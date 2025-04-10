@@ -71,7 +71,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         }
 
         @Override
-        public ExpressionEvaluationContext expressionEvaluationContext() {
+        public ExpressionEvaluationContext expressionEvaluationContext(final Object value) {
             return ExpressionEvaluationContexts.fake();
         }
 

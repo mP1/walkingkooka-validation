@@ -22,6 +22,8 @@ import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 
+import java.util.Optional;
+
 /**
  * {@link walkingkooka.Context} that accompanies a {@link Validator} during validation.
  */
@@ -51,6 +53,8 @@ public interface ValidatorContext<T extends ValidationReference> extends CanConv
 
     /**
      * Factory that returns a {@link ExpressionEvaluationContext} which may be used to evaluate an {@link Expression}.
+     * The value parameter is the value (which may be null) being validated and should be made available at a reference called VALUE.
+     * {@link Optional} isnt used because working with Optionals within an {@link Expression} is cumbersome.
      */
-    ExpressionEvaluationContext expressionEvaluationContext();
+    ExpressionEvaluationContext expressionEvaluationContext(final Object value);
 }

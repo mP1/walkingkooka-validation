@@ -22,7 +22,7 @@ import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 /**
  * A collection of factory methods to create {@link ValidatorContext}
@@ -33,7 +33,7 @@ public final class ValidatorContexts implements PublicStaticHelper {
      * {@see BasicValidatorContext}
      */
     public static <T extends ValidationReference> ValidatorContext<T> basic(final T validationReference,
-                                                                            final Function<T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
+                                                                            final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
                                                                             final ConverterContext converterContext,
                                                                             final EnvironmentContext environmentContext) {
         return BasicValidatorContext.with(
