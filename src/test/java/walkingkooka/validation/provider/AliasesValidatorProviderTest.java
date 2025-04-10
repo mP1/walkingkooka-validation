@@ -70,7 +70,7 @@ public final class AliasesValidatorProviderTest implements ValidatorProviderTest
     private final static ValidatorInfo INFO4 = ValidatorInfo.parse("https://example.com/custom4 " + NAME4);
 
     private static Validator<TestValidationReference, TestValidatorContext> validator(final ValidatorName name) {
-        return new FakeValidator() {
+        return new FakeValidator<>() {
 
             @Override
             public int hashCode() {
