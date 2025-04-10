@@ -25,14 +25,14 @@ import walkingkooka.tree.expression.ExpressionEvaluationContext;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 final class BasicValidatorContext<T extends ValidationReference> implements ValidatorContext<T>,
     ConverterContextDelegator,
     EnvironmentContextDelegator {
 
     static <T extends ValidationReference> BasicValidatorContext<T> with(final T validationReference,
-                                                                         final Function<T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
+                                                                         final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
                                                                          final ConverterContext converterContext,
                                                                          final EnvironmentContext environmentContext) {
         return new BasicValidatorContext<>(
@@ -44,7 +44,7 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
     }
 
     private BasicValidatorContext(final T validationReference,
-                                  final Function<T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
+                                  final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
                                   final ConverterContext converterContext,
                                   final EnvironmentContext environmentContext) {
         this.validationReference = validationReference;
@@ -73,11 +73,14 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
     }
 
     @Override
-    public ExpressionEvaluationContext expressionEvaluationContext() {
-        return this.referenceToExpressionEvaluationContext.apply(this.validationReference);
+    public ExpressionEvaluationContext expressionEvaluationContext(final Object value) {
+        return this.referenceToExpressionEvaluationContext.apply(
+            value,
+            this.validationReference
+        );
     }
 
-    private final Function<T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext;
+    private final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext;
 
     @Override
     public LocalDateTime now() {

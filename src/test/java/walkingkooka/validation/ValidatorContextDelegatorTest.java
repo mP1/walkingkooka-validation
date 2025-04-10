@@ -33,13 +33,14 @@ import java.math.MathContext;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Optional;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public final class ValidatorContextDelegatorTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference> {
 
     private final static TestValidationReference VALIDATION_REFERENCE = new TestValidationReference("A1");
 
-    private final static Function<TestValidationReference, ExpressionEvaluationContext> REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION = (final TestValidationReference validationReference) -> {
+    private final static BiFunction<Object, TestValidationReference, ExpressionEvaluationContext> REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION = (final Object value,
+                                                                                                                                                      final TestValidationReference validationReference) -> {
         throw new UnsupportedOperationException();
     };
 

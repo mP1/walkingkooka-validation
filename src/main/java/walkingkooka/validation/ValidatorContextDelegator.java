@@ -38,9 +38,9 @@ public interface ValidatorContextDelegator<T extends ValidationReference> extend
     }
 
     @Override
-    default ExpressionEvaluationContext expressionEvaluationContext() {
+    default ExpressionEvaluationContext expressionEvaluationContext(final Object value) {
         return this.validatorContext()
-            .expressionEvaluationContext();
+            .expressionEvaluationContext(value);
     }
 
     // CanConvertDelegator..............................................................................................

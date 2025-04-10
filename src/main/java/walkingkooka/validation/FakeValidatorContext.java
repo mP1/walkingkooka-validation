@@ -42,7 +42,7 @@ public class FakeValidatorContext<T extends ValidationReference> extends FakeCon
     }
 
     @Override
-    public ExpressionEvaluationContext expressionEvaluationContext() {
+    public ExpressionEvaluationContext expressionEvaluationContext(final Object value) {
         throw new UnsupportedOperationException();
     }
 
