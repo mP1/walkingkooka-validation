@@ -18,6 +18,7 @@
 package walkingkooka.validation;
 
 import walkingkooka.reflect.PublicStaticHelper;
+import walkingkooka.tree.expression.Expression;
 
 import java.util.List;
 
@@ -35,6 +36,13 @@ public final class Validators implements PublicStaticHelper {
             maxErrors,
             validators
         );
+    }
+
+    /**
+     * {@see ExpressionValidator}
+     */
+    public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> expression(final Expression expression) {
+        return ExpressionValidator.with(expression);
     }
 
     /**
