@@ -29,6 +29,7 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.Validators;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.function.Function;
@@ -39,7 +40,7 @@ final public class ValidatorNameTest implements PluginNameTesting<ValidatorName>
     @Test
     public void testConstantNamesMatchValidatorsFactoryMethods() {
         final Set<String> constantNames = Arrays.stream(ValidatorName.class.getFields())
-            .filter(m -> FieldAttributes.STATIC.is(m))
+            .filter(FieldAttributes.STATIC::is)
             .filter(m -> JavaVisibility.of(m) == JavaVisibility.PUBLIC)
             .filter(m -> m.getType() == ValidatorName.class)
             .map(m -> {
@@ -53,9 +54,9 @@ final public class ValidatorNameTest implements PluginNameTesting<ValidatorName>
             .collect(Collectors.toCollection(SortedSets::tree));
 
         final Set<String> factoryNames = Arrays.stream(Validators.class.getMethods())
-            .filter(m -> MethodAttributes.STATIC.is(m))
+            .filter(MethodAttributes.STATIC::is)
             .filter(m -> JavaVisibility.of(m) == JavaVisibility.PUBLIC)
-            .map(m -> m.getName())
+            .map(Method::getName)
             .filter(n -> false == "fake".equals(n))
             .map(m -> CaseKind.CAMEL.change(m, CaseKind.KEBAB).toLowerCase())
             .collect(Collectors.toCollection(SortedSets::tree));
