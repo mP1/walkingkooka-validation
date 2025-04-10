@@ -18,6 +18,7 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.Cast;
 import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.net.Url;
 import walkingkooka.net.email.EmailAddress;
@@ -32,14 +33,14 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public final class ValidationErrorListTest implements ImmutableListTesting<ValidationErrorList, ValidationError<?>>,
+public final class ValidationErrorListTest implements ImmutableListTesting<ValidationErrorList<TestValidationReference>, ValidationError<TestValidationReference>>,
     TreePrintableTesting,
-    ClassTesting<ValidationErrorList>,
-    JsonNodeMarshallingTesting<ValidationErrorList> {
+    ClassTesting<ValidationErrorList<TestValidationReference>>,
+    JsonNodeMarshallingTesting<ValidationErrorList<TestValidationReference>> {
 
     @Test
     public void testSetElementsDoesntDoubleWrap() {
-        final ValidationErrorList list = this.createList();
+        final ValidationErrorList<TestValidationReference> list = this.createList();
 
         assertSame(
             list,
@@ -48,13 +49,14 @@ public final class ValidationErrorListTest implements ImmutableListTesting<Valid
     }
 
     @Override
-    public ValidationErrorList createList() {
-        return ValidationErrorList.EMPTY.concat(
-            ValidationError.with(
-                new TestValidationReference("Hello"),
-                "Something went wrong 123"
-            )
-        );
+    public ValidationErrorList<TestValidationReference> createList() {
+        return ValidationErrorList.<TestValidationReference>empty()
+            .concat(
+                ValidationError.with(
+                    new TestValidationReference("Hello"),
+                    "Something went wrong 123"
+                )
+            );
     }
 
     // Json.............................................................................................................
@@ -94,25 +96,26 @@ public final class ValidationErrorListTest implements ImmutableListTesting<Valid
     @Test
     public void testMarshallWithValueComplexType() {
         this.marshallAndCheck(
-            ValidationErrorList.EMPTY.concat(
-                ValidationError.with(
-                    new TestValidationReference("Hello"),
-                    "Something went wrong 123"
-                ).setValue(
-                    Optional.of(
-                        EmailAddress.parse("hello@example.com")
+            ValidationErrorList.<TestValidationReference>empty()
+                .concat(
+                    ValidationError.with(
+                        new TestValidationReference("Hello"),
+                        "Something went wrong 123"
+                    ).setValue(
+                        Optional.of(
+                            EmailAddress.parse("hello@example.com")
+                        )
                     )
-                )
-            ).concat(
-                ValidationError.with(
-                    new TestValidationReference("Hello"),
-                    "Something went wrong 123"
-                ).setValue(
-                    Optional.of(
-                        Url.parse("https://example.com")
+                ).concat(
+                    ValidationError.with(
+                        new TestValidationReference("Hello"),
+                        "Something went wrong 123"
+                    ).setValue(
+                        Optional.of(
+                            Url.parse("https://example.com")
+                        )
                     )
-                )
-            ),
+                ),
             "[\n" +
                 "  {\n" +
                 "    \"reference\": {\n" +
@@ -141,8 +144,8 @@ public final class ValidationErrorListTest implements ImmutableListTesting<Valid
     }
 
     @Override
-    public ValidationErrorList unmarshall(final JsonNode json,
-                                          final JsonNodeUnmarshallContext context) {
+    public ValidationErrorList<TestValidationReference> unmarshall(final JsonNode json,
+                                                                   final JsonNodeUnmarshallContext context) {
         return ValidationErrorList.unmarshall(
             json,
             context
@@ -150,15 +153,15 @@ public final class ValidationErrorListTest implements ImmutableListTesting<Valid
     }
 
     @Override
-    public ValidationErrorList createJsonNodeMarshallingValue() {
+    public ValidationErrorList<TestValidationReference> createJsonNodeMarshallingValue() {
         return this.createList();
     }
 
     // ClassTesting.....................................................................................................
 
     @Override
-    public Class<ValidationErrorList> type() {
-        return ValidationErrorList.class;
+    public Class<ValidationErrorList<TestValidationReference>> type() {
+        return Cast.to(ValidationErrorList.class);
     }
 
     @Override
