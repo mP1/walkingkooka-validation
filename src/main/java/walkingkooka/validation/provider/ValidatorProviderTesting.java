@@ -260,7 +260,7 @@ public interface ValidatorProviderTesting<T extends ValidatorProvider> extends P
         this.checkEquals(
             expected,
             provider.validatorInfos(),
-            () -> provider.toString()
+            provider::toString
         );
     }
 
