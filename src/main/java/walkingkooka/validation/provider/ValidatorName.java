@@ -38,7 +38,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.function.Supplier;
 
 /**
  * The {@link Name} of a {@link Validator}. Note comparator names are case-sensitive.
@@ -65,27 +64,6 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
     public final static int MAX_LENGTH = PluginName.MAX_LENGTH;
 
     // constants........................................................................................................
-
-    private static ValidatorName registerConstantName(final String name) {
-        return registerConstantName(
-            name,
-            (BiFunction<List<?>, ProviderContext, Validator<?, ?>>) null
-        );
-    }
-
-    private static ValidatorName registerConstantName(final String name,
-                                                      final Supplier<Validator<?, ?>> validator) {
-        return registerConstantName(
-            name,
-            (p, c) -> {
-                if (false == p.isEmpty()) {
-                    throw new IllegalArgumentException("Expected no parameters got " + p.size() + "=" + p);
-                }
-
-                return validator.get();
-            }
-        );
-    }
 
     private static ValidatorName registerConstantName(final String name,
                                                       final BiFunction<List<?>, ProviderContext, Validator<?, ?>> factory) {
