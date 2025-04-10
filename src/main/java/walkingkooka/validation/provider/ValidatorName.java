@@ -24,6 +24,8 @@ import walkingkooka.naming.Name;
 import walkingkooka.net.http.server.hateos.HateosResourceName;
 import walkingkooka.plugin.PluginName;
 import walkingkooka.plugin.PluginNameLike;
+import walkingkooka.plugin.ProviderContext;
+import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -35,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 /**
@@ -67,7 +69,7 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
     private static ValidatorName registerConstantName(final String name) {
         return registerConstantName(
             name,
-            (Function<List<?>, Validator<?, ?>>) null
+            (BiFunction<List<?>, ProviderContext, Validator<?, ?>>) null
         );
     }
 
@@ -75,7 +77,7 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
                                                       final Supplier<Validator<?, ?>> validator) {
         return registerConstantName(
             name,
-            (p) -> {
+            (p, c) -> {
                 if (false == p.isEmpty()) {
                     throw new IllegalArgumentException("Expected no parameters got " + p.size() + "=" + p);
                 }
@@ -86,7 +88,7 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
     }
 
     private static ValidatorName registerConstantName(final String name,
-                                                      final Function<List<?>, Validator<?, ?>> factory) {
+                                                      final BiFunction<List<?>, ProviderContext, Validator<?, ?>> factory) {
         final ValidatorName validatorName = new ValidatorName(name);
         NAME_TO_FACTORY.put(
             validatorName,
@@ -98,7 +100,7 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
     /**
      * Holds all constants in a {@link Set}.
      */
-    final static Map<ValidatorName, Function<List<?>, Validator<?, ?>>> NAME_TO_FACTORY = Maps.sorted();
+    final static Map<ValidatorName, BiFunction<List<?>, ProviderContext, Validator<?, ?>>> NAME_TO_FACTORY = Maps.sorted();
 
     private final static String COLLECTION_STRING = "collection";
 
@@ -107,7 +109,7 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
      */
     public final static ValidatorName COLLECTION = registerConstantName(
         COLLECTION_STRING,
-        (p) -> {
+        (p, c) -> {
             boolean first = true;
             int max = 0;
             final List<Validator<?, ?>> validators = Lists.array();
@@ -133,6 +135,21 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
         }
     );
 
+    private final static String EXPRESSION_STRING = "expression";
+
+    /**
+     * The name of the {@link Validator} returned by {@link Validators#expression(Expression)}.
+     */
+    public final static ValidatorName EXPRESSION = registerConstantName(
+        EXPRESSION_STRING,
+        (p, c) -> Validators.expression(
+            c.convertOrFail(
+                p.get(0),
+                Expression.class
+            )
+        )
+    );
+
     private final static String NON_NULL_STRING = "non-null";
 
     /**
@@ -140,7 +157,7 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
      */
     public final static ValidatorName NON_NULL = registerConstantName(
         NON_NULL_STRING,
-        (p) -> Validators.nonNull()
+        (p, c) -> Validators.nonNull()
     );
 
     /**
@@ -154,6 +171,9 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
         switch (name) {
             case COLLECTION_STRING:
                 validatorName = COLLECTION;
+                break;
+            case EXPRESSION_STRING:
+                validatorName = EXPRESSION;
                 break;
             case NON_NULL_STRING:
                 validatorName = NON_NULL;

@@ -18,14 +18,16 @@
 package walkingkooka.validation.provider;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.Either;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.collect.set.SortedSets;
+import walkingkooka.plugin.FakeProviderContext;
 import walkingkooka.plugin.ProviderContext;
-import walkingkooka.plugin.ProviderContexts;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.MethodAttributes;
 import walkingkooka.text.CaseKind;
+import walkingkooka.tree.expression.Expression;
 import walkingkooka.validation.Validator;
 import walkingkooka.validation.Validators;
 
@@ -34,7 +36,22 @@ import java.util.Set;
 
 public final class ValidatorsValidatorProviderTest implements ValidatorProviderTesting<ValidatorsValidatorProvider> {
 
-    private final static ProviderContext CONTEXT = ProviderContexts.fake();
+    private final static Expression EXPRESSION = Expression.add(
+        Expression.value(1),
+        Expression.value(2)
+    );
+
+    private final static ProviderContext CONTEXT = new FakeProviderContext() {
+
+        @Override
+        public <T> Either<T, String> convert(final Object value,
+                                             final Class<T> type) {
+            return this.successfulConversion(
+                EXPRESSION,
+                type
+            );
+        }
+    };
 
     @Test
     public void testValidatorSelectorCollection() {
@@ -60,6 +77,18 @@ public final class ValidatorsValidatorProviderTest implements ValidatorProviderT
             ),
             CONTEXT,
             Validators.nonNull()
+        );
+    }
+
+    @Test
+    public void testValidatorSelectorExpression() {
+        this.validatorAndCheck(
+            ValidatorSelector.with(
+                ValidatorName.EXPRESSION,
+                "(\"=1+2\")"
+            ),
+            CONTEXT,
+            Validators.expression(EXPRESSION)
         );
     }
 

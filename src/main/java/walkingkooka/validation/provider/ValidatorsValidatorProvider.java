@@ -30,7 +30,7 @@ import walkingkooka.validation.Validators;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 /**
@@ -86,14 +86,15 @@ final class ValidatorsValidatorProvider implements ValidatorProvider {
         Objects.requireNonNull(values, "values");
         Objects.requireNonNull(context, "context");
 
-        final Function<List<?>, Validator<?, ?>> factory = ValidatorName.NAME_TO_FACTORY.get(name);
+        final BiFunction<List<?>, ProviderContext, Validator<?, ?>> factory = ValidatorName.NAME_TO_FACTORY.get(name);
         if (null == factory) {
             throw new IllegalArgumentException("Unknown validator " + name);
         }
 
         return Cast.to(
             factory.apply(
-                Lists.immutable(values)
+                Lists.immutable(values),
+                context
             )
         );
     }
