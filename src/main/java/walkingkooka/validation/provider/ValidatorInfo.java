@@ -28,7 +28,7 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 /**
- * Captures a unique {@link AbsoluteUrl} and {@link ValidatorName} for a {@link Validator}.
+ * Captures a unique {@link AbsoluteUrl} and {@link ValidatorName} for a {@link walkingkooka.validation.Validator}.
  */
 public final class ValidatorInfo implements PluginInfoLike<ValidatorInfo, ValidatorName>,
     HateosResource<ValidatorName> {
