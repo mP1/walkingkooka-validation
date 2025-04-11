@@ -25,6 +25,7 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.TestValidationReference;
+import walkingkooka.validation.ValidationValueTypeName;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.util.Optional;
@@ -40,6 +41,13 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
 
     private final static String LABEL = "Label123";
     private final static String DIFFERENT_LABEL = "DifferentLabel456";
+
+    private final static Optional<ValidationValueTypeName> TYPE = Optional.of(
+        ValidationValueTypeName.with("Type1")
+    );
+    private final static Optional<ValidationValueTypeName> DIFFERENT_TYPE = Optional.of(
+        ValidationValueTypeName.with("DifferentType2")
+    );
 
     private final static Optional<Object> VALUE = Optional.of(
         Url.parse("https://example.com")
@@ -75,6 +83,10 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
         this.labelAndCheck(
             field,
             FormField.NO_LABEL
+        );
+        this.typeAndCheck(
+            field,
+            FormField.NO_TYPE
         );
         this.valueAndCheck(
             field,
@@ -115,6 +127,7 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
             DIFFERENT_REFERENCE
         );
         this.labelAndCheck(different);
+        this.typeAndCheck(different);
         this.valueAndCheck(different);
         this.validatorAndCheck(different);
     }
@@ -163,6 +176,7 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
             different,
             DIFFERENT_LABEL
         );
+        this.typeAndCheck(different);
         this.valueAndCheck(different);
         this.validatorAndCheck(different);
     }
@@ -182,6 +196,55 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
         );
     }
 
+    // type.............................................................................................................
+
+    @Test
+    public void testSetTypeWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createObject().setType(null)
+        );
+    }
+
+    @Test
+    public void testSetTypeWithSame() {
+        final FormField<TestValidationReference> field = this.createObject();
+        assertSame(
+            field,
+            field.setType(TYPE)
+        );
+    }
+
+    @Test
+    public void testSetTypeWithDifferent() {
+        final FormField<TestValidationReference> field = this.createObject();
+        final FormField<TestValidationReference> different = field.setType(DIFFERENT_TYPE);
+
+        this.referenceAndCheck(different);
+        this.labelAndCheck(different);
+        this.typeAndCheck(
+            different,
+            DIFFERENT_TYPE
+        );
+        this.valueAndCheck(different);
+        this.validatorAndCheck(different);
+    }
+
+    private void typeAndCheck(final FormField<TestValidationReference> field) {
+        this.typeAndCheck(
+            field,
+            TYPE
+        );
+    }
+
+    private void typeAndCheck(final FormField<TestValidationReference> field,
+                              final Optional<ValidationValueTypeName> expected) {
+        this.checkEquals(
+            expected,
+            field.type()
+        );
+    }
+    
     // value............................................................................................................
 
     @Test
@@ -208,6 +271,7 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
 
         this.referenceAndCheck(different);
         this.labelAndCheck(different);
+        this.typeAndCheck(different);
         this.valueAndCheck(
             different,
             DIFFERENT_VALUE
@@ -256,6 +320,7 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
 
         this.referenceAndCheck(different);
         this.labelAndCheck(different);
+        this.typeAndCheck(different);
         this.valueAndCheck(different);
         this.validatorAndCheck(
             different,
@@ -286,6 +351,7 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
             new FormField<>(
                 DIFFERENT_REFERENCE,
                 LABEL,
+                TYPE,
                 VALUE,
                 VALIDATOR
             )
@@ -298,6 +364,20 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
             new FormField<>(
                 REFERENCE,
                 DIFFERENT_LABEL,
+                TYPE,
+                VALUE,
+                VALIDATOR
+            )
+        );
+    }
+
+    @Test
+    public void testEqualsDifferentValidationValueTypeNameType() {
+        this.checkNotEquals(
+            new FormField<>(
+                REFERENCE,
+                LABEL,
+                DIFFERENT_TYPE,
                 VALUE,
                 VALIDATOR
             )
@@ -310,6 +390,7 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
             new FormField<>(
                 REFERENCE,
                 LABEL,
+                TYPE,
                 DIFFERENT_VALUE,
                 VALIDATOR
             )
@@ -322,6 +403,7 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
             new FormField<>(
                 REFERENCE,
                 LABEL,
+                TYPE,
                 VALUE,
                 DIFFERENT_VALIDATOR
             )
@@ -333,6 +415,7 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
         return new FormField<>(
             REFERENCE,
             LABEL,
+            TYPE,
             VALUE,
             VALIDATOR
         );
@@ -363,6 +446,7 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
                 "    \"value\": \"Hello\"\n" +
                 "  },\n" +
                 "  \"label\": \"Label123\",\n" +
+                "  \"type\": \"Type1\",\n" +
                 "  \"value\": {\n" +
                 "    \"type\": \"url\",\n" +
                 "    \"value\": \"https://example.com\"\n" +
