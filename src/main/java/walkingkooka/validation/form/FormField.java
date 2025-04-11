@@ -26,6 +26,7 @@ import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.ValidationReference;
+import walkingkooka.validation.ValidationValueTypeName;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.util.Objects;
@@ -43,6 +44,7 @@ public final class FormField<R extends ValidationReference> {
         return new FormField<>(
             reference,
             NO_LABEL,
+            NO_TYPE,
             NO_VALUE,
             NO_VALIDATOR
         );
@@ -51,10 +53,12 @@ public final class FormField<R extends ValidationReference> {
     // @VisibleForTesting
     FormField(final R reference,
               final String label,
+              final Optional<ValidationValueTypeName> type,
               final Optional<Object> value,
               final Optional<ValidatorSelector> validator) {
         this.reference = reference;
         this.label = label;
+        this.type = type;
         this.value = value;
         this.validator = validator;
     }
@@ -71,6 +75,7 @@ public final class FormField<R extends ValidationReference> {
             new FormField<>(
                 Objects.requireNonNull(reference, "reference"),
                 this.label,
+                this.type,
                 this.value,
                 this.validator
             );
@@ -92,6 +97,7 @@ public final class FormField<R extends ValidationReference> {
             new FormField<>(
                 this.reference,
                 Objects.requireNonNull(label, "label"),
+                this.type,
                 this.value,
                 this.validator
             );
@@ -102,6 +108,31 @@ public final class FormField<R extends ValidationReference> {
      */
     private final String label;
 
+    // type............................................................................................................
+
+    public final static Optional<ValidationValueTypeName> NO_TYPE = Optional.empty();
+
+    public Optional<ValidationValueTypeName> type() {
+        return this.type;
+    }
+
+    public FormField<R> setType(final Optional<ValidationValueTypeName> type) {
+        return this.type.equals(type) ?
+            this :
+            new FormField<>(
+                this.reference,
+                this.label,
+                Objects.requireNonNull(type, "type"),
+                this.value,
+                this.validator
+            );
+    }
+
+    /**
+     * Tags the expected value type for this field. This is used by the UI to display a date-picker for dates etc.
+     */
+    private final Optional<ValidationValueTypeName> type;
+    
     // value............................................................................................................
 
     public final static Optional<Object> NO_VALUE = Optional.empty();
@@ -110,12 +141,16 @@ public final class FormField<R extends ValidationReference> {
         return this.value;
     }
 
+    /**
+     * Would be setter that sets or replaces the initial value. Note the value type is not validated against the {@link #type}.
+     */
     public FormField<R> setValue(final Optional<Object> value) {
         return this.value.equals(value) ?
             this :
             new FormField<>(
                 this.reference,
                 this.label,
+                this.type,
                 Objects.requireNonNull(value, "value"),
                 this.validator
             );
@@ -140,6 +175,7 @@ public final class FormField<R extends ValidationReference> {
             new FormField<>(
                 this.reference,
                 this.label,
+                this.type,
                 this.value,
                 Objects.requireNonNull(validator, "validator")
             );
@@ -154,6 +190,7 @@ public final class FormField<R extends ValidationReference> {
         return Objects.hash(
             this.reference,
             this.label,
+            this.type,
             this.value,
             this.validator
         );
@@ -169,6 +206,7 @@ public final class FormField<R extends ValidationReference> {
     private boolean equals0(final FormField<?> other) {
         return this.reference.equals(other.reference) &&
             this.label.equals(other.label) &&
+            this.type.equals(other.type) &&
             this.value.equals(other.value) &&
             this.validator.equals(other.validator);
     }
@@ -178,6 +216,7 @@ public final class FormField<R extends ValidationReference> {
         return ToStringBuilder.empty()
             .value(this.reference)
             .value(this.label)
+            .value(this.type)
             .value(this.value)
             .value(this.validator)
             .build();
@@ -189,6 +228,8 @@ public final class FormField<R extends ValidationReference> {
 
     private final static String LABEL_PROPERTY_STRING = "label";
 
+    private final static String TYPE_PROPERTY_STRING = "type";
+    
     private final static String VALUE_PROPERTY_STRING = "value";
 
     private final static String VALIDATOR_PROPERTY_STRING = "validator";
@@ -197,6 +238,8 @@ public final class FormField<R extends ValidationReference> {
 
     final static JsonPropertyName LABEL_PROPERTY = JsonPropertyName.with(LABEL_PROPERTY_STRING);
 
+    final static JsonPropertyName TYPE_PROPERTY = JsonPropertyName.with(TYPE_PROPERTY_STRING);
+    
     final static JsonPropertyName VALUE_PROPERTY = JsonPropertyName.with(VALUE_PROPERTY_STRING);
 
     final static JsonPropertyName VALIDATOR_PROPERTY = JsonPropertyName.with(VALIDATOR_PROPERTY_STRING);
@@ -205,6 +248,7 @@ public final class FormField<R extends ValidationReference> {
                                                                    final JsonNodeUnmarshallContext context) {
         R reference = null;
         String label = NO_LABEL;
+        ValidationValueTypeName type = null;
         Object value = null;
         ValidatorSelector validator = null;
 
@@ -218,6 +262,12 @@ public final class FormField<R extends ValidationReference> {
                     label = context.unmarshall(
                         child,
                         String.class
+                    );
+                    break;
+                case TYPE_PROPERTY_STRING:
+                    type = context.unmarshall(
+                        child,
+                        ValidationValueTypeName.class
                     );
                     break;
                 case VALUE_PROPERTY_STRING:
@@ -237,6 +287,7 @@ public final class FormField<R extends ValidationReference> {
 
         return with(reference)
             .setLabel(label)
+            .setType(Optional.ofNullable(type))
             .setValue(Optional.ofNullable(value))
             .setValidator(Optional.ofNullable(validator));
     }
@@ -255,6 +306,16 @@ public final class FormField<R extends ValidationReference> {
             }
         }
 
+        {
+            final Object type = this.type.orElse(null);
+            if (null != type) {
+                object = object.set(
+                    TYPE_PROPERTY,
+                    context.marshall(type)
+                );
+            }
+        }
+        
         {
             final Object value = this.value.orElse(null);
             if (null != value) {
