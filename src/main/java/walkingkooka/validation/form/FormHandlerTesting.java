@@ -20,7 +20,6 @@ package walkingkooka.validation.form;
 import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.validation.ValidationReference;
-import walkingkooka.validation.form.provider.FormName;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
