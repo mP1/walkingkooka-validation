@@ -17,25 +17,25 @@
 
 package walkingkooka.validation.form;
 
-import walkingkooka.reflect.PublicStaticHelper;
+import walkingkooka.Either;
+import walkingkooka.environment.FakeEnvironmentContext;
 import walkingkooka.validation.ValidationReference;
 
-/**
- * A collection of factory methods to create {@link FormHandlerContext}
- */
-public final class FormHandlerContexts implements PublicStaticHelper {
+public class FakeFormHandlerContext<T extends ValidationReference> extends FakeEnvironmentContext implements FormHandlerContext<T> {
 
-    /**
-     * {@see FakeFormHandlerContext}
-     */
-    public static <T extends ValidationReference> FormHandlerContext<T> fake() {
-        return new FakeFormHandlerContext<>();
+    public FakeFormHandlerContext() {
+        super();
     }
 
-    /**
-     * Stop creation
-     */
-    private FormHandlerContexts() {
+    @Override
+    public boolean canConvert(final Object value,
+                              final Class<?> type) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public <T> Either<T, String> convert(final Object value,
+                                         final Class<T> type) {
         throw new UnsupportedOperationException();
     }
 }
