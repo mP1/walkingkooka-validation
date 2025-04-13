@@ -29,4 +29,10 @@ public interface FormHandler<R extends ValidationReference, C extends FormHandle
      */
     Form<R> prepareForm(final Form<R> form,
                         final C context);
+
+    /**
+     * Submits the given form so that it is saved.
+     */
+    void submitForm(final Form<R> form,
+                    final C context);
 }
