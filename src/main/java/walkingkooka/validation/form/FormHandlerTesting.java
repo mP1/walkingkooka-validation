@@ -21,4 +21,6 @@ import walkingkooka.reflect.ClassTesting;
 import walkingkooka.validation.ValidationReference;
 
 public interface FormHandlerTesting<H extends FormHandler<R>, R extends ValidationReference> extends ClassTesting<H> {
+
+    H createFormHandler();
 }
