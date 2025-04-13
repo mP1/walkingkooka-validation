@@ -19,9 +19,10 @@ package walkingkooka.validation.form;
 
 import walkingkooka.convert.CanConvert;
 import walkingkooka.environment.EnvironmentContext;
+import walkingkooka.validation.ValidationReference;
 
 /**
  * A {@link walkingkooka.Context} that accompanies a {@link FormHandler}.
  */
-public interface FormHandlerContext extends CanConvert, EnvironmentContext {
+public interface FormHandlerContext<T extends ValidationReference> extends CanConvert, EnvironmentContext {
 }
