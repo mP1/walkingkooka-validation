@@ -17,10 +17,53 @@
 
 package walkingkooka.validation.form;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.validation.ValidationReference;
+import walkingkooka.validation.form.provider.FormName;
 
-public interface FormHandlerTesting<H extends FormHandler<R>, R extends ValidationReference, C extends FormHandlerContext<R>> extends ClassTesting<H> {
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+public interface FormHandlerTesting<H extends FormHandler<R, C>, R extends ValidationReference, C extends FormHandlerContext<R>> extends ClassTesting<H> {
+
+    @Test
+    default void testPrepareFormWithNullFormFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createFormHandler()
+                .prepareForm(
+                    null,
+                    this.createContext()
+                )
+        );
+    }
+
+    @Test
+    default void testPrepareFormWithNullContextFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createFormHandler()
+                .prepareForm(
+                    Form.with(
+                        FormName.with("Form123")
+                    ),
+                    null
+                )
+        );
+    }
+
+    default void prepareFormAndCheck(final H handler,
+                                     final Form<R> form,
+                                     final C context,
+                                     final Form<R> expected) {
+        this.checkEquals(
+            expected,
+            handler.prepareForm(
+                form,
+                context
+            )
+        );
+    }
 
     H createFormHandler();
 

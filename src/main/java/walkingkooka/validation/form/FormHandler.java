@@ -22,5 +22,11 @@ import walkingkooka.validation.ValidationReference;
 /**
  * A form handler is responsible for {@link Form} lifecycles.
  */
-public interface FormHandler<T extends ValidationReference> {
+public interface FormHandler<R extends ValidationReference, C extends FormHandlerContext<R>> {
+
+    /**
+     * Prepares a {@link Form} before it is displayed for data entry.
+     */
+    Form<R> prepareForm(final Form<R> form,
+                        final C context);
 }
