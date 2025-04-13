@@ -35,7 +35,7 @@ import java.util.Objects;
  */
 final public class FormName implements PluginNameLike<FormName> {
 
-    public static final String HATEOS_RESOURCE_NAME_STRING = "validator";
+    public static final String HATEOS_RESOURCE_NAME_STRING = "formName";
 
     public static final HateosResourceName HATEOS_RESOURCE_NAME = HateosResourceName.with(HATEOS_RESOURCE_NAME_STRING);
 
