@@ -15,7 +15,7 @@
  *
  */
 
-package walkingkooka.validation.form.provider;
+package walkingkooka.validation.form;
 
 import walkingkooka.Cast;
 import walkingkooka.naming.Name;

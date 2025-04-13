@@ -15,7 +15,7 @@
  *
  */
 
-package walkingkooka.validation.form.provider;
+package walkingkooka.validation.form;
 
 import walkingkooka.plugin.PluginNameTesting;
 import walkingkooka.tree.json.JsonNode;
