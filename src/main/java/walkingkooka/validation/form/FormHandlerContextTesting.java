@@ -19,7 +19,8 @@ package walkingkooka.validation.form;
 
 import walkingkooka.convert.CanConvertTesting;
 import walkingkooka.environment.EnvironmentContextTesting2;
+import walkingkooka.validation.ValidationReference;
 
-public interface FormHandlerContextTesting<C extends FormHandlerContext> extends CanConvertTesting<C>,
+public interface FormHandlerContextTesting<C extends FormHandlerContext<R>, R extends ValidationReference> extends CanConvertTesting<C>,
     EnvironmentContextTesting2<C> {
 }
