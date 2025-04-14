@@ -35,7 +35,7 @@ public final class FormStores implements PublicStaticHelper {
     /**
      * {@see TreeFormStore}
      */
-    public static <R extends ValidationReference & Comparable<R>> FormStore<R> empty() {
+    public static <R extends ValidationReference> FormStore<R> empty() {
         return TreeFormStore.empty();
     }
 
