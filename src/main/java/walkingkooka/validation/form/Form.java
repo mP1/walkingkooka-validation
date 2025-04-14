@@ -18,6 +18,7 @@
 package walkingkooka.validation.form;
 
 import walkingkooka.Cast;
+import walkingkooka.HasId;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonPropertyName;
@@ -28,11 +29,12 @@ import walkingkooka.validation.ValidationReference;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * A form has a name and defines one or more fields each with their own validator.
  */
-public final class Form<T extends ValidationReference> {
+public final class Form<T extends ValidationReference> implements HasId<Optional<FormName>> {
 
     public static <T extends ValidationReference> Form<T> with(final FormName name) {
         return new Form<>(
@@ -46,6 +48,13 @@ public final class Form<T extends ValidationReference> {
          final List<FormField<T>> fields) {
         this.name = name;
         this.fields = fields;
+    }
+
+    // HasId............................................................................................................
+
+    @Override
+    public Optional<FormName> id() {
+        return Optional.of(this.name);
     }
 
     // name.............................................................................................................
