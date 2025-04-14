@@ -30,9 +30,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 
-final class TreeFormStore<R extends ValidationReference & Comparable<R>> implements FormStore<R> {
+final class TreeFormStore<R extends ValidationReference> implements FormStore<R> {
 
-    static <R extends ValidationReference & Comparable<R>> TreeFormStore<R> empty() {
+    static <R extends ValidationReference> TreeFormStore<R> empty() {
         return new TreeFormStore<>();
     }
 
