@@ -23,7 +23,7 @@ import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
-public final class TestValidationReference implements ValidationReference {
+public final class TestValidationReference implements ValidationReference, Comparable<TestValidationReference> {
 
     public TestValidationReference(final String field) {
         this.field = CharSequences.failIfNullOrEmpty(field, "field");
@@ -35,6 +35,15 @@ public final class TestValidationReference implements ValidationReference {
     }
 
     private final String field;
+
+    // Comparable.......................................................................................................
+
+    @Override
+    public int compareTo(final TestValidationReference other) {
+        return this.field.compareTo(other.field);
+    }
+
+    // Object...........................................................................................................
 
     @Override
     public int hashCode() {
