@@ -17,25 +17,14 @@
 
 package walkingkooka.validation.form.store;
 
-import walkingkooka.reflect.PublicStaticHelper;
+import walkingkooka.store.FakeStore;
 import walkingkooka.validation.ValidationReference;
+import walkingkooka.validation.form.Form;
+import walkingkooka.validation.form.FormName;
 
-/**
- * A collection of factory methods to create {@link FormStore}
- */
-public final class FormStores implements PublicStaticHelper {
+public class FakeFormStore<T extends ValidationReference> extends FakeStore<FormName, Form<T>> implements FormStore<T> {
 
-    /**
-     * {@see FakeFormStore}
-     */
-    public static <T extends ValidationReference> FormStore<T> fake() {
-        return new FakeFormStore<>();
-    }
-
-    /**
-     * Stop creation
-     */
-    private FormStores() {
-        throw new UnsupportedOperationException();
+    public FakeFormStore() {
+        super();
     }
 }
