@@ -34,12 +34,78 @@
 
 package walkingkooka.validation;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.plugin.PluginNameTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
+
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 final public class ValidationValueTypeNameTest implements PluginNameTesting<ValidationValueTypeName> {
 
+    // json.............................................................................................................
+
+    @Test
+    public void testUnmarshallBoolean() {
+        this.unmarshallAndCheck2(
+            ValidationValueTypeName.BOOLEAN_STRING,
+            ValidationValueTypeName.BOOLEAN
+        );
+    }
+
+    @Test
+    public void testUnmarshallDate() {
+        this.unmarshallAndCheck2(
+            ValidationValueTypeName.DATE_STRING,
+            ValidationValueTypeName.DATE
+        );
+    }
+
+    @Test
+    public void testUnmarshallDateTime() {
+        this.unmarshallAndCheck2(
+            ValidationValueTypeName.DATE_TIME_STRING,
+            ValidationValueTypeName.DATE_TIME
+        );
+    }
+
+    @Test
+    public void testUnmarshallNumber() {
+        this.unmarshallAndCheck2(
+            ValidationValueTypeName.NUMBER_STRING,
+            ValidationValueTypeName.NUMBER
+        );
+    }
+
+    @Test
+    public void testUnmarshallText() {
+        this.unmarshallAndCheck2(
+            ValidationValueTypeName.TEXT_STRING,
+            ValidationValueTypeName.TEXT
+        );
+    }
+
+    @Test
+    public void testUnmarshallTime() {
+        this.unmarshallAndCheck2(
+            ValidationValueTypeName.TIME_STRING,
+            ValidationValueTypeName.TIME
+        );
+    }
+
+
+    private void unmarshallAndCheck2(final String string,
+                                     final ValidationValueTypeName expected) {
+        assertSame(
+            expected,
+            ValidationValueTypeName.unmarshall(
+                JsonNode.string(string),
+                JsonNodeUnmarshallContexts.fake()
+            )
+        );
+    }
+    
     @Override
     public ValidationValueTypeName createName(final String name) {
         return ValidationValueTypeName.with(name);

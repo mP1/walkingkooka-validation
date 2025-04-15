@@ -52,6 +52,32 @@ final public class ValidationValueTypeName implements PluginNameLike<ValidationV
      * The maximum valid length
      */
     public final static int MAX_LENGTH = PluginName.MAX_LENGTH;
+    
+    // constants........................................................................................................
+
+    public final static String BOOLEAN_STRING = "boolean";
+
+    public final static ValidationValueTypeName BOOLEAN = new ValidationValueTypeName(BOOLEAN_STRING);
+
+    public final static String DATE_STRING = "date";
+
+    public final static ValidationValueTypeName DATE = new ValidationValueTypeName(DATE_STRING);
+
+    public final static String DATE_TIME_STRING = "dateTime";
+
+    public final static ValidationValueTypeName DATE_TIME = new ValidationValueTypeName(DATE_TIME_STRING);
+    
+    public final static String NUMBER_STRING = "number";
+
+    public final static ValidationValueTypeName NUMBER = new ValidationValueTypeName(NUMBER_STRING);
+
+    public final static String TEXT_STRING = "text";
+    
+    public final static ValidationValueTypeName TEXT = new ValidationValueTypeName(TEXT_STRING);
+
+    public final static String TIME_STRING = "time";
+
+    public final static ValidationValueTypeName TIME = new ValidationValueTypeName(TIME_STRING);
 
     /**
      * Factory that creates a {@link ValidationValueTypeName}
@@ -59,7 +85,32 @@ final public class ValidationValueTypeName implements PluginNameLike<ValidationV
     public static ValidationValueTypeName with(final String name) {
         Objects.requireNonNull(name, "name");
 
-        return new ValidationValueTypeName(name);
+        ValidationValueTypeName validationValueTypeName;
+
+        switch (name) {
+            case BOOLEAN_STRING:
+                validationValueTypeName = BOOLEAN;
+                break;
+            case DATE_STRING:
+                validationValueTypeName = DATE;
+                break;
+            case DATE_TIME_STRING:
+                validationValueTypeName = DATE_TIME;
+                break;
+            case NUMBER_STRING:
+                validationValueTypeName = NUMBER;
+                break;
+            case TEXT_STRING:
+                validationValueTypeName = TEXT;
+                break;
+            case TIME_STRING:
+                validationValueTypeName = TIME;
+                break;
+            default:
+                validationValueTypeName = new ValidationValueTypeName(name);
+        }
+
+        return validationValueTypeName;
     }
 
     /**
