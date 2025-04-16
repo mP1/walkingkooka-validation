@@ -52,8 +52,15 @@ public interface ValidatorContext<T extends ValidationReference> extends CanConv
     }
 
     /**
+     * The preferred name for expressions to get the value being validated. This is the mechanism to pass a validation
+     * value to an {@link Expression}.
+     */
+    String VALIDATION_EXPRESSION_VALUE_REFERENCE_STRING = "value";
+
+    /**
      * Factory that returns a {@link ExpressionEvaluationContext} which may be used to evaluate an {@link Expression}.
-     * The value parameter is the value (which may be null) being validated and should be made available at a reference called VALUE.
+     * The value parameter is the value (which may be null) being validated and should be made available at a reference called
+     * {@link #VALIDATION_EXPRESSION_VALUE_REFERENCE_STRING}.
      * {@link Optional} isnt used because working with Optionals within an {@link Expression} is cumbersome.
      */
     ExpressionEvaluationContext expressionEvaluationContext(final Object value);
