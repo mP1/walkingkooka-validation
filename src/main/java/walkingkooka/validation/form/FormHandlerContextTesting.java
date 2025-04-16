@@ -29,43 +29,43 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public interface FormHandlerContextTesting<C extends FormHandlerContext<R>, R extends ValidationReference> extends CanConvertTesting<C>,
     EnvironmentContextTesting2<C> {
 
-    // value............................................................................................................
+    // fieldValue.......................................................................................................
 
     @Test
-    default void testValueWithNullFails() {
+    default void testFieldValueWithNullFails() {
         assertThrows(
             NullPointerException.class,
             () -> this.createContext()
-                .value(null)
+                .fieldValue(null)
         );
     }
 
-    default void valueAndCheck(final FormHandlerContext<R> context,
-                               final R reference) {
-        this.valueAndCheck(
+    default void fieldValueAndCheck(final FormHandlerContext<R> context,
+                                    final R reference) {
+        this.fieldValueAndCheck(
             context,
             reference,
             Optional.empty()
         );
     }
 
-    default void valueAndCheck(final FormHandlerContext<R> context,
-                               final R reference,
-                               final Object expected) {
-        this.valueAndCheck(
+    default void fieldValueAndCheck(final FormHandlerContext<R> context,
+                                    final R reference,
+                                    final Object expected) {
+        this.fieldValueAndCheck(
             context,
             reference,
             Optional.of(expected)
         );
     }
 
-    default void valueAndCheck(final FormHandlerContext<R> context,
-                               final R reference,
-                               final Optional<Object> expected) {
+    default void fieldValueAndCheck(final FormHandlerContext<R> context,
+                                    final R reference,
+                                    final Optional<Object> expected) {
         this.checkEquals(
             expected,
-            context.value(reference),
-            () -> context + " value " + reference
+            context.fieldValue(reference),
+            () -> context + " fieldValue " + reference
         );
     }
 }

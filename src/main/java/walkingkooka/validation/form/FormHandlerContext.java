@@ -33,5 +33,5 @@ public interface FormHandlerContext<T extends ValidationReference> extends CanCo
      * In a spreadsheet form a SpreadsheetCellReference may be for an empty cell and will return {@link Optional#empty()},
      * or a non empty {@link Optional} with the value.
      */
-    Optional<Object> value(final T reference);
+    Optional<Object> fieldValue(final T reference);
 }

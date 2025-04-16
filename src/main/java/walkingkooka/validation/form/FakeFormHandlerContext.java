@@ -30,7 +30,7 @@ public class FakeFormHandlerContext<T extends ValidationReference> extends FakeE
     }
 
     @Override
-    public Optional<Object> value(final T reference) {
+    public Optional<Object> fieldValue(final T reference) {
         throw new UnsupportedOperationException();
     }
 
