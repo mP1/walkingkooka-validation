@@ -68,4 +68,15 @@ public interface FormHandlerContextTesting<C extends FormHandlerContext<R>, R ex
             () -> context + " fieldValue " + reference
         );
     }
+
+    // saveFieldValue...................................................................................................
+
+    @Test
+    default void testSaveFieldValuesWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createContext()
+                .saveFieldValues(null)
+        );
+    }
 }

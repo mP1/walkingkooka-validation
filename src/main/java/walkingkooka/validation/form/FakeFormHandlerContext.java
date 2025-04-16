@@ -21,6 +21,7 @@ import walkingkooka.Either;
 import walkingkooka.environment.FakeEnvironmentContext;
 import walkingkooka.validation.ValidationReference;
 
+import java.util.List;
 import java.util.Optional;
 
 public class FakeFormHandlerContext<T extends ValidationReference> extends FakeEnvironmentContext implements FormHandlerContext<T> {
@@ -31,6 +32,11 @@ public class FakeFormHandlerContext<T extends ValidationReference> extends FakeE
 
     @Override
     public Optional<Object> fieldValue(final T reference) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void saveFieldValues(final List<FormField<T>> formFields) {
         throw new UnsupportedOperationException();
     }
 

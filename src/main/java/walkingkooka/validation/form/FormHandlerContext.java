@@ -21,6 +21,7 @@ import walkingkooka.convert.CanConvert;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.validation.ValidationReference;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -34,4 +35,10 @@ public interface FormHandlerContext<T extends ValidationReference> extends CanCo
      * or a non empty {@link Optional} with the value.
      */
     Optional<Object> fieldValue(final T reference);
+
+    /**
+     * Assumes that the fields have been validated, and saves any values.
+     * Note the other {@link FormField} properties are ignored.
+     */
+    void saveFieldValues(final List<FormField<T>> formFields);
 }
