@@ -22,50 +22,18 @@ import walkingkooka.convert.CanConvertTesting;
 import walkingkooka.environment.EnvironmentContextTesting2;
 import walkingkooka.validation.ValidationReference;
 
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface FormHandlerContextTesting<C extends FormHandlerContext<R>, R extends ValidationReference> extends CanConvertTesting<C>,
     EnvironmentContextTesting2<C> {
 
-    // fieldValue.......................................................................................................
-
-    @Test
-    default void testFieldValueWithNullFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createContext()
-                .fieldValue(null)
-        );
-    }
+    // form.............................................................................................................
 
     default void fieldValueAndCheck(final FormHandlerContext<R> context,
-                                    final R reference) {
-        this.fieldValueAndCheck(
-            context,
-            reference,
-            Optional.empty()
-        );
-    }
-
-    default void fieldValueAndCheck(final FormHandlerContext<R> context,
-                                    final R reference,
-                                    final Object expected) {
-        this.fieldValueAndCheck(
-            context,
-            reference,
-            Optional.of(expected)
-        );
-    }
-
-    default void fieldValueAndCheck(final FormHandlerContext<R> context,
-                                    final R reference,
-                                    final Optional<Object> expected) {
+                                    final Form<R> expected) {
         this.checkEquals(
             expected,
-            context.fieldValue(reference),
-            () -> context + " fieldValue " + reference
+            context.form()
         );
     }
 
