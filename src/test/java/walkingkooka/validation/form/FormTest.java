@@ -28,6 +28,8 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.TestValidationReference;
+import walkingkooka.validation.ValidationError;
+import walkingkooka.validation.ValidationErrorList;
 
 import java.util.List;
 
@@ -54,6 +56,24 @@ public final class FormTest implements ClassTesting2<Form<TestValidationReferenc
         Lists.of(
             FormField.with(
                 new TestValidationReference("DifferentField222")
+            )
+        )
+    );
+
+    private final static ValidationErrorList<TestValidationReference> ERRORS = ValidationErrorList.with(
+        Lists.of(
+            ValidationError.with(
+                new TestValidationReference("Field111"),
+                "Error in Field111"
+            )
+        )
+    );
+
+    private final static ValidationErrorList<TestValidationReference> DIFFERENT_ERRORS = ValidationErrorList.with(
+        Lists.of(
+            ValidationError.with(
+                new TestValidationReference("Field111"),
+                "Different Error in Field111"
             )
         )
     );
@@ -115,6 +135,9 @@ public final class FormTest implements ClassTesting2<Form<TestValidationReferenc
 
         this.fieldsAndCheck(form);
         this.fieldsAndCheck(different);
+
+        this.errorsAndCheck(form);
+        this.errorsAndCheck(different);
     }
 
     private void nameAndCheck(final Form<TestValidationReference> form) {
@@ -168,6 +191,9 @@ public final class FormTest implements ClassTesting2<Form<TestValidationReferenc
 
         this.fieldsAndCheck(form);
         this.fieldsAndCheck(different, DIFFERENT_FIELDS);
+
+        this.errorsAndCheck(form);
+        this.errorsAndCheck(different);
     }
 
     private void fieldsAndCheck(final Form<TestValidationReference> form) {
@@ -182,6 +208,62 @@ public final class FormTest implements ClassTesting2<Form<TestValidationReferenc
         this.checkEquals(
             expected,
             form.fields()
+        );
+    }
+
+    // setErrors........................................................................................................
+
+    @Test
+    public void testSetErrorsWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createObject().setErrors(null)
+        );
+    }
+
+    @Test
+    public void testSetErrorsSame() {
+        final Form<TestValidationReference> form = this.createObject();
+
+        assertSame(
+            form,
+            form.setErrors(ERRORS)
+        );
+    }
+
+    @Test
+    public void testSetErrorsWithDifferent() {
+        final Form<TestValidationReference> form = this.createObject();
+
+        final Form<TestValidationReference> different = form.setErrors(DIFFERENT_ERRORS);
+
+        assertNotSame(
+            form,
+            different
+        );
+
+        this.nameAndCheck(form);
+        this.nameAndCheck(different);
+
+        this.fieldsAndCheck(form);
+        this.fieldsAndCheck(different);
+
+        this.errorsAndCheck(form);
+        this.errorsAndCheck(different, DIFFERENT_ERRORS);
+    }
+
+    private void errorsAndCheck(final Form<TestValidationReference> form) {
+        this.errorsAndCheck(
+            form,
+            ERRORS
+        );
+    }
+
+    private void errorsAndCheck(final Form<TestValidationReference> form,
+                                final List<ValidationError<TestValidationReference>> expected) {
+        this.checkEquals(
+            expected,
+            form.errors()
         );
     }
 
@@ -203,11 +285,20 @@ public final class FormTest implements ClassTesting2<Form<TestValidationReferenc
         );
     }
 
+    @Test
+    public void testEqualsDifferentErrors() {
+        this.checkNotEquals(
+            this.createObject()
+                .setErrors(DIFFERENT_ERRORS)
+        );
+    }
+
     @Override
     public Form<TestValidationReference> createObject() {
         return new Form<>(
             NAME,
-            FIELDS
+            FIELDS,
+            ERRORS
         );
     }
 
