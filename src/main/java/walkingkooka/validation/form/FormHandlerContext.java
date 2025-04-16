@@ -22,7 +22,6 @@ import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.validation.ValidationReference;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * A {@link walkingkooka.Context} that accompanies a {@link FormHandler}.
@@ -30,11 +29,10 @@ import java.util.Optional;
 public interface FormHandlerContext<T extends ValidationReference> extends CanConvert, EnvironmentContext {
 
     /**
-     * Fetches the value for the given {@link ValidationReference}.<br>
-     * In a spreadsheet form a SpreadsheetCellReference may be for an empty cell and will return {@link Optional#empty()},
-     * or a non empty {@link Optional} with the value.
+     * Returns the selected {@link Form}.
+     * A spreadsheet form should use the references to load the initial value.
      */
-    Optional<Object> fieldValue(final T reference);
+    Form<T> form();
 
     /**
      * Assumes that the fields have been validated, and saves any values.
