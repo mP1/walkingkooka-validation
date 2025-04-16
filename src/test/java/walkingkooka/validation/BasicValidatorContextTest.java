@@ -20,7 +20,7 @@ package walkingkooka.validation;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.ToStringTesting;
-import walkingkooka.convert.ConverterContext;
+import walkingkooka.convert.CanConvert;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
 import walkingkooka.datetime.DateTimeContexts;
@@ -52,7 +52,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
 
     private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
-    private final static ConverterContext CONVERTER_CONTEXT = ConverterContexts.basic(
+    private final static CanConvert CAN_CONVERT = ConverterContexts.basic(
         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // offset
         Converters.simple(),
         DateTimeContexts.locale(
@@ -78,7 +78,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
             () -> BasicValidatorContext.with(
                 null,
                 REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
-                CONVERTER_CONTEXT,
+                CAN_CONVERT,
                 ENVIRONMENT_CONTEXT
             )
         );
@@ -91,14 +91,14 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
             () -> BasicValidatorContext.with(
                 VALIDATION_REFERENCE,
                 null,
-                CONVERTER_CONTEXT,
+                CAN_CONVERT,
                 ENVIRONMENT_CONTEXT
             )
         );
     }
 
     @Test
-    public void testWithNullConverterContextFails() {
+    public void testWithNullCanConvertFails() {
         assertThrows(
             NullPointerException.class,
             () -> BasicValidatorContext.with(
@@ -117,7 +117,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
             () -> BasicValidatorContext.with(
                 VALIDATION_REFERENCE,
                 REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
-                CONVERTER_CONTEXT,
+                CAN_CONVERT,
                 null
             )
         );
@@ -141,9 +141,9 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
         );
 
         assertSame(
-            CONVERTER_CONTEXT,
-            different.converterContext,
-            "converterContext"
+            CAN_CONVERT,
+            different.canConvert,
+            "canConvert"
         );
 
         assertSame(
@@ -158,7 +158,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
         return BasicValidatorContext.with(
             VALIDATION_REFERENCE,
             REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
-            CONVERTER_CONTEXT,
+            CAN_CONVERT,
             ENVIRONMENT_CONTEXT
         );
     }
@@ -171,10 +171,10 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
             BasicValidatorContext.with(
                 VALIDATION_REFERENCE,
                 REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
-                CONVERTER_CONTEXT,
+                CAN_CONVERT,
                 ENVIRONMENT_CONTEXT
             ).toString(),
-            VALIDATION_REFERENCE + " " + REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION + " " + CONVERTER_CONTEXT + " " + ENVIRONMENT_CONTEXT
+            VALIDATION_REFERENCE + " " + REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION + " " + CAN_CONVERT + " " + ENVIRONMENT_CONTEXT
         );
     }
 

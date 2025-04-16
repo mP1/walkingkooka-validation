@@ -17,39 +17,38 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.convert.ConverterContext;
-import walkingkooka.convert.ConverterContextDelegator;
+import walkingkooka.convert.CanConvert;
+import walkingkooka.convert.CanConvertDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.function.BiFunction;
 
 final class BasicValidatorContext<T extends ValidationReference> implements ValidatorContext<T>,
-    ConverterContextDelegator,
+    CanConvertDelegator,
     EnvironmentContextDelegator {
 
     static <T extends ValidationReference> BasicValidatorContext<T> with(final T validationReference,
                                                                          final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
-                                                                         final ConverterContext converterContext,
+                                                                         final CanConvert canConvert,
                                                                          final EnvironmentContext environmentContext) {
         return new BasicValidatorContext<>(
             Objects.requireNonNull(validationReference, "validationReference"),
             Objects.requireNonNull(referenceToExpressionEvaluationContext, "referenceToExpressionEvaluationContext"),
-            Objects.requireNonNull(converterContext, "converterContext"),
+            Objects.requireNonNull(canConvert, "canConvert"),
             Objects.requireNonNull(environmentContext, "environmentContext")
         );
     }
 
     private BasicValidatorContext(final T validationReference,
                                   final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
-                                  final ConverterContext converterContext,
+                                  final CanConvert canConvert,
                                   final EnvironmentContext environmentContext) {
         this.validationReference = validationReference;
         this.referenceToExpressionEvaluationContext = referenceToExpressionEvaluationContext;
-        this.converterContext = converterContext;
+        this.canConvert = canConvert;
         this.environmentContext = environmentContext;
     }
 
@@ -67,7 +66,7 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
             new BasicValidatorContext<>(
                 Objects.requireNonNull(validationReference, "validationReference"),
                 this.referenceToExpressionEvaluationContext,
-                this.converterContext,
+                this.canConvert,
                 this.environmentContext
             );
     }
@@ -82,20 +81,15 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
 
     private final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext;
 
-    @Override
-    public LocalDateTime now() {
-        return this.converterContext.now();
-    }
-
-    // ConverterContextDelegator........................................................................................
+    // CanConvertDelegator..............................................................................................
 
     @Override
-    public ConverterContext converterContext() {
-        return this.converterContext;
+    public CanConvert canConvert() {
+        return this.canConvert;
     }
 
     // @VisibleForTesting
-    final ConverterContext converterContext;
+    final CanConvert canConvert;
 
     // EnvironmentContextDelegator......................................................................................
 
@@ -111,6 +105,6 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
 
     @Override
     public String toString() {
-        return this.validationReference + " " + this.referenceToExpressionEvaluationContext + " " + this.converterContext + " " + this.environmentContext;
+        return this.validationReference + " " + this.referenceToExpressionEvaluationContext + " " + this.canConvert + " " + this.environmentContext;
     }
 }
