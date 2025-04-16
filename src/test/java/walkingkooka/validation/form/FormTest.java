@@ -302,6 +302,26 @@ public final class FormTest implements ClassTesting2<Form<TestValidationReferenc
         );
     }
 
+    // toString.........................................................................................................
+
+    @Test
+    public void testToStringName() {
+        this.toStringAndCheck(
+            Form.with(NAME),
+            "name123"
+        );
+    }
+
+    @Test
+    public void testToStringNameFieldsErrors() {
+        this.toStringAndCheck(
+            Form.<TestValidationReference>with(NAME)
+                .setFields(FIELDS)
+                .setErrors(ERRORS),
+            "name123 fields=Field111 errors=Field111 \"Error in Field111\""
+        );
+    }
+
     // json.............................................................................................................
 
     @Override

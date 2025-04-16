@@ -19,6 +19,7 @@ package walkingkooka.validation.form;
 
 import walkingkooka.Cast;
 import walkingkooka.HasId;
+import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonObject;
@@ -155,7 +156,13 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
 
     @Override
     public String toString() {
-        return this.name.toString();
+        return ToStringBuilder.empty()
+            .value(this.name)
+            .label("fields")
+            .value(this.fields)
+            .label("errors")
+            .value(this.errors)
+            .build();
     }
 
     // Json.............................................................................................................
