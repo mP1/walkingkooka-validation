@@ -21,8 +21,17 @@ import walkingkooka.convert.CanConvert;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.validation.ValidationReference;
 
+import java.util.Optional;
+
 /**
  * A {@link walkingkooka.Context} that accompanies a {@link FormHandler}.
  */
 public interface FormHandlerContext<T extends ValidationReference> extends CanConvert, EnvironmentContext {
+
+    /**
+     * Fetches the value for the given {@link ValidationReference}.<br>
+     * In a spreadsheet form a SpreadsheetCellReference may be for an empty cell and will return {@link Optional#empty()},
+     * or a non empty {@link Optional} with the value.
+     */
+    Optional<Object> value(final T reference);
 }

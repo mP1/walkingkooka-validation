@@ -21,11 +21,20 @@ import walkingkooka.Either;
 import walkingkooka.environment.FakeEnvironmentContext;
 import walkingkooka.validation.ValidationReference;
 
+import java.util.Optional;
+
 public class FakeFormHandlerContext<T extends ValidationReference> extends FakeEnvironmentContext implements FormHandlerContext<T> {
 
     public FakeFormHandlerContext() {
         super();
     }
+
+    @Override
+    public Optional<Object> value(final T reference) {
+        throw new UnsupportedOperationException();
+    }
+
+    // CanConvert.......................................................................................................
 
     @Override
     public boolean canConvert(final Object value,
