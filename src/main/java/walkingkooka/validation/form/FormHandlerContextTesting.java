@@ -30,8 +30,8 @@ public interface FormHandlerContextTesting<C extends FormHandlerContext<R>, R ex
 
     // form.............................................................................................................
 
-    default void fieldValueAndCheck(final FormHandlerContext<R> context,
-                                    final Form<R> expected) {
+    default void formAndCheck(final FormHandlerContext<R> context,
+                              final Form<R> expected) {
         this.checkEquals(
             expected,
             context.form()
