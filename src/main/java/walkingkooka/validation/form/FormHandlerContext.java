@@ -20,6 +20,7 @@ package walkingkooka.validation.form;
 import walkingkooka.convert.CanConvert;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.validation.ValidationReference;
+import walkingkooka.validation.ValidatorContext;
 
 import java.util.List;
 
@@ -33,6 +34,11 @@ public interface FormHandlerContext<T extends ValidationReference> extends CanCo
      * A spreadsheet form should use the references to load the initial value.
      */
     Form<T> form();
+
+    /**
+     * Factory that creates a {@link ValidatorContext} that may be used to validate the given {@link ValidationReference} and its value.
+     */
+    ValidatorContext<T> validatorContext(final T reference);
 
     /**
      * Assumes that the fields have been validated, and saves any values.

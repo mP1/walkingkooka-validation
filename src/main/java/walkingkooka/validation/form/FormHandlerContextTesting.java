@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.convert.CanConvertTesting;
 import walkingkooka.environment.EnvironmentContextTesting2;
 import walkingkooka.validation.ValidationReference;
+import walkingkooka.validation.ValidatorContext;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -34,6 +35,27 @@ public interface FormHandlerContextTesting<C extends FormHandlerContext<R>, R ex
         this.checkEquals(
             expected,
             context.form()
+        );
+    }
+
+    // validatorContext.................................................................................................
+
+    @Test
+    default void testValidatorContextWithNullReferenceFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createContext()
+                .validatorContext(null)
+        );
+    }
+
+    default void validatorContextAndCheck(final FormHandlerContext<R> context,
+                                          final R reference,
+                                          final ValidatorContext<R> expected) {
+        this.checkEquals(
+            expected,
+            context.validatorContext(reference),
+            () -> "ValidatorContext for " + reference
         );
     }
 
