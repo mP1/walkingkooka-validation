@@ -21,10 +21,13 @@ import walkingkooka.Cast;
 import walkingkooka.HasId;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.JsonObject;
 import walkingkooka.tree.json.JsonPropertyName;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
+import walkingkooka.validation.ValidationError;
+import walkingkooka.validation.ValidationErrorList;
 import walkingkooka.validation.ValidationReference;
 
 import java.util.List;
@@ -39,15 +42,18 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
     public static <T extends ValidationReference> Form<T> with(final FormName name) {
         return new Form<>(
             Objects.requireNonNull(name, "name"),
-            FormFieldList.with(Lists.empty())
+            FormFieldList.with(Lists.empty()),
+            ValidationErrorList.empty()
         );
     }
 
     // @VisibleForTesting
     Form(final FormName name,
-         final List<FormField<T>> fields) {
+         final List<FormField<T>> fields,
+         final ValidationErrorList<T> errors) {
         this.name = name;
         this.fields = fields;
+        this.errors = errors;
     }
 
     // HasId............................................................................................................
@@ -68,7 +74,8 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
             this :
             new Form<>(
                 Objects.requireNonNull(name, "name"),
-                this.fields
+                this.fields,
+                this.errors
             );
     }
 
@@ -89,17 +96,48 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
             this :
             new Form<>(
                 this.name,
-                copy
+                copy,
+                this.errors
             );
     }
 
     private final List<FormField<T>> fields;
 
+    // errors.............................................................................................................
+
+    public List<ValidationError<T>> errors() {
+        return this.errors;
+    }
+
+    /**
+     * Returns a {@link Form} with the given errors, creating a new instance and sharing the other properties.
+     * No attempt is made to verify if all the {@link ValidationError#reference()} match existing {@link #fields()}.
+     */
+    public Form<T> setErrors(final List<ValidationError<T>> errors) {
+        final ValidationErrorList<T> copy = ValidationErrorList.with(
+            Objects.requireNonNull(errors, "errors")
+        );
+
+        return this.errors.equals(copy) ?
+            this :
+            new Form<>(
+                this.name,
+                this.fields,
+                copy
+            );
+    }
+
+    private final ValidationErrorList<T> errors;
+
     // Object...........................................................................................................
 
     @Override
     public int hashCode() {
-        return this.name.hashCode();
+        return Objects.hash(
+            this.name,
+            this.fields,
+            this.errors
+        );
     }
 
     @Override
@@ -111,7 +149,8 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
 
     private boolean equals0(final Form<?> other) {
         return this.name.equals(other.name) &&
-            this.fields.equals(other.fields);
+            this.fields.equals(other.fields) &&
+            this.errors.equals(other.errors);
     }
 
     @Override
@@ -125,14 +164,19 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
 
     private final static String FIELDS_PROPERTY_STRING = "fields";
 
+    private final static String ERRORS_PROPERTY_STRING = "errors";
+
     final static JsonPropertyName NAME_PROPERTY = JsonPropertyName.with(NAME_PROPERTY_STRING);
 
     final static JsonPropertyName FIELDS_PROPERTY = JsonPropertyName.with(FIELDS_PROPERTY_STRING);
+
+    final static JsonPropertyName ERRORS_PROPERTY = JsonPropertyName.with(ERRORS_PROPERTY_STRING);
 
     static <R extends ValidationReference> Form<R> unmarshall(final JsonNode node,
                                                               final JsonNodeUnmarshallContext context) {
         FormName formName = null;
         List<FormField<R>> fields = null;
+        ValidationErrorList<R> errors = null;
 
         for (JsonNode child : node.objectOrFail().children()) {
             final JsonPropertyName name = child.name();
@@ -149,6 +193,12 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
                         FormFieldList.class
                     );
                     break;
+                case ERRORS_PROPERTY_STRING:
+                    errors = context.unmarshall(
+                        child,
+                        ValidationErrorList.class
+                    );
+                    break;
                 default:
                     JsonNodeUnmarshallContext.unknownPropertyPresent(name, node);
                     break;
@@ -156,13 +206,24 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
         }
 
         return Form.<R>with(formName)
-            .setFields(fields);
+            .setFields(fields)
+            .setErrors(errors);
     }
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {
-        return JsonNode.object()
+        JsonObject json = JsonNode.object()
             .set(NAME_PROPERTY, context.marshall(this.name))
             .set(FIELDS_PROPERTY, context.marshall(this.fields));
+
+        final ValidationErrorList<T> errors = this.errors;
+        if(errors.isNotEmpty()) {
+            json = json.set(
+                ERRORS_PROPERTY,
+                context.marshall(errors)
+            );
+        }
+
+        return json;
     }
 
     static {
