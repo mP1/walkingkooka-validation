@@ -20,6 +20,7 @@ package walkingkooka.validation.form;
 import walkingkooka.Either;
 import walkingkooka.environment.FakeEnvironmentContext;
 import walkingkooka.validation.ValidationReference;
+import walkingkooka.validation.ValidatorContext;
 
 import java.util.List;
 
@@ -31,6 +32,11 @@ public class FakeFormHandlerContext<T extends ValidationReference> extends FakeE
 
     @Override
     public Form<T> form() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public ValidatorContext<T> validatorContext(final T reference) {
         throw new UnsupportedOperationException();
     }
 
