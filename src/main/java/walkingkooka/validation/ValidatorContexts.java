@@ -17,7 +17,7 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.convert.ConverterContext;
+import walkingkooka.convert.CanConvert;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
@@ -34,12 +34,12 @@ public final class ValidatorContexts implements PublicStaticHelper {
      */
     public static <T extends ValidationReference> ValidatorContext<T> basic(final T validationReference,
                                                                             final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
-                                                                            final ConverterContext converterContext,
+                                                                            final CanConvert canConvert,
                                                                             final EnvironmentContext environmentContext) {
         return BasicValidatorContext.with(
             validationReference,
             referenceToExpressionEvaluationContext,
-            converterContext,
+            canConvert,
             environmentContext
         );
     }
