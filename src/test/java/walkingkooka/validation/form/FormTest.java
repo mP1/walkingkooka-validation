@@ -24,6 +24,7 @@ import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -40,7 +41,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class FormTest implements ClassTesting2<Form<TestValidationReference>>,
     HashCodeEqualsDefinedTesting2<Form<TestValidationReference>>,
     ToStringTesting<Form<TestValidationReference>>,
-    JsonNodeMarshallingTesting<Form<TestValidationReference>> {
+    JsonNodeMarshallingTesting<Form<TestValidationReference>>,
+    TreePrintableTesting {
 
     private final static FormName NAME = FormName.with("name123");
     private final static FormName DIFFERENT_NAME = FormName.with("differentName234");
@@ -333,6 +335,33 @@ public final class FormTest implements ClassTesting2<Form<TestValidationReferenc
     @Override
     public Form<TestValidationReference> createJsonNodeMarshallingValue() {
         return this.createObject();
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Test
+    public void testTreePrintWithName() {
+        this.treePrintAndCheck(
+            Form.with(NAME),
+            "Form\n" +
+                "  name123\n"
+        );
+    }
+
+    @Test
+    public void testTreePrintAllProperties() {
+        this.treePrintAndCheck(
+            this.createObject(),
+            "Form\n" +
+                "  name123\n" +
+                "  fields:\n" +
+                "    FormField\n" +
+                "      Field111 (walkingkooka.validation.TestValidationReference)\n" +
+                "errors:\n" +
+                "  ValidationError\n" +
+                "    Field111 (walkingkooka.validation.TestValidationReference)\n" +
+                "      Error in Field111\n"
+        );
     }
 
     // class............................................................................................................
