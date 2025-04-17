@@ -21,6 +21,8 @@ import walkingkooka.Cast;
 import walkingkooka.HasId;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.text.printer.IndentingPrinter;
+import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonObject;
 import walkingkooka.tree.json.JsonPropertyName;
@@ -31,6 +33,7 @@ import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.ValidationErrorList;
 import walkingkooka.validation.ValidationReference;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -38,7 +41,8 @@ import java.util.Optional;
 /**
  * A form has a name and defines one or more fields each with their own validator.
  */
-public final class Form<T extends ValidationReference> implements HasId<Optional<FormName>> {
+public final class Form<T extends ValidationReference> implements HasId<Optional<FormName>>,
+    TreePrintable{
 
     public static <T extends ValidationReference> Form<T> with(final FormName name) {
         return new Form<>(
@@ -240,5 +244,51 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
             Form::marshall,
             Form.class
         );
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public void printTree(final IndentingPrinter printer) {
+        printer.println(this.getClass().getSimpleName());
+        printer.indent();
+        {
+            TreePrintable.printTreeOrToString(
+                this.name,
+                printer
+            );
+            printer.lineStart();
+
+            printTreeLabelAndCollection(
+                "fields",
+                this.fields,
+                printer
+            );
+
+            printTreeLabelAndCollection(
+                "errors",
+                this.errors,
+                printer
+            );
+
+            printer.outdent();
+        }
+        printer.outdent();
+    }
+
+
+    private static <T extends TreePrintable> void printTreeLabelAndCollection(final String label,
+                                                                              final Collection<T> collection,
+                                                                              final IndentingPrinter printer) {
+        if (false == collection.isEmpty()) {
+            printer.println(label + ":");
+            printer.indent();
+            {
+                for (final T element : collection) {
+                    element.printTree(printer);
+                }
+            }
+            printer.outdent();
+        }
     }
 }
