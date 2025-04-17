@@ -81,5 +81,17 @@ public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R
         );
     }
 
-    ;
+    // CanConvert.......................................................................................................
+
+    @Override
+    default C createCanConvert() {
+        return this.createContext();
+    }
+
+    // typeNameSuffix...................................................................................................
+
+    @Override
+    default String typeNameSuffix() {
+        return FormHandlerContext.class.getSimpleName();
+    }
 }

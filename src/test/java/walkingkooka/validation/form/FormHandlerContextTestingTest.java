@@ -1,0 +1,105 @@
+/*
+ * Copyright 2025 Miroslav Pokorny (github.com/mP1)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+package walkingkooka.validation.form;
+
+import walkingkooka.Either;
+import walkingkooka.environment.EnvironmentValueName;
+import walkingkooka.net.email.EmailAddress;
+import walkingkooka.validation.TestValidationReference;
+import walkingkooka.validation.ValidatorContext;
+import walkingkooka.validation.form.FormHandlerContextTestingTest.TestFormHandlerContext;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+
+public final class FormHandlerContextTestingTest implements FormHandlerContextTesting<TestFormHandlerContext, TestValidationReference, Void> {
+
+    @Override
+    public TestFormHandlerContext createContext() {
+        return new TestFormHandlerContext();
+    }
+
+    @Override
+    public Class<TestFormHandlerContext> type() {
+        return TestFormHandlerContext.class;
+    }
+
+    static class TestFormHandlerContext implements FormHandlerContext<TestValidationReference, Void> {
+
+        @Override
+        public Form<TestValidationReference> form() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public ValidatorContext<TestValidationReference> validatorContext(final TestValidationReference reference) {
+            Objects.requireNonNull(reference, "reference");
+
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Void saveFieldValues(final List<FormField<TestValidationReference>> formFields) {
+            Objects.requireNonNull(formFields, "formFields");
+
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public boolean canConvert(final Object value,
+                                  final Class<?> type) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public <T> Either<T, String> convert(final Object value,
+                                             final Class<T> type) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public <T> Optional<T> environmentValue(final EnvironmentValueName<T> environmentValueName) {
+            Objects.requireNonNull(environmentValueName, "environmentValueName");
+
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Set<EnvironmentValueName<?>> environmentValueNames() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Optional<EmailAddress> user() {
+            return Optional.empty();
+        }
+
+        @Override
+        public LocalDateTime now() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public String toString() {
+            return this.getClass().getSimpleName();
+        }
+    }
+}
