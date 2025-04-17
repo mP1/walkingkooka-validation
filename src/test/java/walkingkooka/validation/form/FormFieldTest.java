@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.net.Url;
+import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -34,7 +35,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormField<TestValidationReference>>,
-    JsonNodeMarshallingTesting<FormField<TestValidationReference>> {
+    JsonNodeMarshallingTesting<FormField<TestValidationReference>>,
+    TreePrintableTesting {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("Hello");
     private final static TestValidationReference DIFFERENT_REFERENCE = new TestValidationReference("DifferentReference");
@@ -468,6 +470,34 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
     @Override
     public FormField<TestValidationReference> createJsonNodeMarshallingValue() {
         return this.createObject();
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Test
+    public void testTreePrintReference() {
+        this.treePrintAndCheck(
+            FormField.with(REFERENCE),
+            "FormField\n" +
+                "  Hello (walkingkooka.validation.TestValidationReference)\n"
+        );
+    }
+
+    @Test
+    public void testTreePrintAllProperties() {
+        this.treePrintAndCheck(
+            this.createObject(),
+            "FormField\n" +
+                "  Hello (walkingkooka.validation.TestValidationReference)\n" +
+                "  label:\n" +
+                "    \"Label123\"\n" +
+                "  type:\n" +
+                "    Type1\n" +
+                "  value:\n" +
+                "    https://example.com (walkingkooka.net.AbsoluteUrl)\n" +
+                "  validator:\n" +
+                "    helloValidator\n"
+        );
     }
 
     // class............................................................................................................
