@@ -88,7 +88,7 @@ public interface FormHandlerProviderTesting<T extends FormHandlerProvider> exten
 
     default void formHandlerAndCheck(final String selector,
                                      final ProviderContext context,
-                                     final FormHandler<?, ?> expected) {
+                                     final FormHandler<?, ?, ?> expected) {
         this.formHandlerAndCheck(
             FormHandlerSelector.parse(selector),
             context,
@@ -98,7 +98,7 @@ public interface FormHandlerProviderTesting<T extends FormHandlerProvider> exten
 
     default void formHandlerAndCheck(final FormHandlerSelector selector,
                                      final ProviderContext context,
-                                     final FormHandler<?, ?> expected) {
+                                     final FormHandler<?, ?, ?> expected) {
         this.formHandlerAndCheck(
             this.createFormHandlerProvider(),
             selector,
@@ -110,7 +110,7 @@ public interface FormHandlerProviderTesting<T extends FormHandlerProvider> exten
     default void formHandlerAndCheck(final FormHandlerProvider provider,
                                      final String selector,
                                      final ProviderContext context,
-                                     final FormHandler<?, ?> expected) {
+                                     final FormHandler<?, ?, ?> expected) {
         this.formHandlerAndCheck(
             provider,
             FormHandlerSelector.parse(selector),
@@ -122,7 +122,7 @@ public interface FormHandlerProviderTesting<T extends FormHandlerProvider> exten
     default void formHandlerAndCheck(final FormHandlerProvider provider,
                                      final FormHandlerSelector selector,
                                      final ProviderContext context,
-                                     final FormHandler<?, ?> expected) {
+                                     final FormHandler<?, ?, ?> expected) {
         this.checkEquals(
             expected,
             provider.formHandler(
@@ -201,7 +201,7 @@ public interface FormHandlerProviderTesting<T extends FormHandlerProvider> exten
     default void formHandlerAndCheck(final FormHandlerName name,
                                      final List<?> values,
                                      final ProviderContext context,
-                                     final FormHandler<?, ?> expected) {
+                                     final FormHandler<?, ?, ?> expected) {
         this.formHandlerAndCheck(
             this.createFormHandlerProvider(),
             name,
@@ -215,7 +215,7 @@ public interface FormHandlerProviderTesting<T extends FormHandlerProvider> exten
                                      final FormHandlerName name,
                                      final List<?> values,
                                      final ProviderContext context,
-                                     final FormHandler<?, ?> expected) {
+                                     final FormHandler<?, ?, ?> expected) {
         this.checkEquals(
             expected,
             provider.formHandler(

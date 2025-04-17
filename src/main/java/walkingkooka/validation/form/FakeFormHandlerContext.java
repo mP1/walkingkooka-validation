@@ -24,24 +24,24 @@ import walkingkooka.validation.ValidatorContext;
 
 import java.util.List;
 
-public class FakeFormHandlerContext<T extends ValidationReference> extends FakeEnvironmentContext implements FormHandlerContext<T> {
+public class FakeFormHandlerContext<R extends ValidationReference, S> extends FakeEnvironmentContext implements FormHandlerContext<R, S> {
 
     public FakeFormHandlerContext() {
         super();
     }
 
     @Override
-    public Form<T> form() {
+    public Form<R> form() {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public ValidatorContext<T> validatorContext(final T reference) {
+    public ValidatorContext<R> validatorContext(final R reference) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void saveFieldValues(final List<FormField<T>> formFields) {
+    public S saveFieldValues(final List<FormField<R>> formFields) {
         throw new UnsupportedOperationException();
     }
 

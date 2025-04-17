@@ -99,7 +99,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
     @Test
     public void testEvaluateValueTextNoText() {
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected = new FakeFormHandler<>();
 
         this.evaluateValueTextAndCheck(
             NAME + "",
@@ -115,7 +115,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
     @Test
     public void testEvaluateValueTextSpacesText() {
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected = new FakeFormHandler<>();
 
         this.evaluateValueTextAndCheck(
             NAME + " ",
@@ -131,7 +131,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
     @Test
     public void testEvaluateValueTextSpacesText2() {
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected = new FakeFormHandler<>();
 
         this.evaluateValueTextAndCheck(
             NAME + "   ",
@@ -155,7 +155,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
     @Test
     public void testEvaluateValueTextDoubleLiteral() {
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected = new FakeFormHandler<>();
 
         this.evaluateValueTextAndCheck(
             NAME + " (1)",
@@ -171,7 +171,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
     @Test
     public void testEvaluateValueTextNegativeDoubleLiteral() {
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected = new FakeFormHandler<>();
 
         this.evaluateValueTextAndCheck(
             NAME + " (-1)",
@@ -187,7 +187,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
     @Test
     public void testEvaluateValueTextDoubleLiteralWithDecimals() {
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected = new FakeFormHandler<>();
 
         this.evaluateValueTextAndCheck(
             NAME + " (1.25)",
@@ -224,7 +224,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
     @Test
     public void testEvaluateValueTextEmptyParameterList() {
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected = new FakeFormHandler<>();
 
         this.evaluateValueTextAndCheck(
             NAME + " ()",
@@ -240,7 +240,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
     @Test
     public void testEvaluateValueTextEmptyParameterListWithExtraSpaces() {
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected = new FakeFormHandler<>();
 
         this.evaluateValueTextAndCheck(
             NAME + "  ( )",
@@ -256,7 +256,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
     @Test
     public void testEvaluateValueTextEmptyParameterListWithExtraSpaces2() {
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected = new FakeFormHandler<>();
 
         this.evaluateValueTextAndCheck(
             NAME + "   (  )",
@@ -272,7 +272,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
     @Test
     public void testEvaluateValueTextStringLiteral() {
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected = new FakeFormHandler<>();
 
         this.evaluateValueTextAndCheck(
             NAME + " (\"string-literal-parameter\")",
@@ -288,7 +288,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
     @Test
     public void testEvaluateValueTextStringLiteralStringLiteral() {
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected = new FakeFormHandler<>();
 
         this.evaluateValueTextAndCheck(
             NAME + " (\"string-literal-parameter-1\",\"string-literal-parameter-2\")",
@@ -304,7 +304,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
     @Test
     public void testEvaluateValueTextStringLiteralStringLiteralWithExtraSpaceIgnored() {
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected = new FakeFormHandler<>();
 
         this.evaluateValueTextAndCheck(
             NAME + "  ( \"string-literal-parameter-1\" , \"string-literal-parameter-2\" )",
@@ -320,8 +320,8 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
     @Test
     public void testEvaluateValueTextFormHandler() {
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected1 = new FakeFormHandler<>();
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected2 = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected1 = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected2 = new FakeFormHandler<>();
 
         this.evaluateValueTextAndCheck(
             NAME + " (" + NAME2 + ")",
@@ -343,9 +343,9 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
     @Test
     public void testEvaluateValueTextFormHandlerFormHandler() {
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected1 = new FakeFormHandler<>();
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected2 = new FakeFormHandler<>();
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected3 = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected1 = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected2 = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected3 = new FakeFormHandler<>();
 
         this.evaluateValueTextAndCheck(
             NAME + " (" + NAME2 + "," + NAME3 + ")",
@@ -371,9 +371,9 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
     @Test
     public void testEvaluateValueTextNestedFormHandler() {
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected1 = new FakeFormHandler<>();
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected2 = new FakeFormHandler<>();
-        final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected3 = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected1 = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected2 = new FakeFormHandler<>();
+        final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected3 = new FakeFormHandler<>();
 
         this.evaluateValueTextAndCheck(
             NAME + " (" + NAME2 + "(" + NAME3 + "))",
@@ -437,13 +437,13 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
     }
 
     private void evaluateValueTextAndCheck(final String selector,
-                                           final PluginSelectorEvaluateValueTextProvider<FormHandlerName, FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>>> factory,
-                                           final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected) {
+                                           final PluginSelectorEvaluateValueTextProvider<FormHandlerName, FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>>> factory,
+                                           final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected) {
         this.evaluateValueTextAndCheck(
             selector,
             new FakeFormHandlerProvider() {
                 @Override
-                public <R extends ValidationReference, C extends FormHandlerContext<R>> FormHandler<R, C> formHandler(final FormHandlerName name,
+                public <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> formHandler(final FormHandlerName name,
                                                                                                                       final List<?> values,
                                                                                                                       final ProviderContext context) {
                     return Cast.to(
@@ -463,7 +463,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
     private void evaluateValueTextAndCheck(final String selector,
                                            final FormHandlerProvider provider,
                                            final ProviderContext context,
-                                           final FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> expected) {
+                                           final FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> expected) {
         this.checkEquals(
             expected,
             FormHandlerSelector.parse(selector)

@@ -43,13 +43,13 @@ public final class AliasesFormHandlerProviderTest implements FormHandlerProvider
 
     private final static FormHandlerName ALIAS2 = FormHandlerName.with("alias2");
 
-    private final static FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> FORM_HANDLER1 = formHandler(NAME1);
+    private final static FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> FORM_HANDLER1 = formHandler(NAME1);
 
     private final static String NAME2_STRING = "formHandler2";
 
     private final static FormHandlerName NAME2 = FormHandlerName.with(NAME2_STRING);
 
-    private final static FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> FORM_HANDLER2 = formHandler(NAME2);
+    private final static FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> FORM_HANDLER2 = formHandler(NAME2);
 
     private final static FormHandlerInfo INFO2 = FormHandlerInfo.parse("https://example.com/formHandler2 " + NAME2);
 
@@ -57,7 +57,7 @@ public final class AliasesFormHandlerProviderTest implements FormHandlerProvider
 
     private final static FormHandlerName NAME3 = FormHandlerName.with(NAME3_STRING);
 
-    private final static FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> FORM_HANDLER3 = formHandler(NAME3);
+    private final static FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> FORM_HANDLER3 = formHandler(NAME3);
 
     private final static FormHandlerInfo INFO3 = FormHandlerInfo.parse("https://example.com/formHandler3 " + NAME3);
 
@@ -69,7 +69,7 @@ public final class AliasesFormHandlerProviderTest implements FormHandlerProvider
 
     private final static FormHandlerInfo INFO4 = FormHandlerInfo.parse("https://example.com/custom4 " + NAME4);
 
-    private static FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> formHandler(final FormHandlerName name) {
+    private static FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> formHandler(final FormHandlerName name) {
         return new FakeFormHandler<>() {
 
             @Override
@@ -79,10 +79,10 @@ public final class AliasesFormHandlerProviderTest implements FormHandlerProvider
 
             @Override
             public boolean equals(final Object other) {
-                return this == other || other instanceof FormHandler && this.equals0((FormHandler<?, ?>) other);
+                return this == other || other instanceof FormHandler && this.equals0((FormHandler<?, ?, ?>) other);
             }
 
-            private boolean equals0(final FormHandler<?, ?> other) {
+            private boolean equals0(final FormHandler<?, ?, ?> other) {
                 return this.toString().equals(other.toString());
             }
 
@@ -188,8 +188,8 @@ public final class AliasesFormHandlerProviderTest implements FormHandlerProvider
             FormHandlerAliasSet.parse(aliases),
             new FakeFormHandlerProvider() {
                 @Override
-                public <R extends ValidationReference, C extends FormHandlerContext<R>> FormHandler<R, C> formHandler(final FormHandlerSelector selector,
-                                                                                                                      final ProviderContext context) {
+                public <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> formHandler(final FormHandlerSelector selector,
+                                                                                                                               final ProviderContext context) {
                     return selector.evaluateValueText(
                         this,
                         context
@@ -197,10 +197,10 @@ public final class AliasesFormHandlerProviderTest implements FormHandlerProvider
                 }
 
                 @Override
-                public <R extends ValidationReference, C extends FormHandlerContext<R>> FormHandler<R, C> formHandler(final FormHandlerName name,
-                                                                                                                      final List<?> values,
-                                                                                                                      final ProviderContext context) {
-                    FormHandler<?, ?> formHandler;
+                public <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> formHandler(final FormHandlerName name,
+                                                                                                                               final List<?> values,
+                                                                                                                               final ProviderContext context) {
+                    FormHandler<?, ?, ?> formHandler;
 
                     switch (name.toString()) {
                         case NAME1_STRING:

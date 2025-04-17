@@ -23,14 +23,16 @@ import walkingkooka.environment.EnvironmentContextTesting2;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public interface FormHandlerContextTesting<C extends FormHandlerContext<R>, R extends ValidationReference> extends CanConvertTesting<C>,
+public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R extends ValidationReference, S> extends CanConvertTesting<C>,
     EnvironmentContextTesting2<C> {
 
     // form.............................................................................................................
 
-    default void formAndCheck(final FormHandlerContext<R> context,
+    default void formAndCheck(final FormHandlerContext<R, S> context,
                               final Form<R> expected) {
         this.checkEquals(
             expected,
@@ -49,7 +51,7 @@ public interface FormHandlerContextTesting<C extends FormHandlerContext<R>, R ex
         );
     }
 
-    default void validatorContextAndCheck(final FormHandlerContext<R> context,
+    default void validatorContextAndCheck(final FormHandlerContext<R, S> context,
                                           final R reference,
                                           final ValidatorContext<R> expected) {
         this.checkEquals(
@@ -69,4 +71,15 @@ public interface FormHandlerContextTesting<C extends FormHandlerContext<R>, R ex
                 .saveFieldValues(null)
         );
     }
+
+    default void saveFieldValuesAndCheck(final C context,
+                                         final List<FormField<R>> formFields,
+                                         final S expected) {
+        this.checkEquals(
+            expected,
+            context.saveFieldValues(formFields)
+        );
+    }
+
+    ;
 }

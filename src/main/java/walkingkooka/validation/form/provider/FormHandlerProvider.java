@@ -34,15 +34,15 @@ public interface FormHandlerProvider extends Provider {
     /**
      * Resolves the given {@link FormHandlerSelector} to a {@link FormHandler}.
      */
-    <R extends ValidationReference, C extends FormHandlerContext<R>> FormHandler<R, C> formHandler(final FormHandlerSelector selector,
-                                                                                                   final ProviderContext context);
+    <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> formHandler(final FormHandlerSelector selector,
+                                                                                                            final ProviderContext context);
 
     /**
      * Resolves the given {@link FormHandlerName} to a {@link FormHandler} with the given parameter values.
      */
-    <R extends ValidationReference, C extends FormHandlerContext<R>> FormHandler<R, C> formHandler(final FormHandlerName name,
-                                                                                                   final List<?> values,
-                                                                                                   final ProviderContext context);
+    <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> formHandler(final FormHandlerName name,
+                                                                                                            final List<?> values,
+                                                                                                            final ProviderContext context);
 
     /**
      * Returns all available {@link FormHandlerInfo}
