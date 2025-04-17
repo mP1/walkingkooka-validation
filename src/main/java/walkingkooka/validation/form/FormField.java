@@ -19,6 +19,8 @@ package walkingkooka.validation.form;
 
 import walkingkooka.Cast;
 import walkingkooka.ToStringBuilder;
+import walkingkooka.text.printer.IndentingPrinter;
+import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.JsonObject;
 import walkingkooka.tree.json.JsonPropertyName;
@@ -36,7 +38,7 @@ import java.util.Optional;
  * A FormField has a few properties that are a mixture of forms and validation along with visual clues such as a human
  * friendly label.
  */
-public final class FormField<R extends ValidationReference> {
+public final class FormField<R extends ValidationReference> implements TreePrintable {
 
     public static <R extends ValidationReference> FormField<R> with(final R reference) {
         Objects.requireNonNull(reference, "reference");
@@ -346,5 +348,75 @@ public final class FormField<R extends ValidationReference> {
             FormField::marshall,
             FormField.class
         );
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public void printTree(final IndentingPrinter printer) {
+        printer.println(this.getClass().getSimpleName());
+        printer.indent();
+        {
+            TreePrintable.printTreeOrToString(
+                this.reference,
+                printer
+            );
+            printer.lineStart();
+
+            printTreeLabelAndValue(
+                "label",
+                this.label,
+                printer
+            );
+
+            printTreeLabelAndValue(
+                "type",
+                this.type,
+                printer
+            );
+
+            printTreeLabelAndValue(
+                "value",
+                this.value,
+                printer
+            );
+
+            printTreeLabelAndValue(
+                "validator",
+                this.validator,
+                printer
+            );
+
+            printer.outdent();
+        }
+        printer.outdent();
+    }
+
+    private static void printTreeLabelAndValue(final String label,
+                                               final Optional<?> value,
+                                               final IndentingPrinter printer) {
+        if (value.isPresent()) {
+            printTreeLabelAndValue(
+                label,
+                value.get(),
+                printer
+            );
+        }
+    }
+
+    private static void printTreeLabelAndValue(final String label,
+                                               final Object value,
+                                               final IndentingPrinter printer) {
+        if (null != value && false == "".equals(value)) {
+            printer.println(label + ":");
+            printer.indent();
+            {
+                TreePrintable.printTreeOrToString(
+                    value,
+                    printer
+                );
+            }
+            printer.outdent();
+        }
     }
 }
