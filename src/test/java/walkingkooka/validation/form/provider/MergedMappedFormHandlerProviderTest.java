@@ -171,9 +171,10 @@ public final class MergedMappedFormHandlerProviderTest implements FormHandlerPro
             ),
             new FakeFormHandlerProvider() {
 
+                @Override
                 public <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> formHandler(final FormHandlerName name,
-                                                                                                                      final List<?> values,
-                                                                                                                      final ProviderContext context) {
+                                                                                                                               final List<?> values,
+                                                                                                                               final ProviderContext context) {
                     Objects.requireNonNull(name, "name");
                     Objects.requireNonNull(values, "values");
                     Objects.requireNonNull(context, "context");
@@ -187,6 +188,7 @@ public final class MergedMappedFormHandlerProviderTest implements FormHandlerPro
                     throw new IllegalArgumentException("Unknown FormHandler " + name);
                 }
 
+                @Override
                 public FormHandlerInfoSet formHandlerInfos() {
                     return FormHandlerInfoSet.with(
                         Sets.of(
