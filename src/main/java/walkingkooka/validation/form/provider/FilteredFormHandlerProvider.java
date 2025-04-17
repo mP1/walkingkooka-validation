@@ -50,8 +50,8 @@ final class FilteredFormHandlerProvider implements FormHandlerProvider {
     }
 
     @Override
-    public <R extends ValidationReference, C extends FormHandlerContext<R>> FormHandler<R, C> formHandler(final FormHandlerSelector selector,
-                                                                                                          final ProviderContext context) {
+    public <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> formHandler(final FormHandlerSelector selector,
+                                                                                                                   final ProviderContext context) {
         return this.provider.formHandler(
             selector,
             context
@@ -59,9 +59,9 @@ final class FilteredFormHandlerProvider implements FormHandlerProvider {
     }
 
     @Override
-    public <R extends ValidationReference, C extends FormHandlerContext<R>> FormHandler<R, C> formHandler(final FormHandlerName name,
-                                                                                                          final List<?> values,
-                                                                                                          final ProviderContext context) {
+    public <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> formHandler(final FormHandlerName name,
+                                                                                                                   final List<?> values,
+                                                                                                                   final ProviderContext context) {
         Objects.requireNonNull(name, "name");
         Objects.requireNonNull(values, "values");
         Objects.requireNonNull(context, "context");

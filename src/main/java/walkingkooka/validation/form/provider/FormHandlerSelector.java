@@ -138,8 +138,8 @@ public final class FormHandlerSelector implements PluginSelectorLike<FormHandler
      * </pre>
      * The {@link FormHandlerProvider} will be used to fetch {@link FormHandler} with any parameters.
      */
-    public <R extends ValidationReference, C extends FormHandlerContext<R>> FormHandler<R, C> evaluateValueText(final FormHandlerProvider provider,
-                                                                                                                final ProviderContext context) {
+    public <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> evaluateValueText(final FormHandlerProvider provider,
+                                                                                                                         final ProviderContext context) {
         Objects.requireNonNull(provider, "provider");
         Objects.requireNonNull(provider, "context");
 

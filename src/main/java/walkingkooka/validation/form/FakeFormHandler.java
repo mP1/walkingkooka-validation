@@ -19,7 +19,7 @@ package walkingkooka.validation.form;
 
 import walkingkooka.validation.ValidationReference;
 
-public class FakeFormHandler<R extends ValidationReference, C extends FormHandlerContext<R>> implements FormHandler<R, C> {
+public class FakeFormHandler<R extends ValidationReference, S, C extends FormHandlerContext<R, S>> implements FormHandler<R, S, C> {
 
     public FakeFormHandler() {
         super();
@@ -32,8 +32,8 @@ public class FakeFormHandler<R extends ValidationReference, C extends FormHandle
     }
 
     @Override
-    public void submitForm(final Form<R> form,
-                           final C context) {
+    public S submitForm(final Form<R> form,
+                        final C context) {
         throw new UnsupportedOperationException();
     }
 }

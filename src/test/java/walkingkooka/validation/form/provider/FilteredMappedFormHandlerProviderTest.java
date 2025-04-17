@@ -47,7 +47,7 @@ public final class FilteredMappedFormHandlerProviderTest implements FormHandlerP
 
     private final static FormHandlerName ORIGINAL_NAME = FormHandlerName.with("original-formHandler-123");
 
-    private final static FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> FORM_HANDLER = FormHandlers.fake();
+    private final static FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> FORM_HANDLER = FormHandlers.fake();
 
     private final static ProviderContext CONTEXT = ProviderContexts.fake();
 
@@ -139,7 +139,7 @@ public final class FilteredMappedFormHandlerProviderTest implements FormHandlerP
             new FakeFormHandlerProvider() {
 
                 @Override
-                public <R extends ValidationReference, C extends FormHandlerContext<R>> FormHandler<R, C> formHandler(final FormHandlerName name,
+                public <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> formHandler(final FormHandlerName name,
                                                                                                                       final List<?> values,
                                                                                                                       final ProviderContext context) {
                     Objects.requireNonNull(name, "name");

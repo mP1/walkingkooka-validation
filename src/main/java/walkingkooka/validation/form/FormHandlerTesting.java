@@ -23,7 +23,7 @@ import walkingkooka.validation.ValidationReference;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public interface FormHandlerTesting<H extends FormHandler<R, C>, R extends ValidationReference, C extends FormHandlerContext<R>> extends ClassTesting<H> {
+public interface FormHandlerTesting<H extends FormHandler<R, S, C>, R extends ValidationReference, S, C extends FormHandlerContext<R, S>> extends ClassTesting<H> {
 
     @Test
     default void testPrepareFormWithNullFormFails() {
@@ -89,6 +89,19 @@ public interface FormHandlerTesting<H extends FormHandler<R, C>, R extends Valid
                     ),
                     null
                 )
+        );
+    }
+
+    default void submitFormAndCheck(final H handler,
+                                    final Form<R> form,
+                                    final C context,
+                                    final S expected) {
+        this.checkEquals(
+            expected,
+            handler.submitForm(
+                form,
+                context
+            )
         );
     }
 

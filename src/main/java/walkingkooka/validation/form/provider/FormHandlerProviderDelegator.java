@@ -27,8 +27,8 @@ import java.util.List;
 public interface FormHandlerProviderDelegator extends FormHandlerProvider {
 
     @Override
-    default <R extends ValidationReference, C extends FormHandlerContext<R>> FormHandler<R, C> formHandler(final FormHandlerSelector selector,
-                                                                                                           final ProviderContext context) {
+    default <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> formHandler(final FormHandlerSelector selector,
+                                                                                                                    final ProviderContext context) {
         return this.formHandlerProvider()
             .formHandler(
                 selector,
@@ -37,9 +37,9 @@ public interface FormHandlerProviderDelegator extends FormHandlerProvider {
     }
 
     @Override
-    default <R extends ValidationReference, C extends FormHandlerContext<R>> FormHandler<R, C> formHandler(final FormHandlerName name,
-                                                                                                           final List<?> values,
-                                                                                                           final ProviderContext context) {
+    default <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> formHandler(final FormHandlerName name,
+                                                                                                                    final List<?> values,
+                                                                                                                    final ProviderContext context) {
         return this.formHandlerProvider()
             .formHandler(
                 name,

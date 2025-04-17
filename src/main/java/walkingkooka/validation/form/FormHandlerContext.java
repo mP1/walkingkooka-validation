@@ -27,22 +27,21 @@ import java.util.List;
 /**
  * A {@link walkingkooka.Context} that accompanies a {@link FormHandler}.
  */
-public interface FormHandlerContext<T extends ValidationReference> extends CanConvert, EnvironmentContext {
+public interface FormHandlerContext<R extends ValidationReference, S> extends CanConvert, EnvironmentContext {
 
     /**
      * Returns the selected {@link Form}.
      * A spreadsheet form should use the references to load the initial value.
      */
-    Form<T> form();
+    Form<R> form();
 
     /**
      * Factory that creates a {@link ValidatorContext} that may be used to validate the given {@link ValidationReference} and its value.
      */
-    ValidatorContext<T> validatorContext(final T reference);
+    ValidatorContext<R> validatorContext(final R reference);
 
     /**
-     * Assumes that the fields have been validated, and saves any values.
-     * Note the other {@link FormField} properties are ignored.
+     * Assumes that the fields have been validated, and saves any {@link FormField#value()} ignoring all other field properties.
      */
-    void saveFieldValues(final List<FormField<T>> formFields);
+    S saveFieldValues(final List<FormField<R>> formFields);
 }

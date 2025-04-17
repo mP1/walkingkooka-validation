@@ -49,13 +49,13 @@ public final class MergedMappedFormHandlerProviderTest implements FormHandlerPro
 
     private final static FormHandlerName RENAMED_PROVIDER_NAME = FormHandlerName.with("renamed-provider-only-formHandler-111");
 
-    private final static FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> RENAME_FORM_HANDLER = FormHandlers.fake();
+    private final static FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> RENAME_FORM_HANDLER = FormHandlers.fake();
 
     private final static AbsoluteUrl PROVIDER_ONLY_URL = Url.parseAbsolute("https://example.com/provider-only-formHandler-222");
 
     private final static FormHandlerName PROVIDER_ONLY_NAME = FormHandlerName.with("provider-only-formHandler-222");
 
-    private final static FormHandler<TestValidationReference, FakeFormHandlerContext<TestValidationReference>> PROVIDER_ONLY_FORM_HANDLER = FormHandlers.fake();
+    private final static FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> PROVIDER_ONLY_FORM_HANDLER = FormHandlers.fake();
 
     private final static ProviderContext CONTEXT = ProviderContexts.fake();
 
@@ -171,7 +171,7 @@ public final class MergedMappedFormHandlerProviderTest implements FormHandlerPro
             ),
             new FakeFormHandlerProvider() {
 
-                public <R extends ValidationReference, C extends FormHandlerContext<R>> FormHandler<R, C> formHandler(final FormHandlerName name,
+                public <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> formHandler(final FormHandlerName name,
                                                                                                                       final List<?> values,
                                                                                                                       final ProviderContext context) {
                     Objects.requireNonNull(name, "name");

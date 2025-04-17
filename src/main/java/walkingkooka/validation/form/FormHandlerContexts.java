@@ -28,7 +28,7 @@ public final class FormHandlerContexts implements PublicStaticHelper {
     /**
      * {@see FakeFormHandlerContext}
      */
-    public static <T extends ValidationReference> FormHandlerContext<T> fake() {
+    public static <R extends ValidationReference, S> FormHandlerContext<R, S> fake() {
         return new FakeFormHandlerContext<>();
     }
 
