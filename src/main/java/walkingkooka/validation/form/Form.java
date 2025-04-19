@@ -53,7 +53,7 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
 
     // @VisibleForTesting
     Form(final FormName name,
-         final List<FormField<T>> fields,
+         final FormFieldList<T> fields,
          final ValidationErrorList<T> errors) {
         this.name = name;
         this.fields = fields;
@@ -105,7 +105,7 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
             );
     }
 
-    private final List<FormField<T>> fields;
+    private final FormFieldList<T> fields;
 
     // errors.............................................................................................................
 
@@ -185,8 +185,8 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
     static <R extends ValidationReference> Form<R> unmarshall(final JsonNode node,
                                                               final JsonNodeUnmarshallContext context) {
         FormName formName = null;
-        List<FormField<R>> fields = null;
-        ValidationErrorList<R> errors = null;
+        FormFieldList<R> fields = FormFieldList.empty();
+        ValidationErrorList<R> errors = ValidationErrorList.empty();
 
         for (JsonNode child : node.objectOrFail().children()) {
             final JsonPropertyName name = child.name();
@@ -222,11 +222,18 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {
         JsonObject json = JsonNode.object()
-            .set(NAME_PROPERTY, context.marshall(this.name))
-            .set(FIELDS_PROPERTY, context.marshall(this.fields));
+            .set(NAME_PROPERTY, context.marshall(this.name));
+
+        final FormFieldList<T> fields = this.fields;
+        if (fields.isNotEmpty()) {
+            json = json.set(
+                FIELDS_PROPERTY,
+                context.marshall(fields)
+            );
+        }
 
         final ValidationErrorList<T> errors = this.errors;
-        if(errors.isNotEmpty()) {
+        if (errors.isNotEmpty()) {
             json = json.set(
                 ERRORS_PROPERTY,
                 context.marshall(errors)
