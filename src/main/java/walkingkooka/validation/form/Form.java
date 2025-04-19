@@ -284,8 +284,6 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
                 this.errors,
                 printer
             );
-
-            printer.outdent();
         }
         printer.outdent();
     }
