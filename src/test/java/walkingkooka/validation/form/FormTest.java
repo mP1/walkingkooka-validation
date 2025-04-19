@@ -377,10 +377,10 @@ public final class FormTest implements ClassTesting2<Form<TestValidationReferenc
                 "  fields:\n" +
                 "    FormField\n" +
                 "      Field111 (walkingkooka.validation.TestValidationReference)\n" +
-                "errors:\n" +
-                "  ValidationError\n" +
-                "    Field111 (walkingkooka.validation.TestValidationReference)\n" +
-                "      Error in Field111\n"
+                "  errors:\n" +
+                "    ValidationError\n" +
+                "      Field111 (walkingkooka.validation.TestValidationReference)\n" +
+                "        Error in Field111\n"
         );
     }
 

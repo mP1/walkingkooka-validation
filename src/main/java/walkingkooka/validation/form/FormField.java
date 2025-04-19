@@ -386,8 +386,6 @@ public final class FormField<R extends ValidationReference> implements TreePrint
                 this.validator,
                 printer
             );
-
-            printer.outdent();
         }
         printer.outdent();
     }
