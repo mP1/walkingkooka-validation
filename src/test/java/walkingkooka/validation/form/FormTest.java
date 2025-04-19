@@ -21,7 +21,9 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
+import walkingkooka.collect.iterator.IteratorTesting;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.set.SortedSets;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.printer.TreePrintableTesting;
@@ -33,6 +35,7 @@ import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.ValidationErrorList;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -42,7 +45,8 @@ public final class FormTest implements ClassTesting2<Form<TestValidationReferenc
     HashCodeEqualsDefinedTesting2<Form<TestValidationReference>>,
     ToStringTesting<Form<TestValidationReference>>,
     JsonNodeMarshallingTesting<Form<TestValidationReference>>,
-    TreePrintableTesting {
+    TreePrintableTesting,
+    IteratorTesting {
 
     private final static FormName NAME = FormName.with("name123");
     private final static FormName DIFFERENT_NAME = FormName.with("differentName234");
@@ -377,6 +381,29 @@ public final class FormTest implements ClassTesting2<Form<TestValidationReferenc
                 "  ValidationError\n" +
                 "    Field111 (walkingkooka.validation.TestValidationReference)\n" +
                 "      Error in Field111\n"
+        );
+    }
+
+    // nameComparator...................................................................................................
+
+    @Test
+    public void testComparator() {
+        final Form<TestValidationReference> form1 = Form.with(FormName.with("Form111"));
+        final Form<TestValidationReference> form2 = Form.with(FormName.with("Form222"));
+        final Form<TestValidationReference> form3 = Form.with(FormName.with("Form333"));
+
+        final Set<Form<TestValidationReference>> forms = SortedSets.tree(
+            Form.nameComparator()
+        );
+        forms.add(form1);
+        forms.add(form3);
+        forms.add(form2);
+
+        this.iterateAndCheck(
+            forms.iterator(),
+            form1,
+            form2,
+            form3
         );
     }
 

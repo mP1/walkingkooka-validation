@@ -33,6 +33,7 @@ import walkingkooka.validation.ValidationErrorList;
 import walkingkooka.validation.ValidationReference;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -42,6 +43,13 @@ import java.util.Optional;
  */
 public final class Form<T extends ValidationReference> implements HasId<Optional<FormName>>,
     TreePrintable{
+
+    /**
+     * A {@link Comparator} that may be used to sort {@link Form} using only the {@link FormName}.
+     */
+    public static <T extends ValidationReference> Comparator<Form<T>> nameComparator() {
+        return (final Form<T> left, final Form<T> right) -> left.name.compareTo(right.name);
+    }
 
     public static <T extends ValidationReference> Form<T> with(final FormName name) {
         return new Form<>(
