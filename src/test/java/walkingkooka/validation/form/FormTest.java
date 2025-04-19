@@ -326,6 +326,22 @@ public final class FormTest implements ClassTesting2<Form<TestValidationReferenc
 
     // json.............................................................................................................
 
+    @Test
+    public void testMarshallEmptyForm() {
+        this.marshallAndCheck(
+            Form.with(NAME),
+            "{\"name\": \"name123\"}"
+        );
+    }
+
+    @Test
+    public void testUnmarshallEmptyForm() {
+        this.unmarshallAndCheck(
+            "{\"name\": \"name123\"}",
+            Form.with(NAME)
+        );
+    }
+
     @Override
     public Form<TestValidationReference> unmarshall(final JsonNode json,
                                                     final JsonNodeUnmarshallContext context) {
