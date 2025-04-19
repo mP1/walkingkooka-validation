@@ -20,7 +20,6 @@ package walkingkooka.validation.form;
 import walkingkooka.Cast;
 import walkingkooka.HasId;
 import walkingkooka.ToStringBuilder;
-import walkingkooka.collect.list.Lists;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
@@ -47,7 +46,7 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
     public static <T extends ValidationReference> Form<T> with(final FormName name) {
         return new Form<>(
             Objects.requireNonNull(name, "name"),
-            FormFieldList.with(Lists.empty()),
+            FormFieldList.empty(),
             ValidationErrorList.empty()
         );
     }
