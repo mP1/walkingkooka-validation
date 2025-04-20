@@ -24,6 +24,7 @@ import walkingkooka.ToStringTesting;
 import walkingkooka.collect.iterator.IteratorTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.SortedSets;
+import walkingkooka.net.http.server.hateos.HateosResourceTesting;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.printer.TreePrintableTesting;
@@ -41,7 +42,8 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class FormTest implements ClassTesting2<Form<TestValidationReference>>,
+public final class FormTest implements HateosResourceTesting<Form<TestValidationReference>, FormName>,
+    ClassTesting2<Form<TestValidationReference>>,
     HashCodeEqualsDefinedTesting2<Form<TestValidationReference>>,
     ToStringTesting<Form<TestValidationReference>>,
     JsonNodeMarshallingTesting<Form<TestValidationReference>>,
@@ -295,6 +297,13 @@ public final class FormTest implements ClassTesting2<Form<TestValidationReferenc
             expected,
             form.errors()
         );
+    }
+
+    // HateosResource...................................................................................................
+
+    @Override
+    public Form<TestValidationReference> createHateosResource() {
+        return this.createObject();
     }
 
     // hashCode/equals..................................................................................................

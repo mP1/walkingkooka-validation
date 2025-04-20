@@ -18,8 +18,9 @@
 package walkingkooka.validation.form;
 
 import walkingkooka.Cast;
-import walkingkooka.HasId;
 import walkingkooka.ToStringBuilder;
+import walkingkooka.net.http.server.hateos.HateosResource;
+import walkingkooka.net.http.server.hateos.HateosResourceName;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
@@ -41,8 +42,12 @@ import java.util.Optional;
 /**
  * A form has a name and defines one or more fields each with their own validator.
  */
-public final class Form<T extends ValidationReference> implements HasId<Optional<FormName>>,
+public final class Form<T extends ValidationReference> implements HateosResource<FormName>,
     TreePrintable{
+
+    public static final String HATEOS_RESOURCE_NAME_STRING = "form";
+
+    public static final HateosResourceName HATEOS_RESOURCE_NAME = HateosResourceName.with(HATEOS_RESOURCE_NAME_STRING);
 
     /**
      * A {@link Comparator} that may be used to sort {@link Form} using only the {@link FormName}.
@@ -68,11 +73,16 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
         this.errors = errors;
     }
 
-    // HasId............................................................................................................
+    // HateosResource...................................................................................................
 
     @Override
     public Optional<FormName> id() {
         return Optional.of(this.name);
+    }
+
+    @Override
+    public String hateosLinkId() {
+        return this.name.toString();
     }
 
     // name.............................................................................................................
