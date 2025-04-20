@@ -139,6 +139,13 @@ public final class Form<T extends ValidationReference> implements HasId<Optional
             );
     }
 
+    /**
+     * Clears an errors, but keeps the name and fields.
+     */
+    public Form<T> clearErrors() {
+        return this.setErrors(ValidationErrorList.empty());
+    }
+
     private final ValidationErrorList<T> errors;
 
     // Object...........................................................................................................

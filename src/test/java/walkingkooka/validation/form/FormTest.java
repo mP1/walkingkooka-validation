@@ -258,6 +258,30 @@ public final class FormTest implements ClassTesting2<Form<TestValidationReferenc
         this.errorsAndCheck(different, DIFFERENT_ERRORS);
     }
 
+    @Test
+    public void testClearErrorsWhenErrorsPresent() {
+        final Form<TestValidationReference> form = this.createObject();
+
+        final Form<TestValidationReference> different = form.clearErrors();
+
+        assertNotSame(
+            form,
+            different
+        );
+
+        this.nameAndCheck(form);
+        this.nameAndCheck(different);
+
+        this.fieldsAndCheck(form);
+        this.fieldsAndCheck(different);
+
+        this.errorsAndCheck(form);
+        this.errorsAndCheck(
+            different,
+            ValidationErrorList.empty()
+        );
+    }
+
     private void errorsAndCheck(final Form<TestValidationReference> form) {
         this.errorsAndCheck(
             form,
