@@ -20,6 +20,7 @@ package walkingkooka.validation.form;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.ImmutableListTesting;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.net.Url;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.reflect.ClassTesting;
@@ -40,6 +41,23 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
     TreePrintableTesting,
     ClassTesting<FormFieldList<TestValidationReference>>,
     JsonNodeMarshallingTesting<FormFieldList<TestValidationReference>> {
+
+    @Test
+    public void testWithFieldsSharingValidationReference() {
+        final TestValidationReference duplicate = new TestValidationReference("DuplicateFieldReference");
+
+        FormFieldList.with(
+            Lists.of(
+                FormField.with(duplicate)
+                    .setLabel("Label1"),
+                FormField.with(duplicate)
+                    .setLabel("Label2"),
+                FormField.with(
+                    new TestValidationReference("Field3")
+                ).setLabel("Label3")
+            )
+        );
+    }
 
     @Test
     public void testSetElementsDoesntDoubleWrap() {

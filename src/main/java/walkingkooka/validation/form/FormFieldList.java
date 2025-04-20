@@ -32,6 +32,7 @@ import java.util.Objects;
 /**
  * An {@link walkingkooka.collect.list.ImmutableList} holding zero or more {@link FormField}.
  * This is particularly useful to marshall and unmarshall lists of fields to/from {@link JsonNode}.
+ * Nothing happens if {@link FormField} have duplicate {@link ValidationReference}.
  */
 public final class FormFieldList<T extends ValidationReference> extends AbstractList<FormField<T>>
     implements ImmutableListDefaults<FormFieldList<T>, FormField<T>> {
