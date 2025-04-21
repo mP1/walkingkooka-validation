@@ -114,6 +114,8 @@ public final class FormFieldList<T extends ValidationReference> extends Abstract
     }
 
     static {
+        FormField.forceJsonRegistry();
+
         JsonNodeContext.register(
             JsonNodeContext.computeTypeName(FormFieldList.class),
             FormFieldList::unmarshall,
