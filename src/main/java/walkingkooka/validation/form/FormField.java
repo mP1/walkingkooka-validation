@@ -341,6 +341,10 @@ public final class FormField<R extends ValidationReference> implements TreePrint
         return object;
     }
 
+    static void forceJsonRegistry() {
+        // NOP
+    }
+
     static {
         JsonNodeContext.register(
             JsonNodeContext.computeTypeName(FormField.class),
