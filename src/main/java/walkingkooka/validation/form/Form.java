@@ -269,6 +269,8 @@ public final class Form<T extends ValidationReference> implements HateosResource
     }
 
     static {
+        FormName.with("HelloForm");
+
         JsonNodeContext.register(
             JsonNodeContext.computeTypeName(Form.class),
             Form::unmarshall,
