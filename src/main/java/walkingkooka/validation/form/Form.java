@@ -270,6 +270,8 @@ public final class Form<T extends ValidationReference> implements HateosResource
 
     static {
         FormName.with("HelloForm");
+        FormFieldList.empty();
+        ValidationErrorList.empty();
 
         JsonNodeContext.register(
             JsonNodeContext.computeTypeName(Form.class),
