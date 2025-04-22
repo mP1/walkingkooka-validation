@@ -17,7 +17,10 @@
 
 package walkingkooka.validation.form;
 
+import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.ValidationReference;
+
+import java.util.List;
 
 public class FakeFormHandler<R extends ValidationReference, S, C extends FormHandlerContext<R, S>> implements FormHandler<R, S, C> {
 
@@ -28,6 +31,12 @@ public class FakeFormHandler<R extends ValidationReference, S, C extends FormHan
     @Override
     public Form<R> prepareForm(final Form<R> form,
                                final C context) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<ValidationError<R>> validateForm(final Form<R> form,
+                                                 final C context) {
         throw new UnsupportedOperationException();
     }
 

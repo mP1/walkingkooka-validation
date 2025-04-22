@@ -64,6 +64,47 @@ public interface FormHandlerTesting<H extends FormHandler<R, S, C>, R extends Va
         );
     }
 
+    // validateForm.....................................................................................................
+
+    @Test
+    default void testValidateFormWithNullFormFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createFormHandler()
+                .validateForm(
+                    null,
+                    this.createContext()
+                )
+        );
+    }
+
+    @Test
+    default void testValidateFormWithNullContextFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createFormHandler()
+                .validateForm(
+                    Form.with(
+                        FormName.with("Form123")
+                    ),
+                    null
+                )
+        );
+    }
+
+    default void validateFormAndCheck(final H handler,
+                                      final Form<R> form,
+                                      final C context,
+                                      final S expected) {
+        this.checkEquals(
+            expected,
+            handler.validateForm(
+                form,
+                context
+            )
+        );
+    }
+
     // submitForm.......................................................................................................
 
     @Test
