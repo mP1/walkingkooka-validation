@@ -24,6 +24,7 @@ import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -58,6 +59,45 @@ public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R
             expected,
             context.validatorContext(reference),
             () -> "ValidatorContext for " + reference
+        );
+    }
+
+    // loadFieldValue...................................................................................................
+
+    @Test
+    default void testLoadFieldValueWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createContext()
+                .loadFieldValue(null)
+        );
+    }
+
+    default void loadFieldValueAndCheck(final C context,
+                                        final R reference) {
+        this.loadFieldValueAndCheck(
+            context,
+            reference,
+            Optional.empty()
+        );
+    }
+
+    default void loadFieldValueAndCheck(final C context,
+                                        final R reference,
+                                        final Object expected) {
+        this.loadFieldValueAndCheck(
+            context,
+            reference,
+            Optional.of(expected)
+        );
+    }
+
+    default void loadFieldValueAndCheck(final C context,
+                                        final R reference,
+                                        final Optional<?> expected) {
+        this.checkEquals(
+            expected,
+            context.loadFieldValue(reference)
         );
     }
 

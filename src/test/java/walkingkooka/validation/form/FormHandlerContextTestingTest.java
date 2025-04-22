@@ -57,6 +57,12 @@ public final class FormHandlerContextTestingTest implements FormHandlerContextTe
         }
 
         @Override
+        public Optional<?> loadFieldValue(final TestValidationReference reference) {
+            Objects.requireNonNull(reference, "reference");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public Void saveFieldValues(final List<FormField<TestValidationReference>> formFields) {
             Objects.requireNonNull(formFields, "formFields");
 

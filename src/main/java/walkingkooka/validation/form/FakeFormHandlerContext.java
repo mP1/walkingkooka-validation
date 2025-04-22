@@ -23,6 +23,7 @@ import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
 
 import java.util.List;
+import java.util.Optional;
 
 public class FakeFormHandlerContext<R extends ValidationReference, S> extends FakeEnvironmentContext implements FormHandlerContext<R, S> {
 
@@ -37,6 +38,11 @@ public class FakeFormHandlerContext<R extends ValidationReference, S> extends Fa
 
     @Override
     public ValidatorContext<R> validatorContext(final R reference) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Optional<?> loadFieldValue(final R reference) {
         throw new UnsupportedOperationException();
     }
 
