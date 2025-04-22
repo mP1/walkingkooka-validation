@@ -23,6 +23,7 @@ import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * A {@link walkingkooka.Context} that accompanies a {@link FormHandler}.
@@ -39,6 +40,13 @@ public interface FormHandlerContext<R extends ValidationReference, S> extends Ca
      * Factory that creates a {@link ValidatorContext} that may be used to validate the given {@link ValidationReference} and its value.
      */
     ValidatorContext<R> validatorContext(final R reference);
+
+    /**
+     * Loads the current value for a form field from some other source, and does not return the actual {@link FormField#value()}.
+     * <br>
+     * In a spreadsheet this would use the reference to return the SpreadsheetCell#inputValue assuming the cell is present.
+     */
+    Optional<?> loadFieldValue(final R reference);
 
     /**
      * Assumes that the fields have been validated, and saves any {@link FormField#value()} ignoring all other field properties.
