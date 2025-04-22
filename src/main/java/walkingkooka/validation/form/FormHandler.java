@@ -17,7 +17,10 @@
 
 package walkingkooka.validation.form;
 
+import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.ValidationReference;
+
+import java.util.List;
 
 /**
  * A form handler is responsible for {@link Form} lifecycles.
@@ -29,6 +32,13 @@ public interface FormHandler<R extends ValidationReference, S, C extends FormHan
      */
     Form<R> prepareForm(final Form<R> form,
                         final C context);
+
+    /**
+     * Validates the given form, returning an aggregation of {@link ValidationError} but does not submit the form.
+     * This is useful so the UI can continuously validate one or more fields and update to show any error messages.
+     */
+    List<ValidationError<R>> validateForm(final Form<R> form,
+                                          final C context);
 
     /**
      * Submits the given form so that it is saved.
