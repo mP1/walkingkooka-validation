@@ -27,7 +27,7 @@ import java.util.Comparator;
 
 public final class TestValidationReference implements ValidationReference {
 
-    public static Comparator<TestValidationReference> COMPARATOR = (l, r) -> r.field.compareTo(l.field);
+    public static Comparator<TestValidationReference> COMPARATOR = (l, r) -> l.field.compareTo(r.field);
 
     public TestValidationReference(final String field) {
         this.field = CharSequences.failIfNullOrEmpty(field, "field");
