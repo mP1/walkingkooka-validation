@@ -33,7 +33,7 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
     EnvironmentContextDelegator {
 
     static <T extends ValidationReference> BasicValidatorContext<T> with(final T validationReference,
-                                                                         final Function<ValidatorSelector, Validator<T, ? extends ValidatorContext<T>>> validatorSelectorToValidator,
+                                                                         final Function<ValidatorSelector, Validator<T, ? super ValidatorContext<T>>> validatorSelectorToValidator,
                                                                          final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
                                                                          final CanConvert canConvert,
                                                                          final EnvironmentContext environmentContext) {
@@ -47,7 +47,7 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
     }
 
     private BasicValidatorContext(final T validationReference,
-                                  final Function<ValidatorSelector, Validator<T, ? extends ValidatorContext<T>>> validatorSelectorToValidator,
+                                  final Function<ValidatorSelector, Validator<T, ? super ValidatorContext<T>>> validatorSelectorToValidator,
                                   final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
                                   final CanConvert canConvert,
                                   final EnvironmentContext environmentContext) {
@@ -79,13 +79,13 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
     }
 
     @Override
-    public Validator<T, ? extends ValidatorContext<T>> validator(final ValidatorSelector selector) {
+    public Validator<T, ? super ValidatorContext<T>> validator(final ValidatorSelector selector) {
         Objects.requireNonNull(selector, "selector");
 
         return this.validatorSelectorToValidator.apply(selector);
     }
 
-    private final Function<ValidatorSelector, Validator<T, ? extends ValidatorContext<T>>> validatorSelectorToValidator;
+    private final Function<ValidatorSelector, Validator<T, ? super ValidatorContext<T>>> validatorSelectorToValidator;
 
     @Override
     public ExpressionEvaluationContext expressionEvaluationContext(final Object value) {

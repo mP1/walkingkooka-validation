@@ -55,7 +55,7 @@ public interface ValidatorContext<T extends ValidationReference> extends CanConv
     /**
      * Factory that returns a {@link Validator} for the given {@link ValidatorSelector}.
      */
-    Validator<T, ? extends ValidatorContext<T>> validator(final ValidatorSelector selector);
+    Validator<T, ? super ValidatorContext<T>> validator(final ValidatorSelector selector);
 
     /**
      * The preferred name for expressions to get the value being validated. This is the mechanism to pass a validation

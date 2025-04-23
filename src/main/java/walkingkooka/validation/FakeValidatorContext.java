@@ -43,7 +43,7 @@ public class FakeValidatorContext<T extends ValidationReference> extends FakeCon
     }
 
     @Override
-    public Validator<T, ? extends ValidatorContext<T>> validator(final ValidatorSelector selector) {
+    public Validator<T, ? super ValidatorContext<T>> validator(final ValidatorSelector selector) {
         throw new UnsupportedOperationException();
     }
 
