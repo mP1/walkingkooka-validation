@@ -25,6 +25,7 @@ import walkingkooka.validation.ValidatorContext;
 import walkingkooka.validation.form.FormHandlerContextTestingTest.TestFormHandlerContext;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -46,6 +47,11 @@ public final class FormHandlerContextTestingTest implements FormHandlerContextTe
 
         @Override
         public Form<TestValidationReference> form() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Comparator<TestValidationReference> formFieldReferenceComparator() {
             throw new UnsupportedOperationException();
         }
 
