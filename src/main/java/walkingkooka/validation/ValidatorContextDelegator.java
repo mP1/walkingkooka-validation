@@ -22,6 +22,7 @@ import walkingkooka.convert.CanConvertDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
+import walkingkooka.validation.provider.ValidatorSelector;
 
 public interface ValidatorContextDelegator<T extends ValidationReference> extends ValidatorContext<T>,
     CanConvertDelegator,
@@ -35,6 +36,12 @@ public interface ValidatorContextDelegator<T extends ValidationReference> extend
     default T validationReference() {
         return this.validatorContext()
             .validationReference();
+    }
+
+    @Override
+    default Validator<T, ? extends ValidatorContext<T>> validator(final ValidatorSelector selector) {
+        return this.validatorContext()
+            .validator(selector);
     }
 
     @Override

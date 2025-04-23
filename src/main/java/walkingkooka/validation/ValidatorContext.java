@@ -21,6 +21,7 @@ import walkingkooka.convert.CanConvert;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
+import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.util.Optional;
 
@@ -50,6 +51,11 @@ public interface ValidatorContext<T extends ValidationReference> extends CanConv
             message
         );
     }
+
+    /**
+     * Factory that returns a {@link Validator} for the given {@link ValidatorSelector}.
+     */
+    Validator<T, ? extends ValidatorContext<T>> validator(final ValidatorSelector selector);
 
     /**
      * The preferred name for expressions to get the value being validated. This is the mechanism to pass a validation
