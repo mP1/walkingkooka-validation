@@ -22,6 +22,7 @@ import walkingkooka.environment.FakeEnvironmentContext;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,11 @@ public class FakeFormHandlerContext<R extends ValidationReference, S> extends Fa
 
     @Override
     public Form<R> form() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Comparator<R> formFieldReferenceComparator() {
         throw new UnsupportedOperationException();
     }
 

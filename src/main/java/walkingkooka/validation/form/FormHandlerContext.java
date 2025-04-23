@@ -22,6 +22,7 @@ import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +36,13 @@ public interface FormHandlerContext<R extends ValidationReference, S> extends Ca
      * A spreadsheet form should use the references to load the initial value.
      */
     Form<R> form();
+
+    /**
+     * A {@link Comparator} that may be used to sort {@link FormField#reference()}.
+     * It is probably best not to return null if null is available, as this will be probably be used to construct sorted
+     * collection types like {@link java.util.TreeMap}.
+     */
+    Comparator<R> formFieldReferenceComparator();
 
     /**
      * Factory that creates a {@link ValidatorContext} that may be used to validate the given {@link ValidationReference} and its value.
