@@ -29,4 +29,11 @@ public interface Validator<R extends ValidationReference, C extends ValidatorCon
      */
     List<ValidationError<R>> validate(final Object value,
                                       final C context);
+
+    /**
+     * Helper that may be used to return no errors.
+     */
+    default ValidationErrorList<R> noValidationErrors() {
+        return ValidationErrorList.empty();
+    }
 }
