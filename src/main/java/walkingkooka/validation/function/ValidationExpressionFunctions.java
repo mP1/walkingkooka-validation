@@ -23,12 +23,12 @@ import walkingkooka.tree.expression.function.ExpressionFunction;
 /**
  * A collection of {@link ExpressionFunction}.
  */
-public final class ValidatorExpressionFunctions implements PublicStaticHelper {
+public final class ValidationExpressionFunctions implements PublicStaticHelper {
 
     /**
      * Stop creation
      */
-    private ValidatorExpressionFunctions() {
+    private ValidationExpressionFunctions() {
         throw new UnsupportedOperationException();
     }
 }
