@@ -20,6 +20,7 @@ package walkingkooka.validation;
 import org.junit.jupiter.api.Test;
 import walkingkooka.convert.CanConvertTesting;
 import walkingkooka.environment.EnvironmentContextTesting2;
+import walkingkooka.validation.provider.ValidatorSelector;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -56,6 +57,29 @@ public interface ValidatorContextTesting<C extends ValidatorContext<R>, R extend
             context.validationReference(),
             context::toString);
     }
+
+    // validator........................................................................................................
+
+    @Test
+    default void testValidatorWithNullValidatorSelectorFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createContext()
+                .validator(null)
+        );
+    }
+
+    default void validatorAndCheck(final C context,
+                                   final ValidatorSelector selector,
+                                   final Validator<R, C> expected) {
+        this.checkEquals(
+            expected,
+            context.validator(selector),
+            selector::toString
+        );
+    }
+
+    // context..........................................................................................................
 
     @Override
     default C createCanConvert() {

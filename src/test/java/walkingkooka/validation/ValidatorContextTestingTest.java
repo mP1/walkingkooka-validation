@@ -29,6 +29,7 @@ import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionEvaluationContexts;
 import walkingkooka.validation.ValidatorContextTestingTest.TestValidatorContext;
+import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.math.MathContext;
 import java.time.LocalDateTime;
@@ -68,6 +69,13 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
                 new TestValidatorContext(
                     Objects.requireNonNull(reference, "reference")
                 );
+        }
+
+        @Override
+        public Validator<TestValidationReference, ? extends ValidatorContext<TestValidationReference>> validator(final ValidatorSelector selector) {
+            Objects.requireNonNull(selector, "selector");
+
+            throw new UnsupportedOperationException();
         }
 
         @Override

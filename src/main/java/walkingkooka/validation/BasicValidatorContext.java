@@ -22,20 +22,24 @@ import walkingkooka.convert.CanConvertDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
+import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.util.Objects;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 final class BasicValidatorContext<T extends ValidationReference> implements ValidatorContext<T>,
     CanConvertDelegator,
     EnvironmentContextDelegator {
 
     static <T extends ValidationReference> BasicValidatorContext<T> with(final T validationReference,
+                                                                         final Function<ValidatorSelector, Validator<T, ? extends ValidatorContext<T>>> validatorSelectorToValidator,
                                                                          final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
                                                                          final CanConvert canConvert,
                                                                          final EnvironmentContext environmentContext) {
         return new BasicValidatorContext<>(
             Objects.requireNonNull(validationReference, "validationReference"),
+            Objects.requireNonNull(validatorSelectorToValidator, "validatorSelectorToValidator"),
             Objects.requireNonNull(referenceToExpressionEvaluationContext, "referenceToExpressionEvaluationContext"),
             Objects.requireNonNull(canConvert, "canConvert"),
             Objects.requireNonNull(environmentContext, "environmentContext")
@@ -43,10 +47,12 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
     }
 
     private BasicValidatorContext(final T validationReference,
+                                  final Function<ValidatorSelector, Validator<T, ? extends ValidatorContext<T>>> validatorSelectorToValidator,
                                   final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
                                   final CanConvert canConvert,
                                   final EnvironmentContext environmentContext) {
         this.validationReference = validationReference;
+        this.validatorSelectorToValidator = validatorSelectorToValidator;
         this.referenceToExpressionEvaluationContext = referenceToExpressionEvaluationContext;
         this.canConvert = canConvert;
         this.environmentContext = environmentContext;
@@ -65,11 +71,21 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
             this :
             new BasicValidatorContext<>(
                 Objects.requireNonNull(validationReference, "validationReference"),
+                this.validatorSelectorToValidator,
                 this.referenceToExpressionEvaluationContext,
                 this.canConvert,
                 this.environmentContext
             );
     }
+
+    @Override
+    public Validator<T, ? extends ValidatorContext<T>> validator(final ValidatorSelector selector) {
+        Objects.requireNonNull(selector, "selector");
+
+        return this.validatorSelectorToValidator.apply(selector);
+    }
+
+    private final Function<ValidatorSelector, Validator<T, ? extends ValidatorContext<T>>> validatorSelectorToValidator;
 
     @Override
     public ExpressionEvaluationContext expressionEvaluationContext(final Object value) {
@@ -105,6 +121,14 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
 
     @Override
     public String toString() {
-        return this.validationReference + " " + this.referenceToExpressionEvaluationContext + " " + this.canConvert + " " + this.environmentContext;
+        return this.validationReference +
+            " " +
+            this.validatorSelectorToValidator +
+            " " +
+            this.referenceToExpressionEvaluationContext +
+            " " +
+            this.canConvert +
+            " " +
+            this.environmentContext;
     }
 }
