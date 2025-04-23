@@ -121,6 +121,16 @@ public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R
         );
     }
 
+    // validateFormFields...............................................................................................
+
+    @Test
+    default void testValidateFormWithNullFormFieldsFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createContext().validatorContext(null)
+        );
+    }
+
     // CanConvert.......................................................................................................
 
     @Override
