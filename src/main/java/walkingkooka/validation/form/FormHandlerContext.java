@@ -17,14 +17,26 @@
 
 package walkingkooka.validation.form;
 
+import walkingkooka.Cast;
+import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.set.SortedSets;
 import walkingkooka.convert.CanConvert;
 import walkingkooka.environment.EnvironmentContext;
+import walkingkooka.text.CharSequences;
+import walkingkooka.text.CharacterConstant;
+import walkingkooka.validation.ValidationError;
+import walkingkooka.validation.ValidationErrorList;
 import walkingkooka.validation.ValidationReference;
+import walkingkooka.validation.Validator;
 import walkingkooka.validation.ValidatorContext;
+import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * A {@link walkingkooka.Context} that accompanies a {@link FormHandler}.
@@ -43,6 +55,88 @@ public interface FormHandlerContext<R extends ValidationReference, S> extends Ca
      * collection types like {@link java.util.TreeMap}.
      */
     Comparator<R> formFieldReferenceComparator();
+
+    /**
+     * A default validate of the given form fields, only using the reference and value from the given {@link FormField},
+     * fetching the validator from the given {@link #form()}.
+     * <br>
+     * Unknown fields will throw an exception and different given {@link FormField} definitions are ignored.
+     */
+    default List<ValidationError<R>> validateFormFields(final List<FormField<R>> fields) {
+        Objects.requireNonNull(fields, "fields");
+
+        final Form<R> form = this.form();
+
+        final Comparator<R> formFieldReferenceComparator = this.formFieldReferenceComparator();
+        final Map<R, FormField<R>> referenceToField = form.referenceAndFormFieldMap(formFieldReferenceComparator);
+
+        // complain if given Form has extra fields.
+        final Set<R> unknownFields = SortedSets.tree(formFieldReferenceComparator);
+
+        final List<ValidationError<R>> errors = Lists.array();
+
+        // validate each field one by one, use the Validator from the source form not the given form.
+        for (final FormField<R> field : fields) {
+            final R reference = field.reference();
+
+            final FormField<R> sourceFormField = referenceToField.get(reference);
+            if (null == sourceFormField) {
+                unknownFields.add(reference);
+                continue;
+            }
+
+            // found 1 unknown field skip validating others.
+            if (false == unknownFields.isEmpty()) {
+                continue;
+            }
+
+            final ValidatorSelector validatorSelector = sourceFormField.validator()
+                .orElse(null);
+
+            // if there is no ValidatorSelector skip validating field.
+            if (null != validatorSelector) {
+                final ValidatorContext<R> validatorContext = this.validatorContext(reference);
+
+                Validator<R, ValidatorContext<R>> validator = null;
+                try {
+                    validator = Cast.to(
+                        validatorContext.validator(validatorSelector)
+                    );
+                } catch (final RuntimeException missing) {
+                    final String message = missing.getMessage();
+
+                    errors.add(
+                        validatorContext.validationError(
+                            CharSequences.isNullOrEmpty(message) ?
+                            "Validator error: " + validatorSelector :
+                                message
+                        )
+                    );
+                }
+
+                if (null != validator) {
+                    errors.addAll(
+                        validator.validate(
+                            field.value()
+                                .orElse(null),
+                            validatorContext
+                        )
+                    );
+                }
+            }
+        }
+
+        if (false == unknownFields.isEmpty()) {
+            throw new IllegalArgumentException(
+                "Form contains unknown fields: " + CharacterConstant.COMMA.toSeparatedString(
+                    unknownFields,
+                    R::text
+                )
+            );
+        }
+
+        return ValidationErrorList.with(errors);
+    }
 
     /**
      * Factory that creates a {@link ValidatorContext} that may be used to validate the given {@link ValidationReference} and its value.
