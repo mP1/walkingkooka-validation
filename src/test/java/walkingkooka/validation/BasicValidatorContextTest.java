@@ -47,7 +47,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
 
     private final static TestValidationReference VALIDATION_REFERENCE = new TestValidationReference("A1");
 
-    private final static Function<ValidatorSelector, Validator<TestValidationReference, ? extends ValidatorContext<TestValidationReference>>> VALIDATOR_SELECTOR_TO_VALIDATOR = (final ValidatorSelector selector) -> {
+    private final static Function<ValidatorSelector, Validator<TestValidationReference, ? super ValidatorContext<TestValidationReference>>> VALIDATOR_SELECTOR_TO_VALIDATOR = (final ValidatorSelector selector) -> {
         throw new UnsupportedOperationException();
     };
 

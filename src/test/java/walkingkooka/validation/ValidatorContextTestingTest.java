@@ -72,7 +72,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         }
 
         @Override
-        public Validator<TestValidationReference, ? extends ValidatorContext<TestValidationReference>> validator(final ValidatorSelector selector) {
+        public Validator<TestValidationReference, ? super ValidatorContext<TestValidationReference>> validator(final ValidatorSelector selector) {
             Objects.requireNonNull(selector, "selector");
 
             throw new UnsupportedOperationException();

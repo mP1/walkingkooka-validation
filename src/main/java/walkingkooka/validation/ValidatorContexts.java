@@ -35,7 +35,7 @@ public final class ValidatorContexts implements PublicStaticHelper {
      * {@see BasicValidatorContext}
      */
     public static <T extends ValidationReference> ValidatorContext<T> basic(final T validationReference,
-                                                                            final Function<ValidatorSelector, Validator<T, ? extends ValidatorContext<T>>> validatorSelectorToValidator,
+                                                                            final Function<ValidatorSelector, Validator<T, ? super ValidatorContext<T>>> validatorSelectorToValidator,
                                                                             final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
                                                                             final CanConvert canConvert,
                                                                             final EnvironmentContext environmentContext) {

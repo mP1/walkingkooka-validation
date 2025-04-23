@@ -39,7 +39,7 @@ public interface ValidatorContextDelegator<T extends ValidationReference> extend
     }
 
     @Override
-    default Validator<T, ? extends ValidatorContext<T>> validator(final ValidatorSelector selector) {
+    default Validator<T, ? super ValidatorContext<T>> validator(final ValidatorSelector selector) {
         return this.validatorContext()
             .validator(selector);
     }
