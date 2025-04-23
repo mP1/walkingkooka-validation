@@ -19,6 +19,7 @@ package walkingkooka.validation.form;
 
 import walkingkooka.Cast;
 import walkingkooka.ToStringBuilder;
+import walkingkooka.collect.map.Maps;
 import walkingkooka.net.http.server.hateos.HateosResource;
 import walkingkooka.net.http.server.hateos.HateosResourceName;
 import walkingkooka.text.printer.IndentingPrinter;
@@ -36,6 +37,7 @@ import walkingkooka.validation.ValidationReference;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -124,6 +126,21 @@ public final class Form<T extends ValidationReference> implements HateosResource
     }
 
     private final FormFieldList<T> fields;
+
+    /**
+     * Helper that returns a {@link Map} using the reference as the key.
+     */
+    Map<T, FormField<T>> referenceAndFormFieldMap(final Comparator<T> referenceComparator) {
+        final Map<T, FormField<T>> referenceToField = Maps.sorted(referenceComparator);
+        for(final FormField<T> field : this.fields) {
+            referenceToField.put(
+                field.reference(),
+                field
+            );
+        }
+
+        return referenceToField;
+    }
 
     // errors.............................................................................................................
 

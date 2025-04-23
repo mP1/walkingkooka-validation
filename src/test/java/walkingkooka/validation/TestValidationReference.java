@@ -23,7 +23,11 @@ import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.Comparator;
+
 public final class TestValidationReference implements ValidationReference {
+
+    public static Comparator<TestValidationReference> COMPARATOR = (l, r) -> r.field.compareTo(l.field);
 
     public TestValidationReference(final String field) {
         this.field = CharSequences.failIfNullOrEmpty(field, "field");
