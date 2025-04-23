@@ -23,6 +23,7 @@ import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
 import walkingkooka.collect.iterator.IteratorTesting;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.SortedSets;
 import walkingkooka.net.http.server.hateos.HateosResourceTesting;
 import walkingkooka.reflect.ClassTesting2;
@@ -216,6 +217,41 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
         this.checkEquals(
             expected,
             form.fields()
+        );
+    }
+
+    // referenceAndFormFieldMap.........................................................................................
+
+    @Test
+    public void testReferenceAndFormFieldMap() {
+        final FormField<TestValidationReference> field1 = FormField.with(
+            new TestValidationReference("Field1")
+        );
+
+        final FormField<TestValidationReference> field2 = FormField.with(
+            new TestValidationReference("Field2")
+        );
+
+        final Form<TestValidationReference> form = Form.<TestValidationReference>with(
+            FormName.with("Form123")
+        ).setFields(
+            Lists.of(
+                field1,
+                field2
+            )
+        );
+
+        this.checkEquals(
+            Maps.of(
+                field1.reference(),
+                field1,
+                field2.reference(),
+                field2
+            ),
+            form.referenceAndFormFieldMap(
+                TestValidationReference.COMPARATOR
+            ),
+            form::toString
         );
     }
 
