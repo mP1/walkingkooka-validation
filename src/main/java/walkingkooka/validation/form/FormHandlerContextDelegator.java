@@ -17,7 +17,8 @@
 
 package walkingkooka.validation.form;
 
-import walkingkooka.Either;
+import walkingkooka.convert.CanConvert;
+import walkingkooka.convert.CanConvertDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.validation.ValidationReference;
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FormHandlerContextDelegator<R extends ValidationReference, S> extends FormHandlerContext<R, S>,
+    CanConvertDelegator,
     EnvironmentContextDelegator {
 
     @Override
@@ -62,20 +64,11 @@ public interface FormHandlerContextDelegator<R extends ValidationReference, S> e
 
     FormHandlerContext<R, S> formHandlerContext();
 
-    // CanConvert.......................................................................................................
+    // CanConvertDelegator..............................................................................................
 
     @Override
-    default boolean canConvert(final Object value,
-                               final Class<?> type) {
-        return this.formHandlerContext()
-            .canConvert(value, type);
-    }
-
-    @Override
-    default <T> Either<T, String> convert(final Object value,
-                                          final Class<T> type) {
-        return this.formHandlerContext()
-            .convert(value, type);
+    default CanConvert canConvert() {
+        return this.formHandlerContext();
     }
 
     // EnvironmentContext...............................................................................................
