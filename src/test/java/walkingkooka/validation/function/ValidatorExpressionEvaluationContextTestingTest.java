@@ -112,7 +112,7 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
     final static class TestValidatorExpressionEvaluationContext implements ValidatorExpressionEvaluationContext<TestValidationReference, Void> {
 
         @Override
-        public ExpressionEvaluationContext enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {
+        public TestValidatorExpressionEvaluationContext enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {
             Objects.requireNonNull(function, "function");
 
             throw new UnsupportedOperationException();
