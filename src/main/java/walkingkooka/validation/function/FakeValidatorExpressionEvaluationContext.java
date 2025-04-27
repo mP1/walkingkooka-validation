@@ -19,6 +19,7 @@ package walkingkooka.validation.function;
 
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
@@ -29,11 +30,17 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 
 public class FakeValidatorExpressionEvaluationContext<R extends ValidationReference, S> extends FakeExpressionEvaluationContext implements ValidatorExpressionEvaluationContext<R, S> {
 
     public FakeValidatorExpressionEvaluationContext() {
         super();
+    }
+
+    @Override
+    public FakeValidatorExpressionEvaluationContext<R, S> enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> scoped) {
+        throw new UnsupportedOperationException();
     }
 
     @Override

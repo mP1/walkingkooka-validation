@@ -18,9 +18,16 @@
 package walkingkooka.validation.function;
 
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
+import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.FormHandlerContext;
 
+import java.util.Optional;
+import java.util.function.Function;
+
 public interface ValidatorExpressionEvaluationContext<R extends ValidationReference, S> extends ExpressionEvaluationContext,
     FormHandlerContext<R, S> {
+
+    @Override
+    ValidatorExpressionEvaluationContext<R, S> enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function);
 }
