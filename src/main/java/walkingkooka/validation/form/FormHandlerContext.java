@@ -41,13 +41,9 @@ import java.util.Set;
 /**
  * A {@link walkingkooka.Context} that accompanies a {@link FormHandler}.
  */
-public interface FormHandlerContext<R extends ValidationReference, S> extends CanConvert, EnvironmentContext {
-
-    /**
-     * Returns the selected {@link Form}.
-     * A spreadsheet form should use the references to load the initial value.
-     */
-    Form<R> form();
+public interface FormHandlerContext<R extends ValidationReference, S> extends CanConvert,
+    HasForm<R>,
+    EnvironmentContext {
 
     /**
      * A {@link Comparator} that may be used to sort {@link FormField#reference()}.
