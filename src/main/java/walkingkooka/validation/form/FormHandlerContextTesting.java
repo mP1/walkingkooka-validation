@@ -56,59 +56,59 @@ public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R
     // loadFieldValue...................................................................................................
 
     @Test
-    default void testLoadFieldValueWithNullFails() {
+    default void testLoadFormFieldValueWithNullFails() {
         assertThrows(
             NullPointerException.class,
             () -> this.createContext()
-                .loadFieldValue(null)
+                .loadFormFieldValue(null)
         );
     }
 
-    default void loadFieldValueAndCheck(final C context,
-                                        final R reference) {
-        this.loadFieldValueAndCheck(
+    default void loadFormFieldValueAndCheck(final C context,
+                                            final R reference) {
+        this.loadFormFieldValueAndCheck(
             context,
             reference,
             Optional.empty()
         );
     }
 
-    default void loadFieldValueAndCheck(final C context,
-                                        final R reference,
-                                        final Object expected) {
-        this.loadFieldValueAndCheck(
+    default void loadFormFieldValueAndCheck(final C context,
+                                            final R reference,
+                                            final Object expected) {
+        this.loadFormFieldValueAndCheck(
             context,
             reference,
             Optional.of(expected)
         );
     }
 
-    default void loadFieldValueAndCheck(final C context,
-                                        final R reference,
-                                        final Optional<Object> expected) {
+    default void loadFormFieldValueAndCheck(final C context,
+                                            final R reference,
+                                            final Optional<Object> expected) {
         this.checkEquals(
             expected,
-            context.loadFieldValue(reference)
+            context.loadFormFieldValue(reference)
         );
     }
 
     // saveFieldValue...................................................................................................
 
     @Test
-    default void testSaveFieldValuesWithNullFails() {
+    default void testSaveFormFieldValuesWithNullFails() {
         assertThrows(
             NullPointerException.class,
             () -> this.createContext()
-                .saveFieldValues(null)
+                .saveFormFieldValues(null)
         );
     }
 
-    default void saveFieldValuesAndCheck(final C context,
-                                         final List<FormField<R>> formFields,
-                                         final S expected) {
+    default void saveFormFieldValuesAndCheck(final C context,
+                                             final List<FormField<R>> formFields,
+                                             final S expected) {
         this.checkEquals(
             expected,
-            context.saveFieldValues(formFields)
+            context.saveFormFieldValues(formFields)
         );
     }
 
