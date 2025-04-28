@@ -48,12 +48,12 @@ public class FakeFormHandlerContext<R extends ValidationReference, S> extends Fa
     }
 
     @Override
-    public Optional<Object> loadFieldValue(final R reference) {
+    public Optional<Object> loadFormFieldValue(final R reference) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public S saveFieldValues(final List<FormField<R>> formFields) {
+    public S saveFormFieldValues(final List<FormField<R>> formFields) {
         throw new UnsupportedOperationException();
     }
 
