@@ -27,7 +27,7 @@ import java.util.Set;
 /**
  * A collection of {@link ExpressionFunction}.
  */
-public final class ValidationExpressionFunctions implements PublicStaticHelper {
+public final class ValidatorExpressionFunctions implements PublicStaticHelper {
 
     /**
      * {@see ValidationExpressionFunctionRequiredFormFields}
@@ -39,7 +39,7 @@ public final class ValidationExpressionFunctions implements PublicStaticHelper {
     /**
      * Stop creation
      */
-    private ValidationExpressionFunctions() {
+    private ValidatorExpressionFunctions() {
         throw new UnsupportedOperationException();
     }
 }
