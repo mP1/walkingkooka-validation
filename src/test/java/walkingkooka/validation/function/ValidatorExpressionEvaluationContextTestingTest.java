@@ -18,10 +18,8 @@
 package walkingkooka.validation.function;
 
 import walkingkooka.Either;
-import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContexts;
-import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionFunctionName;
@@ -30,19 +28,15 @@ import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.validation.TestValidationReference;
-import walkingkooka.validation.ValidatorContext;
 import walkingkooka.validation.form.Form;
-import walkingkooka.validation.form.FormField;
 import walkingkooka.validation.function.ValidatorExpressionEvaluationContextTestingTest.TestValidatorExpressionEvaluationContext;
 
 import java.math.MathContext;
 import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Function;
 
 public final class ValidatorExpressionEvaluationContextTestingTest implements ValidatorExpressionEvaluationContextTesting<TestValidationReference, Void, TestValidatorExpressionEvaluationContext> {
@@ -54,11 +48,6 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
     @Override
     public void testEvaluateExpressionUnknownFunctionNameFails() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testUser() {
         throw new UnsupportedOperationException();
     }
 
@@ -204,23 +193,6 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
         }
 
         @Override
-        public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
-            Objects.requireNonNull(name, "name");
-
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Set<EnvironmentValueName<?>> environmentValueNames() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Optional<EmailAddress> user() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
         public String currencySymbol() {
             return DECIMAL_NUMBER_CONTEXT.currencySymbol();
         }
@@ -286,32 +258,6 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
         @Override
         public Form<TestValidationReference> form() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Comparator<TestValidationReference> formFieldReferenceComparator() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public ValidatorContext<TestValidationReference> validatorContext(final TestValidationReference reference) {
-            Objects.requireNonNull(reference, "reference");
-
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Optional<?> loadFieldValue(final TestValidationReference reference) {
-            Objects.requireNonNull(reference, "reference");
-
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Void saveFieldValues(final List<FormField<TestValidationReference>> formFields) {
-            Objects.requireNonNull(formFields, "formFields");
-
             throw new UnsupportedOperationException();
         }
 

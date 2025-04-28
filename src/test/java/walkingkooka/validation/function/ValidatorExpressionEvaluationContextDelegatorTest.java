@@ -17,22 +17,16 @@
 
 package walkingkooka.validation.function;
 
-import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContexts;
-import walkingkooka.net.email.EmailAddress;
 import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.validation.TestValidationReference;
-import walkingkooka.validation.ValidatorContext;
 import walkingkooka.validation.form.Form;
-import walkingkooka.validation.form.FormField;
 import walkingkooka.validation.function.ValidatorExpressionEvaluationContextDelegatorTest.TestValidatorExpressionEvaluationContextDelegator;
 import walkingkooka.validation.function.ValidatorExpressionEvaluationContextTestingTest.TestValidatorExpressionEvaluationContext;
 
 import java.math.MathContext;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
@@ -171,45 +165,7 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
                 }
 
                 @Override
-                public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
-                    Objects.requireNonNull(name, "name");
-
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public Optional<EmailAddress> user() {
-                    return Optional.empty();
-                }
-
-                @Override
                 public Form<TestValidationReference> form() {
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public Comparator<TestValidationReference> formFieldReferenceComparator() {
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public ValidatorContext<TestValidationReference> validatorContext(final TestValidationReference reference) {
-                    Objects.requireNonNull(reference, "reference");
-
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public Optional<?> loadFieldValue(final TestValidationReference reference) {
-                    Objects.requireNonNull(reference, "reference");
-
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public Void saveFieldValues(final List<FormField<TestValidationReference>> formFields) {
-                    Objects.requireNonNull(formFields, "formFields");
-
                     throw new UnsupportedOperationException();
                 }
             };

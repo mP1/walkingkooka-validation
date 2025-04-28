@@ -17,19 +17,12 @@
 
 package walkingkooka.validation.function;
 
-import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.net.email.EmailAddress;
 import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.validation.ValidationReference;
-import walkingkooka.validation.ValidatorContext;
 import walkingkooka.validation.form.Form;
-import walkingkooka.validation.form.FormField;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Function;
 
 public class FakeValidatorExpressionEvaluationContext<R extends ValidationReference, S> extends FakeExpressionEvaluationContext implements ValidatorExpressionEvaluationContext<R, S> {
@@ -45,43 +38,6 @@ public class FakeValidatorExpressionEvaluationContext<R extends ValidationRefere
 
     @Override
     public Form<R> form() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Comparator<R> formFieldReferenceComparator() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public ValidatorContext<R> validatorContext(final R reference) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Optional<?> loadFieldValue(final R reference) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public S saveFieldValues(final List<FormField<R>> formFields) {
-        throw new UnsupportedOperationException();
-    }
-
-    // EnvironmentContext...............................................................................................
-
-    @Override
-    public <T> Optional<T> environmentValue(final EnvironmentValueName<T> environmentValueName) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Set<EnvironmentValueName<?>> environmentValueNames() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Optional<EmailAddress> user() {
         throw new UnsupportedOperationException();
     }
 }

@@ -19,10 +19,10 @@ package walkingkooka.validation.function;
 
 import walkingkooka.tree.expression.ExpressionEvaluationContextTesting;
 import walkingkooka.validation.ValidationReference;
-import walkingkooka.validation.form.FormHandlerContextTesting;
+import walkingkooka.validation.form.HasFormTesting;
 
 public interface ValidatorExpressionEvaluationContextTesting<R extends ValidationReference, S, C extends ValidatorExpressionEvaluationContext<R, S>> extends ExpressionEvaluationContextTesting<C>,
-    FormHandlerContextTesting<C, R, S> {
+    HasFormTesting<R> {
 
     @Override
     default C createCanConvert() {
