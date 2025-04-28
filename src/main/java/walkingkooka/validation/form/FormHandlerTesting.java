@@ -18,8 +18,12 @@
 package walkingkooka.validation.form;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.reflect.ClassTesting;
+import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.ValidationReference;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -95,7 +99,19 @@ public interface FormHandlerTesting<H extends FormHandler<R, S, C>, R extends Va
     default void validateFormAndCheck(final H handler,
                                       final Form<R> form,
                                       final C context,
-                                      final S expected) {
+                                      final ValidationError<R>... expected) {
+        this.validateFormAndCheck(
+            handler,
+            form,
+            context,
+            Lists.of(expected)
+        );
+    }
+
+    default void validateFormAndCheck(final H handler,
+                                      final Form<R> form,
+                                      final C context,
+                                      final List<ValidationError<R>> expected) {
         this.checkEquals(
             expected,
             handler.validateForm(
