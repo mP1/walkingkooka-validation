@@ -27,7 +27,7 @@ import walkingkooka.validation.form.FormHandler;
 /**
  * A collection of ExpressionFunction(s).
  */
-public final class ValidationExpressionFunctionProviders implements PublicStaticHelper {
+public final class ValidatorExpressionFunctionProviders implements PublicStaticHelper {
 
     /**
      * This is the base {@link AbsoluteUrl} for all {@link FormHandler} in this package. The name of each
@@ -40,7 +40,7 @@ public final class ValidationExpressionFunctionProviders implements PublicStatic
     /**
      * Stop creation
      */
-    private ValidationExpressionFunctionProviders() {
+    private ValidatorExpressionFunctionProviders() {
         throw new UnsupportedOperationException();
     }
 }
