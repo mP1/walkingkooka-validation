@@ -85,7 +85,7 @@ public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R
 
     default void loadFieldValueAndCheck(final C context,
                                         final R reference,
-                                        final Optional<?> expected) {
+                                        final Optional<Object> expected) {
         this.checkEquals(
             expected,
             context.loadFieldValue(reference)

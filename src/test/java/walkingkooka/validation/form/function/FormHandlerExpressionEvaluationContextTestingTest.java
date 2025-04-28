@@ -302,7 +302,7 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
-        public Optional<?> loadFieldValue(final TestValidationReference reference) {
+        public Optional<Object> loadFieldValue(final TestValidationReference reference) {
             Objects.requireNonNull(reference, "reference");
 
             throw new UnsupportedOperationException();

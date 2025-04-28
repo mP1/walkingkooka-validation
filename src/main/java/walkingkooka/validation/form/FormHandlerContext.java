@@ -144,7 +144,7 @@ public interface FormHandlerContext<R extends ValidationReference, S> extends Ca
      * <br>
      * In a spreadsheet this would use the reference to return the SpreadsheetCell#inputValue assuming the cell is present.
      */
-    Optional<?> loadFieldValue(final R reference);
+    Optional<Object> loadFieldValue(final R reference);
 
     /**
      * Assumes that the fields have been validated, and saves any {@link FormField#value()} ignoring all other field properties.

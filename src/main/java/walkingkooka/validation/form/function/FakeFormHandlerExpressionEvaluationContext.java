@@ -59,7 +59,7 @@ public class FakeFormHandlerExpressionEvaluationContext<R extends ValidationRefe
     }
 
     @Override
-    public Optional<?> loadFieldValue(final R reference) {
+    public Optional<Object> loadFieldValue(final R reference) {
         throw new UnsupportedOperationException();
     }
 
