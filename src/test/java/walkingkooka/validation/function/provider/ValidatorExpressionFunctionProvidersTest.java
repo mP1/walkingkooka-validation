@@ -22,11 +22,11 @@ import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
 
-public final class ValidationExpressionFunctionProvidersTest implements PublicStaticHelperTesting<ValidationExpressionFunctionProviders> {
+public final class ValidatorExpressionFunctionProvidersTest implements PublicStaticHelperTesting<ValidatorExpressionFunctionProviders> {
 
     @Override
-    public Class<ValidationExpressionFunctionProviders> type() {
-        return ValidationExpressionFunctionProviders.class;
+    public Class<ValidatorExpressionFunctionProviders> type() {
+        return ValidatorExpressionFunctionProviders.class;
     }
 
     @Override
