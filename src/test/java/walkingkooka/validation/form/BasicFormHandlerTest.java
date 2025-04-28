@@ -180,7 +180,8 @@ public final class BasicFormHandlerTest implements FormHandlerTesting<
                     };
                 }
             },
-            ValidationErrorList.empty().concat(
+            ValidationErrorList.<TestValidationReference>empty()
+                .concat(
                     ValidationError.with(
                         field1.reference(),
                         "Error1"
@@ -217,37 +218,20 @@ public final class BasicFormHandlerTest implements FormHandlerTesting<
             )
         );
 
-        final Optional<Object> value1 = Optional.empty();
-        final Optional<Object> value2 = Optional.empty();
-        final Optional<Object> value3 = Optional.of("NewValue3");
-
-        this.prepareFormAndCheck(
+        this.submitFormAndCheck(
             this.createFormHandler(),
             form,
             new FakeFormHandlerContext<>() {
                 @Override
-                public Optional<Object> loadFormFieldValue(final TestValidationReference reference) {
-                    if (field1.reference().equals(reference)) {
-                        return Optional.of(value1);
-                    }
-                    if (field2.reference().equals(reference)) {
-                        return Optional.of(value2);
-                    }
-                    if (field3.reference().equals(reference)) {
-                        return Optional.of(value3);
-                    }
-                    throw new UnsupportedOperationException("Unknown reference " + reference);
+                public BasicFormHandlerTest saveFormFieldValues(final List<FormField<TestValidationReference>> formFields) {
+                    checkEquals(
+                        form.fields(),
+                        formFields
+                    );
+                    return BasicFormHandlerTest.this;
                 }
             },
-            Form.<TestValidationReference>with(
-                FormName.with("Form123")
-            ).setFields(
-                Lists.of(
-                    field1,
-                    field2.setValue(value2),
-                    field3.setValue(value3)
-                )
-            )
+            this
         );
     }
 
