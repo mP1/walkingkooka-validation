@@ -19,11 +19,22 @@ package walkingkooka.validation.form.function;
 
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.tree.expression.function.ExpressionFunction;
+import walkingkooka.validation.ValidationErrorList;
+import walkingkooka.validation.ValidationReference;
+
+import java.util.Set;
 
 /**
  * A collection of {@link ExpressionFunction}.
  */
 public final class FormHandlerExpressionFunctions implements PublicStaticHelper {
+
+    /**
+     * {@see FormHandlerExpressionFunctionRequiredFormFields}
+     */
+    public static <R extends ValidationReference, S, C extends FormHandlerExpressionEvaluationContext<R, S>> ExpressionFunction<ValidationErrorList<R>, C> requiredFormFields(final Set<R> fields) {
+        return FormHandlerExpressionFunctionRequiredFormFields.with(fields);
+    }
 
     /**
      * Stop creation
