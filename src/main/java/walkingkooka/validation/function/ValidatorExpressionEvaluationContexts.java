@@ -28,7 +28,7 @@ public final class ValidatorExpressionEvaluationContexts implements PublicStatic
     /**
      * {@see FakeValidatorExpressionEvaluationContext}
      */
-    public static <R extends ValidationReference, S> ValidatorExpressionEvaluationContext<R, S> fake() {
+    public static <R extends ValidationReference> ValidatorExpressionEvaluationContext<R> fake() {
         return new FakeValidatorExpressionEvaluationContext<>();
     }
 

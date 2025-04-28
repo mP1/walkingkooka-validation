@@ -25,9 +25,9 @@ import walkingkooka.validation.form.HasForm;
 import java.util.Optional;
 import java.util.function.Function;
 
-public interface ValidatorExpressionEvaluationContext<R extends ValidationReference, S> extends ExpressionEvaluationContext,
+public interface ValidatorExpressionEvaluationContext<R extends ValidationReference> extends ExpressionEvaluationContext,
     HasForm<R> {
 
     @Override
-    ValidatorExpressionEvaluationContext<R, S> enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function);
+    ValidatorExpressionEvaluationContext<R> enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function);
 }

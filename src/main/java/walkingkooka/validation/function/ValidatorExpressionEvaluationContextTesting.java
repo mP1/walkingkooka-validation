@@ -21,7 +21,7 @@ import walkingkooka.tree.expression.ExpressionEvaluationContextTesting;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.HasFormTesting;
 
-public interface ValidatorExpressionEvaluationContextTesting<R extends ValidationReference, S, C extends ValidatorExpressionEvaluationContext<R, S>> extends ExpressionEvaluationContextTesting<C>,
+public interface ValidatorExpressionEvaluationContextTesting<R extends ValidationReference, C extends ValidatorExpressionEvaluationContext<R>> extends ExpressionEvaluationContextTesting<C>,
     HasFormTesting<R> {
 
     @Override

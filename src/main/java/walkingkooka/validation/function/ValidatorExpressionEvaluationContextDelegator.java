@@ -21,13 +21,13 @@ import walkingkooka.tree.expression.ExpressionEvaluationContextDelegator;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.Form;
 
-public interface ValidatorExpressionEvaluationContextDelegator<R extends ValidationReference, S> extends ValidatorExpressionEvaluationContext<R, S>,
+public interface ValidatorExpressionEvaluationContextDelegator<R extends ValidationReference> extends ValidatorExpressionEvaluationContext<R>,
     ExpressionEvaluationContextDelegator {
 
     // ExpressionEvaluationContextDelegator.............................................................................
 
     @Override
-    ValidatorExpressionEvaluationContext<R, S> expressionEvaluationContext();
+    ValidatorExpressionEvaluationContext<R> expressionEvaluationContext();
 
     // ValidatorExpressionEvaluationContext.............................................................................
 
