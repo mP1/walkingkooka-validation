@@ -21,9 +21,9 @@ import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.validation.ValidationReference;
 
 /**
- * A collection of {@link ValidationExpressionEvaluationContext}.
+ * A collection of {@link ValidatorExpressionEvaluationContext}.
  */
-public final class ValidationExpressionEvaluationContexts implements PublicStaticHelper {
+public final class ValidatorExpressionEvaluationContexts implements PublicStaticHelper {
 
     /**
      * {@see FakeValidatorExpressionEvaluationContext}
@@ -35,7 +35,7 @@ public final class ValidationExpressionEvaluationContexts implements PublicStati
     /**
      * Stop creation
      */
-    private ValidationExpressionEvaluationContexts() {
+    private ValidatorExpressionEvaluationContexts() {
         throw new UnsupportedOperationException();
     }
 }
