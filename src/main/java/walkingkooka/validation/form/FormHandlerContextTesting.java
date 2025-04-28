@@ -29,17 +29,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R extends ValidationReference, S> extends CanConvertTesting<C>,
-    EnvironmentContextTesting2<C> {
-
-    // form.............................................................................................................
-
-    default void formAndCheck(final FormHandlerContext<R, S> context,
-                              final Form<R> expected) {
-        this.checkEquals(
-            expected,
-            context.form()
-        );
-    }
+    EnvironmentContextTesting2<C>,
+    HasFormTesting<R> {
 
     // validatorContext.................................................................................................
 
