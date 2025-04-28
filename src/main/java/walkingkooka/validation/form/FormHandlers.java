@@ -26,6 +26,13 @@ import walkingkooka.validation.ValidationReference;
 public final class FormHandlers implements PublicStaticHelper {
 
     /**
+     * {@see BasicFormHandler}
+     */
+    public static <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> instance() {
+        return BasicFormHandler.instance();
+    }
+
+    /**
      * {@see FakeFormHandler}
      */
     public static <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> fake() {
