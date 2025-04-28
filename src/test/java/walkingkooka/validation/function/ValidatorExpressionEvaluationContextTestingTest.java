@@ -39,7 +39,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
-public final class ValidatorExpressionEvaluationContextTestingTest implements ValidatorExpressionEvaluationContextTesting<TestValidationReference, Void, TestValidatorExpressionEvaluationContext> {
+public final class ValidatorExpressionEvaluationContextTestingTest implements ValidatorExpressionEvaluationContextTesting<TestValidationReference, TestValidatorExpressionEvaluationContext> {
 
     @Override
     public void testEnterScopeGivesDifferentInstance() {
@@ -98,7 +98,7 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
         return DECIMAL_NUMBER_CONTEXT.positiveSign();
     }
 
-    final static class TestValidatorExpressionEvaluationContext implements ValidatorExpressionEvaluationContext<TestValidationReference, Void> {
+    final static class TestValidatorExpressionEvaluationContext implements ValidatorExpressionEvaluationContext<TestValidationReference> {
 
         @Override
         public TestValidatorExpressionEvaluationContext enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {

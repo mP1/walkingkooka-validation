@@ -31,7 +31,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
-public final class ValidatorExpressionEvaluationContextDelegatorTest implements ValidatorExpressionEvaluationContextTesting<TestValidationReference, Void, TestValidatorExpressionEvaluationContextDelegator> {
+public final class ValidatorExpressionEvaluationContextDelegatorTest implements ValidatorExpressionEvaluationContextTesting<TestValidationReference, TestValidatorExpressionEvaluationContextDelegator> {
 
     @Override
     public TestValidatorExpressionEvaluationContextDelegator createContext() {
@@ -97,10 +97,10 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
         return TestValidatorExpressionEvaluationContextDelegator.class;
     }
 
-    static final class TestValidatorExpressionEvaluationContextDelegator implements ValidatorExpressionEvaluationContextDelegator<TestValidationReference, Void> {
+    static final class TestValidatorExpressionEvaluationContextDelegator implements ValidatorExpressionEvaluationContextDelegator<TestValidationReference> {
 
         @Override
-        public ValidatorExpressionEvaluationContext<TestValidationReference, Void> expressionEvaluationContext() {
+        public ValidatorExpressionEvaluationContext<TestValidationReference> expressionEvaluationContext() {
             return new FakeValidatorExpressionEvaluationContext<>() {
 
                 @Override
@@ -172,7 +172,7 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
         }
 
         @Override
-        public ValidatorExpressionEvaluationContext<TestValidationReference, Void> enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {
+        public ValidatorExpressionEvaluationContext<TestValidationReference> enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {
             Objects.requireNonNull(function, "function");
 
             return new TestValidatorExpressionEvaluationContextDelegator();

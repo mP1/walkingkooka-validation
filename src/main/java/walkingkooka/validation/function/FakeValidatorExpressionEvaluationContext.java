@@ -25,14 +25,14 @@ import walkingkooka.validation.form.Form;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class FakeValidatorExpressionEvaluationContext<R extends ValidationReference, S> extends FakeExpressionEvaluationContext implements ValidatorExpressionEvaluationContext<R, S> {
+public class FakeValidatorExpressionEvaluationContext<R extends ValidationReference> extends FakeExpressionEvaluationContext implements ValidatorExpressionEvaluationContext<R> {
 
     public FakeValidatorExpressionEvaluationContext() {
         super();
     }
 
     @Override
-    public ValidatorExpressionEvaluationContext<R, S> enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> scoped) {
+    public ValidatorExpressionEvaluationContext<R> enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> scoped) {
         throw new UnsupportedOperationException();
     }
 
