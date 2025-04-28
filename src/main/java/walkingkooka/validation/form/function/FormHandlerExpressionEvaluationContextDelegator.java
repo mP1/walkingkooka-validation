@@ -79,7 +79,7 @@ public interface FormHandlerExpressionEvaluationContextDelegator<R extends Valid
     }
 
     @Override
-    default Optional<?> loadFieldValue(final R reference) {
+    default Optional<Object> loadFieldValue(final R reference) {
         return this.expressionEvaluationContext()
             .loadFieldValue(reference);
     }

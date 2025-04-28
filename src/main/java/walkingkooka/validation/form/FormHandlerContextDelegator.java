@@ -51,7 +51,7 @@ public interface FormHandlerContextDelegator<R extends ValidationReference, S> e
     }
 
     @Override
-    default Optional<?> loadFieldValue(final R reference) {
+    default Optional<Object> loadFieldValue(final R reference) {
         return this.formHandlerContext()
             .loadFieldValue(reference);
     }

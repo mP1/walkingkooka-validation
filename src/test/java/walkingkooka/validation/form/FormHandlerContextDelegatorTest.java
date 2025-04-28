@@ -60,7 +60,7 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                 }
 
                 @Override
-                public Optional<?> loadFieldValue(final TestValidationReference reference) {
+                public Optional<Object> loadFieldValue(final TestValidationReference reference) {
                     Objects.requireNonNull(reference, "reference");
 
                     throw new UnsupportedOperationException();
