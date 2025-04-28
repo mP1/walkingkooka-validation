@@ -21,6 +21,7 @@ import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.Url;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.tree.expression.function.ExpressionFunction;
+import walkingkooka.validation.Validator;
 import walkingkooka.validation.form.FormHandler;
 
 /**
@@ -33,7 +34,7 @@ public final class ValidationExpressionFunctionProviders implements PublicStatic
      * form handler will be appended to this base.
      */
     public final static AbsoluteUrl BASE_URL = Url.parseAbsolute(
-        "https://github.com/mP1/walkingkooka-validation/" + ExpressionFunction.class.getSimpleName()
+        "https://github.com/mP1/walkingkooka-validation/" + Validator.class.getSimpleName() + "/" + ExpressionFunction.class.getSimpleName()
     );
 
     /**
