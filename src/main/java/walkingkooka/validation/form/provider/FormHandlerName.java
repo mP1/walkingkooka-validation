@@ -54,21 +54,47 @@ final public class FormHandlerName implements PluginNameLike<FormHandlerName> {
      */
     public final static int MAX_LENGTH = PluginName.MAX_LENGTH;
 
+    // constants........................................................................................................
+
+    final static String BASIC_STRING = "basic";
+
+    public final static FormHandlerName BASIC = registerConstant(BASIC_STRING);
+    
+    private static FormHandlerName registerConstant(final String name) {
+        return new FormHandlerName(
+            PluginName.with(name)
+        );
+    }
+
     /**
      * Factory that creates a {@link FormHandlerName}
      */
     public static FormHandlerName with(final String name) {
         Objects.requireNonNull(name, "name");
 
-        return new FormHandlerName(name);
+        final FormHandlerName formHandlerName;
+
+        switch (name) {
+            case BASIC_STRING:
+                formHandlerName = BASIC;
+                break;
+            default:
+                formHandlerName = new FormHandlerName(
+                    PluginName.with(name)
+                        .checkLength("FormHandler")
+                );
+                break;
+        }
+
+        return formHandlerName;
     }
 
     /**
      * Private constructor
      */
-    private FormHandlerName(final String name) {
+    private FormHandlerName(final PluginName name) {
         super();
-        this.name = PluginName.with(name);
+        this.name = name;
     }
 
     @Override
