@@ -28,7 +28,7 @@ public final class FormHandlers implements PublicStaticHelper {
     /**
      * {@see BasicFormHandler}
      */
-    public static <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> instance() {
+    public static <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> basic() {
         return BasicFormHandler.instance();
     }
 
