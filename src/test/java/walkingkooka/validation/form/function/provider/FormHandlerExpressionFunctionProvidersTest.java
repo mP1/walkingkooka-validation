@@ -17,12 +17,34 @@
 
 package walkingkooka.validation.form.function.provider;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
+import walkingkooka.text.CaseSensitivity;
 
 import java.lang.reflect.Method;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public final class FormHandlerExpressionFunctionProvidersTest implements PublicStaticHelperTesting<FormHandlerExpressionFunctionProviders> {
+
+    // expressionFunctionProvider.......................................................................................
+
+    @Test
+    public void testExpressionFunctionInfos() {
+        final IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> FormHandlerExpressionFunctionProviders.expressionFunctionProvider(CaseSensitivity.INSENSITIVE)
+                .expressionFunctionInfos()
+        );
+
+        this.checkEquals(
+            "Functions cannot be empty",
+            thrown.getMessage()
+        );
+    }
+
+    // class............................................................................................................
 
     @Override
     public Class<FormHandlerExpressionFunctionProviders> type() {
