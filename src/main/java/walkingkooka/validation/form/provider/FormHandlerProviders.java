@@ -87,6 +87,13 @@ public final class FormHandlerProviders implements PublicStaticHelper {
     }
 
     /**
+     * {@see ValidationFormHandlerProvider}
+     */
+    public static FormHandlerProvider validation() {
+        return ValidationFormHandlerProvider.INSTANCE;
+    }
+
+    /**
      * Stop creation
      */
     private FormHandlerProviders() {
