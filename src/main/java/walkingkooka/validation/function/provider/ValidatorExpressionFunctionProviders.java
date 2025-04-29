@@ -17,10 +17,14 @@
 
 package walkingkooka.validation.function.provider;
 
+import walkingkooka.collect.set.Sets;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.Url;
 import walkingkooka.reflect.PublicStaticHelper;
+import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.expression.function.ExpressionFunction;
+import walkingkooka.tree.expression.function.provider.ExpressionFunctionProvider;
+import walkingkooka.tree.expression.function.provider.ExpressionFunctionProviders;
 import walkingkooka.validation.Validator;
 
 /**
@@ -36,6 +40,17 @@ public final class ValidatorExpressionFunctionProviders implements PublicStaticH
     public final static AbsoluteUrl BASE_URL = Url.parseAbsolute(
         "https://github.com/mP1/walkingkooka-validation/" + Validator.class.getSimpleName() + "/" + ExpressionFunction.class.getSimpleName()
     );
+
+    /**
+     * An {@link ExpressionFunctionProvider} with all the functions in this project.
+     */
+    public static ExpressionFunctionProvider expressionFunctionProvider(final CaseSensitivity nameCaseSensitivity) {
+        return ExpressionFunctionProviders.basic(
+            BASE_URL,
+            nameCaseSensitivity,
+            Sets.empty()
+        );
+    }
 
     /**
      * Stop creation

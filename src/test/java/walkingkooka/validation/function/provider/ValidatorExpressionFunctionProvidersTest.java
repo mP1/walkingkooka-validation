@@ -17,12 +17,34 @@
 
 package walkingkooka.validation.function.provider;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
+import walkingkooka.text.CaseSensitivity;
 
 import java.lang.reflect.Method;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public final class ValidatorExpressionFunctionProvidersTest implements PublicStaticHelperTesting<ValidatorExpressionFunctionProviders> {
+
+    // expressionFunctionProvider.......................................................................................
+
+    @Test
+    public void testExpressionFunctionInfos() {
+        final IllegalArgumentException thrown = assertThrows(
+            IllegalArgumentException.class,
+            () -> ValidatorExpressionFunctionProviders.expressionFunctionProvider(CaseSensitivity.INSENSITIVE)
+                .expressionFunctionInfos()
+        );
+
+        this.checkEquals(
+            "Functions cannot be empty",
+            thrown.getMessage()
+        );
+    }
+
+    // class............................................................................................................
 
     @Override
     public Class<ValidatorExpressionFunctionProviders> type() {
