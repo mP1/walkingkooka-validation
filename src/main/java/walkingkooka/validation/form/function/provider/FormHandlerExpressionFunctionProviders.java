@@ -25,7 +25,9 @@ import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.provider.ExpressionFunctionProvider;
 import walkingkooka.tree.expression.function.provider.ExpressionFunctionProviders;
+import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.FormHandler;
+import walkingkooka.validation.form.function.FormHandlerExpressionEvaluationContext;
 
 /**
  * A collection of ExpressionFunction(s) that execute with a {@link walkingkooka.validation.form.function.FormHandlerExpressionEvaluationContext}.
@@ -43,7 +45,7 @@ public final class FormHandlerExpressionFunctionProviders implements PublicStati
     /**
      * An {@link ExpressionFunctionProvider} with all the functions in this project.
      */
-    public static ExpressionFunctionProvider expressionFunctionProvider(final CaseSensitivity nameCaseSensitivity) {
+    public static <R extends ValidationReference, S, C extends FormHandlerExpressionEvaluationContext<R, S>> ExpressionFunctionProvider<C> expressionFunctionProvider(final CaseSensitivity nameCaseSensitivity) {
         return ExpressionFunctionProviders.basic(
             BASE_URL,
             nameCaseSensitivity,
