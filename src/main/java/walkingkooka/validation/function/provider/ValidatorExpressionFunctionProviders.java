@@ -25,7 +25,9 @@ import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.provider.ExpressionFunctionProvider;
 import walkingkooka.tree.expression.function.provider.ExpressionFunctionProviders;
+import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.Validator;
+import walkingkooka.validation.function.ValidatorExpressionEvaluationContext;
 
 /**
  * A collection of ExpressionFunction(s) that validate a {@link walkingkooka.validation.form.FormField} with a
@@ -44,7 +46,7 @@ public final class ValidatorExpressionFunctionProviders implements PublicStaticH
     /**
      * An {@link ExpressionFunctionProvider} with all the functions in this project.
      */
-    public static ExpressionFunctionProvider expressionFunctionProvider(final CaseSensitivity nameCaseSensitivity) {
+    public static <R extends ValidationReference, C extends ValidatorExpressionEvaluationContext<R>> ExpressionFunctionProvider<C> expressionFunctionProvider(final CaseSensitivity nameCaseSensitivity) {
         return ExpressionFunctionProviders.basic(
             BASE_URL,
             nameCaseSensitivity,
