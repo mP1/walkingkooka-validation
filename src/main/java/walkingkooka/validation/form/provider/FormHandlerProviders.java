@@ -47,6 +47,13 @@ public final class FormHandlerProviders implements PublicStaticHelper {
     }
 
     /**
+     * {@see EmptyFormHandlerProvider}
+     */
+    public static FormHandlerProvider empty() {
+        return EmptyFormHandlerProvider.INSTANCE;
+    }
+
+    /**
      * {@see FakeFormHandlerProvider}
      */
     public static FormHandlerProvider fake() {
