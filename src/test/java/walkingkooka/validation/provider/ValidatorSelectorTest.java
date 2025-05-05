@@ -149,7 +149,7 @@ public final class ValidatorSelectorTest implements PluginSelectorLikeTesting<Va
     public void testEvaluateValueTextOpenParensFail() {
         this.evaluateValueTextFails(
             NAME + "(",
-            "Invalid character '(' at 24 in \"super-magic-validator123(\""
+            "Invalid character '(' at 24"
         );
     }
 
@@ -210,7 +210,7 @@ public final class ValidatorSelectorTest implements PluginSelectorLikeTesting<Va
 
         this.evaluateValueTextFails(
             NAME + "(1",
-            "Invalid character '1' at 25 in \"super-magic-validator123(1\""
+            "Invalid character '1' at 25"
         );
     }
 
