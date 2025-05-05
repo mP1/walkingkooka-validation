@@ -149,7 +149,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
     public void testEvaluateValueTextOpenParensFail() {
         this.evaluateValueTextFails(
             NAME + "(",
-            "Invalid character '(' at 26 in \"super-magic-formHandler123(\""
+            "Invalid character '(' at 26"
         );
     }
 
@@ -210,7 +210,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
 
         this.evaluateValueTextFails(
             NAME + "(1",
-            "Invalid character '1' at 27 in \"super-magic-formHandler123(1\""
+            "Invalid character '1' at 27"
         );
     }
 
