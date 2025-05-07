@@ -56,7 +56,7 @@ final class FormHandlerExpressionFunctionRequiredFormFields<R extends Validation
 
     @Override
     public List<ExpressionFunctionParameter<?>> parameters(final int count) {
-        return List.of(this.form);
+        return Lists.of(this.form);
     }
 
     @Override
