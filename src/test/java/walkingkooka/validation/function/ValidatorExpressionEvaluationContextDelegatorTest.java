@@ -17,6 +17,7 @@
 
 package walkingkooka.validation.function;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.tree.expression.ExpressionFunctionName;
@@ -32,6 +33,16 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public final class ValidatorExpressionEvaluationContextDelegatorTest implements ValidatorExpressionEvaluationContextTesting<TestValidationReference, TestValidatorExpressionEvaluationContextDelegator> {
+
+    private final static Optional<Object> VALIDATION_VALUE = Optional.of("ValidationValue123");
+
+    @Test
+    public void testValidationValue() {
+        this.validationValueAndCheck(
+            this.createContext(),
+            VALIDATION_VALUE
+        );
+    }
 
     @Override
     public TestValidatorExpressionEvaluationContextDelegator createContext() {
@@ -102,6 +113,11 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
         @Override
         public ValidatorExpressionEvaluationContext<TestValidationReference> expressionEvaluationContext() {
             return new FakeValidatorExpressionEvaluationContext<>() {
+
+                @Override
+                public Optional<Object> validationValue() {
+                    return VALIDATION_VALUE;
+                }
 
                 @Override
                 public TestValidatorExpressionEvaluationContext enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {

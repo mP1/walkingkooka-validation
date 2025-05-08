@@ -108,6 +108,11 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
         }
 
         @Override
+        public Optional<Object> validationValue() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public Object handleException(final RuntimeException exception) {
             throw new UnsupportedOperationException();
         }

@@ -21,6 +21,8 @@ import walkingkooka.tree.expression.ExpressionEvaluationContextDelegator;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.Form;
 
+import java.util.Optional;
+
 public interface ValidatorExpressionEvaluationContextDelegator<R extends ValidationReference> extends ValidatorExpressionEvaluationContext<R>,
     ExpressionEvaluationContextDelegator {
 
@@ -30,6 +32,12 @@ public interface ValidatorExpressionEvaluationContextDelegator<R extends Validat
     ValidatorExpressionEvaluationContext<R> expressionEvaluationContext();
 
     // ValidatorExpressionEvaluationContext.............................................................................
+
+    @Override
+    default Optional<Object> validationValue() {
+        return this.expressionEvaluationContext()
+            .validationValue();
+    }
 
     @Override
     default Form<R> form() {

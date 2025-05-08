@@ -21,8 +21,35 @@ import walkingkooka.tree.expression.ExpressionEvaluationContextTesting;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.HasFormTesting;
 
+import java.util.Optional;
+
 public interface ValidatorExpressionEvaluationContextTesting<R extends ValidationReference, C extends ValidatorExpressionEvaluationContext<R>> extends ExpressionEvaluationContextTesting<C>,
     HasFormTesting<R> {
+
+    default void validationValueAndCheck(final ValidatorExpressionEvaluationContext<R> context) {
+        this.validationValueAndCheck(
+            context,
+            Optional.empty()
+        );
+    }
+
+    default void validationValueAndCheck(final ValidatorExpressionEvaluationContext<R> context,
+                                         final Object expected) {
+        this.validationValueAndCheck(
+            context,
+            Optional.of(expected)
+        );
+    }
+
+    default void validationValueAndCheck(final ValidatorExpressionEvaluationContext<R> context,
+                                         final Optional<Object> expected) {
+        this.checkEquals(
+            expected,
+            context.validationValue()
+        );
+    }
+
+    // ExpressionEvaluationContextTesting...............................................................................
 
     @Override
     default C createCanConvert() {
