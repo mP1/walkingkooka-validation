@@ -34,11 +34,16 @@ public final class ValidatorExpressionFunctionProvidersTest implements PublicSta
 
     @Test
     public void testExpressionFunctionValidationValue() {
+        final CaseSensitivity caseSensitivity = CaseSensitivity.SENSITIVE;
+
         this.checkEquals(
             ValidatorExpressionFunctions.validationValue(),
-            ValidatorExpressionFunctionProviders.expressionFunctionProvider(CaseSensitivity.SENSITIVE)
+            ValidatorExpressionFunctionProviders.expressionFunctionProvider(caseSensitivity)
                 .expressionFunction(
-                    ExpressionFunctionSelector.parse("validationValue"),
+                    ExpressionFunctionSelector.parse(
+                        "validationValue",
+                        caseSensitivity
+                    ),
                     ProviderContexts.fake()
                 )
         );
