@@ -34,6 +34,16 @@ public final class TestValidationReference implements ValidationReference {
     }
 
     @Override
+    public ValidationError<? extends ValidationReference> setValidationErrorMessage(final String message) {
+        return ValidationError.with(
+            this,
+            message
+        );
+    }
+
+    // HasText..........................................................................................................
+
+    @Override
     public String text() {
         return this.field;
     }

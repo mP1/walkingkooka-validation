@@ -23,4 +23,9 @@ import walkingkooka.text.HasText;
  * Tag for an identifier that names a field that can be validated.
  */
 public interface ValidationReference extends HasText {
+
+    /**
+     * Creates a {@link ValidationError} with this reference and the given message.
+     */
+    ValidationError<? extends ValidationReference> setValidationErrorMessage(final String message);
 }
