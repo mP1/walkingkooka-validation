@@ -18,29 +18,40 @@
 package walkingkooka.validation.function.provider;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.plugin.ProviderContexts;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 import walkingkooka.text.CaseSensitivity;
+import walkingkooka.tree.expression.function.provider.ExpressionFunctionInfoSet;
+import walkingkooka.tree.expression.function.provider.ExpressionFunctionSelector;
+import walkingkooka.validation.function.ValidatorExpressionFunctions;
 
 import java.lang.reflect.Method;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ValidatorExpressionFunctionProvidersTest implements PublicStaticHelperTesting<ValidatorExpressionFunctionProviders> {
 
     // expressionFunctionProvider.......................................................................................
 
     @Test
-    public void testExpressionFunctionInfos() {
-        final IllegalArgumentException thrown = assertThrows(
-            IllegalArgumentException.class,
-            () -> ValidatorExpressionFunctionProviders.expressionFunctionProvider(CaseSensitivity.INSENSITIVE)
-                .expressionFunctionInfos()
-        );
-
+    public void testExpressionFunctionValidationValue() {
         this.checkEquals(
-            "Functions cannot be empty",
-            thrown.getMessage()
+            ValidatorExpressionFunctions.validationValue(),
+            ValidatorExpressionFunctionProviders.expressionFunctionProvider(CaseSensitivity.SENSITIVE)
+                .expressionFunction(
+                    ExpressionFunctionSelector.parse("validationValue"),
+                    ProviderContexts.fake()
+                )
+        );
+    }
+
+    @Test
+    public void testExpressionFunctionInfos() {
+        // https://github.com/mP1/walkingkooka-tree-expression-function-provider/issues/181
+        // ExpressionFunctionInfoSet.parse creates functions with SENSITIVE
+        this.checkEquals(
+            ExpressionFunctionInfoSet.parse("https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/validationValue validationValue"),
+            ValidatorExpressionFunctionProviders.expressionFunctionProvider(CaseSensitivity.SENSITIVE)
+                .expressionFunctionInfos()
         );
     }
 
