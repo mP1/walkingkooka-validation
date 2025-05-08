@@ -256,12 +256,7 @@ public final class ValidationErrorTest implements HasTextTesting,
     public void testEqualsDifferentReference() {
         this.checkNotEquals(
             ValidationError.with(
-                new ValidationReference() {
-                    @Override
-                    public String text() {
-                        return "different";
-                    }
-                },
+                new TestValidationReference("different"),
                 MESSAGE
             )
         );
