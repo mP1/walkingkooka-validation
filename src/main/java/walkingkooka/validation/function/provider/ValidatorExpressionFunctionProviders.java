@@ -28,6 +28,7 @@ import walkingkooka.tree.expression.function.provider.ExpressionFunctionProvider
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.Validator;
 import walkingkooka.validation.function.ValidatorExpressionEvaluationContext;
+import walkingkooka.validation.function.ValidatorExpressionFunctions;
 
 /**
  * A collection of ExpressionFunction(s) that validate a {@link walkingkooka.validation.form.FormField} with a
@@ -50,7 +51,9 @@ public final class ValidatorExpressionFunctionProviders implements PublicStaticH
         return ExpressionFunctionProviders.basic(
             BASE_URL,
             nameCaseSensitivity,
-            Sets.empty()
+            Sets.of(
+                ValidatorExpressionFunctions.validationValue()
+            )
         );
     }
 

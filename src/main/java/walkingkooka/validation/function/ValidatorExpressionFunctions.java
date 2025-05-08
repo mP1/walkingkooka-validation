@@ -19,11 +19,19 @@ package walkingkooka.validation.function;
 
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.tree.expression.function.ExpressionFunction;
+import walkingkooka.validation.ValidationReference;
 
 /**
  * A collection of {@link ExpressionFunction}.
  */
 public final class ValidatorExpressionFunctions implements PublicStaticHelper {
+
+    /**
+     * {@see ValidationExpressionFunctionValidationValue}
+     */
+    public static <R extends ValidationReference, C extends ValidatorExpressionEvaluationContext<R>> ExpressionFunction<Object, C> validationValue() {
+        return ValidationExpressionFunctionValidationValue.instance();
+    }
 
     /**
      * Stop creation
