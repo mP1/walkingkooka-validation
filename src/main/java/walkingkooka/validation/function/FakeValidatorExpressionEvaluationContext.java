@@ -32,6 +32,11 @@ public class FakeValidatorExpressionEvaluationContext<R extends ValidationRefere
     }
 
     @Override
+    public Optional<Object> validationValue() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public ValidatorExpressionEvaluationContext<R> enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> scoped) {
         throw new UnsupportedOperationException();
     }

@@ -28,6 +28,11 @@ import java.util.function.Function;
 public interface ValidatorExpressionEvaluationContext<R extends ValidationReference> extends ExpressionEvaluationContext,
     HasForm<R> {
 
+    /**
+     * Getter that returns the value being validated.
+     */
+    Optional<Object> validationValue();
+
     @Override
     ValidatorExpressionEvaluationContext<R> enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function);
 }
