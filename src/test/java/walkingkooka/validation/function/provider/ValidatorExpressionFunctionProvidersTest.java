@@ -68,14 +68,14 @@ public final class ValidatorExpressionFunctionProvidersTest implements PublicSta
 
     @Test
     public void testExpressionFunctionInfos() {
-        // https://github.com/mP1/walkingkooka-tree-expression-function-provider/issues/181
-        // ExpressionFunctionInfoSet.parse creates functions with SENSITIVE
+        final CaseSensitivity caseSensitivity = CaseSensitivity.SENSITIVE;
         this.checkEquals(
             ExpressionFunctionInfoSet.parse(
                 "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/validationErrorIf validationErrorIf," +
-                "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/validationValue validationValue"
+                    "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/validationValue validationValue",
+                caseSensitivity
             ),
-            ValidatorExpressionFunctionProviders.expressionFunctionProvider(CaseSensitivity.SENSITIVE)
+            ValidatorExpressionFunctionProviders.expressionFunctionProvider(caseSensitivity)
                 .expressionFunctionInfos()
         );
     }
