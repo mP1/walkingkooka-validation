@@ -84,6 +84,11 @@ public final class ValidationErrorList<T extends ValidationReference> extends Ab
     }
 
     @Override
+    public void elementCheck(final ValidationError error) {
+        Objects.requireNonNull(error, "error");
+    }
+
+    @Override
     public ValidationErrorList<T> setElements(final List<ValidationError<T>> list) {
         final ValidationErrorList<T> copy = with(list);
         return this.equals(copy) ?

@@ -86,6 +86,11 @@ public final class FormFieldList<T extends ValidationReference> extends Abstract
     }
 
     @Override
+    public void elementCheck(final FormField<T> field) {
+        Objects.requireNonNull(field, "field");
+    }
+
+    @Override
     public FormFieldList<T> setElements(final List<FormField<T>> list) {
         final FormFieldList<T> copy = with(list);
         return this.equals(copy) ?
