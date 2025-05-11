@@ -32,6 +32,7 @@ import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.SortedSet;
 
@@ -234,6 +235,11 @@ public final class FormHandlerAliasSet extends AbstractSet<FormHandlerAlias>
     @Override
     public FormHandlerAlias last() {
         return this.pluginAliasSet.last();
+    }
+
+    @Override
+    public void elementCheck(final FormHandlerAlias alias) {
+        Objects.requireNonNull(alias, "alias");
     }
 
     @Override
