@@ -19,6 +19,7 @@ package walkingkooka.validation.form.function;
 
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.math.DecimalNumberContext;
+import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.tree.expression.ExpressionFunctionName;
@@ -37,33 +38,12 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
-public final class FormHandlerExpressionEvaluationContextDelegatorTest implements FormHandlerExpressionEvaluationContextTesting<TestValidationReference, Void, TestFormHandlerExpressionEvaluationContextDelegator> {
+public final class FormHandlerExpressionEvaluationContextDelegatorTest implements FormHandlerExpressionEvaluationContextTesting<TestValidationReference, Void, TestFormHandlerExpressionEvaluationContextDelegator>,
+    DecimalNumberContextDelegator {
 
     @Override
     public TestFormHandlerExpressionEvaluationContextDelegator createContext() {
         return new TestFormHandlerExpressionEvaluationContextDelegator();
-    }
-
-    private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
-
-    @Override
-    public String currencySymbol() {
-        return DECIMAL_NUMBER_CONTEXT.currencySymbol();
-    }
-
-    @Override
-    public char decimalSeparator() {
-        return DECIMAL_NUMBER_CONTEXT.decimalSeparator();
-    }
-
-    @Override
-    public String exponentSymbol() {
-        return DECIMAL_NUMBER_CONTEXT.exponentSymbol();
-    }
-
-    @Override
-    public char groupSeparator() {
-        return DECIMAL_NUMBER_CONTEXT.groupSeparator();
     }
 
     @Override
@@ -71,20 +51,14 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
         return DECIMAL_NUMBER_CONTEXT.mathContext();
     }
 
-    @Override
-    public char negativeSign() {
-        return DECIMAL_NUMBER_CONTEXT.negativeSign();
-    }
+    // DecimalNumberContextDelegator....................................................................................
 
     @Override
-    public char percentSymbol() {
-        return DECIMAL_NUMBER_CONTEXT.percentSymbol();
+    public DecimalNumberContext decimalNumberContext() {
+        return DECIMAL_NUMBER_CONTEXT;
     }
 
-    @Override
-    public char positiveSign() {
-        return DECIMAL_NUMBER_CONTEXT.positiveSign();
-    }
+    private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
     // class............................................................................................................
 
@@ -137,8 +111,23 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
                 }
 
                 @Override
+                public String infinitySymbol() {
+                    return DECIMAL_NUMBER_CONTEXT.infinitySymbol();
+                }
+
+                @Override
                 public MathContext mathContext() {
                     return DECIMAL_NUMBER_CONTEXT.mathContext();
+                }
+
+                @Override
+                public char monetaryDecimalSeparator() {
+                    return DECIMAL_NUMBER_CONTEXT.monetaryDecimalSeparator();
+                }
+
+                @Override
+                public String nanSymbol() {
+                    return DECIMAL_NUMBER_CONTEXT.nanSymbol();
                 }
 
                 @Override
@@ -152,8 +141,18 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
                 }
 
                 @Override
+                public char permillSymbol() {
+                    return DECIMAL_NUMBER_CONTEXT.permillSymbol();
+                }
+
+                @Override
                 public char positiveSign() {
                     return DECIMAL_NUMBER_CONTEXT.positiveSign();
+                }
+
+                @Override
+                public char zeroDigit() {
+                    return DECIMAL_NUMBER_CONTEXT.zeroDigit();
                 }
 
                 @Override
