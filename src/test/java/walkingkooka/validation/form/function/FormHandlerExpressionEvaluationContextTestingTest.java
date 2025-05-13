@@ -20,6 +20,7 @@ package walkingkooka.validation.form.function;
 import walkingkooka.Either;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.math.DecimalNumberContext;
+import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.CaseSensitivity;
@@ -45,7 +46,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
-public final class FormHandlerExpressionEvaluationContextTestingTest implements FormHandlerExpressionEvaluationContextTesting<TestValidationReference, Void, TestFormHandlerExpressionEvaluationContext> {
+public final class FormHandlerExpressionEvaluationContextTestingTest implements FormHandlerExpressionEvaluationContextTesting<TestValidationReference, Void, TestFormHandlerExpressionEvaluationContext>,
+    DecimalNumberContextDelegator {
 
     @Override
     public void testEnterScopeGivesDifferentInstance() {
@@ -67,49 +69,24 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         return new TestFormHandlerExpressionEvaluationContext();
     }
 
-    private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
-
-    @Override
-    public String currencySymbol() {
-        return DECIMAL_NUMBER_CONTEXT.currencySymbol();
-    }
-
-    @Override
-    public char decimalSeparator() {
-        return DECIMAL_NUMBER_CONTEXT.decimalSeparator();
-    }
-
-    @Override
-    public String exponentSymbol() {
-        return DECIMAL_NUMBER_CONTEXT.exponentSymbol();
-    }
-
-    @Override
-    public char groupSeparator() {
-        return DECIMAL_NUMBER_CONTEXT.groupSeparator();
-    }
+    // DecimalNumberContext..............................................................................................
 
     @Override
     public MathContext mathContext() {
         return DECIMAL_NUMBER_CONTEXT.mathContext();
     }
 
-    @Override
-    public char negativeSign() {
-        return DECIMAL_NUMBER_CONTEXT.negativeSign();
-    }
+    // DecimalNumberContextDelegator....................................................................................
 
     @Override
-    public char percentSymbol() {
-        return DECIMAL_NUMBER_CONTEXT.percentSymbol();
+    public DecimalNumberContext decimalNumberContext() {
+        return DECIMAL_NUMBER_CONTEXT;
     }
 
-    @Override
-    public char positiveSign() {
-        return DECIMAL_NUMBER_CONTEXT.positiveSign();
-    }
+    private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
-    final static class TestFormHandlerExpressionEvaluationContext implements FormHandlerExpressionEvaluationContext<TestValidationReference, Void> {
+    final static class TestFormHandlerExpressionEvaluationContext implements FormHandlerExpressionEvaluationContext<TestValidationReference, Void>,
+        DecimalNumberContextDelegator{
 
         @Override
         public TestFormHandlerExpressionEvaluationContext enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {
@@ -221,48 +198,18 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
-        public String currencySymbol() {
-            return DECIMAL_NUMBER_CONTEXT.currencySymbol();
-        }
-
-        @Override
-        public char decimalSeparator() {
-            return DECIMAL_NUMBER_CONTEXT.decimalSeparator();
-        }
-
-        @Override
-        public String exponentSymbol() {
-            return DECIMAL_NUMBER_CONTEXT.exponentSymbol();
-        }
-
-        @Override
-        public char groupSeparator() {
-            return DECIMAL_NUMBER_CONTEXT.groupSeparator();
-        }
-
-        @Override
-        public MathContext mathContext() {
-            return DECIMAL_NUMBER_CONTEXT.mathContext();
-        }
-
-        @Override
-        public char negativeSign() {
-            return DECIMAL_NUMBER_CONTEXT.negativeSign();
-        }
-
-        @Override
-        public char percentSymbol() {
-            return DECIMAL_NUMBER_CONTEXT.percentSymbol();
-        }
-
-        @Override
-        public char positiveSign() {
-            return DECIMAL_NUMBER_CONTEXT.positiveSign();
+        public DecimalNumberContext decimalNumberContext() {
+            return DECIMAL_NUMBER_CONTEXT;
         }
 
         @Override
         public Locale locale() {
             throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public MathContext mathContext() {
+            return DECIMAL_NUMBER_CONTEXT.mathContext();
         }
 
         @Override

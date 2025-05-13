@@ -19,6 +19,7 @@ package walkingkooka.validation.function;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.math.DecimalNumberContext;
+import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionReference;
@@ -32,7 +33,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
-public final class ValidatorExpressionEvaluationContextDelegatorTest implements ValidatorExpressionEvaluationContextTesting<TestValidationReference, TestValidatorExpressionEvaluationContextDelegator> {
+public final class ValidatorExpressionEvaluationContextDelegatorTest implements ValidatorExpressionEvaluationContextTesting<TestValidationReference, TestValidatorExpressionEvaluationContextDelegator>,
+    DecimalNumberContextDelegator {
 
     private final static Optional<Object> VALIDATION_VALUE = Optional.of("ValidationValue123");
 
@@ -49,47 +51,19 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
         return new TestValidatorExpressionEvaluationContextDelegator();
     }
 
-    private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
-
-    @Override
-    public String currencySymbol() {
-        return DECIMAL_NUMBER_CONTEXT.currencySymbol();
-    }
-
-    @Override
-    public char decimalSeparator() {
-        return DECIMAL_NUMBER_CONTEXT.decimalSeparator();
-    }
-
-    @Override
-    public String exponentSymbol() {
-        return DECIMAL_NUMBER_CONTEXT.exponentSymbol();
-    }
-
-    @Override
-    public char groupSeparator() {
-        return DECIMAL_NUMBER_CONTEXT.groupSeparator();
-    }
-
     @Override
     public MathContext mathContext() {
         return DECIMAL_NUMBER_CONTEXT.mathContext();
     }
 
-    @Override
-    public char negativeSign() {
-        return DECIMAL_NUMBER_CONTEXT.negativeSign();
-    }
+    // DecimalNumberContextDelegator....................................................................................
 
     @Override
-    public char percentSymbol() {
-        return DECIMAL_NUMBER_CONTEXT.percentSymbol();
+    public DecimalNumberContext decimalNumberContext() {
+        return DECIMAL_NUMBER_CONTEXT;
     }
 
-    @Override
-    public char positiveSign() {
-        return DECIMAL_NUMBER_CONTEXT.positiveSign();
-    }
+    private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
     // class............................................................................................................
 
@@ -147,8 +121,23 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
                 }
 
                 @Override
+                public String infinitySymbol() {
+                    return DECIMAL_NUMBER_CONTEXT.infinitySymbol();
+                }
+
+                @Override
                 public MathContext mathContext() {
                     return DECIMAL_NUMBER_CONTEXT.mathContext();
+                }
+
+                @Override
+                public char monetaryDecimalSeparator() {
+                    return DECIMAL_NUMBER_CONTEXT.monetaryDecimalSeparator();
+                }
+
+                @Override
+                public String nanSymbol() {
+                    return DECIMAL_NUMBER_CONTEXT.nanSymbol();
                 }
 
                 @Override
@@ -159,6 +148,11 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
                 @Override
                 public char percentSymbol() {
                     return DECIMAL_NUMBER_CONTEXT.percentSymbol();
+                }
+
+                @Override
+                public char permillSymbol() {
+                    return DECIMAL_NUMBER_CONTEXT.permillSymbol();
                 }
 
                 @Override
