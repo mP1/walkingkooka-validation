@@ -18,7 +18,8 @@
 package walkingkooka.validation.form.function;
 
 import walkingkooka.Either;
-import walkingkooka.datetime.DateTimeSymbols;
+import walkingkooka.datetime.DateTimeContext;
+import walkingkooka.datetime.DateTimeContextDelegator;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
@@ -38,7 +39,6 @@ import walkingkooka.validation.form.FormField;
 import walkingkooka.validation.form.function.FormHandlerExpressionEvaluationContextTestingTest.TestFormHandlerExpressionEvaluationContext;
 
 import java.math.MathContext;
-import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
@@ -87,7 +87,8 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
     private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
     final static class TestFormHandlerExpressionEvaluationContext implements FormHandlerExpressionEvaluationContext<TestValidationReference, Void>,
-        DecimalNumberContextDelegator{
+        DateTimeContextDelegator,
+        DecimalNumberContextDelegator {
 
         @Override
         public TestFormHandlerExpressionEvaluationContext enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {
@@ -142,47 +143,7 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
-        public List<String> ampms() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public List<String> monthNames() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public List<String> monthNameAbbreviations() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public List<String> weekDayNames() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public List<String> weekDayNameAbbreviations() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public LocalDateTime now() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public int defaultYear() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public int twoDigitYear() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public DateTimeSymbols dateTimeSymbols() {
+        public DateTimeContext dateTimeContext() {
             throw new UnsupportedOperationException();
         }
 
