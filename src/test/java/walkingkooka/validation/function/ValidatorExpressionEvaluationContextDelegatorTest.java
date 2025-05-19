@@ -161,6 +161,11 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
                 }
 
                 @Override
+                public char zeroDigit() {
+                    return DECIMAL_NUMBER_CONTEXT.zeroDigit();
+                }
+
+                @Override
                 public boolean isPure(final ExpressionFunctionName name) {
                     Objects.requireNonNull(name, "name");
 
