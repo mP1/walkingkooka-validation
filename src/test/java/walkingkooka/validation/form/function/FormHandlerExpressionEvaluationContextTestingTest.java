@@ -18,6 +18,7 @@
 package walkingkooka.validation.form.function;
 
 import walkingkooka.Either;
+import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
@@ -177,6 +178,11 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
 
         @Override
         public int twoDigitYear() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public DateTimeSymbols dateTimeSymbols() {
             throw new UnsupportedOperationException();
         }
 

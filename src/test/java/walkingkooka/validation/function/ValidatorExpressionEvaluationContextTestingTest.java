@@ -18,6 +18,7 @@
 package walkingkooka.validation.function;
 
 import walkingkooka.Either;
+import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.math.DecimalNumberContexts;
@@ -171,6 +172,11 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
         @Override
         public int twoDigitYear() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public DateTimeSymbols dateTimeSymbols() {
             throw new UnsupportedOperationException();
         }
 
