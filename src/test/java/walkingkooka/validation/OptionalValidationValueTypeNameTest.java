@@ -140,6 +140,18 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
     }
 
     @Test
+    public void testJsonMarshallNotEmpty() {
+        this.marshallAndCheck(
+            OptionalValidationValueTypeName.with(
+                Optional.of(
+                    ValidationValueTypeName.DATE
+                )
+            ),
+                "\"date\""
+        );
+    }
+
+    @Test
     public void testJsonRoundtripEmpty() {
         this.marshallRoundTripTwiceAndCheck(
             OptionalValidationValueTypeName.EMPTY
