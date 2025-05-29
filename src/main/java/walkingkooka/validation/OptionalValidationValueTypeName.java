@@ -87,26 +87,25 @@ public final class OptionalValidationValueTypeName implements Value<Optional<Val
     // json.............................................................................................................
 
     static OptionalValidationValueTypeName unmarshall(final JsonNode node,
-                                       final JsonNodeUnmarshallContext context) {
+                                                      final JsonNodeUnmarshallContext context) {
         return with(
-                Optional.ofNullable(
-                        context.unmarshallWithType(node)
-                )
+            context.unmarshallOptional(
+                node,
+                ValidationValueTypeName.class
+            )
         );
     }
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {
-        return context.marshallWithType(
-                this.value.orElse(null)
-        );
+        return context.marshallOptional(this.value);
     }
 
     static {
         JsonNodeContext.register(
-                JsonNodeContext.computeTypeName(OptionalValidationValueTypeName.class),
-                OptionalValidationValueTypeName::unmarshall,
-                OptionalValidationValueTypeName::marshall,
-                OptionalValidationValueTypeName.class
+            JsonNodeContext.computeTypeName(OptionalValidationValueTypeName.class),
+            OptionalValidationValueTypeName::unmarshall,
+            OptionalValidationValueTypeName::marshall,
+            OptionalValidationValueTypeName.class
         );
     }
 
