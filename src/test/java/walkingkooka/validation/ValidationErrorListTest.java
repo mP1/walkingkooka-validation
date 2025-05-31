@@ -20,6 +20,7 @@ package walkingkooka.validation;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.ImmutableListTesting;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.net.Url;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.reflect.ClassTesting;
@@ -32,6 +33,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ValidationErrorListTest implements ImmutableListTesting<ValidationErrorList<TestValidationReference>, ValidationError<TestValidationReference>>,
     TreePrintableTesting,
@@ -45,6 +47,19 @@ public final class ValidationErrorListTest implements ImmutableListTesting<Valid
         assertSame(
             list,
             list.setElements(list)
+        );
+    }
+
+    @Test
+    public void testSetElementsIncludesNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createList()
+                .setElements(
+                    Lists.of(
+                        null
+                    )
+                )
         );
     }
 
