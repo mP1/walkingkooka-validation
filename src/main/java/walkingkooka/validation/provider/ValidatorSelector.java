@@ -29,6 +29,7 @@ import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.Validator;
 import walkingkooka.validation.ValidatorContext;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,6 +37,11 @@ import java.util.Objects;
  * Contains the {@link ValidatorName} and some text which may contain an expression for a {@link Validator}.
  */
 public final class ValidatorSelector implements PluginSelectorLike<ValidatorName> {
+
+    /**
+     * {@see PluginSelectorLike#nameOnlyComparator}
+     */
+    public static Comparator<ValidatorSelector> NAME_ONLY_COMPARATOR = PluginSelectorLike.nameOnlyComparator();
 
     /**
      * Parses the given text into a {@link ValidatorSelector}. Note the text following the {@link ValidatorName} is not validated in any form and simply stored.
