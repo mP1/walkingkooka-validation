@@ -63,6 +63,21 @@ public final class ValidationErrorListTest implements ImmutableListTesting<Valid
         );
     }
 
+    @Test
+    public void testSetElementsIncludesNonValidationErrorElementFails() {
+        assertThrows(
+            RuntimeException.class,
+            () -> this.createList()
+                .setElements(
+                    Cast.to(
+                        Lists.of(
+                            "Not a ValidationError!"
+                        )
+                    )
+                )
+        );
+    }
+
     @Override
     public ValidationErrorList<TestValidationReference> createList() {
         return ValidationErrorList.<TestValidationReference>empty()
