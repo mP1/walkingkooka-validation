@@ -29,7 +29,7 @@ import walkingkooka.validation.ValidationValueTypeName;
 public final class TextToValidationValueTypeNameConverterTest implements ConverterTesting2<TextToValidationValueTypeNameConverter<FakeConverterContext>, FakeConverterContext> {
 
     @Test
-    public void testConvertNumberToValidationValueTypeNameConverter() {
+    public void testConvertNumberToValidationValueTypeName() {
         this.convertFails(
             123,
             ValidationValueTypeName.class
@@ -37,7 +37,7 @@ public final class TextToValidationValueTypeNameConverterTest implements Convert
     }
 
     @Test
-    public void testConvertStringToValidationValueTypeNameConverter() {
+    public void testConvertStringToValidationValueTypeName() {
         final String text = "text";
 
         this.convertAndCheck(
