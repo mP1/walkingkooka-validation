@@ -34,6 +34,13 @@ public final class ValidatorConvertConverters implements PublicStaticHelper {
     }
 
     /**
+     * {@see TextToValidatorSelectorConverter}
+     */
+    public static <C extends ConverterContext> Converter<C> validatorSelector() {
+        return TextToValidatorSelectorConverter.instance();
+    }
+
+    /**
      * Stop creation
      */
     private ValidatorConvertConverters() {
