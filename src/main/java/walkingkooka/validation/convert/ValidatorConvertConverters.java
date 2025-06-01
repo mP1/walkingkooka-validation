@@ -18,12 +18,20 @@
 package walkingkooka.validation.convert;
 
 import walkingkooka.convert.Converter;
+import walkingkooka.convert.ConverterContext;
 import walkingkooka.reflect.PublicStaticHelper;
 
 /**
  * A collection of {@link Converter}.
  */
 public final class ValidatorConvertConverters implements PublicStaticHelper {
+
+    /**
+     * {@see TextToValidationValueTypeNameConverter}
+     */
+    public static <C extends ConverterContext> Converter<C> instance() {
+        return TextToValidationValueTypeNameConverter.instance();
+    }
 
     /**
      * Stop creation
