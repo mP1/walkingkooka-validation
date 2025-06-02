@@ -35,6 +35,8 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.net.HasUrlFragmentTesting;
+import walkingkooka.net.UrlFragment;
 import walkingkooka.plugin.PluginNameTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -42,7 +44,8 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-final public class ValidationValueTypeNameTest implements PluginNameTesting<ValidationValueTypeName> {
+final public class ValidationValueTypeNameTest implements PluginNameTesting<ValidationValueTypeName>,
+    HasUrlFragmentTesting {
 
     // json.............................................................................................................
 
@@ -122,6 +125,16 @@ final public class ValidationValueTypeNameTest implements PluginNameTesting<Vali
         return ValidationValueTypeName.unmarshall(
             from,
             context
+        );
+    }
+
+    // HasUrlFragment...................................................................................................
+
+    @Test
+    public void testUrlFragment() {
+        this.urlFragmentAndCheck(
+            ValidationValueTypeName.TEXT,
+            UrlFragment.with("text")
         );
     }
 }
