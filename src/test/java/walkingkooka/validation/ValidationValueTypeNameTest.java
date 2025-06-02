@@ -47,6 +47,13 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 final public class ValidationValueTypeNameTest implements PluginNameTesting<ValidationValueTypeName>,
     HasUrlFragmentTesting {
 
+    // name.............................................................................................................
+
+    @Override
+    public ValidationValueTypeName createName(final String name) {
+        return ValidationValueTypeName.with(name);
+    }
+
     // json.............................................................................................................
 
     @Test
@@ -108,16 +115,6 @@ final public class ValidationValueTypeNameTest implements PluginNameTesting<Vali
             )
         );
     }
-    
-    @Override
-    public ValidationValueTypeName createName(final String name) {
-        return ValidationValueTypeName.with(name);
-    }
-
-    @Override
-    public Class<ValidationValueTypeName> type() {
-        return ValidationValueTypeName.class;
-    }
 
     @Override
     public ValidationValueTypeName unmarshall(final JsonNode from,
@@ -136,5 +133,12 @@ final public class ValidationValueTypeNameTest implements PluginNameTesting<Vali
             ValidationValueTypeName.TEXT,
             UrlFragment.with("text")
         );
+    }
+
+    // class............................................................................................................
+
+    @Override
+    public Class<ValidationValueTypeName> type() {
+        return ValidationValueTypeName.class;
     }
 }
