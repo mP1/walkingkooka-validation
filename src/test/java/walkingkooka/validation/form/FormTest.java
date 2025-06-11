@@ -35,8 +35,10 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.ValidationErrorList;
+import walkingkooka.validation.form.provider.FormHandlerSelector;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertNotSame;
@@ -53,6 +55,14 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
 
     private final static FormName NAME = FormName.with("name123");
     private final static FormName DIFFERENT_NAME = FormName.with("differentName234");
+
+    private final static Optional<FormHandlerSelector> HANDLER = Optional.of(
+        FormHandlerSelector.parse("TestFormHandler")
+    );
+
+    private final static Optional<FormHandlerSelector> DIFFERENT_HANDLER = Optional.of(
+        FormHandlerSelector.parse("DifferentTestFormHandler")
+    );
 
     private final static FormFieldList<TestValidationReference> FIELDS = FormFieldList.with(
         Lists.of(
@@ -164,6 +174,66 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
         );
     }
 
+    // setHandler.......................................................................................................
+
+    @Test
+    public void testSetHandlerWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createObject().setHandler(null)
+        );
+    }
+
+    @Test
+    public void testSetHandlerSame() {
+        final Form<TestValidationReference> form = this.createObject()
+            .setHandler(HANDLER);
+
+        assertSame(
+            form,
+            form.setHandler(HANDLER)
+        );
+    }
+
+    @Test
+    public void testSetHandlerWithDifferent() {
+        final Form<TestValidationReference> form = this.createObject();
+
+        final Form<TestValidationReference> different = form.setHandler(DIFFERENT_HANDLER);
+
+        assertNotSame(
+            form,
+            different
+        );
+
+        this.nameAndCheck(form);
+        this.nameAndCheck(different);
+
+        this.handlerAndCheck(form);
+        this.handlerAndCheck(different, DIFFERENT_HANDLER);
+
+        this.fieldsAndCheck(form);
+        this.fieldsAndCheck(different);
+
+        this.errorsAndCheck(form);
+        this.errorsAndCheck(different);
+    }
+
+    private void handlerAndCheck(final Form<TestValidationReference> form) {
+        this.handlerAndCheck(
+            form,
+            HANDLER
+        );
+    }
+
+    private void handlerAndCheck(final Form<TestValidationReference> form,
+                                 final Optional<FormHandlerSelector> handler) {
+        this.checkEquals(
+            handler,
+            form.handler()
+        );
+    }
+
     // setFields........................................................................................................
 
     @Test
@@ -197,6 +267,9 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
 
         this.nameAndCheck(form);
         this.nameAndCheck(different);
+
+        this.handlerAndCheck(form);
+        this.handlerAndCheck(different);
 
         this.fieldsAndCheck(form);
         this.fieldsAndCheck(different, DIFFERENT_FIELDS);
@@ -289,6 +362,9 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
         this.nameAndCheck(form);
         this.nameAndCheck(different);
 
+        this.handlerAndCheck(form);
+        this.handlerAndCheck(different);
+
         this.fieldsAndCheck(form);
         this.fieldsAndCheck(different);
 
@@ -309,6 +385,9 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
 
         this.nameAndCheck(form);
         this.nameAndCheck(different);
+
+        this.handlerAndCheck(form);
+        this.handlerAndCheck(different);
 
         this.fieldsAndCheck(form);
         this.fieldsAndCheck(different);
@@ -353,6 +432,14 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
     }
 
     @Test
+    public void testEqualsDifferentHandler() {
+        this.checkNotEquals(
+            this.createObject()
+                .setHandler(DIFFERENT_HANDLER)
+        );
+    }
+
+    @Test
     public void testEqualsDifferentFields() {
         this.checkNotEquals(
             this.createObject()
@@ -372,6 +459,7 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
     public Form<TestValidationReference> createObject() {
         return new Form<>(
             NAME,
+            HANDLER,
             FIELDS,
             ERRORS
         );
@@ -388,12 +476,13 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
     }
 
     @Test
-    public void testToStringNameFieldsErrors() {
+    public void testToStringNameHandlerFieldsErrors() {
         this.toStringAndCheck(
             Form.<TestValidationReference>with(NAME)
+                .setHandler(HANDLER)
                 .setFields(FIELDS)
                 .setErrors(ERRORS),
-            "name123 fields=Field111 errors=Field111 \"Error in Field111\""
+            "name123 handler=TestFormHandler fields=Field111 errors=Field111 \"Error in Field111\""
         );
     }
 
@@ -404,6 +493,34 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
         this.marshallAndCheck(
             Form.with(NAME),
             "{\"name\": \"name123\"}"
+        );
+    }
+
+    @Test
+    public void testMarshall() {
+        this.marshallAndCheck(
+            this.createJsonNodeMarshallingValue(),
+            "{\n" +
+                "  \"name\": \"name123\",\n" +
+                "  \"fields\": [\n" +
+                "    {\n" +
+                "      \"reference\": {\n" +
+                "        \"type\": \"test-validation-reference\",\n" +
+                "        \"value\": \"Field111\"\n" +
+                "      }\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"handler\": \"TestFormHandler\",\n" +
+                "  \"errors\": [\n" +
+                "    {\n" +
+                "      \"reference\": {\n" +
+                "        \"type\": \"test-validation-reference\",\n" +
+                "        \"value\": \"Field111\"\n" +
+                "      },\n" +
+                "      \"message\": \"Error in Field111\"\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}"
         );
     }
 
@@ -443,6 +560,8 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
             this.createObject(),
             "Form\n" +
                 "  name123\n" +
+                "  handler:\n" +
+                "    TestFormHandler\n" +
                 "  fields:\n" +
                 "    FormField\n" +
                 "      Field111 (walkingkooka.validation.TestValidationReference)\n" +
