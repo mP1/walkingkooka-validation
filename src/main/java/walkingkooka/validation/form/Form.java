@@ -33,6 +33,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.ValidationErrorList;
 import walkingkooka.validation.ValidationReference;
+import walkingkooka.validation.form.provider.FormHandlerSelector;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -61,6 +62,7 @@ public final class Form<T extends ValidationReference> implements HateosResource
     public static <T extends ValidationReference> Form<T> with(final FormName name) {
         return new Form<>(
             Objects.requireNonNull(name, "name"),
+            NO_HANDLER,
             FormFieldList.empty(),
             ValidationErrorList.empty()
         );
@@ -68,9 +70,11 @@ public final class Form<T extends ValidationReference> implements HateosResource
 
     // @VisibleForTesting
     Form(final FormName name,
+         final Optional<FormHandlerSelector> handler,
          final FormFieldList<T> fields,
          final ValidationErrorList<T> errors) {
         this.name = name;
+        this.handler = handler;
         this.fields = fields;
         this.errors = errors;
     }
@@ -98,12 +102,37 @@ public final class Form<T extends ValidationReference> implements HateosResource
             this :
             new Form<>(
                 Objects.requireNonNull(name, "name"),
+                this.handler,
                 this.fields,
                 this.errors
             );
     }
 
     private final FormName name;
+
+    // handler..........................................................................................................
+
+    /**
+     * Default handler for all forms.
+     */
+    public final static Optional<FormHandlerSelector> NO_HANDLER = Optional.empty();
+
+    public Optional<FormHandlerSelector> handler() {
+        return this.handler;
+    }
+
+    public Form<T> setHandler(final Optional<FormHandlerSelector> handler) {
+        return this.handler.equals(handler) ?
+            this :
+            new Form<>(
+                this.name,
+                Objects.requireNonNull(handler, "handler"),
+                this.fields,
+                this.errors
+            );
+    }
+
+    private final Optional<FormHandlerSelector> handler;
 
     // fields.............................................................................................................
 
@@ -120,6 +149,7 @@ public final class Form<T extends ValidationReference> implements HateosResource
             this :
             new Form<>(
                 this.name,
+                this.handler,
                 copy,
                 this.errors
             );
@@ -161,6 +191,7 @@ public final class Form<T extends ValidationReference> implements HateosResource
             this :
             new Form<>(
                 this.name,
+                this.handler,
                 this.fields,
                 copy
             );
@@ -181,6 +212,7 @@ public final class Form<T extends ValidationReference> implements HateosResource
     public int hashCode() {
         return Objects.hash(
             this.name,
+            this.handler,
             this.fields,
             this.errors
         );
@@ -195,6 +227,7 @@ public final class Form<T extends ValidationReference> implements HateosResource
 
     private boolean equals0(final Form<?> other) {
         return this.name.equals(other.name) &&
+            this.handler.equals(other.handler) &&
             this.fields.equals(other.fields) &&
             this.errors.equals(other.errors);
     }
@@ -203,6 +236,8 @@ public final class Form<T extends ValidationReference> implements HateosResource
     public String toString() {
         return ToStringBuilder.empty()
             .value(this.name)
+            .label("handler")
+            .value(this.handler)
             .label("fields")
             .value(this.fields)
             .label("errors")
@@ -214,11 +249,15 @@ public final class Form<T extends ValidationReference> implements HateosResource
 
     private final static String NAME_PROPERTY_STRING = "name";
 
+    private final static String HANDLER_PROPERTY_STRING = "handler";
+
     private final static String FIELDS_PROPERTY_STRING = "fields";
 
     private final static String ERRORS_PROPERTY_STRING = "errors";
 
     final static JsonPropertyName NAME_PROPERTY = JsonPropertyName.with(NAME_PROPERTY_STRING);
+
+    final static JsonPropertyName HANDLER_PROPERTY = JsonPropertyName.with(HANDLER_PROPERTY_STRING);
 
     final static JsonPropertyName FIELDS_PROPERTY = JsonPropertyName.with(FIELDS_PROPERTY_STRING);
 
@@ -227,6 +266,7 @@ public final class Form<T extends ValidationReference> implements HateosResource
     static <R extends ValidationReference> Form<R> unmarshall(final JsonNode node,
                                                               final JsonNodeUnmarshallContext context) {
         FormName formName = null;
+        Optional<FormHandlerSelector> handler = NO_HANDLER;
         FormFieldList<R> fields = FormFieldList.empty();
         ValidationErrorList<R> errors = ValidationErrorList.empty();
 
@@ -237,6 +277,12 @@ public final class Form<T extends ValidationReference> implements HateosResource
                     formName = context.unmarshall(
                         child,
                         FormName.class
+                    );
+                    break;
+                case HANDLER_PROPERTY_STRING:
+                    handler = context.unmarshallOptional(
+                        child,
+                        FormHandlerSelector.class
                     );
                     break;
                 case FIELDS_PROPERTY_STRING:
@@ -258,6 +304,7 @@ public final class Form<T extends ValidationReference> implements HateosResource
         }
 
         return Form.<R>with(formName)
+            .setHandler(handler)
             .setFields(fields)
             .setErrors(errors);
     }
@@ -271,6 +318,14 @@ public final class Form<T extends ValidationReference> implements HateosResource
             json = json.set(
                 FIELDS_PROPERTY,
                 context.marshall(fields)
+            );
+        }
+
+        final Optional<FormHandlerSelector> handler = this.handler;
+        if (handler.isPresent()) {
+            json = json.set(
+                HANDLER_PROPERTY,
+                context.marshallOptional(handler)
             );
         }
 
@@ -310,6 +365,20 @@ public final class Form<T extends ValidationReference> implements HateosResource
                 printer
             );
             printer.lineStart();
+
+            {
+                final Optional<FormHandlerSelector> handler = this.handler;
+                if (handler.isPresent()) {
+                    printer.println("handler:");
+                    printer.indent();
+                    {
+                        handler.get()
+                            .printTree(printer);
+                    }
+                    printer.outdent();
+                    printer.lineStart();
+                }
+            }
 
             printTreeLabelAndCollection(
                 "fields",
