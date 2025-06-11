@@ -53,6 +53,18 @@ public interface FormHandlerContext<R extends ValidationReference, S> extends Ca
     Comparator<R> formFieldReferenceComparator();
 
     /**
+     * Loads the current value for a form field from some other source, and does not return the actual {@link FormField#value()}.
+     * <br>
+     * In a spreadsheet this would use the reference to return the SpreadsheetCell#inputValue assuming the cell is present.
+     */
+    Optional<Object> loadFormFieldValue(final R reference);
+
+    /**
+     * Factory that creates a {@link ValidatorContext} that may be used to validate the given {@link ValidationReference} and its value.
+     */
+    ValidatorContext<R> validatorContext(final R reference);
+
+    /**
      * A default validate of the given form fields, only using the reference and value from the given {@link FormField},
      * fetching the validator from the given {@link #form()}.
      * <br>
@@ -104,7 +116,7 @@ public interface FormHandlerContext<R extends ValidationReference, S> extends Ca
                     errors.add(
                         validatorContext.validationError(
                             CharSequences.isNullOrEmpty(message) ?
-                            "Validator error: " + validatorSelector :
+                                "Validator error: " + validatorSelector :
                                 message
                         )
                     );
@@ -133,18 +145,6 @@ public interface FormHandlerContext<R extends ValidationReference, S> extends Ca
 
         return ValidationErrorList.with(errors);
     }
-
-    /**
-     * Factory that creates a {@link ValidatorContext} that may be used to validate the given {@link ValidationReference} and its value.
-     */
-    ValidatorContext<R> validatorContext(final R reference);
-
-    /**
-     * Loads the current value for a form field from some other source, and does not return the actual {@link FormField#value()}.
-     * <br>
-     * In a spreadsheet this would use the reference to return the SpreadsheetCell#inputValue assuming the cell is present.
-     */
-    Optional<Object> loadFormFieldValue(final R reference);
 
     /**
      * Assumes that the fields have been validated, and saves any {@link FormField#value()} ignoring all other field properties.
