@@ -61,7 +61,7 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
     }
 
     @Override
-    public void testUser() {
+    public void testUserNotNull() {
         throw new UnsupportedOperationException();
     }
 
