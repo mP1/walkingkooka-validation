@@ -17,10 +17,10 @@
 
 package walkingkooka.validation.form;
 
-import walkingkooka.test.Testing;
+import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.validation.ValidationReference;
 
-public interface HasFormTesting<R extends ValidationReference> extends Testing {
+public interface HasFormTesting<R extends ValidationReference> extends TreePrintableTesting {
 
     // form.............................................................................................................
 
