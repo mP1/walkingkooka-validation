@@ -20,6 +20,7 @@ package walkingkooka.validation.form;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.reflect.ClassTesting;
+import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.ValidationReference;
 
@@ -27,7 +28,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public interface FormHandlerTesting<H extends FormHandler<R, S, C>, R extends ValidationReference, S, C extends FormHandlerContext<R, S>> extends ClassTesting<H> {
+public interface FormHandlerTesting<H extends FormHandler<R, S, C>, R extends ValidationReference, S, C extends FormHandlerContext<R, S>> extends TreePrintableTesting,
+    ClassTesting<H> {
 
     @Test
     default void testPrepareFormWithNullFormFails() {
