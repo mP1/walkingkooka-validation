@@ -42,7 +42,87 @@ public final class BasicFormHandlerTest implements FormHandlerTesting<
     > {
 
     @Test
-    public void testPrepareForm() {
+    public void testPrepareFormMissingField() {
+        final FormField<TestValidationReference> field1 = FormField.with(
+            new TestValidationReference("Field1")
+        ).setValue(
+            Optional.of("InitialFormField1")
+        );
+
+        final Form<TestValidationReference> form = Form.<TestValidationReference>with(
+            FormName.with("Form123")
+        ).setFields(
+            Lists.of(
+                field1
+            )
+        );
+
+        this.prepareFormAndCheck(
+            this.createFormHandler(),
+            form,
+            new FakeFormHandlerContext<>() {
+                @Override
+                public Optional<Object> loadFormFieldValue(final TestValidationReference reference) {
+                    if (field1.reference().equals(reference)) {
+                        return Optional.empty();
+                    }
+                    throw new UnsupportedOperationException("Unknown reference " + reference);
+                }
+            },
+            Form.<TestValidationReference>with(
+                FormName.with("Form123")
+            ).setFields(
+                Lists.of(
+                    field1
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testPrepareFormInitialFieldValueReplaced() {
+        final FormField<TestValidationReference> field1 = FormField.with(
+            new TestValidationReference("Field1")
+        ).setValue(
+            Optional.of("InitialFormField1")
+        );
+
+        final Form<TestValidationReference> form = Form.<TestValidationReference>with(
+            FormName.with("Form123")
+        ).setFields(
+            Lists.of(
+                field1
+            )
+        );
+
+        final Optional<Object> replacedValue = Optional.of(
+            "ReplacedValue1"
+        );
+
+        this.prepareFormAndCheck(
+            this.createFormHandler(),
+            form,
+            new FakeFormHandlerContext<>() {
+                @Override
+                public Optional<Object> loadFormFieldValue(final TestValidationReference reference) {
+                    if (field1.reference().equals(reference)) {
+                        return replacedValue;
+                    }
+                    throw new UnsupportedOperationException("Unknown reference " + reference);
+                }
+            },
+            Form.<TestValidationReference>with(
+                FormName.with("Form123")
+            ).setFields(
+                Lists.of(
+                    field1.setValue(replacedValue)
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testPrepareFormSeveralFields() {
         final FormField<TestValidationReference> field1 = FormField.with(
             new TestValidationReference("Field1")
         );
@@ -67,8 +147,8 @@ public final class BasicFormHandlerTest implements FormHandlerTesting<
             )
         );
 
-        final Optional<Object> value1 = Optional.empty();
-        final Optional<Object> value2 = Optional.empty();
+        final Optional<Object> value1 = Optional.empty(); // does not replace original value1
+        final Optional<Object> value2 = Optional.empty(); // does not replace original value2
         final Optional<Object> value3 = Optional.of("NewValue3");
 
         this.prepareFormAndCheck(
@@ -94,7 +174,7 @@ public final class BasicFormHandlerTest implements FormHandlerTesting<
             ).setFields(
                 Lists.of(
                     field1,
-                    field2.setValue(value2),
+                    field2,
                     field3.setValue(value3)
                 )
             )

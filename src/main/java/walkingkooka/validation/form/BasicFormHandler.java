@@ -23,6 +23,7 @@ import walkingkooka.validation.ValidationReference;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * A {@link FormHandler} that delegates to the provided {@link FormHandlerContext} to prepare, validate and submit a form.
@@ -46,7 +47,8 @@ final class BasicFormHandler<R extends ValidationReference, S, C extends FormHan
     // FormHandler......................................................................................................
 
     /**
-     * Load and replace the value for each form.
+     * Load and replace the value for each form. If the loaded value is missing the original {@link FormField#value()}
+     * is not replaced.
      */
     @Override
     public Form<R> prepareForm(final Form<R> form,
@@ -56,11 +58,13 @@ final class BasicFormHandler<R extends ValidationReference, S, C extends FormHan
 
         final List<FormField<R>> loadedFields = Lists.array();
 
-        for(final FormField<R> field : form.fields()) {
+        for (final FormField<R> field : form.fields()) {
+            final Optional<Object> loadedValue = context.loadFormFieldValue(field.reference());
+
             loadedFields.add(
-                field.setValue(
-                    context.loadFormFieldValue(field.reference())
-                )
+                loadedValue.isPresent() ?
+                    field.setValue(loadedValue) :
+                    field
             );
         }
 
