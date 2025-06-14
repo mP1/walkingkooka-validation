@@ -564,7 +564,8 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
                 "    TestFormHandler\n" +
                 "  fields:\n" +
                 "    FormField\n" +
-                "      Field111 (walkingkooka.validation.TestValidationReference)\n" +
+                "      reference:\n" +
+                "        Field111 (walkingkooka.validation.TestValidationReference)\n" +
                 "  errors:\n" +
                 "    ValidationError\n" +
                 "      Field111 (walkingkooka.validation.TestValidationReference)\n" +
