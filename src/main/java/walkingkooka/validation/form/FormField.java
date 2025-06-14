@@ -364,11 +364,11 @@ public final class FormField<R extends ValidationReference> implements TreePrint
         printer.println(this.getClass().getSimpleName());
         printer.indent();
         {
-            TreePrintable.printTreeOrToString(
+            printTreeLabelAndValue(
+                "reference",
                 this.reference,
                 printer
             );
-            printer.lineStart();
 
             printTreeLabelAndValue(
                 "label",

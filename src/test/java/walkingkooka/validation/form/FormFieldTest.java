@@ -479,7 +479,8 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
         this.treePrintAndCheck(
             FormField.with(REFERENCE),
             "FormField\n" +
-                "  Hello (walkingkooka.validation.TestValidationReference)\n"
+                "  reference:\n" +
+                "    Hello (walkingkooka.validation.TestValidationReference)\n"
         );
     }
 
@@ -488,7 +489,8 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
         this.treePrintAndCheck(
             this.createObject(),
             "FormField\n" +
-                "  Hello (walkingkooka.validation.TestValidationReference)\n" +
+                "  reference:\n" +
+                "    Hello (walkingkooka.validation.TestValidationReference)\n" +
                 "  label:\n" +
                 "    \"Label123\"\n" +
                 "  type:\n" +
