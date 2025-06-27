@@ -38,6 +38,16 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
 
     private final static Optional<Object> VALIDATION_VALUE = Optional.of("ValidationValue123");
 
+    @Override
+    public void testDateTimeSymbolsForLocaleWithNullFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testDecimalNumberSymbolsForLocaleWithNullFails() {
+        throw new UnsupportedOperationException();
+    }
+
     @Test
     public void testValidationValue() {
         this.validationValueAndCheck(

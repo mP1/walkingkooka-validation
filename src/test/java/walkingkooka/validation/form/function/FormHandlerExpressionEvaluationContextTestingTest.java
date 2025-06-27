@@ -21,6 +21,9 @@ import walkingkooka.Either;
 import walkingkooka.datetime.DateTimeContext;
 import walkingkooka.datetime.DateTimeContextDelegator;
 import walkingkooka.environment.EnvironmentValueName;
+import walkingkooka.locale.LocaleContext;
+import walkingkooka.locale.LocaleContextDelegator;
+import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.math.DecimalNumberContexts;
@@ -88,7 +91,8 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
 
     final static class TestFormHandlerExpressionEvaluationContext implements FormHandlerExpressionEvaluationContext<TestValidationReference, Void>,
         DateTimeContextDelegator,
-        DecimalNumberContextDelegator {
+        DecimalNumberContextDelegator,
+        LocaleContextDelegator {
 
         @Override
         public TestFormHandlerExpressionEvaluationContext enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {
@@ -172,6 +176,11 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         @Override
         public Locale locale() {
             throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public LocaleContext localeContext() {
+            return LocaleContexts.jre(Locale.ENGLISH);
         }
 
         @Override
