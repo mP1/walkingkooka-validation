@@ -19,6 +19,9 @@ package walkingkooka.validation.function;
 
 import walkingkooka.Either;
 import walkingkooka.datetime.DateTimeSymbols;
+import walkingkooka.locale.LocaleContext;
+import walkingkooka.locale.LocaleContextDelegator;
+import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.math.DecimalNumberContexts;
@@ -76,7 +79,8 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
     private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
     final static class TestValidatorExpressionEvaluationContext implements ValidatorExpressionEvaluationContext<TestValidationReference>,
-        DecimalNumberContextDelegator{
+        DecimalNumberContextDelegator,
+        LocaleContextDelegator {
 
         @Override
         public TestValidatorExpressionEvaluationContext enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {
@@ -192,6 +196,13 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
         @Override
         public MathContext mathContext() {
             return DECIMAL_NUMBER_CONTEXT.mathContext();
+        }
+
+        // LocaleContext................................................................................................
+
+        @Override
+        public LocaleContext localeContext() {
+            return LocaleContexts.jre(Locale.ENGLISH);
         }
 
         @Override

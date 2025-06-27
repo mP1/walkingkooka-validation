@@ -42,6 +42,16 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
     DecimalNumberContextDelegator {
 
     @Override
+    public void testDateTimeSymbolsForLocaleWithNullFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testDecimalNumberSymbolsForLocaleWithNullFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public TestFormHandlerExpressionEvaluationContextDelegator createContext() {
         return new TestFormHandlerExpressionEvaluationContextDelegator();
     }
