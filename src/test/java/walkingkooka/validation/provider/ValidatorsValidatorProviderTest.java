@@ -46,10 +46,20 @@ public final class ValidatorsValidatorProviderTest implements ValidatorProviderT
         @Override
         public <T> Either<T, String> convert(final Object value,
                                              final Class<T> type) {
-            return this.successfulConversion(
-                EXPRESSION,
-                type
-            );
+            return Expression.class == type ?
+                this.successfulConversion(
+                    EXPRESSION,
+                    type
+                ) :
+                Integer.class == type ?
+                    this.successfulConversion(
+                        Number.class.cast(value).intValue(),
+                        type
+                    ) :
+                    this.failConversion(
+                        value,
+                        type
+                    );
         }
     };
 
@@ -89,6 +99,21 @@ public final class ValidatorsValidatorProviderTest implements ValidatorProviderT
             ),
             CONTEXT,
             Validators.expression(EXPRESSION)
+        );
+    }
+
+    @Test
+    public void testValidatorSelectorWithTextLength() {
+        this.validatorAndCheck(
+            ValidatorSelector.with(
+                ValidatorName.TEXT_LENGTH,
+                "(1, 2)"
+            ),
+            CONTEXT,
+            Validators.textLength(
+                1,
+                2
+            )
         );
     }
 
