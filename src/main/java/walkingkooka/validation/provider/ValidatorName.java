@@ -138,6 +138,25 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
         (p, c) -> Validators.nonNull()
     );
 
+    private final static String TEXT_LENGTH_STRING = "text-length";
+
+    /**
+     * The name of the {@link Validator} returned by {@link Validators#nonNull()}.
+     */
+    public final static ValidatorName TEXT_LENGTH = registerConstantName(
+        TEXT_LENGTH_STRING,
+        (p, c) -> Validators.textLength(
+            c.convertOrFail(
+                p.get(0),
+                Integer.class
+            ),
+            c.convertOrFail(
+                p.get(1),
+                Integer.class
+            )
+        )
+    );
+
     /**
      * Factory that creates a {@link ValidatorName}
      */
@@ -155,6 +174,9 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
                 break;
             case NON_NULL_STRING:
                 validatorName = NON_NULL;
+                break;
+            case TEXT_LENGTH_STRING:
+                validatorName = TEXT_LENGTH;
                 break;
             default:
                 validatorName = new ValidatorName(name);

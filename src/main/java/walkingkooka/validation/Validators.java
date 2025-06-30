@@ -60,6 +60,17 @@ public final class Validators implements PublicStaticHelper {
     }
 
     /**
+     * {@see TextLengthValidator}
+     */
+    public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> textLength(final int minLength,
+                                                                                                            final int maxLength) {
+        return TextLengthValidator.with(
+            minLength,
+            maxLength
+        );
+    }
+
+    /**
      * Private constructor to stop creation
      */
     private Validators() {
