@@ -6,3 +6,14 @@
 ![](https://tokei.rs/b1/github/mP1/walkingkooka-validation)
 [![J2CL compatible](https://img.shields.io/badge/J2CL-compatible-brightgreen.svg)](https://github.com/mP1/j2cl-central)
 
+A validation framework that supports validating individual fields within a form.
+
+# [Validators](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/Validator.java)
+
+Within a spreadsheet, individual cells or a fields within a form can have a validator. Each validator can report zero
+or more [ValidationError](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ValidationError.java).
+
+- [ExpressionValidator](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ExpressionValidator.java)
+- [NonNullValidator](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/NonNullValidator.java)
+- [TextLengthValidator](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/TextLengthValidator.java)
+- [ValidatorCollection](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ValidatorCollection.java)
