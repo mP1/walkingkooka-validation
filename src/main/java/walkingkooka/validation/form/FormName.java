@@ -78,7 +78,7 @@ final public class FormName implements PluginNameLike<FormName> {
 
     private final PluginName name;
 
-    // Object..................................................................................................
+    // Object...........................................................................................................
 
     @Override
     public int hashCode() {
