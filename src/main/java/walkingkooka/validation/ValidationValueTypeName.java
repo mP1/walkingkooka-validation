@@ -19,8 +19,6 @@ package walkingkooka.validation;
 
 import walkingkooka.Cast;
 import walkingkooka.naming.Name;
-import walkingkooka.net.HasUrlFragment;
-import walkingkooka.net.UrlFragment;
 import walkingkooka.net.http.server.hateos.HateosResourceName;
 import walkingkooka.plugin.PluginName;
 import walkingkooka.plugin.PluginNameLike;
@@ -34,8 +32,7 @@ import java.util.Objects;
 /**
  * The {@link Name} of a supported validation value.
  */
-final public class ValidationValueTypeName implements PluginNameLike<ValidationValueTypeName>,
-    HasUrlFragment {
+final public class ValidationValueTypeName implements PluginNameLike<ValidationValueTypeName> {
 
     public static final String HATEOS_RESOURCE_NAME_STRING = "type";
 
@@ -130,13 +127,6 @@ final public class ValidationValueTypeName implements PluginNameLike<ValidationV
     }
 
     private final PluginName name;
-
-    // HasUrlFragment...................................................................................................
-
-    @Override
-    public UrlFragment urlFragment() {
-        return UrlFragment.with(this.name.value());
-    }
 
     // Object...........................................................................................................
 
