@@ -64,7 +64,9 @@ public final class ValidatorAliasSet extends AbstractSet<ValidatorAlias>
      * Factory that creates {@link ValidatorAliasSet} with the given aliases.
      */
     public static ValidatorAliasSet with(final SortedSet<ValidatorAlias> aliases) {
-        return EMPTY.setElements(aliases);
+        return aliases instanceof ValidatorAliasSet ?
+            (ValidatorAliasSet) aliases :
+            EMPTY.setElements(aliases);
     }
 
     public static ValidatorAliasSet parse(final String text) {
