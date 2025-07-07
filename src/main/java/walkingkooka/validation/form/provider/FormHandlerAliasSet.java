@@ -145,12 +145,21 @@ public final class FormHandlerAliasSet extends AbstractSet<FormHandlerAlias>
 
     @Override
     public FormHandlerAliasSet setElements(final SortedSet<FormHandlerAlias> aliases) {
-        final FormHandlerAliasSet after = new FormHandlerAliasSet(
-            this.pluginAliasSet.setElements(aliases)
-        );
-        return this.pluginAliasSet.equals(aliases) ?
-            this :
-            after;
+        FormHandlerAliasSet after;
+
+        if (aliases instanceof FormHandlerAliasSet) {
+            after = (FormHandlerAliasSet) aliases;
+        } else {
+            after = new FormHandlerAliasSet(
+                this.pluginAliasSet.setElements(aliases)
+            );
+            after = this.pluginAliasSet.equals(aliases) ?
+                this :
+                after;
+
+        }
+
+        return after;
     }
 
     @Override
