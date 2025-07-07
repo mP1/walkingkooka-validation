@@ -57,6 +57,16 @@ public final class FormHandlerAliasSetTest implements PluginAliasSetLikeTesting<
         );
     }
 
+    @Test
+    public void testWithFormHandlerAliasSetDoesntWrap() {
+        final FormHandlerAliasSet set = this.createSet();
+
+        assertSame(
+            set,
+            FormHandlerAliasSet.with(set)
+        );
+    }
+
     // name.............................................................................................................
 
     @Test
