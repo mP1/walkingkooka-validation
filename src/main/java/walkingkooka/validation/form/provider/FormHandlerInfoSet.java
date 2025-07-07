@@ -56,12 +56,20 @@ public final class FormHandlerInfoSet extends AbstractSet<FormHandlerInfo> imple
     }
 
     public static FormHandlerInfoSet with(final Set<FormHandlerInfo> infos) {
-        Objects.requireNonNull(infos, "infos");
+        FormHandlerInfoSet with;
 
-        final PluginInfoSet<FormHandlerName, FormHandlerInfo> pluginInfoSet = PluginInfoSet.with(infos);
-        return pluginInfoSet.isEmpty() ?
-            EMPTY :
-            new FormHandlerInfoSet(pluginInfoSet);
+        if (infos instanceof FormHandlerInfoSet) {
+            with = (FormHandlerInfoSet) infos;
+        } else {
+            final PluginInfoSet<FormHandlerName, FormHandlerInfo> pluginInfoSet = PluginInfoSet.with(
+                Objects.requireNonNull(infos, "infos")
+            );
+            with = pluginInfoSet.isEmpty() ?
+                EMPTY :
+                new FormHandlerInfoSet(pluginInfoSet);
+        }
+
+        return with;
     }
 
     private FormHandlerInfoSet(final PluginInfoSet<FormHandlerName, FormHandlerInfo> pluginInfoSet) {
@@ -160,12 +168,21 @@ public final class FormHandlerInfoSet extends AbstractSet<FormHandlerInfo> imple
 
     @Override
     public FormHandlerInfoSet setElements(final Set<FormHandlerInfo> infos) {
-        final FormHandlerInfoSet after = new FormHandlerInfoSet(
-            this.pluginInfoSet.setElements(infos)
-        );
-        return this.pluginInfoSet.equals(infos) ?
-            this :
-            after;
+        final FormHandlerInfoSet after;
+
+        if (infos instanceof FormHandlerInfoSet) {
+            after = (FormHandlerInfoSet) infos;
+        } else {
+            after = new FormHandlerInfoSet(
+                this.pluginInfoSet.setElements(infos)
+            );
+            return this.pluginInfoSet.equals(infos) ?
+                this :
+                after;
+
+        }
+
+        return after;
     }
 
     @Override

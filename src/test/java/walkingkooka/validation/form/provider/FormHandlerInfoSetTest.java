@@ -32,6 +32,16 @@ public final class FormHandlerInfoSetTest implements PluginInfoSetLikeTesting<Fo
     ClassTesting<FormHandlerInfoSet> {
 
     @Test
+    public void testWithFormHandlerInfoSetDoesntWrap() {
+        final FormHandlerInfoSet set = this.createSet();
+
+        assertSame(
+            set,
+            FormHandlerInfoSet.with(set)
+        );
+    }
+
+    @Test
     public void testImmutableSet() {
         final FormHandlerInfoSet set = this.createSet();
 
