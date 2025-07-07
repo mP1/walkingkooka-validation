@@ -57,6 +57,16 @@ public final class ValidatorAliasSetTest implements PluginAliasSetLikeTesting<Va
         );
     }
 
+    @Test
+    public void testWithValidatorAliasSetDoesntWrap() {
+        final ValidatorAliasSet set = this.createSet();
+
+        assertSame(
+            set,
+            ValidatorAliasSet.with(set)
+        );
+    }
+
     // name.............................................................................................................
 
     @Test
