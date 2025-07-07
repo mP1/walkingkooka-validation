@@ -158,7 +158,6 @@ public final class ValidatorAliasSet extends AbstractSet<ValidatorAlias>
             return this.pluginAliasSet.equals(aliases) ?
                 this :
                 after;
-
         }
 
         return after;
