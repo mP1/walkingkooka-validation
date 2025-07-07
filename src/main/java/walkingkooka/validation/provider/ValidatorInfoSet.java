@@ -56,12 +56,20 @@ public final class ValidatorInfoSet extends AbstractSet<ValidatorInfo> implement
     }
 
     public static ValidatorInfoSet with(final Set<ValidatorInfo> infos) {
-        Objects.requireNonNull(infos, "infos");
+        ValidatorInfoSet with;
 
-        final PluginInfoSet<ValidatorName, ValidatorInfo> pluginInfoSet = PluginInfoSet.with(infos);
-        return pluginInfoSet.isEmpty() ?
-            EMPTY :
-            new ValidatorInfoSet(pluginInfoSet);
+        if (infos instanceof ValidatorInfoSet) {
+            with = (ValidatorInfoSet) infos;
+        } else {
+            final PluginInfoSet<ValidatorName, ValidatorInfo> pluginInfoSet = PluginInfoSet.with(
+                Objects.requireNonNull(infos, "infos")
+            );
+            with = pluginInfoSet.isEmpty() ?
+                EMPTY :
+                new ValidatorInfoSet(pluginInfoSet);
+        }
+
+        return with;
     }
 
     private ValidatorInfoSet(final PluginInfoSet<ValidatorName, ValidatorInfo> pluginInfoSet) {
@@ -160,12 +168,21 @@ public final class ValidatorInfoSet extends AbstractSet<ValidatorInfo> implement
 
     @Override
     public ValidatorInfoSet setElements(final Set<ValidatorInfo> infos) {
-        final ValidatorInfoSet after = new ValidatorInfoSet(
-            this.pluginInfoSet.setElements(infos)
-        );
-        return this.pluginInfoSet.equals(infos) ?
-            this :
-            after;
+        final ValidatorInfoSet after;
+
+        if (infos instanceof ValidatorInfoSet) {
+            after = (ValidatorInfoSet) infos;
+        } else {
+            after = new ValidatorInfoSet(
+                this.pluginInfoSet.setElements(infos)
+            );
+            return this.pluginInfoSet.equals(infos) ?
+                this :
+                after;
+
+        }
+
+        return after;
     }
 
     @Override

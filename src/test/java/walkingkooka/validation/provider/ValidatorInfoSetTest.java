@@ -32,6 +32,16 @@ public final class ValidatorInfoSetTest implements PluginInfoSetLikeTesting<Vali
     ClassTesting<ValidatorInfoSet> {
 
     @Test
+    public void testWithValidatorInfoSetDoesntWrap() {
+        final ValidatorInfoSet set = this.createSet();
+
+        assertSame(
+            set,
+            ValidatorInfoSet.with(set)
+        );
+    }
+
+    @Test
     public void testImmutableSet() {
         final ValidatorInfoSet set = this.createSet();
 
