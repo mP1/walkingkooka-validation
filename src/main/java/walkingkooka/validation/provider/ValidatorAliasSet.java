@@ -147,12 +147,21 @@ public final class ValidatorAliasSet extends AbstractSet<ValidatorAlias>
 
     @Override
     public ValidatorAliasSet setElements(final SortedSet<ValidatorAlias> aliases) {
-        final ValidatorAliasSet after = new ValidatorAliasSet(
-            this.pluginAliasSet.setElements(aliases)
-        );
-        return this.pluginAliasSet.equals(aliases) ?
-            this :
-            after;
+        final ValidatorAliasSet after;
+
+        if (aliases instanceof ValidatorAliasSet) {
+            after = (ValidatorAliasSet) aliases;
+        } else {
+            after = new ValidatorAliasSet(
+                this.pluginAliasSet.setElements(aliases)
+            );
+            return this.pluginAliasSet.equals(aliases) ?
+                this :
+                after;
+
+        }
+
+        return after;
     }
 
     @Override
