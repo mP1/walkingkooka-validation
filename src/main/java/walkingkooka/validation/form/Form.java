@@ -21,7 +21,6 @@ import walkingkooka.Cast;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.net.http.server.hateos.HateosResource;
-import walkingkooka.net.http.server.hateos.HateosResourceName;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
@@ -47,10 +46,6 @@ import java.util.Optional;
  */
 public final class Form<T extends ValidationReference> implements HateosResource<FormName>,
     TreePrintable{
-
-    public static final String HATEOS_RESOURCE_NAME_STRING = "form";
-
-    public static final HateosResourceName HATEOS_RESOURCE_NAME = HateosResourceName.with(HATEOS_RESOURCE_NAME_STRING);
 
     /**
      * A {@link Comparator} that may be used to sort {@link Form} using only the {@link FormName}.
