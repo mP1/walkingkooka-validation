@@ -19,6 +19,7 @@ package walkingkooka.validation.form;
 
 import walkingkooka.Cast;
 import walkingkooka.naming.Name;
+import walkingkooka.net.http.server.hateos.HateosResourceName;
 import walkingkooka.plugin.PluginName;
 import walkingkooka.plugin.PluginNameLike;
 import walkingkooka.tree.json.JsonNode;
@@ -33,6 +34,10 @@ import java.util.Objects;
  * The {@link Name} of a {@link Validator}. Note comparator names are case-sensitive.
  */
 final public class FormName implements PluginNameLike<FormName> {
+
+    public static final String HATEOS_RESOURCE_NAME_STRING = "form";
+
+    public static final HateosResourceName HATEOS_RESOURCE_NAME = HateosResourceName.with(HATEOS_RESOURCE_NAME_STRING);
 
     public static boolean isChar(final int pos,
                                  final char c) {
