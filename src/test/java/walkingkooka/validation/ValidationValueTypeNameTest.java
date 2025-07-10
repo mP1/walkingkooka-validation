@@ -54,6 +54,14 @@ final public class ValidationValueTypeNameTest implements PluginNameTesting<Vali
     // json.............................................................................................................
 
     @Test
+    public void testUnmarshallAny() {
+        this.unmarshallAndCheck2(
+            ValidationValueTypeName.ANY_STRING,
+            ValidationValueTypeName.ANY
+        );
+    }
+
+    @Test
     public void testUnmarshallBoolean() {
         this.unmarshallAndCheck2(
             ValidationValueTypeName.BOOLEAN_STRING,
