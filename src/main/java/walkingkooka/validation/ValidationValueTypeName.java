@@ -55,6 +55,10 @@ final public class ValidationValueTypeName implements PluginNameLike<ValidationV
     
     // constants........................................................................................................
 
+    public final static String ANY_STRING = "*";
+
+    public final static ValidationValueTypeName ANY = new ValidationValueTypeName(ANY_STRING);
+
     public final static String BOOLEAN_STRING = "boolean";
 
     public final static ValidationValueTypeName BOOLEAN = new ValidationValueTypeName(BOOLEAN_STRING);
@@ -88,6 +92,9 @@ final public class ValidationValueTypeName implements PluginNameLike<ValidationV
         ValidationValueTypeName validationValueTypeName;
 
         switch (name) {
+            case ANY_STRING:
+                validationValueTypeName = ANY;
+                break;
             case BOOLEAN_STRING:
                 validationValueTypeName = BOOLEAN;
                 break;
@@ -107,7 +114,9 @@ final public class ValidationValueTypeName implements PluginNameLike<ValidationV
                 validationValueTypeName = TIME;
                 break;
             default:
+                PluginName.with(name);
                 validationValueTypeName = new ValidationValueTypeName(name);
+                break;
         }
 
         return validationValueTypeName;
@@ -118,15 +127,22 @@ final public class ValidationValueTypeName implements PluginNameLike<ValidationV
      */
     private ValidationValueTypeName(final String name) {
         super();
-        this.name = PluginName.with(name);
+        this.name = name;
     }
 
     @Override
     public String value() {
-        return this.name.value();
+        return this.name;
     }
 
-    private final PluginName name;
+    private final String name;
+
+    /**
+     * Only returns true if this is ANY.
+     */
+    public boolean isAny() {
+        return ANY == this;
+    }
 
     // Object...........................................................................................................
 
