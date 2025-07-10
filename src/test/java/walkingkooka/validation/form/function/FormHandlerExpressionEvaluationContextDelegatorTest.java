@@ -52,6 +52,11 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
     }
 
     @Override
+    public void testLocaleTextWithNullFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public TestFormHandlerExpressionEvaluationContextDelegator createContext() {
         return new TestFormHandlerExpressionEvaluationContextDelegator();
     }
