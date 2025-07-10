@@ -48,6 +48,11 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public void testLocaleTextWithNullFails() {
+        throw new UnsupportedOperationException();
+    }
+
     @Test
     public void testValidationValue() {
         this.validationValueAndCheck(
