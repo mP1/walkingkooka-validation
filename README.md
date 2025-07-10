@@ -8,6 +8,13 @@
 
 A validation framework that supports validating individual fields within a form.
 
+# [Converters](https://github.com/mP1/walkingkooka-convert/blob/master/src/main/java/walkingkooka/convert/Converter.java)
+
+- [TextToFormNameConverter](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/convert/TextToFormNameConverter.java)
+- [TextToValidationValueTypeNameConverter](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/convert/TextToValidationValueTypeNameConverter.java)
+- [TextToValidatorSelectorConverter](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/convert/TextToValidatorSelectorConverter.java)
+- [ValidationErrorListConverter](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/convert/ValidationErrorListConverter.java)
+
 # [Validators](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/Validator.java)
 
 Within a spreadsheet, individual cells or a fields within a form can have a validator. Each validator can report zero
