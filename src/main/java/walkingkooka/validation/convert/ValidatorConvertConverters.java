@@ -48,6 +48,13 @@ public final class ValidatorConvertConverters implements PublicStaticHelper {
     }
 
     /**
+     * {@see ValidationErrorListConverter}
+     */
+    public static <C extends ConverterContext> Converter<C> toValidationErrorList() {
+        return ValidationErrorListConverter.instance();
+    }
+
+    /**
      * Stop creation
      */
     private ValidatorConvertConverters() {
