@@ -18,6 +18,7 @@
 package walkingkooka.validation.function;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.math.DecimalNumberContexts;
@@ -29,8 +30,10 @@ import walkingkooka.validation.function.ValidatorExpressionEvaluationContextDele
 import walkingkooka.validation.function.ValidatorExpressionEvaluationContextTestingTest.TestValidatorExpressionEvaluationContext;
 
 import java.math.MathContext;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
 
 public final class ValidatorExpressionEvaluationContextDelegatorTest implements ValidatorExpressionEvaluationContextTesting<TestValidationReference, TestValidatorExpressionEvaluationContextDelegator>,
@@ -197,6 +200,18 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
                 @Override
                 public Form<TestValidationReference> form() {
                     throw new UnsupportedOperationException();
+                }
+
+                @Override
+                public Set<Locale> findByLocaleText(final String text,
+                                                    final int offset,
+                                                    final int count) {
+                    return LocaleContexts.jre(Locale.ENGLISH)
+                        .findByLocaleText(
+                            text,
+                            offset,
+                            count
+                        );
                 }
             };
         }
