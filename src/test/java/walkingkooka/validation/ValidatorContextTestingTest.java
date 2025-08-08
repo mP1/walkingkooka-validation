@@ -26,6 +26,7 @@ import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.environment.EnvironmentContexts;
+import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionEvaluationContexts;
@@ -93,6 +94,14 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         @Override
         public LocalDateTime now() {
             return CONVERTER_CONTEXT.now();
+        }
+
+        @Override
+        public <T> TestValidatorContext setEnvironmentValue(final EnvironmentValueName<T> name,
+                                                            final T value) {
+            Objects.requireNonNull(name, "name");
+            Objects.requireNonNull(value, "value");
+            throw new UnsupportedOperationException();
         }
 
         @Override

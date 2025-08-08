@@ -21,6 +21,7 @@ import walkingkooka.convert.CanConvert;
 import walkingkooka.convert.CanConvertDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
+import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
@@ -106,6 +107,18 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
 
     // @VisibleForTesting
     final CanConvert canConvert;
+
+    // EnvironmentContext...............................................................................................
+
+    @Override
+    public <TT> BasicValidatorContext<T> setEnvironmentValue(final EnvironmentValueName<TT> name,
+                                                             final TT value) {
+        this.environmentContext.setEnvironmentValue(
+            name,
+            value
+        );
+        return this;
+    }
 
     // EnvironmentContextDelegator......................................................................................
 

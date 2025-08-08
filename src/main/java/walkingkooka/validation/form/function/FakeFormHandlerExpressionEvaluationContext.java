@@ -28,6 +28,7 @@ import walkingkooka.validation.form.FormField;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
@@ -77,6 +78,14 @@ public class FakeFormHandlerExpressionEvaluationContext<R extends ValidationRefe
 
     @Override
     public Set<EnvironmentValueName<?>> environmentValueNames() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public <T> FormHandlerExpressionEvaluationContext<R, S> setEnvironmentValue(final EnvironmentValueName<T> name,
+                                                                                final T value) {
+        Objects.requireNonNull(name, "name");
+        Objects.requireNonNull(value, "value");
         throw new UnsupportedOperationException();
     }
 

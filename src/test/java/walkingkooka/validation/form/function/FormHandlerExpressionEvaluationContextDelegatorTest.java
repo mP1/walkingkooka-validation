@@ -195,6 +195,14 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
                 }
 
                 @Override
+                public <T> FakeFormHandlerExpressionEvaluationContext<TestValidationReference, Void> setEnvironmentValue(final EnvironmentValueName<T> name,
+                                                                                                                         final T value) {
+                    Objects.requireNonNull(name, "name");
+                    Objects.requireNonNull(value, "value");
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
                 public Optional<EmailAddress> user() {
                     return Optional.empty();
                 }
@@ -255,6 +263,14 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
         public Optional<Optional<Object>> reference(final ExpressionReference reference) {
             Objects.requireNonNull(reference, "reference");
 
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public <T> TestFormHandlerExpressionEvaluationContextDelegator setEnvironmentValue(final EnvironmentValueName<T> name,
+                                                                                           final T value) {
+            Objects.requireNonNull(name, "name");
+            Objects.requireNonNull(value, "value");
             throw new UnsupportedOperationException();
         }
 

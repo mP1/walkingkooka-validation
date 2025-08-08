@@ -17,6 +17,7 @@
 
 package walkingkooka.validation.form.function;
 
+import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.validation.ValidationReference;
@@ -27,6 +28,9 @@ import java.util.function.Function;
 
 public interface FormHandlerExpressionEvaluationContext<R extends ValidationReference, S> extends ExpressionEvaluationContext,
     FormHandlerContext<R, S> {
+
+    <T> FormHandlerExpressionEvaluationContext<R, S> setEnvironmentValue(final EnvironmentValueName<T> name,
+                                                                         final T value);
 
     @Override
     FormHandlerExpressionEvaluationContext<R, S> enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function);
