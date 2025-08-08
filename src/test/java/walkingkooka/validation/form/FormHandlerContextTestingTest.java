@@ -95,6 +95,14 @@ public final class FormHandlerContextTestingTest implements FormHandlerContextTe
         }
 
         @Override
+        public <T> TestFormHandlerContext setEnvironmentValue(final EnvironmentValueName<T> name,
+                                                              final T value) {
+            Objects.requireNonNull(name, "name");
+            Objects.requireNonNull(value, "value");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public Set<EnvironmentValueName<?>> environmentValueNames() {
             throw new UnsupportedOperationException();
         }

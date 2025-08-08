@@ -164,6 +164,14 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
+        public <T> TestFormHandlerExpressionEvaluationContext setEnvironmentValue(final EnvironmentValueName<T> name,
+                                                                                  final T value) {
+            Objects.requireNonNull(name, "name");
+            Objects.requireNonNull(value, "value");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public Optional<EmailAddress> user() {
             throw new UnsupportedOperationException();
         }

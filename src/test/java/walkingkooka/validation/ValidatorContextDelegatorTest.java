@@ -24,6 +24,7 @@ import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContexts;
+import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
@@ -35,6 +36,7 @@ import java.math.MathContext;
 import java.text.DateFormatSymbols;
 import java.time.LocalDateTime;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -117,6 +119,14 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
         }
 
         private final ValidatorContext<TestValidationReference> context;
+
+        @Override
+        public <T> TestValidatorContext setEnvironmentValue(final EnvironmentValueName<T> name,
+                                                            final T value) {
+            Objects.requireNonNull(name, "name");
+            Objects.requireNonNull(value, "value");
+            throw new UnsupportedOperationException();
+        }
 
         @Override
         public String toString() {

@@ -20,6 +20,7 @@ package walkingkooka.validation;
 import walkingkooka.Cast;
 import walkingkooka.convert.CanConvert;
 import walkingkooka.environment.EnvironmentContext;
+import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
@@ -71,4 +72,8 @@ public interface ValidatorContext<T extends ValidationReference> extends CanConv
      * {@link Optional} isnt used because working with Optionals within an {@link Expression} is cumbersome.
      */
     ExpressionEvaluationContext expressionEvaluationContext(final Object value);
+
+    @Override
+    <TT> ValidatorContext<T> setEnvironmentValue(final EnvironmentValueName<TT> name,
+                                                 final TT value);
 }
