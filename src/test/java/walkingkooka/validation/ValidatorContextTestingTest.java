@@ -105,6 +105,12 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         }
 
         @Override
+        public TestValidatorContext removeEnvironmentValue(final EnvironmentValueName<?> name) {
+            Objects.requireNonNull(name, "name");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public EnvironmentContext environmentContext() {
             return EnvironmentContexts.empty(
                 this,

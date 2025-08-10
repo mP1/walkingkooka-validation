@@ -22,6 +22,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.SortedSets;
 import walkingkooka.convert.CanConvert;
 import walkingkooka.environment.EnvironmentContext;
+import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.CharacterConstant;
 import walkingkooka.validation.ValidationError;
@@ -150,4 +151,8 @@ public interface FormHandlerContext<R extends ValidationReference, S> extends Ca
      * Assumes that the fields have been validated, and saves any {@link FormField#value()} ignoring all other field properties.
      */
     S saveFormFieldValues(final List<FormField<R>> formFields);
+
+
+    @Override
+    FormHandlerContext<R, S> removeEnvironmentValue(final EnvironmentValueName<?> name);
 }

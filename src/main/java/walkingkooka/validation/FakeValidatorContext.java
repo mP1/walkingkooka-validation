@@ -72,6 +72,12 @@ public class FakeValidatorContext<T extends ValidationReference> extends FakeCon
     }
 
     @Override
+    public ValidatorContext<T> removeEnvironmentValue(final EnvironmentValueName<?> name) {
+        Objects.requireNonNull(name, "name");
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public Optional<EmailAddress> user() {
         throw new UnsupportedOperationException();
     }

@@ -203,6 +203,12 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
                 }
 
                 @Override
+                public FakeFormHandlerExpressionEvaluationContext<TestValidationReference, Void> removeEnvironmentValue(final EnvironmentValueName<?> name) {
+                    Objects.requireNonNull(name, "name");
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
                 public Optional<EmailAddress> user() {
                     return Optional.empty();
                 }

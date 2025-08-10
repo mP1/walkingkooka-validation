@@ -21,6 +21,7 @@ import walkingkooka.convert.CanConvert;
 import walkingkooka.convert.CanConvertDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
+import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
 
@@ -72,6 +73,13 @@ public interface FormHandlerContextDelegator<R extends ValidationReference, S> e
     }
 
     // EnvironmentContext...............................................................................................
+
+    @Override
+    default FormHandlerContext<R, S> removeEnvironmentValue(final EnvironmentValueName<?> name) {
+        this.environmentContext()
+            .removeEnvironmentValue(name);
+        return this;
+    }
 
     @Override
     default EnvironmentContext environmentContext() {
