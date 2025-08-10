@@ -36,6 +36,17 @@ public interface FormHandlerExpressionEvaluationContextDelegator<R extends Valid
     // ExpressionEvaluationContextDelegator.............................................................................
 
     @Override
+    default <T> FormHandlerExpressionEvaluationContext<R, S> setEnvironmentValue(final EnvironmentValueName<T> name,
+                                                                                 final T value) {
+        this.expressionEvaluationContext()
+            .setEnvironmentValue(
+                name,
+                value
+            );
+        return this;
+    }
+
+    @Override
     default FormHandlerExpressionEvaluationContext<R, S> removeEnvironmentValue(final EnvironmentValueName<?> name) {
         this.expressionEvaluationContext()
             .removeEnvironmentValue(name);
