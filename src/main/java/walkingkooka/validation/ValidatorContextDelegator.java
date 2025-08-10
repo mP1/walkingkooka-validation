@@ -21,12 +21,20 @@ import walkingkooka.convert.CanConvert;
 import walkingkooka.convert.CanConvertDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
+import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 public interface ValidatorContextDelegator<T extends ValidationReference> extends ValidatorContext<T>,
     CanConvertDelegator,
     EnvironmentContextDelegator {
+
+    // EnvironmentContextDelegator......................................................................................
+
+    @Override
+    default ValidatorContext removeEnvironmentValue(final EnvironmentValueName<?> name) {
+        throw new UnsupportedOperationException();
+    }
 
     // ValidatorContextDelegator.......................................................................................
 

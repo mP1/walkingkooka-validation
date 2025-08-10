@@ -120,6 +120,14 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
         return this;
     }
 
+    @Override
+    public ValidatorContext<T> removeEnvironmentValue(final EnvironmentValueName<?> name) {
+        this.environmentContext.removeEnvironmentValue(
+            name
+        );
+        return this;
+    }
+
     // EnvironmentContextDelegator......................................................................................
 
     @Override

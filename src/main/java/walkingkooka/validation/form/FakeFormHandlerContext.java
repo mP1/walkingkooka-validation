@@ -18,6 +18,7 @@
 package walkingkooka.validation.form;
 
 import walkingkooka.Either;
+import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.environment.FakeEnvironmentContext;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
@@ -54,6 +55,13 @@ public class FakeFormHandlerContext<R extends ValidationReference, S> extends Fa
 
     @Override
     public S saveFormFieldValues(final List<FormField<R>> formFields) {
+        throw new UnsupportedOperationException();
+    }
+
+    // EnvironmentConvert...............................................................................................
+
+    @Override
+    public FormHandlerContext<R, S> removeEnvironmentValue(final EnvironmentValueName<?> name) {
         throw new UnsupportedOperationException();
     }
 

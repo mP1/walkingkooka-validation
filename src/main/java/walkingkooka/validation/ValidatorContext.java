@@ -76,4 +76,7 @@ public interface ValidatorContext<T extends ValidationReference> extends CanConv
     @Override
     <TT> ValidatorContext<T> setEnvironmentValue(final EnvironmentValueName<TT> name,
                                                  final TT value);
+
+    @Override
+    ValidatorContext<T> removeEnvironmentValue(final EnvironmentValueName<?> name);
 }

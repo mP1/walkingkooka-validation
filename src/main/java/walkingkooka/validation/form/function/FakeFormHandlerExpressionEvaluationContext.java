@@ -90,6 +90,12 @@ public class FakeFormHandlerExpressionEvaluationContext<R extends ValidationRefe
     }
 
     @Override
+    public FormHandlerExpressionEvaluationContext<R, S> removeEnvironmentValue(final EnvironmentValueName<?> name) {
+        Objects.requireNonNull(name, "name");
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public Optional<EmailAddress> user() {
         throw new UnsupportedOperationException();
     }
