@@ -32,6 +32,17 @@ public interface ValidatorContextDelegator<T extends ValidationReference> extend
     // EnvironmentContextDelegator......................................................................................
 
     @Override
+    default <TT> ValidatorContext<T> setEnvironmentValue(final EnvironmentValueName<TT> name,
+                                                         final TT value) {
+        this.environmentContext()
+            .setEnvironmentValue(
+                name,
+                value
+            );
+        return this;
+    }
+
+    @Override
     default ValidatorContext removeEnvironmentValue(final EnvironmentValueName<?> name) {
         throw new UnsupportedOperationException();
     }
