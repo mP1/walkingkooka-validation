@@ -43,7 +43,7 @@ public interface ValidatorContextDelegator<T extends ValidationReference> extend
     }
 
     @Override
-    default ValidatorContext removeEnvironmentValue(final EnvironmentValueName<?> name) {
+    default ValidatorContext<T> removeEnvironmentValue(final EnvironmentValueName<?> name) {
         throw new UnsupportedOperationException();
     }
 
