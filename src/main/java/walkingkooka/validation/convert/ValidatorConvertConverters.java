@@ -27,6 +27,13 @@ import walkingkooka.reflect.PublicStaticHelper;
 public final class ValidatorConvertConverters implements PublicStaticHelper {
 
     /**
+     * {@see HasOptionalValidatorSelectorConverter}
+     */
+    public static <C extends ConverterContext> Converter<C> hasOptionalValidatorSelector() {
+        return HasOptionalValidatorSelectorConverter.instance();
+    }
+
+    /**
      * {@see TextToFormNameConverter}
      */
     public static <C extends ConverterContext> Converter<C> textToFormName() {
