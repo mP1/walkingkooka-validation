@@ -211,6 +211,12 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
         }
 
         @Override
+        public ValidatorExpressionEvaluationContext<TestValidationReference> setLocale(final Locale locale) {
+            Objects.requireNonNull(locale, "locale");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public boolean isPure(final ExpressionFunctionName name) {
             Objects.requireNonNull(name, "name");
 

@@ -281,6 +281,14 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
         }
 
         @Override
+        public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> setLocale(final Locale locale  ) {
+            Objects.requireNonNull(locale, "locale");
+
+            return new TestFormHandlerExpressionEvaluationContextDelegator();
+        }
+
+
+        @Override
         public String toString() {
             return this.getClass().getSimpleName();
         }

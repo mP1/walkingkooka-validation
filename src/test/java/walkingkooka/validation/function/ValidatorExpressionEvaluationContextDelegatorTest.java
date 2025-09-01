@@ -231,6 +231,12 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
         }
 
         @Override
+        public ValidatorExpressionEvaluationContext<TestValidationReference> setLocale(final Locale locale) {
+            Objects.requireNonNull(locale, "locale");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public String toString() {
             return this.getClass().getSimpleName();
         }
