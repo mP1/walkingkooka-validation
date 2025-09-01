@@ -23,6 +23,7 @@ import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.FormHandlerContext;
 
+import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -34,4 +35,7 @@ public interface FormHandlerExpressionEvaluationContext<R extends ValidationRefe
 
     @Override
     FormHandlerExpressionEvaluationContext<R, S> enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function);
+
+    @Override
+    FormHandlerExpressionEvaluationContext<R, S> setLocale(final Locale locale);
 }

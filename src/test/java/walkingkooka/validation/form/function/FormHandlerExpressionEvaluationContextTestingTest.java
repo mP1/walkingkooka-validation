@@ -198,6 +198,12 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
+        public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> setLocale(final Locale locale) {
+            Objects.requireNonNull(locale, "locale");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public MathContext mathContext() {
             return DECIMAL_NUMBER_CONTEXT.mathContext();
         }
