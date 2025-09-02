@@ -43,6 +43,8 @@ import java.util.function.Function;
 
 public final class ValidatorContextDelegatorTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference> {
 
+    private final static Locale LOCALE = Locale.ENGLISH;
+
     private final static TestValidationReference VALIDATION_REFERENCE = new TestValidationReference("A1");
 
     private final static Function<ValidatorSelector, Validator<TestValidationReference, ? super ValidatorContext<TestValidationReference>>> VALIDATOR_SELECTOR_TO_VALIDATOR = (final ValidatorSelector selector) -> {
@@ -61,9 +63,9 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
         Converters.simple(),
         DateTimeContexts.basic(
             DateTimeSymbols.fromDateFormatSymbols(
-                new DateFormatSymbols(Locale.ENGLISH)
+                new DateFormatSymbols(LOCALE)
             ),
-            Locale.ENGLISH, // locale
+            LOCALE, // locale
             1950, // defaultYear
             50, // twoDigitYear
             LocalDateTime::now
@@ -72,6 +74,7 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
     );
 
     private final static EnvironmentContext ENVIRONMENT_CONTEXT = EnvironmentContexts.empty(
+        LOCALE,
         LocalDateTime::now, // now
         Optional.of(
             EmailAddress.parse("user@example.com")
