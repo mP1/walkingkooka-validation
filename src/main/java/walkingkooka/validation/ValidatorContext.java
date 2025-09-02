@@ -25,6 +25,7 @@ import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
+import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -72,6 +73,9 @@ public interface ValidatorContext<T extends ValidationReference> extends CanConv
      * {@link Optional} isnt used because working with Optionals within an {@link Expression} is cumbersome.
      */
     ExpressionEvaluationContext expressionEvaluationContext(final Object value);
+
+    @Override
+    ValidatorContext<T> setLocale(final Locale locale);
 
     @Override
     <TT> ValidatorContext<T> setEnvironmentValue(final EnvironmentValueName<TT> name,

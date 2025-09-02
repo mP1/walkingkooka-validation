@@ -94,6 +94,12 @@ public final class FormHandlerContextTestingTest implements FormHandlerContextTe
         }
 
         @Override
+        public ValidatorContext<TestValidationReference> setLocale(final Locale locale) {
+            Objects.requireNonNull(locale, "locale");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public <T> Optional<T> environmentValue(final EnvironmentValueName<T> environmentValueName) {
             Objects.requireNonNull(environmentValueName, "environmentValueName");
 

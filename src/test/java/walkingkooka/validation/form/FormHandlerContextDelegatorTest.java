@@ -24,6 +24,7 @@ import walkingkooka.validation.ValidatorContext;
 import walkingkooka.validation.form.FormHandlerContextDelegatorTest.TestFormHandlerContextDelegator;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -74,6 +75,12 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                 }
 
                 @Override
+                public ValidatorContext<TestValidationReference> setLocale(final Locale locale) {
+                    Objects.requireNonNull(locale, "locale");
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
                 public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
                     Objects.requireNonNull(name, "name");
 
@@ -101,6 +108,12 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                     );
                 }
             };
+        }
+
+        @Override
+        public ValidatorContext<TestValidationReference> setLocale(final Locale locale) {
+            Objects.requireNonNull(locale, "locale");
+            throw new UnsupportedOperationException();
         }
 
         @Override
