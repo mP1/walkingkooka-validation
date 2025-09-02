@@ -41,6 +41,9 @@ import java.util.Objects;
 import java.util.Optional;
 
 public final class ValidatorContextTestingTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference> {
+
+    private final static Locale LOCALE = Locale.ENGLISH;
+
     @Override
     public TestValidatorContext createContext() {
         return new TestValidatorContext();
@@ -82,6 +85,11 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         }
 
         @Override
+        public Locale locale() {
+            return LOCALE;
+        }
+
+        @Override
         public ExpressionEvaluationContext expressionEvaluationContext(final Object value) {
             return ExpressionEvaluationContexts.fake();
         }
@@ -113,6 +121,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         @Override
         public EnvironmentContext environmentContext() {
             return EnvironmentContexts.empty(
+                LOCALE,
                 this,
                 Optional.empty()
             );
@@ -129,9 +138,9 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         Converters.objectToString(),
         DateTimeContexts.basic(
             DateTimeSymbols.fromDateFormatSymbols(
-                new DateFormatSymbols(Locale.ENGLISH)
+                new DateFormatSymbols(LOCALE)
             ),
-            Locale.ENGLISH,
+            LOCALE,
             1950,
             50,
             LocalDateTime::now
