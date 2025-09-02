@@ -15,7 +15,7 @@
  *
  */
 
-package walkingkooka.validation.function.provider;
+package walkingkooka.validation.expression.function.provider;
 
 import walkingkooka.collect.set.Sets;
 import walkingkooka.net.AbsoluteUrl;
@@ -27,12 +27,12 @@ import walkingkooka.tree.expression.function.provider.ExpressionFunctionProvider
 import walkingkooka.tree.expression.function.provider.ExpressionFunctionProviders;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.Validator;
-import walkingkooka.validation.function.ValidatorExpressionEvaluationContext;
-import walkingkooka.validation.function.ValidatorExpressionFunctions;
+import walkingkooka.validation.expression.ValidatorExpressionEvaluationContext;
+import walkingkooka.validation.expression.function.ValidatorExpressionFunctions;
 
 /**
  * A collection of ExpressionFunction(s) that validate a {@link walkingkooka.validation.form.FormField} with a
- * {@link walkingkooka.validation.function.ValidatorExpressionEvaluationContext}.
+ * {@link ValidatorExpressionEvaluationContext}.
  */
 public final class ValidatorExpressionFunctionProviders implements PublicStaticHelper {
 
