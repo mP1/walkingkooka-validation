@@ -15,22 +15,27 @@
  *
  */
 
-package walkingkooka.validation.form.function;
+package walkingkooka.validation.form.expression.function;
 
-import walkingkooka.tree.expression.ExpressionEvaluationContextTesting;
-import walkingkooka.validation.ValidationReference;
-import walkingkooka.validation.form.FormHandlerContextTesting;
+import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicStaticHelperTesting;
 
-public interface FormHandlerExpressionEvaluationContextTesting<R extends ValidationReference, S, C extends FormHandlerExpressionEvaluationContext<R, S>> extends ExpressionEvaluationContextTesting<C>,
-    FormHandlerContextTesting<C, R, S> {
+import java.lang.reflect.Method;
+
+public final class FormHandlerExpressionFunctionsTest implements PublicStaticHelperTesting<FormHandlerExpressionFunctions> {
 
     @Override
-    default C createCanConvert() {
-        return this.createContext();
+    public Class<FormHandlerExpressionFunctions> type() {
+        return FormHandlerExpressionFunctions.class;
     }
 
     @Override
-    default String typeNameSuffix() {
-        return FormHandlerExpressionEvaluationContext.class.getSimpleName();
+    public JavaVisibility typeVisibility() {
+        return JavaVisibility.PUBLIC;
+    }
+
+    @Override
+    public boolean canHavePublicTypes(final Method method) {
+        return false;
     }
 }
