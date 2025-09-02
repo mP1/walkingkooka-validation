@@ -15,7 +15,7 @@
  *
  */
 
-package walkingkooka.validation.function.provider;
+package walkingkooka.validation.expression.function.provider;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.plugin.ProviderContexts;
@@ -24,7 +24,7 @@ import walkingkooka.reflect.PublicStaticHelperTesting;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.expression.function.provider.ExpressionFunctionInfoSet;
 import walkingkooka.tree.expression.function.provider.ExpressionFunctionSelector;
-import walkingkooka.validation.function.ValidatorExpressionFunctions;
+import walkingkooka.validation.expression.function.ValidatorExpressionFunctions;
 
 import java.lang.reflect.Method;
 

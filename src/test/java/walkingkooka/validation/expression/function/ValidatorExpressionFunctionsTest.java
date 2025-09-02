@@ -15,18 +15,18 @@
  *
  */
 
-package walkingkooka.validation.function;
+package walkingkooka.validation.expression.function;
 
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
 
-public final class ValidatorExpressionEvaluationContextsTest implements PublicStaticHelperTesting<ValidatorExpressionEvaluationContexts> {
+public final class ValidatorExpressionFunctionsTest implements PublicStaticHelperTesting<ValidatorExpressionFunctions> {
 
     @Override
-    public Class<ValidatorExpressionEvaluationContexts> type() {
-        return ValidatorExpressionEvaluationContexts.class;
+    public Class<ValidatorExpressionFunctions> type() {
+        return ValidatorExpressionFunctions.class;
     }
 
     @Override
