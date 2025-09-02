@@ -25,6 +25,7 @@ import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
+import java.util.Locale;
 import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -109,6 +110,12 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
     final CanConvert canConvert;
 
     // EnvironmentContext...............................................................................................
+
+    @Override
+    public ValidatorContext<T> setLocale(final Locale locale) {
+        this.environmentContext.setLocale(locale);
+        return this;
+    }
 
     @Override
     public <TT> BasicValidatorContext<T> setEnvironmentValue(final EnvironmentValueName<TT> name,

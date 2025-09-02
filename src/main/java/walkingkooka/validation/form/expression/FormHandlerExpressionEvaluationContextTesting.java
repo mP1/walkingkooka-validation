@@ -17,12 +17,19 @@
 
 package walkingkooka.validation.form.expression;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.tree.expression.ExpressionEvaluationContextTesting;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.FormHandlerContextTesting;
 
 public interface FormHandlerExpressionEvaluationContextTesting<R extends ValidationReference, S, C extends FormHandlerExpressionEvaluationContext<R, S>> extends ExpressionEvaluationContextTesting<C>,
     FormHandlerContextTesting<C, R, S> {
+
+    @Override
+    @Test
+    default void testSetLocaleWithNullFails() {
+        FormHandlerContextTesting.super.testSetLocaleWithNullFails();
+    }
 
     @Override
     default C createCanConvert() {
