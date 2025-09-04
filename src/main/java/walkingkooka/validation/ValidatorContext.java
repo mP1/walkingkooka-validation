@@ -75,6 +75,9 @@ public interface ValidatorContext<T extends ValidationReference> extends CanConv
     ExpressionEvaluationContext expressionEvaluationContext(final Object value);
 
     @Override
+    ValidatorContext<T> cloneEnvironment();
+
+    @Override
     ValidatorContext<T> setLocale(final Locale locale);
 
     @Override

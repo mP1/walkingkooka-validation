@@ -188,6 +188,11 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
                 }
 
                 @Override
+                public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> cloneEnvironment() {
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
                 public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
                     Objects.requireNonNull(name, "name");
 
@@ -269,6 +274,11 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
         public Optional<Optional<Object>> reference(final ExpressionReference reference) {
             Objects.requireNonNull(reference, "reference");
 
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public TestFormHandlerExpressionEvaluationContextDelegator cloneEnvironment() {
             throw new UnsupportedOperationException();
         }
 

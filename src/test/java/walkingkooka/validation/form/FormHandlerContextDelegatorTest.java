@@ -81,6 +81,11 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                 }
 
                 @Override
+                public ValidatorContext<TestValidationReference> cloneEnvironment() {
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
                 public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
                     Objects.requireNonNull(name, "name");
 
@@ -108,6 +113,11 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                     );
                 }
             };
+        }
+
+        @Override
+        public ValidatorContext<TestValidationReference> cloneEnvironment() {
+            throw new UnsupportedOperationException();
         }
 
         @Override

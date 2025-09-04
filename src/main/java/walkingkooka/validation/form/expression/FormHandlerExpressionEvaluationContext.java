@@ -31,6 +31,9 @@ public interface FormHandlerExpressionEvaluationContext<R extends ValidationRefe
     FormHandlerContext<R, S> {
 
     @Override
+    FormHandlerExpressionEvaluationContext<R, S> cloneEnvironment();
+
+    @Override
     FormHandlerExpressionEvaluationContext<R, S> setLocale(final Locale locale);
 
     @Override

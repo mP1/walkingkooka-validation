@@ -147,6 +147,11 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
+        public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> cloneEnvironment() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public DateTimeContext dateTimeContext() {
             throw new UnsupportedOperationException();
         }

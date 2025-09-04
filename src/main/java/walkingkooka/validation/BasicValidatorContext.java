@@ -112,6 +112,22 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
     // EnvironmentContext...............................................................................................
 
     @Override
+    public ValidatorContext<T> cloneEnvironment() {
+        final EnvironmentContext environmentContext = this.environmentContext;
+        final EnvironmentContext cloned = environmentContext.cloneEnvironment();
+
+        return environmentContext.equals(cloned) ?
+            this :
+            new BasicValidatorContext<>(
+                this.validationReference,
+                this.validatorSelectorToValidator,
+                this.referenceToExpressionEvaluationContext,
+                this.canConvert,
+                Objects.requireNonNull(cloned, "environmentContext")
+            );
+    }
+
+    @Override
     public ValidatorContext<T> setLocale(final Locale locale) {
         this.environmentContext.setLocale(locale);
         return this;

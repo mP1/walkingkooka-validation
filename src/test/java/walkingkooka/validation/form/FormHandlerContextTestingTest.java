@@ -100,6 +100,11 @@ public final class FormHandlerContextTestingTest implements FormHandlerContextTe
         }
 
         @Override
+        public FormHandlerContext<TestValidationReference, Void> cloneEnvironment() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public <T> Optional<T> environmentValue(final EnvironmentValueName<T> environmentValueName) {
             Objects.requireNonNull(environmentValueName, "environmentValueName");
 

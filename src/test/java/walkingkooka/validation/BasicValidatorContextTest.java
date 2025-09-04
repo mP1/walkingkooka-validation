@@ -185,6 +185,17 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
         );
     }
 
+    // cloneEnvironment..................................................................................................
+
+    @Test
+    public void testCloneEnvironment() {
+        final BasicValidatorContext<TestValidationReference> context = this.createContext();
+        assertSame(
+            context,
+            context.cloneEnvironment()
+        );
+    }
+
     @Override
     public BasicValidatorContext<TestValidationReference> createContext() {
         return BasicValidatorContext.with(
