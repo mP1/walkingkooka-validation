@@ -116,7 +116,8 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
         final EnvironmentContext environmentContext = this.environmentContext;
         final EnvironmentContext cloned = environmentContext.cloneEnvironment();
 
-        return environmentContext.equals(cloned) ?
+        // Recreate only if different cloned EnvironmentContext, cloned environment should be equals
+        return environmentContext == cloned ?
             this :
             new BasicValidatorContext<>(
                 this.validationReference,
