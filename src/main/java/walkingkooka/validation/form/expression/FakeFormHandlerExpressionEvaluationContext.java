@@ -73,6 +73,11 @@ public class FakeFormHandlerExpressionEvaluationContext<R extends ValidationRefe
     // EnvironmentContext...............................................................................................
 
     @Override
+    public FormHandlerExpressionEvaluationContext<R, S> cloneEnvironment() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public <T> Optional<T> environmentValue(final EnvironmentValueName<T> environmentValueName) {
         throw new UnsupportedOperationException();
     }
