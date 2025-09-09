@@ -63,6 +63,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
     private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
     private final static CanConvert CAN_CONVERT = ConverterContexts.basic(
+        false, // canNumbersHaveGroupSeparator
         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // offset
         Converters.simple(),
         DateTimeContexts.basic(
