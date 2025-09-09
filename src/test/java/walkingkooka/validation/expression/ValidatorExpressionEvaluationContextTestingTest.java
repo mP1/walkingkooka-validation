@@ -123,6 +123,11 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
         }
 
         @Override
+        public boolean canNumbersHaveGroupSeparator() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public long dateOffset() {
             return 0;
         }

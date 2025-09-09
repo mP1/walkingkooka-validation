@@ -130,6 +130,11 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
+        public boolean canNumbersHaveGroupSeparator() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public long dateOffset() {
             return 0;
         }
