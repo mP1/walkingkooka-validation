@@ -140,6 +140,11 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
+        public char valueSeparator() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public boolean canConvert(final Object value,
                                   final Class<?> type) {
             throw new UnsupportedOperationException();

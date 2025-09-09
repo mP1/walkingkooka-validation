@@ -61,6 +61,7 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
     private final static ConverterContext CONVERTER_CONTEXT = ConverterContexts.basic(
         false, // canNumbersHaveGroupSeparator
         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // offset
+        ',', // valueSeparator
         Converters.simple(),
         DateTimeContexts.basic(
             DateTimeSymbols.fromDateFormatSymbols(
