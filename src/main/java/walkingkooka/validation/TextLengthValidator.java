@@ -21,6 +21,7 @@ import walkingkooka.text.CharSequences;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * A {@link Validator} that assumes a {@link String text} value and verifies its length is between the given range.
@@ -89,6 +90,14 @@ final class TextLengthValidator<R extends ValidationReference, C extends Validat
     private final int minLength;
 
     private final int maxLength;
+
+    // choices..........................................................................................................
+
+    @Override
+    public Optional<List<ValidationChoice>> choices(final ValidatorContext<R> context) {
+        Objects.requireNonNull(context, "context");
+        return NO_CHOICES;
+    }
 
     // Object...........................................................................................................
 

@@ -22,6 +22,7 @@ import walkingkooka.collect.list.Lists;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * A {@link Validator} that adds an error if the value is null.
@@ -56,6 +57,14 @@ final class NonNullValidator<R extends ValidationReference, C extends ValidatorC
                 )
             ) :
             Lists.empty();
+    }
+
+    // choices..........................................................................................................
+
+    @Override
+    public Optional<List<ValidationChoice>> choices(final ValidatorContext<R> context) {
+        Objects.requireNonNull(context, "context");
+        return NO_CHOICES;
     }
 
     // Object...........................................................................................................

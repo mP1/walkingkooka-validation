@@ -25,6 +25,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface ValidatorTesting2<V extends Validator<R, C>, R extends ValidationReference, C extends ValidatorContext<R>> extends ValidatorTesting {
 
+    // validate.........................................................................................................
+
     @Test
     default void testValidateWithNullContextFails() {
         assertThrows(
@@ -53,6 +55,50 @@ public interface ValidatorTesting2<V extends Validator<R, C>, R extends Validati
         this.validateAndCheck(
             this.createValidator(),
             value,
+            context,
+            expected
+        );
+    }
+
+    // choices..........................................................................................................
+
+    @Test
+    default void testChoicesWithNullContextFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createValidator()
+                .choices(
+                    null
+                )
+        );
+    }
+
+    default void choicesAndCheck(final ValidationChoice... expected) {
+        this.choicesAndCheck(
+            this.createContext(),
+            expected
+        );
+    }
+
+    default void choicesAndCheck(final List<ValidationChoice> expected) {
+        this.choicesAndCheck(
+            this.createContext(),
+            expected
+        );
+    }
+
+    default void choicesAndCheck(final C context,
+                                 final ValidationChoice... expected) {
+        this.choicesAndCheck(
+            context,
+            List.of(expected)
+        );
+    }
+
+    default void choicesAndCheck(final C context,
+                                 final List<ValidationChoice> expected) {
+        this.choicesAndCheck(
+            this.createValidator(),
             context,
             expected
         );
