@@ -21,12 +21,11 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.convert.Converter;
-import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.validation.ValidationValueTypeName;
 
-public final class TextToValidationValueTypeNameConverterTest implements ConverterTesting2<TextToValidationValueTypeNameConverter<FakeConverterContext>, FakeConverterContext> {
+public final class ValidationConverterTextToValidationValueTypeNameTest extends ValidationConverterTestCase<ValidationConverterTextToValidationValueTypeName<FakeConverterContext>, FakeConverterContext> {
 
     @Test
     public void testConvertNumberToValidationValueTypeName() {
@@ -47,8 +46,8 @@ public final class TextToValidationValueTypeNameConverterTest implements Convert
     }
 
     @Override
-    public TextToValidationValueTypeNameConverter<FakeConverterContext> createConverter() {
-        return TextToValidationValueTypeNameConverter.instance();
+    public ValidationConverterTextToValidationValueTypeName<FakeConverterContext> createConverter() {
+        return ValidationConverterTextToValidationValueTypeName.instance();
     }
 
     @Override
@@ -81,13 +80,13 @@ public final class TextToValidationValueTypeNameConverterTest implements Convert
     @Test
     public void testToString() {
         this.toStringAndCheck(
-            TextToValidationValueTypeNameConverter.instance(),
+            ValidationConverterTextToValidationValueTypeName.instance(),
             "Text to ValidationValueTypeName"
         );
     }
 
     @Override
-    public Class<TextToValidationValueTypeNameConverter<FakeConverterContext>> type() {
-        return Cast.to(TextToValidationValueTypeNameConverter.class);
+    public Class<ValidationConverterTextToValidationValueTypeName<FakeConverterContext>> type() {
+        return Cast.to(ValidationConverterTextToValidationValueTypeName.class);
     }
 }

@@ -20,26 +20,26 @@ package walkingkooka.validation.convert;
 import walkingkooka.Cast;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TextToTryingShortCircuitingConverter;
-import walkingkooka.validation.ValidationValueTypeName;
+import walkingkooka.validation.form.FormName;
 
 /**
- * Converts text to a {@link ValidationValueTypeName}.
+ * Converts text to a {@link FormName}.
  */
-final class TextToValidationValueTypeNameConverter<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
+final class ValidationConverterTextToFormName<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
 
     /**
      * Type safe getter
      */
-    static <C extends ConverterContext> TextToValidationValueTypeNameConverter<C> instance() {
+    static <C extends ConverterContext> ValidationConverterTextToFormName<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TextToValidationValueTypeNameConverter<?> INSTANCE = new TextToValidationValueTypeNameConverter<>();
+    private final static ValidationConverterTextToFormName<?> INSTANCE = new ValidationConverterTextToFormName<>();
 
-    private TextToValidationValueTypeNameConverter() {
+    private ValidationConverterTextToFormName() {
         super();
     }
 
@@ -47,18 +47,18 @@ final class TextToValidationValueTypeNameConverter<C extends ConverterContext> i
     public boolean isTargetType(final Object value,
                                 final Class<?> type,
                                 final C context) {
-        return type == ValidationValueTypeName.class;
+        return type == FormName.class;
     }
 
     @Override
     public Object parseText(final String text,
                             final Class<?> type,
                             final C context) {
-        return ValidationValueTypeName.with(text);
+        return FormName.with(text);
     }
 
     @Override
     public String toString() {
-        return "Text to " + ValidationValueTypeName.class.getSimpleName();
+        return "Text to " + FormName.class.getSimpleName();
     }
 }

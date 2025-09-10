@@ -21,13 +21,12 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.ConverterContexts;
-import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.validation.provider.HasOptionalValidatorSelector;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.util.Optional;
 
-public final class HasOptionalValidatorSelectorConverterTest implements ConverterTesting2<HasOptionalValidatorSelectorConverter<ConverterContext>, ConverterContext> {
+public final class ValidationConverterHasOptionalValidatorSelectorTest extends ValidationConverterTestCase<ValidationConverterHasOptionalValidatorSelector<ConverterContext>, ConverterContext> {
 
     @Test
     public void testConvertNotHasOptionalValidatorSelector() {
@@ -68,8 +67,8 @@ public final class HasOptionalValidatorSelectorConverterTest implements Converte
     }
 
     @Override
-    public HasOptionalValidatorSelectorConverter<ConverterContext> createConverter() {
-        return HasOptionalValidatorSelectorConverter.instance();
+    public ValidationConverterHasOptionalValidatorSelector<ConverterContext> createConverter() {
+        return ValidationConverterHasOptionalValidatorSelector.instance();
     }
 
     @Override
@@ -78,7 +77,7 @@ public final class HasOptionalValidatorSelectorConverterTest implements Converte
     }
 
     @Override
-    public Class<HasOptionalValidatorSelectorConverter<ConverterContext>> type() {
-        return Cast.to(HasOptionalValidatorSelectorConverter.class);
+    public Class<ValidationConverterHasOptionalValidatorSelector<ConverterContext>> type() {
+        return Cast.to(ValidationConverterHasOptionalValidatorSelector.class);
     }
 }

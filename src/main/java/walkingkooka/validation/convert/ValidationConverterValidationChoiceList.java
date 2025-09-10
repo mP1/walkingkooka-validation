@@ -21,39 +21,32 @@ import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TryingShortCircuitingConverter;
-import walkingkooka.validation.ValidationError;
-import walkingkooka.validation.ValidationErrorList;
+import walkingkooka.validation.ValidationChoice;
+import walkingkooka.validation.ValidationChoiceList;
 
 import java.util.List;
 
 /**
- * A converter that handles converting the given value to a {@link ValidationErrorList}.
- * <ul>
- *     <li>null becomes {@link ValidationErrorList#empty()}</li>
- *     <li>non list such as {@link String} if it can be converted into a {@link ValidationError}</li>
- *     <li>A single {@link ValidationError}</li>
- *     <li>A list of elements that can each be converted into a {@link ValidationError}, with nulls skipped</li>
- *     <li>A {@link ValidationErrorList}</li>
- * </ul>
+ * A converter that handles converting the given value to a {@link ValidationChoiceList}.
  */
-final class ValidationErrorListConverter<C extends ConverterContext> implements TryingShortCircuitingConverter<C> {
+final class ValidationConverterValidationChoiceList<C extends ConverterContext> implements TryingShortCircuitingConverter<C> {
 
     /**
      * Type safe getter
      */
-    static <C extends ConverterContext> ValidationErrorListConverter<C> instance() {
+    static <C extends ConverterContext> ValidationConverterValidationChoiceList<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static ValidationErrorListConverter<?> INSTANCE = new ValidationErrorListConverter<>();
+    private final static ValidationConverterValidationChoiceList INSTANCE = new ValidationConverterValidationChoiceList<>();
 
     /**
      * Private ctor
      */
-    private ValidationErrorListConverter() {
+    private ValidationConverterValidationChoiceList() {
         super();
     }
 
@@ -61,14 +54,14 @@ final class ValidationErrorListConverter<C extends ConverterContext> implements 
     public boolean canConvert(final Object value,
                               final Class<?> type,
                               final C context) {
-        return type == ValidationErrorList.class &&
+        return type == ValidationChoiceList.class &&
             (
                 null == value ||
-                    value instanceof ValidationErrorList ||
-                    value instanceof ValidationError ||
+                    value instanceof ValidationChoiceList ||
+                    value instanceof ValidationChoice ||
                     context.canConvert(
                         value,
-                        ValidationError.class
+                        ValidationChoice.class
                     ) ||
                     value instanceof List &&
                         this.canConvertList(
@@ -86,7 +79,7 @@ final class ValidationErrorListConverter<C extends ConverterContext> implements 
                 null == e ||
                     context.canConvert(
                         e,
-                        ValidationError.class
+                        ValidationChoice.class
                     )
             );
     }
@@ -95,38 +88,35 @@ final class ValidationErrorListConverter<C extends ConverterContext> implements 
     public Object tryConvertOrFail(final Object value,
                                    final Class<?> type,
                                    final C context) {
-        ValidationErrorList<?> validationErrorList;
+        ValidationChoiceList validationErrorList;
 
         if (null == value) {
-            validationErrorList = ValidationErrorList.empty();
+            validationErrorList = ValidationChoiceList.EMPTY;
         } else {
-            if (value instanceof ValidationErrorList) {
-                validationErrorList = (ValidationErrorList<?>) value;
+            if (value instanceof ValidationChoiceList) {
+                validationErrorList = (ValidationChoiceList) value;
             } else {
                 if (value instanceof List) {
-                    final List<ValidationError<?>> list = Lists.array();
+                    final List<ValidationChoice> list = Lists.array();
 
-                    // skip nulls, try and convert all other elements to ValidationError
                     for (final Object element : (List<?>) value) {
-                        if (null != element) {
-                            list.add(
-                                context.convertOrFail(
-                                    element,
-                                    ValidationError.class
-                                )
-                            );
-                        }
+                        list.add(
+                            context.convertOrFail(
+                                element,
+                                ValidationChoice.class
+                            )
+                        );
                     }
 
-                    validationErrorList = ValidationErrorList.with(
+                    validationErrorList = ValidationChoiceList.with(
                         Cast.to(list)
                     );
                 } else {
-                    validationErrorList = ValidationErrorList.empty()
+                    validationErrorList = ValidationChoiceList.EMPTY
                         .concat(
                             context.convertOrFail(
                                 value,
-                                ValidationError.class
+                                ValidationChoice.class
                             )
                         );
                 }

@@ -27,45 +27,45 @@ import walkingkooka.reflect.PublicStaticHelper;
 public final class ValidationConvertConverters implements PublicStaticHelper {
 
     /**
-     * {@see HasOptionalValidatorSelectorConverter}
+     * {@see ValidationConverterHasOptionalValidatorSelector}
      */
     public static <C extends ConverterContext> Converter<C> hasOptionalValidatorSelector() {
-        return HasOptionalValidatorSelectorConverter.instance();
+        return ValidationConverterHasOptionalValidatorSelector.instance();
     }
 
     /**
-     * {@see TextToFormNameConverter}
+     * {@see ValidationConverterTextToFormName}
      */
     public static <C extends ConverterContext> Converter<C> textToFormName() {
-        return TextToFormNameConverter.instance();
+        return ValidationConverterTextToFormName.instance();
     }
 
     /**
-     * {@see TextToValidationValueTypeNameConverter}
+     * {@see ValidationConverterTextToValidationValueTypeName}
      */
     public static <C extends ConverterContext> Converter<C> textToValidationValueTypeName() {
-        return TextToValidationValueTypeNameConverter.instance();
+        return ValidationConverterTextToValidationValueTypeName.instance();
     }
 
     /**
-     * {@see TextToValidatorSelectorConverter}
+     * {@see ValidationConverterTextToValidatorSelector}
      */
     public static <C extends ConverterContext> Converter<C> textToValidatorSelector() {
-        return TextToValidatorSelectorConverter.instance();
+        return ValidationConverterTextToValidatorSelector.instance();
     }
 
     /**
-     * {@see ValidationChoiceListConverter}
+     * {@see ValidationConverterValidationChoiceList}
      */
     public static <C extends ConverterContext> Converter<C> toValidationChoiceList() {
-        return ValidationChoiceListConverter.instance();
+        return ValidationConverterValidationChoiceList.instance();
     }
 
     /**
-     * {@see ValidationErrorListConverter}
+     * {@see ValidationConverterValidationErrorList}
      */
     public static <C extends ConverterContext> Converter<C> toValidationErrorList() {
-        return ValidationErrorListConverter.instance();
+        return ValidationConverterValidationErrorList.instance();
     }
 
     /**
