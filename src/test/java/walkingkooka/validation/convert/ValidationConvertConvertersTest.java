@@ -22,11 +22,11 @@ import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
 
-public final class ValidatorConvertConvertersTest implements PublicStaticHelperTesting<ValidatorConvertConverters> {
+public final class ValidationConvertConvertersTest implements PublicStaticHelperTesting<ValidationConvertConverters> {
 
     @Override
-    public Class<ValidatorConvertConverters> type() {
-        return ValidatorConvertConverters.class;
+    public Class<ValidationConvertConverters> type() {
+        return ValidationConvertConverters.class;
     }
 
     @Override

@@ -24,7 +24,7 @@ import walkingkooka.reflect.PublicStaticHelper;
 /**
  * A collection of {@link Converter}.
  */
-public final class ValidatorConvertConverters implements PublicStaticHelper {
+public final class ValidationConvertConverters implements PublicStaticHelper {
 
     /**
      * {@see HasOptionalValidatorSelectorConverter}
@@ -71,7 +71,7 @@ public final class ValidatorConvertConverters implements PublicStaticHelper {
     /**
      * Stop creation
      */
-    private ValidatorConvertConverters() {
+    private ValidationConvertConverters() {
         throw new UnsupportedOperationException();
     }
 }
