@@ -55,6 +55,13 @@ public final class ValidatorConvertConverters implements PublicStaticHelper {
     }
 
     /**
+     * {@see ValidationChoiceListConverter}
+     */
+    public static <C extends ConverterContext> Converter<C> toValidationChoiceList() {
+        return ValidationChoiceListConverter.instance();
+    }
+
+    /**
      * {@see ValidationErrorListConverter}
      */
     public static <C extends ConverterContext> Converter<C> toValidationErrorList() {
