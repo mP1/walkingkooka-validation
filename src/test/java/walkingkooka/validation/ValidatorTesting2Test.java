@@ -23,6 +23,7 @@ import walkingkooka.validation.ValidatorTesting2Test.TestValidator;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, TestValidationReference, TestValidatorContext> {
 
@@ -44,6 +45,22 @@ public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, T
             new TestValidatorContext(),
             error1,
             error2
+        );
+    }
+
+    private final static Optional<List<ValidationChoice>> CHOICES = Optional.of(
+        Lists.of(
+            ValidationChoice.with(
+                "Label1",
+                Optional.of(1)
+            )
+        )
+    );
+
+    @Test
+    public void testChoices() {
+        this.choicesAndCheck(
+            CHOICES.get()
         );
     }
 
@@ -71,5 +88,13 @@ public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, T
         }
 
         private final List<ValidationError<TestValidationReference>> errors;
+
+        // choices.................................................................................................
+
+        @Override
+        public Optional<List<ValidationChoice>> choices(final ValidatorContext<TestValidationReference> context) {
+            Objects.requireNonNull(context, "context");
+            return CHOICES;
+        }
     }
 }

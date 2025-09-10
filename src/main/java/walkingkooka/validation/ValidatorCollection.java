@@ -22,6 +22,7 @@ import walkingkooka.collect.list.Lists;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * A {@link Validator} that contains many other validators, and tries them until the error count exceeds the given {@link #maxErrors}.
@@ -82,6 +83,15 @@ final class ValidatorCollection<R extends ValidationReference, C extends Validat
     }
 
     private final int maxErrors;
+
+    // choices..........................................................................................................
+
+    @Override
+    public Optional<List<ValidationChoice>> choices(final ValidatorContext<R> context) {
+        Objects.requireNonNull(context, "context");
+        return NO_CHOICES;
+    }
+
     private final List<Validator<R, C>> validators;
 
     // Object...........................................................................................................

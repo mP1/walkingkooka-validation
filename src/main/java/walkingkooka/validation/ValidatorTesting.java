@@ -20,6 +20,7 @@ package walkingkooka.validation;
 import walkingkooka.test.Testing;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ValidatorTesting extends Testing {
 
@@ -45,6 +46,44 @@ public interface ValidatorTesting extends Testing {
                 value,
                 context
             )
+        );
+    }
+
+    default <R extends ValidationReference, C extends ValidatorContext<R>> void choicesAndCheck(final Validator<R, C> validator,
+                                                                                                final C context) {
+        this.choicesAndCheck(
+            validator,
+            context,
+            Optional.empty()
+        );
+    }
+
+    default <R extends ValidationReference, C extends ValidatorContext<R>> void choicesAndCheck(final Validator<R, C> validator,
+                                                                                                final C context,
+                                                                                                final ValidationChoice... expected) {
+        this.choicesAndCheck(
+            validator,
+            context,
+            List.of(expected)
+        );
+    }
+
+    default <R extends ValidationReference, C extends ValidatorContext<R>> void choicesAndCheck(final Validator<R, C> validator,
+                                                                                                final C context,
+                                                                                                final List<ValidationChoice> expected) {
+        this.choicesAndCheck(
+            validator,
+            context,
+            Optional.of(expected)
+        );
+    }
+
+    default <R extends ValidationReference, C extends ValidatorContext<R>> void choicesAndCheck(final Validator<R, C> validator,
+                                                                                                final C context,
+                                                                                                final Optional<List<ValidationChoice>> expected) {
+        this.checkEquals(
+            expected,
+            validator.choices(context)
         );
     }
 }

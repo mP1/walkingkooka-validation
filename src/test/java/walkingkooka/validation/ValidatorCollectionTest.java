@@ -51,7 +51,7 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
         return reference + ": Message " + messageNumber;
     }
 
-    private final static Validator<TestValidationReference, TestValidatorContext> VALIDATOR1 = new Validator<>() {
+    private final static Validator<TestValidationReference, TestValidatorContext> VALIDATOR1 = new FakeValidator<>() {
 
         @Override
         public List<ValidationError<TestValidationReference>> validate(final Object value,
@@ -76,7 +76,7 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
         }
     };
 
-    private final static Validator<TestValidationReference, TestValidatorContext> VALIDATOR2 = new Validator<>() {
+    private final static Validator<TestValidationReference, TestValidatorContext> VALIDATOR2 = new FakeValidator<>() {
 
         @Override
         public List<ValidationError<TestValidationReference>> validate(final Object value,
@@ -99,7 +99,7 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
         }
     };
 
-    private final static Validator<TestValidationReference, TestValidatorContext> VALIDATOR3 = new Validator<>() {
+    private final static Validator<TestValidationReference, TestValidatorContext> VALIDATOR3 = new FakeValidator<>() {
 
         @Override
         public List<ValidationError<TestValidationReference>> validate(final Object value,
@@ -227,7 +227,7 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
             ValidatorCollection.with(
                 10,
                 Lists.of(
-                    new Validator<TestValidationReference, TestValidatorContext>() {
+                    new FakeValidator<>() {
 
                         @Override
                         public List<ValidationError<TestValidationReference>> validate(final Object value,

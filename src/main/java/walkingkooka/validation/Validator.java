@@ -18,6 +18,7 @@
 package walkingkooka.validation;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * A validator accepts a value and potentially produces {@link ValidationError}.
@@ -36,4 +37,11 @@ public interface Validator<R extends ValidationReference, C extends ValidatorCon
     default ValidationErrorList<R> noValidationErrors() {
         return ValidationErrorList.empty();
     }
+
+    Optional<List<ValidationChoice>> NO_CHOICES = Optional.empty();
+
+    /**
+     * Some validators may return some choices.
+     */
+    Optional<List<ValidationChoice>> choices(final ValidatorContext<R> context);
 }
