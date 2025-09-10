@@ -22,7 +22,6 @@ import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidationError;
@@ -32,8 +31,8 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public final class ValidationErrorListConverterTest implements ConverterTesting2<ValidationErrorListConverter<FakeConverterContext>, FakeConverterContext>,
-    ToStringTesting<ValidationErrorListConverter<FakeConverterContext>> {
+public final class ValidationConverterValidationErrorListTest extends ValidationConverterTestCase<ValidationConverterValidationErrorList<FakeConverterContext>, FakeConverterContext>
+    implements ToStringTesting<ValidationConverterValidationErrorList<FakeConverterContext>> {
 
     private final static TestValidationReference TEST_VALIDATION_REFERENCE = new TestValidationReference("Hello");
 
@@ -180,8 +179,8 @@ public final class ValidationErrorListConverterTest implements ConverterTesting2
     }
 
     @Override
-    public ValidationErrorListConverter<FakeConverterContext> createConverter() {
-        return ValidationErrorListConverter.instance();
+    public ValidationConverterValidationErrorList<FakeConverterContext> createConverter() {
+        return ValidationConverterValidationErrorList.instance();
     }
 
     @Override
@@ -229,15 +228,15 @@ public final class ValidationErrorListConverterTest implements ConverterTesting2
     @Test
     public void testToString() {
         this.toStringAndCheck(
-            ValidationErrorListConverter.instance(),
-            "* to ValidationErrorListConverter"
+            ValidationConverterValidationErrorList.instance(),
+            "* to ValidationErrorList"
         );
     }
 
     // class............................................................................................................
 
     @Override
-    public Class<ValidationErrorListConverter<FakeConverterContext>> type() {
-        return Cast.to(ValidationErrorListConverter.class);
+    public Class<ValidationConverterValidationErrorList<FakeConverterContext>> type() {
+        return Cast.to(ValidationConverterValidationErrorList.class);
     }
 }

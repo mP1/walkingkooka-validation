@@ -20,9 +20,7 @@ package walkingkooka.validation.convert;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.Either;
-import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.validation.ValidationChoice;
 import walkingkooka.validation.ValidationChoiceList;
@@ -32,8 +30,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public final class ValidationChoiceListConverterTest implements ConverterTesting2<ValidationChoiceListConverter<FakeConverterContext>, FakeConverterContext>,
-    ToStringTesting<ValidationChoiceListConverter<FakeConverterContext>> {
+public final class ValidationConverterValidationChoiceListTest extends ValidationConverterTestCase<ValidationConverterValidationChoiceList<FakeConverterContext>, FakeConverterContext> {
 
     private final static String STRING_VALUE = "stringValue";
 
@@ -159,8 +156,8 @@ public final class ValidationChoiceListConverterTest implements ConverterTesting
     }
 
     @Override
-    public ValidationChoiceListConverter<FakeConverterContext> createConverter() {
-        return ValidationChoiceListConverter.instance();
+    public ValidationConverterValidationChoiceList<FakeConverterContext> createConverter() {
+        return ValidationConverterValidationChoiceList.instance();
     }
 
     @Override
@@ -202,15 +199,15 @@ public final class ValidationChoiceListConverterTest implements ConverterTesting
     @Test
     public void testToString() {
         this.toStringAndCheck(
-            ValidationChoiceListConverter.instance(),
-            "* to ValidationChoiceListConverter"
+            ValidationConverterValidationChoiceList.instance(),
+            "* to ValidationConverterValidationChoiceList"
         );
     }
 
     // class............................................................................................................
 
     @Override
-    public Class<ValidationChoiceListConverter<FakeConverterContext>> type() {
-        return Cast.to(ValidationChoiceListConverter.class);
+    public Class<ValidationConverterValidationChoiceList<FakeConverterContext>> type() {
+        return Cast.to(ValidationConverterValidationChoiceList.class);
     }
 }

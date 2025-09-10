@@ -20,26 +20,26 @@ package walkingkooka.validation.convert;
 import walkingkooka.Cast;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TextToTryingShortCircuitingConverter;
-import walkingkooka.validation.provider.ValidatorSelector;
+import walkingkooka.validation.ValidationValueTypeName;
 
 /**
- * Converts text to a {@link ValidatorSelector}.
+ * Converts text to a {@link ValidationValueTypeName}.
  */
-final class TextToValidatorSelectorConverter<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
+final class ValidationConverterTextToValidationValueTypeName<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
 
     /**
      * Type safe getter
      */
-    static <C extends ConverterContext> TextToValidatorSelectorConverter<C> instance() {
+    static <C extends ConverterContext> ValidationConverterTextToValidationValueTypeName<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TextToValidatorSelectorConverter<?> INSTANCE = new TextToValidatorSelectorConverter<>();
+    private final static ValidationConverterTextToValidationValueTypeName<?> INSTANCE = new ValidationConverterTextToValidationValueTypeName<>();
 
-    private TextToValidatorSelectorConverter() {
+    private ValidationConverterTextToValidationValueTypeName() {
         super();
     }
 
@@ -47,18 +47,18 @@ final class TextToValidatorSelectorConverter<C extends ConverterContext> impleme
     public boolean isTargetType(final Object value,
                                 final Class<?> type,
                                 final C context) {
-        return type == ValidatorSelector.class;
+        return type == ValidationValueTypeName.class;
     }
 
     @Override
     public Object parseText(final String text,
                             final Class<?> type,
                             final C context) {
-        return ValidatorSelector.parse(text);
+        return ValidationValueTypeName.with(text);
     }
 
     @Override
     public String toString() {
-        return "Text to " + ValidatorSelector.class.getSimpleName();
+        return "Text to " + ValidationValueTypeName.class.getSimpleName();
     }
 }

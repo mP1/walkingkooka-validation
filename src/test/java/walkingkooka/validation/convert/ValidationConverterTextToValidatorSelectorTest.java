@@ -21,12 +21,11 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.convert.Converter;
-import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
-public final class TextToValidatorSelectorConverterTest implements ConverterTesting2<TextToValidatorSelectorConverter<FakeConverterContext>, FakeConverterContext> {
+public final class ValidationConverterTextToValidatorSelectorTest extends ValidationConverterTestCase<ValidationConverterTextToValidatorSelector<FakeConverterContext>, FakeConverterContext> {
 
     @Test
     public void testConvertNumberToValidatorSelector() {
@@ -47,8 +46,8 @@ public final class TextToValidatorSelectorConverterTest implements ConverterTest
     }
 
     @Override
-    public TextToValidatorSelectorConverter<FakeConverterContext> createConverter() {
-        return TextToValidatorSelectorConverter.instance();
+    public ValidationConverterTextToValidatorSelector<FakeConverterContext> createConverter() {
+        return ValidationConverterTextToValidatorSelector.instance();
     }
 
     @Override
@@ -81,13 +80,13 @@ public final class TextToValidatorSelectorConverterTest implements ConverterTest
     @Test
     public void testToString() {
         this.toStringAndCheck(
-            TextToValidatorSelectorConverter.instance(),
+            ValidationConverterTextToValidatorSelector.instance(),
             "Text to ValidatorSelector"
         );
     }
 
     @Override
-    public Class<TextToValidatorSelectorConverter<FakeConverterContext>> type() {
-        return Cast.to(TextToValidatorSelectorConverter.class);
+    public Class<ValidationConverterTextToValidatorSelector<FakeConverterContext>> type() {
+        return Cast.to(ValidationConverterTextToValidatorSelector.class);
     }
 }

@@ -21,12 +21,11 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.convert.Converter;
-import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.validation.form.FormName;
 
-public final class TextToFormNameConverterTest implements ConverterTesting2<TextToFormNameConverter<FakeConverterContext>, FakeConverterContext> {
+public final class ValidationConverterTextToFormNameTest extends ValidationConverterTestCase<ValidationConverterTextToFormName<FakeConverterContext>, FakeConverterContext> {
 
     @Test
     public void testConvertNumberToFormName() {
@@ -47,8 +46,8 @@ public final class TextToFormNameConverterTest implements ConverterTesting2<Text
     }
 
     @Override
-    public TextToFormNameConverter<FakeConverterContext> createConverter() {
-        return TextToFormNameConverter.instance();
+    public ValidationConverterTextToFormName<FakeConverterContext> createConverter() {
+        return ValidationConverterTextToFormName.instance();
     }
 
     @Override
@@ -81,13 +80,13 @@ public final class TextToFormNameConverterTest implements ConverterTesting2<Text
     @Test
     public void testToString() {
         this.toStringAndCheck(
-            TextToFormNameConverter.instance(),
+            ValidationConverterTextToFormName.instance(),
             "Text to FormName"
         );
     }
 
     @Override
-    public Class<TextToFormNameConverter<FakeConverterContext>> type() {
-        return Cast.to(TextToFormNameConverter.class);
+    public Class<ValidationConverterTextToFormName<FakeConverterContext>> type() {
+        return Cast.to(ValidationConverterTextToFormName.class);
     }
 }

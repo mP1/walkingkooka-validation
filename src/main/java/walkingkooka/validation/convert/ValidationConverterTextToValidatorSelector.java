@@ -20,26 +20,26 @@ package walkingkooka.validation.convert;
 import walkingkooka.Cast;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TextToTryingShortCircuitingConverter;
-import walkingkooka.validation.form.FormName;
+import walkingkooka.validation.provider.ValidatorSelector;
 
 /**
- * Converts text to a {@link FormName}.
+ * Converts text to a {@link ValidatorSelector}.
  */
-final class TextToFormNameConverter<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
+final class ValidationConverterTextToValidatorSelector<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
 
     /**
      * Type safe getter
      */
-    static <C extends ConverterContext> TextToFormNameConverter<C> instance() {
+    static <C extends ConverterContext> ValidationConverterTextToValidatorSelector<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static TextToFormNameConverter<?> INSTANCE = new TextToFormNameConverter<>();
+    private final static ValidationConverterTextToValidatorSelector<?> INSTANCE = new ValidationConverterTextToValidatorSelector<>();
 
-    private TextToFormNameConverter() {
+    private ValidationConverterTextToValidatorSelector() {
         super();
     }
 
@@ -47,18 +47,18 @@ final class TextToFormNameConverter<C extends ConverterContext> implements TextT
     public boolean isTargetType(final Object value,
                                 final Class<?> type,
                                 final C context) {
-        return type == FormName.class;
+        return type == ValidatorSelector.class;
     }
 
     @Override
     public Object parseText(final String text,
                             final Class<?> type,
                             final C context) {
-        return FormName.with(text);
+        return ValidatorSelector.parse(text);
     }
 
     @Override
     public String toString() {
-        return "Text to " + FormName.class.getSimpleName();
+        return "Text to " + ValidatorSelector.class.getSimpleName();
     }
 }
