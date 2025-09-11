@@ -141,7 +141,7 @@ public final class FormHandlerSelector implements PluginSelectorLike<FormHandler
     public <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> evaluateValueText(final FormHandlerProvider provider,
                                                                                                                          final ProviderContext context) {
         Objects.requireNonNull(provider, "provider");
-        Objects.requireNonNull(provider, "context");
+        Objects.requireNonNull(context, "context");
 
         return this.selector.evaluateValueText(
             FormHandlerPluginHelper.INSTANCE::parseName,

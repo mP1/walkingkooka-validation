@@ -147,7 +147,7 @@ public final class ValidatorSelector implements PluginSelectorLike<ValidatorName
     public <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> evaluateValueText(final ValidatorProvider provider,
                                                                                                             final ProviderContext context) {
         Objects.requireNonNull(provider, "provider");
-        Objects.requireNonNull(provider, "context");
+        Objects.requireNonNull(context, "context");
 
         return this.selector.evaluateValueText(
             ValidatorPluginHelper.INSTANCE::parseName,
