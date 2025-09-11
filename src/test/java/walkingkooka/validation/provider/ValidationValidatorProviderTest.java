@@ -69,6 +69,18 @@ public final class ValidationValidatorProviderTest implements ValidatorProviderT
     };
 
     @Test
+    public void testValidatorSelectorWithAbsoluteUrlValidator() {
+        this.validatorAndCheck(
+            ValidatorSelector.with(
+                ValidatorName.ABSOLUTE_URL,
+                ""
+            ),
+            CONTEXT,
+            Validators.absoluteUrl()
+        );
+    }
+
+    @Test
     public void testValidatorSelectorCollection() {
         this.validatorAndCheck(
             ValidatorSelector.with(
