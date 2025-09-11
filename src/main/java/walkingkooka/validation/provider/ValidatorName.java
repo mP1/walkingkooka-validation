@@ -80,6 +80,16 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
      */
     final static Map<ValidatorName, BiFunction<List<?>, ProviderContext, Validator<?, ?>>> NAME_TO_FACTORY = Maps.sorted();
 
+    private final static String ABSOLUTE_URL_STRING = "absolute-url";
+
+    /**
+     * The name of the {@link Validator} returned by {@link Validators#absoluteUrl()}.
+     */
+    public final static ValidatorName ABSOLUTE_URL = registerConstantName(
+        ABSOLUTE_URL_STRING,
+        (p, c) -> Validators.absoluteUrl()
+    );
+
     private final static String COLLECTION_STRING = "collection";
 
     /**

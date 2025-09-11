@@ -22,6 +22,7 @@ A validation framework that supports validating individual fields within a form.
 Within a spreadsheet, individual cells or a fields within a form can have a validator. Each validator can report zero
 or more [ValidationError](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ValidationError.java).
 
+- [AbsoluteUrlValidator](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/AbsoluteUrlValidator.java)
 - [EmailAddressValidator](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/EmailAddressValidator.java)
 - [ExpressionValidator](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ExpressionValidator.java)
 - [NonNullValidator](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/NonNullValidator.java)
