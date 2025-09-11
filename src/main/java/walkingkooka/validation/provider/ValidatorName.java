@@ -177,6 +177,21 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
         )
     );
 
+    private final static String TEXT_MASK_STRING = "text-mask";
+
+    /**
+     * The name of the {@link Validator} returned by {@link Validators#textMask(String)}.
+     */
+    public final static ValidatorName TEXT_MASK = registerConstantName(
+        TEXT_MASK_STRING,
+        (p, c) -> Validators.textMask(
+            c.convertOrFail(
+                p.get(0),
+                String.class
+            )
+        )
+    );
+
     /**
      * Factory that creates a {@link ValidatorName}
      */
@@ -200,6 +215,9 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
                 break;
             case TEXT_LENGTH_STRING:
                 validatorName = TEXT_LENGTH;
+                break;
+            case TEXT_MASK_STRING:
+                validatorName = TEXT_MASK;
                 break;
             default:
                 validatorName = new ValidatorName(name);
