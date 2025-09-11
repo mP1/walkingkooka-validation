@@ -113,6 +113,16 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
         }
     );
 
+    private final static String EMAIL_ADDRESS_STRING = "email-address";
+
+    /**
+     * The name of the {@link Validator} returned by {@link Validators#emailAddress()} ()}.
+     */
+    public final static ValidatorName EMAIL_ADDRESS = registerConstantName(
+        EMAIL_ADDRESS_STRING,
+        (p, c) -> Validators.emailAddress()
+    );
+
     private final static String EXPRESSION_STRING = "expression";
 
     /**
@@ -168,6 +178,9 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
         switch (name) {
             case COLLECTION_STRING:
                 validatorName = COLLECTION;
+                break;
+            case EMAIL_ADDRESS_STRING:
+                validatorName = EMAIL_ADDRESS;
                 break;
             case EXPRESSION_STRING:
                 validatorName = EXPRESSION;
