@@ -34,7 +34,7 @@ import walkingkooka.validation.Validators;
 import java.lang.reflect.Method;
 import java.util.Set;
 
-public final class ValidatorsValidatorProviderTest implements ValidatorProviderTesting<ValidatorsValidatorProvider> {
+public final class ValidationValidatorProviderTest implements ValidatorProviderTesting<ValidationValidatorProvider> {
 
     private final static Expression EXPRESSION = Expression.add(
         Expression.value(1),
@@ -120,7 +120,7 @@ public final class ValidatorsValidatorProviderTest implements ValidatorProviderT
     @Test
     public void testValidatorFactoryMethodWithoutParameters() {
         final Set<ValidatorName> missing = SortedSets.tree();
-        final ValidatorsValidatorProvider provider = this.createValidatorProvider();
+        final ValidationValidatorProvider provider = this.createValidatorProvider();
         int i = 0;
 
         for (final Method method : Validators.class.getMethods()) {
@@ -195,8 +195,8 @@ public final class ValidatorsValidatorProviderTest implements ValidatorProviderT
     }
 
     @Override
-    public ValidatorsValidatorProvider createValidatorProvider() {
-        return ValidatorsValidatorProvider.INSTANCE;
+    public ValidationValidatorProvider createValidatorProvider() {
+        return ValidationValidatorProvider.INSTANCE;
     }
 
     @Override
@@ -205,7 +205,7 @@ public final class ValidatorsValidatorProviderTest implements ValidatorProviderT
     }
 
     @Override
-    public Class<ValidatorsValidatorProvider> type() {
-        return ValidatorsValidatorProvider.class;
+    public Class<ValidationValidatorProvider> type() {
+        return ValidationValidatorProvider.class;
     }
 }

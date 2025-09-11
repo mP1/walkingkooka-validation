@@ -56,10 +56,10 @@ public final class ValidatorProviders implements PublicStaticHelper {
     }
 
     /**
-     * {@see ValidatorsValidatorProvider}
+     * {@see ValidationValidatorProvider}
      */
     public static ValidatorProvider validators() {
-        return ValidatorsValidatorProvider.INSTANCE;
+        return ValidationValidatorProvider.INSTANCE;
     }
 
     /**
