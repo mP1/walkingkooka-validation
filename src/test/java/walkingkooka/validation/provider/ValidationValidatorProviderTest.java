@@ -56,10 +56,15 @@ public final class ValidationValidatorProviderTest implements ValidatorProviderT
                         Number.class.cast(value).intValue(),
                         type
                     ) :
-                    this.failConversion(
-                        value,
-                        type
-                    );
+                    String.class == type ?
+                        this.successfulConversion(
+                            String.class.cast(value),
+                            type
+                        ) :
+                        this.failConversion(
+                            value,
+                            type
+                        );
         }
     };
 
@@ -114,6 +119,18 @@ public final class ValidationValidatorProviderTest implements ValidatorProviderT
                 1,
                 2
             )
+        );
+    }
+
+    @Test
+    public void testValidatorSelectorWithTextMask() {
+        this.validatorAndCheck(
+            ValidatorSelector.with(
+                ValidatorName.TEXT_MASK,
+                "(\"???\")"
+            ),
+            CONTEXT,
+            Validators.textMask("???")
         );
     }
 
