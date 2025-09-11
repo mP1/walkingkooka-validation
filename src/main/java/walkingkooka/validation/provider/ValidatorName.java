@@ -201,6 +201,9 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
         final ValidatorName validatorName;
 
         switch (name) {
+            case ABSOLUTE_URL_STRING:
+                validatorName = ABSOLUTE_URL;
+                break;
             case COLLECTION_STRING:
                 validatorName = COLLECTION;
                 break;
