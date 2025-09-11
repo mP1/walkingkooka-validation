@@ -39,6 +39,13 @@ public final class Validators implements PublicStaticHelper {
     }
 
     /**
+     * {@link EmailAddressValidator}
+     */
+    public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> emailAddress() {
+        return EmailAddressValidator.instance();
+    }
+
+    /**
      * {@see ExpressionValidator}
      */
     public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> expression(final Expression expression) {
