@@ -96,6 +96,18 @@ public final class ValidationValidatorProviderTest implements ValidatorProviderT
     }
 
     @Test
+    public void testValidatorSelectorWithEmailAddressValidator() {
+        this.validatorAndCheck(
+            ValidatorSelector.with(
+                ValidatorName.EMAIL_ADDRESS,
+                ""
+            ),
+            CONTEXT,
+            Validators.emailAddress()
+        );
+    }
+
+    @Test
     public void testValidatorSelectorNonNull() {
         this.validatorAndCheck(
             ValidatorSelector.with(
