@@ -108,19 +108,7 @@ public final class ValidationValidatorProviderTest implements ValidatorProviderT
     }
 
     @Test
-    public void testValidatorSelectorNonNull() {
-        this.validatorAndCheck(
-            ValidatorSelector.with(
-                ValidatorName.NON_NULL,
-                ""
-            ),
-            CONTEXT,
-            Validators.nonNull()
-        );
-    }
-
-    @Test
-    public void testValidatorSelectorExpression() {
+    public void testValidatorSelectorWithExpression() {
         this.validatorAndCheck(
             ValidatorSelector.with(
                 ValidatorName.EXPRESSION,
@@ -128,6 +116,18 @@ public final class ValidationValidatorProviderTest implements ValidatorProviderT
             ),
             CONTEXT,
             Validators.expression(EXPRESSION)
+        );
+    }
+
+    @Test
+    public void testValidatorSelectorWithNonNull() {
+        this.validatorAndCheck(
+            ValidatorSelector.with(
+                ValidatorName.NON_NULL,
+                ""
+            ),
+            CONTEXT,
+            Validators.nonNull()
         );
     }
 
