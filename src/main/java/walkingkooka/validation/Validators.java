@@ -85,6 +85,13 @@ public final class Validators implements PublicStaticHelper {
     }
 
     /**
+     * {@see TextMaskValidator}
+     */
+    public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> textMask(final String mask) {
+        return TextMaskValidator.parse(mask);
+    }
+
+    /**
      * Private constructor to stop creation
      */
     private Validators() {
