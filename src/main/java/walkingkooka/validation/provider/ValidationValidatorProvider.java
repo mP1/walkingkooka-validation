@@ -36,21 +36,21 @@ import java.util.stream.Collectors;
 /**
  * A {@link ValidatorProvider} that sources all {@link Validator} from {@link Validators}.
  */
-final class ValidatorsValidatorProvider implements ValidatorProvider {
+final class ValidationValidatorProvider implements ValidatorProvider {
 
     /**
      * Singleton
      */
-    final static ValidatorsValidatorProvider INSTANCE = new ValidatorsValidatorProvider();
+    final static ValidationValidatorProvider INSTANCE = new ValidationValidatorProvider();
 
-    private ValidatorsValidatorProvider() {
+    private ValidationValidatorProvider() {
         super();
 
         this.infos = ValidatorInfoSet.with(
             Sets.readOnly(
                 ValidatorName.NAME_TO_FACTORY.keySet()
                     .stream()
-                    .map(ValidatorsValidatorProvider::nameToValidatorInfo)
+                    .map(ValidationValidatorProvider::nameToValidatorInfo)
                     .collect(Collectors.toCollection(SortedSets::tree))
             )
         );
