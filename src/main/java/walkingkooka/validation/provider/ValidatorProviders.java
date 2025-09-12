@@ -56,13 +56,6 @@ public final class ValidatorProviders implements PublicStaticHelper {
     }
 
     /**
-     * {@see ValidationValidatorProvider}
-     */
-    public static ValidatorProvider validators() {
-        return ValidationValidatorProvider.INSTANCE;
-    }
-
-    /**
      * {@see EmptyValidatorProvider}
      */
     public static ValidatorProvider empty() {
@@ -107,6 +100,13 @@ public final class ValidatorProviders implements PublicStaticHelper {
             infos,
             provider
         );
+    }
+
+    /**
+     * {@see ValidationValidatorProvider}
+     */
+    public static ValidatorProvider validators() {
+        return ValidationValidatorProvider.INSTANCE;
     }
 
     /**
