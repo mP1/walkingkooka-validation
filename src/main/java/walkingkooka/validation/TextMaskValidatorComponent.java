@@ -21,11 +21,12 @@ import walkingkooka.NeverError;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.cursor.TextCursor;
+import walkingkooka.text.printer.TreePrintable;
 
 import java.util.Iterator;
 import java.util.List;
 
-abstract class TextMaskValidatorComponent<T extends ValidationReference> {
+abstract class TextMaskValidatorComponent<T extends ValidationReference> implements TreePrintable {
 
     static <T extends ValidationReference> List<TextMaskValidatorComponent<T>> parse(final TextCursor mask) {
         List<TextMaskValidatorComponent<T>> components = Lists.array();

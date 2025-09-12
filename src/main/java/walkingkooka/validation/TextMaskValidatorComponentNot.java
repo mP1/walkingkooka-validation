@@ -19,6 +19,7 @@ package walkingkooka.validation;
 
 import walkingkooka.Cast;
 import walkingkooka.text.cursor.TextCursor;
+import walkingkooka.text.printer.IndentingPrinter;
 
 import java.util.Iterator;
 
@@ -78,5 +79,17 @@ final class TextMaskValidatorComponentNot<T extends ValidationReference> extends
     @Override
     public String toString() {
         return NOT + this.component.toString();
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public void printTree(final IndentingPrinter printer) {
+        printer.println(this.getClass().getSimpleName() + " " + NOT);
+        printer.indent();
+        {
+            this.component.printTree(printer);
+        }
+        printer.outdent();
     }
 }
