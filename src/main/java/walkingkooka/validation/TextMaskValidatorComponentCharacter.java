@@ -33,6 +33,7 @@ abstract class TextMaskValidatorComponentCharacter<T extends ValidationReference
 
     @Override//
     final ValidationErrorList<T> tryMatch(final TextCursor text,
+                                          final boolean invertNext,
                                           final Iterator<TextMaskValidatorComponent<T>> nextComponent,
                                           final ValidatorContext<T> context) {
         ValidationErrorList<T> errors = null;
@@ -47,13 +48,14 @@ abstract class TextMaskValidatorComponentCharacter<T extends ValidationReference
         } else {
             final char c = text.at();
 
-            if (this.isMatch(c)) {
+            if (invertNext ^ this.isMatch(c)) {
                 text.next();
 
                 if (nextComponent.hasNext()) {
                     errors = nextComponent.next()
                         .tryMatch(
                             text,
+                            false, // invert no ?
                             nextComponent,
                             context
                         );

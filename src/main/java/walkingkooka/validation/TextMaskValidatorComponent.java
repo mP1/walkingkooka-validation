@@ -217,10 +217,10 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> {
     final static char NOT = '~';
 
     /**
-     * {@link TextMaskValidatorComponentCharacterNot}
+     * {@link TextMaskValidatorComponentNot}
      */
     static <T extends ValidationReference> TextMaskValidatorComponent<T> not(final TextMaskValidatorComponent<T> component) {
-        return TextMaskValidatorComponentCharacterNot.with(component);
+        return TextMaskValidatorComponentNot.with(component);
     }
 
    final static char UPPER_CASE_LETTER = 'U';
@@ -237,6 +237,7 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> {
     }
 
     abstract ValidationErrorList<T> tryMatch(final TextCursor text,
+                                             final boolean not,
                                              final Iterator<TextMaskValidatorComponent<T>> nextComponent,
                                              final ValidatorContext<T> context);
 

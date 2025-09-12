@@ -18,24 +18,35 @@
 package walkingkooka.validation;
 
 import walkingkooka.Cast;
+import walkingkooka.text.cursor.TextCursor;
+
+import java.util.Iterator;
 
 /**
- * Matches any character not matching the {@link TextMaskValidatorComponent}.
+ * Inverts the matching of the next {@link TextMaskValidatorComponent}.
  */
-final class TextMaskValidatorComponentCharacterNot<T extends ValidationReference> extends TextMaskValidatorComponentCharacter<T> {
+final class TextMaskValidatorComponentNot<T extends ValidationReference> extends TextMaskValidatorComponent<T> {
 
     static <T extends ValidationReference> TextMaskValidatorComponent<T> with(final TextMaskValidatorComponent<T> component) {
-        return new TextMaskValidatorComponentCharacterNot<>(component);
+        return new TextMaskValidatorComponentNot<>(component);
     }
 
-    private TextMaskValidatorComponentCharacterNot(final TextMaskValidatorComponent<T> component) {
+    private TextMaskValidatorComponentNot(final TextMaskValidatorComponent<T> component) {
         super();
-        this.component = (TextMaskValidatorComponentCharacter<T>) component;
+        this.component = component;
     }
 
-    @Override //
-    boolean isMatch(final char c) {
-        return false == this.component.isMatch(c);
+    @Override
+    ValidationErrorList<T> tryMatch(final TextCursor text,
+                                    final boolean invertNext,
+                                    final Iterator<TextMaskValidatorComponent<T>> nextComponent,
+                                    final ValidatorContext<T> context) {
+        return this.component.tryMatch(
+                text,
+                false == invertNext, // invert
+                nextComponent,
+                context
+            );
     }
 
     @Override //
@@ -43,7 +54,7 @@ final class TextMaskValidatorComponentCharacterNot<T extends ValidationReference
         return "not " + this.component.expected();
     }
 
-    private final TextMaskValidatorComponentCharacter<T> component;
+    private final TextMaskValidatorComponent<T> component;
 
 // Object...........................................................................................................
 
@@ -56,11 +67,11 @@ final class TextMaskValidatorComponentCharacterNot<T extends ValidationReference
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-            other instanceof TextMaskValidatorComponentCharacterNot &&
+            other instanceof TextMaskValidatorComponentNot &&
                 this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final TextMaskValidatorComponentCharacterNot<?> other) {
+    private boolean equals0(final TextMaskValidatorComponentNot<?> other) {
         return this.component.equals(other.component);
     }
 
