@@ -71,6 +71,14 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     }
 
     @Test
+    public void testParseOptionalWithoutPrecedingComponent() {
+        this.parseStringFails(
+            "+",
+            new IllegalArgumentException("Optional '+': Missing component before")
+        );
+    }
+
+    @Test
     public void testParseAny() {
         this.parseMaskAndCheck(
             "?",
@@ -206,6 +214,27 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
             "UU",
             TextMaskValidatorComponent.upperCaseLetter(),
             TextMaskValidatorComponent.upperCaseLetter()
+        );
+    }
+
+    @Test
+    public void testParseOptionalLetter() {
+        this.parseMaskAndCheck(
+            "A+",
+            TextMaskValidatorComponent.optional(
+                TextMaskValidatorComponent.letter()
+            )
+        );
+    }
+
+    @Test
+    public void testParseOptionalLetterDigit() {
+        this.parseMaskAndCheck(
+            "A+9",
+            TextMaskValidatorComponent.optional(
+                TextMaskValidatorComponent.letter()
+            ),
+            TextMaskValidatorComponent.digit()
         );
     }
 
@@ -419,6 +448,86 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
         this.maskValidateAndCheck(
             "~\"Hello\"9",
             "ABCDE1"
+        );
+    }
+
+    @Test
+    public void testValidateWithOptionalDigitPresent() {
+        this.maskValidateAndCheck(
+            "9+",
+            "9"
+        );
+    }
+
+    @Test
+    public void testValidateWithOptionalDigitPresentLetter() {
+        this.maskValidateAndCheck(
+            "9+A",
+            "9A"
+        );
+    }
+
+    @Test
+    public void testValidateWithOptionalDigitMissing() {
+        this.maskValidateAndCheck(
+            "9+",
+            ""
+        );
+    }
+
+    @Test
+    public void testValidateWithOptionalDigitMissingLetter() {
+        this.maskValidateAndCheck(
+            "9+A",
+            "A"
+        );
+    }
+
+    @Test
+    public void testValidateWithOptionalDigitPresentOptionalLetterPresentTextLiteral() {
+        this.maskValidateAndCheck(
+            "9+A+\"Hello\"",
+            "9AHello"
+        );
+    }
+
+    @Test
+    public void testValidateWithOptionalDigitMissingOptionalLetterPresentTextLiteral() {
+        this.maskValidateAndCheck(
+            "9+A+\"Hello\"",
+            "AHello"
+        );
+    }
+
+    @Test
+    public void testValidateWithOptionalTextLiteralPresent() {
+        this.maskValidateAndCheck(
+            "\"Hello\"+",
+            "Hello"
+        );
+    }
+
+    @Test
+    public void testValidateWithOptionalTextLiteralPresentDigit() {
+        this.maskValidateAndCheck(
+            "\"Hello\"+9",
+            "Hello8"
+        );
+    }
+
+    @Test
+    public void testValidateWithOptionalTextLiteralMissing() {
+        this.maskValidateAndCheck(
+            "\"Hello\"+",
+            ""
+        );
+    }
+
+    @Test
+    public void testValidateWithOptionalTextLiteralMissingDigit() {
+        this.maskValidateAndCheck(
+            "\"Hello\"+9",
+            "8"
         );
     }
 

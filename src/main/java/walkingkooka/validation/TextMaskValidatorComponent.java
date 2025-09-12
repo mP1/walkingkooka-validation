@@ -70,6 +70,19 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
                             mode = MODE_NOT;
                             component = null;
                             break;
+                        case OPTIONAL:
+                            // optional PLUS must have a mask control character before
+                            if(null == component) {
+                                component = components.isEmpty() ?
+                                    null :
+                                    components.remove(components.size() - 1);
+                            }
+
+                            if(null == component) {
+                                throw new IllegalArgumentException("Optional " + CharSequences.quoteIfChars(OPTIONAL) + ": Missing component before");
+                            }
+                            component = optional(component);
+                            break;
                         case UPPER_CASE_LETTER:
                             component = upperCaseLetter();
                             break;
@@ -253,6 +266,15 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
      */
     static <T extends ValidationReference> TextMaskValidatorComponent<T> not(final TextMaskValidatorComponent<T> component) {
         return TextMaskValidatorComponentNot.with(component);
+    }
+
+    final static char OPTIONAL = '+';
+
+    /**
+     * {@link TextMaskValidatorComponentOptional}
+     */
+    static <T extends ValidationReference> TextMaskValidatorComponent<T> optional(final TextMaskValidatorComponent<T> component) {
+        return TextMaskValidatorComponentOptional.with(component);
     }
 
    final static char UPPER_CASE_LETTER = 'U';
