@@ -103,6 +103,16 @@ public final class TextMaskValidatorComponentTest implements ClassTesting<TextMa
     }
 
     @Test
+    public void testToStringWithOptionalLetter() {
+        this.toStringAndCheck(
+            TextMaskValidatorComponent.optional(
+                TextMaskValidatorComponent.upperCaseLetter()
+            ),
+            "U+"
+        );
+    }
+
+    @Test
     public void testToStringWithUpperCaseLetter() {
         this.toStringAndCheck(
             TextMaskValidatorComponent.upperCaseLetter(),
