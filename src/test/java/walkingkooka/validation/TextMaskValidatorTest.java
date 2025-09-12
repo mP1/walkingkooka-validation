@@ -269,6 +269,18 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     }
 
     @Test
+    public void testValidateWithUnmatchedCharacter() {
+        this.maskValidateAndCheck(
+            "AAA",
+            "abcd",
+            ValidationError.with(
+                REFERENCE,
+                "Invalid character 'd' at 3"
+            )
+        );
+    }
+
+    @Test
     public void testValidateWithLetterMaskAndDigit() {
         this.maskValidateAndCheck(
             "A",

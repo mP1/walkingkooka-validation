@@ -241,6 +241,19 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> {
                                              final Iterator<TextMaskValidatorComponent<T>> nextComponent,
                                              final ValidatorContext<T> context);
 
+    final ValidationErrorList<T> invalidCharacterIfNotEmpty(final TextCursor text,
+                                                            final ValidatorContext<T> context) {
+        return text.isEmpty() ?
+            ValidationErrorList.empty() :
+            ValidationErrorList.<T>empty()
+                .concat(
+                    context.validationError(
+                        "Invalid character " + CharSequences.quoteIfChars(text.at()) + " at " + text.lineInfo()
+                            .textOffset()
+                    )
+                );
+    }
+
     final ValidationErrorList<T> invalidCharacter(final TextCursor text,
                                                   final ValidatorContext<T> context) {
         return ValidationErrorList.<T>empty()
