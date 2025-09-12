@@ -367,8 +367,32 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     @Test
     public void testValidateWithMaskIncludesNot() {
         this.maskValidateAndCheck(
+            "~9",
+            "X"
+        );
+    }
+
+    @Test
+    public void testValidateWithMaskIncludesNot2() {
+        this.maskValidateAndCheck(
+            "~999",
+            "X23"
+        );
+    }
+
+    @Test
+    public void testValidateWithMaskIncludesNot3() {
+        this.maskValidateAndCheck(
             "\"Hello\"?AAA~999",
             "Hello*abcX23"
+        );
+    }
+
+    @Test
+    public void testValidateWithMaskIncludesNot4() {
+        this.maskValidateAndCheck(
+            "~AA~AA",
+            "9A9A"
         );
     }
 

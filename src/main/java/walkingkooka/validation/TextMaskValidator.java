@@ -92,6 +92,7 @@ final class TextMaskValidator<R extends ValidationReference, C extends Validator
         return components.next()
             .tryMatch(
                 TextCursors.charSequence(text),
+                false, // invert no
                 components,
                 context
             );
