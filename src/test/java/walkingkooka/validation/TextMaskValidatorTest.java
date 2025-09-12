@@ -619,6 +619,22 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
         );
     }
 
+    @Test
+    public void testValidateWithDashSlashSpace() {
+        this.maskValidateAndCheck(
+            "-/ ",
+            "-/ "
+        );
+    }
+
+    @Test
+    public void testValidateWithDashSlashSpaceLetter() {
+        this.maskValidateAndCheck(
+            "-/ A",
+            "-/ B"
+        );
+    }
+
     private void maskValidateAndCheck(final String mask,
                                       final String text,
                                       final ValidationError<TestValidationReference>...expected) {

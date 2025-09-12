@@ -57,6 +57,9 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
                         case '\\':
                             mode = MODE_BACK_SLASH_ESCAPE;
                             break;
+                        case DASH:
+                            component = character(DASH);
+                            break;
                         case DIGIT:
                             component = digit();
                             break;
@@ -95,6 +98,12 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
                                 throw new IllegalArgumentException("Repeating " + CharSequences.quoteIfChars(REPEATING) + ": Missing component before");
                             }
                             component = repeating(component);
+                            break;
+                        case SLASH:
+                            component = character(SLASH);
+                            break;
+                        case SPACE:
+                            component = character(SPACE);
                             break;
                         case UPPER_CASE_LETTER:
                             component = upperCaseLetter();
@@ -224,6 +233,11 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
         return components;
     }
 
+    final static char DASH = '-';
+    final static char SLASH = '/';
+    final static char SPACE = ' ';
+
+
     final static char ANY = '?';
 
     /**
@@ -231,6 +245,16 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
      */
     static <T extends ValidationReference> TextMaskValidatorComponent<T> any() {
         return TextMaskValidatorComponentCharacterAny.instance();
+    }
+
+    /**
+     * {@link TextMaskValidatorComponentCharacterChar}
+     */
+    static <T extends ValidationReference> TextMaskValidatorComponent<T> character(final char c) {
+        return TextMaskValidatorComponentCharacterChar.with(
+            c,
+            CharSequences.quoteIfChars(c).toString()
+        );
     }
 
     final static char DIGIT = '9';

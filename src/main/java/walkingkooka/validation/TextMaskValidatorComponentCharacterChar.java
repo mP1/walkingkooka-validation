@@ -27,9 +27,45 @@ final class TextMaskValidatorComponentCharacterChar<T extends ValidationReferenc
 
     static <T extends ValidationReference> TextMaskValidatorComponent<T> with(final char c,
                                                                               final String toString) {
-        return new TextMaskValidatorComponentCharacterChar<>(
+        TextMaskValidatorComponentCharacterChar<T> component;
+
+        switch (c) {
+            case DASH:
+                component = DASH_COMPONENT;
+                break;
+            case SLASH:
+                component = SLASH_COMPONENT;
+                break;
+            case SPACE:
+                component = SPACE_COMPONENT;
+                break;
+            default:
+                component = new TextMaskValidatorComponentCharacterChar<>(
+                    c,
+                    toString
+                );
+        }
+
+        return component;
+    }
+
+    private final static TextMaskValidatorComponentCharacterChar DASH_COMPONENT = new TextMaskValidatorComponentCharacterChar<>(
+        DASH
+    );
+
+    private final static TextMaskValidatorComponentCharacterChar SLASH_COMPONENT = new TextMaskValidatorComponentCharacterChar<>(
+        SLASH
+    );
+
+    private final static TextMaskValidatorComponentCharacterChar SPACE_COMPONENT = new TextMaskValidatorComponentCharacterChar<>(
+        SPACE
+    );
+
+    private TextMaskValidatorComponentCharacterChar(final char c) {
+        this(
             c,
-            toString
+            CharSequences.quoteIfChars(c)
+                .toString()
         );
     }
 
