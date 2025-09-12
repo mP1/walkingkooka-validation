@@ -79,9 +79,7 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> {
                                 .get();
                     }
                     if (mode == MODE_NOT && null != component) {
-                        component = not(
-                            (TextMaskValidatorComponentCharacter<T>)component
-                        );
+                        component = not(component);
                         mode = MODE_NORMAL;
                     }
                     if (null != component) {
