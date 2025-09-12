@@ -17,18 +17,15 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.Cast;
 import walkingkooka.NeverError;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.predicate.character.CharPredicate;
-import walkingkooka.predicate.character.CharPredicates;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.cursor.TextCursor;
 
 import java.util.Iterator;
 import java.util.List;
 
-final class TextMaskValidatorComponent<T extends ValidationReference> {
+abstract class TextMaskValidatorComponent<T extends ValidationReference> {
 
     static <T extends ValidationReference> List<TextMaskValidatorComponent<T>> parse(final TextCursor mask) {
         List<TextMaskValidatorComponent<T>> components = Lists.array();
@@ -82,7 +79,9 @@ final class TextMaskValidatorComponent<T extends ValidationReference> {
                                 .get();
                     }
                     if (mode == MODE_NOT && null != component) {
-                        component = not(component);
+                        component = not(
+                            (TextMaskValidatorComponentCharacter<T>)component
+                        );
                         mode = MODE_NORMAL;
                     }
                     if (null != component) {
@@ -157,208 +156,92 @@ final class TextMaskValidatorComponent<T extends ValidationReference> {
         return components;
     }
 
-    private final static char ANY = '?';
-
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> any() {
-        return ANY_COMPONENT;
-    }
-
-    private final static TextMaskValidatorComponent ANY_COMPONENT = new TextMaskValidatorComponent<>(
-        CharPredicates.always(),
-        "character",
-        ANY
-    );
+    final static char ANY = '?';
 
     /**
-     * Matches the given character verbatim. This is also used to match a backslash escaped character.
+     * {@link TextMaskValidatorComponentCharacterAny}
+     */
+    static <T extends ValidationReference> TextMaskValidatorComponent<T> any() {
+        return TextMaskValidatorComponentCharacterAny.instance();
+    }
+
+    /**
+     * {@link TextMaskValidatorComponentCharacterChar}
      */
     static <T extends ValidationReference> TextMaskValidatorComponent<T> character(final char c) {
-        final String toString = CharSequences.quoteIfChars(c)
-            .toString();
-
-        return new TextMaskValidatorComponent<>(
-            CharPredicates.is(c),
-            toString,
-            toString
+        return TextMaskValidatorComponentCharacterChar.with(
+            c,
+            CharSequences.quoteIfChars(c).toString()
         );
     }
 
-    private final static char DIGIT = '9';
+    final static char DIGIT = '9';
 
+    /**
+     * {@link TextMaskValidatorComponentCharacterDigit}
+     */
     static <T extends ValidationReference> TextMaskValidatorComponent<T> digit() {
-        return DIGIT_COMPONENT;
+        return TextMaskValidatorComponentCharacterDigit.instance();
     }
-
-    private final static TextMaskValidatorComponent DIGIT_COMPONENT = new TextMaskValidatorComponent<>(
-        CharPredicates.digit(),
-        "digit",
-        DIGIT
-    );
 
     /**
      * Matches the given character which was escaped in the initial mask
      */
     static <T extends ValidationReference> TextMaskValidatorComponent<T> escaped(final char c) {
-        final CharSequence cc = CharSequences.escape(
-            Character.toString(c)
-        );
-
-        return new TextMaskValidatorComponent<>(
-            CharPredicates.is(c),
-            cc.toString(),
-            "\\" + cc
+        return TextMaskValidatorComponentCharacterChar.with(
+            c,
+            "\\" + CharSequences.escape(
+                Character.toString(c)
+            )
         );
     }
 
-    private final static char LETTER = 'A';
+    final static char LETTER = 'A';
 
+    /**
+     * {@link TextMaskValidatorComponentCharacterLetter}
+     */
     static <T extends ValidationReference> TextMaskValidatorComponent<T> letter() {
-        return LETTER_COMPONENT;
+        return TextMaskValidatorComponentCharacterLetter.instance();
     }
 
-    private final static TextMaskValidatorComponent LETTER_COMPONENT = new TextMaskValidatorComponent<>(
-        CharPredicates.letter(),
-        "letter",
-        LETTER
-    );
+    final static char LOWER_CASE_LETTER = 'L';
 
+    /**
+     * {@link TextMaskValidatorComponentCharacterLowerCaseLetter}
+     */
     static <T extends ValidationReference> TextMaskValidatorComponent<T> lowerCaseLetter() {
-        return LOWER_CASE_LETTER_COMPONENT;
+        return TextMaskValidatorComponentCharacterLowerCaseLetter.instance();
     }
 
-    private final static char LOWER_CASE_LETTER = 'L';
-
-    private final static TextMaskValidatorComponent LOWER_CASE_LETTER_COMPONENT = new TextMaskValidatorComponent<>(
-        ((c) -> Character.isLowerCase(c)),
-        "lower-case letter",
-        LOWER_CASE_LETTER
-    );
-
-    private final static char NOT = '~';
+    final static char NOT = '~';
 
     /**
-     * Matches any character not matching the {@link CharPredicate}.
+     * {@link TextMaskValidatorComponentCharacterNot}
      */
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> not(
-        final TextMaskValidatorComponent<T> component) {
-        return new TextMaskValidatorComponent<>(
-            component.predicate.negate(),
-            "character but not " + component.expected,
-            "" + NOT + component
-        );
+    static <T extends ValidationReference> TextMaskValidatorComponent<T> not(final TextMaskValidatorComponent<T> component) {
+        return TextMaskValidatorComponentCharacterNot.with(component);
     }
 
-    private final static char UPPER_CASE_LETTER = 'U';
+   final static char UPPER_CASE_LETTER = 'U';
 
+    /**
+     * {@link TextMaskValidatorComponentCharacterUpperCaseLetter}
+     */
     static <T extends ValidationReference> TextMaskValidatorComponent<T> upperCaseLetter() {
-        return UPPER_CASE_LETTER_COMPONENT;
+        return TextMaskValidatorComponentCharacterUpperCaseLetter.instance();
     }
 
-    final static TextMaskValidatorComponent UPPER_CASE_LETTER_COMPONENT = new TextMaskValidatorComponent<>(
-        ((c) -> Character.isUpperCase(c)),
-        "upper-case letter",
-        UPPER_CASE_LETTER
-    );
-
-    private TextMaskValidatorComponent(final CharPredicate predicate,
-                                       final String expected,
-                                       final char toString) {
-        this(
-            predicate,
-            expected,
-            CharSequences.escape(
-                String.valueOf(toString)
-            ).toString()
-        );
-    }
-
-    private TextMaskValidatorComponent(final CharPredicate predicate,
-                                       final String expected,
-                                       final String toString) {
+    TextMaskValidatorComponent() {
         super();
-        this.predicate = predicate;
-        this.expected = expected;
-        this.toString = toString;
     }
 
-    ValidationErrorList<T> tryMatch(final TextCursor text,
-                                    final Iterator<TextMaskValidatorComponent<T>> nextComponent,
-                                    final ValidatorContext<T> context) {
-        ValidationErrorList<T> errors = null;
+    abstract ValidationErrorList<T> tryMatch(final TextCursor text,
+                                             final Iterator<TextMaskValidatorComponent<T>> nextComponent,
+                                             final ValidatorContext<T> context);
 
-        if (text.isEmpty()) {
-            errors = ValidationErrorList.<T>empty()
-                    .concat(
-                        context.validationError(
-                            "End of text expected " + this.expected
-                        )
-                    );
-        } else {
-            final char c = text.at();
-
-            if (this.predicate.test(c)) {
-                text.next();
-
-                if (nextComponent.hasNext()) {
-                    errors = nextComponent.next()
-                        .tryMatch(
-                            text,
-                            nextComponent,
-                            context
-                        );
-                } else {
-                    if(text.isEmpty()) {
-                        errors = ValidationErrorList.empty();
-                    }
-                }
-            }
-
-            if (null == errors) {
-                errors = ValidationErrorList.<T>empty()
-                    .concat(
-                        context.validationError(
-                            "Invalid character " + CharSequences.quoteIfChars(c) + " at " + text.lineInfo()
-                                .textOffset() +
-                                " expected " +
-                                this.expected
-                        )
-                    );
-            }
-        }
-
-        return errors;
-    }
-
-    private final CharPredicate predicate;
-
-    /**
-     * A short message when this particular predicate fails.
-     */
-    private final String expected;
-
-    // Object...........................................................................................................
+    abstract CharSequence expected();
 
     @Override
-    public int hashCode() {
-        return this.toString()
-            .hashCode();
-    }
-
-    @Override
-    public boolean equals(final Object other) {
-        return this == other ||
-            other instanceof TextMaskValidatorComponent &&
-                this.equals0(Cast.to(other));
-    }
-
-    private boolean equals0(final TextMaskValidatorComponent<?> other) {
-        return this.toString.equals(other.toString());
-    }
-
-    @Override
-    public String toString() {
-        return this.toString;
-    }
-
-    private final String toString;
+    abstract public String toString();
 }
