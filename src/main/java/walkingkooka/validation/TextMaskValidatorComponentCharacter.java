@@ -35,7 +35,7 @@ abstract class TextMaskValidatorComponentCharacter<T extends ValidationReference
                                           final boolean invertNext,
                                           final Iterator<TextMaskValidatorComponent<T>> nextComponent,
                                           final ValidatorContext<T> context) {
-        ValidationErrorList<T> errors = null;
+        ValidationErrorList<T> errors;
 
         if (text.isEmpty()) {
             errors = ValidationErrorList.<T>empty()
@@ -59,13 +59,12 @@ abstract class TextMaskValidatorComponentCharacter<T extends ValidationReference
                             context
                         );
                 } else {
-                    if (text.isEmpty()) {
-                        errors = ValidationErrorList.empty();
-                    }
+                    errors = this.invalidCharacterIfNotEmpty(
+                        text,
+                        context
+                    );
                 }
-            }
-
-            if (null == errors) {
+            } else {
                 errors = this.invalidCharacter(
                     text,
                     context
