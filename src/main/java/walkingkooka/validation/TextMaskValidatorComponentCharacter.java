@@ -38,12 +38,7 @@ abstract class TextMaskValidatorComponentCharacter<T extends ValidationReference
         ValidationErrorList<T> errors;
 
         if (text.isEmpty()) {
-            errors = ValidationErrorList.<T>empty()
-                .concat(
-                    context.validationError(
-                        "End of text expected " + this.expected()
-                    )
-                );
+            errors = this.endOfText(context);
         } else {
             final char c = text.at();
 

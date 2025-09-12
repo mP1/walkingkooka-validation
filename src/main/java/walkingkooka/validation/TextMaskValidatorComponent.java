@@ -241,6 +241,15 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> {
                                              final Iterator<TextMaskValidatorComponent<T>> nextComponent,
                                              final ValidatorContext<T> context);
 
+    final ValidationErrorList<T> endOfText(final ValidatorContext<T> context) {
+        return ValidationErrorList.<T>empty()
+            .concat(
+                context.validationError(
+                    "End of text expected " + this.expected()
+                )
+            );
+    }
+
     final ValidationErrorList<T> invalidCharacterIfNotEmpty(final TextCursor text,
                                                             final ValidatorContext<T> context) {
         return text.isEmpty() ?
