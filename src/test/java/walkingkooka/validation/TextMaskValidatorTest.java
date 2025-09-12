@@ -179,7 +179,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseQuoted() {
         this.parseMaskAndCheck(
             "\"A\"",
-            TextMaskValidatorComponent.character('A')
+            TextMaskValidatorComponent.textLiteral("A")
         );
     }
 
@@ -187,11 +187,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseQuoted2() {
         this.parseMaskAndCheck(
             "\"Hello\"",
-            TextMaskValidatorComponent.character('H'),
-            TextMaskValidatorComponent.character('e'),
-            TextMaskValidatorComponent.character('l'),
-            TextMaskValidatorComponent.character('l'),
-            TextMaskValidatorComponent.character('o')
+            TextMaskValidatorComponent.textLiteral("Hello")
         );
     }
 
@@ -199,7 +195,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseQuotedLetter() {
         this.parseMaskAndCheck(
             "\"A\"9",
-            TextMaskValidatorComponent.character('A'),
+            TextMaskValidatorComponent.textLiteral("A"),
             TextMaskValidatorComponent.digit()
         );
     }
@@ -351,7 +347,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     }
 
     @Test
-    public void testValidateWithTextLiteral2() {
+    public void testValidateWithTextLiteralIncludesEscapedCharacter() {
         this.maskValidateAndCheck(
             "\"He\\llo\"",
             "Hello"
@@ -407,6 +403,22 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
         this.maskValidateAndCheck(
             "~AA~AA",
             "9A9A"
+        );
+    }
+
+    @Test
+    public void testValidateWithMaskNotTextLiteral() {
+        this.maskValidateAndCheck(
+            "~\"Hello\"",
+            "ABCDE"
+        );
+    }
+
+    @Test
+    public void testValidateWithMaskNotTextLiteral2() {
+        this.maskValidateAndCheck(
+            "~\"Hello\"9",
+            "ABCDE1"
         );
     }
 
@@ -505,11 +517,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
                 "    TextMaskValidatorComponentCharacterDigit 9\n" +
                 "    TextMaskValidatorComponentCharacterLowerCaseLetter L\n" +
                 "    TextMaskValidatorComponentCharacterUpperCaseLetter U\n" +
-                "    TextMaskValidatorComponentCharacterChar 'H'\n" +
-                "    TextMaskValidatorComponentCharacterChar 'e'\n" +
-                "    TextMaskValidatorComponentCharacterChar 'l'\n" +
-                "    TextMaskValidatorComponentCharacterChar 'l'\n" +
-                "    TextMaskValidatorComponentCharacterChar 'o'\n" +
+                "    TextMaskValidatorComponentTextLiteral \"Hello\"\n" +
                 "    TextMaskValidatorComponentNot ~\n" +
                 "      TextMaskValidatorComponentCharacterLetter A\n" +
                 "  \n"

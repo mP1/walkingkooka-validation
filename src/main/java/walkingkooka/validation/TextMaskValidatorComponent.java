@@ -36,10 +36,13 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
         final int MODE_NOT = 3;
         final int MODE_INSIDE_QUOTES = 4;
         final int MODE_INSIDE_QUOTES_BACKSLASH_ESCAPE = 5;
+        final int MODE_NOT_INSIDE_QUOTES = 6;
+        final int MODE_NOT_INSIDE_QUOTES_BACKSLASH_ESCAPE = 7;
 
         int mode = MODE_NORMAL;
 
         TextMaskValidatorComponent<T> component = null;
+        StringBuilder textLiteral = null;
 
         while (mask.isNotEmpty()) {
             final char c = mask.at();
@@ -71,8 +74,11 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
                             component = upperCaseLetter();
                             break;
                         case '\"':
-                            mode = MODE_INSIDE_QUOTES;
+                            mode = MODE_NOT == mode ?
+                                MODE_NOT_INSIDE_QUOTES :
+                                MODE_INSIDE_QUOTES;
                             component = null;
+                            textLiteral = new StringBuilder();
                             break;
                         default:
                             throw mask.lineInfo()
@@ -101,20 +107,47 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
                             mode = MODE_INSIDE_QUOTES_BACKSLASH_ESCAPE;
                             break;
                         case '"':
+                            components.add(
+                                textLiteral(
+                                    textLiteral.toString()
+                                )
+                            );
+                            textLiteral = null;
                             mode = MODE_NORMAL;
                             break;
                         default:
-                            components.add(
-                                character(c)
-                            );
+                            textLiteral.append(c);
                             break;
                     }
                     break;
                 case MODE_INSIDE_QUOTES_BACKSLASH_ESCAPE:
-                    components.add(
-                        escaped(c)
-                    );
+                    textLiteral.append(c);
                     mode = MODE_INSIDE_QUOTES;
+                    break;
+                case MODE_NOT_INSIDE_QUOTES:
+                    switch (c) {
+                        case '\\':
+                            mode = MODE_NOT_INSIDE_QUOTES_BACKSLASH_ESCAPE;
+                            break;
+                        case '"':
+                            components.add(
+                                not(
+                                    textLiteral(
+                                        textLiteral.toString()
+                                    )
+                                )
+                            );
+                            textLiteral = null;
+                            mode = MODE_NORMAL;
+                            break;
+                        default:
+                            textLiteral.append(c);
+                            break;
+                    }
+                    break;
+                case MODE_NOT_INSIDE_QUOTES_BACKSLASH_ESCAPE:
+                    textLiteral.append(c);
+                    mode = MODE_NOT_INSIDE_QUOTES;
                     break;
                 default:
                     NeverError.unhandledCase(
@@ -122,7 +155,9 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
                         MODE_NORMAL,
                         MODE_BACK_SLASH_ESCAPE,
                         MODE_INSIDE_QUOTES,
-                        MODE_INSIDE_QUOTES_BACKSLASH_ESCAPE
+                        MODE_INSIDE_QUOTES_BACKSLASH_ESCAPE,
+                        MODE_NOT_INSIDE_QUOTES,
+                        MODE_NOT_INSIDE_QUOTES_BACKSLASH_ESCAPE
                     );
                     break;
             }
@@ -140,6 +175,8 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
                 throw new IllegalArgumentException("Not missing following character");
             case MODE_INSIDE_QUOTES:
             case MODE_INSIDE_QUOTES_BACKSLASH_ESCAPE:
+            case MODE_NOT_INSIDE_QUOTES:
+            case MODE_NOT_INSIDE_QUOTES_BACKSLASH_ESCAPE:
                 throw new IllegalArgumentException("Unclosed double quotes");
             default:
                 NeverError.unhandledCase(
@@ -147,9 +184,15 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
                     MODE_NORMAL,
                     MODE_BACK_SLASH_ESCAPE,
                     MODE_INSIDE_QUOTES,
-                    MODE_INSIDE_QUOTES_BACKSLASH_ESCAPE
+                    MODE_INSIDE_QUOTES_BACKSLASH_ESCAPE,
+                    MODE_NOT_INSIDE_QUOTES,
+                    MODE_NOT_INSIDE_QUOTES_BACKSLASH_ESCAPE
                 );
                 break;
+        }
+
+        if (null != component) {
+            components.add(component);
         }
 
         return components;
@@ -162,16 +205,6 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
      */
     static <T extends ValidationReference> TextMaskValidatorComponent<T> any() {
         return TextMaskValidatorComponentCharacterAny.instance();
-    }
-
-    /**
-     * {@link TextMaskValidatorComponentCharacterChar}
-     */
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> character(final char c) {
-        return TextMaskValidatorComponentCharacterChar.with(
-            c,
-            CharSequences.quoteIfChars(c).toString()
-        );
     }
 
     final static char DIGIT = '9';
@@ -223,6 +256,13 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
     }
 
    final static char UPPER_CASE_LETTER = 'U';
+
+    /**
+     * {@see TextMaskValidatorComponentTextLiteral}
+     */
+    static <T extends ValidationReference> TextMaskValidatorComponent<T> textLiteral(final String text) {
+        return TextMaskValidatorComponentTextLiteral.with(text);
+    }
 
     /**
      * {@link TextMaskValidatorComponentCharacterUpperCaseLetter}
