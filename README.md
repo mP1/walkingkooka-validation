@@ -30,3 +30,4 @@ or more [ValidationError](https://github.com/mP1/walkingkooka-validation/blob/ma
 - [TextLengthValidator](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/TextLengthValidator.java)
 - [TextMaskValidator](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/TextMaskValidator.java)
 - [ValidatorCollection](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/javex/walkingkooka/validation/ValidatorCollection.java)
+- [ValidationErrorListExpression](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/javex/walkingkooka/validation/ValidationErrorListExpressionValidator.java)

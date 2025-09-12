@@ -159,6 +159,21 @@ public final class ValidationValidatorProviderTest implements ValidatorProviderT
     }
 
     @Test
+    public void testValidatorSelectorWithValidationErrorListExpression() {
+        this.validatorAndCheck(
+            ValidatorSelector.with(
+                ValidatorName.VALIDATION_CHOICE_LIST_EXPRESSION,
+                "(\"1+2\", \"Invalid choice !!!\")"
+            ),
+            CONTEXT,
+            Validators.validationChoiceListExpression(
+                EXPRESSION,
+                "Invalid choice !!!"
+            )
+        );
+    }
+
+    @Test
     public void testValidatorFactoryMethodWithoutParameters() {
         final Set<ValidatorName> missing = SortedSets.tree();
         final ValidationValidatorProvider provider = this.createValidatorProvider();
