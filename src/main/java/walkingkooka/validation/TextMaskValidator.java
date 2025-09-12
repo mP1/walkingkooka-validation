@@ -39,8 +39,8 @@ import java.util.Optional;
  * <li><code>~</code> Match any character that is not the following mask control letter</li>
  * <li><code>U</code> Match any upper case letter</li>
  * <li><code>+</code> Makes the preceding mask component optional</li>
+ * <li><code>&star;</code> Makes the preceding mask component repeat while true</li>
  * </ul>
- * TODO Missing some extras such as support for repeating characters, WILDCARD
  */
 final class TextMaskValidator<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C>,
     TreePrintable {

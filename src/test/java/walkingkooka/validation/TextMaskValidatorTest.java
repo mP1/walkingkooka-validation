@@ -531,6 +531,94 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
         );
     }
 
+    @Test
+    public void testValidateWithRepeatingLetterPresent() {
+        this.maskValidateAndCheck(
+            "A*",
+            "B"
+        );
+    }
+
+    @Test
+    public void testValidateWithRepeatingLetterPresentDigit() {
+        this.maskValidateAndCheck(
+            "A*9",
+            "B8"
+        );
+    }
+
+    @Test
+    public void testValidateWithRepeatingLetterPresentTwiceDigit() {
+        this.maskValidateAndCheck(
+            "A*9",
+            "BC8"
+        );
+    }
+
+    @Test
+    public void testValidateWithRepeatingLetterPresentThriceDigit() {
+        this.maskValidateAndCheck(
+            "A*9",
+            "BCD8"
+        );
+    }
+
+    @Test
+    public void testValidateWithRepeatingLetterMissing() {
+        this.maskValidateAndCheck(
+            "A*",
+            ""
+        );
+    }
+
+    @Test
+    public void testValidateWithRepeatingLetterMissingDigit() {
+        this.maskValidateAndCheck(
+            "A*9",
+            "8"
+        );
+    }
+
+    @Test
+    public void testValidateWithRepeatingTextLiteralPresent() {
+        this.maskValidateAndCheck(
+            "\"Hello\"*",
+            "Hello"
+        );
+    }
+
+    @Test
+    public void testValidateWithRepeatingTextLiteralPresentDigit() {
+        this.maskValidateAndCheck(
+            "\"Hello\"*9",
+            "Hello8"
+        );
+    }
+
+    @Test
+    public void testValidateWithRepeatingTextLiteralPresentTwiceDigit() {
+        this.maskValidateAndCheck(
+            "\"Hello\"*9",
+            "HelloHello8"
+        );
+    }
+
+    @Test
+    public void testValidateWithRepeatingTextLiteralMissing() {
+        this.maskValidateAndCheck(
+            "\"Hello\"*",
+            ""
+        );
+    }
+
+    @Test
+    public void testValidateWithRepeatingTextLiteralMissingDigit() {
+        this.maskValidateAndCheck(
+            "\"Hello\"*9",
+            "8"
+        );
+    }
+
     private void maskValidateAndCheck(final String mask,
                                       final String text,
                                       final ValidationError<TestValidationReference>...expected) {
@@ -618,9 +706,9 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     @Test
     public void testTreePrint() {
         this.treePrintAndCheck(
-            TextMaskValidator.parse("?A9LU\"Hello\"~A"),
+            TextMaskValidator.parse("?A9LU\"Hello\"~AA*"),
             "TextMaskValidator\n" +
-                "  \"?A9LU\\\"Hello\\\"~A\"\n" +
+                "  \"?A9LU\\\"Hello\\\"~AA*\"\n" +
                 "    TextMaskValidatorComponentCharacterAny ?\n" +
                 "    TextMaskValidatorComponentCharacterLetter A\n" +
                 "    TextMaskValidatorComponentCharacterDigit 9\n" +
@@ -628,6 +716,8 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
                 "    TextMaskValidatorComponentCharacterUpperCaseLetter U\n" +
                 "    TextMaskValidatorComponentTextLiteral \"Hello\"\n" +
                 "    TextMaskValidatorComponentNot ~\n" +
+                "      TextMaskValidatorComponentCharacterLetter A\n" +
+                "    TextMaskValidatorComponentRepeating *\n" +
                 "      TextMaskValidatorComponentCharacterLetter A\n" +
                 "  \n"
         );

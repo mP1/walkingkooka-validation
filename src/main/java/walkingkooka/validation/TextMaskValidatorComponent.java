@@ -83,6 +83,19 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
                             }
                             component = optional(component);
                             break;
+                        case REPEATING:
+                            // repeating PLUS must have a mask control character before
+                            if(null == component) {
+                                component = components.isEmpty() ?
+                                    null :
+                                    components.remove(components.size() - 1);
+                            }
+
+                            if(null == component) {
+                                throw new IllegalArgumentException("Repeating " + CharSequences.quoteIfChars(REPEATING) + ": Missing component before");
+                            }
+                            component = repeating(component);
+                            break;
                         case UPPER_CASE_LETTER:
                             component = upperCaseLetter();
                             break;
@@ -277,8 +290,17 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
         return TextMaskValidatorComponentOptional.with(component);
     }
 
-   final static char UPPER_CASE_LETTER = 'U';
+    final static char REPEATING = '*';
 
+    /**
+     * {@link TextMaskValidatorComponentRepeating}
+     */
+    static <T extends ValidationReference> TextMaskValidatorComponent<T> repeating(final TextMaskValidatorComponent<T> component) {
+        return TextMaskValidatorComponentRepeating.with(component);
+    }
+
+   final static char UPPER_CASE_LETTER = 'U';
+    
     /**
      * {@see TextMaskValidatorComponentTextLiteral}
      */
