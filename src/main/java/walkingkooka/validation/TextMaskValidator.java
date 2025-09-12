@@ -32,6 +32,9 @@ import java.util.Optional;
 /**
  * A {@link Validator} that supports a mask using the following characters.
  * <ul>
+ * <li><code> </code> Match spaces</li>
+ * <li><code>-</code> Match dash</li>
+ * <li><code>&slash;</code> Match '/' forward slash'</li>
  * <li><code>?</code> Match any character</li>
  * <li><code>9</code> Match any digit</li>
  * <li><code>A</code> Match any letter</li>
