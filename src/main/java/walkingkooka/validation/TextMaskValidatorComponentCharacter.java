@@ -18,6 +18,7 @@
 package walkingkooka.validation;
 
 import walkingkooka.text.cursor.TextCursor;
+import walkingkooka.text.printer.IndentingPrinter;
 
 import java.util.Iterator;
 
@@ -71,4 +72,11 @@ abstract class TextMaskValidatorComponentCharacter<T extends ValidationReference
     }
 
     abstract boolean isMatch(final char c);
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public final void printTree(final IndentingPrinter printer) {
+        printer.println(this.getClass().getSimpleName() + " " + this);
+    }
 }

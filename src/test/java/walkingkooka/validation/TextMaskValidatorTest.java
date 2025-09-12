@@ -26,11 +26,13 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
 import walkingkooka.test.ParseStringTesting;
+import walkingkooka.text.printer.TreePrintableTesting;
 
 public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskValidator<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
     ToStringTesting<TextMaskValidator<TestValidationReference, TestValidatorContext>>,
     ParseStringTesting<TextMaskValidator<TestValidationReference, TestValidatorContext>>,
-    HashCodeEqualsDefinedTesting2<TextMaskValidator<TestValidationReference, TestValidatorContext>> {
+    HashCodeEqualsDefinedTesting2<TextMaskValidator<TestValidationReference, TestValidatorContext>>,
+    TreePrintableTesting {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("HelloField");
 
@@ -487,6 +489,30 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
         this.toStringAndCheck(
             this.createValidator(),
             "?"
+        );
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Test
+    public void testTreePrint() {
+        this.treePrintAndCheck(
+            TextMaskValidator.parse("?A9LU\"Hello\"~A"),
+            "TextMaskValidator\n" +
+                "  \"?A9LU\\\"Hello\\\"~A\"\n" +
+                "    TextMaskValidatorComponentCharacterAny ?\n" +
+                "    TextMaskValidatorComponentCharacterLetter A\n" +
+                "    TextMaskValidatorComponentCharacterDigit 9\n" +
+                "    TextMaskValidatorComponentCharacterLowerCaseLetter L\n" +
+                "    TextMaskValidatorComponentCharacterUpperCaseLetter U\n" +
+                "    TextMaskValidatorComponentCharacterChar 'H'\n" +
+                "    TextMaskValidatorComponentCharacterChar 'e'\n" +
+                "    TextMaskValidatorComponentCharacterChar 'l'\n" +
+                "    TextMaskValidatorComponentCharacterChar 'l'\n" +
+                "    TextMaskValidatorComponentCharacterChar 'o'\n" +
+                "    TextMaskValidatorComponentNot ~\n" +
+                "      TextMaskValidatorComponentCharacterLetter A\n" +
+                "  \n"
         );
     }
 

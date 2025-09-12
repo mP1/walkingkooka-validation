@@ -21,6 +21,8 @@ import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.cursor.TextCursors;
+import walkingkooka.text.printer.IndentingPrinter;
+import walkingkooka.text.printer.TreePrintable;
 
 import java.util.Iterator;
 import java.util.List;
@@ -39,7 +41,8 @@ import java.util.Optional;
  * </ul>
  * TODO Missing some extras such as support for optional / repeating characters, PLUS and WILDCARD
  */
-final class TextMaskValidator<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
+final class TextMaskValidator<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C>,
+    TreePrintable {
 
     static <R extends ValidationReference, C extends ValidatorContext<R>> TextMaskValidator<R, C> parse(final String mask) {
         CharSequences.failIfNullOrEmpty(mask, "mask");
@@ -133,4 +136,26 @@ final class TextMaskValidator<R extends ValidationReference, C extends Validator
     }
 
     private final String mask;
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public void printTree(final IndentingPrinter printer) {
+        printer.println(this.getClass().getSimpleName());
+        printer.indent();
+        {
+            printer.println(
+                CharSequences.quoteAndEscape(this.mask)
+            );
+
+            printer.indent();
+            {
+                for(final TextMaskValidatorComponent<R> component : this.components) {
+                    component.printTree(printer);
+                }
+            }
+            printer.outdent();
+        }
+        printer.println();
+    }
 }
