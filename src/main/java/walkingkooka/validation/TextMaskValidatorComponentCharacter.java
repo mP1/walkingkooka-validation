@@ -17,7 +17,6 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.text.CharSequences;
 import walkingkooka.text.cursor.TextCursor;
 
 import java.util.Iterator;
@@ -67,15 +66,10 @@ abstract class TextMaskValidatorComponentCharacter<T extends ValidationReference
             }
 
             if (null == errors) {
-                errors = ValidationErrorList.<T>empty()
-                    .concat(
-                        context.validationError(
-                            "Invalid character " + CharSequences.quoteIfChars(c) + " at " + text.lineInfo()
-                                .textOffset() +
-                                " expected " +
-                                this.expected()
-                        )
-                    );
+                errors = this.invalidCharacter(
+                    text,
+                    context
+                );
             }
         }
 
