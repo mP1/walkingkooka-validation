@@ -26,7 +26,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.ValidationReference;
 
 import java.util.AbstractList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -51,12 +51,12 @@ public final class FormFieldList<T extends ValidationReference> extends Abstract
     /**
      * Factory that takes a copy and returns a {@link FormFieldList}.
      */
-    public static <T extends ValidationReference> FormFieldList<T> with(final List<FormField<T>> list) {
-        Objects.requireNonNull(list, "list");
+    public static <T extends ValidationReference> FormFieldList<T> with(final Collection<FormField<T>> fields) {
+        Objects.requireNonNull(fields, "fields");
 
-        final int size = list.size();
-        final FormField<T>[] copy = new FormField[list.size()];
-        list.toArray(copy);
+        final int size = fields.size();
+        final FormField<T>[] copy = new FormField[fields.size()];
+        fields.toArray(copy);
 
         final FormFieldList<T> result;
         switch (size) {
@@ -91,8 +91,8 @@ public final class FormFieldList<T extends ValidationReference> extends Abstract
     }
 
     @Override
-    public FormFieldList<T> setElements(final List<FormField<T>> list) {
-        final FormFieldList<T> copy = with(list);
+    public FormFieldList<T> setElements(final Collection<FormField<T>> fields) {
+        final FormFieldList<T> copy = with(fields);
         return this.equals(copy) ?
             this :
             copy;
