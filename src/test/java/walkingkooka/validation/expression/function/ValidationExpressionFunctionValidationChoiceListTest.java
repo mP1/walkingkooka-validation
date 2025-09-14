@@ -74,7 +74,7 @@ public final class ValidationExpressionFunctionValidationChoiceListTest implemen
         final IllegalArgumentException thrown = assertThrows(
             IllegalArgumentException.class,
             () -> this.apply2(
-                StringList.with(
+                StringList.EMPTY.setElements(
                     Lists.of(
                         "Label1",
                         "Label2"
@@ -98,7 +98,7 @@ public final class ValidationExpressionFunctionValidationChoiceListTest implemen
     public void testApplyLabelsAndValues() {
         this.applyAndCheck(
             Lists.of(
-                StringList.with(
+                StringList.EMPTY.setElements(
                     Lists.of(
                         "Label1",
                         "Label22",
