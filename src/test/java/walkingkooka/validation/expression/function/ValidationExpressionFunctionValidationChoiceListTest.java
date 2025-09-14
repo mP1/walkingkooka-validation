@@ -105,7 +105,7 @@ public final class ValidationExpressionFunctionValidationChoiceListTest implemen
                         "Label333"
                     )
                 ),
-                NumberList.with(
+                NumberList.EMPTY.setElements(
                     Lists.of(
                         111,
                         222,
