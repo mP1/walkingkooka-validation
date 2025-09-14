@@ -17,7 +17,6 @@
 
 package walkingkooka.validation.provider;
 
-import walkingkooka.collect.set.ImmutableSet;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.plugin.PluginInfoSet;
@@ -55,7 +54,7 @@ public final class ValidatorInfoSet extends AbstractSet<ValidatorInfo> implement
         );
     }
 
-    public static ValidatorInfoSet with(final Set<ValidatorInfo> infos) {
+    public static ValidatorInfoSet with(final Collection<ValidatorInfo> infos) {
         ValidatorInfoSet with;
 
         if (infos instanceof ValidatorInfoSet) {
@@ -158,7 +157,7 @@ public final class ValidatorInfoSet extends AbstractSet<ValidatorInfo> implement
     }
 
     @Override
-    public ImmutableSet<ValidatorInfo> setElementsFailIfDifferent(final Set<ValidatorInfo> infos) {
+    public ValidatorInfoSet setElementsFailIfDifferent(final Collection<ValidatorInfo> infos) {
         return this.setElements(
             this.pluginInfoSet.setElementsFailIfDifferent(
                 infos
@@ -167,7 +166,7 @@ public final class ValidatorInfoSet extends AbstractSet<ValidatorInfo> implement
     }
 
     @Override
-    public ValidatorInfoSet setElements(final Set<ValidatorInfo> infos) {
+    public ValidatorInfoSet setElements(final Collection<ValidatorInfo> infos) {
         final ValidatorInfoSet after;
 
         if (infos instanceof ValidatorInfoSet) {

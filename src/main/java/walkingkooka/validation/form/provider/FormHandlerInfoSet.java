@@ -17,7 +17,6 @@
 
 package walkingkooka.validation.form.provider;
 
-import walkingkooka.collect.set.ImmutableSet;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.plugin.PluginInfoSet;
@@ -158,7 +157,7 @@ public final class FormHandlerInfoSet extends AbstractSet<FormHandlerInfo> imple
     }
 
     @Override
-    public ImmutableSet<FormHandlerInfo> setElementsFailIfDifferent(final Set<FormHandlerInfo> infos) {
+    public FormHandlerInfoSet setElementsFailIfDifferent(final Collection<FormHandlerInfo> infos) {
         return this.setElements(
             this.pluginInfoSet.setElementsFailIfDifferent(
                 infos
@@ -167,7 +166,7 @@ public final class FormHandlerInfoSet extends AbstractSet<FormHandlerInfo> imple
     }
 
     @Override
-    public FormHandlerInfoSet setElements(final Set<FormHandlerInfo> infos) {
+    public FormHandlerInfoSet setElements(final Collection<FormHandlerInfo> infos) {
         final FormHandlerInfoSet after;
 
         if (infos instanceof FormHandlerInfoSet) {
