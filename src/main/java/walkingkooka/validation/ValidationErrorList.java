@@ -25,7 +25,7 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.AbstractList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -49,12 +49,12 @@ public final class ValidationErrorList<T extends ValidationReference> extends Ab
     /**
      * Factory that takes a copy and returns a {@link ValidationErrorList}.
      */
-    public static <T extends ValidationReference> ValidationErrorList<T> with(final List<ValidationError<T>> list) {
-        Objects.requireNonNull(list, "list");
+    public static <T extends ValidationReference> ValidationErrorList<T> with(final Collection<ValidationError<T>> errors) {
+        Objects.requireNonNull(errors, "errors");
 
-        final int size = list.size();
-        final ValidationError<T>[] copy = new ValidationError[list.size()];
-        list.toArray(copy);
+        final int size = errors.size();
+        final ValidationError<T>[] copy = new ValidationError[errors.size()];
+        errors.toArray(copy);
 
         final ValidationErrorList<T> result;
         switch (size) {
@@ -89,8 +89,8 @@ public final class ValidationErrorList<T extends ValidationReference> extends Ab
     }
 
     @Override
-    public ValidationErrorList<T> setElements(final List<ValidationError<T>> list) {
-        final ValidationErrorList<T> copy = with(list);
+    public ValidationErrorList<T> setElements(final Collection<ValidationError<T>> errors) {
+        final ValidationErrorList<T> copy = with(errors);
         return this.equals(copy) ?
             this :
             copy;

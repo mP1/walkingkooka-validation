@@ -25,6 +25,7 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.AbstractList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -45,7 +46,7 @@ public final class ValidationChoiceList extends AbstractList<ValidationChoice>
     /**
      * Factory that creates a {@link ValidationChoiceList} from the list of {@link ValidationChoice}.
      */
-    public static ValidationChoiceList with(final List<ValidationChoice> choices) {
+    public static ValidationChoiceList with(final Collection<ValidationChoice> choices) {
         Objects.requireNonNull(choices, "choices");
 
         ValidationChoiceList DateList;
@@ -95,7 +96,7 @@ public final class ValidationChoiceList extends AbstractList<ValidationChoice>
     }
 
     @Override
-    public ValidationChoiceList setElements(final List<ValidationChoice> choices) {
+    public ValidationChoiceList setElements(final Collection<ValidationChoice> choices) {
         final ValidationChoiceList copy = with(choices);
         return this.equals(copy) ?
             this :
