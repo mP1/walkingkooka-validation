@@ -140,7 +140,7 @@ public final class ValidationConverterValidationChoiceListTest extends Validatio
 
     @Test
     public void testConvertValidationChoiceListToValidationChoiceList() {
-        final ValidationChoiceList list = ValidationChoiceList.with(
+        final ValidationChoiceList list = ValidationChoiceList.EMPTY.setElements(
             Lists.of(
                 CHOICE
             )

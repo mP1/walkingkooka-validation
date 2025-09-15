@@ -43,38 +43,8 @@ public final class ValidationChoiceList extends AbstractList<ValidationChoice>
         Lists.empty()
     );
 
-    /**
-     * Factory that creates a {@link ValidationChoiceList} from the list of {@link ValidationChoice}.
-     */
-    public static ValidationChoiceList with(final Collection<ValidationChoice> choices) {
-        Objects.requireNonNull(choices, "choices");
-
-        ValidationChoiceList DateList;
-
-        if (choices instanceof ValidationChoiceList) {
-            DateList = (ValidationChoiceList) choices;
-        } else {
-            final List<ValidationChoice> copy = Lists.array();
-            for (final ValidationChoice name : choices) {
-                copy.add(
-                    Objects.requireNonNull(name, "includes null " + ValidationChoice.class.getSimpleName())
-                );
-            }
-
-            switch (choices.size()) {
-                case 0:
-                    DateList = EMPTY;
-                    break;
-                default:
-                    DateList = new ValidationChoiceList(copy);
-                    break;
-            }
-        }
-
-        return DateList;
-    }
-
-    private ValidationChoiceList(final List<ValidationChoice> choices) {
+    // @VisibleForTesting
+    ValidationChoiceList(final List<ValidationChoice> choices) {
         this.choices = choices;
     }
 
@@ -97,17 +67,40 @@ public final class ValidationChoiceList extends AbstractList<ValidationChoice>
 
     @Override
     public ValidationChoiceList setElements(final Collection<ValidationChoice> choices) {
-        final ValidationChoiceList copy = with(choices);
-        return this.equals(copy) ?
+        Objects.requireNonNull(choices, "choices");
+
+        ValidationChoiceList validationChoiceList;
+
+        if (choices instanceof ValidationChoiceList) {
+            validationChoiceList = (ValidationChoiceList) choices;
+        } else {
+            final List<ValidationChoice> copy = Lists.array();
+            for (final ValidationChoice name : choices) {
+                copy.add(
+                    Objects.requireNonNull(name, "includes null " + ValidationChoice.class.getSimpleName())
+                );
+            }
+
+            switch (choices.size()) {
+                case 0:
+                    validationChoiceList = EMPTY;
+                    break;
+                default:
+                    validationChoiceList = new ValidationChoiceList(copy);
+                    break;
+            }
+        }
+
+        return this.equals(validationChoiceList) ?
             this :
-            copy;
+            validationChoiceList;
     }
 
     // json.............................................................................................................
 
     static ValidationChoiceList unmarshall(final JsonNode node,
                                            final JsonNodeUnmarshallContext context) {
-        return with(
+        return EMPTY.setElements(
             context.unmarshallList(
                 node,
                 ValidationChoice.class
