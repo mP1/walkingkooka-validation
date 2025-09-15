@@ -153,7 +153,7 @@ public final class ValidationChoiceListExpressionValidatorTest implements Valida
                     public <T> Either<T, String> convert(final Object value,
                                                          final Class<T> target) {
                         return this.successfulConversion(
-                            ValidationChoiceList.with(
+                            ValidationChoiceList.EMPTY.setElements(
                                 (List<ValidationChoice>) value
                             ),
                             target

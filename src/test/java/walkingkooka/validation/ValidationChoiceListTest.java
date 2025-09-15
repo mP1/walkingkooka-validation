@@ -47,33 +47,6 @@ public class ValidationChoiceListTest implements ListTesting2<ValidationChoiceLi
         Optional.empty()
     );
 
-    @Test
-    public void testWithNullFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> ValidationChoiceList.with(null)
-        );
-    }
-
-    @Test
-    public void testWithDoesntDoubleWrap() {
-        final ValidationChoiceList list = this.createList();
-        assertSame(
-            list,
-            ValidationChoiceList.with(list)
-        );
-    }
-
-    @Test
-    public void testWithEmpty() {
-        assertSame(
-            ValidationChoiceList.EMPTY,
-            ValidationChoiceList.with(
-                Lists.empty()
-            )
-        );
-    }
-
     // list.............................................................................................................
 
     @Test
@@ -123,6 +96,8 @@ public class ValidationChoiceListTest implements ListTesting2<ValidationChoiceLi
         );
     }
 
+    // setElements......................................................................................................
+
     @Test
     public void testSetElementsIncludesNullFails() {
         final NullPointerException thrown = assertThrows(
@@ -141,9 +116,30 @@ public class ValidationChoiceListTest implements ListTesting2<ValidationChoiceLi
         );
     }
 
+    @Test
+    public void testSetElementsDoesntDoubleWrap() {
+        final ValidationChoiceList list = this.createList();
+        assertSame(
+            list,
+            list.setElements(list)
+        );
+    }
+
+    @Test
+    public void testSetElementsWithEmpty() {
+        assertSame(
+            ValidationChoiceList.EMPTY,
+            new ValidationChoiceList(
+                Lists.of(
+                    CHOICE1
+                )
+            ).setElements(Lists.empty())
+        );
+    }
+
     @Override
     public ValidationChoiceList createList() {
-        return ValidationChoiceList.with(
+        return new ValidationChoiceList(
             Lists.of(
                 CHOICE1,
                 CHOICE2

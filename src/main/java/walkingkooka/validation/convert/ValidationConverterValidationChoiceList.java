@@ -108,7 +108,7 @@ final class ValidationConverterValidationChoiceList<C extends ConverterContext> 
                         );
                     }
 
-                    validationErrorList = ValidationChoiceList.with(
+                    validationErrorList = ValidationChoiceList.EMPTY.setElements(
                         Cast.to(list)
                     );
                 } else {
