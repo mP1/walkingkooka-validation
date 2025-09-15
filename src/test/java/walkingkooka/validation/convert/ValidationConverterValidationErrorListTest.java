@@ -163,11 +163,10 @@ public final class ValidationConverterValidationErrorListTest extends Validation
 
     @Test
     public void testConvertValidationErrorListToValidationErrorList() {
-        final ValidationErrorList<TestValidationReference> validationErrorList = ValidationErrorList.with(
-            Lists.of(
+        final ValidationErrorList<TestValidationReference> validationErrorList = ValidationErrorList.<TestValidationReference>empty()
+            .concat(
                 validationError(MESSAGE)
-            )
-        );
+            );
 
         assertSame(
             validationErrorList,

@@ -118,9 +118,10 @@ final class ValidationConverterValidationErrorList<C extends ConverterContext> i
                         }
                     }
 
-                    validationErrorList = ValidationErrorList.with(
-                        Cast.to(list)
-                    );
+                    validationErrorList = ValidationErrorList.empty()
+                        .setElements(
+                            Cast.to(list)
+                        );
                 } else {
                     validationErrorList = ValidationErrorList.empty()
                         .concat(

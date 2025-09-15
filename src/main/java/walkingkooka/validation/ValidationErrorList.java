@@ -19,6 +19,7 @@ package walkingkooka.validation;
 
 import walkingkooka.Cast;
 import walkingkooka.collect.list.ImmutableListDefaults;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -26,6 +27,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.AbstractList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -46,30 +48,8 @@ public final class ValidationErrorList<T extends ValidationReference> extends Ab
         new ValidationError[0]
     );
 
-    /**
-     * Factory that takes a copy and returns a {@link ValidationErrorList}.
-     */
-    public static <T extends ValidationReference> ValidationErrorList<T> with(final Collection<ValidationError<T>> errors) {
-        Objects.requireNonNull(errors, "errors");
-
-        final int size = errors.size();
-        final ValidationError<T>[] copy = new ValidationError[errors.size()];
-        errors.toArray(copy);
-
-        final ValidationErrorList<T> result;
-        switch (size) {
-            case 0:
-                result = empty();
-                break;
-            default:
-                result = new ValidationErrorList<>(copy);
-                break;
-        }
-
-        return result;
-    }
-
-    private ValidationErrorList(final ValidationError<T>[] list) {
+    // @VisibleForTesting
+    ValidationErrorList(final ValidationError<T>[] list) {
         this.list = list;
     }
 
@@ -90,10 +70,38 @@ public final class ValidationErrorList<T extends ValidationReference> extends Ab
 
     @Override
     public ValidationErrorList<T> setElements(final Collection<ValidationError<T>> errors) {
-        final ValidationErrorList<T> copy = with(errors);
-        return this.equals(copy) ?
+        Objects.requireNonNull(errors, "errors");
+
+        ValidationErrorList<T> validationErrorList;
+
+        if (errors instanceof ValidationErrorList) {
+            validationErrorList = (ValidationErrorList<T>) errors;
+        } else {
+            final List<ValidationError<T>> copy = Lists.array();
+            for (final ValidationError<T> name : errors) {
+                copy.add(
+                    Objects.requireNonNull(name, "includes null " + ValidationError.class.getSimpleName())
+                );
+            }
+
+            final int size = copy.size();
+            switch (size) {
+                case 0:
+                    validationErrorList = empty();
+                    break;
+                default:
+                    validationErrorList = new ValidationErrorList<>(
+                        copy.toArray(
+                            new ValidationError[size]
+                        )
+                    );
+                    break;
+            }
+        }
+
+        return this.equals(validationErrorList) ?
             this :
-            copy;
+            validationErrorList;
     }
 
     private final ValidationError<T>[] list;
@@ -102,14 +110,13 @@ public final class ValidationErrorList<T extends ValidationReference> extends Ab
 
     static <T extends ValidationReference> ValidationErrorList<T> unmarshall(final JsonNode node,
                                                                              final JsonNodeUnmarshallContext context) {
-        return with(
-            Cast.to(
+        return ValidationErrorList.<T>empty()
+            .setElements(
                 context.unmarshallList(
                     node,
-                    ValidationError.class
+                    Cast.to(ValidationError.class)
                 )
-            )
-        );
+            );
     }
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {

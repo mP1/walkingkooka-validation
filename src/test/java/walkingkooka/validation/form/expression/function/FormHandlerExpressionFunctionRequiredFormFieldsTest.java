@@ -89,11 +89,10 @@ public final class FormHandlerExpressionFunctionRequiredFormFieldsTest implement
                         .setValue(Optional.of("Value3"))
                 )
             ),
-            ValidationErrorList.with(
-                Lists.of(
+            ValidationErrorList.<TestValidationReference>empty()
+                .concat(
                     ValidationError.with(FIELD2, "Required")
                 )
-            )
         );
     }
 

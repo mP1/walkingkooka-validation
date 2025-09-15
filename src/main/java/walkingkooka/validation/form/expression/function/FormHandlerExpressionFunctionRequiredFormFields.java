@@ -90,7 +90,8 @@ final class FormHandlerExpressionFunctionRequiredFormFields<R extends Validation
             }
         }
 
-        return ValidationErrorList.with(errors);
+        return ValidationErrorList.<R>empty()
+            .setElements(errors);
     }
 
     private final Set<R> fields;
