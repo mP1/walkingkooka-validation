@@ -178,9 +178,8 @@ public final class Form<T extends ValidationReference> implements HateosResource
      * No attempt is made to verify if all the {@link ValidationError#reference()} match existing {@link #fields()}.
      */
     public Form<T> setErrors(final List<ValidationError<T>> errors) {
-        final ValidationErrorList<T> copy = ValidationErrorList.with(
-            Objects.requireNonNull(errors, "errors")
-        );
+        final ValidationErrorList<T> copy = ValidationErrorList.<T>empty()
+            .setElements(errors);
 
         return this.errors.equals(copy) ?
             this :

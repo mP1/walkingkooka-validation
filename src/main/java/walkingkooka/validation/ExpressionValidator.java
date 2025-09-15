@@ -18,7 +18,6 @@
 package walkingkooka.validation;
 
 import walkingkooka.Cast;
-import walkingkooka.collect.list.Lists;
 import walkingkooka.tree.expression.Expression;
 
 import java.util.List;
@@ -56,15 +55,15 @@ final class ExpressionValidator<R extends ValidationReference, C extends Validat
 
         final ValidationErrorList<R> validationErrors;
         if(errors instanceof ValidationError) {
-            validationErrors = ValidationErrorList.with(
-                Lists.of(
-                (ValidationError<R>) errors
-            )
-            );
+            validationErrors = ValidationErrorList.<R>empty()
+                .concat(
+                    (ValidationError<R>) errors
+                );
         } else {
-            validationErrors = ValidationErrorList.with(
-                Cast.to(errors)
-            );
+            validationErrors = ValidationErrorList.<R>empty()
+                .setElements(
+                    Cast.to(errors)
+                );
         }
 
         return validationErrors;

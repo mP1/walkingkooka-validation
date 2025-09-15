@@ -144,7 +144,8 @@ public interface FormHandlerContext<R extends ValidationReference, S> extends Ca
             );
         }
 
-        return ValidationErrorList.with(errors);
+        return ValidationErrorList.<R>empty()
+            .setElements(errors);
     }
 
     /**
