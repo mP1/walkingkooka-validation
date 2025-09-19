@@ -24,7 +24,6 @@ import walkingkooka.tree.expression.function.ExpressionFunctionParameterKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.expression.ValidatorExpressionEvaluationContext;
-import walkingkooka.validation.provider.HasOptionalValidatorSelector;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.util.List;
@@ -50,13 +49,13 @@ final class ValidationExpressionFunctionGetValidator<R extends ValidationReferen
         super("getValidator");
     }
 
-    final static ExpressionFunctionParameter<HasOptionalValidatorSelector> HAS_VALIDATOR_SELECTOR = ExpressionFunctionParameterName.with("validator")
-        .required(HasOptionalValidatorSelector.class)
+    final static ExpressionFunctionParameter<ValidatorSelector> VALIDATOR_SELECTOR = ExpressionFunctionParameterName.with("validator")
+        .required(ValidatorSelector.class)
         .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE);
 
 
     private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
-        HAS_VALIDATOR_SELECTOR
+        VALIDATOR_SELECTOR
     );
 
     @Override
@@ -76,10 +75,7 @@ final class ValidationExpressionFunctionGetValidator<R extends ValidationReferen
 
     @Override
     ValidatorSelector applyNonNullParameters(final List<Object> parameters,
-                                  final C context) {
-        final HasOptionalValidatorSelector has = HAS_VALIDATOR_SELECTOR.getOrFail(parameters, 0);
-
-        return has.validatorSelector()
-            .orElse(null);
+                                             final C context) {
+        return VALIDATOR_SELECTOR.getOrFail(parameters, 0);
     }
 }
