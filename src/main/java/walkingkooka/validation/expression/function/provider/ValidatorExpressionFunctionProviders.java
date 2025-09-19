@@ -52,6 +52,7 @@ public final class ValidatorExpressionFunctionProviders implements PublicStaticH
             BASE_URL,
             nameCaseSensitivity,
             Sets.of(
+                ValidatorExpressionFunctions.getValidator(),
                 ValidatorExpressionFunctions.validationErrorIf(),
                 ValidatorExpressionFunctions.validationValue()
             )

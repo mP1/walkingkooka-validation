@@ -23,11 +23,19 @@ import walkingkooka.validation.ValidationChoiceList;
 import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.expression.ValidatorExpressionEvaluationContext;
+import walkingkooka.validation.provider.ValidatorSelector;
 
 /**
  * A collection of {@link ExpressionFunction}.
  */
 public final class ValidatorExpressionFunctions implements PublicStaticHelper {
+
+    /**
+     * {@see ValidationExpressionFunctionGetValidator}
+     */
+    public static <R extends ValidationReference, C extends ValidatorExpressionEvaluationContext<R>> ExpressionFunction<ValidatorSelector, C> getValidator() {
+        return ValidationExpressionFunctionGetValidator.instance();
+    }
 
     /**
      * {@see ValidationExpressionFunctionValidationChoiceList}
