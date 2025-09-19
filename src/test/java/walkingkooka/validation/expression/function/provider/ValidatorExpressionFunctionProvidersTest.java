@@ -71,6 +71,7 @@ public final class ValidatorExpressionFunctionProvidersTest implements PublicSta
         final CaseSensitivity caseSensitivity = CaseSensitivity.SENSITIVE;
         this.checkEquals(
             ExpressionFunctionInfoSet.parse(
+                "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/getValidator getValidator," +
                 "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/validationErrorIf validationErrorIf," +
                     "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/validationValue validationValue",
                 caseSensitivity
