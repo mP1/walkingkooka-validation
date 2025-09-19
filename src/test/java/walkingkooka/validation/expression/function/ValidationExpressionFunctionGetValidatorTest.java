@@ -24,10 +24,9 @@ import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.expression.ValidatorExpressionEvaluationContext;
 import walkingkooka.validation.expression.ValidatorExpressionEvaluationContexts;
-import walkingkooka.validation.provider.HasOptionalValidatorSelector;
 import walkingkooka.validation.provider.ValidatorSelector;
 
-import java.util.Optional;
+import java.util.Arrays;
 
 public final class ValidationExpressionFunctionGetValidatorTest implements ExpressionFunctionTesting<ValidationExpressionFunctionGetValidator<TestValidationReference, ValidatorExpressionEvaluationContext<TestValidationReference>>, ValidatorSelector, ValidatorExpressionEvaluationContext<TestValidationReference>> {
 
@@ -36,13 +35,8 @@ public final class ValidationExpressionFunctionGetValidatorTest implements Expre
     @Test
     public void testApplyNullValidatorSelector() {
         this.applyAndCheck(
-            Lists.of(
-                new HasOptionalValidatorSelector() {
-                    @Override
-                    public Optional<ValidatorSelector> validatorSelector() {
-                        return Optional.empty();
-                    }
-                }
+            Arrays.asList(
+                (Object)null
             ),
             null
         );
@@ -53,14 +47,7 @@ public final class ValidationExpressionFunctionGetValidatorTest implements Expre
         final ValidatorSelector validator = ValidatorSelector.parse("hello-validator");
 
         this.applyAndCheck(
-            Lists.of(
-                new HasOptionalValidatorSelector() {
-                    @Override
-                    public Optional<walkingkooka.validation.provider.ValidatorSelector> validatorSelector() {
-                        return Optional.of(validator);
-                    }
-                }
-            ),
+            Lists.of(validator),
             validator
         );
     }
