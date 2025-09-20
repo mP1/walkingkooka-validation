@@ -59,7 +59,7 @@ final class TextLengthValidator<R extends ValidationReference, C extends Validat
         final int minLength = this.minLength;
         final int maxLength = this.maxLength;
 
-        ValidationErrorList<R> errors = ValidationErrorList.empty();
+        ValidationErrorList<R> errors = context.validationErrorList();
 
         final String text = context.convertOrFail(
             value,

@@ -46,7 +46,7 @@ final class AbsoluteUrlValidator<R extends ValidationReference, C extends Valida
                                              final C context) {
         Objects.requireNonNull(context, "context");
 
-        ValidationErrorList<R> errors = ValidationErrorList.empty();
+        ValidationErrorList<R> errors = context.validationErrorList();
 
         try {
             Url.parseAbsolute(

@@ -43,7 +43,7 @@ final class TextMaskValidatorComponentRepeatingNext<T extends ValidationReferenc
                                     final boolean invertNext,
                                     final Iterator<TextMaskValidatorComponent<T>> nextComponent,
                                     final ValidatorContext<T> context) {
-        return ValidationErrorList.empty();
+        return context.validationErrorList();
     }
 
     @Override //
