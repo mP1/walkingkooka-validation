@@ -31,10 +31,8 @@ public final class NonNullValidatorTest implements ValidatorTesting2<NonNullVali
         this.validateAndCheck(
             null,
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                "Missing HelloField"
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage("Missing HelloField")
         );
     }
 
@@ -56,10 +54,8 @@ public final class NonNullValidatorTest implements ValidatorTesting2<NonNullVali
         return new TestValidatorContext() {
             @Override
             public ValidationError<TestValidationReference> validationError(final String message) {
-                return ValidationError.with(
-                    REFERENCE,
-                    message
-                );
+                return ValidationError.with(REFERENCE)
+                    .setMessage(message);
             }
 
             @Override

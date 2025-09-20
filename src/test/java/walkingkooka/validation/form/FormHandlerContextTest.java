@@ -185,9 +185,8 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
                 field1.setValue(value1)
             ),
             ValidationError.with(
-                field1.reference(),
-                "Unknown validator Validator1"
-            )
+                field1.reference()
+            ).setMessage("Unknown validator Validator1")
         );
     }
 
@@ -263,10 +262,9 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
                 field2.setValue(value2),
                 field3.setValue(value3)
             ),
-            ValidationError.with(
-                field1.reference(),
-                "Error1"
-            ).setValue(value1)
+            ValidationError.with(field1.reference())
+                .setMessage("Error1")
+                .setValue(value1)
         );
     }
 
@@ -317,9 +315,9 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
                 field1.setValue(value1)
             ),
             ValidationError.with(
-                field1.reference(),
-                "Error1"
-            ).setValue(value1)
+                    field1.reference()
+                ).setMessage("Error1")
+                .setValue(value1)
         );
     }
 
@@ -370,9 +368,9 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
                 field1.setValue(value1)
             ),
             ValidationError.with(
-                field1.reference(),
-                "Error1"
-            ).setValue(value1)
+                field1.reference()
+            ).setMessage("Error1")
+                .setValue(value1)
         );
     }
 
@@ -456,17 +454,17 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
                 field3.setValue(value3)
             ),
             ValidationError.with(
-                field1.reference(),
-                "Error1"
-            ).setValue(value1),
+                    field1.reference()
+                ).setMessage("Error1")
+                .setValue(value1),
             ValidationError.with(
-                field2.reference(),
-                "Error2a"
-            ).setValue(value2),
+                    field2.reference()
+                ).setMessage("Error2a")
+                .setValue(value2),
             ValidationError.with(
-                field2.reference(),
-                "Error2b"
-            ).setValue(value2)
+                    field2.reference()
+                ).setMessage("Error2b")
+                .setValue(value2)
         );
     }
 

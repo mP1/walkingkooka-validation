@@ -36,10 +36,8 @@ public final class AbsoluteUrlValidatorTest implements ValidatorTesting2<Absolut
         this.validateAndCheck(
             null,
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                "Missing url"
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage("Missing url")
         );
     }
 
@@ -48,10 +46,8 @@ public final class AbsoluteUrlValidatorTest implements ValidatorTesting2<Absolut
         this.validateAndCheck(
             "",
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                "no protocol: "
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage("no protocol: ")
         );
     }
 
@@ -60,10 +56,8 @@ public final class AbsoluteUrlValidatorTest implements ValidatorTesting2<Absolut
         this.validateAndCheck(
             "/relative-url/123",
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                "no protocol: /relative-url/123"
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage("no protocol: /relative-url/123")
         );
     }
 
@@ -72,10 +66,8 @@ public final class AbsoluteUrlValidatorTest implements ValidatorTesting2<Absolut
         this.validateAndCheck(
             "https://",
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                "Missing host name"
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage("Missing host name")
         );
     }
 
@@ -123,10 +115,8 @@ public final class AbsoluteUrlValidatorTest implements ValidatorTesting2<Absolut
 
             @Override
             public ValidationError<TestValidationReference> validationError(final String message) {
-                return ValidationError.with(
-                    REFERENCE,
-                    message
-                );
+                return ValidationError.with(REFERENCE)
+                    .setMessage(message);
             }
 
             @Override

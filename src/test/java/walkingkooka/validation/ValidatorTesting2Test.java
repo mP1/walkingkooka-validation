@@ -30,14 +30,12 @@ public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, T
     @Test
     public void testValidateAndCheck() {
         final ValidationError<TestValidationReference> error1 = ValidationError.with(
-            new TestValidationReference("A1"),
-            "Message1"
-        );
+            new TestValidationReference("A1")
+        ).setMessage("Message1");
 
         final ValidationError<TestValidationReference> error2 = ValidationError.with(
-            new TestValidationReference("B2"),
-            "Message2"
-        );
+            new TestValidationReference("B2")
+        ).setMessage("Message2");
 
         this.validateAndCheck(
             new TestValidator(error1, error2),

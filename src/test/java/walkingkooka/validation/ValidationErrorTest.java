@@ -55,57 +55,81 @@ public final class ValidationErrorTest implements HasTextTesting,
         assertThrows(
             NullPointerException.class,
             () -> ValidationError.with(
-                null,
-                MESSAGE
-            )
-        );
-    }
-
-    @Test
-    public void testWithNullMessageFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> ValidationError.with(
-                REFERENCE,
                 null
             )
         );
     }
 
-    @Test
-    public void testWithEmptyMessageFails() {
-        assertThrows(
-            IllegalArgumentException.class,
-            () -> ValidationError.with(
-                REFERENCE,
-                ""
-            )
-        );
-    }
-
-    @Test
-    public void testWithWhitespaceMessageFails() {
-        assertThrows(
-            IllegalArgumentException.class,
-            () -> ValidationError.with(
-                REFERENCE,
-                " "
-            )
-        );
-    }
 
     @Test
     public void testWith() {
         final ValidationError<TestValidationReference> error = ValidationError.with(
-            REFERENCE,
-            MESSAGE
+            REFERENCE
         );
 
         this.referenceAndCheck(error);
-        this.messageAndCheck(error);
+        this.messageAndCheck(
+            error,
+            ValidationError.NO_MESSAGE
+        );
         this.valueAndCheck(error, ValidationError.NO_VALUE);
     }
 
+    // setMessage.........................................................................................................
+
+    @Test
+    public void testSetMessageWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> this.createObject().setMessage(null)
+        );
+    }
+
+    @Test
+    public void testSetMessageSame() {
+        final ValidationError<TestValidationReference> error = this.createObject()
+            .setMessage(MESSAGE);
+
+        assertSame(
+            error,
+            error.setMessage(MESSAGE)
+        );
+    }
+
+    @Test
+    public void testSetMessageWithDifferent() {
+        final ValidationError<TestValidationReference> error = this.createObject();
+
+        final String differentMessage = "DifferentMessage";
+        final ValidationError<TestValidationReference> different = error.setMessage(differentMessage);
+
+        assertNotSame(
+            error,
+            different
+        );
+
+        this.referenceAndCheck(error);
+        this.referenceAndCheck(different);
+
+        this.messageAndCheck(
+            error,
+            MESSAGE
+        );
+        this.messageAndCheck(
+            different,
+            differentMessage
+        );
+
+        this.valueAndCheck(
+            error,
+            ValidationError.NO_VALUE
+        );
+        this.valueAndCheck(
+            different,
+            ValidationError.NO_VALUE
+        );
+    }
+    
     // setValue.........................................................................................................
 
     @Test
@@ -170,7 +194,10 @@ public final class ValidationErrorTest implements HasTextTesting,
         this.referenceAndCheck(error);
         this.referenceAndCheck(different);
 
-        this.messageAndCheck(error);
+        this.messageAndCheck(
+            error,
+            MESSAGE
+        );
         this.messageAndCheck(different);
 
         this.valueAndCheck(error);
@@ -193,9 +220,8 @@ public final class ValidationErrorTest implements HasTextTesting,
 
         this.textAndCheck(
             ValidationError.with(
-                new TestValidationReference("Z99"),
-                message
-            ),
+                new TestValidationReference("Z99")
+            ).setMessage(message),
             message
         );
     }
@@ -250,46 +276,40 @@ public final class ValidationErrorTest implements HasTextTesting,
         );
     }
     
-    // class............................................................................................................
+    // equals...........................................................................................................
 
     @Test
     public void testEqualsDifferentReference() {
         this.checkNotEquals(
             ValidationError.with(
-                new TestValidationReference("different"),
-                MESSAGE
-            )
+                new TestValidationReference("different")
+            ).setMessage(MESSAGE)
         );
     }
 
     @Test
     public void testEqualsDifferentMessage() {
         this.checkNotEquals(
-            ValidationError.with(
-                REFERENCE,
-                "different"
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage("different")
         );
     }
 
     @Test
     public void testEqualsDifferentValue() {
         this.checkNotEquals(
-            ValidationError.with(
-                REFERENCE,
-                MESSAGE
-            ).setValue(
-                Optional.of("different")
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage(MESSAGE)
+                .setValue(
+                    Optional.of("different")
+                )
         );
     }
 
     @Override
     public ValidationError<TestValidationReference> createObject() {
-        return ValidationError.with(
-            REFERENCE,
-            MESSAGE
-        );
+        return ValidationError.with(REFERENCE)
+            .setMessage(MESSAGE);
     }
 
     // toString.........................................................................................................
@@ -308,10 +328,8 @@ public final class ValidationErrorTest implements HasTextTesting,
     @Test
     public void testTreePrintWithoutValue() {
         this.treePrintAndCheck(
-            ValidationError.with(
-                REFERENCE,
-                MESSAGE
-            ),
+            ValidationError.with(REFERENCE)
+                .setMessage(MESSAGE),
             "ValidationError\n" +
                 "  Hello (walkingkooka.validation.TestValidationReference)\n" +
                 "    Error too many xyz\n"
@@ -321,10 +339,9 @@ public final class ValidationErrorTest implements HasTextTesting,
     @Test
     public void testTreePrintWithValue() {
         this.treePrintAndCheck(
-            ValidationError.with(
-                REFERENCE,
-                MESSAGE
-            ).setValue(VALUE),
+            ValidationError.with(REFERENCE)
+                .setMessage(MESSAGE)
+                .setValue(VALUE),
             "ValidationError\n" +
                 "  Hello (walkingkooka.validation.TestValidationReference)\n" +
                 "    Error too many xyz\n" +
@@ -352,10 +369,9 @@ public final class ValidationErrorTest implements HasTextTesting,
                     this.marshallContext()
                         .marshallWithType(VALUE.get())
                 ),
-            ValidationError.with(
-                REFERENCE,
-                MESSAGE
-            ).setValue(VALUE)
+            ValidationError.with(REFERENCE)
+                .setMessage(MESSAGE)
+                .setValue(VALUE)
         );
     }
 

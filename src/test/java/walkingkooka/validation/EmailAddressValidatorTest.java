@@ -36,10 +36,8 @@ public final class EmailAddressValidatorTest implements ValidatorTesting2<EmailA
         this.validateAndCheck(
             null,
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                "Missing email address"
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage("Missing email address")
         );
     }
 
@@ -48,10 +46,8 @@ public final class EmailAddressValidatorTest implements ValidatorTesting2<EmailA
         this.validateAndCheck(
             "",
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                "Empty \"EmailAddress\""
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage("Empty \"EmailAddress\"")
         );
     }
 
@@ -60,10 +56,8 @@ public final class EmailAddressValidatorTest implements ValidatorTesting2<EmailA
         this.validateAndCheck(
             "@example.com",
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                "Email missing user"
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage("Email missing user")
         );
     }
 
@@ -72,10 +66,8 @@ public final class EmailAddressValidatorTest implements ValidatorTesting2<EmailA
         this.validateAndCheck(
             "missing.host@",
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                "Email missing host"
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage("Email missing host")
         );
     }
 
@@ -123,10 +115,8 @@ public final class EmailAddressValidatorTest implements ValidatorTesting2<EmailA
 
             @Override
             public ValidationError<TestValidationReference> validationError(final String message) {
-                return ValidationError.with(
-                    REFERENCE,
-                    message
-                );
+                return ValidationError.with(REFERENCE)
+                    .setMessage(message);
             }
 
             @Override

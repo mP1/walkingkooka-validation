@@ -38,12 +38,12 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
     private static ValidationError<TestValidationReference> error(final TestValidationReference reference,
                                                                   final int messageNumber,
                                                                   final Object value) {
-        return ValidationError.with(
-            reference,
-            message(reference, messageNumber)
-        ).setValue(
-            Optional.ofNullable(value)
-        );
+        return ValidationError.with(reference)
+            .setMessage(
+                message(reference, messageNumber)
+            ).setValue(
+                Optional.ofNullable(value)
+            );
     }
 
     private static String message(final TestValidationReference reference,

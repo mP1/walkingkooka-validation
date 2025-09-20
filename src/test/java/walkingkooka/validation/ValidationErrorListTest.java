@@ -83,9 +83,8 @@ public final class ValidationErrorListTest implements ImmutableListTesting<Valid
         return ValidationErrorList.<TestValidationReference>empty()
             .concat(
                 ValidationError.with(
-                    new TestValidationReference("Hello"),
-                    "Something went wrong 123"
-                )
+                    new TestValidationReference("Hello")
+                ).setMessage("Something went wrong 123")
             );
     }
 
@@ -129,22 +128,22 @@ public final class ValidationErrorListTest implements ImmutableListTesting<Valid
             ValidationErrorList.<TestValidationReference>empty()
                 .concat(
                     ValidationError.with(
-                        new TestValidationReference("Hello"),
-                        "Something went wrong 123"
-                    ).setValue(
-                        Optional.of(
-                            EmailAddress.parse("hello@example.com")
+                            new TestValidationReference("Hello")
+                        ).setMessage("Something went wrong 123")
+                        .setValue(
+                            Optional.of(
+                                EmailAddress.parse("hello@example.com")
+                            )
                         )
-                    )
                 ).concat(
                     ValidationError.with(
-                        new TestValidationReference("Hello"),
-                        "Something went wrong 123"
-                    ).setValue(
-                        Optional.of(
-                            Url.parse("https://example.com")
+                            new TestValidationReference("Hello")
+                        ).setMessage("Something went wrong 123")
+                        .setValue(
+                            Optional.of(
+                                Url.parse("https://example.com")
+                            )
                         )
-                    )
                 ),
             "[\n" +
                 "  {\n" +

@@ -32,10 +32,8 @@ public final class TextLengthValidatorTest implements ValidatorTesting2<TextLeng
         this.validateAndCheck(
             null,
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                "Missing required text"
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage("Missing required text")
         );
     }
 
@@ -44,10 +42,8 @@ public final class TextLengthValidatorTest implements ValidatorTesting2<TextLeng
         this.validateAndCheck(
             "",
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                "Missing required text"
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage("Missing required text")
         );
     }
 
@@ -56,10 +52,8 @@ public final class TextLengthValidatorTest implements ValidatorTesting2<TextLeng
         this.validateAndCheck(
             "A",
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                "Text length 1 < 2"
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage("Text length 1 < 2")
         );
     }
 
@@ -68,10 +62,8 @@ public final class TextLengthValidatorTest implements ValidatorTesting2<TextLeng
         this.validateAndCheck(
             "ABCDEFG",
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                "Text length 7 > 2"
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage("Text length 7 > 2")
         );
     }
 
@@ -98,10 +90,8 @@ public final class TextLengthValidatorTest implements ValidatorTesting2<TextLeng
 
             @Override
             public ValidationError<TestValidationReference> validationError(final String message) {
-                return ValidationError.with(
-                    REFERENCE,
-                    message
-                );
+                return ValidationError.with(REFERENCE)
+                    .setMessage(message);
             }
 
             @Override

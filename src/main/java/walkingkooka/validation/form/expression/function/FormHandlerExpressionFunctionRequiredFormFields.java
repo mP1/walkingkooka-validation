@@ -82,9 +82,8 @@ final class FormHandlerExpressionFunctionRequiredFormFields<R extends Validation
                     // field is missing value, add an error
                     errors.add(
                         ValidationError.with(
-                            reference,
-                            "Required"
-                        )
+                            reference
+                        ).setMessage("Required")
                     );
                 }
             }

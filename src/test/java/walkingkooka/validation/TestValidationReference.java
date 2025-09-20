@@ -35,10 +35,8 @@ public final class TestValidationReference implements ValidationReference {
 
     @Override
     public ValidationError<? extends ValidationReference> setValidationErrorMessage(final String message) {
-        return ValidationError.with(
-            this,
-            message
-        );
+        return ValidationError.with(this)
+            .setMessage(message);
     }
 
     // HasText..........................................................................................................

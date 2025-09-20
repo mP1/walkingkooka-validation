@@ -91,7 +91,8 @@ public final class FormHandlerExpressionFunctionRequiredFormFieldsTest implement
             ),
             ValidationErrorList.<TestValidationReference>empty()
                 .concat(
-                    ValidationError.with(FIELD2, "Required")
+                    ValidationError.with(FIELD2)
+                        .setMessage("Required")
                 )
         );
     }
