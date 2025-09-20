@@ -276,10 +276,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
         this.maskValidateAndCheck(
             "?",
             null,
-            ValidationError.with(
-                REFERENCE,
-                "End of text expected character"
-            )
+            "End of text expected character"
         );
     }
 
@@ -288,10 +285,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
         this.maskValidateAndCheck(
             "?",
             "",
-            ValidationError.with(
-                REFERENCE,
-                "End of text expected character"
-            )
+            "End of text expected character"
         );
     }
 
@@ -300,10 +294,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
         this.maskValidateAndCheck(
             "AAA",
             "abcd",
-            ValidationError.with(
-                REFERENCE,
-                "Invalid character 'd' at 3"
-            )
+            "Invalid character 'd' at 3"
         );
     }
 
@@ -312,10 +303,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
         this.maskValidateAndCheck(
             "A",
             "9",
-            ValidationError.with(
-                REFERENCE,
-                "Invalid character '9' at 0 expected letter"
-            )
+            "Invalid character '9' at 0 expected letter"
         );
     }
 
@@ -324,10 +312,8 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
         this.maskValidateAndCheck(
             "AAA",
             "B9",
-            ValidationError.with(
-                REFERENCE,
-                "Invalid character '9' at 1 expected letter"
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage("Invalid character '9' at 1 expected letter")
         );
     }
 
@@ -336,10 +322,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
         this.maskValidateAndCheck(
             "99",
             "8A",
-            ValidationError.with(
-                REFERENCE,
-                "Invalid character 'A' at 1 expected digit"
-            )
+            "Invalid character 'A' at 1 expected digit"
         );
     }
 
@@ -348,10 +331,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
         this.maskValidateAndCheck(
             "LL",
             "lX",
-            ValidationError.with(
-                REFERENCE,
-                "Invalid character 'X' at 1 expected lower-case letter"
-            )
+            "Invalid character 'X' at 1 expected lower-case letter"
         );
     }
 
@@ -360,10 +340,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
         this.maskValidateAndCheck(
             "UU",
             "Ua",
-            ValidationError.with(
-                REFERENCE,
-                "Invalid character 'a' at 1 expected upper-case letter"
-            )
+            "Invalid character 'a' at 1 expected upper-case letter"
         );
     }
 
@@ -388,10 +365,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
         this.maskValidateAndCheck(
             "\"Hello\"",
             "Hel!o",
-            ValidationError.with(
-                REFERENCE,
-                "Invalid character '!' at 3 expected 'l'"
-            )
+            "Invalid character '!' at 3 expected 'l'"
         );
     }
 
@@ -637,6 +611,17 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
 
     private void maskValidateAndCheck(final String mask,
                                       final String text,
+                                      final String expected) {
+        this.maskValidateAndCheck(
+            mask,
+            text,
+            ValidationError.with(REFERENCE)
+                .setMessage(expected)
+        );
+    }
+
+    private void maskValidateAndCheck(final String mask,
+                                      final String text,
                                       final ValidationError<TestValidationReference>...expected) {
         this.validateAndCheck(
             TextMaskValidator.parse(mask),
@@ -679,10 +664,8 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
 
             @Override
             public ValidationError<TestValidationReference> validationError(final String message) {
-                return ValidationError.with(
-                    REFERENCE,
-                    message
-                );
+                return ValidationError.with(REFERENCE)
+                    .setMessage(message);
             }
 
             @Override

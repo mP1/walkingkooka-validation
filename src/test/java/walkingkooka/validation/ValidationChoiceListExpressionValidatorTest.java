@@ -47,10 +47,8 @@ public final class ValidationChoiceListExpressionValidatorTest implements Valida
             ),
             null,
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                MESSAGE
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage(MESSAGE)
         );
     }
 
@@ -83,10 +81,8 @@ public final class ValidationChoiceListExpressionValidatorTest implements Valida
             ),
             "UnknownValue123",
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                MESSAGE
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage(MESSAGE)
         );
     }
 
@@ -164,10 +160,8 @@ public final class ValidationChoiceListExpressionValidatorTest implements Valida
 
             @Override
             public ValidationError<TestValidationReference> validationError(final String message) {
-                return ValidationError.with(
-                    REFERENCE,
-                    message
-                );
+                return ValidationError.with(REFERENCE)
+                    .setMessage(message);
             }
 
             @Override

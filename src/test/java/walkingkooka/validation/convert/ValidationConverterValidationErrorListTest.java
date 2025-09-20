@@ -216,10 +216,8 @@ public final class ValidationConverterValidationErrorListTest extends Validation
     }
 
     private static ValidationError<TestValidationReference> validationError(final String message) {
-        return ValidationError.with(
-            TEST_VALIDATION_REFERENCE,
-            message
-        );
+        return ValidationError.with(TEST_VALIDATION_REFERENCE)
+            .setMessage(message);
     }
 
     // toString.........................................................................................................

@@ -82,17 +82,15 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
     private final static ValidationErrorList<TestValidationReference> ERRORS = ValidationErrorList.<TestValidationReference>empty()
         .concat(
             ValidationError.with(
-                new TestValidationReference("Field111"),
-                "Error in Field111"
-            )
+                new TestValidationReference("Field111")
+            ).setMessage("Error in Field111")
         );
 
     private final static ValidationErrorList<TestValidationReference> DIFFERENT_ERRORS = ValidationErrorList.<TestValidationReference>empty()
         .concat(
             ValidationError.with(
-                new TestValidationReference("Field111"),
-                "Different Error in Field111"
-            )
+                new TestValidationReference("Field111")
+            ).setMessage("Different Error in Field111")
         );
 
     // with.............................................................................................................

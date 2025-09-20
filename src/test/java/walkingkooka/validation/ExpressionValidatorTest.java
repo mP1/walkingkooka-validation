@@ -36,10 +36,8 @@ public final class ExpressionValidatorTest implements ValidatorTesting2<Expressi
         this.validateAndCheck(
             null,
             this.createContext(),
-            ValidationError.with(
-                REFERENCE,
-                MESSAGE
-            )
+            ValidationError.with(REFERENCE)
+                .setMessage(MESSAGE)
         );
     }
 
@@ -47,10 +45,8 @@ public final class ExpressionValidatorTest implements ValidatorTesting2<Expressi
     public ExpressionValidator<TestValidationReference, TestValidatorContext> createValidator() {
         return ExpressionValidator.with(
             Expression.value(
-                ValidationError.with(
-                    REFERENCE,
-                    MESSAGE
-                )
+                ValidationError.with(REFERENCE)
+                    .setMessage(MESSAGE)
             )
         );
     }
@@ -71,10 +67,8 @@ public final class ExpressionValidatorTest implements ValidatorTesting2<Expressi
 
             @Override
             public ValidationError<TestValidationReference> validationError(final String message) {
-                return ValidationError.with(
-                    REFERENCE,
-                    message
-                );
+                return ValidationError.with(REFERENCE)
+                    .setMessage(message);
             }
 
             @Override

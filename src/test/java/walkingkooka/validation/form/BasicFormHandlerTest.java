@@ -263,11 +263,11 @@ public final class BasicFormHandlerTest implements FormHandlerTesting<
             ValidationErrorList.<TestValidationReference>empty()
                 .concat(
                     ValidationError.with(
-                        field1.reference(),
-                        "Error1"
-                    ).setValue(
-                        field1.value()
-                    )
+                            field1.reference()
+                        ).setMessage("Error1")
+                        .setValue(
+                            field1.value()
+                        )
                 )
         );
     }

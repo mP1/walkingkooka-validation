@@ -35,10 +35,8 @@ public final class ValidationExpressionFunctionValidationErrorIfTest implements 
 
     @Test
     public void testApplyExpressionTrue() {
-        final ValidationError<TestValidationReference> error = ValidationError.with(
-            REFERENCE,
-            "Error message 123"
-        );
+        final ValidationError<TestValidationReference> error = ValidationError.with(REFERENCE)
+            .setMessage("Error message 123");
 
         this.applyAndCheck(
             Lists.of(
@@ -51,10 +49,8 @@ public final class ValidationExpressionFunctionValidationErrorIfTest implements 
 
     @Test
     public void testApplyExpressionFalse() {
-        final ValidationError<TestValidationReference> error = ValidationError.with(
-            REFERENCE,
-            "Error message 123"
-        );
+        final ValidationError<TestValidationReference> error = ValidationError.with(REFERENCE)
+            .setMessage("Error message 123");
 
         this.applyAndCheck(
             Lists.of(

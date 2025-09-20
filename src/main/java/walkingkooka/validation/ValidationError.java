@@ -22,7 +22,6 @@ import walkingkooka.ToStringBuilder;
 import walkingkooka.UsesToStringBuilder;
 import walkingkooka.Value;
 import walkingkooka.text.HasText;
-import walkingkooka.text.Whitespace;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.json.JsonNode;
@@ -36,27 +35,29 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Reports a single error for the identified field or component.
+ * Reports a single error for the identified field or component. The message and value components are optional.
  */
 public final class ValidationError<T extends ValidationReference> implements Value<Optional<Object>>,
     HasText,
     UsesToStringBuilder,
     TreePrintable {
 
+    public final static String NO_MESSAGE = "";
+
     public final static Optional<Object> NO_VALUE = Optional.empty();
 
-    public static <T extends ValidationReference> ValidationError<T> with(final T reference,
-                                                                          final String message) {
+    public static <T extends ValidationReference> ValidationError<T> with(final T reference) {
         return new ValidationError<>(
             Objects.requireNonNull(reference, "reference"),
-            Whitespace.failIfNullOrEmptyOrWhitespace(message, "message"),
+            NO_MESSAGE,
             NO_VALUE
         );
     }
 
-    private ValidationError(final T reference,
-                            final String message,
-                            final Optional<Object> value) {
+    // Vesting
+    ValidationError(final T reference,
+                    final String message,
+                    final Optional<Object> value) {
         this.reference = reference;
         this.message = message;
         this.value = value;
@@ -70,6 +71,16 @@ public final class ValidationError<T extends ValidationReference> implements Val
 
     public String message() {
         return this.message;
+    }
+
+    public ValidationError<T> setMessage(final String message) {
+        return this.message.equals(message) ?
+            this :
+            new ValidationError<>(
+                this.reference,
+                Objects.requireNonNull(message, "message"),
+                this.value
+            );
     }
 
     private final String message;
