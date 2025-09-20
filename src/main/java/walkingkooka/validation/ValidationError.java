@@ -76,6 +76,9 @@ public final class ValidationError<T extends ValidationReference> implements Val
 
     // HasText..........................................................................................................
 
+    /**
+     * Returns the error message or text.
+     */
     @Override
     public String text() {
         return this.message;
