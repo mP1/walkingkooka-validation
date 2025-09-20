@@ -221,7 +221,7 @@ public final class BasicFormHandlerTest implements FormHandlerTesting<
         this.validateFormAndCheck(
             this.createFormHandler(),
             form,
-            new FakeFormHandlerContext<TestValidationReference, BasicFormHandlerTest>() {
+            new FakeFormHandlerContext<>() {
                 @Override
                 public Form<TestValidationReference> form() {
                     return Form.<TestValidationReference>with(
