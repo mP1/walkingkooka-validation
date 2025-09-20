@@ -41,6 +41,20 @@ public final class ValidationErrorListTest implements ImmutableListTesting<Valid
     JsonNodeMarshallingTesting<ValidationErrorList<TestValidationReference>> {
 
     @Test
+    public void testConcatErrorWithoutMessageAndWithoutValue() {
+        final ValidationError<TestValidationReference> error = ValidationError.with(
+            new TestValidationReference("Hello")
+        );
+
+        this.getAndCheck(
+            ValidationErrorList.<TestValidationReference>empty()
+                .concat(error),
+            0,
+            error
+        );
+    }
+
+    @Test
     public void testSetElementsDoesntDoubleWrap() {
         final ValidationErrorList<TestValidationReference> list = this.createList();
 
