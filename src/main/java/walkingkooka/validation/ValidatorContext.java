@@ -46,6 +46,13 @@ public interface ValidatorContext<T extends ValidationReference> extends CanConv
     ValidatorContext<T> setValidationReference(final T reference);
 
     /**
+     * Returns an empty {@link ValidationErrorList}.
+     */
+    default ValidationErrorList<T> validationErrorList() {
+        return ValidationErrorList.empty();
+    }
+
+    /**
      * Factory that creates a {@link ValidationError} using the current {@link ValidationReference}.
      */
     default ValidationError<T> validationError(final String message) {
