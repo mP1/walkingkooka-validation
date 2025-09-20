@@ -65,7 +65,7 @@ final class TreeFormStore<R extends ValidationReference> implements FormStore<R>
         Objects.requireNonNull(watcher, "watcher");
 
         return this.store.addSaveWatcher(
-            (f) -> watcher.accept(f)
+            watcher::accept
         );
     }
 
