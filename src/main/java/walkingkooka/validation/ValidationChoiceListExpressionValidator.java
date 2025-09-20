@@ -59,8 +59,8 @@ final class ValidationChoiceListExpressionValidator<R extends ValidationReferenc
 
         return choices.stream()
             .anyMatch((c) -> c.value().equals(optionalValue)) ?
-            ValidationErrorList.empty() :
-            ValidationErrorList.<R>empty()
+            context.validationErrorList() :
+            context.validationErrorList()
                 .concat(
                     context.validationError(this.message)
                 );

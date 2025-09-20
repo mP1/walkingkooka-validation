@@ -84,7 +84,7 @@ final class TextMaskValidatorComponentTextLiteral<T extends ValidationReference>
                         context
                     ) :
                 text.isEmpty() ?
-                    ValidationErrorList.empty() :
+                    context.validationErrorList() :
                     this.invalidCharacter(
                         text,
                         i,

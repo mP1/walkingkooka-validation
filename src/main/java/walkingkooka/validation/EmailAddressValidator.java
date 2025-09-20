@@ -45,7 +45,7 @@ final class EmailAddressValidator<R extends ValidationReference, C extends Valid
                                              final C context) {
         Objects.requireNonNull(context, "context");
 
-        ValidationErrorList<R> errors = ValidationErrorList.empty();
+        ValidationErrorList<R> errors = context.validationErrorList();
 
         try {
             EmailAddress.parse(
