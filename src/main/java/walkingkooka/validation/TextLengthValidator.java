@@ -66,20 +66,23 @@ final class TextLengthValidator<R extends ValidationReference, C extends Validat
             String.class
         );
 
-        if(minLength > 0 && CharSequences.isNullOrEmpty(text)) {
+        if (minLength > 0 && CharSequences.isNullOrEmpty(text)) {
             errors = errors.concat(
-                context.validationError("Missing required text")
+                context.validationError()
+                    .setMessage("Missing required text")
             );
         } else {
             final int textLength = text.length();
-            if(textLength < minLength) {
+            if (textLength < minLength) {
                 errors = errors.concat(
-                    context.validationError("Text length " + textLength + " < " + minLength)
+                    context.validationError()
+                        .setMessage("Text length " + textLength + " < " + minLength)
                 );
             }
-            if(textLength > maxLength) {
+            if (textLength > maxLength) {
                 errors = errors.concat(
-                    context.validationError("Text length " + textLength + " > " + minLength)
+                    context.validationError()
+                        .setMessage("Text length " + textLength + " > " + minLength)
                 );
             }
         }

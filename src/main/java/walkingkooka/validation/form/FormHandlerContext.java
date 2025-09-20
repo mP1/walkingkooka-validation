@@ -115,11 +115,12 @@ public interface FormHandlerContext<R extends ValidationReference, S> extends Ca
                     final String message = missing.getMessage();
 
                     errors.add(
-                        validatorContext.validationError(
-                            CharSequences.isNullOrEmpty(message) ?
-                                "Validator error: " + validatorSelector :
-                                message
-                        )
+                        validatorContext.validationError()
+                            .setMessage(
+                                CharSequences.isNullOrEmpty(message) ?
+                                    "Validator error: " + validatorSelector :
+                                    message
+                            )
                     );
                 }
 

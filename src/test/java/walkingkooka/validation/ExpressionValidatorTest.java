@@ -66,12 +66,6 @@ public final class ExpressionValidatorTest implements ValidatorTesting2<Expressi
             }
 
             @Override
-            public ValidationError<TestValidationReference> validationError(final String message) {
-                return ValidationError.with(REFERENCE)
-                    .setMessage(message);
-            }
-
-            @Override
             public TestValidationReference validationReference() {
                 return REFERENCE;
             }

@@ -85,7 +85,8 @@ final class TextMaskValidator<R extends ValidationReference, C extends Validator
         } else {
             errors = ValidationErrorList.<R>empty()
                 .concat(
-                    context.validationError("Expected text")
+                    context.validationError()
+                        .setMessage("Expected text")
                 );
         }
 

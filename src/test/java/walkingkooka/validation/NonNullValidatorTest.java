@@ -52,11 +52,6 @@ public final class NonNullValidatorTest implements ValidatorTesting2<NonNullVali
     @Override
     public TestValidatorContext createContext() {
         return new TestValidatorContext() {
-            @Override
-            public ValidationError<TestValidationReference> validationError(final String message) {
-                return ValidationError.with(REFERENCE)
-                    .setMessage(message);
-            }
 
             @Override
             public TestValidationReference validationReference() {

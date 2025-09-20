@@ -114,12 +114,6 @@ public final class AbsoluteUrlValidatorTest implements ValidatorTesting2<Absolut
             );
 
             @Override
-            public ValidationError<TestValidationReference> validationError(final String message) {
-                return ValidationError.with(REFERENCE)
-                    .setMessage(message);
-            }
-
-            @Override
             public TestValidationReference validationReference() {
                 return REFERENCE;
             }

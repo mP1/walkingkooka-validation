@@ -57,13 +57,15 @@ final class AbsoluteUrlValidator<R extends ValidationReference, C extends Valida
             );
         } catch (final NullPointerException cause) {
             errors = errors.concat(
-                context.validationError("Missing url")
+                context.validationError()
+                    .setMessage("Missing url")
             );
         } catch (final UnsupportedOperationException rethrow) {
             throw rethrow;
         } catch (final RuntimeException cause) {
             errors = errors.concat(
-                context.validationError(cause.getMessage())
+                context.validationError()
+                    .setMessage(cause.getMessage())
             );
         }
 

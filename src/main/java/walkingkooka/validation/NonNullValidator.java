@@ -52,9 +52,8 @@ final class NonNullValidator<R extends ValidationReference, C extends ValidatorC
 
         return null == value ?
             Lists.of(
-                context.validationError(
-                    "Missing " + context.validationReference()
-                )
+                context.validationError()
+                    .setMessage("Missing " + context.validationReference())
             ) :
             Lists.empty();
     }
