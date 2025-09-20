@@ -237,7 +237,8 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
                                     public List<ValidationError<TestValidationReference>> validate(final Object value,
                                                                                                    final ValidatorContext<TestValidationReference> context) {
                                         return Lists.of(
-                                            context.validationError("Error1")
+                                            context.validationError()
+                                                .setMessage("Error1")
                                                 .setValue(Optional.of(value))
                                         );
                                     }
@@ -300,7 +301,8 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
                                     public List<ValidationError<TestValidationReference>> validate(final Object value,
                                                                                                    final ValidatorContext<TestValidationReference> context) {
                                         return Lists.of(
-                                            context.validationError("Error1")
+                                            context.validationError()
+                                                .setMessage("Error1")
                                                 .setValue(Optional.ofNullable(value)) // value is null
                                         );
                                     }
@@ -353,7 +355,8 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
                                     public List<ValidationError<TestValidationReference>> validate(final Object value,
                                                                                                    final ValidatorContext<TestValidationReference> context) {
                                         return Lists.of(
-                                            context.validationError("Error1")
+                                            context.validationError()
+                                                .setMessage("Error1")
                                                 .setValue(Optional.of(value))
                                         );
                                     }
@@ -423,7 +426,8 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
                                     public List<ValidationError<TestValidationReference>> validate(final Object value,
                                                                                                    final ValidatorContext<TestValidationReference> context) {
                                         return Lists.of(
-                                            context.validationError("Error1")
+                                            context.validationError()
+                                                .setMessage("Error1")
                                                 .setValue(Optional.of(value))
                                         );
                                     }
@@ -435,9 +439,11 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
                                     public List<ValidationError<TestValidationReference>> validate(final Object value,
                                                                                                    final ValidatorContext<TestValidationReference> context) {
                                         return Lists.of(
-                                            context.validationError("Error2a")
+                                            context.validationError()
+                                                .setMessage("Error2a")
                                                 .setValue(Optional.of(value)),
-                                            context.validationError("Error2b")
+                                            context.validationError()
+                                                .setMessage("Error2b")
                                                 .setValue(Optional.of(value))
                                         );
                                     }

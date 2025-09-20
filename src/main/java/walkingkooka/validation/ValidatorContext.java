@@ -17,7 +17,6 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.Cast;
 import walkingkooka.convert.CanConvert;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
@@ -55,10 +54,9 @@ public interface ValidatorContext<T extends ValidationReference> extends CanConv
     /**
      * Factory that creates a {@link ValidationError} using the current {@link ValidationReference}.
      */
-    default ValidationError<T> validationError(final String message) {
-        return Cast.to(
+    default ValidationError<T> validationError() {
+        return ValidationError.with(
             this.validationReference()
-                .setValidationErrorMessage(message)
         );
     }
 

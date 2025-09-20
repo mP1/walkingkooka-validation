@@ -188,7 +188,8 @@ public final class BasicFormHandlerTest implements FormHandlerTesting<
             public List<ValidationError<TestValidationReference>> validate(final Object value,
                                                                            final ValidatorContext<TestValidationReference> context) {
                 return Lists.of(
-                    context.validationError("Error1")
+                    context.validationError()
+                        .setMessage("Error1")
                         .setValue(
                             Optional.ofNullable(value)
                         )

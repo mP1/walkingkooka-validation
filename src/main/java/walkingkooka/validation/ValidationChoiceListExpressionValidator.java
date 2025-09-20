@@ -62,7 +62,8 @@ final class ValidationChoiceListExpressionValidator<R extends ValidationReferenc
             context.validationErrorList() :
             context.validationErrorList()
                 .concat(
-                    context.validationError(this.message)
+                    context.validationError()
+                        .setMessage(this.message)
                 );
     }
 

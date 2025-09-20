@@ -351,9 +351,8 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
     final ValidationErrorList<T> endOfText(final ValidatorContext<T> context) {
         return ValidationErrorList.<T>empty()
             .concat(
-                context.validationError(
-                    "End of text expected " + this.expected()
-                )
+                context.validationError()
+                    .setMessage("End of text expected " + this.expected())
             );
     }
 
@@ -363,10 +362,11 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
             context.validationErrorList() :
             context.validationErrorList()
                 .concat(
-                    context.validationError(
-                        "Invalid character " + CharSequences.quoteIfChars(text.at()) + " at " + text.lineInfo()
-                            .textOffset()
-                    )
+                    context.validationError()
+                        .setMessage(
+                            "Invalid character " + CharSequences.quoteIfChars(text.at()) + " at " + text.lineInfo()
+                                .textOffset()
+                        )
                 );
     }
 
@@ -374,12 +374,13 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
                                                   final ValidatorContext<T> context) {
         return context.validationErrorList()
             .concat(
-                context.validationError(
-                    "Invalid character " + CharSequences.quoteIfChars(text.at()) + " at " + text.lineInfo()
-                        .textOffset() +
-                        " expected " +
-                        this.expected()
-                )
+                context.validationError()
+                    .setMessage(
+                        "Invalid character " + CharSequences.quoteIfChars(text.at()) + " at " + text.lineInfo()
+                            .textOffset() +
+                            " expected " +
+                            this.expected()
+                    )
             );
     }
 

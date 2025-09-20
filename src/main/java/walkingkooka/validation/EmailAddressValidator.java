@@ -56,13 +56,15 @@ final class EmailAddressValidator<R extends ValidationReference, C extends Valid
             );
         } catch (final NullPointerException cause) {
             errors = errors.concat(
-                context.validationError("Missing email address")
+                context.validationError()
+                    .setMessage("Missing email address")
             );
         } catch (final UnsupportedOperationException rethrow) {
             throw rethrow;
         } catch (final RuntimeException cause) {
             errors = errors.concat(
-                context.validationError(cause.getMessage())
+                context.validationError()
+                    .setMessage(cause.getMessage())
             );
         }
 

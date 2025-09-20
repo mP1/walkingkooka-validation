@@ -97,12 +97,13 @@ final class TextMaskValidatorComponentTextLiteral<T extends ValidationReference>
                                                     final ValidatorContext<T> context) {
         return ValidationErrorList.<T>empty()
             .concat(
-                context.validationError(
-                    "Invalid character " + CharSequences.quoteIfChars(text.at()) + " at " + text.lineInfo()
-                        .textOffset() +
-                        " expected " +
-                        CharSequences.quoteIfChars(this.text.charAt(i))
-                )
+                context.validationError()
+                    .setMessage(
+                        "Invalid character " + CharSequences.quoteIfChars(text.at()) + " at " + text.lineInfo()
+                            .textOffset() +
+                            " expected " +
+                            CharSequences.quoteIfChars(this.text.charAt(i))
+                    )
             );
     }
 

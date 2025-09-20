@@ -82,14 +82,15 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
         public List<ValidationError<TestValidationReference>> validate(final Object value,
                                                                        final TestValidatorContext context) {
             return List.of(
-                context.validationError(
-                    message(
-                        context.validationReference(),
-                        3
+                context.validationError()
+                    .setMessage(
+                        message(
+                            context.validationReference(),
+                            3
+                        )
+                    ).setValue(
+                        Optional.ofNullable(value)
                     )
-                ).setValue(
-                    Optional.ofNullable(value)
-                )
             );
         }
 
@@ -105,14 +106,15 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
         public List<ValidationError<TestValidationReference>> validate(final Object value,
                                                                        final TestValidatorContext context) {
             return List.of(
-                context.validationError(
-                    message(
-                        context.validationReference(),
-                        4
+                context.validationError()
+                    .setMessage(
+                        message(
+                            context.validationReference(),
+                            4
+                        )
+                    ).setValue(
+                        Optional.ofNullable(value)
                     )
-                ).setValue(
-                    Optional.ofNullable(value)
-                )
             );
         }
 
