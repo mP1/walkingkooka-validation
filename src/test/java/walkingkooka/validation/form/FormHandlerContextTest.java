@@ -92,7 +92,7 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
 
                 @Override
                 public ValidatorContext<TestValidationReference> validatorContext(final TestValidationReference reference) {
-                    return new FakeValidatorContext<TestValidationReference>() {
+                    return new FakeValidatorContext<>() {
                         @Override
                         public TestValidationReference validationReference() {
                             return reference;
@@ -123,7 +123,7 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
 
                 @Override
                 public ValidatorContext<TestValidationReference> validatorContext(final TestValidationReference reference) {
-                    return new FakeValidatorContext<TestValidationReference>() {
+                    return new FakeValidatorContext<>() {
                         @Override
                         public TestValidationReference validationReference() {
                             return reference;
