@@ -177,6 +177,50 @@ public final class ValidationErrorTest implements HasTextTesting,
         );
     }
 
+    @Test
+    public void testSetValueWithValidationChoiceList() {
+        final ValidationError<TestValidationReference> error = ValidationError.with(REFERENCE)
+            .setValue(VALUE);
+
+        final Optional<Object> differentValue = Optional.of(
+            ValidationChoiceList.EMPTY.concat(
+                ValidationChoice.with(
+                    "Label1",
+                    Optional.of(1)
+                )
+            ).concat(
+                ValidationChoice.with(
+                    "Label2",
+                    Optional.of(22)
+                )
+            )
+        );
+        final ValidationError<TestValidationReference> different = error.setValue(differentValue);
+
+        assertNotSame(
+            error,
+            different
+        );
+
+        this.referenceAndCheck(error);
+        this.referenceAndCheck(different);
+
+        this.messageAndCheck(
+            error,
+            ValidationError.NO_MESSAGE
+        );
+        this.messageAndCheck(
+            different,
+            ValidationError.NO_MESSAGE
+        );
+
+        this.valueAndCheck(error);
+        this.valueAndCheck(
+            different,
+            differentValue
+        );
+    }
+
     // clearValue.......................................................................................................
 
     @Test
