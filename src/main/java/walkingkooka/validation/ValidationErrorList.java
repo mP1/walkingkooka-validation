@@ -78,9 +78,9 @@ public final class ValidationErrorList<T extends ValidationReference> extends Ab
             validationErrorList = (ValidationErrorList<T>) errors;
         } else {
             final List<ValidationError<T>> copy = Lists.array();
-            for (final ValidationError<T> name : errors) {
+            for (final ValidationError<T> error : errors) {
                 copy.add(
-                    Objects.requireNonNull(name, "includes null " + ValidationError.class.getSimpleName())
+                    Objects.requireNonNull(error, "includes null " + ValidationError.class.getSimpleName())
                 );
             }
 
