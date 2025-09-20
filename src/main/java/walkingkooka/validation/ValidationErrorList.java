@@ -49,18 +49,18 @@ public final class ValidationErrorList<T extends ValidationReference> extends Ab
     );
 
     // @VisibleForTesting
-    ValidationErrorList(final ValidationError<T>[] list) {
-        this.list = list;
+    ValidationErrorList(final ValidationError<T>[] errors) {
+        this.errors = errors;
     }
 
     @Override
     public ValidationError<T> get(final int index) {
-        return this.list[index];
+        return this.errors[index];
     }
 
     @Override
     public int size() {
-        return this.list.length;
+        return this.errors.length;
     }
 
     @Override
@@ -104,7 +104,7 @@ public final class ValidationErrorList<T extends ValidationReference> extends Ab
             validationErrorList;
     }
 
-    private final ValidationError<T>[] list;
+    private final ValidationError<T>[] errors;
 
     // Json.............................................................................................................
 
