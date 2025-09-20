@@ -38,24 +38,31 @@ public final class ValidationChoiceListExpressionValidatorTest implements Valida
 
     @Test
     public void testValidateWithNullFails() {
-        this.validateAndCheck(
-            this.createValidator(
+        final ValidationChoiceList choices = ValidationChoiceList.EMPTY.setElements(
+            Lists.of(
                 ValidationChoice.with(
                     "Label1",
                     Optional.of("Value1")
                 )
-            ),
+            )
+        );
+
+        this.validateAndCheck(
+            this.createValidator(choices),
             null,
             this.createContext(),
             ValidationError.with(REFERENCE)
                 .setMessage(MESSAGE)
+                .setValue(
+                    Optional.of(choices)
+                )
         );
     }
 
     @Test
     public void testValidateWithNull() {
-        this.validateAndCheck(
-            this.createValidator(
+        final ValidationChoiceList choices = ValidationChoiceList.EMPTY.setElements(
+            Lists.of(
                 ValidationChoice.with(
                     "Label1",
                     Optional.of("Value1")
@@ -64,25 +71,40 @@ public final class ValidationChoiceListExpressionValidatorTest implements Valida
                     "Label2",
                     Optional.empty()
                 )
-            ),
+            )
+        );
+
+        this.validateAndCheck(
+            this.createValidator(choices),
             null,
-            this.createContext()
+            this.createContext(),
+            ValidationError.with(REFERENCE)
+                .setValue(
+                    Optional.of(choices)
+                )
         );
     }
 
     @Test
     public void testValidateWithNonNullFails() {
+        final ValidationChoiceList choices = ValidationChoiceList.EMPTY.concat(
+            ValidationChoice.with(
+                "Label1",
+                Optional.of("Value1")
+            )
+        );
+
         this.validateAndCheck(
             this.createValidator(
-                ValidationChoice.with(
-                    "Label1",
-                    Optional.of("Value1")
-                )
+                choices
             ),
             "UnknownValue123",
             this.createContext(),
             ValidationError.with(REFERENCE)
                 .setMessage(MESSAGE)
+                .setValue(
+                    Optional.of(choices)
+                )
         );
     }
 
@@ -90,8 +112,8 @@ public final class ValidationChoiceListExpressionValidatorTest implements Valida
     public void testValidateWithNonNull() {
         final String value = "Value222";
 
-        this.validateAndCheck(
-            this.createValidator(
+        final ValidationChoiceList choices = ValidationChoiceList.EMPTY.setElements(
+            Lists.of(
                 ValidationChoice.with(
                     "Label1",
                     Optional.of("DifferentValue111")
@@ -104,9 +126,17 @@ public final class ValidationChoiceListExpressionValidatorTest implements Valida
                     "Label3",
                     Optional.empty()
                 )
-            ),
+            )
+        );
+
+        this.validateAndCheck(
+            this.createValidator(choices),
             value,
-            this.createContext()
+            this.createContext(),
+            ValidationError.with(REFERENCE)
+                .setValue(
+                    Optional.of(choices)
+                )
         );
     }
 
