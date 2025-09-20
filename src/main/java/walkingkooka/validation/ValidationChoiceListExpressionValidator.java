@@ -54,17 +54,20 @@ final class ValidationChoiceListExpressionValidator<R extends ValidationReferenc
         Objects.requireNonNull(context, "context");
 
         final ValidationChoiceList choices = this.evaluateExpressionToValidationChoiceList(context);
+        ValidationError<R> error = context.validationError();
 
         final Optional<Object> optionalValue = Optional.ofNullable(value);
+        if (false == choices.stream()
+            .anyMatch((c) -> c.value().equals(optionalValue))) {
+            error = error.setMessage(this.message);
+        }
 
-        return choices.stream()
-            .anyMatch((c) -> c.value().equals(optionalValue)) ?
-            context.validationErrorList() :
-            context.validationErrorList()
-                .concat(
-                    context.validationError()
-                        .setMessage(this.message)
-                );
+        return context.validationErrorList()
+            .concat(
+                error.setValue(
+                    Optional.ofNullable(choices)
+                )
+            );
     }
 
     private final Expression expression;
