@@ -179,8 +179,9 @@ final class ValidationExpressionFunctionValidationChoiceList<R extends Validatio
                         )
                     );
                 }
+                break;
             default:
-                new IllegalArgumentException("Invalid parameters count: " + count + " expected 1 (values), 2 (labels and values)");
+                throw new IllegalArgumentException("Invalid parameters count: " + count + " expected 1 (values), 2 (labels and values)");
         }
 
         return validationChoiceList;
