@@ -407,7 +407,7 @@ public final class ValidationErrorTest implements HasTextTesting,
         this.unmarshallAndCheck(
             JsonNode.object()
                 .set(ValidationError.REFERENCE_PROPERTY, this.marshallContext().marshallWithType(REFERENCE))
-                .set(ValidationError.MESSAGE_PROPERTY, JsonNode.string(MESSAGE))
+                .set(ValidationError.MESSAGE_PROPERTY, MESSAGE)
                 .set(
                     ValidationError.VALUE_PROPERTY,
                     this.marshallContext()
@@ -426,7 +426,7 @@ public final class ValidationErrorTest implements HasTextTesting,
                 .setValue(VALUE),
             JsonNode.object()
                 .set(ValidationError.REFERENCE_PROPERTY, this.marshallContext().marshallWithType(REFERENCE))
-                .set(ValidationError.MESSAGE_PROPERTY, JsonNode.string(MESSAGE))
+                .set(ValidationError.MESSAGE_PROPERTY, MESSAGE)
                 .set(
                     ValidationError.VALUE_PROPERTY,
                     this.marshallContext()
