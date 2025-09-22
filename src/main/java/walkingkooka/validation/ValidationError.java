@@ -233,7 +233,7 @@ public final class ValidationError<T extends ValidationReference> implements Val
     private JsonNode marshall(final JsonNodeMarshallContext context) {
         JsonObject json = JsonNode.object()
             .set(REFERENCE_PROPERTY, context.marshallWithType(this.reference))
-            .set(MESSAGE_PROPERTY, JsonNode.string(this.message));
+            .set(MESSAGE_PROPERTY, this.message);
 
         final Object value = this.value()
             .orElse(null);

@@ -155,7 +155,10 @@ public final class ValidationChoice implements Value<Optional<Object>>,
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {
         JsonObject json = JsonNode.object()
-            .set(LABEL_PROPERTY, JsonNode.string(this.label));
+            .set(
+                LABEL_PROPERTY,
+                this.label
+            );
 
         final Object value = this.value()
             .orElse(null);
