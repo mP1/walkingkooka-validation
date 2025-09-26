@@ -28,6 +28,7 @@ import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.math.DecimalNumberContexts;
+import walkingkooka.net.email.EmailAddress;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionEvaluationContexts;
 import walkingkooka.validation.ValidatorContextTestingTest.TestValidatorContext;
@@ -92,6 +93,12 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         @Override
         public ValidatorContext<TestValidationReference> setLocale(final Locale locale) {
             Objects.requireNonNull(locale, "locale");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public ValidatorContext<TestValidationReference> setUser(final Optional<EmailAddress> user) {
+            Objects.requireNonNull(user, "user");
             throw new UnsupportedOperationException();
         }
 

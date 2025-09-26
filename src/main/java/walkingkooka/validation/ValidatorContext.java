@@ -20,6 +20,7 @@ package walkingkooka.validation;
 import walkingkooka.convert.CanConvert;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
+import walkingkooka.net.email.EmailAddress;
 import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
@@ -84,6 +85,9 @@ public interface ValidatorContext<T extends ValidationReference> extends CanConv
 
     @Override
     ValidatorContext<T> setLocale(final Locale locale);
+
+    @Override
+    ValidatorContext<T> setUser(final Optional<EmailAddress> user);
 
     @Override
     <TT> ValidatorContext<T> setEnvironmentValue(final EnvironmentValueName<TT> name,

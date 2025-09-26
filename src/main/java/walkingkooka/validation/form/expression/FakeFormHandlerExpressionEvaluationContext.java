@@ -106,6 +106,11 @@ public class FakeFormHandlerExpressionEvaluationContext<R extends ValidationRefe
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public FormHandlerExpressionEvaluationContext<R, S> setUser(final Optional<EmailAddress> user) {
+        throw new UnsupportedOperationException();
+    }
+
     // LocaleContext....................................................................................................
 
     @Override
