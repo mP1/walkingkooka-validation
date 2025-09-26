@@ -132,6 +132,12 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
         }
 
         @Override
+        public ValidatorContext<TestValidationReference> setUser(final Optional<EmailAddress> user) {
+            Objects.requireNonNull(user, "user");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public TestValidatorContext cloneEnvironment() {
             throw new UnsupportedOperationException();
         }

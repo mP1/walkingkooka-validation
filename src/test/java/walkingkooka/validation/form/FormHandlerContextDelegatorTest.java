@@ -112,6 +112,12 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                         EmailAddress.parse("user@example.com")
                     );
                 }
+
+                @Override
+                public ValidatorContext<TestValidationReference> setUser(final Optional<EmailAddress> user) {
+                    Objects.requireNonNull(user, "user");
+                    throw new UnsupportedOperationException();
+                }
             };
         }
 
@@ -123,6 +129,12 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
         @Override
         public ValidatorContext<TestValidationReference> setLocale(final Locale locale) {
             Objects.requireNonNull(locale, "locale");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public ValidatorContext<TestValidationReference> setUser(final Optional<EmailAddress> user) {
+            Objects.requireNonNull(user, "user");
             throw new UnsupportedOperationException();
         }
 

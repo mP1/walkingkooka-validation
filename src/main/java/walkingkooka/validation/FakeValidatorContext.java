@@ -65,6 +65,11 @@ public class FakeValidatorContext<T extends ValidationReference> extends FakeCon
     }
 
     @Override
+    public ValidatorContext<T> setUser(final Optional<EmailAddress> user) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public <T> Optional<T> environmentValue(final EnvironmentValueName<T> environmentValueName) {
         throw new UnsupportedOperationException();
     }

@@ -198,6 +198,12 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
+        public ValidatorContext<TestValidationReference> setUser(final Optional<EmailAddress> user) {
+            Objects.requireNonNull(user, "user");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public DecimalNumberContext decimalNumberContext() {
             return DECIMAL_NUMBER_CONTEXT;
         }

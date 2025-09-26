@@ -219,6 +219,12 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
                 }
 
                 @Override
+                public FakeFormHandlerExpressionEvaluationContext<TestValidationReference, Void> setUser(final Optional<EmailAddress> user) {
+                    Objects.requireNonNull(user, "user");
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
                 public Form<TestValidationReference> form() {
                     throw new UnsupportedOperationException();
                 }
@@ -297,6 +303,11 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
             return new TestFormHandlerExpressionEvaluationContextDelegator();
         }
 
+        @Override
+        public FakeFormHandlerExpressionEvaluationContext<TestValidationReference, Void> setUser(final Optional<EmailAddress> user) {
+            Objects.requireNonNull(user, "user");
+            throw new UnsupportedOperationException();
+        }
 
         @Override
         public String toString() {
