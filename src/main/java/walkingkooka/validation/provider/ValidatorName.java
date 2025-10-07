@@ -192,14 +192,14 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
         )
     );
 
-    private final static String VALIDATION_CHOICE_LIST_EXPRESSION_STRING = "validation-choice-list-expression";
+    private final static String VALIDATION_CHOICE_LIST_STRING = "validation-choice-list";
 
     /**
-     * The name of the {@link Validator} returned by {@link Validators#validationChoiceListExpression(Expression, String)}.
+     * The name of the {@link Validator} returned by {@link Validators#validationChoiceList(Expression, String)}.
      */
-    public final static ValidatorName VALIDATION_CHOICE_LIST_EXPRESSION = registerConstantName(
-        VALIDATION_CHOICE_LIST_EXPRESSION_STRING,
-        (p, c) -> Validators.validationChoiceListExpression(
+    public final static ValidatorName VALIDATION_CHOICE_LIST = registerConstantName(
+        VALIDATION_CHOICE_LIST_STRING,
+        (p, c) -> Validators.validationChoiceList(
             c.convertOrFail(
                 p.get(0),
                 Expression.class
@@ -241,8 +241,8 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
             case TEXT_MASK_STRING:
                 validatorName = TEXT_MASK;
                 break;
-            case VALIDATION_CHOICE_LIST_EXPRESSION_STRING:
-                validatorName = VALIDATION_CHOICE_LIST_EXPRESSION;
+            case VALIDATION_CHOICE_LIST_STRING:
+                validatorName = VALIDATION_CHOICE_LIST;
                 break;
             default:
                 validatorName = new ValidatorName(name);

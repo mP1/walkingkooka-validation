@@ -159,14 +159,14 @@ public final class ValidationValidatorProviderTest implements ValidatorProviderT
     }
 
     @Test
-    public void testValidatorSelectorWithValidationErrorListExpression() {
+    public void testValidatorSelectorWithValidationErrorList() {
         this.validatorAndCheck(
             ValidatorSelector.with(
-                ValidatorName.VALIDATION_CHOICE_LIST_EXPRESSION,
+                ValidatorName.VALIDATION_CHOICE_LIST,
                 "(\"1+2\", \"Invalid choice !!!\")"
             ),
             CONTEXT,
-            Validators.validationChoiceListExpression(
+            Validators.validationChoiceList(
                 EXPRESSION,
                 "Invalid choice !!!"
             )
