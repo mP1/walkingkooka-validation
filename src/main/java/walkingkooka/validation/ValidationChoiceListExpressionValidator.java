@@ -26,8 +26,9 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * A {@link Validator} that executes the given {@link Expression} expecting choices and verifies the validated value
- * is within the choices.
+ * A {@link Validator} that executes a given {@link Expression} which must return a non-empty expected {@link ValidationChoiceList}.
+ * The validation value will always return a {@link ValidationErrorList} with the choices, no message indicates a PASS,
+ * the value was found in the choices, otherwise the message will be added to the {@link ValidationError}.
  */
 final class ValidationChoiceListExpressionValidator<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
 
