@@ -39,4 +39,4 @@ which is used by the Spreadsheet to display a drop down of choices.
 - [non-null](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/NonNullValidator.java)
 - [text-length](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/TextLengthValidator.java)
 - [text-mask](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/TextMaskValidator.java)
-- [validation-choice-list-expression](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/javex/walkingkooka/validation/ValidationChoiceListExpressionValidator.java)
+- [validation-choice-list](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/javex/walkingkooka/validation/ValidationChoiceListExpressionValidator.java)
