@@ -18,7 +18,6 @@
 package walkingkooka.validation.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.collect.set.Sets;
 import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionPurityContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
@@ -56,14 +55,14 @@ final class ValidationExpressionFunctionValidationErrorIf<R extends ValidationRe
      */
     private final static ExpressionFunctionParameter<Expression> EXPRESSION = ExpressionFunctionParameterName.with("if")
         .required(Expression.class)
-        .setKinds(Sets.of(ExpressionFunctionParameterKind.CONVERT));
+        .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
 
     /**
      * The {@link ValidationError} which will be returned if the expression is true.
      */
     private final static ExpressionFunctionParameter<ValidationError> VALIDATION_ERROR = ExpressionFunctionParameterName.with("validationError")
         .required(ValidationError.class)
-        .setKinds(Sets.of(ExpressionFunctionParameterKind.CONVERT));
+        .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
 
     private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
         EXPRESSION,
