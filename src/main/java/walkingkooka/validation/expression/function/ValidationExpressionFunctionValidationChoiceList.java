@@ -98,7 +98,7 @@ final class ValidationExpressionFunctionValidationChoiceList<R extends Validatio
      * The {@link Expression} which will be evaluated giving the values.
      */
     private final static ExpressionFunctionParameter<List<?>> VALUES = ExpressionFunctionParameterName.with("values")
-        .required(Cast.<Class<List<?>>>to(List.class))
+        .required(ExpressionFunctionParameter.LIST_WILDCARD_CLASS)
         .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
 
     private final static List<ExpressionFunctionParameter<?>> PARAMETERS_1 = ExpressionFunctionParameter.list(
