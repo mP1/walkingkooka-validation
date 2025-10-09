@@ -26,8 +26,8 @@ A validation framework that supports validating individual fields within a form.
 
 ## [Validators](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/Validator.java)
 
-Within a spreadsheet, individual cells or a fields within a form can have a validator. Each validator can report zero
-or more [ValidationError](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ValidationError.java).
+Within a spreadsheet, individual cells or a fields within a form can have a [Validator](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/Validator.java).
+Each [Validator](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/Validator.java) can report zero or more [ValidationError](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ValidationError.java).
 
 The [ValidationError.value](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ValidationError.java) may also contain [ValidationChoiceList](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ValidationChoiceList.java)
 which is used by the Spreadsheet to display a drop down of choices.
