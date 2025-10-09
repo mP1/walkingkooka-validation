@@ -51,7 +51,7 @@ final class ValidationExpressionFunctionGetValidator<R extends ValidationReferen
 
     final static ExpressionFunctionParameter<ValidatorSelector> VALIDATOR_SELECTOR = ExpressionFunctionParameterName.with("validator")
         .required(ValidatorSelector.class)
-        .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE);
+        .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
 
 
     private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
