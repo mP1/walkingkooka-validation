@@ -52,6 +52,15 @@ public final class ValidationExpressionFunctionGetValidatorTest implements Expre
         );
     }
 
+    @Test
+    public void testIsPure() {
+        this.isPureAndCheck(
+            this.createBiFunction(),
+            this.createContext(),
+            false
+        );
+    }
+
     @Override
     public ValidationExpressionFunctionGetValidator<TestValidationReference, ValidatorExpressionEvaluationContext<TestValidationReference>> createBiFunction() {
         return ValidationExpressionFunctionGetValidator.instance();
