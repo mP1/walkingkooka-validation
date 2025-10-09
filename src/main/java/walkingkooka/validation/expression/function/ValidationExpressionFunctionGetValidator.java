@@ -70,7 +70,7 @@ final class ValidationExpressionFunctionGetValidator<R extends ValidationReferen
 
     @Override
     public boolean isPure(final ExpressionPurityContext context) {
-        return true;
+        return false; // ValidatorSelector parameter could change at anytime.
     }
 
     @Override
