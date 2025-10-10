@@ -17,6 +17,7 @@
 
 package walkingkooka.validation;
 
+import walkingkooka.plugin.PluginStartup;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 
@@ -26,6 +27,8 @@ import walkingkooka.tree.json.marshall.JsonNodeContext;
 public final class ValidationStartup implements PublicStaticHelper {
 
     static {
+        PluginStartup.init();
+
         ValidationChoiceList.EMPTY.toString();
         ValidationErrorList.empty().toString();
         ValidationValueTypeName.ANY_STRING.toString();
