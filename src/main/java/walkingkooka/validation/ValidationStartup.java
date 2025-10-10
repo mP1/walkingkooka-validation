@@ -23,7 +23,7 @@ import walkingkooka.tree.json.marshall.JsonNodeContext;
 /**
  * Used to force all values types to register their {@link JsonNodeContext#register}
  */
-public final class ValidatorStartup implements PublicStaticHelper {
+public final class ValidationStartup implements PublicStaticHelper {
 
     static {
         ValidationChoiceList.EMPTY.toString();
@@ -35,7 +35,7 @@ public final class ValidatorStartup implements PublicStaticHelper {
         // NOP
     }
 
-    private ValidatorStartup() {
+    private ValidationStartup() {
         throw new UnsupportedOperationException();
     }
 }
