@@ -21,6 +21,8 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.convert.Converter;
+import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.validation.ValidationChoice;
 import walkingkooka.validation.ValidationChoiceList;
@@ -139,6 +141,30 @@ public final class ValidationConverterValidationChoiceListTest extends Validatio
     }
 
     @Test
+    public void testConvertStringToValidationChoiceList() {
+        this.convertAndCheck(
+            "Value1,Value2,Value3",
+            ValidationChoiceList.EMPTY
+                .concat(
+                    ValidationChoice.with(
+                        "Value1",
+                        Optional.of("Value1")
+                    )
+                ).concat(
+                    ValidationChoice.with(
+                        "Value2",
+                        Optional.of("Value2")
+                    )
+                ).concat(
+                    ValidationChoice.with(
+                        "Value3",
+                        Optional.of("Value3")
+                    )
+                )
+        );
+    }
+
+    @Test
     public void testConvertValidationChoiceListToValidationChoiceList() {
         final ValidationChoiceList list = ValidationChoiceList.EMPTY.setElements(
             Lists.of(
@@ -166,30 +192,34 @@ public final class ValidationConverterValidationChoiceListTest extends Validatio
             @Override
             public boolean canConvert(final Object value,
                                       final Class<?> type) {
-                return (value instanceof String || value instanceof ValidationChoice) &&
-                    ValidationChoice.class == type;
+                return this.converter.canConvert(
+                    value,
+                    type,
+                    this
+                );
             }
 
             @Override
             public <T> Either<T, String> convert(final Object value,
                                                  final Class<T> target) {
-                return value instanceof String && target == ValidationChoice.class ?
-                    this.successfulConversion(
-                        ValidationChoice.with(
-                            (String) value,
-                            Optional.of(value)
-                        ),
-                        target
-                    ) :
-                    value instanceof ValidationChoice && target == ValidationChoice.class ?
-                        this.successfulConversion(
-                            value,
-                            target
-                        ) :
-                        this.failConversion(
-                            value,
-                            target
-                        );
+                return this.converter.convert(
+                    value,
+                    target,
+                    this
+                );
+            }
+
+            private final Converter<FakeConverterContext> converter = Converters.collection(
+                Lists.of(
+                    Converters.simple(), // ValidationChoice -> ValidationChoice
+                    ValidationConvertConverters.toValidationChoice(), // String -> ValidationChoice
+                    Converters.textToCsvStringList() // String -> CsvStringList
+                )
+            );
+
+            @Override
+            public char valueSeparator() {
+                return ',';
             }
         };
     }
