@@ -31,6 +31,13 @@ import java.util.function.Function;
  */
 public final class ValidatorContexts implements PublicStaticHelper {
 
+    // trigger registering of json marshall/unmarshallers
+    static {
+        ValidationChoiceList.EMPTY.toString();
+        ValidationErrorList.empty().toString();
+        ValidationValueTypeName.ANY_STRING.toString();
+    }
+
     /**
      * {@see BasicValidatorContext}
      */
