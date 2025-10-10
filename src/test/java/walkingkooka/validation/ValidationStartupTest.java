@@ -22,7 +22,7 @@ import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
 
-public final class ValidatorStartupTest implements PublicStaticHelperTesting<ValidatorStartup> {
+public final class ValidationStartupTest implements PublicStaticHelperTesting<ValidationStartup> {
 
     @Override
     public boolean canHavePublicTypes(final Method method) {
@@ -30,8 +30,8 @@ public final class ValidatorStartupTest implements PublicStaticHelperTesting<Val
     }
 
     @Override
-    public Class<ValidatorStartup> type() {
-        return ValidatorStartup.class;
+    public Class<ValidationStartup> type() {
+        return ValidationStartup.class;
     }
 
     @Override
