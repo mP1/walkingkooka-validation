@@ -20,6 +20,12 @@ package walkingkooka.validation;
 import walkingkooka.plugin.PluginStartup;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
+import walkingkooka.validation.form.provider.FormHandlerAliasSet;
+import walkingkooka.validation.form.provider.FormHandlerInfoSet;
+import walkingkooka.validation.form.provider.FormHandlerSelector;
+import walkingkooka.validation.provider.ValidatorAliasSet;
+import walkingkooka.validation.provider.ValidatorInfoSet;
+import walkingkooka.validation.provider.ValidatorSelector;
 
 /**
  * Used to force all values types to register their {@link JsonNodeContext#register}
@@ -32,6 +38,15 @@ public final class ValidationStartup implements PublicStaticHelper {
         ValidationChoiceList.EMPTY.toString();
         ValidationErrorList.empty().toString();
         ValidationValueTypeName.ANY_STRING.toString();
+
+        FormHandlerAliasSet.EMPTY.size();
+        FormHandlerInfoSet.EMPTY.size();
+        FormHandlerSelector.parse("Hello");
+
+        ValidatorAliasSet.EMPTY.size();
+        ValidatorInfoSet.EMPTY.size();
+        ValidatorSelector.parse("Hello");
+
     }
 
     public static void init() {
