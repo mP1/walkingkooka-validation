@@ -18,9 +18,11 @@
 package walkingkooka.validation.convert;
 
 import walkingkooka.Cast;
+import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TryingShortCircuitingConverter;
+import walkingkooka.text.CharSequences;
 import walkingkooka.validation.ValidationChoice;
 import walkingkooka.validation.ValidationChoiceList;
 
@@ -67,6 +69,12 @@ final class ValidationConverterValidationChoiceList<C extends ConverterContext> 
                         this.canConvertList(
                             (List<?>) value,
                             context
+                        ) ||
+                    value instanceof CharSequences &&
+                        this.canConvert(
+                            value,
+                            CsvStringList.class,
+                            context
                         )
             );
     }
@@ -94,36 +102,59 @@ final class ValidationConverterValidationChoiceList<C extends ConverterContext> 
             validationErrorList = ValidationChoiceList.EMPTY;
         } else {
             if (value instanceof ValidationChoiceList) {
+                // ValidationChoiceList -> ValidationChoiceList
                 validationErrorList = (ValidationChoiceList) value;
             } else {
                 if (value instanceof List) {
-                    final List<ValidationChoice> list = Lists.array();
-
-                    for (final Object element : (List<?>) value) {
-                        list.add(
-                            context.convertOrFail(
-                                element,
-                                ValidationChoice.class
-                            )
-                        );
-                    }
-
+                    // eg list( ValidationChoice, ValidationChoice, ValidationChoice)
                     validationErrorList = ValidationChoiceList.EMPTY.setElements(
-                        Cast.to(list)
+                        convertToValidationChoice(
+                            (List<?>)value,
+                            context
+                        )
                     );
                 } else {
-                    validationErrorList = ValidationChoiceList.EMPTY
-                        .concat(
-                            context.convertOrFail(
-                                value,
-                                ValidationChoice.class
+                    // eg "Label1, Label2, Labell3"
+                    if( value instanceof CharSequence ) {
+                        validationErrorList = ValidationChoiceList.EMPTY.setElements(
+                            convertToValidationChoice(
+                                context.convertOrFail(
+                                    value,
+                                    CsvStringList.class
+                                ),
+                                context
                             )
                         );
+                    } else {
+                        validationErrorList = ValidationChoiceList.EMPTY
+                            .concat(
+                                context.convertOrFail(
+                                    value,
+                                    ValidationChoice.class
+                                )
+                            );
+                    }
                 }
             }
         }
 
         return validationErrorList;
+    }
+
+    private static List<ValidationChoice> convertToValidationChoice(final List<?> value,
+                                                                    final ConverterContext context) {
+        final List<ValidationChoice> list = Lists.array();
+
+        for (final Object element : value) {
+            list.add(
+                context.convertOrFail(
+                    element,
+                    ValidationChoice.class
+                )
+            );
+        }
+
+        return list;
     }
 
     // Object...........................................................................................................
