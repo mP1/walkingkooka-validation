@@ -200,7 +200,7 @@ public final class ValidationConverterValidationChoiceListTest extends Validatio
     public void testToString() {
         this.toStringAndCheck(
             ValidationConverterValidationChoiceList.instance(),
-            "* to ValidationConverterValidationChoiceList"
+            "* to ValidationChoiceList"
         );
     }
 
