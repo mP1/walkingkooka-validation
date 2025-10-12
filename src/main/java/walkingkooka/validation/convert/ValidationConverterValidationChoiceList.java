@@ -71,10 +71,9 @@ final class ValidationConverterValidationChoiceList<C extends ConverterContext> 
                             context
                         ) ||
                     value instanceof CharSequences &&
-                        this.canConvert(
+                        context.canConvert(
                             value,
-                            CsvStringList.class,
-                            context
+                            CsvStringList.class
                         )
             );
     }
