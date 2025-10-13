@@ -22,7 +22,6 @@ import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TryingShortCircuitingConverter;
-import walkingkooka.text.CharSequences;
 import walkingkooka.validation.ValidationChoice;
 import walkingkooka.validation.ValidationChoiceList;
 
@@ -70,11 +69,10 @@ final class ValidationConverterValidationChoiceList<C extends ConverterContext> 
                             (List<?>) value,
                             context
                         ) ||
-                    value instanceof CharSequences &&
-                        context.canConvert(
+                    context.canConvert(
                             value,
                             CsvStringList.class
-                        )
+                    )
             );
     }
 
