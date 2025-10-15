@@ -98,7 +98,7 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
     @Test
     public void testToString() {
         final Optional<ValidationValueTypeName> value = Optional.of(
-            ValidationValueTypeName.with("Hello123")
+            ValidationValueTypeName.with("hello-123")
         );
 
         this.toStringAndCheck(
@@ -163,7 +163,7 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
         this.marshallRoundTripTwiceAndCheck(
             OptionalValidationValueTypeName.with(
                 Optional.of(
-                    ValidationValueTypeName.with("Hello123")
+                    ValidationValueTypeName.with("hello-123")
                 )
             )
         );
@@ -182,7 +182,7 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
     public OptionalValidationValueTypeName createJsonNodeMarshallingValue() {
         return OptionalValidationValueTypeName.with(
             Optional.of(
-                ValidationValueTypeName.with("Hello123")
+                ValidationValueTypeName.with("hello-123")
             )
         );
     }
@@ -202,11 +202,11 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
         this.treePrintAndCheck(
             OptionalValidationValueTypeName.with(
                 Optional.of(
-                    ValidationValueTypeName.with("Hello123")
+                    ValidationValueTypeName.with("hello-123")
                 )
             ),
             "OptionalValidationValueTypeName\n" +
-                "  Hello123\n"
+                "  hello-123\n"
         );
     }
 

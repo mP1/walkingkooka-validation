@@ -37,7 +37,7 @@ public final class ValidationConverterTextToValidatorSelectorTest extends Valida
 
     @Test
     public void testConvertStringToValidatorSelector() {
-        final String text = "HelloValidator";
+        final String text = "hello-validator";
 
         this.convertAndCheck(
             text,

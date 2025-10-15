@@ -29,14 +29,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ValidatorAliasTest implements PluginAliasLikeTesting<ValidatorName, ValidatorSelector, ValidatorAlias> {
 
-    private final static ValidatorName NAME = ValidatorName.with("Hello");
+    private final static ValidatorName NAME = ValidatorName.with("hello");
 
     private final static Optional<ValidatorSelector> SELECTOR = Optional.of(
-        ValidatorSelector.parse("validator123")
+        ValidatorSelector.parse("validator-123")
     );
 
     private final static Optional<AbsoluteUrl> URL = Optional.of(
-        Url.parseAbsolute("https://example.com/validator123")
+        Url.parseAbsolute("https://example.com/validator-123")
     );
 
     // with.............................................................................................................

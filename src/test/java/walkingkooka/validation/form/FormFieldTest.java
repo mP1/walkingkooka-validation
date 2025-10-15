@@ -45,10 +45,10 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
     private final static String DIFFERENT_LABEL = "DifferentLabel456";
 
     private final static Optional<ValidationValueTypeName> TYPE = Optional.of(
-        ValidationValueTypeName.with("Type1")
+        ValidationValueTypeName.with("type-1")
     );
     private final static Optional<ValidationValueTypeName> DIFFERENT_TYPE = Optional.of(
-        ValidationValueTypeName.with("DifferentType2")
+        ValidationValueTypeName.with("different-type-2")
     );
 
     private final static Optional<Object> VALUE = Optional.of(
@@ -59,10 +59,10 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
     );
 
     private final static Optional<ValidatorSelector> VALIDATOR = Optional.of(
-        ValidatorSelector.parse("helloValidator")
+        ValidatorSelector.parse("hello-validator")
     );
     private final static Optional<ValidatorSelector> DIFFERENT_VALIDATOR = Optional.of(
-        ValidatorSelector.parse("differentValidator")
+        ValidatorSelector.parse("different-validator")
     );
 
     // with.............................................................................................................
@@ -448,12 +448,12 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
                 "    \"value\": \"Hello\"\n" +
                 "  },\n" +
                 "  \"label\": \"Label123\",\n" +
-                "  \"type\": \"Type1\",\n" +
+                "  \"type\": \"type-1\",\n" +
                 "  \"value\": {\n" +
                 "    \"type\": \"url\",\n" +
                 "    \"value\": \"https://example.com\"\n" +
                 "  },\n" +
-                "  \"validator\": \"helloValidator\"\n" +
+                "  \"validator\": \"hello-validator\"\n" +
                 "}"
         );
     }
@@ -494,11 +494,11 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
                 "  label:\n" +
                 "    \"Label123\"\n" +
                 "  type:\n" +
-                "    Type1\n" +
+                "    type-1\n" +
                 "  value:\n" +
                 "    https://example.com (walkingkooka.net.AbsoluteUrl)\n" +
                 "  validator:\n" +
-                "    helloValidator\n"
+                "    hello-validator\n"
         );
     }
 

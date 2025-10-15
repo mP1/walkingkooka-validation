@@ -41,11 +41,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class FilteredMappedFormHandlerProviderTest implements FormHandlerProviderTesting<FilteredMappedFormHandlerProvider>,
     ToStringTesting<FilteredMappedFormHandlerProvider> {
 
-    private final static AbsoluteUrl URL = Url.parseAbsolute("https://example.com/formHandler123");
+    private final static AbsoluteUrl URL = Url.parseAbsolute("https://example.com/form-handler-123");
 
-    private final static FormHandlerName NAME = FormHandlerName.with("different-formHandler-name-123");
+    private final static FormHandlerName NAME = FormHandlerName.with("different-form-handler-name-123");
 
-    private final static FormHandlerName ORIGINAL_NAME = FormHandlerName.with("original-formHandler-123");
+    private final static FormHandlerName ORIGINAL_NAME = FormHandlerName.with("original-form-handler-123");
 
     private final static FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> FORM_HANDLER = FormHandlers.fake();
 
@@ -123,7 +123,7 @@ public final class FilteredMappedFormHandlerProviderTest implements FormHandlerP
     public void testToString() {
         this.toStringAndCheck(
             this.createFormHandlerProvider(),
-            "https://example.com/formHandler123 different-formHandler-name-123"
+            "https://example.com/form-handler-123 different-form-handler-name-123"
         );
     }
 

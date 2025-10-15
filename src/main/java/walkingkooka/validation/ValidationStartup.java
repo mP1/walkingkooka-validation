@@ -41,11 +41,11 @@ public final class ValidationStartup implements PublicStaticHelper {
 
         FormHandlerAliasSet.EMPTY.size();
         FormHandlerInfoSet.EMPTY.size();
-        FormHandlerSelector.parse("Hello");
+        FormHandlerSelector.parse("hello");
 
         ValidatorAliasSet.EMPTY.size();
         ValidatorInfoSet.EMPTY.size();
-        ValidatorSelector.parse("Hello");
+        ValidatorSelector.parse("hello");
 
     }
 

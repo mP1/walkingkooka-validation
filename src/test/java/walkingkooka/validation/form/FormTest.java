@@ -57,11 +57,11 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
     private final static FormName DIFFERENT_NAME = FormName.with("differentName234");
 
     private final static Optional<FormHandlerSelector> HANDLER = Optional.of(
-        FormHandlerSelector.parse("TestFormHandler")
+        FormHandlerSelector.parse("test-form-handler")
     );
 
     private final static Optional<FormHandlerSelector> DIFFERENT_HANDLER = Optional.of(
-        FormHandlerSelector.parse("DifferentTestFormHandler")
+        FormHandlerSelector.parse("different-test-form-handler")
     );
 
     private final static FormFieldList<TestValidationReference> FIELDS = FormFieldList.with(
@@ -478,7 +478,7 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
                 .setHandler(HANDLER)
                 .setFields(FIELDS)
                 .setErrors(ERRORS),
-            "name123 handler=TestFormHandler fields=Field111 errors=Field111 \"Error in Field111\""
+            "name123 handler=test-form-handler fields=Field111 errors=Field111 \"Error in Field111\""
         );
     }
 
@@ -506,7 +506,7 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
                 "      }\n" +
                 "    }\n" +
                 "  ],\n" +
-                "  \"handler\": \"TestFormHandler\",\n" +
+                "  \"handler\": \"test-form-handler\",\n" +
                 "  \"errors\": [\n" +
                 "    {\n" +
                 "      \"reference\": {\n" +
@@ -557,7 +557,7 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
             "Form\n" +
                 "  name123\n" +
                 "  handler:\n" +
-                "    TestFormHandler\n" +
+                "    test-form-handler\n" +
                 "  fields:\n" +
                 "    FormField\n" +
                 "      reference:\n" +

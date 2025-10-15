@@ -35,7 +35,7 @@ public final class FormHandlerPluginHelperTest implements PluginHelperTesting<Fo
 
     @Override
     public FormHandlerName createName() {
-        return FormHandlerName.with("Hello");
+        return FormHandlerName.with("hello");
     }
 
     // class............................................................................................................

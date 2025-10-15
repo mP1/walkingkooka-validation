@@ -78,13 +78,13 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                     ).setLabel("Label111")
                     .setType(
                         Optional.of(
-                            ValidationValueTypeName.with("Type222")
+                            ValidationValueTypeName.with("type222")
                         )
                     ).setValue(
                         Optional.of("Value333")
                     ).setValidator(
                         Optional.of(
-                            ValidatorSelector.parse("Validator4444")
+                            ValidatorSelector.parse("validator-4444")
                         )
                     )
             );
@@ -103,9 +103,9 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                 "      \"value\": \"Hello\"\n" +
                 "    },\n" +
                 "    \"label\": \"Label111\",\n" +
-                "    \"type\": \"Type222\",\n" +
+                "    \"type\": \"type222\",\n" +
                 "    \"value\": \"Value333\",\n" +
-                "    \"validator\": \"Validator4444\"\n" +
+                "    \"validator\": \"validator-4444\"\n" +
                 "  }\n" +
                 "]"
         );
@@ -121,9 +121,9 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                 "      \"value\": \"Hello\"\n" +
                 "    },\n" +
                 "    \"label\": \"Label111\",\n" +
-                "    \"type\": \"Type222\",\n" +
+                "    \"type\": \"type222\",\n" +
                 "    \"value\": \"Value333\",\n" +
-                "    \"validator\": \"Validator4444\"\n" +
+                "    \"validator\": \"validator-4444\"\n" +
                 "  }\n" +
                 "]",
             this.createJsonNodeMarshallingValue()
@@ -148,7 +148,7 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                     ).setLabel("Label2"
                     ).setType(
                         Optional.of(
-                            ValidationValueTypeName.with("Type222")
+                            ValidationValueTypeName.with("type222")
                         )
                     ).setValue(
                         Optional.of(
@@ -173,7 +173,7 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                 "      \"value\": \"Hello2\"\n" +
                 "    },\n" +
                 "    \"label\": \"Label2\",\n" +
-                "    \"type\": \"Type222\",\n" +
+                "    \"type\": \"type222\",\n" +
                 "    \"value\": {\n" +
                 "      \"type\": \"url\",\n" +
                 "      \"value\": \"https://example.com/2\"\n" +

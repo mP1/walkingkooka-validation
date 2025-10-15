@@ -28,13 +28,13 @@ public final class FormHandlerInfoTest implements PluginInfoLikeTesting<FormHand
 
     @Test
     public void testSetNameWithDifferent() {
-        final AbsoluteUrl url = Url.parseAbsolute("https://example/formHandler123");
+        final AbsoluteUrl url = Url.parseAbsolute("https://example/form-handler-123");
         final FormHandlerName different = FormHandlerName.with("different");
 
         this.setNameAndCheck(
             FormHandlerInfo.with(
                 url,
-                FormHandlerName.with("original-formHandler-name")
+                FormHandlerName.with("original-form-handler-name")
             ),
             different,
             FormHandlerInfo.with(

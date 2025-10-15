@@ -77,8 +77,8 @@ public final class FormHandlerInfoSetTest implements PluginInfoSetLikeTesting<Fo
     @Override
     public FormHandlerInfo info() {
         return FormHandlerInfo.with(
-            Url.parseAbsolute("https://example.com/FormHandler123"),
-            FormHandlerName.with("FormHandler123")
+            Url.parseAbsolute("https://example.com/form-handler-123"),
+            FormHandlerName.with("form-handler-123")
         );
     }
 
