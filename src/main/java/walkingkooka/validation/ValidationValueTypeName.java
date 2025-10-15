@@ -30,7 +30,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import java.util.Objects;
 
 /**
- * The {@link Name} of a supported validation value.
+ * The {@link Name} of a supported validation value. Note names must be lower-cased kebab-case not camel-case.
  */
 final public class ValidationValueTypeName implements PluginNameLike<ValidationValueTypeName> {
 
@@ -67,7 +67,7 @@ final public class ValidationValueTypeName implements PluginNameLike<ValidationV
 
     public final static ValidationValueTypeName DATE = new ValidationValueTypeName(DATE_STRING);
 
-    public final static String DATE_TIME_STRING = "dateTime";
+    public final static String DATE_TIME_STRING = "date-time";
 
     public final static ValidationValueTypeName DATE_TIME = new ValidationValueTypeName(DATE_TIME_STRING);
     
