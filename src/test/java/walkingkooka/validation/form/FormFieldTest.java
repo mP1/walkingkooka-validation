@@ -26,7 +26,7 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.TestValidationReference;
-import walkingkooka.validation.ValidationValueTypeName;
+import walkingkooka.validation.ValueTypeName;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.util.Optional;
@@ -44,11 +44,11 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
     private final static String LABEL = "Label123";
     private final static String DIFFERENT_LABEL = "DifferentLabel456";
 
-    private final static Optional<ValidationValueTypeName> TYPE = Optional.of(
-        ValidationValueTypeName.with("type-1")
+    private final static Optional<ValueTypeName> TYPE = Optional.of(
+        ValueTypeName.with("type-1")
     );
-    private final static Optional<ValidationValueTypeName> DIFFERENT_TYPE = Optional.of(
-        ValidationValueTypeName.with("different-type-2")
+    private final static Optional<ValueTypeName> DIFFERENT_TYPE = Optional.of(
+        ValueTypeName.with("different-type-2")
     );
 
     private final static Optional<Object> VALUE = Optional.of(
@@ -240,7 +240,7 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
     }
 
     private void typeAndCheck(final FormField<TestValidationReference> field,
-                              final Optional<ValidationValueTypeName> expected) {
+                              final Optional<ValueTypeName> expected) {
         this.checkEquals(
             expected,
             field.type()
@@ -374,7 +374,7 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
     }
 
     @Test
-    public void testEqualsDifferentValidationValueTypeNameType() {
+    public void testEqualsDifferentValueTypeNameType() {
         this.checkNotEquals(
             new FormField<>(
                 REFERENCE,

@@ -32,7 +32,7 @@ import java.util.Objects;
 /**
  * The {@link Name} of a supported validation value. Note names must be lower-cased kebab-case not camel-case.
  */
-final public class ValidationValueTypeName implements PluginNameLike<ValidationValueTypeName> {
+final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
 
     public static final String HATEOS_RESOURCE_NAME_STRING = "type";
 
@@ -57,39 +57,39 @@ final public class ValidationValueTypeName implements PluginNameLike<ValidationV
 
     public final static String ANY_STRING = "*";
 
-    public final static ValidationValueTypeName ANY = new ValidationValueTypeName(ANY_STRING);
+    public final static ValueTypeName ANY = new ValueTypeName(ANY_STRING);
 
     public final static String BOOLEAN_STRING = "boolean";
 
-    public final static ValidationValueTypeName BOOLEAN = new ValidationValueTypeName(BOOLEAN_STRING);
+    public final static ValueTypeName BOOLEAN = new ValueTypeName(BOOLEAN_STRING);
 
     public final static String DATE_STRING = "date";
 
-    public final static ValidationValueTypeName DATE = new ValidationValueTypeName(DATE_STRING);
+    public final static ValueTypeName DATE = new ValueTypeName(DATE_STRING);
 
     public final static String DATE_TIME_STRING = "date-time";
 
-    public final static ValidationValueTypeName DATE_TIME = new ValidationValueTypeName(DATE_TIME_STRING);
+    public final static ValueTypeName DATE_TIME = new ValueTypeName(DATE_TIME_STRING);
     
     public final static String NUMBER_STRING = "number";
 
-    public final static ValidationValueTypeName NUMBER = new ValidationValueTypeName(NUMBER_STRING);
+    public final static ValueTypeName NUMBER = new ValueTypeName(NUMBER_STRING);
 
     public final static String TEXT_STRING = "text";
     
-    public final static ValidationValueTypeName TEXT = new ValidationValueTypeName(TEXT_STRING);
+    public final static ValueTypeName TEXT = new ValueTypeName(TEXT_STRING);
 
     public final static String TIME_STRING = "time";
 
-    public final static ValidationValueTypeName TIME = new ValidationValueTypeName(TIME_STRING);
+    public final static ValueTypeName TIME = new ValueTypeName(TIME_STRING);
 
     /**
-     * Factory that creates a {@link ValidationValueTypeName}
+     * Factory that creates a {@link ValueTypeName}
      */
-    public static ValidationValueTypeName with(final String name) {
+    public static ValueTypeName with(final String name) {
         Objects.requireNonNull(name, "name");
 
-        ValidationValueTypeName validationValueTypeName;
+        ValueTypeName validationValueTypeName;
 
         switch (name) {
             case ANY_STRING:
@@ -115,7 +115,7 @@ final public class ValidationValueTypeName implements PluginNameLike<ValidationV
                 break;
             default:
                 PluginName.with(name);
-                validationValueTypeName = new ValidationValueTypeName(name);
+                validationValueTypeName = new ValueTypeName(name);
                 break;
         }
 
@@ -125,7 +125,7 @@ final public class ValidationValueTypeName implements PluginNameLike<ValidationV
     /**
      * Private constructor
      */
-    private ValidationValueTypeName(final String name) {
+    private ValueTypeName(final String name) {
         super();
         this.name = name;
     }
@@ -154,11 +154,11 @@ final public class ValidationValueTypeName implements PluginNameLike<ValidationV
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-            other instanceof ValidationValueTypeName &&
+            other instanceof ValueTypeName &&
                 this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final ValidationValueTypeName other) {
+    private boolean equals0(final ValueTypeName other) {
         return this.compareTo(other) == 0;
     }
 
@@ -169,8 +169,8 @@ final public class ValidationValueTypeName implements PluginNameLike<ValidationV
 
     // Json.............................................................................................................
 
-    static ValidationValueTypeName unmarshall(final JsonNode node,
-                                              final JsonNodeUnmarshallContext context) {
+    static ValueTypeName unmarshall(final JsonNode node,
+                                    final JsonNodeUnmarshallContext context) {
         return with(node.stringOrFail());
     }
 
@@ -180,10 +180,10 @@ final public class ValidationValueTypeName implements PluginNameLike<ValidationV
 
     static {
         JsonNodeContext.register(
-            JsonNodeContext.computeTypeName(ValidationValueTypeName.class),
-            ValidationValueTypeName::unmarshall,
-            ValidationValueTypeName::marshall,
-            ValidationValueTypeName.class
+            JsonNodeContext.computeTypeName(ValueTypeName.class),
+            ValueTypeName::unmarshall,
+            ValueTypeName::marshall,
+            ValueTypeName.class
         );
     }
 }

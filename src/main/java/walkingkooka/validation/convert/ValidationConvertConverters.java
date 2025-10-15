@@ -41,17 +41,17 @@ public final class ValidationConvertConverters implements PublicStaticHelper {
     }
 
     /**
-     * {@see ValidationConverterTextToValidationValueTypeName}
-     */
-    public static <C extends ConverterContext> Converter<C> textToValidationValueTypeName() {
-        return ValidationConverterTextToValidationValueTypeName.instance();
-    }
-
-    /**
      * {@see ValidationConverterTextToValidatorSelector}
      */
     public static <C extends ConverterContext> Converter<C> textToValidatorSelector() {
         return ValidationConverterTextToValidatorSelector.instance();
+    }
+
+    /**
+     * {@see ValidationConverterTextToValueTypeName}
+     */
+    public static <C extends ConverterContext> Converter<C> textToValueTypeName() {
+        return ValidationConverterTextToValueTypeName.instance();
     }
 
     /**
