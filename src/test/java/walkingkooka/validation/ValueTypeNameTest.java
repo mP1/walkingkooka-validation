@@ -42,13 +42,13 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-final public class ValidationValueTypeNameTest implements PluginNameTesting<ValidationValueTypeName> {
+final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName> {
 
     // name.............................................................................................................
 
     @Override
-    public ValidationValueTypeName createName(final String name) {
-        return ValidationValueTypeName.with(name);
+    public ValueTypeName createName(final String name) {
+        return ValueTypeName.with(name);
     }
 
     // json.............................................................................................................
@@ -56,65 +56,65 @@ final public class ValidationValueTypeNameTest implements PluginNameTesting<Vali
     @Test
     public void testUnmarshallAny() {
         this.unmarshallAndCheck2(
-            ValidationValueTypeName.ANY_STRING,
-            ValidationValueTypeName.ANY
+            ValueTypeName.ANY_STRING,
+            ValueTypeName.ANY
         );
     }
 
     @Test
     public void testUnmarshallBoolean() {
         this.unmarshallAndCheck2(
-            ValidationValueTypeName.BOOLEAN_STRING,
-            ValidationValueTypeName.BOOLEAN
+            ValueTypeName.BOOLEAN_STRING,
+            ValueTypeName.BOOLEAN
         );
     }
 
     @Test
     public void testUnmarshallDate() {
         this.unmarshallAndCheck2(
-            ValidationValueTypeName.DATE_STRING,
-            ValidationValueTypeName.DATE
+            ValueTypeName.DATE_STRING,
+            ValueTypeName.DATE
         );
     }
 
     @Test
     public void testUnmarshallDateTime() {
         this.unmarshallAndCheck2(
-            ValidationValueTypeName.DATE_TIME_STRING,
-            ValidationValueTypeName.DATE_TIME
+            ValueTypeName.DATE_TIME_STRING,
+            ValueTypeName.DATE_TIME
         );
     }
 
     @Test
     public void testUnmarshallNumber() {
         this.unmarshallAndCheck2(
-            ValidationValueTypeName.NUMBER_STRING,
-            ValidationValueTypeName.NUMBER
+            ValueTypeName.NUMBER_STRING,
+            ValueTypeName.NUMBER
         );
     }
 
     @Test
     public void testUnmarshallText() {
         this.unmarshallAndCheck2(
-            ValidationValueTypeName.TEXT_STRING,
-            ValidationValueTypeName.TEXT
+            ValueTypeName.TEXT_STRING,
+            ValueTypeName.TEXT
         );
     }
 
     @Test
     public void testUnmarshallTime() {
         this.unmarshallAndCheck2(
-            ValidationValueTypeName.TIME_STRING,
-            ValidationValueTypeName.TIME
+            ValueTypeName.TIME_STRING,
+            ValueTypeName.TIME
         );
     }
 
 
     private void unmarshallAndCheck2(final String string,
-                                     final ValidationValueTypeName expected) {
+                                     final ValueTypeName expected) {
         assertSame(
             expected,
-            ValidationValueTypeName.unmarshall(
+            ValueTypeName.unmarshall(
                 JsonNode.string(string),
                 JsonNodeUnmarshallContexts.fake()
             )
@@ -122,9 +122,9 @@ final public class ValidationValueTypeNameTest implements PluginNameTesting<Vali
     }
 
     @Override
-    public ValidationValueTypeName unmarshall(final JsonNode from,
-                                              final JsonNodeUnmarshallContext context) {
-        return ValidationValueTypeName.unmarshall(
+    public ValueTypeName unmarshall(final JsonNode from,
+                                    final JsonNodeUnmarshallContext context) {
+        return ValueTypeName.unmarshall(
             from,
             context
         );
@@ -133,7 +133,7 @@ final public class ValidationValueTypeNameTest implements PluginNameTesting<Vali
     // class............................................................................................................
 
     @Override
-    public Class<ValidationValueTypeName> type() {
-        return ValidationValueTypeName.class;
+    public Class<ValueTypeName> type() {
+        return ValueTypeName.class;
     }
 }

@@ -35,7 +35,7 @@ public final class ValidatorContexts implements PublicStaticHelper {
     static {
         ValidationChoiceList.EMPTY.toString();
         ValidationErrorList.empty().toString();
-        ValidationValueTypeName.ANY_STRING.toString();
+        ValueTypeName.ANY_STRING.toString();
     }
 
     /**

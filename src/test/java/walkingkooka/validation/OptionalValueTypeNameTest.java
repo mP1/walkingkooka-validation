@@ -34,11 +34,11 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class OptionalValidationValueTypeNameTest implements ClassTesting<OptionalValidationValueTypeName>,
+public final class OptionalValueTypeNameTest implements ClassTesting<OptionalValueTypeName>,
     CanBeEmptyTesting,
-    HashCodeEqualsDefinedTesting2<OptionalValidationValueTypeName>,
-    ToStringTesting<OptionalValidationValueTypeName>,
-    JsonNodeMarshallingTesting<OptionalValidationValueTypeName>,
+    HashCodeEqualsDefinedTesting2<OptionalValueTypeName>,
+    ToStringTesting<OptionalValueTypeName>,
+    JsonNodeMarshallingTesting<OptionalValueTypeName>,
     TreePrintableTesting {
 
     // with.............................................................................................................
@@ -47,15 +47,15 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
     public void testWithNullFails() {
         assertThrows(
             NullPointerException.class,
-            () -> OptionalValidationValueTypeName.with(null)
+            () -> OptionalValueTypeName.with(null)
         );
     }
 
     @Test
     public void testWithEmpty() {
         assertSame(
-            OptionalValidationValueTypeName.EMPTY,
-            OptionalValidationValueTypeName.with(
+            OptionalValueTypeName.EMPTY,
+            OptionalValueTypeName.with(
                 Optional.empty()
             )
         );
@@ -63,11 +63,11 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
 
     @Test
     public void testWithNotEmpty() {
-        final Optional<ValidationValueTypeName> value = Optional.of(
-            ValidationValueTypeName.TEXT
+        final Optional<ValueTypeName> value = Optional.of(
+            ValueTypeName.TEXT
         );
 
-        final OptionalValidationValueTypeName optional = OptionalValidationValueTypeName.with(value);
+        final OptionalValueTypeName optional = OptionalValueTypeName.with(value);
 
         assertSame(
             value,
@@ -80,16 +80,16 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
     @Test
     public void testEqualsDifferent() {
         this.checkNotEquals(
-            OptionalValidationValueTypeName.with(
+            OptionalValueTypeName.with(
                 Optional.of(
-                    ValidationValueTypeName.BOOLEAN
+                    ValueTypeName.BOOLEAN
                 )
             )
         );
     }
 
     @Override
-    public OptionalValidationValueTypeName createObject() {
+    public OptionalValueTypeName createObject() {
         return this.createJsonNodeMarshallingValue();
     }
 
@@ -97,12 +97,12 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
 
     @Test
     public void testToString() {
-        final Optional<ValidationValueTypeName> value = Optional.of(
-            ValidationValueTypeName.with("hello-123")
+        final Optional<ValueTypeName> value = Optional.of(
+            ValueTypeName.with("hello-123")
         );
 
         this.toStringAndCheck(
-            OptionalValidationValueTypeName.with(value),
+            OptionalValueTypeName.with(value),
             value.toString()
         );
     }
@@ -112,7 +112,7 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
     @Test
     public void testCanBeEmptyWhenEmpty() {
         this.isEmptyAndCheck(
-            OptionalValidationValueTypeName.EMPTY,
+            OptionalValueTypeName.EMPTY,
             true
         );
     }
@@ -120,9 +120,9 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
     @Test
     public void testCanBeEmptyWhenNotEmpty() {
         this.isEmptyAndCheck(
-            OptionalValidationValueTypeName.with(
+            OptionalValueTypeName.with(
                 Optional.of(
-                    ValidationValueTypeName.DATE
+                    ValueTypeName.DATE
                 )
             ),
             false
@@ -134,7 +134,7 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
     @Test
     public void testJsonMarshallEmpty() {
         this.marshallAndCheck(
-            OptionalValidationValueTypeName.EMPTY,
+            OptionalValueTypeName.EMPTY,
             JsonNode.nullNode()
         );
     }
@@ -142,9 +142,9 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
     @Test
     public void testJsonMarshallNotEmpty() {
         this.marshallAndCheck(
-            OptionalValidationValueTypeName.with(
+            OptionalValueTypeName.with(
                 Optional.of(
-                    ValidationValueTypeName.DATE
+                    ValueTypeName.DATE
                 )
             ),
                 "\"date\""
@@ -154,35 +154,35 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
     @Test
     public void testJsonRoundtripEmpty() {
         this.marshallRoundTripTwiceAndCheck(
-            OptionalValidationValueTypeName.EMPTY
+            OptionalValueTypeName.EMPTY
         );
     }
 
     @Test
-    public void testJsonRoundtripValidationValueTypeName() {
+    public void testJsonRoundtripValueTypeName() {
         this.marshallRoundTripTwiceAndCheck(
-            OptionalValidationValueTypeName.with(
+            OptionalValueTypeName.with(
                 Optional.of(
-                    ValidationValueTypeName.with("hello-123")
+                    ValueTypeName.with("hello-123")
                 )
             )
         );
     }
 
     @Override
-    public OptionalValidationValueTypeName unmarshall(final JsonNode json,
-                                                      final JsonNodeUnmarshallContext context) {
-        return OptionalValidationValueTypeName.unmarshall(
+    public OptionalValueTypeName unmarshall(final JsonNode json,
+                                            final JsonNodeUnmarshallContext context) {
+        return OptionalValueTypeName.unmarshall(
             json,
             context
         );
     }
 
     @Override
-    public OptionalValidationValueTypeName createJsonNodeMarshallingValue() {
-        return OptionalValidationValueTypeName.with(
+    public OptionalValueTypeName createJsonNodeMarshallingValue() {
+        return OptionalValueTypeName.with(
             Optional.of(
-                ValidationValueTypeName.with("hello-123")
+                ValueTypeName.with("hello-123")
             )
         );
     }
@@ -192,20 +192,20 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
     @Test
     public void testTreePrintableEmpty() {
         this.treePrintAndCheck(
-            OptionalValidationValueTypeName.EMPTY,
-            "OptionalValidationValueTypeName\n"
+            OptionalValueTypeName.EMPTY,
+            "OptionalValueTypeName\n"
         );
     }
 
     @Test
     public void testTreePrintable() {
         this.treePrintAndCheck(
-            OptionalValidationValueTypeName.with(
+            OptionalValueTypeName.with(
                 Optional.of(
-                    ValidationValueTypeName.with("hello-123")
+                    ValueTypeName.with("hello-123")
                 )
             ),
-            "OptionalValidationValueTypeName\n" +
+            "OptionalValueTypeName\n" +
                 "  hello-123\n"
         );
     }
@@ -213,8 +213,8 @@ public final class OptionalValidationValueTypeNameTest implements ClassTesting<O
     // class............................................................................................................
 
     @Override
-    public Class<OptionalValidationValueTypeName> type() {
-        return Cast.to(OptionalValidationValueTypeName.class);
+    public Class<OptionalValueTypeName> type() {
+        return Cast.to(OptionalValueTypeName.class);
     }
 
     @Override

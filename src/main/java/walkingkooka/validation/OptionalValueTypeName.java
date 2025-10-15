@@ -31,35 +31,35 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * A typed Optional {@link ValidationValueTypeName}. This is especially necessary because generics are erased and it is not possible
+ * A typed Optional {@link ValueTypeName}. This is especially necessary because generics are erased and it is not possible
  * to test and distinguish between empty Optionals of different values.
  */
-public final class OptionalValidationValueTypeName implements Value<Optional<ValidationValueTypeName>>,
+public final class OptionalValueTypeName implements Value<Optional<ValueTypeName>>,
         CanBeEmpty,
         TreePrintable {
 
-    public final static OptionalValidationValueTypeName EMPTY = new OptionalValidationValueTypeName(Optional.empty());
+    public final static OptionalValueTypeName EMPTY = new OptionalValueTypeName(Optional.empty());
 
-    private OptionalValidationValueTypeName(final Optional<ValidationValueTypeName> value) {
+    private OptionalValueTypeName(final Optional<ValueTypeName> value) {
         this.value = value;
     }
 
-    public static OptionalValidationValueTypeName with(final Optional<ValidationValueTypeName> value) {
+    public static OptionalValueTypeName with(final Optional<ValueTypeName> value) {
         Objects.requireNonNull(value, "value");
 
         return value.isPresent() ?
-                new OptionalValidationValueTypeName(value) :
+                new OptionalValueTypeName(value) :
                 Cast.to(EMPTY);
     }
 
     // value............................................................................................................
 
     @Override
-    public Optional<ValidationValueTypeName> value() {
+    public Optional<ValueTypeName> value() {
         return this.value;
     }
 
-    private final Optional<ValidationValueTypeName> value;
+    private final Optional<ValueTypeName> value;
 
     // Object...........................................................................................................
 
@@ -71,11 +71,11 @@ public final class OptionalValidationValueTypeName implements Value<Optional<Val
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-                other instanceof OptionalValidationValueTypeName &&
+                other instanceof OptionalValueTypeName &&
                         this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final OptionalValidationValueTypeName other) {
+    private boolean equals0(final OptionalValueTypeName other) {
         return this.value.equals(other.value);
     }
 
@@ -86,12 +86,12 @@ public final class OptionalValidationValueTypeName implements Value<Optional<Val
 
     // json.............................................................................................................
 
-    static OptionalValidationValueTypeName unmarshall(final JsonNode node,
-                                                      final JsonNodeUnmarshallContext context) {
+    static OptionalValueTypeName unmarshall(final JsonNode node,
+                                            final JsonNodeUnmarshallContext context) {
         return with(
             context.unmarshallOptional(
                 node,
-                ValidationValueTypeName.class
+                ValueTypeName.class
             )
         );
     }
@@ -102,10 +102,10 @@ public final class OptionalValidationValueTypeName implements Value<Optional<Val
 
     static {
         JsonNodeContext.register(
-            JsonNodeContext.computeTypeName(OptionalValidationValueTypeName.class),
-            OptionalValidationValueTypeName::unmarshall,
-            OptionalValidationValueTypeName::marshall,
-            OptionalValidationValueTypeName.class
+            JsonNodeContext.computeTypeName(OptionalValueTypeName.class),
+            OptionalValueTypeName::unmarshall,
+            OptionalValueTypeName::marshall,
+            OptionalValueTypeName.class
         );
     }
 
@@ -123,7 +123,7 @@ public final class OptionalValidationValueTypeName implements Value<Optional<Val
         printer.println(this.getClass().getSimpleName());
         printer.indent();
         {
-            final Optional<ValidationValueTypeName> value = this.value;
+            final Optional<ValueTypeName> value = this.value;
             if (value.isPresent()) {
                 TreePrintable.printTreeOrToString(
                     value.get(),

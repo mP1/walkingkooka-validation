@@ -30,7 +30,7 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.TestValidationReference;
-import walkingkooka.validation.ValidationValueTypeName;
+import walkingkooka.validation.ValueTypeName;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.util.Optional;
@@ -78,7 +78,7 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                     ).setLabel("Label111")
                     .setType(
                         Optional.of(
-                            ValidationValueTypeName.with("type222")
+                            ValueTypeName.with("type222")
                         )
                     ).setValue(
                         Optional.of("Value333")
@@ -148,7 +148,7 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                     ).setLabel("Label2"
                     ).setType(
                         Optional.of(
-                            ValidationValueTypeName.with("type222")
+                            ValueTypeName.with("type222")
                         )
                     ).setValue(
                         Optional.of(

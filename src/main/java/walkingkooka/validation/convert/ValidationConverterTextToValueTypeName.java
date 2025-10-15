@@ -20,26 +20,26 @@ package walkingkooka.validation.convert;
 import walkingkooka.Cast;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TextToTryingShortCircuitingConverter;
-import walkingkooka.validation.ValidationValueTypeName;
+import walkingkooka.validation.ValueTypeName;
 
 /**
- * Converts text to a {@link ValidationValueTypeName}.
+ * Converts text to a {@link ValueTypeName}.
  */
-final class ValidationConverterTextToValidationValueTypeName<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
+final class ValidationConverterTextToValueTypeName<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
 
     /**
      * Type safe getter
      */
-    static <C extends ConverterContext> ValidationConverterTextToValidationValueTypeName<C> instance() {
+    static <C extends ConverterContext> ValidationConverterTextToValueTypeName<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static ValidationConverterTextToValidationValueTypeName<?> INSTANCE = new ValidationConverterTextToValidationValueTypeName<>();
+    private final static ValidationConverterTextToValueTypeName<?> INSTANCE = new ValidationConverterTextToValueTypeName<>();
 
-    private ValidationConverterTextToValidationValueTypeName() {
+    private ValidationConverterTextToValueTypeName() {
         super();
     }
 
@@ -47,18 +47,18 @@ final class ValidationConverterTextToValidationValueTypeName<C extends Converter
     public boolean isTargetType(final Object value,
                                 final Class<?> type,
                                 final C context) {
-        return type == ValidationValueTypeName.class;
+        return type == ValueTypeName.class;
     }
 
     @Override
     public Object parseText(final String text,
                             final Class<?> type,
                             final C context) {
-        return ValidationValueTypeName.with(text);
+        return ValueTypeName.with(text);
     }
 
     @Override
     public String toString() {
-        return "Text to " + ValidationValueTypeName.class.getSimpleName();
+        return "Text to " + ValueTypeName.class.getSimpleName();
     }
 }
