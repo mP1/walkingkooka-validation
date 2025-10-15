@@ -18,17 +18,18 @@
 package walkingkooka.validation.form;
 
 import walkingkooka.Cast;
+import walkingkooka.InvalidTextLengthException;
 import walkingkooka.naming.Name;
 import walkingkooka.net.http.server.hateos.HateosResourceName;
 import walkingkooka.plugin.PluginName;
 import walkingkooka.plugin.PluginNameLike;
+import walkingkooka.predicate.character.CharPredicate;
+import walkingkooka.predicate.character.CharPredicates;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.Validator;
-
-import java.util.Objects;
 
 /**
  * The {@link Name} of a {@link Validator}. Note comparator names are case-sensitive.
@@ -41,8 +42,17 @@ final public class FormName implements PluginNameLike<FormName> {
 
     public static boolean isChar(final int pos,
                                  final char c) {
-        return PluginName.isChar(pos, c);
+        return 0 == pos ?
+            INITIAL.test(c) :
+            PART.test(c);
     }
+
+    final static CharPredicate INITIAL = CharPredicates.range('A', 'Z').or(
+        CharPredicates.range('a', 'z')
+    );
+
+    final static CharPredicate PART = INITIAL.or(CharPredicates.range('0', '9'))
+        .or(CharPredicates.is('-'));
 
     /**
      * The minimum valid length
@@ -58,7 +68,19 @@ final public class FormName implements PluginNameLike<FormName> {
      * Factory that creates a {@link FormName}
      */
     public static FormName with(final String name) {
-        Objects.requireNonNull(name, "name");
+        CharPredicates.failIfNullOrEmptyOrInitialAndPartFalse(
+            name,
+            "name",
+            INITIAL,
+            PART
+        );
+
+        InvalidTextLengthException.throwIfFail(
+            "name",
+            name,
+            MIN_LENGTH,
+            MAX_LENGTH
+        );
 
         return new FormName(name);
     }
@@ -68,15 +90,15 @@ final public class FormName implements PluginNameLike<FormName> {
      */
     private FormName(final String name) {
         super();
-        this.name = PluginName.with(name);
+        this.name = name;
     }
 
     @Override
     public String value() {
-        return this.name.value();
+        return this.name;
     }
 
-    private final PluginName name;
+    private final String name;
 
     // Object...........................................................................................................
 

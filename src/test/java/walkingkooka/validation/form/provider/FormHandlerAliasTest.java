@@ -29,14 +29,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FormHandlerAliasTest implements PluginAliasLikeTesting<FormHandlerName, FormHandlerSelector, FormHandlerAlias> {
 
-    private final static FormHandlerName NAME = FormHandlerName.with("Hello");
+    private final static FormHandlerName NAME = FormHandlerName.with("hello");
 
     private final static Optional<FormHandlerSelector> SELECTOR = Optional.of(
-        FormHandlerSelector.parse("formHandler123")
+        FormHandlerSelector.parse("form-handler-123")
     );
 
     private final static Optional<AbsoluteUrl> URL = Optional.of(
-        Url.parseAbsolute("https://example.com/formHandler123")
+        Url.parseAbsolute("https://example.com/form-handler-123")
     );
 
     // with.............................................................................................................

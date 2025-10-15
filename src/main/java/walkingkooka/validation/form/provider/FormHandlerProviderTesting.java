@@ -51,7 +51,7 @@ public interface FormHandlerProviderTesting<T extends FormHandlerProvider> exten
             NullPointerException.class,
             () -> this.createFormHandlerProvider()
                 .formHandler(
-                    FormHandlerSelector.parse("formHandler"),
+                    FormHandlerSelector.parse("form-handler"),
                     null
                 )
         );
@@ -153,7 +153,7 @@ public interface FormHandlerProviderTesting<T extends FormHandlerProvider> exten
             NullPointerException.class,
             () -> this.createFormHandlerProvider()
                 .formHandler(
-                    FormHandlerName.with("Hello"),
+                    FormHandlerName.with("hello"),
                     null,
                     ProviderContexts.fake()
                 )
@@ -166,7 +166,7 @@ public interface FormHandlerProviderTesting<T extends FormHandlerProvider> exten
             NullPointerException.class,
             () -> this.createFormHandlerProvider()
                 .formHandler(
-                    FormHandlerName.with("Hello"),
+                    FormHandlerName.with("hello"),
                     Lists.empty(),
                     null
                 )

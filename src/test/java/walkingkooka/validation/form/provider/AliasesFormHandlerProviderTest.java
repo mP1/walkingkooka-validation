@@ -35,31 +35,31 @@ import java.util.List;
 
 public final class AliasesFormHandlerProviderTest implements FormHandlerProviderTesting<AliasesFormHandlerProvider> {
 
-    private final static String NAME1_STRING = "formHandler1";
+    private final static String NAME1_STRING = "form-handler-1";
 
     private final static FormHandlerName NAME1 = FormHandlerName.with(NAME1_STRING);
 
-    private final static FormHandlerInfo INFO1 = FormHandlerInfo.parse("https://example.com/formHandler1 " + NAME1);
+    private final static FormHandlerInfo INFO1 = FormHandlerInfo.parse("https://example.com/form-handler-1 " + NAME1);
 
     private final static FormHandlerName ALIAS2 = FormHandlerName.with("alias2");
 
     private final static FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> FORM_HANDLER1 = formHandler(NAME1);
 
-    private final static String NAME2_STRING = "formHandler2";
+    private final static String NAME2_STRING = "form-handler-2";
 
     private final static FormHandlerName NAME2 = FormHandlerName.with(NAME2_STRING);
 
     private final static FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> FORM_HANDLER2 = formHandler(NAME2);
 
-    private final static FormHandlerInfo INFO2 = FormHandlerInfo.parse("https://example.com/formHandler2 " + NAME2);
+    private final static FormHandlerInfo INFO2 = FormHandlerInfo.parse("https://example.com/form-handler-2 " + NAME2);
 
-    private final static String NAME3_STRING = "formHandler3";
+    private final static String NAME3_STRING = "form-handler-3";
 
     private final static FormHandlerName NAME3 = FormHandlerName.with(NAME3_STRING);
 
     private final static FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> FORM_HANDLER3 = formHandler(NAME3);
 
-    private final static FormHandlerInfo INFO3 = FormHandlerInfo.parse("https://example.com/formHandler3 " + NAME3);
+    private final static FormHandlerInfo INFO3 = FormHandlerInfo.parse("https://example.com/form-handler-3 " + NAME3);
 
     private final static String VALUE3 = "Value3";
 
@@ -98,12 +98,12 @@ public final class AliasesFormHandlerProviderTest implements FormHandlerProvider
     @Test
     public void testWithUnknownFormHandlerName() {
         AliasesFormHandlerProvider.with(
-            FormHandlerAliasSet.parse("unknown-formHandler404"),
+            FormHandlerAliasSet.parse("unknown-form-handler-404"),
             new FakeFormHandlerProvider() {
 
                 @Override
                 public FormHandlerInfoSet formHandlerInfos() {
-                    return FormHandlerInfoSet.parse("https://example.com/formHandler111 formHandler111");
+                    return FormHandlerInfoSet.parse("https://example.com/form-handler-111 form-handler-111");
                 }
             }
         );
@@ -177,7 +177,7 @@ public final class AliasesFormHandlerProviderTest implements FormHandlerProvider
 
     @Override
     public AliasesFormHandlerProvider createFormHandlerProvider() {
-        final String aliases = "formHandler1, alias2 formHandler2, custom4 formHandler3(\"Value3\") https://example.com/custom4";
+        final String aliases = "form-handler-1, alias2 form-handler-2, custom4 form-handler-3(\"Value3\") https://example.com/custom4";
 
         this.checkEquals(
             NAME1 + ", " + ALIAS2 + " " + NAME2 + ", " + NAME4 + " " + NAME3 + "(\"" + VALUE3 + "\") " + INFO4.url(),

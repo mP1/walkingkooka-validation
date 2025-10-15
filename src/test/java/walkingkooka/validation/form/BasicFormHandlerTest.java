@@ -196,7 +196,7 @@ public final class BasicFormHandlerTest implements FormHandlerTesting<
                 );
             }
         };
-        final ValidatorSelector validatorSelector1 = ValidatorSelector.parse("Validator1");
+        final ValidatorSelector validatorSelector1 = ValidatorSelector.parse("validator1");
 
         final FormField<TestValidationReference> field1 = FormField.with(
             new TestValidationReference("Field1")

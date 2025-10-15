@@ -43,17 +43,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class MergedMappedFormHandlerProviderTest implements FormHandlerProviderTesting<MergedMappedFormHandlerProvider>,
     ToStringTesting<MergedMappedFormHandlerProvider> {
 
-    private final static AbsoluteUrl RENAMED_URL = Url.parseAbsolute("https://example.com/renamed-formHandler-111");
+    private final static AbsoluteUrl RENAMED_URL = Url.parseAbsolute("https://example.com/renamed-form-handler-111");
 
-    private final static FormHandlerName RENAMED_RENAME_NAME = FormHandlerName.with("renamed-rename-formHandler-111");
+    private final static FormHandlerName RENAMED_RENAME_NAME = FormHandlerName.with("renamed-rename-form-handler-111");
 
-    private final static FormHandlerName RENAMED_PROVIDER_NAME = FormHandlerName.with("renamed-provider-only-formHandler-111");
+    private final static FormHandlerName RENAMED_PROVIDER_NAME = FormHandlerName.with("renamed-provider-only-form-handler-111");
 
     private final static FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> RENAME_FORM_HANDLER = FormHandlers.fake();
 
-    private final static AbsoluteUrl PROVIDER_ONLY_URL = Url.parseAbsolute("https://example.com/provider-only-formHandler-222");
+    private final static AbsoluteUrl PROVIDER_ONLY_URL = Url.parseAbsolute("https://example.com/provider-only-form-handler-222");
 
-    private final static FormHandlerName PROVIDER_ONLY_NAME = FormHandlerName.with("provider-only-formHandler-222");
+    private final static FormHandlerName PROVIDER_ONLY_NAME = FormHandlerName.with("provider-only-form-handler-222");
 
     private final static FormHandler<TestValidationReference, Void, FakeFormHandlerContext<TestValidationReference, Void>> PROVIDER_ONLY_FORM_HANDLER = FormHandlers.fake();
 
@@ -154,7 +154,7 @@ public final class MergedMappedFormHandlerProviderTest implements FormHandlerPro
     public void testToString() {
         this.toStringAndCheck(
             this.createFormHandlerProvider(),
-            "https://example.com/provider-only-formHandler-222 provider-only-formHandler-222,https://example.com/renamed-formHandler-111 renamed-rename-formHandler-111"
+            "https://example.com/provider-only-form-handler-222 provider-only-form-handler-222,https://example.com/renamed-form-handler-111 renamed-rename-form-handler-111"
         );
     }
 

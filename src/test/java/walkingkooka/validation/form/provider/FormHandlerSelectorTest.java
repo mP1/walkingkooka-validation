@@ -42,11 +42,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<FormHandlerSelector, FormHandlerName> {
 
-    private final static FormHandlerName NAME = FormHandlerName.with("super-magic-formHandler123");
+    private final static FormHandlerName NAME = FormHandlerName.with("super-magic-form-handler-123");
 
-    private final static FormHandlerName NAME2 = FormHandlerName.with("formHandler2");
+    private final static FormHandlerName NAME2 = FormHandlerName.with("form-handler-2");
 
-    private final static FormHandlerName NAME3 = FormHandlerName.with("formHandler3");
+    private final static FormHandlerName NAME3 = FormHandlerName.with("form-handler-3");
 
     private final static String TEXT = "$0.00";
 
@@ -149,7 +149,7 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
     public void testEvaluateValueTextOpenParensFail() {
         this.evaluateValueTextFails(
             NAME + "(",
-            "Invalid character '(' at 26"
+            "Invalid character '(' at 28"
         );
     }
 
@@ -204,13 +204,13 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
     @Test
     public void testEvaluateValueTextDoubleMissingClosingParensFail() {
         this.checkEquals(
-            27,
+            29,
             NAME.textLength() + 1
         );
 
         this.evaluateValueTextFails(
             NAME + "(1",
-            "Invalid character '1' at 27"
+            "Invalid character '1' at 29"
         );
     }
 
@@ -518,14 +518,14 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
     public void testMarshall() {
         this.marshallAndCheck(
             this.createJsonNodeMarshallingValue(),
-            "\"super-magic-formHandler123 $0.00\""
+            "\"super-magic-form-handler-123 $0.00\""
         );
     }
 
     @Test
     public void testUnmarshall() {
         this.unmarshallAndCheck(
-            "\"super-magic-formHandler123 $0.00\"",
+            "\"super-magic-form-handler-123 $0.00\"",
             this.createJsonNodeMarshallingValue()
         );
     }

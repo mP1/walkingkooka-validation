@@ -77,8 +77,8 @@ public final class ValidatorInfoSetTest implements PluginInfoSetLikeTesting<Vali
     @Override
     public ValidatorInfo info() {
         return ValidatorInfo.with(
-            Url.parseAbsolute("https://example.com/Validator123"),
-            ValidatorName.with("Validator123")
+            Url.parseAbsolute("https://example.com/validator-123"),
+            ValidatorName.with("validator-123")
         );
     }
 

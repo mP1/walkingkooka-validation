@@ -108,7 +108,7 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
 
     @Test
     public void testValidateFormFieldsWithValidatorAndNoErrors() {
-        final ValidatorSelector validator1 = ValidatorSelector.parse("Validator1");
+        final ValidatorSelector validator1 = ValidatorSelector.parse("validator-1");
 
         final FormField<TestValidationReference> field1 = FormField.with(
             new TestValidationReference("Field1")
@@ -153,7 +153,7 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
 
     @Test
     public void testValidateFormFieldsWithUnknownValidator() {
-        final ValidatorSelector validator1 = ValidatorSelector.parse("Validator1");
+        final ValidatorSelector validator1 = ValidatorSelector.parse("validator-1");
 
         final FormField<TestValidationReference> field1 = FormField.with(
             new TestValidationReference("Field1")
@@ -186,14 +186,14 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
             ),
             ValidationError.with(
                 field1.reference()
-            ).setMessage("Unknown validator Validator1")
+            ).setMessage("Unknown validator validator-1")
         );
     }
 
     @Test
     public void testValidateFormFieldsWithSomeWithValidationErrors() {
-        final ValidatorSelector validator1 = ValidatorSelector.parse("Validator1");
-        final ValidatorSelector validator2 = ValidatorSelector.parse("Validator2");
+        final ValidatorSelector validator1 = ValidatorSelector.parse("validator-1");
+        final ValidatorSelector validator2 = ValidatorSelector.parse("validator-2");
 
         final Optional<Object> value1 = Optional.of("value1");
         final Optional<Object> value2 = Optional.of("value2");
@@ -271,7 +271,7 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
 
     @Test
     public void testValidateFormFieldsWithNullValueAndValidationError() {
-        final ValidatorSelector validator1 = ValidatorSelector.parse("Validator1");
+        final ValidatorSelector validator1 = ValidatorSelector.parse("validator-1");
 
         final Optional<Object> value1 = Optional.empty();
 
@@ -325,7 +325,7 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
 
     @Test
     public void testValidateFormFieldsWithNonNullValueAndValidationError() {
-        final ValidatorSelector validator1 = ValidatorSelector.parse("Validator1");
+        final ValidatorSelector validator1 = ValidatorSelector.parse("validator-1");
 
         final Optional<Object> value1 = Optional.of("NonNullValue1");
 
@@ -379,8 +379,8 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
 
     @Test
     public void testValidateFormFieldsWithValidationErrorsFromMultipleFields() {
-        final ValidatorSelector validator1 = ValidatorSelector.parse("Validator1");
-        final ValidatorSelector validator2 = ValidatorSelector.parse("Validator2");
+        final ValidatorSelector validator1 = ValidatorSelector.parse("validator-1");
+        final ValidatorSelector validator2 = ValidatorSelector.parse("validator-2");
 
         final Optional<Object> value1 = Optional.of("value1");
         final Optional<Object> value2 = Optional.of("value2");

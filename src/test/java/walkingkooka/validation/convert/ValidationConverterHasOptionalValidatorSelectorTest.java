@@ -38,7 +38,7 @@ public final class ValidationConverterHasOptionalValidatorSelectorTest extends V
 
     @Test
     public void testConvertHasOptionalValidatorSelector() {
-        final ValidatorSelector selector = ValidatorSelector.parse("Hello");
+        final ValidatorSelector selector = ValidatorSelector.parse("hello");
 
         this.convertAndCheck(
             new HasOptionalValidatorSelector() {

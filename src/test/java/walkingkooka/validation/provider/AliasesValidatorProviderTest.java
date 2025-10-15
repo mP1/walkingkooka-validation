@@ -102,7 +102,7 @@ public final class AliasesValidatorProviderTest implements ValidatorProviderTest
             new FakeValidatorProvider() {
                 @Override
                 public ValidatorInfoSet validatorInfos() {
-                    return ValidatorInfoSet.parse("https://example.com/validator111 validator111");
+                    return ValidatorInfoSet.parse("https://example.com/validator-111 validator-111");
                 }
             }
         );
