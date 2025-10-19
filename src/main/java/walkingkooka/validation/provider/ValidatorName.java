@@ -90,6 +90,21 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
         (p, c) -> Validators.absoluteUrl()
     );
 
+    private final static String CHECKBOX_STRING = "checkbox";
+
+    /**
+     * The name of the {@link Validator} returned by {@link Validators#checkbox(Expression)}.
+     */
+    public final static ValidatorName CHECKBOX = registerConstantName(
+        CHECKBOX_STRING,
+        (p, c) -> Validators.checkbox(
+            c.convertOrFail(
+                p.get(0),
+                Expression.class
+            )
+        )
+    );
+    
     private final static String CHOICE_LIST_STRING = "choice-list";
 
     /**
@@ -222,6 +237,9 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
         switch (name) {
             case ABSOLUTE_URL_STRING:
                 validatorName = ABSOLUTE_URL;
+                break;
+            case CHECKBOX_STRING:
+                validatorName = CHECKBOX;
                 break;
             case CHOICE_LIST_STRING:
                 validatorName = CHOICE_LIST;

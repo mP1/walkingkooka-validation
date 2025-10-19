@@ -81,6 +81,15 @@ public final class ValidationValidatorProviderTest implements ValidatorProviderT
     }
 
     @Test
+    public void testValidatorSelectorWithCheckbox() {
+        this.validatorAndCheck(
+            ValidatorSelector.parse("checkbox(\"1+2\")"),
+            CONTEXT,
+            Validators.checkbox(EXPRESSION)
+        );
+    }
+
+    @Test
     public void testValidatorSelectorWithChoiceList() {
         this.validatorAndCheck(
             ValidatorSelector.with(
