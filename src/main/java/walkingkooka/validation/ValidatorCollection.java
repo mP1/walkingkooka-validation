@@ -84,15 +84,15 @@ final class ValidatorCollection<R extends ValidationReference, C extends Validat
 
     private final int maxErrors;
 
-    // choices..........................................................................................................
+    private final List<Validator<R, C>> validators;
+
+    // promptValue......................................................................................................
 
     @Override
-    public Optional<List<ValidationChoice>> choices(final ValidatorContext<R> context) {
+    public Optional<ValidationPromptValue> promptValue(final ValidatorContext<R> context) {
         Objects.requireNonNull(context, "context");
-        return NO_CHOICES;
+        return NO_PROMPT_VALUES;
     }
-
-    private final List<Validator<R, C>> validators;
 
     // Object...........................................................................................................
 

@@ -32,10 +32,10 @@ public class FakeValidator<R extends ValidationReference, C extends ValidatorCon
         throw new UnsupportedOperationException();
     }
 
-    // choices..........................................................................................................
+    // promptValue......................................................................................................
 
     @Override
-    public Optional<List<ValidationChoice>> choices(final ValidatorContext<R> context) {
+    public Optional<ValidationPromptValue> promptValue(final ValidatorContext<R> context) {
         throw new UnsupportedOperationException();
     }
 }
