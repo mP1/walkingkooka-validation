@@ -20,12 +20,12 @@ package walkingkooka.validation;
 import java.util.Optional;
 
 /**
- * Provides a getter to return a {@link ValidationChoiceList} if one is present.
+ * Provides a getter to return a {@link ValidationPromptValue} if one is present.
  */
-public interface HasValidationChoiceList {
+public interface HasValidationPromptValue {
 
     /**
-     * Tries to return a {@link ValidationChoiceList} if one is present.
+     * Tries to return a {@link ValidationPromptValue} if one is present.
      */
-    Optional<ValidationChoiceList> validationChoiceList();
+    Optional<ValidationPromptValue> validationPromptValue();
 }

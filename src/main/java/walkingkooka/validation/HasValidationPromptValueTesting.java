@@ -21,28 +21,28 @@ import walkingkooka.text.printer.TreePrintableTesting;
 
 import java.util.Optional;
 
-public interface HasValidationChoiceListTesting extends TreePrintableTesting {
+public interface HasValidationPromptValueTesting extends TreePrintableTesting {
 
-    default void validationChoiceListAndCheck(final HasValidationChoiceList has) {
-        this.validationChoiceListAndCheck(
+    default void validationPromptValueAndCheck(final HasValidationPromptValue has) {
+        this.validationPromptValueAndCheck(
             has,
             Optional.empty()
         );
     }
 
-    default void validationChoiceListAndCheck(final HasValidationChoiceList has,
-                                              final ValidationChoiceList expected) {
-        this.validationChoiceListAndCheck(
+    default void validationPromptValueAndCheck(final HasValidationPromptValue has,
+                                               final ValidationChoiceList expected) {
+        this.validationPromptValueAndCheck(
             has,
             Optional.of(expected)
         );
     }
 
-    default void validationChoiceListAndCheck(final HasValidationChoiceList has,
-                                              final Optional<ValidationChoiceList> expected) {
+    default void validationPromptValueAndCheck(final HasValidationPromptValue has,
+                                               final Optional<ValidationChoiceList> expected) {
         this.checkEquals(
             expected,
-            has.validationChoiceList(),
+            has.validationPromptValue(),
             has::toString
         );
     }
