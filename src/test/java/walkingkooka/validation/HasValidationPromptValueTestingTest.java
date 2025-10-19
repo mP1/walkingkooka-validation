@@ -21,21 +21,21 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
-public final class HasValidationChoiceListTestingTest implements HasValidationChoiceListTesting {
+public final class HasValidationPromptValueTestingTest implements HasValidationPromptValueTesting {
 
     @Test
-    public void testValidationChoiceListAndCheck() {
-        this.validationChoiceListAndCheck(
-            new TestHasValidationChoiceList(Optional.empty())
+    public void testValidationPromptValueAndCheck() {
+        this.validationPromptValueAndCheck(
+            new TestHasValidationPromptValue(Optional.empty())
         );
     }
 
     @Test
-    public void testValidationChoiceListAndCheckWithValidationChoiceList() {
+    public void testValidationPromptValueAndCheckWithValidationPromptValue() {
         final ValidationChoiceList choices = ValidationChoiceList.EMPTY;
 
-        this.validationChoiceListAndCheck(
-            new TestHasValidationChoiceList(
+        this.validationPromptValueAndCheck(
+            new TestHasValidationPromptValue(
                 Optional.of(choices)
             ),
             choices
@@ -43,7 +43,7 @@ public final class HasValidationChoiceListTestingTest implements HasValidationCh
     }
 
     @Test
-    public void testValidationChoiceListAndCheckWithValidationChoiceList2() {
+    public void testValidationPromptValueAndCheckWithValidationPromptValue2() {
         final ValidationChoiceList choices = ValidationChoiceList.EMPTY.concat(
             ValidationChoice.with(
                 "Label1",
@@ -51,25 +51,25 @@ public final class HasValidationChoiceListTestingTest implements HasValidationCh
             )
         );
 
-        this.validationChoiceListAndCheck(
-            new TestHasValidationChoiceList(
+        this.validationPromptValueAndCheck(
+            new TestHasValidationPromptValue(
                 Optional.of(choices)
             ),
             choices
         );
     }
 
-    private static class TestHasValidationChoiceList implements HasValidationChoiceList {
+    private static class TestHasValidationPromptValue implements HasValidationPromptValue {
 
-        TestHasValidationChoiceList(final Optional<ValidationChoiceList> choices) {
-            this.choices = choices;
+        TestHasValidationPromptValue(final Optional<ValidationPromptValue> value) {
+            this.value = value;
         }
 
         @Override
-        public Optional<ValidationChoiceList> validationChoiceList() {
-            return this.choices;
+        public Optional<ValidationPromptValue> validationPromptValue() {
+            return this.value;
         }
 
-        private final Optional<ValidationChoiceList> choices;
+        private final Optional<ValidationPromptValue> value;
     }
 }
