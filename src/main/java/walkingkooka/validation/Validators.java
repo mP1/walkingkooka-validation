@@ -35,6 +35,17 @@ public final class Validators implements PublicStaticHelper {
     }
 
     /**
+     * {@see ValidationChoiceListExpressionValidator}
+     */
+    public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> choiceList(final Expression expression,
+                                                                                                            final String message) {
+        return ValidationChoiceListExpressionValidator.with(
+            expression,
+            message
+        );
+    }
+
+    /**
      * {@link ValidatorCollection}
      */
     public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> collection(final int maxErrors,
@@ -89,17 +100,6 @@ public final class Validators implements PublicStaticHelper {
      */
     public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> textMask(final String mask) {
         return TextMaskValidator.parse(mask);
-    }
-
-    /**
-     * {@see ValidationChoiceListExpressionValidator}
-     */
-    public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> validationChoiceList(final Expression expression,
-                                                                                                                      final String message) {
-        return ValidationChoiceListExpressionValidator.with(
-            expression,
-            message
-        );
     }
 
     /**

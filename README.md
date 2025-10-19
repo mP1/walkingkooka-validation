@@ -35,10 +35,10 @@ The [ValidationError.value](https://github.com/mP1/walkingkooka-validation/blob/
 which is used by the Spreadsheet to display a drop down of choices.
 
 - [absolute-url](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/AbsoluteUrlValidator.java)
+- [choice-list](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/javex/walkingkooka/validation/ValidationChoiceListExpressionValidator.java)
 - [collection](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/javex/walkingkooka/validation/ValidatorCollection.java)
 - [email-address](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/EmailAddressValidator.java)
 - [expression](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ExpressionValidator.java)
 - [non-null](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/NonNullValidator.java)
 - [text-length](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/TextLengthValidator.java)
 - [text-mask](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/TextMaskValidator.java)
-- [validation-choice-list](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/javex/walkingkooka/validation/ValidationChoiceListExpressionValidator.java)

@@ -90,6 +90,25 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
         (p, c) -> Validators.absoluteUrl()
     );
 
+    private final static String CHOICE_LIST_STRING = "choice-list";
+
+    /**
+     * The name of the {@link Validator} returned by {@link Validators#choiceList(Expression, String)}.
+     */
+    public final static ValidatorName CHOICE_LIST = registerConstantName(
+        CHOICE_LIST_STRING,
+        (p, c) -> Validators.choiceList(
+            c.convertOrFail(
+                p.get(0),
+                Expression.class
+            ),
+            c.convertOrFail(
+                p.get(1),
+                String.class
+            )
+        )
+    );
+
     private final static String COLLECTION_STRING = "collection";
 
     /**
@@ -192,25 +211,6 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
         )
     );
 
-    private final static String VALIDATION_CHOICE_LIST_STRING = "validation-choice-list";
-
-    /**
-     * The name of the {@link Validator} returned by {@link Validators#validationChoiceList(Expression, String)}.
-     */
-    public final static ValidatorName VALIDATION_CHOICE_LIST = registerConstantName(
-        VALIDATION_CHOICE_LIST_STRING,
-        (p, c) -> Validators.validationChoiceList(
-            c.convertOrFail(
-                p.get(0),
-                Expression.class
-            ),
-            c.convertOrFail(
-                p.get(1),
-                String.class
-            )
-        )
-    );
-
     /**
      * Factory that creates a {@link ValidatorName}
      */
@@ -222,6 +222,9 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
         switch (name) {
             case ABSOLUTE_URL_STRING:
                 validatorName = ABSOLUTE_URL;
+                break;
+            case CHOICE_LIST_STRING:
+                validatorName = CHOICE_LIST;
                 break;
             case COLLECTION_STRING:
                 validatorName = COLLECTION;
@@ -240,9 +243,6 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
                 break;
             case TEXT_MASK_STRING:
                 validatorName = TEXT_MASK;
-                break;
-            case VALIDATION_CHOICE_LIST_STRING:
-                validatorName = VALIDATION_CHOICE_LIST;
                 break;
             default:
                 validatorName = new ValidatorName(name);
