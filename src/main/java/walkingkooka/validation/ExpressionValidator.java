@@ -71,15 +71,15 @@ final class ExpressionValidator<R extends ValidationReference, C extends Validat
 
     private final Expression expression;
 
-    // choices..........................................................................................................
+    // promptValue......................................................................................................
 
     /**
      * Note the expression is ignored, and this always returns no choices.
      */
     @Override
-    public Optional<List<ValidationChoice>> choices(final ValidatorContext<R> context) {
+    public Optional<ValidationPromptValue> promptValue(final ValidatorContext<R> context) {
         Objects.requireNonNull(context, "context");
-        return NO_CHOICES;
+        return NO_PROMPT_VALUES;
     }
 
     // Object...........................................................................................................

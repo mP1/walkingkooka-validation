@@ -17,6 +17,7 @@
 
 package walkingkooka.validation;
 
+import walkingkooka.collect.list.Lists;
 import walkingkooka.test.Testing;
 
 import java.util.List;
@@ -49,41 +50,43 @@ public interface ValidatorTesting extends Testing {
         );
     }
 
-    default <R extends ValidationReference, C extends ValidatorContext<R>> void choicesAndCheck(final Validator<R, C> validator,
-                                                                                                final C context) {
-        this.choicesAndCheck(
+    default <R extends ValidationReference, C extends ValidatorContext<R>> void promptValueAndCheck(final Validator<R, C> validator,
+                                                                                                    final C context) {
+        this.promptValueAndCheck(
             validator,
             context,
             Optional.empty()
         );
     }
 
-    default <R extends ValidationReference, C extends ValidatorContext<R>> void choicesAndCheck(final Validator<R, C> validator,
-                                                                                                final C context,
-                                                                                                final ValidationChoice... expected) {
-        this.choicesAndCheck(
+    default <R extends ValidationReference, C extends ValidatorContext<R>> void promptValueAndCheck(final Validator<R, C> validator,
+                                                                                                    final C context,
+                                                                                                    final ValidationChoice... expected) {
+        this.promptValueAndCheck(
             validator,
             context,
-            List.of(expected)
+            ValidationChoiceList.EMPTY.setElements(
+                Lists.of(expected)
+            )
         );
     }
 
-    default <R extends ValidationReference, C extends ValidatorContext<R>> void choicesAndCheck(final Validator<R, C> validator,
-                                                                                                final C context,
-                                                                                                final List<ValidationChoice> expected) {
-        this.choicesAndCheck(
+    default <R extends ValidationReference, C extends ValidatorContext<R>> void promptValueAndCheck(final Validator<R, C> validator,
+                                                                                                    final C context,
+                                                                                                    final ValidationPromptValue expected) {
+        this.promptValueAndCheck(
             validator,
             context,
             Optional.of(expected)
         );
     }
 
-    default <R extends ValidationReference, C extends ValidatorContext<R>> void choicesAndCheck(final Validator<R, C> validator,
-                                                                                                final C context,
-                                                                                                final Optional<List<ValidationChoice>> expected) {
+    default <R extends ValidationReference, C extends ValidatorContext<R>> void promptValueAndCheck(final Validator<R, C> validator,
+                                                                                                    final C context,
+                                                                                                    final Optional<ValidationPromptValue> expected) {
         this.checkEquals(
             expected,
-            validator.choices(context)
+            validator.promptValue(context)
         );
     }
 }

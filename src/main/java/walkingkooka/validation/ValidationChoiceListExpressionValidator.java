@@ -75,13 +75,13 @@ final class ValidationChoiceListExpressionValidator<R extends ValidationReferenc
 
     private final String message;
 
-    // choices..........................................................................................................
+    // promptValue......................................................................................................
 
     /**
      * Evaluates the {@link Expression} returning the choices {@link ValidationChoiceList}.
      */
     @Override
-    public Optional<List<ValidationChoice>> choices(final ValidatorContext<R> context) {
+    public Optional<ValidationPromptValue> promptValue(final ValidatorContext<R> context) {
         Objects.requireNonNull(context, "context");
 
         return Optional.ofNullable(

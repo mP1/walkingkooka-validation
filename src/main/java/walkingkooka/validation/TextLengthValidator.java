@@ -94,12 +94,12 @@ final class TextLengthValidator<R extends ValidationReference, C extends Validat
 
     private final int maxLength;
 
-    // choices..........................................................................................................
+    // promptValue......................................................................................................
 
     @Override
-    public Optional<List<ValidationChoice>> choices(final ValidatorContext<R> context) {
+    public Optional<ValidationPromptValue> promptValue(final ValidatorContext<R> context) {
         Objects.requireNonNull(context, "context");
-        return NO_CHOICES;
+        return NO_PROMPT_VALUES;
     }
 
     // Object...........................................................................................................

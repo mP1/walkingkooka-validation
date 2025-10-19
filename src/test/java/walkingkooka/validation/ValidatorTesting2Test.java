@@ -18,6 +18,7 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.validation.ValidatorTesting2Test.TestValidator;
 
@@ -46,8 +47,8 @@ public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, T
         );
     }
 
-    private final static Optional<List<ValidationChoice>> CHOICES = Optional.of(
-        Lists.of(
+    private final static Optional<ValidationChoiceList> CHOICES = Optional.of(
+        ValidationChoiceList.EMPTY.concat(
             ValidationChoice.with(
                 "Label1",
                 Optional.of(1)
@@ -57,7 +58,7 @@ public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, T
 
     @Test
     public void testChoices() {
-        this.choicesAndCheck(
+        this.promptValueAndCheck(
             CHOICES.get()
         );
     }
@@ -87,12 +88,13 @@ public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, T
 
         private final List<ValidationError<TestValidationReference>> errors;
 
-        // choices.................................................................................................
+        // promptValue..................................................................................................
 
         @Override
-        public Optional<List<ValidationChoice>> choices(final ValidatorContext<TestValidationReference> context) {
+        public Optional<ValidationPromptValue> promptValue(final ValidatorContext<TestValidationReference> context) {
             Objects.requireNonNull(context, "context");
-            return CHOICES;
+
+            return Cast.to(CHOICES);
         }
     }
 }

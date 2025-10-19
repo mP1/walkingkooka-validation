@@ -18,6 +18,7 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.collect.list.Lists;
 
 import java.util.List;
 
@@ -60,44 +61,46 @@ public interface ValidatorTesting2<V extends Validator<R, C>, R extends Validati
         );
     }
 
-    // choices..........................................................................................................
+    // promptValue......................................................................................................
 
     @Test
-    default void testChoicesWithNullContextFails() {
+    default void testPromptValueWithNullContextFails() {
         assertThrows(
             NullPointerException.class,
             () -> this.createValidator()
-                .choices(
+                .promptValue(
                     null
                 )
         );
     }
 
-    default void choicesAndCheck(final ValidationChoice... expected) {
-        this.choicesAndCheck(
+    default void promptValueAndCheck(final ValidationChoice... expected) {
+        this.promptValueAndCheck(
             this.createContext(),
             expected
         );
     }
 
-    default void choicesAndCheck(final List<ValidationChoice> expected) {
-        this.choicesAndCheck(
+    default void promptValueAndCheck(final ValidationPromptValue expected) {
+        this.promptValueAndCheck(
             this.createContext(),
             expected
         );
     }
 
-    default void choicesAndCheck(final C context,
-                                 final ValidationChoice... expected) {
-        this.choicesAndCheck(
+    default void promptValueAndCheck(final C context,
+                                     final ValidationChoice... expected) {
+        this.promptValueAndCheck(
             context,
-            List.of(expected)
+            ValidationChoiceList.EMPTY.setElements(
+                Lists.of(expected)
+            )
         );
     }
 
-    default void choicesAndCheck(final C context,
-                                 final List<ValidationChoice> expected) {
-        this.choicesAndCheck(
+    default void promptValueAndCheck(final C context,
+                                     final ValidationPromptValue expected) {
+        this.promptValueAndCheck(
             this.createValidator(),
             context,
             expected

@@ -38,10 +38,10 @@ public interface Validator<R extends ValidationReference, C extends ValidatorCon
         return ValidationErrorList.empty();
     }
 
-    Optional<List<ValidationChoice>> NO_CHOICES = Optional.empty();
+    Optional<ValidationPromptValue> NO_PROMPT_VALUES = Optional.empty();
 
     /**
-     * Some validators may return some choices.
+     * Some validators may return a {@link ValidationPromptValue} as part of a {@link ValidationError}.
      */
-    Optional<List<ValidationChoice>> choices(final ValidatorContext<R> context);
+    Optional<ValidationPromptValue> promptValue(final ValidatorContext<R> context);
 }
