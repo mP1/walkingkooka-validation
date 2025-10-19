@@ -87,9 +87,9 @@ public final class ValidationChoice implements Value<Optional<Object>>,
                 this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final ValidationChoice error) {
-        return this.label.equals(error.label) &&
-            this.value.equals(error.value);
+    private boolean equals0(final ValidationChoice other) {
+        return this.label.equals(other.label) &&
+            this.value.equals(other.value);
     }
 
     @Override
