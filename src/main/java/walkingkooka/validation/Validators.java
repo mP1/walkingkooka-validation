@@ -35,6 +35,13 @@ public final class Validators implements PublicStaticHelper {
     }
 
     /**
+     * {@see ValidationCheckboxExpressionValidator}
+     */
+    public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> checkbox(final Expression expression) {
+        return ValidationCheckboxExpressionValidator.with(expression);
+    }
+
+    /**
      * {@see ValidationChoiceListExpressionValidator}
      */
     public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> choiceList(final Expression expression,
