@@ -81,6 +81,21 @@ public final class ValidationValidatorProviderTest implements ValidatorProviderT
     }
 
     @Test
+    public void testValidatorSelectorWithChoiceList() {
+        this.validatorAndCheck(
+            ValidatorSelector.with(
+                ValidatorName.CHOICE_LIST,
+                "(\"1+2\", \"Invalid choice !!!\")"
+            ),
+            CONTEXT,
+            Validators.choiceList(
+                EXPRESSION,
+                "Invalid choice !!!"
+            )
+        );
+    }
+
+    @Test
     public void testValidatorSelectorCollection() {
         this.validatorAndCheck(
             ValidatorSelector.with(
@@ -155,21 +170,6 @@ public final class ValidationValidatorProviderTest implements ValidatorProviderT
             ),
             CONTEXT,
             Validators.textMask("???")
-        );
-    }
-
-    @Test
-    public void testValidatorSelectorWithValidationErrorList() {
-        this.validatorAndCheck(
-            ValidatorSelector.with(
-                ValidatorName.VALIDATION_CHOICE_LIST,
-                "(\"1+2\", \"Invalid choice !!!\")"
-            ),
-            CONTEXT,
-            Validators.validationChoiceList(
-                EXPRESSION,
-                "Invalid choice !!!"
-            )
         );
     }
 
