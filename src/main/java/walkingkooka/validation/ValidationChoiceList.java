@@ -34,7 +34,8 @@ import java.util.Optional;
  * An immutable list of {@link ValidationChoice} choices returned by a {@link Validator}.
  */
 public final class ValidationChoiceList extends AbstractList<ValidationChoice>
-    implements ImmutableListDefaults<ValidationChoiceList, ValidationChoice> {
+    implements ImmutableListDefaults<ValidationChoiceList, ValidationChoice>,
+    ValidationPromptValue {
 
     /**
      * An empty {@link ValidationChoiceList}.
