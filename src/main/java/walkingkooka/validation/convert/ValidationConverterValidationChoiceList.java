@@ -93,18 +93,18 @@ final class ValidationConverterValidationChoiceList<C extends ConverterContext> 
     public Object tryConvertOrFail(final Object value,
                                    final Class<?> type,
                                    final C context) {
-        ValidationChoiceList validationErrorList;
+        ValidationChoiceList validationChoiceList;
 
         if (null == value) {
-            validationErrorList = ValidationChoiceList.EMPTY;
+            validationChoiceList = ValidationChoiceList.EMPTY;
         } else {
             if (value instanceof ValidationChoiceList) {
                 // ValidationChoiceList -> ValidationChoiceList
-                validationErrorList = (ValidationChoiceList) value;
+                validationChoiceList = (ValidationChoiceList) value;
             } else {
                 if (value instanceof List) {
                     // eg list( ValidationChoice, ValidationChoice, ValidationChoice)
-                    validationErrorList = ValidationChoiceList.EMPTY.setElements(
+                    validationChoiceList = ValidationChoiceList.EMPTY.setElements(
                         convertToValidationChoice(
                             (List<?>)value,
                             context
@@ -113,7 +113,7 @@ final class ValidationConverterValidationChoiceList<C extends ConverterContext> 
                 } else {
                     // eg "Label1, Label2, Labell3"
                     if( value instanceof CharSequence ) {
-                        validationErrorList = ValidationChoiceList.EMPTY.setElements(
+                        validationChoiceList = ValidationChoiceList.EMPTY.setElements(
                             convertToValidationChoice(
                                 context.convertOrFail(
                                     value,
@@ -123,7 +123,7 @@ final class ValidationConverterValidationChoiceList<C extends ConverterContext> 
                             )
                         );
                     } else {
-                        validationErrorList = ValidationChoiceList.EMPTY
+                        validationChoiceList = ValidationChoiceList.EMPTY
                             .concat(
                                 context.convertOrFail(
                                     value,
@@ -135,7 +135,7 @@ final class ValidationConverterValidationChoiceList<C extends ConverterContext> 
             }
         }
 
-        return validationErrorList;
+        return validationChoiceList;
     }
 
     private static List<ValidationChoice> convertToValidationChoice(final List<?> value,
