@@ -30,6 +30,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ValidationCheckboxTest implements ClassTesting<ValidationCheckbox>,
@@ -58,6 +59,17 @@ public final class ValidationCheckboxTest implements ClassTesting<ValidationChec
             () -> ValidationCheckbox.with(
                 TRUE,
                 null
+            )
+        );
+    }
+
+    @Test
+    public void testWithTrueFalse() {
+        assertSame(
+            ValidationCheckbox.TRUE_FALSE,
+            ValidationCheckbox.with(
+                Optional.of(true),
+                Optional.of(false)
             )
         );
     }

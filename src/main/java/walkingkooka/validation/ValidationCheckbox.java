@@ -38,12 +38,23 @@ public final class ValidationCheckbox implements ValidationPromptValue,
     UsesToStringBuilder,
     TreePrintable {
 
+    public final static ValidationCheckbox TRUE_FALSE = new ValidationCheckbox(
+        Optional.of(true),
+        Optional.of(false)
+    );
+
     public static ValidationCheckbox with(final Optional<Object> trueValue,
                                           final Optional<Object> falseValue) {
-        return new ValidationCheckbox(
-            Objects.requireNonNull(trueValue, "trueValue"),
-            Objects.requireNonNull(falseValue, "falseValue")
-        );
+        Objects.requireNonNull(trueValue, "trueValue");
+        Objects.requireNonNull(falseValue, "falseValue");
+
+        return TRUE_FALSE.trueValue.equals(trueValue) &&
+            TRUE_FALSE.falseValue.equals(falseValue) ?
+            TRUE_FALSE :
+            new ValidationCheckbox(
+                trueValue,
+                falseValue
+            );
     }
 
     private ValidationCheckbox(final Optional<Object> trueValue,
