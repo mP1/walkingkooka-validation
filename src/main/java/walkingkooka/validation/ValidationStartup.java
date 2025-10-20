@@ -35,6 +35,7 @@ public final class ValidationStartup implements PublicStaticHelper {
     static {
         PluginStartup.init();
 
+        ValidationCheckbox.TRUE_FALSE.trueValue();
         ValidationChoiceList.EMPTY.toString();
         ValidationErrorList.empty().toString();
         ValueTypeName.ANY_STRING.toString();
