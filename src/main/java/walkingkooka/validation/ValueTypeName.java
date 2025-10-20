@@ -87,6 +87,11 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
 
     public final static ValueTypeName TIME = new ValueTypeName(TIME_STRING);
 
+    public final static String URL_STRING = "url";
+
+    public final static ValueTypeName URL = new ValueTypeName(URL_STRING);
+
+
     /**
      * Factory that creates a {@link ValueTypeName}
      */
@@ -119,6 +124,9 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
                 break;
             case TIME_STRING:
                 validationValueTypeName = TIME;
+                break;
+            case URL_STRING:
+                validationValueTypeName = URL;
                 break;
             default:
                 PluginName.with(name);
