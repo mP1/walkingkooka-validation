@@ -28,6 +28,7 @@ import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.MethodAttributes;
 import walkingkooka.text.CaseKind;
 import walkingkooka.tree.expression.Expression;
+import walkingkooka.validation.ValidationCheckbox;
 import walkingkooka.validation.Validator;
 import walkingkooka.validation.Validators;
 
@@ -82,6 +83,17 @@ public final class ValidationValidatorProviderTest implements ValidatorProviderT
 
     @Test
     public void testValidatorSelectorWithCheckbox() {
+        this.validatorAndCheck(
+            ValidatorSelector.parse("checkbox"),
+            CONTEXT,
+            Validators.checkbox(
+                Expression.value(ValidationCheckbox.TRUE_FALSE)
+            )
+        );
+    }
+
+    @Test
+    public void testValidatorSelectorWithCheckboxWithExpression() {
         this.validatorAndCheck(
             ValidatorSelector.parse("checkbox(\"1+2\")"),
             CONTEXT,

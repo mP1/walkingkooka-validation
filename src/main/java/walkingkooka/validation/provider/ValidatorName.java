@@ -30,6 +30,7 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
+import walkingkooka.validation.ValidationCheckbox;
 import walkingkooka.validation.Validator;
 import walkingkooka.validation.Validators;
 
@@ -98,10 +99,12 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
     public final static ValidatorName CHECKBOX = registerConstantName(
         CHECKBOX_STRING,
         (p, c) -> Validators.checkbox(
-            c.convertOrFail(
-                p.get(0),
-                Expression.class
-            )
+            p.size() == 1 ?
+                c.convertOrFail(
+                    p.get(0),
+                    Expression.class
+                ) :
+                Expression.value(ValidationCheckbox.TRUE_FALSE)
         )
     );
     
