@@ -77,18 +77,6 @@ final class ValidationChoiceListExpressionValidator<R extends ValidationReferenc
 
     // promptValue......................................................................................................
 
-    /**
-     * Evaluates the {@link Expression} returning the choices {@link ValidationChoiceList}.
-     */
-    @Override
-    public Optional<ValidationPromptValue> promptValue(final ValidatorContext<R> context) {
-        Objects.requireNonNull(context, "context");
-
-        return Optional.ofNullable(
-            this.evaluateExpressionToValidationChoiceList(context)
-        );
-    }
-
     private ValidationChoiceList evaluateExpressionToValidationChoiceList(final ValidatorContext<R> context) {
         final ExpressionEvaluationContext expressionEvaluationContext = context.expressionEvaluationContext(null);
 

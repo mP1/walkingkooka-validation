@@ -18,7 +18,6 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.collect.list.Lists;
 
 import java.util.List;
 
@@ -56,52 +55,6 @@ public interface ValidatorTesting2<V extends Validator<R, C>, R extends Validati
         this.validateAndCheck(
             this.createValidator(),
             value,
-            context,
-            expected
-        );
-    }
-
-    // promptValue......................................................................................................
-
-    @Test
-    default void testPromptValueWithNullContextFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createValidator()
-                .promptValue(
-                    null
-                )
-        );
-    }
-
-    default void promptValueAndCheck(final ValidationChoice... expected) {
-        this.promptValueAndCheck(
-            this.createContext(),
-            expected
-        );
-    }
-
-    default void promptValueAndCheck(final ValidationPromptValue expected) {
-        this.promptValueAndCheck(
-            this.createContext(),
-            expected
-        );
-    }
-
-    default void promptValueAndCheck(final C context,
-                                     final ValidationChoice... expected) {
-        this.promptValueAndCheck(
-            context,
-            ValidationChoiceList.EMPTY.setElements(
-                Lists.of(expected)
-            )
-        );
-    }
-
-    default void promptValueAndCheck(final C context,
-                                     final ValidationPromptValue expected) {
-        this.promptValueAndCheck(
-            this.createValidator(),
             context,
             expected
         );

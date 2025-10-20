@@ -21,7 +21,6 @@ import walkingkooka.net.email.EmailAddress;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * A {@link Validator} that verifies that {@link String} is a {@link EmailAddress}.
@@ -69,14 +68,6 @@ final class EmailAddressValidator<R extends ValidationReference, C extends Valid
         }
 
         return errors;
-    }
-
-    // promptValue......................................................................................................
-
-    @Override
-    public Optional<ValidationPromptValue> promptValue(final ValidatorContext<R> context) {
-        Objects.requireNonNull(context, "context");
-        return NO_PROMPT_VALUES;
     }
 
     // Object...........................................................................................................

@@ -17,11 +17,9 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.collect.list.Lists;
 import walkingkooka.test.Testing;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ValidatorTesting extends Testing {
 
@@ -47,46 +45,6 @@ public interface ValidatorTesting extends Testing {
                 value,
                 context
             )
-        );
-    }
-
-    default <R extends ValidationReference, C extends ValidatorContext<R>> void promptValueAndCheck(final Validator<R, C> validator,
-                                                                                                    final C context) {
-        this.promptValueAndCheck(
-            validator,
-            context,
-            Optional.empty()
-        );
-    }
-
-    default <R extends ValidationReference, C extends ValidatorContext<R>> void promptValueAndCheck(final Validator<R, C> validator,
-                                                                                                    final C context,
-                                                                                                    final ValidationChoice... expected) {
-        this.promptValueAndCheck(
-            validator,
-            context,
-            ValidationChoiceList.EMPTY.setElements(
-                Lists.of(expected)
-            )
-        );
-    }
-
-    default <R extends ValidationReference, C extends ValidatorContext<R>> void promptValueAndCheck(final Validator<R, C> validator,
-                                                                                                    final C context,
-                                                                                                    final ValidationPromptValue expected) {
-        this.promptValueAndCheck(
-            validator,
-            context,
-            Optional.of(expected)
-        );
-    }
-
-    default <R extends ValidationReference, C extends ValidatorContext<R>> void promptValueAndCheck(final Validator<R, C> validator,
-                                                                                                    final C context,
-                                                                                                    final Optional<ValidationPromptValue> expected) {
-        this.checkEquals(
-            expected,
-            validator.promptValue(context)
         );
     }
 }

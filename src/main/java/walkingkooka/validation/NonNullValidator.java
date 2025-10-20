@@ -22,7 +22,6 @@ import walkingkooka.collect.list.Lists;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * A {@link Validator} that adds an error if the value is null.
@@ -56,14 +55,6 @@ final class NonNullValidator<R extends ValidationReference, C extends ValidatorC
                     .setMessage("Missing " + context.validationReference())
             ) :
             Lists.empty();
-    }
-
-    // promptValue......................................................................................................
-
-    @Override
-    public Optional<ValidationPromptValue> promptValue(final ValidatorContext<R> context) {
-        Objects.requireNonNull(context, "context");
-        return NO_PROMPT_VALUES;
     }
 
     // Object...........................................................................................................

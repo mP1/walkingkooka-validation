@@ -18,7 +18,6 @@
 package walkingkooka.validation;
 
 import java.util.List;
-import java.util.Optional;
 
 public class FakeValidator<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
 
@@ -29,13 +28,6 @@ public class FakeValidator<R extends ValidationReference, C extends ValidatorCon
     @Override
     public List<ValidationError<R>> validate(final Object value,
                                              final C context) {
-        throw new UnsupportedOperationException();
-    }
-
-    // promptValue......................................................................................................
-
-    @Override
-    public Optional<ValidationPromptValue> promptValue(final ValidatorContext<R> context) {
         throw new UnsupportedOperationException();
     }
 }
