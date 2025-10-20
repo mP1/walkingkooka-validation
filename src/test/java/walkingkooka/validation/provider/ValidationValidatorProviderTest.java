@@ -19,6 +19,7 @@ package walkingkooka.validation.provider;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.Either;
+import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.collect.set.SortedSets;
@@ -47,25 +48,30 @@ public final class ValidationValidatorProviderTest implements ValidatorProviderT
         @Override
         public <T> Either<T, String> convert(final Object value,
                                              final Class<T> type) {
-            return Expression.class == type ?
+            return value instanceof String && CsvStringList.class == type ?
                 this.successfulConversion(
-                    EXPRESSION,
+                    CsvStringList.parse((String) value),
                     type
                 ) :
-                Integer.class == type ?
+                Expression.class == type && ("1+2".equals(value) || "=1+2".equals(value)) ?
                     this.successfulConversion(
-                        Number.class.cast(value).intValue(),
+                        EXPRESSION,
                         type
                     ) :
-                    String.class == type ?
+                    Integer.class == type ?
                         this.successfulConversion(
-                            String.class.cast(value),
+                            Number.class.cast(value).intValue(),
                             type
                         ) :
-                        this.failConversion(
-                            value,
-                            type
-                        );
+                        String.class == type ?
+                            this.successfulConversion(
+                                String.class.cast(value),
+                                type
+                            ) :
+                            this.failConversion(
+                                value,
+                                type
+                            );
         }
     };
 
@@ -98,6 +104,24 @@ public final class ValidationValidatorProviderTest implements ValidatorProviderT
             ValidatorSelector.parse("checkbox(\"1+2\")"),
             CONTEXT,
             Validators.checkbox(EXPRESSION)
+        );
+    }
+
+    @Test
+    public void testValidatorSelectorWithChoiceListWithCsvString() {
+        this.validatorAndCheck(
+            ValidatorSelector.parse("choice-list(\"111,222,333\", \"Invalid choice 456\")"),
+            CONTEXT,
+            Validators.choiceList(
+                Expression.value(
+                    Lists.of(
+                        "111",
+                        "222",
+                        "333"
+                    )
+                ),
+                "Invalid choice 456"
+            )
         );
     }
 
