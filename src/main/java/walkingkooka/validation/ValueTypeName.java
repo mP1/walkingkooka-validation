@@ -70,7 +70,11 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
     public final static String DATE_TIME_STRING = "date-time";
 
     public final static ValueTypeName DATE_TIME = new ValueTypeName(DATE_TIME_STRING);
-    
+
+    public final static String EMAIL_STRING = "email";
+
+    public final static ValueTypeName EMAIL = new ValueTypeName(EMAIL_STRING);
+
     public final static String NUMBER_STRING = "number";
 
     public final static ValueTypeName NUMBER = new ValueTypeName(NUMBER_STRING);
@@ -103,6 +107,9 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
                 break;
             case DATE_TIME_STRING:
                 validationValueTypeName = DATE_TIME;
+                break;
+            case EMAIL_STRING:
+                validationValueTypeName = EMAIL;
                 break;
             case NUMBER_STRING:
                 validationValueTypeName = NUMBER;
