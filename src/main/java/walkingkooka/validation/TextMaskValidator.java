@@ -26,8 +26,6 @@ import walkingkooka.text.printer.TreePrintable;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * A {@link Validator} that supports a mask using the following characters.
@@ -110,14 +108,6 @@ final class TextMaskValidator<R extends ValidationReference, C extends Validator
      * One or more components
      */
     private final List<TextMaskValidatorComponent<R>> components;
-
-    // promptValue......................................................................................................
-
-    @Override
-    public Optional<ValidationPromptValue> promptValue(final ValidatorContext<R> context) {
-        Objects.requireNonNull(context, "context");
-        return NO_PROMPT_VALUES;
-    }
 
     // Object...........................................................................................................
 

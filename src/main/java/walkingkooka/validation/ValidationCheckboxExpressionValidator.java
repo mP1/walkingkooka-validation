@@ -68,18 +68,6 @@ final class ValidationCheckboxExpressionValidator<R extends ValidationReference,
 
     // choices..........................................................................................................
 
-    /**
-     * Evaluates the {@link Expression} returning the {@link ValidationCheckbox}.
-     */
-    @Override
-    public Optional<ValidationPromptValue> promptValue(final ValidatorContext<R> context) {
-        Objects.requireNonNull(context, "context");
-
-        return Optional.ofNullable(
-            this.evaluateExpressionToValidationCheckbox(context)
-        );
-    }
-
     private ValidationCheckbox evaluateExpressionToValidationCheckbox(final ValidatorContext<R> context) {
         final ExpressionEvaluationContext expressionEvaluationContext = context.expressionEvaluationContext(null);
 

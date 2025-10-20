@@ -22,7 +22,6 @@ import walkingkooka.tree.expression.Expression;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * A {@link Validator} which executes the given {@link Expression} passing the validation value as a reference called VALUE.
@@ -70,17 +69,6 @@ final class ExpressionValidator<R extends ValidationReference, C extends Validat
     }
 
     private final Expression expression;
-
-    // promptValue......................................................................................................
-
-    /**
-     * Note the expression is ignored, and this always returns no choices.
-     */
-    @Override
-    public Optional<ValidationPromptValue> promptValue(final ValidatorContext<R> context) {
-        Objects.requireNonNull(context, "context");
-        return NO_PROMPT_VALUES;
-    }
 
     // Object...........................................................................................................
 
