@@ -18,6 +18,7 @@
 package walkingkooka.validation.provider;
 
 import walkingkooka.Cast;
+import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.naming.Name;
@@ -115,16 +116,33 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
      */
     public final static ValidatorName CHOICE_LIST = registerConstantName(
         CHOICE_LIST_STRING,
-        (p, c) -> Validators.choiceList(
-            c.convertOrFail(
-                p.get(0),
-                Expression.class
-            ),
-            c.convertOrFail(
-                p.get(1),
-                String.class
-            )
-        )
+        (p, c) -> {
+            Expression expression;
+
+            try {
+                expression = c.convertOrFail(
+                    p.get(0),
+                    Expression.class
+                );
+            } catch (final UnsupportedOperationException rethrow) {
+                throw rethrow;
+            } catch (final RuntimeException expressionFailed) {
+                expression = Expression.value(
+                    c.convertOrFail(
+                        p.get(0),
+                        CsvStringList.class
+                    )
+                );
+            }
+
+            return Validators.choiceList(
+                expression,
+                c.convertOrFail(
+                    p.get(1),
+                    String.class
+                )
+            );
+        }
     );
 
     private final static String COLLECTION_STRING = "collection";
