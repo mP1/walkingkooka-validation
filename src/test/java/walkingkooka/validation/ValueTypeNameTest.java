@@ -109,6 +109,13 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
         );
     }
 
+    @Test
+    public void testUnmarshallWholeNumber() {
+        this.unmarshallAndCheck2(
+            ValueTypeName.WHOLE_NUMBER_STRING,
+            ValueTypeName.WHOLE_NUMBER
+        );
+    }
 
     private void unmarshallAndCheck2(final String string,
                                      final ValueTypeName expected) {
