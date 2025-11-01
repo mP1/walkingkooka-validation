@@ -91,6 +91,9 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
 
     public final static ValueTypeName URL = new ValueTypeName(URL_STRING);
 
+    public final static String WHOLE_NUMBER_STRING = "whole-number";
+
+    public final static ValueTypeName WHOLE_NUMBER = new ValueTypeName(WHOLE_NUMBER_STRING);
 
     /**
      * Factory that creates a {@link ValueTypeName}
@@ -127,6 +130,9 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
                 break;
             case URL_STRING:
                 validationValueTypeName = URL;
+                break;
+            case WHOLE_NUMBER_STRING:
+                validationValueTypeName = WHOLE_NUMBER;
                 break;
             default:
                 PluginName.with(name);
