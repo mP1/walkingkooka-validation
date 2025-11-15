@@ -87,7 +87,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
 
         @Override
         public Locale locale() {
-            return LOCALE;
+            return ValidatorContextTestingTest.LOCALE;
         }
 
         @Override
@@ -139,7 +139,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         @Override
         public EnvironmentContext environmentContext() {
             return EnvironmentContexts.empty(
-                LOCALE,
+                ValidatorContextTestingTest.LOCALE,
                 this,
                 Optional.empty()
             );
