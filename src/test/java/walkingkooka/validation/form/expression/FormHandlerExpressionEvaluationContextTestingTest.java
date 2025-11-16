@@ -59,7 +59,22 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
     }
 
     @Override
+    public void testEnvironmentValueLocaleEqualsLocale() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testEnvironmentValueUserEqualsUser() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void testEvaluateExpressionUnknownFunctionNameFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetLocaleWithDifferent() {
         throw new UnsupportedOperationException();
     }
 
