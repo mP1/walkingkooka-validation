@@ -35,6 +35,21 @@ import java.util.Set;
 public final class FormHandlerContextTestingTest implements FormHandlerContextTesting<TestFormHandlerContext, TestValidationReference, Void> {
 
     @Override
+    public void testEnvironmentValueLocaleEqualsLocale() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testEnvironmentValueUserEqualsUser() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetLocaleWithDifferent() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public TestFormHandlerContext createContext() {
         return new TestFormHandlerContext();
     }

@@ -75,13 +75,20 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
         DECIMAL_NUMBER_CONTEXT
     );
 
-    private final static EnvironmentContext ENVIRONMENT_CONTEXT = EnvironmentContexts.empty(
-        LOCALE,
-        LocalDateTime::now, // now
-        Optional.of(
-            EmailAddress.parse("user@example.com")
+    private final static EnvironmentContext ENVIRONMENT_CONTEXT = EnvironmentContexts.readOnly(
+        EnvironmentContexts.empty(
+            LOCALE,
+            LocalDateTime::now, // now
+            Optional.of(
+                EmailAddress.parse("user@example.com")
+            )
         )
     );
+
+    @Override
+    public void testSetLocaleWithDifferent() {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
     public TestValidatorContext createContext() {

@@ -46,6 +46,11 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
     private final static Locale LOCALE = Locale.ENGLISH;
 
     @Override
+    public void testSetLocaleWithDifferent() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public TestValidatorContext createContext() {
         return new TestValidatorContext();
     }

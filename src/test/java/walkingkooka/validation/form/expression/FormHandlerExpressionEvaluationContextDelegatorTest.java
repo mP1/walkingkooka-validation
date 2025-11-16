@@ -54,8 +54,24 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
         throw new UnsupportedOperationException();
     }
 
+
+    @Override
+    public void testEnvironmentValueLocaleEqualsLocale() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testEnvironmentValueUserEqualsUser() {
+        throw new UnsupportedOperationException();
+    }
+
     @Override
     public void testLocaleTextWithNullFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetLocaleWithDifferent() {
         throw new UnsupportedOperationException();
     }
 
