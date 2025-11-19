@@ -101,38 +101,38 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
     public static ValueTypeName with(final String name) {
         Objects.requireNonNull(name, "name");
 
-        ValueTypeName validationValueTypeName;
+        ValueTypeName valueTypeName;
 
         switch (name) {
             case ANY_STRING:
-                validationValueTypeName = ANY;
+                valueTypeName = ANY;
                 break;
             case BOOLEAN_STRING:
-                validationValueTypeName = BOOLEAN;
+                valueTypeName = BOOLEAN;
                 break;
             case DATE_STRING:
-                validationValueTypeName = DATE;
+                valueTypeName = DATE;
                 break;
             case DATE_TIME_STRING:
-                validationValueTypeName = DATE_TIME;
+                valueTypeName = DATE_TIME;
                 break;
             case EMAIL_STRING:
-                validationValueTypeName = EMAIL;
+                valueTypeName = EMAIL;
                 break;
             case NUMBER_STRING:
-                validationValueTypeName = NUMBER;
+                valueTypeName = NUMBER;
                 break;
             case TEXT_STRING:
-                validationValueTypeName = TEXT;
+                valueTypeName = TEXT;
                 break;
             case TIME_STRING:
-                validationValueTypeName = TIME;
+                valueTypeName = TIME;
                 break;
             case URL_STRING:
-                validationValueTypeName = URL;
+                valueTypeName = URL;
                 break;
             case WHOLE_NUMBER_STRING:
-                validationValueTypeName = WHOLE_NUMBER;
+                valueTypeName = WHOLE_NUMBER;
                 break;
             default:
                 // FIXME weakness doesnt allow all possible class names, eg those with non ascii letters will fail
@@ -141,11 +141,11 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
                         .replace('$', '-')
                         .toLowerCase()
                 );
-                validationValueTypeName = new ValueTypeName(name);
+                valueTypeName = new ValueTypeName(name);
                 break;
         }
 
-        return validationValueTypeName;
+        return valueTypeName;
     }
 
     /**
