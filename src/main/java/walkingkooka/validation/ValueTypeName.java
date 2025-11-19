@@ -135,7 +135,12 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
                 validationValueTypeName = WHOLE_NUMBER;
                 break;
             default:
-                PluginName.with(name);
+                // FIXME weakness doesnt allow all possible class names, eg those with non ascii letters will fail
+                PluginName.with(
+                    name.replace('.', '-')
+                        .replace('$', '-')
+                        .toLowerCase()
+                );
                 validationValueTypeName = new ValueTypeName(name);
                 break;
         }

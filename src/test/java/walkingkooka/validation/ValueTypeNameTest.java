@@ -44,6 +44,16 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName> {
 
+    @Test
+    public void testWithClassNameJavaLangVoid() {
+        this.createNameAndCheck("java.lang.Void");
+    }
+
+    @Test
+    public void testWithInnerClassDollarSign() {
+        this.createNameAndCheck("java.lang.Void$InnerClass");
+    }
+
     // name.............................................................................................................
 
     @Override
