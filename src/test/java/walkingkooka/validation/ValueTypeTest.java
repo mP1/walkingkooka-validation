@@ -53,7 +53,12 @@ import java.time.LocalTime;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName> {
+final public class ValueTypeTest implements PluginNameTesting<ValueType> {
+
+    @Override
+    public void testTypeNaming() {
+        throw new UnsupportedOperationException();
+    }
 
     // fromClass........................................................................................................
 
@@ -61,7 +66,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithNullFails() {
         assertThrows(
             NullPointerException.class,
-            () -> ValueTypeName.fromClass(null)
+            () -> ValueType.fromClass(null)
         );
     }
 
@@ -69,7 +74,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithBooleanType() {
         this.fromClassAndCheck(
             Boolean.TYPE,
-            ValueTypeName.BOOLEAN
+            ValueType.BOOLEAN
         );
     }
 
@@ -77,7 +82,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithBooleanClass() {
         this.fromClassAndCheck(
             Boolean.class,
-            ValueTypeName.BOOLEAN
+            ValueType.BOOLEAN
         );
     }
 
@@ -85,7 +90,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithLocalDate() {
         this.fromClassAndCheck(
             LocalDate.class,
-            ValueTypeName.DATE
+            ValueType.DATE
         );
     }
 
@@ -93,7 +98,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithLocalDateTime() {
         this.fromClassAndCheck(
             LocalDateTime.class,
-            ValueTypeName.DATE_TIME
+            ValueType.DATE_TIME
         );
     }
 
@@ -101,7 +106,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithLocalTime() {
         this.fromClassAndCheck(
             LocalTime.class,
-            ValueTypeName.TIME
+            ValueType.TIME
         );
     }
 
@@ -109,7 +114,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithByteType() {
         this.fromClassAndCheck(
             Byte.TYPE,
-            ValueTypeName.with("byte")
+            ValueType.with("byte")
         );
     }
 
@@ -117,7 +122,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithByteClass() {
         this.fromClassAndCheck(
             Byte.class,
-            ValueTypeName.with("number(Byte)")
+            ValueType.with("number(Byte)")
         );
     }
 
@@ -125,7 +130,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithShortType() {
         this.fromClassAndCheck(
             Short.TYPE,
-            ValueTypeName.with("short")
+            ValueType.with("short")
         );
     }
 
@@ -133,7 +138,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithShortClass() {
         this.fromClassAndCheck(
             Short.class,
-            ValueTypeName.with("number(Short)")
+            ValueType.with("number(Short)")
         );
     }
 
@@ -141,7 +146,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithIntegerType() {
         this.fromClassAndCheck(
             Integer.TYPE,
-            ValueTypeName.with("int")
+            ValueType.with("int")
         );
     }
 
@@ -149,7 +154,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithIntegerClass() {
         this.fromClassAndCheck(
             Integer.class,
-            ValueTypeName.with("number(Integer)")
+            ValueType.with("number(Integer)")
         );
     }
 
@@ -157,7 +162,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithLongType() {
         this.fromClassAndCheck(
             Long.TYPE,
-            ValueTypeName.with("long")
+            ValueType.with("long")
         );
     }
 
@@ -165,7 +170,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithLongClass() {
         this.fromClassAndCheck(
             Long.class,
-            ValueTypeName.with("number(Long)")
+            ValueType.with("number(Long)")
         );
     }
 
@@ -173,7 +178,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithFloatType() {
         this.fromClassAndCheck(
             Float.TYPE,
-            ValueTypeName.with("float")
+            ValueType.with("float")
         );
     }
 
@@ -181,7 +186,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithFloatClass() {
         this.fromClassAndCheck(
             Float.class,
-            ValueTypeName.with("number(Float)")
+            ValueType.with("number(Float)")
         );
     }
 
@@ -189,7 +194,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithDoubleType() {
         this.fromClassAndCheck(
             Double.TYPE,
-            ValueTypeName.with("double")
+            ValueType.with("double")
         );
     }
 
@@ -197,7 +202,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithDoubleClass() {
         this.fromClassAndCheck(
             Double.class,
-            ValueTypeName.with("number(Double)")
+            ValueType.with("number(Double)")
         );
     }
 
@@ -205,7 +210,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithBigDecimal() {
         this.fromClassAndCheck(
             BigDecimal.class,
-            ValueTypeName.with("number(BigDecimal)")
+            ValueType.with("number(BigDecimal)")
         );
     }
 
@@ -213,7 +218,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithBigInteger() {
         this.fromClassAndCheck(
             BigInteger.class,
-            ValueTypeName.with("number(BigInteger)")
+            ValueType.with("number(BigInteger)")
         );
     }
 
@@ -221,7 +226,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithString() {
         this.fromClassAndCheck(
             String.class,
-            ValueTypeName.TEXT
+            ValueType.TEXT
         );
     }
 
@@ -229,7 +234,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithStringBuffer() {
         this.fromClassAndCheck(
             StringBuffer.class,
-            ValueTypeName.with("text(StringBuffer)")
+            ValueType.with("text(StringBuffer)")
         );
     }
 
@@ -237,7 +242,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithStringBuilder() {
         this.fromClassAndCheck(
             StringBuilder.class,
-            ValueTypeName.with("text(StringBuilder)")
+            ValueType.with("text(StringBuilder)")
         );
     }
 
@@ -245,7 +250,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithEmailAddress() {
         this.fromClassAndCheck(
             EmailAddress.class,
-            ValueTypeName.EMAIL
+            ValueType.EMAIL
         );
     }
 
@@ -253,7 +258,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithAbsoluteUrl() {
         this.fromClassAndCheck(
             AbsoluteUrl.class,
-            ValueTypeName.URL
+            ValueType.URL
         );
     }
 
@@ -261,7 +266,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithVoid() {
         this.fromClassAndCheck(
             Void.class,
-            ValueTypeName.with("java.lang.Void")
+            ValueType.with("java.lang.Void")
         );
     }
 
@@ -269,15 +274,15 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testFromClassWithObject() {
         this.fromClassAndCheck(
             Object.class,
-            ValueTypeName.ANY
+            ValueType.ANY
         );
     }
 
     private void fromClassAndCheck(final Class<?> classs,
-                                   final ValueTypeName expected) {
+                                   final ValueType expected) {
         this.checkEquals(
             expected,
-            ValueTypeName.fromClass(classs)
+            ValueType.fromClass(classs)
         );
     }
 
@@ -296,8 +301,8 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     // name.............................................................................................................
 
     @Override
-    public ValueTypeName createName(final String name) {
-        return ValueTypeName.with(name);
+    public ValueType createName(final String name) {
+        return ValueType.with(name);
     }
 
     // isAny............................................................................................................
@@ -305,7 +310,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsAnyWithAny() {
         this.isAnyAndCheck(
-            ValueTypeName.ANY,
+            ValueType.ANY,
             true
         );
     }
@@ -313,7 +318,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsAnyWithNumber() {
         this.isAnyAndCheck(
-            ValueTypeName.NUMBER,
+            ValueType.NUMBER,
             false
         );
     }
@@ -321,12 +326,12 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsAnyWithText() {
         this.isAnyAndCheck(
-            ValueTypeName.TEXT,
+            ValueType.TEXT,
             false
         );
     }
 
-    private void isAnyAndCheck(final ValueTypeName name,
+    private void isAnyAndCheck(final ValueType name,
                                final boolean expected) {
         this.checkEquals(
             expected,
@@ -340,7 +345,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsDateWithAny() {
         this.isDateAndCheck(
-            ValueTypeName.ANY,
+            ValueType.ANY,
             false
         );
     }
@@ -348,7 +353,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsDateWithDate() {
         this.isDateAndCheck(
-            ValueTypeName.DATE,
+            ValueType.DATE,
             true
         );
     }
@@ -356,7 +361,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsDateWithDateTime() {
         this.isDateAndCheck(
-            ValueTypeName.DATE_TIME,
+            ValueType.DATE_TIME,
             false
         );
     }
@@ -364,7 +369,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsDateWithNumber() {
         this.isDateAndCheck(
-            ValueTypeName.NUMBER,
+            ValueType.NUMBER,
             false
         );
     }
@@ -372,12 +377,12 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsDateWithText() {
         this.isDateAndCheck(
-            ValueTypeName.TEXT,
+            ValueType.TEXT,
             false
         );
     }
 
-    private void isDateAndCheck(final ValueTypeName name,
+    private void isDateAndCheck(final ValueType name,
                                 final boolean expected) {
         this.checkEquals(
             expected,
@@ -391,7 +396,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsDateTimeWithAny() {
         this.isDateTimeAndCheck(
-            ValueTypeName.ANY,
+            ValueType.ANY,
             false
         );
     }
@@ -399,7 +404,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsDateTimeWithDate() {
         this.isDateTimeAndCheck(
-            ValueTypeName.DATE,
+            ValueType.DATE,
             false
         );
     }
@@ -407,7 +412,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsDateTimeWithDateTime() {
         this.isDateTimeAndCheck(
-            ValueTypeName.DATE_TIME,
+            ValueType.DATE_TIME,
             true
         );
     }
@@ -415,7 +420,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsDateTimeWithNumber() {
         this.isDateTimeAndCheck(
-            ValueTypeName.NUMBER,
+            ValueType.NUMBER,
             false
         );
     }
@@ -423,12 +428,12 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsDateTimeWithText() {
         this.isDateTimeAndCheck(
-            ValueTypeName.TEXT,
+            ValueType.TEXT,
             false
         );
     }
 
-    private void isDateTimeAndCheck(final ValueTypeName name,
+    private void isDateTimeAndCheck(final ValueType name,
                                     final boolean expected) {
         this.checkEquals(
             expected,
@@ -442,7 +447,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsNumberWithNumber() {
         this.isNumberAndCheck(
-            ValueTypeName.NUMBER,
+            ValueType.NUMBER,
             true
         );
     }
@@ -508,7 +513,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsNumberWithText() {
         this.isNumberAndCheck(
-            ValueTypeName.TEXT,
+            ValueType.TEXT,
             false
         );
     }
@@ -516,7 +521,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsNumberWithTextStringBuilder() {
         this.isNumberAndCheck(
-            ValueTypeName.fromClass(StringBuilder.class),
+            ValueType.fromClass(StringBuilder.class),
             false
         );
     }
@@ -524,7 +529,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsNumberWithTextDash() {
         this.isNumberAndCheck(
-            ValueTypeName.with("text-etc"),
+            ValueType.with("text-etc"),
             false
         );
     }
@@ -532,12 +537,12 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     private void isNumberAndCheck(final Class<?> type,
                                   final boolean expected) {
         this.isNumberAndCheck(
-            ValueTypeName.fromClass(type),
+            ValueType.fromClass(type),
             expected
         );
     }
 
-    private void isNumberAndCheck(final ValueTypeName name,
+    private void isNumberAndCheck(final ValueType name,
                                   final boolean expected) {
         this.checkEquals(
             expected,
@@ -551,7 +556,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsTextWithNumber() {
         this.isTextAndCheck(
-            ValueTypeName.NUMBER,
+            ValueType.NUMBER,
             false
         );
     }
@@ -559,7 +564,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsTextWithText() {
         this.isTextAndCheck(
-            ValueTypeName.TEXT,
+            ValueType.TEXT,
             true
         );
     }
@@ -567,12 +572,12 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsTextWithTextStringBuilder() {
         this.isTextAndCheck(
-            ValueTypeName.fromClass(StringBuilder.class),
+            ValueType.fromClass(StringBuilder.class),
             true
         );
     }
 
-    private void isTextAndCheck(final ValueTypeName name,
+    private void isTextAndCheck(final ValueType name,
                                 final boolean expected) {
         this.checkEquals(
             expected,
@@ -586,7 +591,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsTimeWithAny() {
         this.isTimeAndCheck(
-            ValueTypeName.ANY,
+            ValueType.ANY,
             false
         );
     }
@@ -594,7 +599,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsTimeWithDate() {
         this.isTimeAndCheck(
-            ValueTypeName.DATE,
+            ValueType.DATE,
             false
         );
     }
@@ -602,7 +607,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsTimeWithDateTime() {
         this.isTimeAndCheck(
-            ValueTypeName.DATE_TIME,
+            ValueType.DATE_TIME,
             false
         );
     }
@@ -610,7 +615,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsTimeWithNumber() {
         this.isTimeAndCheck(
-            ValueTypeName.NUMBER,
+            ValueType.NUMBER,
             false
         );
     }
@@ -618,7 +623,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsTimeWithText() {
         this.isTimeAndCheck(
-            ValueTypeName.TEXT,
+            ValueType.TEXT,
             false
         );
     }
@@ -626,12 +631,12 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testIsTimeWithTime() {
         this.isTimeAndCheck(
-            ValueTypeName.TIME,
+            ValueType.TIME,
             true
         );
     }
 
-    private void isTimeAndCheck(final ValueTypeName name,
+    private void isTimeAndCheck(final ValueType name,
                                 final boolean expected) {
         this.checkEquals(
             expected,
@@ -645,72 +650,72 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     @Test
     public void testUnmarshallAny() {
         this.unmarshallAndCheck2(
-            ValueTypeName.ANY_STRING,
-            ValueTypeName.ANY
+            ValueType.ANY_STRING,
+            ValueType.ANY
         );
     }
 
     @Test
     public void testUnmarshallBoolean() {
         this.unmarshallAndCheck2(
-            ValueTypeName.BOOLEAN_STRING,
-            ValueTypeName.BOOLEAN
+            ValueType.BOOLEAN_STRING,
+            ValueType.BOOLEAN
         );
     }
 
     @Test
     public void testUnmarshallDate() {
         this.unmarshallAndCheck2(
-            ValueTypeName.DATE_STRING,
-            ValueTypeName.DATE
+            ValueType.DATE_STRING,
+            ValueType.DATE
         );
     }
 
     @Test
     public void testUnmarshallDateTime() {
         this.unmarshallAndCheck2(
-            ValueTypeName.DATE_TIME_STRING,
-            ValueTypeName.DATE_TIME
+            ValueType.DATE_TIME_STRING,
+            ValueType.DATE_TIME
         );
     }
 
     @Test
     public void testUnmarshallNumber() {
         this.unmarshallAndCheck2(
-            ValueTypeName.NUMBER_STRING,
-            ValueTypeName.NUMBER
+            ValueType.NUMBER_STRING,
+            ValueType.NUMBER
         );
     }
 
     @Test
     public void testUnmarshallText() {
         this.unmarshallAndCheck2(
-            ValueTypeName.TEXT_STRING,
-            ValueTypeName.TEXT
+            ValueType.TEXT_STRING,
+            ValueType.TEXT
         );
     }
 
     @Test
     public void testUnmarshallTime() {
         this.unmarshallAndCheck2(
-            ValueTypeName.TIME_STRING,
-            ValueTypeName.TIME
+            ValueType.TIME_STRING,
+            ValueType.TIME
         );
     }
 
     @Test
     public void testUnmarshallWholeNumber() {
         this.unmarshallAndCheck2(
-            ValueTypeName.WHOLE_NUMBER_STRING,
-            ValueTypeName.WHOLE_NUMBER
+            ValueType.WHOLE_NUMBER_STRING,
+            ValueType.WHOLE_NUMBER
         );
     }
 
     private void unmarshallAndCheck2(final String string,
-                                     final ValueTypeName expected) {
+                                     final ValueType expected) {
         assertSame(
             expected,
-            ValueTypeName.unmarshall(
+            ValueType.unmarshall(
                 JsonNode.string(string),
                 JsonNodeUnmarshallContexts.fake()
             )
@@ -718,9 +723,9 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     }
 
     @Override
-    public ValueTypeName unmarshall(final JsonNode from,
-                                    final JsonNodeUnmarshallContext context) {
-        return ValueTypeName.unmarshall(
+    public ValueType unmarshall(final JsonNode from,
+                                final JsonNodeUnmarshallContext context) {
+        return ValueType.unmarshall(
             from,
             context
         );
@@ -729,7 +734,7 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     // class............................................................................................................
 
     @Override
-    public Class<ValueTypeName> type() {
-        return ValueTypeName.class;
+    public Class<ValueType> type() {
+        return ValueType.class;
     }
 }

@@ -48,10 +48,10 @@ public final class ValidationConvertConverters implements PublicStaticHelper {
     }
 
     /**
-     * {@see ValidationConverterTextToValueTypeName}
+     * {@see ValidationConverterTextToValueType}
      */
     public static <C extends ConverterContext> Converter<C> textToValueTypeName() {
-        return ValidationConverterTextToValueTypeName.instance();
+        return ValidationConverterTextToValueType.instance();
     }
 
     /**

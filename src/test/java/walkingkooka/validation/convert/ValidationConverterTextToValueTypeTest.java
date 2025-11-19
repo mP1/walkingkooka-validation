@@ -23,15 +23,15 @@ import walkingkooka.Either;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
-import walkingkooka.validation.ValueTypeName;
+import walkingkooka.validation.ValueType;
 
-public final class ValidationConverterTextToValueTypeNameTest extends ValidationConverterTestCase<ValidationConverterTextToValueTypeName<FakeConverterContext>, FakeConverterContext> {
+public final class ValidationConverterTextToValueTypeTest extends ValidationConverterTestCase<ValidationConverterTextToValueType<FakeConverterContext>, FakeConverterContext> {
 
     @Test
     public void testConvertNumberToValueTypeName() {
         this.convertFails(
             123,
-            ValueTypeName.class
+            ValueType.class
         );
     }
 
@@ -41,13 +41,13 @@ public final class ValidationConverterTextToValueTypeNameTest extends Validation
 
         this.convertAndCheck(
             text,
-            ValueTypeName.with(text)
+            ValueType.with(text)
         );
     }
 
     @Override
-    public ValidationConverterTextToValueTypeName<FakeConverterContext> createConverter() {
-        return ValidationConverterTextToValueTypeName.instance();
+    public ValidationConverterTextToValueType<FakeConverterContext> createConverter() {
+        return ValidationConverterTextToValueType.instance();
     }
 
     @Override
@@ -80,13 +80,13 @@ public final class ValidationConverterTextToValueTypeNameTest extends Validation
     @Test
     public void testToString() {
         this.toStringAndCheck(
-            ValidationConverterTextToValueTypeName.instance(),
-            "Text to ValueTypeName"
+            ValidationConverterTextToValueType.instance(),
+            "Text to ValueType"
         );
     }
 
     @Override
-    public Class<ValidationConverterTextToValueTypeName<FakeConverterContext>> type() {
-        return Cast.to(ValidationConverterTextToValueTypeName.class);
+    public Class<ValidationConverterTextToValueType<FakeConverterContext>> type() {
+        return Cast.to(ValidationConverterTextToValueType.class);
     }
 }
