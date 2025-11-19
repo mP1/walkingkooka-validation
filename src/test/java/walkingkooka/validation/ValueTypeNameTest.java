@@ -300,6 +300,41 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
         return ValueTypeName.with(name);
     }
 
+    // isAny............................................................................................................
+
+    @Test
+    public void testIsAnyWithAny() {
+        this.isAnyAndCheck(
+            ValueTypeName.ANY,
+            true
+        );
+    }
+
+    @Test
+    public void testIsAnyWithNumber() {
+        this.isAnyAndCheck(
+            ValueTypeName.NUMBER,
+            false
+        );
+    }
+
+    @Test
+    public void testIsAnyWithText() {
+        this.isAnyAndCheck(
+            ValueTypeName.TEXT,
+            false
+        );
+    }
+
+    private void isAnyAndCheck(final ValueTypeName name,
+                               final boolean expected) {
+        this.checkEquals(
+            expected,
+            name.isAny(),
+            name::toString
+        );
+    }
+
     // isNumber...........................................................................................................
 
     @Test
