@@ -229,6 +229,13 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
     }
 
     /**
+     * Returns true if this {@link ValueTypeName} is a date value such as {@link #DATE}, but not {@link #DATE_TIME}.
+     */
+    public boolean isDate() {
+        return "date".equals(this.prefix());
+    }
+
+    /**
      * Returns true if this {@link ValueTypeName} is text such as {@link #NUMBER}.
      */
     public boolean isNumber() {
@@ -245,21 +252,13 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
     private String prefix() {
         final String name = this.name;
 
-        final int dash = name.indexOf('-');
         final int leftParens = name.indexOf('(');
 
-        return -1 == dash && -1 == leftParens ?
+        return -1 == leftParens ?
             name :
             name.substring(
                 0,
-                -1 == dash ?
-                    leftParens :
-                    -1 == leftParens ?
-                        dash :
-                        Math.min(
-                            dash,
-                            leftParens
-                        )
+                leftParens
             );
     }
 

@@ -335,6 +335,57 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
         );
     }
 
+    // isDate...........................................................................................................
+
+    @Test
+    public void testIsDateWithAny() {
+        this.isDateAndCheck(
+            ValueTypeName.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateWithDate() {
+        this.isDateAndCheck(
+            ValueTypeName.DATE,
+            true
+        );
+    }
+
+    @Test
+    public void testIsDateWithDateTime() {
+        this.isDateAndCheck(
+            ValueTypeName.DATE_TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateWithNumber() {
+        this.isDateAndCheck(
+            ValueTypeName.NUMBER,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateWithText() {
+        this.isDateAndCheck(
+            ValueTypeName.TEXT,
+            false
+        );
+    }
+
+    private void isDateAndCheck(final ValueTypeName name,
+                                final boolean expected) {
+        this.checkEquals(
+            expected,
+            name.isDate(),
+            name::toString
+        );
+    }
+
     // isNumber...........................................................................................................
 
     @Test
@@ -466,14 +517,6 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
     public void testIsTextWithTextStringBuilder() {
         this.isTextAndCheck(
             ValueTypeName.fromClass(StringBuilder.class),
-            true
-        );
-    }
-
-    @Test
-    public void testIsTextWithTextDash() {
-        this.isTextAndCheck(
-            ValueTypeName.with("text-etc"),
             true
         );
     }
