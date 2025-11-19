@@ -250,6 +250,13 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
     }
 
     /**
+     * Returns true if this {@link ValueTypeName} is text such as {@link #TIME}.
+     */
+    public boolean isTime() {
+        return "time".equals(this.prefix());
+    }
+
+    /**
      * Returns true if this {@link ValueTypeName} is text such as {@link #TEXT}.
      */
     public boolean isText() {
