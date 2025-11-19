@@ -35,14 +35,251 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.net.AbsoluteUrl;
+import walkingkooka.net.email.EmailAddress;
 import walkingkooka.plugin.PluginNameTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName> {
+
+    // fromClass........................................................................................................
+
+    @Test
+    public void testFromClassWithNullFails() {
+        assertThrows(
+            NullPointerException.class,
+            () -> ValueTypeName.fromClass(null)
+        );
+    }
+
+    @Test
+    public void testFromClassWithBooleanType() {
+        this.fromClassAndCheck(
+            Boolean.TYPE,
+            ValueTypeName.BOOLEAN
+        );
+    }
+
+    @Test
+    public void testFromClassWithBooleanClass() {
+        this.fromClassAndCheck(
+            Boolean.class,
+            ValueTypeName.BOOLEAN
+        );
+    }
+
+    @Test
+    public void testFromClassWithLocalDate() {
+        this.fromClassAndCheck(
+            LocalDate.class,
+            ValueTypeName.DATE
+        );
+    }
+
+    @Test
+    public void testFromClassWithLocalDateTime() {
+        this.fromClassAndCheck(
+            LocalDateTime.class,
+            ValueTypeName.DATE_TIME
+        );
+    }
+
+    @Test
+    public void testFromClassWithLocalTime() {
+        this.fromClassAndCheck(
+            LocalTime.class,
+            ValueTypeName.TIME
+        );
+    }
+
+    @Test
+    public void testFromClassWithByteType() {
+        this.fromClassAndCheck(
+            Byte.TYPE,
+            ValueTypeName.with("byte")
+        );
+    }
+
+    @Test
+    public void testFromClassWithByteClass() {
+        this.fromClassAndCheck(
+            Byte.class,
+            ValueTypeName.with("number(Byte)")
+        );
+    }
+
+    @Test
+    public void testFromClassWithShortType() {
+        this.fromClassAndCheck(
+            Short.TYPE,
+            ValueTypeName.with("short")
+        );
+    }
+
+    @Test
+    public void testFromClassWithShortClass() {
+        this.fromClassAndCheck(
+            Short.class,
+            ValueTypeName.with("number(Short)")
+        );
+    }
+
+    @Test
+    public void testFromClassWithIntegerType() {
+        this.fromClassAndCheck(
+            Integer.TYPE,
+            ValueTypeName.with("int")
+        );
+    }
+
+    @Test
+    public void testFromClassWithIntegerClass() {
+        this.fromClassAndCheck(
+            Integer.class,
+            ValueTypeName.with("number(Integer)")
+        );
+    }
+
+    @Test
+    public void testFromClassWithLongType() {
+        this.fromClassAndCheck(
+            Long.TYPE,
+            ValueTypeName.with("long")
+        );
+    }
+
+    @Test
+    public void testFromClassWithLongClass() {
+        this.fromClassAndCheck(
+            Long.class,
+            ValueTypeName.with("number(Long)")
+        );
+    }
+
+    @Test
+    public void testFromClassWithFloatType() {
+        this.fromClassAndCheck(
+            Float.TYPE,
+            ValueTypeName.with("float")
+        );
+    }
+
+    @Test
+    public void testFromClassWithFloatClass() {
+        this.fromClassAndCheck(
+            Float.class,
+            ValueTypeName.with("number(Float)")
+        );
+    }
+
+    @Test
+    public void testFromClassWithDoubleType() {
+        this.fromClassAndCheck(
+            Double.TYPE,
+            ValueTypeName.with("double")
+        );
+    }
+
+    @Test
+    public void testFromClassWithDoubleClass() {
+        this.fromClassAndCheck(
+            Double.class,
+            ValueTypeName.with("number(Double)")
+        );
+    }
+
+    @Test
+    public void testFromClassWithBigDecimal() {
+        this.fromClassAndCheck(
+            BigDecimal.class,
+            ValueTypeName.with("number(BigDecimal)")
+        );
+    }
+
+    @Test
+    public void testFromClassWithBigInteger() {
+        this.fromClassAndCheck(
+            BigInteger.class,
+            ValueTypeName.with("number(BigInteger)")
+        );
+    }
+
+    @Test
+    public void testFromClassWithString() {
+        this.fromClassAndCheck(
+            String.class,
+            ValueTypeName.TEXT
+        );
+    }
+
+    @Test
+    public void testFromClassWithStringBuffer() {
+        this.fromClassAndCheck(
+            StringBuffer.class,
+            ValueTypeName.with("text(StringBuffer)")
+        );
+    }
+
+    @Test
+    public void testFromClassWithStringBuilder() {
+        this.fromClassAndCheck(
+            StringBuilder.class,
+            ValueTypeName.with("text(StringBuilder)")
+        );
+    }
+
+    @Test
+    public void testFromClassWithEmailAddress() {
+        this.fromClassAndCheck(
+            EmailAddress.class,
+            ValueTypeName.EMAIL
+        );
+    }
+
+    @Test
+    public void testFromClassWithAbsoluteUrl() {
+        this.fromClassAndCheck(
+            AbsoluteUrl.class,
+            ValueTypeName.URL
+        );
+    }
+
+    @Test
+    public void testFromClassWithVoid() {
+        this.fromClassAndCheck(
+            Void.class,
+            ValueTypeName.with("java.lang.Void")
+        );
+    }
+
+    @Test
+    public void testFromClassWithObject() {
+        this.fromClassAndCheck(
+            Object.class,
+            ValueTypeName.ANY
+        );
+    }
+
+    private void fromClassAndCheck(final Class<?> classs,
+                                   final ValueTypeName expected) {
+        this.checkEquals(
+            expected,
+            ValueTypeName.fromClass(classs)
+        );
+    }
+
+    // with.............................................................................................................
 
     @Test
     public void testWithClassNameJavaLangVoid() {
