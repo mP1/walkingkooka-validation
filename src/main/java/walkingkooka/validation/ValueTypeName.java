@@ -185,7 +185,7 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
 
     @Override
     public String toString() {
-        return this.name.toString();
+        return this.name;
     }
 
     // Json.............................................................................................................
