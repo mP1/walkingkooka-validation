@@ -20,26 +20,26 @@ package walkingkooka.validation.convert;
 import walkingkooka.Cast;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.TextToTryingShortCircuitingConverter;
-import walkingkooka.validation.ValueTypeName;
+import walkingkooka.validation.ValueType;
 
 /**
- * Converts text to a {@link ValueTypeName}.
+ * Converts text to a {@link ValueType}.
  */
-final class ValidationConverterTextToValueTypeName<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
+final class ValidationConverterTextToValueType<C extends ConverterContext> implements TextToTryingShortCircuitingConverter<C> {
 
     /**
      * Type safe getter
      */
-    static <C extends ConverterContext> ValidationConverterTextToValueTypeName<C> instance() {
+    static <C extends ConverterContext> ValidationConverterTextToValueType<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static ValidationConverterTextToValueTypeName<?> INSTANCE = new ValidationConverterTextToValueTypeName<>();
+    private final static ValidationConverterTextToValueType<?> INSTANCE = new ValidationConverterTextToValueType<>();
 
-    private ValidationConverterTextToValueTypeName() {
+    private ValidationConverterTextToValueType() {
         super();
     }
 
@@ -47,18 +47,18 @@ final class ValidationConverterTextToValueTypeName<C extends ConverterContext> i
     public boolean isTargetType(final Object value,
                                 final Class<?> type,
                                 final C context) {
-        return type == ValueTypeName.class;
+        return type == ValueType.class;
     }
 
     @Override
     public Object parseText(final String text,
                             final Class<?> type,
                             final C context) {
-        return ValueTypeName.with(text);
+        return ValueType.with(text);
     }
 
     @Override
     public String toString() {
-        return "Text to " + ValueTypeName.class.getSimpleName();
+        return "Text to " + ValueType.class.getSimpleName();
     }
 }

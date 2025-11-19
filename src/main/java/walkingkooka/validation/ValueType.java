@@ -34,7 +34,7 @@ import java.util.Objects;
 /**
  * The {@link Name} of a supported validation value. Note names must be lower-cased kebab-case not camel-case.
  */
-final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
+final public class ValueType implements PluginNameLike<ValueType> {
 
     public static final String HATEOS_RESOURCE_NAME_STRING = "type";
 
@@ -59,86 +59,86 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
 
     public final static String ANY_STRING = "*";
 
-    public final static ValueTypeName ANY = new ValueTypeName(ANY_STRING);
+    public final static ValueType ANY = new ValueType(ANY_STRING);
 
     public final static String BOOLEAN_STRING = "boolean";
 
-    public final static ValueTypeName BOOLEAN = new ValueTypeName(BOOLEAN_STRING);
+    public final static ValueType BOOLEAN = new ValueType(BOOLEAN_STRING);
 
     public final static String DATE_STRING = "date";
 
-    public final static ValueTypeName DATE = new ValueTypeName(DATE_STRING);
+    public final static ValueType DATE = new ValueType(DATE_STRING);
 
     public final static String DATE_TIME_STRING = "date-time";
 
-    public final static ValueTypeName DATE_TIME = new ValueTypeName(DATE_TIME_STRING);
+    public final static ValueType DATE_TIME = new ValueType(DATE_TIME_STRING);
 
     public final static String EMAIL_STRING = "email";
 
-    public final static ValueTypeName EMAIL = new ValueTypeName(EMAIL_STRING);
+    public final static ValueType EMAIL = new ValueType(EMAIL_STRING);
 
     public final static String NUMBER_STRING = "number";
 
-    public final static ValueTypeName NUMBER = new ValueTypeName(NUMBER_STRING);
+    public final static ValueType NUMBER = new ValueType(NUMBER_STRING);
 
     public final static String TEXT_STRING = "text";
 
-    public final static ValueTypeName TEXT = new ValueTypeName(TEXT_STRING);
+    public final static ValueType TEXT = new ValueType(TEXT_STRING);
 
     public final static String TIME_STRING = "time";
 
-    public final static ValueTypeName TIME = new ValueTypeName(TIME_STRING);
+    public final static ValueType TIME = new ValueType(TIME_STRING);
 
     public final static String URL_STRING = "url";
 
-    public final static ValueTypeName URL = new ValueTypeName(URL_STRING);
+    public final static ValueType URL = new ValueType(URL_STRING);
 
     public final static String WHOLE_NUMBER_STRING = "whole-number";
 
-    public final static ValueTypeName WHOLE_NUMBER = new ValueTypeName(WHOLE_NUMBER_STRING);
+    public final static ValueType WHOLE_NUMBER = new ValueType(WHOLE_NUMBER_STRING);
 
-    public static ValueTypeName fromClass(final Class<?> klass) {
+    public static ValueType fromClass(final Class<?> klass) {
         Objects.requireNonNull(klass, "class");
 
-        ValueTypeName valueTypeName;
+        ValueType valueType;
 
         switch (klass.getName()) {
             case "java.lang.Boolean":
-                valueTypeName = BOOLEAN;
+                valueType = BOOLEAN;
                 break;
             case "walkingkooka.net.AbsoluteUrl":
-                valueTypeName = URL;
+                valueType = URL;
                 break;
             case "walkingkooka.net.email.EmailAddress":
-                valueTypeName = EMAIL;
+                valueType = EMAIL;
                 break;
             case "java.lang.String":
-                valueTypeName = TEXT;
+                valueType = TEXT;
                 break;
             case "java.time.LocalDate":
-                valueTypeName = DATE;
+                valueType = DATE;
                 break;
             case "java.time.LocalDateTime":
-                valueTypeName = DATE_TIME;
+                valueType = DATE_TIME;
                 break;
             case "java.time.LocalTime":
-                valueTypeName = TIME;
+                valueType = TIME;
                 break;
             default:
                 if (klass == StringBuilder.class || klass == StringBuffer.class) {
-                    valueTypeName = with("text(" + klass.getSimpleName() + ")");
+                    valueType = with("text(" + klass.getSimpleName() + ")");
                 } else {
                     if (Maths.isNumberClass(klass)) {
-                        valueTypeName = with("number(" + klass.getSimpleName() + ")");
+                        valueType = with("number(" + klass.getSimpleName() + ")");
                     } else {
                         if (ExpressionNumber.isClass(klass)) {
-                            valueTypeName = NUMBER;
+                            valueType = NUMBER;
                             break;
                         } else {
                             if (Object.class == klass) {
-                                valueTypeName = ANY;
+                                valueType = ANY;
                             } else {
-                                valueTypeName = with(
+                                valueType = with(
                                     klass.getName()
                                 );
                             }
@@ -148,47 +148,47 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
                 }
         }
 
-        return valueTypeName;
+        return valueType;
     }
 
     /**
-     * Factory that creates a {@link ValueTypeName}
+     * Factory that creates a {@link ValueType}
      */
-    public static ValueTypeName with(final String name) {
+    public static ValueType with(final String name) {
         Objects.requireNonNull(name, "name");
 
-        ValueTypeName valueTypeName;
+        ValueType valueType;
 
         switch (name) {
             case ANY_STRING:
-                valueTypeName = ANY;
+                valueType = ANY;
                 break;
             case BOOLEAN_STRING:
-                valueTypeName = BOOLEAN;
+                valueType = BOOLEAN;
                 break;
             case DATE_STRING:
-                valueTypeName = DATE;
+                valueType = DATE;
                 break;
             case DATE_TIME_STRING:
-                valueTypeName = DATE_TIME;
+                valueType = DATE_TIME;
                 break;
             case EMAIL_STRING:
-                valueTypeName = EMAIL;
+                valueType = EMAIL;
                 break;
             case NUMBER_STRING:
-                valueTypeName = NUMBER;
+                valueType = NUMBER;
                 break;
             case TEXT_STRING:
-                valueTypeName = TEXT;
+                valueType = TEXT;
                 break;
             case TIME_STRING:
-                valueTypeName = TIME;
+                valueType = TIME;
                 break;
             case URL_STRING:
-                valueTypeName = URL;
+                valueType = URL;
                 break;
             case WHOLE_NUMBER_STRING:
-                valueTypeName = WHOLE_NUMBER;
+                valueType = WHOLE_NUMBER;
                 break;
             default:
                 // FIXME weakness doesnt allow all possible class names, eg those with non ascii letters will fail
@@ -199,17 +199,17 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
                         .replace(')', '-')
                         .toLowerCase()
                 );
-                valueTypeName = new ValueTypeName(name);
+                valueType = new ValueType(name);
                 break;
         }
 
-        return valueTypeName;
+        return valueType;
     }
 
     /**
      * Private constructor
      */
-    private ValueTypeName(final String name) {
+    private ValueType(final String name) {
         super();
         this.name = name;
     }
@@ -229,35 +229,35 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
     }
 
     /**
-     * Returns true if this {@link ValueTypeName} is a date value such as {@link #DATE}, but not {@link #DATE_TIME}.
+     * Returns true if this {@link ValueType} is a date value such as {@link #DATE}, but not {@link #DATE_TIME}.
      */
     public boolean isDate() {
         return "date".equals(this.prefix());
     }
 
     /**
-     * Returns true if this {@link ValueTypeName} is a date value such as {@link #DATE_TIME}, but not {@link #DATE}.
+     * Returns true if this {@link ValueType} is a date value such as {@link #DATE_TIME}, but not {@link #DATE}.
      */
     public boolean isDateTime() {
         return "date-time".equals(this.prefix());
     }
 
     /**
-     * Returns true if this {@link ValueTypeName} is text such as {@link #NUMBER}.
+     * Returns true if this {@link ValueType} is text such as {@link #NUMBER}.
      */
     public boolean isNumber() {
         return "number".equals(this.prefix());
     }
 
     /**
-     * Returns true if this {@link ValueTypeName} is text such as {@link #TIME}.
+     * Returns true if this {@link ValueType} is text such as {@link #TIME}.
      */
     public boolean isTime() {
         return "time".equals(this.prefix());
     }
 
     /**
-     * Returns true if this {@link ValueTypeName} is text such as {@link #TEXT}.
+     * Returns true if this {@link ValueType} is text such as {@link #TEXT}.
      */
     public boolean isText() {
         return "text".equals(this.prefix());
@@ -286,11 +286,11 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-            other instanceof ValueTypeName &&
+            other instanceof ValueType &&
                 this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final ValueTypeName other) {
+    private boolean equals0(final ValueType other) {
         return this.compareTo(other) == 0;
     }
 
@@ -301,8 +301,8 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
 
     // Json.............................................................................................................
 
-    static ValueTypeName unmarshall(final JsonNode node,
-                                    final JsonNodeUnmarshallContext context) {
+    static ValueType unmarshall(final JsonNode node,
+                                final JsonNodeUnmarshallContext context) {
         return with(node.stringOrFail());
     }
 
@@ -312,10 +312,10 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
 
     static {
         JsonNodeContext.register(
-            JsonNodeContext.computeTypeName(ValueTypeName.class),
-            ValueTypeName::unmarshall,
-            ValueTypeName::marshall,
-            ValueTypeName.class
+            JsonNodeContext.computeTypeName(ValueType.class),
+            ValueType::unmarshall,
+            ValueType::marshall,
+            ValueType.class
         );
     }
 }

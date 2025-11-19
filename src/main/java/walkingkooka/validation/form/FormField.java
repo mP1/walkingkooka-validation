@@ -28,7 +28,7 @@ import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.ValidationReference;
-import walkingkooka.validation.ValueTypeName;
+import walkingkooka.validation.ValueType;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.util.Objects;
@@ -55,7 +55,7 @@ public final class FormField<R extends ValidationReference> implements TreePrint
     // @VisibleForTesting
     FormField(final R reference,
               final String label,
-              final Optional<ValueTypeName> type,
+              final Optional<ValueType> type,
               final Optional<Object> value,
               final Optional<ValidatorSelector> validator) {
         this.reference = reference;
@@ -112,13 +112,13 @@ public final class FormField<R extends ValidationReference> implements TreePrint
 
     // type............................................................................................................
 
-    public final static Optional<ValueTypeName> NO_TYPE = Optional.empty();
+    public final static Optional<ValueType> NO_TYPE = Optional.empty();
 
-    public Optional<ValueTypeName> type() {
+    public Optional<ValueType> type() {
         return this.type;
     }
 
-    public FormField<R> setType(final Optional<ValueTypeName> type) {
+    public FormField<R> setType(final Optional<ValueType> type) {
         return this.type.equals(type) ?
             this :
             new FormField<>(
@@ -133,7 +133,7 @@ public final class FormField<R extends ValidationReference> implements TreePrint
     /**
      * Tags the expected value type for this field. This is used by the UI to display a date-picker for dates etc.
      */
-    private final Optional<ValueTypeName> type;
+    private final Optional<ValueType> type;
     
     // value............................................................................................................
 
@@ -250,7 +250,7 @@ public final class FormField<R extends ValidationReference> implements TreePrint
                                                                    final JsonNodeUnmarshallContext context) {
         R reference = null;
         String label = NO_LABEL;
-        ValueTypeName type = null;
+        ValueType type = null;
         Object value = null;
         ValidatorSelector validator = null;
 
@@ -269,7 +269,7 @@ public final class FormField<R extends ValidationReference> implements TreePrint
                 case TYPE_PROPERTY_STRING:
                     type = context.unmarshall(
                         child,
-                        ValueTypeName.class
+                        ValueType.class
                     );
                     break;
                 case VALUE_PROPERTY_STRING:
@@ -346,7 +346,7 @@ public final class FormField<R extends ValidationReference> implements TreePrint
     }
 
     static {
-        ValueTypeName.with("text");
+        ValueType.with("text");
         ValidatorSelector.parse("hello");
 
         JsonNodeContext.register(

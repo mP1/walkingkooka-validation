@@ -31,35 +31,35 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * A typed Optional {@link ValueTypeName}. This is especially necessary because generics are erased and it is not possible
+ * A typed Optional {@link ValueType}. This is especially necessary because generics are erased and it is not possible
  * to test and distinguish between empty Optionals of different values.
  */
-public final class OptionalValueTypeName implements Value<Optional<ValueTypeName>>,
+public final class OptionalValueType implements Value<Optional<ValueType>>,
         CanBeEmpty,
         TreePrintable {
 
-    public final static OptionalValueTypeName EMPTY = new OptionalValueTypeName(Optional.empty());
+    public final static OptionalValueType EMPTY = new OptionalValueType(Optional.empty());
 
-    private OptionalValueTypeName(final Optional<ValueTypeName> value) {
+    private OptionalValueType(final Optional<ValueType> value) {
         this.value = value;
     }
 
-    public static OptionalValueTypeName with(final Optional<ValueTypeName> value) {
+    public static OptionalValueType with(final Optional<ValueType> value) {
         Objects.requireNonNull(value, "value");
 
         return value.isPresent() ?
-                new OptionalValueTypeName(value) :
+                new OptionalValueType(value) :
                 Cast.to(EMPTY);
     }
 
     // value............................................................................................................
 
     @Override
-    public Optional<ValueTypeName> value() {
+    public Optional<ValueType> value() {
         return this.value;
     }
 
-    private final Optional<ValueTypeName> value;
+    private final Optional<ValueType> value;
 
     // Object...........................................................................................................
 
@@ -71,11 +71,11 @@ public final class OptionalValueTypeName implements Value<Optional<ValueTypeName
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-                other instanceof OptionalValueTypeName &&
+                other instanceof OptionalValueType &&
                         this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final OptionalValueTypeName other) {
+    private boolean equals0(final OptionalValueType other) {
         return this.value.equals(other.value);
     }
 
@@ -86,12 +86,12 @@ public final class OptionalValueTypeName implements Value<Optional<ValueTypeName
 
     // json.............................................................................................................
 
-    static OptionalValueTypeName unmarshall(final JsonNode node,
-                                            final JsonNodeUnmarshallContext context) {
+    static OptionalValueType unmarshall(final JsonNode node,
+                                        final JsonNodeUnmarshallContext context) {
         return with(
             context.unmarshallOptional(
                 node,
-                ValueTypeName.class
+                ValueType.class
             )
         );
     }
@@ -102,10 +102,10 @@ public final class OptionalValueTypeName implements Value<Optional<ValueTypeName
 
     static {
         JsonNodeContext.register(
-            JsonNodeContext.computeTypeName(OptionalValueTypeName.class),
-            OptionalValueTypeName::unmarshall,
-            OptionalValueTypeName::marshall,
-            OptionalValueTypeName.class
+            JsonNodeContext.computeTypeName(OptionalValueType.class),
+            OptionalValueType::unmarshall,
+            OptionalValueType::marshall,
+            OptionalValueType.class
         );
     }
 
@@ -123,7 +123,7 @@ public final class OptionalValueTypeName implements Value<Optional<ValueTypeName
         printer.println(this.getClass().getSimpleName());
         printer.indent();
         {
-            final Optional<ValueTypeName> value = this.value;
+            final Optional<ValueType> value = this.value;
             if (value.isPresent()) {
                 TreePrintable.printTreeOrToString(
                     value.get(),
