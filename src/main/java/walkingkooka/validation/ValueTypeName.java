@@ -228,6 +228,34 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
         return ANY == this;
     }
 
+    /**
+     * Returns true if this {@link ValueTypeName} is text such as {@link #TEXT}.
+     */
+    public boolean isText() {
+        return "text".equals(this.prefix());
+    }
+
+    private String prefix() {
+        final String name = this.name;
+
+        final int dash = name.indexOf('-');
+        final int leftParens = name.indexOf('(');
+
+        return -1 == dash && -1 == leftParens ?
+            name :
+            name.substring(
+                0,
+                -1 == dash ?
+                    leftParens :
+                    -1 == leftParens ?
+                        dash :
+                        Math.min(
+                            dash,
+                            leftParens
+                        )
+            );
+    }
+
     // Object...........................................................................................................
 
     @Override

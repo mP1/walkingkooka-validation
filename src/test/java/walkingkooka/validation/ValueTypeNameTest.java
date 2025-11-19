@@ -298,6 +298,49 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
         return ValueTypeName.with(name);
     }
 
+    // isText...........................................................................................................
+
+    @Test
+    public void testIsTextWithNumber() {
+        this.isTextAndCheck(
+            ValueTypeName.NUMBER,
+            false
+        );
+    }
+
+    @Test
+    public void testIsTextWithText() {
+        this.isTextAndCheck(
+            ValueTypeName.TEXT,
+            true
+        );
+    }
+
+    @Test
+    public void testIsTextWithTextStringBuilder() {
+        this.isTextAndCheck(
+            ValueTypeName.fromClass(StringBuilder.class),
+            true
+        );
+    }
+
+    @Test
+    public void testIsTextWithTextDash() {
+        this.isTextAndCheck(
+            ValueTypeName.with("text-etc"),
+            true
+        );
+    }
+
+    private void isTextAndCheck(final ValueTypeName name,
+                                final boolean expected) {
+        this.checkEquals(
+            expected,
+            name.isText(),
+            name::toString
+        );
+    }
+
     // json.............................................................................................................
 
     @Test
