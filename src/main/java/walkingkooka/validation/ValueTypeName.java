@@ -18,10 +18,12 @@
 package walkingkooka.validation;
 
 import walkingkooka.Cast;
+import walkingkooka.math.Maths;
 import walkingkooka.naming.Name;
 import walkingkooka.net.http.server.hateos.HateosResourceName;
 import walkingkooka.plugin.PluginName;
 import walkingkooka.plugin.PluginNameLike;
+import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -52,7 +54,7 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
      * The maximum valid length
      */
     public final static int MAX_LENGTH = PluginName.MAX_LENGTH;
-    
+
     // constants........................................................................................................
 
     public final static String ANY_STRING = "*";
@@ -80,7 +82,7 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
     public final static ValueTypeName NUMBER = new ValueTypeName(NUMBER_STRING);
 
     public final static String TEXT_STRING = "text";
-    
+
     public final static ValueTypeName TEXT = new ValueTypeName(TEXT_STRING);
 
     public final static String TIME_STRING = "time";
@@ -94,6 +96,60 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
     public final static String WHOLE_NUMBER_STRING = "whole-number";
 
     public final static ValueTypeName WHOLE_NUMBER = new ValueTypeName(WHOLE_NUMBER_STRING);
+
+    public static ValueTypeName fromClass(final Class<?> klass) {
+        Objects.requireNonNull(klass, "class");
+
+        ValueTypeName valueTypeName;
+
+        switch (klass.getName()) {
+            case "java.lang.Boolean":
+                valueTypeName = BOOLEAN;
+                break;
+            case "walkingkooka.net.AbsoluteUrl":
+                valueTypeName = URL;
+                break;
+            case "walkingkooka.net.email.EmailAddress":
+                valueTypeName = EMAIL;
+                break;
+            case "java.lang.String":
+                valueTypeName = TEXT;
+                break;
+            case "java.time.LocalDate":
+                valueTypeName = DATE;
+                break;
+            case "java.time.LocalDateTime":
+                valueTypeName = DATE_TIME;
+                break;
+            case "java.time.LocalTime":
+                valueTypeName = TIME;
+                break;
+            default:
+                if (klass == StringBuilder.class || klass == StringBuffer.class) {
+                    valueTypeName = with("text(" + klass.getSimpleName() + ")");
+                } else {
+                    if (Maths.isNumberClass(klass)) {
+                        valueTypeName = with("number(" + klass.getSimpleName() + ")");
+                    } else {
+                        if (ExpressionNumber.isClass(klass)) {
+                            valueTypeName = NUMBER;
+                            break;
+                        } else {
+                            if (Object.class == klass) {
+                                valueTypeName = ANY;
+                            } else {
+                                valueTypeName = with(
+                                    klass.getName()
+                                );
+                            }
+                        }
+                        break;
+                    }
+                }
+        }
+
+        return valueTypeName;
+    }
 
     /**
      * Factory that creates a {@link ValueTypeName}
@@ -139,6 +195,8 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
                 PluginName.with(
                     name.replace('.', '-')
                         .replace('$', '-')
+                        .replace('(', '-')
+                        .replace(')', '-')
                         .toLowerCase()
                 );
                 valueTypeName = new ValueTypeName(name);
