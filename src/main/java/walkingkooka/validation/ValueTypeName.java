@@ -229,6 +229,13 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
     }
 
     /**
+     * Returns true if this {@link ValueTypeName} is text such as {@link #NUMBER}.
+     */
+    public boolean isNumber() {
+        return "number".equals(this.prefix());
+    }
+
+    /**
      * Returns true if this {@link ValueTypeName} is text such as {@link #TEXT}.
      */
     public boolean isText() {

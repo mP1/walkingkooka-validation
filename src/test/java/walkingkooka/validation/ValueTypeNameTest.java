@@ -38,6 +38,8 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.plugin.PluginNameTesting;
+import walkingkooka.tree.expression.ExpressionNumber;
+import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
@@ -298,6 +300,115 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
         return ValueTypeName.with(name);
     }
 
+    // isNumber...........................................................................................................
+
+    @Test
+    public void testIsNumberWithNumber() {
+        this.isNumberAndCheck(
+            ValueTypeName.NUMBER,
+            true
+        );
+    }
+
+    @Test
+    public void testIsNumberWithExpressionNumber() {
+        this.isNumberAndCheck(
+            ExpressionNumber.class,
+            true
+        );
+    }
+
+    @Test
+    public void testIsNumberWithExpressionNumberBigDecimal() {
+        this.isNumberAndCheck(
+            ExpressionNumberKind.BIG_DECIMAL.zero()
+                .getClass(),
+            true
+        );
+    }
+
+    @Test
+    public void testIsNumberWithByte() {
+        this.isNumberAndCheck(
+            Byte.class,
+            true
+        );
+    }
+
+    @Test
+    public void testIsNumberWithShort() {
+        this.isNumberAndCheck(
+            Short.class,
+            true
+        );
+    }
+
+    @Test
+    public void testIsNumberWithInteger() {
+        this.isNumberAndCheck(
+            Integer.class,
+            true
+        );
+    }
+
+    @Test
+    public void testIsNumberWithLong() {
+        this.isNumberAndCheck(
+            Long.class,
+            true
+        );
+    }
+
+    @Test
+    public void testIsNumberWithExpressionNumberDouble() {
+        this.isNumberAndCheck(
+            ExpressionNumberKind.DOUBLE.zero()
+                .getClass(),
+            true
+        );
+    }
+
+    @Test
+    public void testIsNumberWithText() {
+        this.isNumberAndCheck(
+            ValueTypeName.TEXT,
+            false
+        );
+    }
+
+    @Test
+    public void testIsNumberWithTextStringBuilder() {
+        this.isNumberAndCheck(
+            ValueTypeName.fromClass(StringBuilder.class),
+            false
+        );
+    }
+
+    @Test
+    public void testIsNumberWithTextDash() {
+        this.isNumberAndCheck(
+            ValueTypeName.with("text-etc"),
+            false
+        );
+    }
+
+    private void isNumberAndCheck(final Class<?> type,
+                                  final boolean expected) {
+        this.isNumberAndCheck(
+            ValueTypeName.fromClass(type),
+            expected
+        );
+    }
+
+    private void isNumberAndCheck(final ValueTypeName name,
+                                  final boolean expected) {
+        this.checkEquals(
+            expected,
+            name.isNumber(),
+            name::toString
+        );
+    }
+    
     // isText...........................................................................................................
 
     @Test
