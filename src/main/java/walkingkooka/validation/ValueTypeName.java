@@ -236,6 +236,13 @@ final public class ValueTypeName implements PluginNameLike<ValueTypeName> {
     }
 
     /**
+     * Returns true if this {@link ValueTypeName} is a date value such as {@link #DATE_TIME}, but not {@link #DATE}.
+     */
+    public boolean isDateTime() {
+        return "date-time".equals(this.prefix());
+    }
+
+    /**
      * Returns true if this {@link ValueTypeName} is text such as {@link #NUMBER}.
      */
     public boolean isNumber() {

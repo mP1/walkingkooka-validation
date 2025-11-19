@@ -386,6 +386,57 @@ final public class ValueTypeNameTest implements PluginNameTesting<ValueTypeName>
         );
     }
 
+    // isDateTime.......................................................................................................
+
+    @Test
+    public void testIsDateTimeWithAny() {
+        this.isDateTimeAndCheck(
+            ValueTypeName.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateTimeWithDate() {
+        this.isDateTimeAndCheck(
+            ValueTypeName.DATE,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateTimeWithDateTime() {
+        this.isDateTimeAndCheck(
+            ValueTypeName.DATE_TIME,
+            true
+        );
+    }
+
+    @Test
+    public void testIsDateTimeWithNumber() {
+        this.isDateTimeAndCheck(
+            ValueTypeName.NUMBER,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateTimeWithText() {
+        this.isDateTimeAndCheck(
+            ValueTypeName.TEXT,
+            false
+        );
+    }
+
+    private void isDateTimeAndCheck(final ValueTypeName name,
+                                    final boolean expected) {
+        this.checkEquals(
+            expected,
+            name.isDateTime(),
+            name::toString
+        );
+    }
+
     // isNumber...........................................................................................................
 
     @Test
