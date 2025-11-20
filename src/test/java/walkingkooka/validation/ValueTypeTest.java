@@ -316,6 +316,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testIsAnyWithBoolean() {
+        this.isAnyAndCheck(
+            ValueType.BOOLEAN,
+            false
+        );
+    }
+
+    @Test
     public void testIsAnyWithNumber() {
         this.isAnyAndCheck(
             ValueType.NUMBER,
@@ -327,6 +335,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     public void testIsAnyWithText() {
         this.isAnyAndCheck(
             ValueType.TEXT,
+            false
+        );
+    }
+
+    @Test
+    public void testIsAnyWithUrl() {
+        this.isAnyAndCheck(
+            ValueType.BOOLEAN,
             false
         );
     }
@@ -390,6 +406,22 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         );
     }
 
+    @Test
+    public void testisBooleanWithTime() {
+        this.isBooleanAndCheck(
+            ValueType.TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testisBooleanWithUrl() {
+        this.isBooleanAndCheck(
+            ValueType.URL,
+            false
+        );
+    }
+
     private void isBooleanAndCheck(final ValueType name,
                                    final boolean expected) {
         this.checkEquals(
@@ -405,6 +437,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     public void testIsDateWithAny() {
         this.isDateAndCheck(
             ValueType.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateWithBoolean() {
+        this.isDateAndCheck(
+            ValueType.BOOLEAN,
             false
         );
     }
@@ -441,6 +481,22 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         );
     }
 
+    @Test
+    public void testIsDateWithTime() {
+        this.isDateAndCheck(
+            ValueType.TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateWithUrl() {
+        this.isDateAndCheck(
+            ValueType.URL,
+            false
+        );
+    }
+
     private void isDateAndCheck(final ValueType name,
                                 final boolean expected) {
         this.checkEquals(
@@ -456,6 +512,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     public void testIsDateTimeWithAny() {
         this.isDateTimeAndCheck(
             ValueType.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateTimeWithBoolean() {
+        this.isDateTimeAndCheck(
+            ValueType.BOOLEAN,
             false
         );
     }
@@ -492,6 +556,22 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         );
     }
 
+    @Test
+    public void testIsDateTimeWithTime() {
+        this.isDateTimeAndCheck(
+            ValueType.TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateTimeWithUrl() {
+        this.isDateTimeAndCheck(
+            ValueType.URL,
+            false
+        );
+    }
+
     private void isDateTimeAndCheck(final ValueType name,
                                     final boolean expected) {
         this.checkEquals(
@@ -502,6 +582,38 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     // isNumber...........................................................................................................
+
+    @Test
+    public void testIsNumberWithAny() {
+        this.isNumberAndCheck(
+            ValueType.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testIsNumberWithBoolean() {
+        this.isNumberAndCheck(
+            ValueType.BOOLEAN,
+            false
+        );
+    }
+
+    @Test
+    public void testIsNumberWithDate() {
+        this.isNumberAndCheck(
+            ValueType.DATE,
+            false
+        );
+    }
+
+    @Test
+    public void testIsNumberWithDateTime() {
+        this.isNumberAndCheck(
+            ValueType.DATE_TIME,
+            false
+        );
+    }
 
     @Test
     public void testIsNumberWithNumber() {
@@ -593,6 +705,22 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         );
     }
 
+    @Test
+    public void testIsNumberWithTime() {
+        this.isNumberAndCheck(
+            ValueType.TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testIsNumberWithUrl() {
+        this.isNumberAndCheck(
+            ValueType.URL,
+            false
+        );
+    }
+
     private void isNumberAndCheck(final Class<?> type,
                                   final boolean expected) {
         this.isNumberAndCheck(
@@ -611,6 +739,38 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
     
     // isText...........................................................................................................
+
+    @Test
+    public void testIsTextWithAny() {
+        this.isTextAndCheck(
+            ValueType.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testIsTextWithBoolean() {
+        this.isTextAndCheck(
+            ValueType.BOOLEAN,
+            false
+        );
+    }
+
+    @Test
+    public void testIsTextWithDate() {
+        this.isTextAndCheck(
+            ValueType.DATE,
+            false
+        );
+    }
+
+    @Test
+    public void testIsTextWithDateTime() {
+        this.isTextAndCheck(
+            ValueType.DATE_TIME,
+            false
+        );
+    }
 
     @Test
     public void testIsTextWithNumber() {
@@ -636,6 +796,22 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         );
     }
 
+    @Test
+    public void testIsTextWithTime() {
+        this.isTextAndCheck(
+            ValueType.TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testIsTextWithUrl() {
+        this.isTextAndCheck(
+            ValueType.URL,
+            false
+        );
+    }
+
     private void isTextAndCheck(final ValueType name,
                                 final boolean expected) {
         this.checkEquals(
@@ -651,6 +827,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     public void testIsTimeWithAny() {
         this.isTimeAndCheck(
             ValueType.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testIsTimeWithBoolean() {
+        this.isTimeAndCheck(
+            ValueType.BOOLEAN,
             false
         );
     }
@@ -692,6 +876,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         this.isTimeAndCheck(
             ValueType.TIME,
             true
+        );
+    }
+
+    @Test
+    public void testIsTimeWithUrl() {
+        this.isTimeAndCheck(
+            ValueType.URL,
+            false
         );
     }
 
