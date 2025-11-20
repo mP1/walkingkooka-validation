@@ -340,6 +340,65 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         );
     }
 
+    // isBoolean........................................................................................................
+
+    @Test
+    public void testisBooleanWithAny() {
+        this.isBooleanAndCheck(
+            ValueType.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testisBooleanWithBoolean() {
+        this.isBooleanAndCheck(
+            ValueType.BOOLEAN,
+            true
+        );
+    }
+
+    @Test
+    public void testisBooleanWithDate() {
+        this.isBooleanAndCheck(
+            ValueType.DATE,
+            false
+        );
+    }
+
+    @Test
+    public void testisBooleanWithDateTime() {
+        this.isBooleanAndCheck(
+            ValueType.DATE_TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testisBooleanWithNumber() {
+        this.isBooleanAndCheck(
+            ValueType.NUMBER,
+            false
+        );
+    }
+
+    @Test
+    public void testisBooleanWithText() {
+        this.isBooleanAndCheck(
+            ValueType.TEXT,
+            false
+        );
+    }
+
+    private void isBooleanAndCheck(final ValueType name,
+                                   final boolean expected) {
+        this.checkEquals(
+            expected,
+            name.isBoolean(),
+            name::toString
+        );
+    }
+
     // isDate...........................................................................................................
 
     @Test
