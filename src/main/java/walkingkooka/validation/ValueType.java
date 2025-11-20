@@ -257,17 +257,17 @@ final public class ValueType implements PluginNameLike<ValueType> {
     }
 
     /**
-     * Returns true if this {@link ValueType} is text such as {@link #TIME}.
-     */
-    public boolean isTime() {
-        return TIME_STRING.equals(this.prefix());
-    }
-
-    /**
      * Returns true if this {@link ValueType} is text such as {@link #TEXT}.
      */
     public boolean isText() {
         return TEXT_STRING.equals(this.prefix());
+    }
+
+    /**
+     * Returns true if this {@link ValueType} is text such as {@link #TIME}.
+     */
+    public boolean isTime() {
+        return TIME_STRING.equals(this.prefix());
     }
 
     private String prefix() {
