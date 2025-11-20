@@ -253,7 +253,8 @@ final public class ValueType implements PluginNameLike<ValueType> {
      * Returns true if this {@link ValueType} is text such as {@link #NUMBER}.
      */
     public boolean isNumber() {
-        return NUMBER_STRING.equals(this.prefix());
+        final String prefix = this.prefix();
+        return NUMBER_STRING.equals(prefix) || WHOLE_NUMBER_STRING.equals(prefix);
     }
 
     /**
