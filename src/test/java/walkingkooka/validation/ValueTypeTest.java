@@ -703,6 +703,73 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
             name::toString
         );
     }
+
+    // isUrl............................................................................................................
+
+    @Test
+    public void testIsUrlWithAny() {
+        this.isUrlAndCheck(
+            ValueType.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testIsUrlWithDate() {
+        this.isUrlAndCheck(
+            ValueType.DATE,
+            false
+        );
+    }
+
+    @Test
+    public void testIsUrlWithDateTime() {
+        this.isUrlAndCheck(
+            ValueType.DATE_TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testIsUrlWithNumber() {
+        this.isUrlAndCheck(
+            ValueType.NUMBER,
+            false
+        );
+    }
+
+    @Test
+    public void testIsUrlWithText() {
+        this.isUrlAndCheck(
+            ValueType.TEXT,
+            false
+        );
+    }
+
+    @Test
+    public void testIsUrlWithTime() {
+        this.isUrlAndCheck(
+            ValueType.TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testIsUrlWithUrl() {
+        this.isUrlAndCheck(
+            ValueType.URL,
+            true
+        );
+    }
+
+    private void isUrlAndCheck(final ValueType name,
+                               final boolean expected) {
+        this.checkEquals(
+            expected,
+            name.isUrl(),
+            name::toString
+        );
+    }
     
     // json.............................................................................................................
 

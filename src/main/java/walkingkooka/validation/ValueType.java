@@ -270,6 +270,13 @@ final public class ValueType implements PluginNameLike<ValueType> {
         return TIME_STRING.equals(this.prefix());
     }
 
+    /**
+     * Returns true if this {@link ValueType} is text such as {@link #URL}.
+     */
+    public boolean isUrl() {
+        return URL_STRING.equals(this.prefix());
+    }
+
     private String prefix() {
         final String name = this.name;
 
