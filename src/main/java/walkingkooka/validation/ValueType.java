@@ -250,6 +250,13 @@ final public class ValueType implements PluginNameLike<ValueType> {
     }
 
     /**
+     * Returns true if this {@link ValueType} is a {@link walkingkooka.net.email.EmailAddress}.
+     */
+    public boolean isEmail() {
+        return EMAIL_STRING.equals(this.prefix());
+    }
+
+    /**
      * Returns true if this {@link ValueType} is text such as {@link #NUMBER}.
      */
     public boolean isNumber() {

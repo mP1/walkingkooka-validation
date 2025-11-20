@@ -324,6 +324,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testIsAnyWithEmail() {
+        this.isAnyAndCheck(
+            ValueType.EMAIL,
+            false
+        );
+    }
+
+    @Test
     public void testIsAnyWithNumber() {
         this.isAnyAndCheck(
             ValueType.NUMBER,
@@ -386,6 +394,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     public void testisBooleanWithDateTime() {
         this.isBooleanAndCheck(
             ValueType.DATE_TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testisBooleanWithEmail() {
+        this.isBooleanAndCheck(
+            ValueType.EMAIL,
             false
         );
     }
@@ -466,6 +482,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testIsDateWithEmail() {
+        this.isDateAndCheck(
+            ValueType.EMAIL,
+            false
+        );
+    }
+
+    @Test
     public void testIsDateWithNumber() {
         this.isDateAndCheck(
             ValueType.NUMBER,
@@ -541,6 +565,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testIsDateTimeWithEmail() {
+        this.isDateTimeAndCheck(
+            ValueType.EMAIL,
+            false
+        );
+    }
+
+    @Test
     public void testIsDateTimeWithNumber() {
         this.isDateTimeAndCheck(
             ValueType.NUMBER,
@@ -581,6 +613,73 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         );
     }
 
+    // isEmail........................................................................................................
+
+    @Test
+    public void testisEmailWithAny() {
+        this.isEmailAndCheck(
+            ValueType.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testisEmailWithBoolean() {
+        this.isEmailAndCheck(
+            ValueType.BOOLEAN,
+            false
+        );
+    }
+
+    @Test
+    public void testisEmailWithDate() {
+        this.isEmailAndCheck(
+            ValueType.DATE,
+            false
+        );
+    }
+
+    @Test
+    public void testisEmailWithDateTime() {
+        this.isEmailAndCheck(
+            ValueType.DATE_TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testisEmailWithEmail() {
+        this.isEmailAndCheck(
+            ValueType.EMAIL,
+            true
+        );
+    }
+
+    @Test
+    public void testisEmailWithNumber() {
+        this.isEmailAndCheck(
+            ValueType.NUMBER,
+            false
+        );
+    }
+
+    @Test
+    public void testisEmailWithText() {
+        this.isEmailAndCheck(
+            ValueType.TEXT,
+            false
+        );
+    }
+
+    private void isEmailAndCheck(final ValueType name,
+                                   final boolean expected) {
+        this.checkEquals(
+            expected,
+            name.isEmail(),
+            name::toString
+        );
+    }
+
     // isNumber...........................................................................................................
 
     @Test
@@ -611,6 +710,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     public void testIsNumberWithDateTime() {
         this.isNumberAndCheck(
             ValueType.DATE_TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testIsNumberWithEmail() {
+        this.isNumberAndCheck(
+            ValueType.EMAIL,
             false
         );
     }
@@ -781,6 +888,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testIsTextWithEmail() {
+        this.isTextAndCheck(
+            ValueType.EMAIL,
+            false
+        );
+    }
+
+    @Test
     public void testIsTextWithNumber() {
         this.isTextAndCheck(
             ValueType.NUMBER,
@@ -859,6 +974,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     public void testIsTimeWithDateTime() {
         this.isTimeAndCheck(
             ValueType.DATE_TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testIsTimeWithEmail() {
+        this.isTimeAndCheck(
+            ValueType.EMAIL,
             false
         );
     }
@@ -970,7 +1093,7 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
             name::toString
         );
     }
-    
+
     // json.............................................................................................................
 
     @Test
