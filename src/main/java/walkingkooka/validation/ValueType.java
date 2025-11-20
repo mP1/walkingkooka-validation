@@ -72,10 +72,14 @@ final public class ValueType implements PluginNameLike<ValueType> {
     public final static String DATE_TIME_STRING = "date-time";
 
     public final static ValueType DATE_TIME = new ValueType(DATE_TIME_STRING);
-
+    
     public final static String EMAIL_STRING = "email";
 
     public final static ValueType EMAIL = new ValueType(EMAIL_STRING);
+
+    public final static String ERROR_STRING = "error";
+
+    public final static ValueType ERROR = new ValueType(ERROR_STRING);
 
     public final static String NUMBER_STRING = "number";
 
@@ -175,6 +179,9 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case EMAIL_STRING:
                 valueType = EMAIL;
                 break;
+            case ERROR_STRING:
+                valueType = ERROR;
+                break;
             case NUMBER_STRING:
                 valueType = NUMBER;
                 break;
@@ -254,6 +261,13 @@ final public class ValueType implements PluginNameLike<ValueType> {
      */
     public boolean isEmail() {
         return EMAIL_STRING.equals(this.prefix());
+    }
+
+    /**
+     * Returns true if this {@link ValueType}.
+     */
+    public boolean isError() {
+        return ERROR_STRING.equals(this.prefix());
     }
 
     /**
