@@ -570,6 +570,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testIsNumberWithWholeNumber() {
+        this.isNumberAndCheck(
+            ValueType.WHOLE_NUMBER,
+            true
+        );
+    }
+
+    @Test
     public void testIsNumberWithText() {
         this.isNumberAndCheck(
             ValueType.TEXT,
