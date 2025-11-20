@@ -229,7 +229,7 @@ final public class ValueType implements PluginNameLike<ValueType> {
     }
 
     /**
-     * Returns true if this {@link ValueType} is a date value such as {@link #DATE}, but not {@link #DATE_TIME}.
+     * Returns true if this {@link ValueType} is a boolean value like {@link #BOOLEAN}
      */
     public boolean isBoolean() {
         return BOOLEAN_STRING.equals(this.prefix());
