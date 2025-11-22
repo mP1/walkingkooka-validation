@@ -232,7 +232,7 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     public void testFromClassNameWithJsonArray() {
         this.fromClassNameAndCheck(
             JsonArray.class,
-            ValueType.JSON
+            ValueType.JSON_ARRAY
         );
     }
 
@@ -240,7 +240,7 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     public void testFromClassNameWithJsonBoolean() {
         this.fromClassNameAndCheck(
             JsonBoolean.class,
-            ValueType.JSON
+            ValueType.JSON_BOOLEAN
         );
     }
 
@@ -248,7 +248,15 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     public void testFromClassNameWithJsonNull() {
         this.fromClassNameAndCheck(
             JsonNull.class,
-            ValueType.JSON
+            ValueType.JSON_NULL
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithJsonNode() {
+        this.fromClassNameAndCheck(
+            JsonNode.class,
+            ValueType.JSON_NODE
         );
     }
 
@@ -256,7 +264,7 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     public void testFromClassNameWithJsonNumber() {
         this.fromClassNameAndCheck(
             JsonNumber.class,
-            ValueType.JSON
+            ValueType.JSON_NUMBER
         );
     }
 
@@ -264,7 +272,7 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     public void testFromClassNameWithJsonObject() {
         this.fromClassNameAndCheck(
             JsonObject.class,
-            ValueType.JSON
+            ValueType.JSON_OBJECT
         );
     }
 
@@ -272,7 +280,7 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     public void testFromClassNameWithJsonString() {
         this.fromClassNameAndCheck(
             JsonString.class,
-            ValueType.JSON
+            ValueType.JSON_STRING
         );
     }
 
@@ -900,9 +908,57 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
-    public void testisJsonWithJson() {
+    public void testisJsonWithJsonNode() {
         this.isJsonAndCheck(
-            ValueType.JSON,
+            ValueType.JSON_NODE,
+            true
+        );
+    }
+
+    @Test
+    public void testisJsonWithJsonArray() {
+        this.isJsonAndCheck(
+            ValueType.JSON_ARRAY,
+            true
+        );
+    }
+
+    @Test
+    public void testisJsonWithJsonBoolean() {
+        this.isJsonAndCheck(
+            ValueType.JSON_BOOLEAN,
+            true
+        );
+    }
+
+    @Test
+    public void testisJsonWithJsonNull() {
+        this.isJsonAndCheck(
+            ValueType.JSON_NULL,
+            true
+        );
+    }
+
+    @Test
+    public void testisJsonWithJsonNumber() {
+        this.isJsonAndCheck(
+            ValueType.JSON_NUMBER,
+            true
+        );
+    }
+
+    @Test
+    public void testisJsonWithJsonObject() {
+        this.isJsonAndCheck(
+            ValueType.JSON_OBJECT,
+            true
+        );
+    }
+
+    @Test
+    public void testisJsonWithJsonString() {
+        this.isJsonAndCheck(
+            ValueType.JSON_STRING,
             true
         );
     }
