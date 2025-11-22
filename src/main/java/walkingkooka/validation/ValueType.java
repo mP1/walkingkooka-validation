@@ -142,6 +142,7 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case "java.lang.Boolean":
                 valueType = BOOLEAN;
                 break;
+            case "walkingkooka.net.Url":
             case "walkingkooka.net.AbsoluteUrl":
                 valueType = URL;
                 break;
