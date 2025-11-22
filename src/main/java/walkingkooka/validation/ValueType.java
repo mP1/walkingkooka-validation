@@ -107,6 +107,10 @@ final public class ValueType implements PluginNameLike<ValueType> {
 
     public final static ValueType JSON_STRING = new ValueType(JSON_STRING_STRING);
 
+    public final static String LOCALE_STRING = "locale";
+
+    public final static ValueType LOCALE = new ValueType(LOCALE_STRING);
+    
     public final static String NUMBER_STRING = "number";
 
     public final static ValueType NUMBER = new ValueType(NUMBER_STRING);
@@ -160,6 +164,9 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case "java.math.BigDecimal":
             case "java.math.BigInteger":
                 valueType = with("number(" + classSimpleName(klass) + ")");
+                break;
+            case "java.util.Locale":
+                valueType = LOCALE;
                 break;
             case "java.lang.String":
                 valueType = TEXT;
@@ -261,6 +268,9 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case JSON_STRING_STRING:
                 valueType = JSON_STRING;
                 break;
+            case LOCALE_STRING:
+                valueType = LOCALE;
+                break;
             case NUMBER_STRING:
                 valueType = NUMBER;
                 break;
@@ -356,6 +366,13 @@ final public class ValueType implements PluginNameLike<ValueType> {
         return JSON_NODE_STRING.equals(this.prefix());
     }
 
+    /**
+     * Returns true if this {@link ValueType} is a {@link Locale}.
+     */
+    public boolean isLocale() {
+        return LOCALE_STRING.equals(this.prefix());
+    }
+    
     /**
      * Returns true if this {@link ValueType} is text such as {@link #NUMBER}.
      */
