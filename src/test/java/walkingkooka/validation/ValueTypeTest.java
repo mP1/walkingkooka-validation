@@ -987,6 +987,113 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
             name::toString
         );
     }
+
+    // isLocale...........................................................................................................
+
+    @Test
+    public void testIsLocaleWithAny() {
+        this.isLocaleAndCheck(
+            ValueType.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testIsLocaleWithBoolean() {
+        this.isLocaleAndCheck(
+            ValueType.BOOLEAN,
+            false
+        );
+    }
+
+    @Test
+    public void testIsLocaleWithDate() {
+        this.isLocaleAndCheck(
+            ValueType.DATE,
+            false
+        );
+    }
+
+    @Test
+    public void testIsLocaleWithDateTime() {
+        this.isLocaleAndCheck(
+            ValueType.DATE_TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testIsLocaleWithEmail() {
+        this.isLocaleAndCheck(
+            ValueType.EMAIL,
+            false
+        );
+    }
+
+    @Test
+    public void testIsLocaleWithError() {
+        this.isLocaleAndCheck(
+            ValueType.ERROR,
+            false
+        );
+    }
+
+    @Test
+    public void testIsLocaleWithLocale() {
+        this.isLocaleAndCheck(
+            ValueType.LOCALE,
+            true
+        );
+    }
+
+    @Test
+    public void testIsLocaleWithNumber() {
+        this.isLocaleAndCheck(
+            Number.class,
+            false
+        );
+    }
+
+    @Test
+    public void testIsLocaleWithText() {
+        this.isLocaleAndCheck(
+            ValueType.TEXT,
+            false
+        );
+    }
+
+    @Test
+    public void testIsLocaleWithTime() {
+        this.isLocaleAndCheck(
+            ValueType.TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testIsLocaleWithUrl() {
+        this.isLocaleAndCheck(
+            ValueType.URL,
+            false
+        );
+    }
+
+    private void isLocaleAndCheck(final Class<?> type,
+                                  final boolean expected) {
+        this.isLocaleAndCheck(
+            ValueType.fromClassName(type.getName()),
+            expected
+        );
+    }
+
+    private void isLocaleAndCheck(final ValueType name,
+                                  final boolean expected) {
+        this.checkEquals(
+            expected,
+            name.isLocale(),
+            name::toString
+        );
+    }
     
     // isNumber...........................................................................................................
 
