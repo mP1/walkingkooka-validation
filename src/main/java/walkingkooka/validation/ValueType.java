@@ -18,12 +18,10 @@
 package walkingkooka.validation;
 
 import walkingkooka.Cast;
-import walkingkooka.math.Maths;
 import walkingkooka.naming.Name;
 import walkingkooka.net.http.server.hateos.HateosResourceName;
 import walkingkooka.plugin.PluginName;
 import walkingkooka.plugin.PluginNameLike;
-import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -101,12 +99,13 @@ final public class ValueType implements PluginNameLike<ValueType> {
 
     public final static ValueType WHOLE_NUMBER = new ValueType(WHOLE_NUMBER_STRING);
 
-    public static ValueType fromClass(final Class<?> klass) {
-        Objects.requireNonNull(klass, "class");
-
+    /**
+     * Gets a {@link ValueType} for the given {@link Class#getName()}.
+     */
+    public static ValueType fromClassName(final String klass) {
         ValueType valueType;
 
-        switch (klass.getName()) {
+        switch (klass) {
             case "java.lang.Boolean":
                 valueType = BOOLEAN;
                 break;
@@ -116,8 +115,30 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case "walkingkooka.net.email.EmailAddress":
                 valueType = EMAIL;
                 break;
+            case "walkingkooka.tree.expression.ExpressionNumber":
+            case "walkingkooka.tree.expression.ExpressionNumberBigDecimal":
+            case "walkingkooka.tree.expression.ExpressionNumberDouble":
+                valueType = NUMBER;
+                break;
+            case "java.lang.Object":
+                valueType = ANY;
+                break;
+            case "java.lang.Byte":
+            case "java.lang.Short":
+            case "java.lang.Integer":
+            case "java.lang.Long":
+            case "java.lang.Float":
+            case "java.lang.Double":
+            case "java.math.BigDecimal":
+            case "java.math.BigInteger":
+                valueType = with("number(" + classSimpleName(klass) + ")");
+                break;
             case "java.lang.String":
                 valueType = TEXT;
+                break;
+            case "java.lang.StringBuffer":
+            case "java.lang.StringBuilder":
+                valueType = with("text(" + classSimpleName(klass) + ")");
                 break;
             case "java.time.LocalDate":
                 valueType = DATE;
@@ -129,30 +150,18 @@ final public class ValueType implements PluginNameLike<ValueType> {
                 valueType = TIME;
                 break;
             default:
-                if (klass == StringBuilder.class || klass == StringBuffer.class) {
-                    valueType = with("text(" + klass.getSimpleName() + ")");
-                } else {
-                    if (Maths.isNumberClass(klass)) {
-                        valueType = with("number(" + klass.getSimpleName() + ")");
-                    } else {
-                        if (ExpressionNumber.isClass(klass)) {
-                            valueType = NUMBER;
-                            break;
-                        } else {
-                            if (Object.class == klass) {
-                                valueType = ANY;
-                            } else {
-                                valueType = with(
-                                    klass.getName()
-                                );
-                            }
-                        }
-                        break;
-                    }
-                }
+                valueType = with(klass);
+                break;
         }
 
         return valueType;
+    }
+
+    private static String classSimpleName(final String className) {
+        final int index = className.lastIndexOf('.');
+        return -1 == index ?
+            className :
+            className.substring(index + 1);
     }
 
     /**
