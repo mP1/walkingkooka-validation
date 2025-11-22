@@ -1469,6 +1469,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     // isUrl............................................................................................................
 
     @Test
+    public void testIsUrlWithAbsoluteUrl() {
+        this.isUrlAndCheck(
+            AbsoluteUrl.class,
+            true
+        );
+    }
+
+    @Test
     public void testIsUrlWithAny() {
         this.isUrlAndCheck(
             ValueType.ANY,
@@ -1529,6 +1537,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         this.isUrlAndCheck(
             ValueType.URL,
             true
+        );
+    }
+
+    private void isUrlAndCheck(final Class<?> type,
+                               final boolean expected) {
+        this.isUrlAndCheck(
+            ValueType.fromClassName(type.getName()),
+            expected
         );
     }
 
