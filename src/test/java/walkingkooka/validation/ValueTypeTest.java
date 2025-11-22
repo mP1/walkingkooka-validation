@@ -60,229 +60,237 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         throw new UnsupportedOperationException();
     }
 
-    // fromClass........................................................................................................
+    // fromClassName....................................................................................................
 
     @Test
-    public void testFromClassWithNullFails() {
+    public void testFromClassNameWithNullFails() {
         assertThrows(
             NullPointerException.class,
-            () -> ValueType.fromClass(null)
+            () -> ValueType.fromClassName(null)
         );
     }
 
     @Test
-    public void testFromClassWithBooleanType() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithBooleanType() {
+        this.fromClassNameAndCheck(
             Boolean.TYPE,
             ValueType.BOOLEAN
         );
     }
 
     @Test
-    public void testFromClassWithBooleanClass() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithBooleanClass() {
+        this.fromClassNameAndCheck(
             Boolean.class,
             ValueType.BOOLEAN
         );
     }
 
     @Test
-    public void testFromClassWithLocalDate() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithLocalDate() {
+        this.fromClassNameAndCheck(
             LocalDate.class,
             ValueType.DATE
         );
     }
 
     @Test
-    public void testFromClassWithLocalDateTime() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithLocalDateTime() {
+        this.fromClassNameAndCheck(
             LocalDateTime.class,
             ValueType.DATE_TIME
         );
     }
 
     @Test
-    public void testFromClassWithLocalTime() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithLocalTime() {
+        this.fromClassNameAndCheck(
             LocalTime.class,
             ValueType.TIME
         );
     }
 
     @Test
-    public void testFromClassWithByteType() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithByteType() {
+        this.fromClassNameAndCheck(
             Byte.TYPE,
             ValueType.with("byte")
         );
     }
 
     @Test
-    public void testFromClassWithByteClass() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithByteClass() {
+        this.fromClassNameAndCheck(
             Byte.class,
             ValueType.with("number(Byte)")
         );
     }
 
     @Test
-    public void testFromClassWithShortType() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithShortType() {
+        this.fromClassNameAndCheck(
             Short.TYPE,
             ValueType.with("short")
         );
     }
 
     @Test
-    public void testFromClassWithShortClass() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithShortClass() {
+        this.fromClassNameAndCheck(
             Short.class,
             ValueType.with("number(Short)")
         );
     }
 
     @Test
-    public void testFromClassWithIntegerType() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithIntegerType() {
+        this.fromClassNameAndCheck(
             Integer.TYPE,
             ValueType.with("int")
         );
     }
 
     @Test
-    public void testFromClassWithIntegerClass() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithIntegerClass() {
+        this.fromClassNameAndCheck(
             Integer.class,
             ValueType.with("number(Integer)")
         );
     }
 
     @Test
-    public void testFromClassWithLongType() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithLongType() {
+        this.fromClassNameAndCheck(
             Long.TYPE,
             ValueType.with("long")
         );
     }
 
     @Test
-    public void testFromClassWithLongClass() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithLongClass() {
+        this.fromClassNameAndCheck(
             Long.class,
             ValueType.with("number(Long)")
         );
     }
 
     @Test
-    public void testFromClassWithFloatType() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithFloatType() {
+        this.fromClassNameAndCheck(
             Float.TYPE,
             ValueType.with("float")
         );
     }
 
     @Test
-    public void testFromClassWithFloatClass() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithFloatClass() {
+        this.fromClassNameAndCheck(
             Float.class,
             ValueType.with("number(Float)")
         );
     }
 
     @Test
-    public void testFromClassWithDoubleType() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithDoubleType() {
+        this.fromClassNameAndCheck(
             Double.TYPE,
             ValueType.with("double")
         );
     }
 
     @Test
-    public void testFromClassWithDoubleClass() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithDoubleClass() {
+        this.fromClassNameAndCheck(
             Double.class,
             ValueType.with("number(Double)")
         );
     }
 
     @Test
-    public void testFromClassWithBigDecimal() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithBigDecimal() {
+        this.fromClassNameAndCheck(
             BigDecimal.class,
             ValueType.with("number(BigDecimal)")
         );
     }
 
     @Test
-    public void testFromClassWithBigInteger() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithBigInteger() {
+        this.fromClassNameAndCheck(
             BigInteger.class,
             ValueType.with("number(BigInteger)")
         );
     }
 
     @Test
-    public void testFromClassWithString() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithString() {
+        this.fromClassNameAndCheck(
             String.class,
             ValueType.TEXT
         );
     }
 
     @Test
-    public void testFromClassWithStringBuffer() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithStringBuffer() {
+        this.fromClassNameAndCheck(
             StringBuffer.class,
             ValueType.with("text(StringBuffer)")
         );
     }
 
     @Test
-    public void testFromClassWithStringBuilder() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithStringBuilder() {
+        this.fromClassNameAndCheck(
             StringBuilder.class,
             ValueType.with("text(StringBuilder)")
         );
     }
 
     @Test
-    public void testFromClassWithEmailAddress() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithEmailAddress() {
+        this.fromClassNameAndCheck(
             EmailAddress.class,
             ValueType.EMAIL
         );
     }
 
     @Test
-    public void testFromClassWithAbsoluteUrl() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithAbsoluteUrl() {
+        this.fromClassNameAndCheck(
             AbsoluteUrl.class,
             ValueType.URL
         );
     }
 
     @Test
-    public void testFromClassWithVoid() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithVoid() {
+        this.fromClassNameAndCheck(
             Void.class,
             ValueType.with("java.lang.Void")
         );
     }
 
     @Test
-    public void testFromClassWithObject() {
-        this.fromClassAndCheck(
+    public void testFromClassNameWithObject() {
+        this.fromClassNameAndCheck(
             Object.class,
             ValueType.ANY
         );
     }
 
-    private void fromClassAndCheck(final Class<?> classs,
-                                   final ValueType expected) {
+    private void fromClassNameAndCheck(final Class<?> klass,
+                                       final ValueType expected) {
+        this.fromClassNameAndCheck(
+            klass.getName(),
+            expected
+        );
+    }
+
+    private void fromClassNameAndCheck(final String className,
+                                       final ValueType expected) {
         this.checkEquals(
             expected,
-            ValueType.fromClass(classs)
+            ValueType.fromClassName(className)
         );
     }
 
@@ -922,7 +930,7 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     @Test
     public void testIsNumberWithTextStringBuilder() {
         this.isNumberAndCheck(
-            ValueType.fromClass(StringBuilder.class),
+            ValueType.fromClassName(StringBuilder.class.getName()),
             false
         );
     }
@@ -954,7 +962,7 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     private void isNumberAndCheck(final Class<?> type,
                                   final boolean expected) {
         this.isNumberAndCheck(
-            ValueType.fromClass(type),
+            ValueType.fromClassName(type.getName()),
             expected
         );
     }
@@ -1037,7 +1045,7 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     @Test
     public void testIsTextWithTextStringBuilder() {
         this.isTextAndCheck(
-            ValueType.fromClass(StringBuilder.class),
+            ValueType.fromClassName(StringBuilder.class.getName()),
             true
         );
     }
