@@ -40,7 +40,13 @@ import walkingkooka.net.email.EmailAddress;
 import walkingkooka.plugin.PluginNameTesting;
 import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.ExpressionNumberKind;
+import walkingkooka.tree.json.JsonArray;
+import walkingkooka.tree.json.JsonBoolean;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.JsonNull;
+import walkingkooka.tree.json.JsonNumber;
+import walkingkooka.tree.json.JsonObject;
+import walkingkooka.tree.json.JsonString;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContexts;
 
@@ -219,6 +225,54 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         this.fromClassNameAndCheck(
             BigInteger.class,
             ValueType.with("number(BigInteger)")
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithJsonArray() {
+        this.fromClassNameAndCheck(
+            JsonArray.class,
+            ValueType.JSON
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithJsonBoolean() {
+        this.fromClassNameAndCheck(
+            JsonBoolean.class,
+            ValueType.JSON
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithJsonNull() {
+        this.fromClassNameAndCheck(
+            JsonNull.class,
+            ValueType.JSON
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithJsonNumber() {
+        this.fromClassNameAndCheck(
+            JsonNumber.class,
+            ValueType.JSON
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithJsonObject() {
+        this.fromClassNameAndCheck(
+            JsonObject.class,
+            ValueType.JSON
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithJsonString() {
+        this.fromClassNameAndCheck(
+            JsonString.class,
+            ValueType.JSON
         );
     }
 
@@ -791,6 +845,89 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         this.checkEquals(
             expected,
             name.isError(),
+            name::toString
+        );
+    }
+
+    // isJson........................................................................................................
+
+    @Test
+    public void testisJsonWithAny() {
+        this.isJsonAndCheck(
+            ValueType.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testisJsonWithBoolean() {
+        this.isJsonAndCheck(
+            ValueType.BOOLEAN,
+            false
+        );
+    }
+
+    @Test
+    public void testisJsonWithDate() {
+        this.isJsonAndCheck(
+            ValueType.DATE,
+            false
+        );
+    }
+
+    @Test
+    public void testisJsonWithDateTime() {
+        this.isJsonAndCheck(
+            ValueType.DATE_TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testisJsonWithEmail() {
+        this.isJsonAndCheck(
+            ValueType.EMAIL,
+            false
+        );
+    }
+
+    @Test
+    public void testisJsonWithError() {
+        this.isJsonAndCheck(
+            ValueType.ERROR,
+            false
+        );
+    }
+
+    @Test
+    public void testisJsonWithJson() {
+        this.isJsonAndCheck(
+            ValueType.JSON,
+            true
+        );
+    }
+
+    @Test
+    public void testisJsonWithNumber() {
+        this.isJsonAndCheck(
+            ValueType.NUMBER,
+            false
+        );
+    }
+
+    @Test
+    public void testisJsonWithText() {
+        this.isJsonAndCheck(
+            ValueType.TEXT,
+            false
+        );
+    }
+
+    private void isJsonAndCheck(final ValueType name,
+                                 final boolean expected) {
+        this.checkEquals(
+            expected,
+            name.isJson(),
             name::toString
         );
     }
