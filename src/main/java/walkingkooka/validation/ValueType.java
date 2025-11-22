@@ -79,9 +79,33 @@ final public class ValueType implements PluginNameLike<ValueType> {
 
     public final static ValueType ERROR = new ValueType(ERROR_STRING);
 
-    public final static String JSON_STRING = "json";
+    public final static String JSON_NODE_STRING = "json";
 
-    public final static ValueType JSON = new ValueType(JSON_STRING);
+    public final static ValueType JSON_NODE = new ValueType(JSON_NODE_STRING);
+
+    public final static String JSON_ARRAY_STRING = "json(array)";
+
+    public final static ValueType JSON_ARRAY = new ValueType(JSON_ARRAY_STRING);
+
+    public final static String JSON_BOOLEAN_STRING = "json(boolean)";
+
+    public final static ValueType JSON_BOOLEAN = new ValueType(JSON_BOOLEAN_STRING);
+    
+    public final static String JSON_NULL_STRING = "json(null)";
+
+    public final static ValueType JSON_NULL = new ValueType(JSON_NULL_STRING);
+
+    public final static String JSON_NUMBER_STRING = "json(number)";
+
+    public final static ValueType JSON_NUMBER = new ValueType(JSON_NUMBER_STRING);
+
+    public final static String JSON_OBJECT_STRING = "json(object)";
+
+    public final static ValueType JSON_OBJECT = new ValueType(JSON_OBJECT_STRING);
+
+    public final static String JSON_STRING_STRING = "json(string)";
+
+    public final static ValueType JSON_STRING = new ValueType(JSON_STRING_STRING);
 
     public final static String NUMBER_STRING = "number";
 
@@ -153,13 +177,26 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case "java.time.LocalTime":
                 valueType = TIME;
                 break;
+            case "walkingkooka.tree.json.JsonNode":
+                valueType = JSON_NODE;
+                break;
             case "walkingkooka.tree.json.JsonArray":
+                valueType = JSON_ARRAY;
+                break;
             case "walkingkooka.tree.json.JsonBoolean":
+                valueType = JSON_BOOLEAN;
+                break;
             case "walkingkooka.tree.json.JsonNull":
+                valueType = JSON_NULL;
+                break;
             case "walkingkooka.tree.json.JsonNumber":
+                valueType = JSON_NUMBER;
+                break;
             case "walkingkooka.tree.json.JsonObject":
+                valueType = JSON_OBJECT;
+                break;
             case "walkingkooka.tree.json.JsonString":
-                valueType = JSON;
+                valueType = JSON_STRING;
                 break;
             default:
                 valueType = with(klass);
@@ -203,8 +240,26 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case ERROR_STRING:
                 valueType = ERROR;
                 break;
-            case JSON_STRING:
-                valueType = JSON;
+            case JSON_NODE_STRING:
+                valueType = JSON_NODE;
+                break;
+            case JSON_ARRAY_STRING:
+                valueType = JSON_ARRAY;
+                break;
+            case JSON_BOOLEAN_STRING:
+                valueType = JSON_BOOLEAN;
+                break;
+            case JSON_NULL_STRING:
+                valueType = JSON_NULL;
+                break;
+            case JSON_NUMBER_STRING:
+                valueType = JSON_NUMBER;
+                break;
+            case JSON_OBJECT_STRING:
+                valueType = JSON_OBJECT;
+                break;
+            case JSON_STRING_STRING:
+                valueType = JSON_STRING;
                 break;
             case NUMBER_STRING:
                 valueType = NUMBER;
@@ -298,7 +353,7 @@ final public class ValueType implements PluginNameLike<ValueType> {
      * Returns true if this {@link ValueType}.
      */
     public boolean isJson() {
-        return JSON_STRING.equals(this.prefix());
+        return JSON_NODE_STRING.equals(this.prefix());
     }
 
     /**
