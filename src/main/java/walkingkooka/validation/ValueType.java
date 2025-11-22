@@ -79,6 +79,10 @@ final public class ValueType implements PluginNameLike<ValueType> {
 
     public final static ValueType ERROR = new ValueType(ERROR_STRING);
 
+    public final static String JSON_STRING = "json";
+
+    public final static ValueType JSON = new ValueType(JSON_STRING);
+
     public final static String NUMBER_STRING = "number";
 
     public final static ValueType NUMBER = new ValueType(NUMBER_STRING);
@@ -149,6 +153,14 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case "java.time.LocalTime":
                 valueType = TIME;
                 break;
+            case "walkingkooka.tree.json.JsonArray":
+            case "walkingkooka.tree.json.JsonBoolean":
+            case "walkingkooka.tree.json.JsonNull":
+            case "walkingkooka.tree.json.JsonNumber":
+            case "walkingkooka.tree.json.JsonObject":
+            case "walkingkooka.tree.json.JsonString":
+                valueType = JSON;
+                break;
             default:
                 valueType = with(klass);
                 break;
@@ -190,6 +202,9 @@ final public class ValueType implements PluginNameLike<ValueType> {
                 break;
             case ERROR_STRING:
                 valueType = ERROR;
+                break;
+            case JSON_STRING:
+                valueType = JSON;
                 break;
             case NUMBER_STRING:
                 valueType = NUMBER;
@@ -277,6 +292,13 @@ final public class ValueType implements PluginNameLike<ValueType> {
      */
     public boolean isError() {
         return ERROR_STRING.equals(this.prefix());
+    }
+
+    /**
+     * Returns true if this {@link ValueType}.
+     */
+    public boolean isJson() {
+        return JSON_STRING.equals(this.prefix());
     }
 
     /**
