@@ -56,6 +56,10 @@ final public class ValueType implements PluginNameLike<ValueType> {
 
     // constants........................................................................................................
 
+    public final static String ABSOLUTE_URL_STRING = "url(absolute)";
+
+    public final static ValueType ABSOLUTE_URL = new ValueType(ABSOLUTE_URL_STRING);
+
     public final static String ANY_STRING = "*";
 
     public final static ValueType ANY = new ValueType(ANY_STRING);
@@ -63,6 +67,10 @@ final public class ValueType implements PluginNameLike<ValueType> {
     public final static String BOOLEAN_STRING = "boolean";
 
     public final static ValueType BOOLEAN = new ValueType(BOOLEAN_STRING);
+
+    public final static String DATA_URL_STRING = "url(data)";
+
+    public final static ValueType DATA_URL = new ValueType(DATA_URL_STRING);
 
     public final static String DATE_STRING = "date";
 
@@ -111,10 +119,18 @@ final public class ValueType implements PluginNameLike<ValueType> {
     public final static String LOCALE_STRING = "locale";
 
     public final static ValueType LOCALE = new ValueType(LOCALE_STRING);
-    
+
+    public final static String MAIL_TO_URL_STRING = "url(mail-to)";
+
+    public final static ValueType MAIL_TO_URL = new ValueType(MAIL_TO_URL_STRING);
+
     public final static String NUMBER_STRING = "number";
 
     public final static ValueType NUMBER = new ValueType(NUMBER_STRING);
+
+    public final static String RELATIVE_URL_STRING = "url(relative)";
+
+    public final static ValueType RELATIVE_URL = new ValueType(RELATIVE_URL_STRING);
 
     public final static String TEXT_STRING = "text";
 
@@ -142,12 +158,23 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case "java.lang.Boolean":
                 valueType = BOOLEAN;
                 break;
-            case "walkingkooka.net.Url":
-            case "walkingkooka.net.AbsoluteUrl":
-                valueType = URL;
-                break;
             case "walkingkooka.net.email.EmailAddress":
                 valueType = EMAIL;
+                break;
+            case "walkingkooka.net.Url":
+                valueType = URL;
+                break;
+            case "walkingkooka.net.AbsoluteUrl":
+                valueType = ABSOLUTE_URL;
+                break;
+            case "walkingkooka.net.DataUrl":
+                valueType = DATA_URL;
+                break;
+            case "walkingkooka.net.MailToUrl":
+                valueType = MAIL_TO_URL;
+                break;
+            case "walkingkooka.net.RelativeUrl":
+                valueType = RELATIVE_URL;
                 break;
             case "walkingkooka.tree.expression.ExpressionNumber":
             case "walkingkooka.tree.expression.ExpressionNumberBigDecimal":

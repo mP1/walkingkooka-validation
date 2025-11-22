@@ -36,6 +36,9 @@ package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.net.AbsoluteUrl;
+import walkingkooka.net.DataUrl;
+import walkingkooka.net.MailToUrl;
+import walkingkooka.net.RelativeUrl;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.plugin.PluginNameTesting;
 import walkingkooka.tree.expression.ExpressionNumber;
@@ -320,7 +323,7 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     public void testFromClassNameWithAbsoluteUrl() {
         this.fromClassNameAndCheck(
             AbsoluteUrl.class,
-            ValueType.URL
+            ValueType.ABSOLUTE_URL
         );
     }
 
@@ -1493,6 +1496,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testIsUrlWithDataUrl() {
+        this.isUrlAndCheck(
+            DataUrl.class,
+            true
+        );
+    }
+
+    @Test
     public void testIsUrlWithDateTime() {
         this.isUrlAndCheck(
             ValueType.DATE_TIME,
@@ -1509,10 +1520,26 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testIsUrlWithMailToUrl() {
+        this.isUrlAndCheck(
+            MailToUrl.class,
+            true
+        );
+    }
+
+    @Test
     public void testIsUrlWithNumber() {
         this.isUrlAndCheck(
             ValueType.NUMBER,
             false
+        );
+    }
+
+    @Test
+    public void testIsUrlWithRelativeUrl() {
+        this.isUrlAndCheck(
+            RelativeUrl.class,
+            true
         );
     }
 
