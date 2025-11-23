@@ -35,6 +35,7 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.DataUrl;
 import walkingkooka.net.MailToUrl;
@@ -92,6 +93,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         this.fromClassNameAndCheck(
             Boolean.class,
             ValueType.BOOLEAN
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithDateTimeSymbols() {
+        this.fromClassNameAndCheck(
+            DateTimeSymbols.class,
+            ValueType.DATE_TIME_SYMBOLS
         );
     }
 
@@ -718,6 +727,81 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         );
     }
 
+    // isDateTimeSymbols................................................................................................
+
+    @Test
+    public void testIsDateTimeSymbolsWithAny() {
+        this.isDateTimeSymbolsAndCheck(
+            ValueType.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateTimeSymbolsWithBoolean() {
+        this.isDateTimeSymbolsAndCheck(
+            ValueType.BOOLEAN,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateTimeSymbolsWithDateTimeSymbols() {
+        this.isDateTimeSymbolsAndCheck(
+            ValueType.DATE_TIME_SYMBOLS,
+            true
+        );
+    }
+
+    @Test
+    public void testIsDateTimeSymbolsWithEmail() {
+        this.isDateTimeSymbolsAndCheck(
+            ValueType.EMAIL,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateTimeSymbolsWithError() {
+        this.isDateTimeSymbolsAndCheck(
+            ValueType.ERROR,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateTimeSymbolsWithNumber() {
+        this.isDateTimeSymbolsAndCheck(
+            ValueType.NUMBER,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateTimeSymbolsWithText() {
+        this.isDateTimeSymbolsAndCheck(
+            ValueType.TEXT,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDateTimeSymbolsWithUrl() {
+        this.isDateTimeSymbolsAndCheck(
+            ValueType.BOOLEAN,
+            false
+        );
+    }
+
+    private void isDateTimeSymbolsAndCheck(final ValueType name,
+                                           final boolean expected) {
+        this.checkEquals(
+            expected,
+            name.isDateTimeSymbols(),
+            name::toString
+        );
+    }
+    
     // isEmail........................................................................................................
 
     @Test
