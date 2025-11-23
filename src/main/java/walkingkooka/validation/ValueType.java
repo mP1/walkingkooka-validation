@@ -85,6 +85,10 @@ final public class ValueType implements PluginNameLike<ValueType> {
 
     public final static ValueType DATE_TIME_SYMBOLS = new ValueType(DATE_TIME_SYMBOLS_STRING);
 
+    public final static String DECIMAL_NUMBER_SYMBOLS_STRING = "decimal-number-symbols";
+
+    public final static ValueType DECIMAL_NUMBER_SYMBOLS = new ValueType(DECIMAL_NUMBER_SYMBOLS_STRING);
+
     public final static String EMAIL_STRING = "email";
 
     public final static ValueType EMAIL = new ValueType(EMAIL_STRING);
@@ -184,6 +188,9 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case "walkingkooka.datetime.DateTimeSymbols":
                 valueType = DATE_TIME_SYMBOLS;
                 break;
+            case "walkingkooka.math.DecimalNumberSymbols":
+                valueType = DECIMAL_NUMBER_SYMBOLS;
+                break;
             case "walkingkooka.tree.expression.ExpressionNumber":
             case "walkingkooka.tree.expression.ExpressionNumberBigDecimal":
             case "walkingkooka.tree.expression.ExpressionNumberDouble":
@@ -280,6 +287,9 @@ final public class ValueType implements PluginNameLike<ValueType> {
                 break;
             case DATE_TIME_SYMBOLS_STRING:
                 valueType = DATE_TIME_SYMBOLS;
+                break;
+            case DECIMAL_NUMBER_SYMBOLS_STRING:
+                valueType = DECIMAL_NUMBER_SYMBOLS;
                 break;
             case EMAIL_STRING:
                 valueType = EMAIL;
@@ -390,6 +400,13 @@ final public class ValueType implements PluginNameLike<ValueType> {
      */
     public boolean isDateTimeSymbols() {
         return DATE_TIME_SYMBOLS_STRING.equals(this.prefix());
+    }
+
+    /**
+     * Returns true if this {@link ValueType} is {@link walkingkooka.math.DecimalNumberSymbols}
+     */
+    public boolean isDecimalNumberSymbols() {
+        return DECIMAL_NUMBER_SYMBOLS_STRING.equals(this.prefix());
     }
 
     /**

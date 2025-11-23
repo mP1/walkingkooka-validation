@@ -36,6 +36,7 @@ package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.datetime.DateTimeSymbols;
+import walkingkooka.math.DecimalNumberSymbols;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.DataUrl;
 import walkingkooka.net.MailToUrl;
@@ -101,6 +102,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         this.fromClassNameAndCheck(
             DateTimeSymbols.class,
             ValueType.DATE_TIME_SYMBOLS
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithDecimalNumberSymbols() {
+        this.fromClassNameAndCheck(
+            DecimalNumberSymbols.class,
+            ValueType.DECIMAL_NUMBER_SYMBOLS
         );
     }
 
@@ -754,6 +763,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testIsDateTimeSymbolsWithDecimalNumberSymbols() {
+        this.isDateTimeSymbolsAndCheck(
+            ValueType.DECIMAL_NUMBER_SYMBOLS,
+            false
+        );
+    }
+
+    @Test
     public void testIsDateTimeSymbolsWithEmail() {
         this.isDateTimeSymbolsAndCheck(
             ValueType.EMAIL,
@@ -798,6 +815,89 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         this.checkEquals(
             expected,
             name.isDateTimeSymbols(),
+            name::toString
+        );
+    }
+
+    // isDecimalNumberSymbols...........................................................................................
+
+    @Test
+    public void testIsDecimalNumberSymbolsWithAny() {
+        this.isDecimalNumberSymbolsAndCheck(
+            ValueType.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDecimalNumberSymbolsWithBoolean() {
+        this.isDecimalNumberSymbolsAndCheck(
+            ValueType.BOOLEAN,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDecimalNumberSymbolsWithDateTimeSymbols() {
+        this.isDecimalNumberSymbolsAndCheck(
+            ValueType.DATE_TIME_SYMBOLS,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDecimalNumberSymbolsWithDecimalNumberSymbols() {
+        this.isDecimalNumberSymbolsAndCheck(
+            ValueType.DECIMAL_NUMBER_SYMBOLS,
+            true
+        );
+    }
+
+    @Test
+    public void testIsDecimalNumberSymbolsWithEmail() {
+        this.isDecimalNumberSymbolsAndCheck(
+            ValueType.EMAIL,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDecimalNumberSymbolsWithError() {
+        this.isDecimalNumberSymbolsAndCheck(
+            ValueType.ERROR,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDecimalNumberSymbolsWithNumber() {
+        this.isDecimalNumberSymbolsAndCheck(
+            ValueType.NUMBER,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDecimalNumberSymbolsWithText() {
+        this.isDecimalNumberSymbolsAndCheck(
+            ValueType.TEXT,
+            false
+        );
+    }
+
+    @Test
+    public void testIsDecimalNumberSymbolsWithUrl() {
+        this.isDecimalNumberSymbolsAndCheck(
+            ValueType.BOOLEAN,
+            false
+        );
+    }
+
+    private void isDecimalNumberSymbolsAndCheck(final ValueType name,
+                                           final boolean expected) {
+        this.checkEquals(
+            expected,
+            name.isDecimalNumberSymbols(),
             name::toString
         );
     }
