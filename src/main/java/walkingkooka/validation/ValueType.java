@@ -18,6 +18,7 @@
 package walkingkooka.validation;
 
 import walkingkooka.Cast;
+import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.naming.Name;
 import walkingkooka.net.http.server.hateos.HateosResourceName;
 import walkingkooka.plugin.PluginName;
@@ -79,7 +80,11 @@ final public class ValueType implements PluginNameLike<ValueType> {
     public final static String DATE_TIME_STRING = "date-time";
 
     public final static ValueType DATE_TIME = new ValueType(DATE_TIME_STRING);
-    
+
+    public final static String DATE_TIME_SYMBOLS_STRING = "date-time-symbols";
+
+    public final static ValueType DATE_TIME_SYMBOLS = new ValueType(DATE_TIME_SYMBOLS_STRING);
+
     public final static String EMAIL_STRING = "email";
 
     public final static ValueType EMAIL = new ValueType(EMAIL_STRING);
@@ -176,6 +181,9 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case "walkingkooka.net.RelativeUrl":
                 valueType = RELATIVE_URL;
                 break;
+            case "walkingkooka.datetime.DateTimeSymbols":
+                valueType = DATE_TIME_SYMBOLS;
+                break;
             case "walkingkooka.tree.expression.ExpressionNumber":
             case "walkingkooka.tree.expression.ExpressionNumberBigDecimal":
             case "walkingkooka.tree.expression.ExpressionNumberDouble":
@@ -269,6 +277,9 @@ final public class ValueType implements PluginNameLike<ValueType> {
                 break;
             case DATE_TIME_STRING:
                 valueType = DATE_TIME;
+                break;
+            case DATE_TIME_SYMBOLS_STRING:
+                valueType = DATE_TIME_SYMBOLS;
                 break;
             case EMAIL_STRING:
                 valueType = EMAIL;
@@ -372,6 +383,13 @@ final public class ValueType implements PluginNameLike<ValueType> {
      */
     public boolean isDateTime() {
         return DATE_TIME_STRING.equals(this.prefix());
+    }
+
+    /**
+     * Returns true if this {@link ValueType} is {@link DateTimeSymbols}
+     */
+    public boolean isDateTimeSymbols() {
+        return DATE_TIME_SYMBOLS_STRING.equals(this.prefix());
     }
 
     /**
