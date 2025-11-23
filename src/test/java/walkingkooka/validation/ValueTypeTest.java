@@ -35,8 +35,12 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.collect.list.BooleanList;
+import walkingkooka.collect.list.CsvStringList;
+import walkingkooka.collect.list.StringList;
 import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.math.DecimalNumberSymbols;
+import walkingkooka.math.NumberList;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.DataUrl;
 import walkingkooka.net.MailToUrl;
@@ -60,6 +64,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -94,6 +99,22 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         this.fromClassNameAndCheck(
             Boolean.class,
             ValueType.BOOLEAN
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithBooleanList() {
+        this.fromClassNameAndCheck(
+            BooleanList.class,
+            ValueType.BOOLEAN_LIST
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithCsvStringList() {
+        this.fromClassNameAndCheck(
+            CsvStringList.class,
+            ValueType.CSV_LIST
         );
     }
 
@@ -306,6 +327,22 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testFromClassNameWithList() {
+        this.fromClassNameAndCheck(
+            List.class,
+            ValueType.LIST
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithNumberList() {
+        this.fromClassNameAndCheck(
+            NumberList.class,
+            ValueType.NUMBER_LIST
+        );
+    }
+
+    @Test
     public void testFromClassNameWithString() {
         this.fromClassNameAndCheck(
             String.class,
@@ -326,6 +363,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         this.fromClassNameAndCheck(
             StringBuilder.class,
             ValueType.with("text(StringBuilder)")
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithStringList() {
+        this.fromClassNameAndCheck(
+            StringList.class,
+            ValueType.STRING_LIST
         );
     }
 
@@ -358,6 +403,22 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         this.fromClassNameAndCheck(
             Object.class,
             ValueType.ANY
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithValidationChoiceList() {
+        this.fromClassNameAndCheck(
+            ValidationChoiceList.class,
+            ValueType.CHOICE_LIST
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithValidationErrorList() {
+        this.fromClassNameAndCheck(
+            ValidationErrorList.class,
+            ValueType.ERROR_LIST
         );
     }
 
@@ -1171,6 +1232,169 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         this.checkEquals(
             expected,
             name.isJson(),
+            name::toString
+        );
+    }
+
+    // isList............................................................................................................
+
+    @Test
+    public void testIsListWithAny() {
+        this.isListAndCheck(
+            ValueType.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testIsListWithBoolean() {
+        this.isListAndCheck(
+            ValueType.BOOLEAN,
+            false
+        );
+    }
+
+    @Test
+    public void testIsListWithBooleanList() {
+        this.isListAndCheck(
+            ValueType.BOOLEAN_LIST,
+            true
+        );
+    }
+
+    @Test
+    public void testIsListWithChoiceList() {
+        this.isListAndCheck(
+            ValueType.CHOICE_LIST,
+            true
+        );
+    }
+
+    @Test
+    public void testIsListWithCsvList() {
+        this.isListAndCheck(
+            ValueType.CSV_LIST,
+            true
+        );
+    }
+
+    @Test
+    public void testIsListWithDate() {
+        this.isListAndCheck(
+            ValueType.DATE,
+            false
+        );
+    }
+
+    @Test
+    public void testIsListWithDateList() {
+        this.isListAndCheck(
+            ValueType.DATE_LIST,
+            true
+        );
+    }
+
+    @Test
+    public void testIsListWithDateTime() {
+        this.isListAndCheck(
+            ValueType.DATE_TIME,
+            false
+        );
+    }
+
+    @Test
+    public void testIsListWithDateTimeList() {
+        this.isListAndCheck(
+            ValueType.DATE_TIME_LIST,
+            true
+        );
+    }
+
+    @Test
+    public void testIsListWithEmail() {
+        this.isListAndCheck(
+            ValueType.EMAIL,
+            false
+        );
+    }
+
+    @Test
+    public void testIsListWithError() {
+        this.isListAndCheck(
+            ValueType.ERROR,
+            false
+        );
+    }
+
+    @Test
+    public void testIsListWithErrorList() {
+        this.isListAndCheck(
+            ValueType.ERROR_LIST,
+            true
+        );
+    }
+
+    @Test
+    public void testIsListWithList() {
+        this.isListAndCheck(
+            ValueType.LIST,
+            true
+        );
+    }
+
+    @Test
+    public void testIsListWithNumber() {
+        this.isListAndCheck(
+            ValueType.NUMBER,
+            false
+        );
+    }
+
+    @Test
+    public void testIsListWithNumberList() {
+        this.isListAndCheck(
+            ValueType.NUMBER_LIST,
+            true
+        );
+    }
+
+    @Test
+    public void testIsListWithText() {
+        this.isListAndCheck(
+            ValueType.TEXT,
+            false
+        );
+    }
+
+    @Test
+    public void testIsListWithTextList() {
+        this.isListAndCheck(
+            ValueType.STRING_LIST,
+            true
+        );
+    }
+
+    @Test
+    public void testIsListWithTimeList() {
+        this.isListAndCheck(
+            ValueType.TIME_LIST,
+            true
+        );
+    }
+
+    @Test
+    public void testIsListWithUrl() {
+        this.isListAndCheck(
+            ValueType.BOOLEAN,
+            false
+        );
+    }
+
+    private void isListAndCheck(final ValueType name,
+                               final boolean expected) {
+        this.checkEquals(
+            expected,
+            name.isList(),
             name::toString
         );
     }

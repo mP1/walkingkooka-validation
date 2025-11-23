@@ -28,6 +28,7 @@ import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -69,6 +70,18 @@ final public class ValueType implements PluginNameLike<ValueType> {
 
     public final static ValueType BOOLEAN = new ValueType(BOOLEAN_STRING);
 
+    public final static String BOOLEAN_LIST_STRING = "list(boolean)";
+
+    public final static ValueType BOOLEAN_LIST = new ValueType(BOOLEAN_LIST_STRING);
+
+    public final static String CHOICE_LIST_STRING = "list(choice)";
+
+    public final static ValueType CHOICE_LIST = new ValueType(CHOICE_LIST_STRING);
+
+    public final static String CSV_LIST_STRING = "list(csv)";
+
+    public final static ValueType CSV_LIST = new ValueType(CSV_LIST_STRING);
+    
     public final static String DATA_URL_STRING = "url(data)";
 
     public final static ValueType DATA_URL = new ValueType(DATA_URL_STRING);
@@ -76,10 +89,18 @@ final public class ValueType implements PluginNameLike<ValueType> {
     public final static String DATE_STRING = "date";
 
     public final static ValueType DATE = new ValueType(DATE_STRING);
+    
+    public final static String DATE_LIST_STRING = "list(date)";
 
+    public final static ValueType DATE_LIST = new ValueType(DATE_LIST_STRING);
+    
     public final static String DATE_TIME_STRING = "date-time";
 
     public final static ValueType DATE_TIME = new ValueType(DATE_TIME_STRING);
+
+    public final static String DATE_TIME_LIST_STRING = "list(date-time)";
+
+    public final static ValueType DATE_TIME_LIST = new ValueType(DATE_TIME_LIST_STRING);
 
     public final static String DATE_TIME_SYMBOLS_STRING = "date-time-symbols";
 
@@ -96,6 +117,10 @@ final public class ValueType implements PluginNameLike<ValueType> {
     public final static String ERROR_STRING = "error";
 
     public final static ValueType ERROR = new ValueType(ERROR_STRING);
+
+    public final static String ERROR_LIST_STRING = "list(error)";
+
+    public final static ValueType ERROR_LIST = new ValueType(ERROR_LIST_STRING);
 
     public final static String JSON_NODE_STRING = "json";
 
@@ -125,6 +150,10 @@ final public class ValueType implements PluginNameLike<ValueType> {
 
     public final static ValueType JSON_STRING = new ValueType(JSON_STRING_STRING);
 
+    public final static String LIST_STRING = "list";
+
+    public final static ValueType LIST = new ValueType(LIST_STRING);
+    
     public final static String LOCALE_STRING = "locale";
 
     public final static ValueType LOCALE = new ValueType(LOCALE_STRING);
@@ -137,10 +166,18 @@ final public class ValueType implements PluginNameLike<ValueType> {
 
     public final static ValueType NUMBER = new ValueType(NUMBER_STRING);
 
+    public final static String NUMBER_LIST_STRING = "list(number)";
+
+    public final static ValueType NUMBER_LIST = new ValueType(NUMBER_LIST_STRING);
+
     public final static String RELATIVE_URL_STRING = "url(relative)";
 
     public final static ValueType RELATIVE_URL = new ValueType(RELATIVE_URL_STRING);
 
+    public final static String STRING_LIST_STRING = "list(text)";
+
+    public final static ValueType STRING_LIST = new ValueType(STRING_LIST_STRING);
+    
     public final static String TEXT_STRING = "text";
 
     public final static ValueType TEXT = new ValueType(TEXT_STRING);
@@ -148,6 +185,10 @@ final public class ValueType implements PluginNameLike<ValueType> {
     public final static String TIME_STRING = "time";
 
     public final static ValueType TIME = new ValueType(TIME_STRING);
+
+    public final static String TIME_LIST_STRING = "list(time)";
+
+    public final static ValueType TIME_LIST = new ValueType(TIME_LIST_STRING);
 
     public final static String URL_STRING = "url";
 
@@ -208,6 +249,36 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case "java.math.BigDecimal":
             case "java.math.BigInteger":
                 valueType = with("number(" + classSimpleName(klass) + ")");
+                break;
+            case "java.util.List":
+                valueType = LIST;
+                break;
+            case "walkingkooka.collect.list.BooleanList":
+                valueType = BOOLEAN_LIST;
+                break;
+            case "walkingkooka.validation.ValidationChoiceList":
+                valueType = CHOICE_LIST;
+                break;
+            case "walkingkooka.collect.list.CsvStringList":
+                valueType = CSV_LIST;
+                break;
+            case "walkingkooka.datetime.LocalDateList":
+                valueType = DATE_LIST;
+                break;
+            case "walkingkooka.datetime.LocalDateTimeList":
+                valueType = DATE_TIME_LIST;
+                break;
+            case "walkingkooka.validation.ValidationErrorList":
+                valueType = ERROR_LIST;
+                break;
+            case "walkingkooka.datetime.LocalTimeList":
+                valueType = TIME_LIST;
+                break;
+            case "walkingkooka.math.NumberList":
+                valueType = NUMBER_LIST;
+                break;
+            case "walkingkooka.collect.list.StringList":
+                valueType = STRING_LIST;
                 break;
             case "java.util.Locale":
                 valueType = LOCALE;
@@ -279,11 +350,26 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case BOOLEAN_STRING:
                 valueType = BOOLEAN;
                 break;
+            case BOOLEAN_LIST_STRING:
+                valueType = BOOLEAN_LIST;
+                break;
+            case CHOICE_LIST_STRING:
+                valueType = CHOICE_LIST;
+                break;
+            case CSV_LIST_STRING:
+                valueType = CSV_LIST;
+                break;
             case DATE_STRING:
                 valueType = DATE;
                 break;
+            case DATE_LIST_STRING:
+                valueType = DATE_LIST;
+                break;
             case DATE_TIME_STRING:
                 valueType = DATE_TIME;
+                break;
+            case DATE_TIME_LIST_STRING:
+                valueType = DATE_TIME_LIST;
                 break;
             case DATE_TIME_SYMBOLS_STRING:
                 valueType = DATE_TIME_SYMBOLS;
@@ -296,6 +382,9 @@ final public class ValueType implements PluginNameLike<ValueType> {
                 break;
             case ERROR_STRING:
                 valueType = ERROR;
+                break;
+            case ERROR_LIST_STRING:
+                valueType = ERROR_LIST;
                 break;
             case JSON_NODE_STRING:
                 valueType = JSON_NODE;
@@ -318,17 +407,29 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case JSON_STRING_STRING:
                 valueType = JSON_STRING;
                 break;
+            case LIST_STRING:
+                valueType = LIST;
+                break;
             case LOCALE_STRING:
                 valueType = LOCALE;
                 break;
             case NUMBER_STRING:
                 valueType = NUMBER;
                 break;
+            case NUMBER_LIST_STRING:
+                valueType = NUMBER_LIST;
+                break;
             case TEXT_STRING:
                 valueType = TEXT;
                 break;
+            case STRING_LIST_STRING:
+                valueType = STRING_LIST;
+                break;
             case TIME_STRING:
                 valueType = TIME;
+                break;
+            case TIME_LIST_STRING:
+                valueType = TIME_LIST;
                 break;
             case URL_STRING:
                 valueType = URL;
@@ -428,6 +529,13 @@ final public class ValueType implements PluginNameLike<ValueType> {
      */
     public boolean isJson() {
         return JSON_NODE_STRING.equals(this.prefix());
+    }
+
+    /**
+     * Returns true if this {@link ValueType} is a {@link List}.
+     */
+    public boolean isList() {
+        return LIST_STRING.equals(this.prefix());
     }
 
     /**
