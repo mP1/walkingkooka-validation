@@ -62,6 +62,14 @@ final public class ValueType implements PluginNameLike<ValueType> {
 
     public final static ValueType ABSOLUTE_URL = new ValueType(ABSOLUTE_URL_STRING);
 
+    public final static String ADD_EXPRESSION_STRING = "expression(add)";
+
+    public final static ValueType ADD_EXPRESSION = new ValueType(ADD_EXPRESSION_STRING);
+
+    public final static String AND_EXPRESSION_STRING = "expression(and)";
+
+    public final static ValueType AND_EXPRESSION = new ValueType(AND_EXPRESSION_STRING);
+
     public final static String ANY_STRING = "*";
 
     public final static ValueType ANY = new ValueType(ANY_STRING);
@@ -73,6 +81,10 @@ final public class ValueType implements PluginNameLike<ValueType> {
     public final static String BOOLEAN_LIST_STRING = "list(boolean)";
 
     public final static ValueType BOOLEAN_LIST = new ValueType(BOOLEAN_LIST_STRING);
+
+    public final static String CALL_EXPRESSION_STRING = "expression(call)";
+
+    public final static ValueType CALL_EXPRESSION = new ValueType(CALL_EXPRESSION_STRING);
 
     public final static String CHOICE_LIST_STRING = "list(choice)";
 
@@ -110,9 +122,17 @@ final public class ValueType implements PluginNameLike<ValueType> {
 
     public final static ValueType DECIMAL_NUMBER_SYMBOLS = new ValueType(DECIMAL_NUMBER_SYMBOLS_STRING);
 
+    public final static String DIVIDE_EXPRESSION_STRING = "expression(divide)";
+
+    public final static ValueType DIVIDE_EXPRESSION = new ValueType(DIVIDE_EXPRESSION_STRING);
+    
     public final static String EMAIL_STRING = "email";
 
     public final static ValueType EMAIL = new ValueType(EMAIL_STRING);
+
+    public final static String EQUALS_EXPRESSION_STRING = "expression(equals)";
+
+    public final static ValueType EQUALS_EXPRESSION = new ValueType(EQUALS_EXPRESSION_STRING);
 
     public final static String ERROR_STRING = "error";
 
@@ -121,6 +141,18 @@ final public class ValueType implements PluginNameLike<ValueType> {
     public final static String ERROR_LIST_STRING = "list(error)";
 
     public final static ValueType ERROR_LIST = new ValueType(ERROR_LIST_STRING);
+
+    public final static String EXPRESSION_STRING = "expression";
+
+    public final static ValueType EXPRESSION = new ValueType(EXPRESSION_STRING);
+
+    public final static String GREATER_THAN_EXPRESSION_STRING = "expression(greater-than)";
+
+    public final static ValueType GREATER_THAN_EXPRESSION = new ValueType(GREATER_THAN_EXPRESSION_STRING);
+
+    public final static String GREATER_THAN_EQUALS_EXPRESSION_STRING = "expression(greater-than-equals)";
+
+    public final static ValueType GREATER_THAN_EQUALS_EXPRESSION = new ValueType(GREATER_THAN_EQUALS_EXPRESSION_STRING);
 
     public final static String JSON_NODE_STRING = "json";
 
@@ -150,9 +182,25 @@ final public class ValueType implements PluginNameLike<ValueType> {
 
     public final static ValueType JSON_STRING = new ValueType(JSON_STRING_STRING);
 
+    public final static String LAMBDA_FUNCTION_EXPRESSION_STRING = "expression(lambda-function)";
+
+    public final static ValueType LAMBDA_FUNCTION_EXPRESSION = new ValueType(LAMBDA_FUNCTION_EXPRESSION_STRING);
+
+    public final static String LESS_THAN_EXPRESSION_STRING = "expression(less-than)";
+
+    public final static ValueType LESS_THAN_EXPRESSION = new ValueType(LESS_THAN_EXPRESSION_STRING);
+
+    public final static String LESS_THAN_EQUALS_EXPRESSION_STRING = "expression(less-than-equals)";
+
+    public final static ValueType LESS_THAN_EQUALS_EXPRESSION = new ValueType(LESS_THAN_EQUALS_EXPRESSION_STRING);
+
     public final static String LIST_STRING = "list";
 
     public final static ValueType LIST = new ValueType(LIST_STRING);
+
+    public final static String LIST_EXPRESSION_STRING = "expression(list)";
+
+    public final static ValueType LIST_EXPRESSION = new ValueType(LIST_EXPRESSION_STRING);
     
     public final static String LOCALE_STRING = "locale";
 
@@ -162,6 +210,30 @@ final public class ValueType implements PluginNameLike<ValueType> {
 
     public final static ValueType MAIL_TO_URL = new ValueType(MAIL_TO_URL_STRING);
 
+    public final static String MODULO_EXPRESSION_STRING = "expression(modulo)";
+
+    public final static ValueType MODULO_EXPRESSION = new ValueType(MODULO_EXPRESSION_STRING);
+    
+    public final static String MULTIPLY_EXPRESSION_STRING = "expression(multiply)";
+
+    public final static ValueType MULTIPLY_EXPRESSION = new ValueType(MULTIPLY_EXPRESSION_STRING);
+
+    public final static String NAMED_FUNCTION_EXPRESSION_STRING = "expression(named-function)";
+
+    public final static ValueType NAMED_FUNCTION_EXPRESSION = new ValueType(NAMED_FUNCTION_EXPRESSION_STRING);
+
+    public final static String NEGATIVE_EXPRESSION_STRING = "expression(negative)";
+
+    public final static ValueType NEGATIVE_EXPRESSION = new ValueType(NEGATIVE_EXPRESSION_STRING);
+    
+    public final static String NOT_EQUALS_EXPRESSION_STRING = "expression(not-equals)";
+
+    public final static ValueType NOT_EQUALS_EXPRESSION = new ValueType(NOT_EQUALS_EXPRESSION_STRING);
+
+    public final static String NOT_EXPRESSION_STRING = "expression(not)";
+
+    public final static ValueType NOT_EXPRESSION = new ValueType(NOT_EXPRESSION_STRING);
+
     public final static String NUMBER_STRING = "number";
 
     public final static ValueType NUMBER = new ValueType(NUMBER_STRING);
@@ -170,6 +242,18 @@ final public class ValueType implements PluginNameLike<ValueType> {
 
     public final static ValueType NUMBER_LIST = new ValueType(NUMBER_LIST_STRING);
 
+    public final static String OR_EXPRESSION_STRING = "expression(or)";
+
+    public final static ValueType OR_EXPRESSION = new ValueType(OR_EXPRESSION_STRING);
+
+    public final static String POWER_EXPRESSION_STRING = "expression(power)";
+
+    public final static ValueType POWER_EXPRESSION = new ValueType(POWER_EXPRESSION_STRING);
+
+    public final static String REFERENCE_EXPRESSION_STRING = "expression(reference)";
+
+    public final static ValueType REFERENCE_EXPRESSION = new ValueType(REFERENCE_EXPRESSION_STRING);
+    
     public final static String RELATIVE_URL_STRING = "url(relative)";
 
     public final static ValueType RELATIVE_URL = new ValueType(RELATIVE_URL_STRING);
@@ -177,7 +261,11 @@ final public class ValueType implements PluginNameLike<ValueType> {
     public final static String STRING_LIST_STRING = "list(text)";
 
     public final static ValueType STRING_LIST = new ValueType(STRING_LIST_STRING);
-    
+
+    public final static String SUBTRACT_EXPRESSION_STRING = "expression(subtract)";
+
+    public final static ValueType SUBTRACT_EXPRESSION = new ValueType(SUBTRACT_EXPRESSION_STRING);
+
     public final static String TEXT_STRING = "text";
 
     public final static ValueType TEXT = new ValueType(TEXT_STRING);
@@ -194,9 +282,17 @@ final public class ValueType implements PluginNameLike<ValueType> {
 
     public final static ValueType URL = new ValueType(URL_STRING);
 
+    public final static String VALUE_EXPRESSION_STRING = "expression(value)";
+
+    public final static ValueType VALUE_EXPRESSION = new ValueType(VALUE_EXPRESSION_STRING);
+    
     public final static String WHOLE_NUMBER_STRING = "whole-number";
 
     public final static ValueType WHOLE_NUMBER = new ValueType(WHOLE_NUMBER_STRING);
+
+    public final static String XOR_EXPRESSION_STRING = "expression(xor)";
+
+    public final static ValueType XOR_EXPRESSION = new ValueType(XOR_EXPRESSION_STRING);
 
     /**
      * Gets a {@link ValueType} for the given {@link Class#getName()}.
@@ -299,6 +395,78 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case "java.time.LocalTime":
                 valueType = TIME;
                 break;
+            case "walkingkooka.tree.expression.AddExpression":
+                valueType = ADD_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.AndExpression":
+                valueType = AND_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.CallExpression":
+                valueType = CALL_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.DivideExpression":
+                valueType = DIVIDE_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.EqualsExpression":
+                valueType = EQUALS_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.Expression":
+                valueType = EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.GreaterThanExpression":
+                valueType = GREATER_THAN_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.GreaterThanEqualsExpression":
+                valueType = GREATER_THAN_EQUALS_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.LambdaFunctionExpression":
+                valueType = LAMBDA_FUNCTION_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.LessThanExpression":
+                valueType = LESS_THAN_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.LessThanEqualsExpression":
+                valueType = LESS_THAN_EQUALS_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.ListExpression":
+                valueType = LIST_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.ModuloExpression":
+                valueType = MODULO_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.MultiplyExpression":
+                valueType = MULTIPLY_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.NamedFunctionExpression":
+                valueType = NAMED_FUNCTION_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.NegativeExpression":
+                valueType = NEGATIVE_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.NotEqualsExpression":
+                valueType = NOT_EQUALS_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.NotExpression":
+                valueType = NOT_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.OrExpression":
+                valueType = OR_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.PowerExpression":
+                valueType = POWER_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.ReferenceExpression":
+                valueType = REFERENCE_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.SubtractExpression":
+                valueType = SUBTRACT_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.ValueExpression":
+                valueType = VALUE_EXPRESSION;
+                break;
+            case "walkingkooka.tree.expression.XorExpression":
+                valueType = XOR_EXPRESSION;
+                break;
             case "walkingkooka.tree.json.JsonNode":
                 valueType = JSON_NODE;
                 break;
@@ -344,6 +512,12 @@ final public class ValueType implements PluginNameLike<ValueType> {
         ValueType valueType;
 
         switch (name) {
+            case ADD_EXPRESSION_STRING:
+                valueType = ADD_EXPRESSION;
+                break;
+            case AND_EXPRESSION_STRING:
+                valueType = AND_EXPRESSION;
+                break;
             case ANY_STRING:
                 valueType = ANY;
                 break;
@@ -352,6 +526,9 @@ final public class ValueType implements PluginNameLike<ValueType> {
                 break;
             case BOOLEAN_LIST_STRING:
                 valueType = BOOLEAN_LIST;
+                break;
+            case CALL_EXPRESSION_STRING:
+                valueType = CALL_EXPRESSION;
                 break;
             case CHOICE_LIST_STRING:
                 valueType = CHOICE_LIST;
@@ -377,14 +554,29 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case DECIMAL_NUMBER_SYMBOLS_STRING:
                 valueType = DECIMAL_NUMBER_SYMBOLS;
                 break;
+            case DIVIDE_EXPRESSION_STRING:
+                valueType = DIVIDE_EXPRESSION;
+                break;
             case EMAIL_STRING:
                 valueType = EMAIL;
+                break;
+            case EQUALS_EXPRESSION_STRING:
+                valueType = EQUALS_EXPRESSION;
                 break;
             case ERROR_STRING:
                 valueType = ERROR;
                 break;
             case ERROR_LIST_STRING:
                 valueType = ERROR_LIST;
+                break;
+            case EXPRESSION_STRING:
+                valueType = EXPRESSION;
+                break;
+            case GREATER_THAN_EXPRESSION_STRING:
+                valueType = GREATER_THAN_EXPRESSION;
+                break;
+            case GREATER_THAN_EQUALS_EXPRESSION_STRING:
+                valueType = GREATER_THAN_EQUALS_EXPRESSION;
                 break;
             case JSON_NODE_STRING:
                 valueType = JSON_NODE;
@@ -407,17 +599,56 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case JSON_STRING_STRING:
                 valueType = JSON_STRING;
                 break;
+            case LAMBDA_FUNCTION_EXPRESSION_STRING:
+                valueType = LAMBDA_FUNCTION_EXPRESSION;
+                break;
+            case LESS_THAN_EXPRESSION_STRING:
+                valueType = LESS_THAN_EXPRESSION;
+                break;
+            case LESS_THAN_EQUALS_EXPRESSION_STRING:
+                valueType = LESS_THAN_EQUALS_EXPRESSION;
+                break;
             case LIST_STRING:
                 valueType = LIST;
                 break;
+            case LIST_EXPRESSION_STRING:
+                valueType = LIST_EXPRESSION;
+                break;
             case LOCALE_STRING:
                 valueType = LOCALE;
+                break;
+            case MODULO_EXPRESSION_STRING:
+                valueType = MODULO_EXPRESSION;
+                break;
+            case MULTIPLY_EXPRESSION_STRING:
+                valueType = MULTIPLY_EXPRESSION;
+                break;
+            case NEGATIVE_EXPRESSION_STRING:
+                valueType = NEGATIVE_EXPRESSION;
+                break;
+            case NOT_EQUALS_EXPRESSION_STRING:
+                valueType = NOT_EQUALS_EXPRESSION;
+                break;
+            case NOT_EXPRESSION_STRING:
+                valueType = NOT_EXPRESSION;
                 break;
             case NUMBER_STRING:
                 valueType = NUMBER;
                 break;
             case NUMBER_LIST_STRING:
                 valueType = NUMBER_LIST;
+                break;
+            case OR_EXPRESSION_STRING:
+                valueType = OR_EXPRESSION;
+                break;
+            case POWER_EXPRESSION_STRING:
+                valueType = POWER_EXPRESSION;
+                break;
+            case REFERENCE_EXPRESSION_STRING:
+                valueType = REFERENCE_EXPRESSION;
+                break;
+            case SUBTRACT_EXPRESSION_STRING:
+                valueType = SUBTRACT_EXPRESSION;
                 break;
             case TEXT_STRING:
                 valueType = TEXT;
@@ -434,8 +665,14 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case URL_STRING:
                 valueType = URL;
                 break;
+            case VALUE_EXPRESSION_STRING:
+                valueType = VALUE_EXPRESSION;
+                break;
             case WHOLE_NUMBER_STRING:
                 valueType = WHOLE_NUMBER;
+                break;
+            case XOR_EXPRESSION_STRING:
+                valueType = XOR_EXPRESSION;
                 break;
             default:
                 // FIXME weakness doesnt allow all possible class names, eg those with non ascii letters will fail
@@ -522,6 +759,13 @@ final public class ValueType implements PluginNameLike<ValueType> {
      */
     public boolean isError() {
         return ERROR_STRING.equals(this.prefix());
+    }
+
+    /**
+     * Returns true if this {@link ValueType}.
+     */
+    public boolean isExpression() {
+        return EXPRESSION_STRING.equals(this.prefix());
     }
 
     /**

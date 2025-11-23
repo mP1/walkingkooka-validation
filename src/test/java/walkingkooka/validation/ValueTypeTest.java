@@ -47,8 +47,30 @@ import walkingkooka.net.MailToUrl;
 import walkingkooka.net.RelativeUrl;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.plugin.PluginNameTesting;
+import walkingkooka.tree.expression.AddExpression;
+import walkingkooka.tree.expression.AndExpression;
+import walkingkooka.tree.expression.CallExpression;
+import walkingkooka.tree.expression.EqualsExpression;
+import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.ExpressionNumberKind;
+import walkingkooka.tree.expression.GreaterThanEqualsExpression;
+import walkingkooka.tree.expression.GreaterThanExpression;
+import walkingkooka.tree.expression.LessThanEqualsExpression;
+import walkingkooka.tree.expression.LessThanExpression;
+import walkingkooka.tree.expression.ListExpression;
+import walkingkooka.tree.expression.ModuloExpression;
+import walkingkooka.tree.expression.MultiplyExpression;
+import walkingkooka.tree.expression.NamedFunctionExpression;
+import walkingkooka.tree.expression.NegativeExpression;
+import walkingkooka.tree.expression.NotEqualsExpression;
+import walkingkooka.tree.expression.NotExpression;
+import walkingkooka.tree.expression.OrExpression;
+import walkingkooka.tree.expression.PowerExpression;
+import walkingkooka.tree.expression.ReferenceExpression;
+import walkingkooka.tree.expression.SubtractExpression;
+import walkingkooka.tree.expression.ValueExpression;
+import walkingkooka.tree.expression.XorExpression;
 import walkingkooka.tree.json.JsonArray;
 import walkingkooka.tree.json.JsonBoolean;
 import walkingkooka.tree.json.JsonNode;
@@ -87,6 +109,22 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testFromClassNameWithAddExpression() {
+        this.fromClassNameAndCheck(
+            AddExpression.class,
+            ValueType.ADD_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithAndExpression() {
+        this.fromClassNameAndCheck(
+            AndExpression.class,
+            ValueType.AND_EXPRESSION
+        );
+    }
+
+    @Test
     public void testFromClassNameWithBooleanType() {
         this.fromClassNameAndCheck(
             Boolean.TYPE,
@@ -107,6 +145,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         this.fromClassNameAndCheck(
             BooleanList.class,
             ValueType.BOOLEAN_LIST
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithCallExpression() {
+        this.fromClassNameAndCheck(
+            CallExpression.class,
+            ValueType.CALL_EXPRESSION
         );
     }
 
@@ -158,6 +204,46 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         );
     }
 
+    @Test
+    public void testFromClassNameWithDivideExpression() {
+        this.fromClassNameAndCheck(
+            CallExpression.class,
+            ValueType.CALL_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithEqualsExpression() {
+        this.fromClassNameAndCheck(
+            EqualsExpression.class,
+            ValueType.EQUALS_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithExpression() {
+        this.fromClassNameAndCheck(
+            Expression.class,
+            ValueType.EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithGreaterThanExpression() {
+        this.fromClassNameAndCheck(
+            GreaterThanExpression.class,
+            ValueType.GREATER_THAN_EXPRESSION
+        );
+    }
+    
+    @Test
+    public void testFromClassNameWithGreaterThanEqualsExpression() {
+        this.fromClassNameAndCheck(
+            GreaterThanEqualsExpression.class,
+            ValueType.GREATER_THAN_EQUALS_EXPRESSION
+        );
+    }
+    
     @Test
     public void testFromClassNameWithByteType() {
         this.fromClassNameAndCheck(
@@ -327,6 +413,22 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testFromClassNameWithLessThanExpression() {
+        this.fromClassNameAndCheck(
+            LessThanExpression.class,
+            ValueType.LESS_THAN_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithLessThanEqualsExpression() {
+        this.fromClassNameAndCheck(
+            LessThanEqualsExpression.class,
+            ValueType.LESS_THAN_EQUALS_EXPRESSION
+        );
+    }
+
+    @Test
     public void testFromClassNameWithList() {
         this.fromClassNameAndCheck(
             List.class,
@@ -335,10 +437,90 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testFromClassNameWithListExpression() {
+        this.fromClassNameAndCheck(
+            ListExpression.class,
+            ValueType.LIST_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithModuloExpression() {
+        this.fromClassNameAndCheck(
+            ModuloExpression.class,
+            ValueType.MODULO_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithMultiplyExpression() {
+        this.fromClassNameAndCheck(
+            MultiplyExpression.class,
+            ValueType.MULTIPLY_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithNamedFunctionExpression() {
+        this.fromClassNameAndCheck(
+            NamedFunctionExpression.class,
+            ValueType.NAMED_FUNCTION_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithNegativeExpression() {
+        this.fromClassNameAndCheck(
+            NegativeExpression.class,
+            ValueType.NEGATIVE_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithNotEqualsExpression() {
+        this.fromClassNameAndCheck(
+            NotEqualsExpression.class,
+            ValueType.NOT_EQUALS_EXPRESSION
+        );
+    }
+    
+    @Test
+    public void testFromClassNameWithNotExpression() {
+        this.fromClassNameAndCheck(
+            NotExpression.class,
+            ValueType.NOT_EXPRESSION
+        );
+    }
+    
+    @Test
     public void testFromClassNameWithNumberList() {
         this.fromClassNameAndCheck(
             NumberList.class,
             ValueType.NUMBER_LIST
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithOrExpression() {
+        this.fromClassNameAndCheck(
+            OrExpression.class,
+            ValueType.OR_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithPowerExpression() {
+        this.fromClassNameAndCheck(
+            PowerExpression.class,
+            ValueType.POWER_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithReferenceExpression() {
+        this.fromClassNameAndCheck(
+            ReferenceExpression.class,
+            ValueType.REFERENCE_EXPRESSION
         );
     }
 
@@ -375,6 +557,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testFromClassNameWithSubtractExpression() {
+        this.fromClassNameAndCheck(
+            SubtractExpression.class,
+            ValueType.SUBTRACT_EXPRESSION
+        );
+    }
+
+    @Test
     public void testFromClassNameWithEmailAddress() {
         this.fromClassNameAndCheck(
             EmailAddress.class,
@@ -391,10 +581,26 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testFromClassNameWithValueExpression() {
+        this.fromClassNameAndCheck(
+            ValueExpression.class,
+            ValueType.VALUE_EXPRESSION
+        );
+    }
+
+    @Test
     public void testFromClassNameWithVoid() {
         this.fromClassNameAndCheck(
             Void.class,
             ValueType.with("java.lang.Void")
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithXorExpression() {
+        this.fromClassNameAndCheck(
+            XorExpression.class,
+            ValueType.XOR_EXPRESSION
         );
     }
 
@@ -1105,6 +1311,265 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         );
     }
 
+    // isExpression............................................................................................................
+
+    @Test
+    public void testIsExpressionWithAddExpression() {
+        this.isExpressionAndCheck(
+            ValueType.ADD_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithAndExpression() {
+        this.isExpressionAndCheck(
+            ValueType.AND_EXPRESSION,
+            true
+        );
+    }
+    
+    @Test
+    public void testIsExpressionWithAny() {
+        this.isExpressionAndCheck(
+            ValueType.ANY,
+            false
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithBoolean() {
+        this.isExpressionAndCheck(
+            ValueType.BOOLEAN,
+            false
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithCallExpression() {
+        this.isExpressionAndCheck(
+            ValueType.CALL_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithDivideExpression() {
+        this.isExpressionAndCheck(
+            ValueType.DIVIDE_EXPRESSION,
+            true
+        );
+    }
+    
+    @Test
+    public void testIsExpressionWithEmail() {
+        this.isExpressionAndCheck(
+            ValueType.EMAIL,
+            false
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithError() {
+        this.isExpressionAndCheck(
+            ValueType.ERROR,
+            false
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithEqualsExpression() {
+        this.isExpressionAndCheck(
+            ValueType.EQUALS_EXPRESSION,
+            true
+        );
+    }
+    
+    @Test
+    public void testIsExpressionWithExpression() {
+        this.isExpressionAndCheck(
+            ValueType.EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithGreaterThanEqualsExpression() {
+        this.isExpressionAndCheck(
+            ValueType.GREATER_THAN_EQUALS_EXPRESSION,
+            true
+        );
+    }
+    
+    @Test
+    public void testIsExpressionWithGreaterThanExpression() {
+        this.isExpressionAndCheck(
+            ValueType.GREATER_THAN_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithLambdaFunctionExpression() {
+        this.isExpressionAndCheck(
+            ValueType.LAMBDA_FUNCTION_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithLessThanEqualsExpression() {
+        this.isExpressionAndCheck(
+            ValueType.LESS_THAN_EQUALS_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithLessThanExpression() {
+        this.isExpressionAndCheck(
+            ValueType.LESS_THAN_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithListExpression() {
+        this.isExpressionAndCheck(
+            ValueType.LIST_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithModuloExpression() {
+        this.isExpressionAndCheck(
+            ValueType.MODULO_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithMultiplyExpression() {
+        this.isExpressionAndCheck(
+            ValueType.MULTIPLY_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithNamedFunctionExpression() {
+        this.isExpressionAndCheck(
+            ValueType.NAMED_FUNCTION_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithNegativeExpression() {
+        this.isExpressionAndCheck(
+            ValueType.NEGATIVE_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithNotExpression() {
+        this.isExpressionAndCheck(
+            ValueType.NOT_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithNotEqualsExpression() {
+        this.isExpressionAndCheck(
+            ValueType.NOT_EQUALS_EXPRESSION,
+            true
+        );
+    }
+    
+    @Test
+    public void testIsExpressionWithNumber() {
+        this.isExpressionAndCheck(
+            ValueType.NUMBER,
+            false
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithOrExpression() {
+        this.isExpressionAndCheck(
+            ValueType.OR_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithPowerExpression() {
+        this.isExpressionAndCheck(
+            ValueType.POWER_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithReferenceExpression() {
+        this.isExpressionAndCheck(
+            ValueType.REFERENCE_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithSubtractExpression() {
+        this.isExpressionAndCheck(
+            ValueType.SUBTRACT_EXPRESSION,
+            true
+        );
+    }
+    
+    @Test
+    public void testIsExpressionWithText() {
+        this.isExpressionAndCheck(
+            ValueType.TEXT,
+            false
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithUrl() {
+        this.isExpressionAndCheck(
+            ValueType.BOOLEAN,
+            false
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithValueExpression() {
+        this.isExpressionAndCheck(
+            ValueType.VALUE_EXPRESSION,
+            true
+        );
+    }
+
+    @Test
+    public void testIsExpressionWithXorExpression() {
+        this.isExpressionAndCheck(
+            ValueType.XOR_EXPRESSION,
+            true
+        );
+    }
+
+    private void isExpressionAndCheck(final ValueType name,
+                               final boolean expected) {
+        this.checkEquals(
+            expected,
+            name.isExpression(),
+            name::toString
+        );
+    }
+    
     // isJson........................................................................................................
 
     @Test
