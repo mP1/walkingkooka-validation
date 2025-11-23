@@ -466,7 +466,10 @@ final public class ValueType implements PluginNameLike<ValueType> {
         return URL_STRING.equals(this.prefix());
     }
 
-    private String prefix() {
+    /**
+     * Extracts the prefix for the value type, aka the text before any left-parens.
+     */
+    public String prefix() {
         final String name = this.name;
 
         final int leftParens = name.indexOf('(');
