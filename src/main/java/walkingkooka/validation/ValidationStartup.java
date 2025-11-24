@@ -37,7 +37,10 @@ public final class ValidationStartup implements PublicStaticHelper {
 
         ValidationCheckbox.TRUE_FALSE.trueValue();
         ValidationChoiceList.EMPTY.toString();
+
+        ValidationError.NO_VALUE.isPresent();
         ValidationErrorList.empty().toString();
+
         ValueType.ANY_STRING.toString();
 
         FormHandlerAliasSet.EMPTY.size();
