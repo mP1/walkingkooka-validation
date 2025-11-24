@@ -621,6 +621,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
     }
 
     @Test
+    public void testFromClassNameWithValidationError() {
+        this.fromClassNameAndCheck(
+            ValidationError.class,
+            ValueType.ERROR
+        );
+    }
+
+    @Test
     public void testFromClassNameWithValidationErrorList() {
         this.fromClassNameAndCheck(
             ValidationErrorList.class,

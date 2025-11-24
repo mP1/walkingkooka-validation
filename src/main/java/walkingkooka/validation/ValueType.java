@@ -364,6 +364,9 @@ final public class ValueType implements PluginNameLike<ValueType> {
             case "walkingkooka.datetime.LocalDateTimeList":
                 valueType = DATE_TIME_LIST;
                 break;
+            case "walkingkooka.validation.ValidationError":
+                valueType = ERROR;
+                break;
             case "walkingkooka.validation.ValidationErrorList":
                 valueType = ERROR_LIST;
                 break;
