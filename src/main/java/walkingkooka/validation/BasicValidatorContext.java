@@ -23,6 +23,7 @@ import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
@@ -128,6 +129,12 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
                 this.canConvert,
                 Objects.requireNonNull(cloned, "environmentContext")
             );
+    }
+
+    @Override
+    public ValidatorContext<T> setLineEnding(final LineEnding lineEnding) {
+        this.environmentContext.setLineEnding(lineEnding);
+        return this;
     }
 
     @Override

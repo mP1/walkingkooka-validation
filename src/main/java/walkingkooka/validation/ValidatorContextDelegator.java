@@ -22,6 +22,7 @@ import walkingkooka.convert.CanConvertDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.environment.EnvironmentValueName;
+import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
@@ -77,6 +78,13 @@ public interface ValidatorContextDelegator<T extends ValidationReference> extend
     }
 
     // EnvironmentContextDelegator......................................................................................
+
+    @Override
+    default ValidatorContext<T> setLineEnding(final LineEnding lineEnding) {
+        this.environmentContext()
+            .setLineEnding(lineEnding);
+        return this;
+    }
 
     @Override
     default EnvironmentContext environmentContext() {
