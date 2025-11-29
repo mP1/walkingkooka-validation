@@ -19,6 +19,7 @@ package walkingkooka.validation.form;
 
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.text.LineEnding;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidatorContext;
 import walkingkooka.validation.form.FormHandlerContextDelegatorTest.TestFormHandlerContextDelegator;
@@ -141,6 +142,12 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
             throw new UnsupportedOperationException();
         }
 
+        @Override
+        public ValidatorContext<TestValidationReference> setLineEnding(final LineEnding lineEnding) {
+            Objects.requireNonNull(lineEnding, "lineEnding");
+            throw new UnsupportedOperationException();
+        }
+        
         @Override
         public ValidatorContext<TestValidationReference> setLocale(final Locale locale) {
             Objects.requireNonNull(locale, "locale");

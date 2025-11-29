@@ -23,6 +23,7 @@ import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.validation.TestValidationReference;
@@ -230,6 +231,17 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
                 }
 
                 @Override
+                public LineEnding lineEnding() {
+                    return LineEnding.NL;
+                }
+
+                @Override
+                public FakeFormHandlerExpressionEvaluationContext<TestValidationReference, Void> setLineEnding(final LineEnding lineEnding) {
+                    Objects.requireNonNull(lineEnding, "lineEnding");
+                    throw new UnsupportedOperationException();
+                }
+                
+                @Override
                 public Optional<EmailAddress> user() {
                     return Optional.empty();
                 }
@@ -310,6 +322,18 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
             Objects.requireNonNull(name, "name");
             Objects.requireNonNull(value, "value");
             throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public LineEnding lineEnding() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> setLineEnding(final LineEnding lineEnding) {
+            Objects.requireNonNull(lineEnding, "lineEnding");
+
+            return new TestFormHandlerExpressionEvaluationContextDelegator();
         }
 
         @Override

@@ -29,6 +29,7 @@ import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionEvaluationContexts;
 import walkingkooka.validation.ValidatorContextTestingTest.TestValidatorContext;
@@ -42,6 +43,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 public final class ValidatorContextTestingTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference> {
+
+    private final static LineEnding LINE_ENDING = LineEnding.NL;
 
     private final static Locale LOCALE = Locale.ENGLISH;
 
@@ -90,6 +93,17 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
             throw new UnsupportedOperationException();
         }
 
+        @Override
+        public LineEnding lineEnding() {
+            return ValidatorContextTestingTest.LINE_ENDING;
+        }
+
+        @Override
+        public ValidatorContext<TestValidationReference> setLineEnding(final LineEnding lineEnding) {
+            Objects.requireNonNull(lineEnding, "lineEnding");
+            throw new UnsupportedOperationException();
+        }
+        
         @Override
         public Locale locale() {
             return ValidatorContextTestingTest.LOCALE;
@@ -144,6 +158,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         @Override
         public EnvironmentContext environmentContext() {
             return EnvironmentContexts.empty(
+                LineEnding.NL,
                 ValidatorContextTestingTest.LOCALE,
                 this,
                 Optional.empty()

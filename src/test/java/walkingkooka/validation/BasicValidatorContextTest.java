@@ -30,6 +30,7 @@ import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
@@ -46,6 +47,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class BasicValidatorContextTest implements ValidatorContextTesting<BasicValidatorContext<TestValidationReference>, TestValidationReference>,
     ToStringTesting<BasicValidatorContext<TestValidationReference>> {
+
+    private final static LineEnding LINE_ENDING = LineEnding.NL;
 
     private final static Locale LOCALE = Locale.ENGLISH;
 
@@ -80,6 +83,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
     );
 
     private final static EnvironmentContext ENVIRONMENT_CONTEXT = EnvironmentContexts.empty(
+        LINE_ENDING,
         LOCALE,
         LocalDateTime::now, // now
         Optional.of(

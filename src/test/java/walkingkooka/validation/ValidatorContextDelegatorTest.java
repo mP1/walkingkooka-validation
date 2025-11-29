@@ -28,6 +28,7 @@ import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.ValidatorContextDelegatorTest.TestValidatorContext;
 import walkingkooka.validation.provider.ValidatorSelector;
@@ -42,6 +43,8 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public final class ValidatorContextDelegatorTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference> {
+
+    private final static LineEnding LINE_ENDING = LineEnding.NL;
 
     private final static Locale LOCALE = Locale.ENGLISH;
 
@@ -77,6 +80,7 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
 
     private final static EnvironmentContext ENVIRONMENT_CONTEXT = EnvironmentContexts.readOnly(
         EnvironmentContexts.empty(
+            LINE_ENDING,
             LOCALE,
             LocalDateTime::now, // now
             Optional.of(

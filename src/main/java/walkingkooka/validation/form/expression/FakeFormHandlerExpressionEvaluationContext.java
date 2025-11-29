@@ -19,6 +19,7 @@ package walkingkooka.validation.form.expression;
 
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.validation.ValidationReference;
@@ -108,6 +109,19 @@ public class FakeFormHandlerExpressionEvaluationContext<R extends ValidationRefe
 
     @Override
     public FormHandlerExpressionEvaluationContext<R, S> setUser(final Optional<EmailAddress> user) {
+        throw new UnsupportedOperationException();
+    }
+
+    // HasLineEnding....................................................................................................
+
+    @Override
+    public LineEnding lineEnding() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public FormHandlerExpressionEvaluationContext<R, S> setLineEnding(final LineEnding lineEnding) {
+        Objects.requireNonNull(lineEnding, "lineEnding");
         throw new UnsupportedOperationException();
     }
 

@@ -18,6 +18,7 @@
 package walkingkooka.validation.form.expression;
 
 import walkingkooka.environment.EnvironmentValueName;
+import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.validation.ValidationReference;
@@ -32,6 +33,9 @@ public interface FormHandlerExpressionEvaluationContext<R extends ValidationRefe
 
     @Override
     FormHandlerExpressionEvaluationContext<R, S> cloneEnvironment();
+
+    @Override
+    FormHandlerExpressionEvaluationContext<R, S> setLineEnding(final LineEnding lineEnding);
 
     @Override
     FormHandlerExpressionEvaluationContext<R, S> setLocale(final Locale locale);

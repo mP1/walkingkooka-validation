@@ -21,6 +21,7 @@ import walkingkooka.convert.CanConvert;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
@@ -82,6 +83,9 @@ public interface ValidatorContext<T extends ValidationReference> extends CanConv
 
     @Override
     ValidatorContext<T> cloneEnvironment();
+
+    @Override
+    ValidatorContext<T> setLineEnding(final LineEnding lineEnding);
 
     @Override
     ValidatorContext<T> setLocale(final Locale locale);
