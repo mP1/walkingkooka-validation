@@ -22,11 +22,14 @@ import walkingkooka.convert.CanConvertDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.environment.EnvironmentValueName;
+import walkingkooka.net.email.EmailAddress;
+import walkingkooka.text.LineEnding;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 public interface FormHandlerContextDelegator<R extends ValidationReference, S> extends FormHandlerContext<R, S>,
@@ -89,6 +92,27 @@ public interface FormHandlerContextDelegator<R extends ValidationReference, S> e
     default FormHandlerContext<R, S> removeEnvironmentValue(final EnvironmentValueName<?> name) {
         this.environmentContext()
             .removeEnvironmentValue(name);
+        return this;
+    }
+
+    @Override
+    default FormHandlerContext<R, S> setLineEnding(final LineEnding lineEnding) {
+        this.environmentContext()
+            .setLineEnding(lineEnding);
+        return this;
+    }
+
+    @Override
+    default FormHandlerContext<R, S> setLocale(final Locale locale) {
+        this.environmentContext()
+            .setLocale(locale);
+        return this;
+    }
+
+    @Override
+    default FormHandlerContext<R, S> setUser(final Optional<EmailAddress> user) {
+        this.environmentContext()
+            .setUser(user);
         return this;
     }
 
