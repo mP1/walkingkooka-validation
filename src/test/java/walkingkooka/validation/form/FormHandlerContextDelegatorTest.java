@@ -91,13 +91,13 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                 }
 
                 @Override
-                public ValidatorContext<TestValidationReference> setLocale(final Locale locale) {
+                public FormHandlerContext<TestValidationReference, Void> setLocale(final Locale locale) {
                     Objects.requireNonNull(locale, "locale");
                     throw new UnsupportedOperationException();
                 }
 
                 @Override
-                public ValidatorContext<TestValidationReference> cloneEnvironment() {
+                public FormHandlerContext<TestValidationReference, Void> cloneEnvironment() {
                     throw new UnsupportedOperationException();
                 }
 
@@ -130,7 +130,7 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                 }
 
                 @Override
-                public ValidatorContext<TestValidationReference> setUser(final Optional<EmailAddress> user) {
+                public FormHandlerContext<TestValidationReference, Void> setUser(final Optional<EmailAddress> user) {
                     Objects.requireNonNull(user, "user");
                     throw new UnsupportedOperationException();
                 }
@@ -138,24 +138,24 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
         }
 
         @Override
-        public ValidatorContext<TestValidationReference> cloneEnvironment() {
+        public FormHandlerContext<TestValidationReference, Void> cloneEnvironment() {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public ValidatorContext<TestValidationReference> setLineEnding(final LineEnding lineEnding) {
+        public FormHandlerContext<TestValidationReference, Void> setLineEnding(final LineEnding lineEnding) {
             Objects.requireNonNull(lineEnding, "lineEnding");
             throw new UnsupportedOperationException();
         }
         
         @Override
-        public ValidatorContext<TestValidationReference> setLocale(final Locale locale) {
+        public FormHandlerContext<TestValidationReference, Void> setLocale(final Locale locale) {
             Objects.requireNonNull(locale, "locale");
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public ValidatorContext<TestValidationReference> setUser(final Optional<EmailAddress> user) {
+        public FormHandlerContext<TestValidationReference, Void> setUser(final Optional<EmailAddress> user) {
             Objects.requireNonNull(user, "user");
             throw new UnsupportedOperationException();
         }

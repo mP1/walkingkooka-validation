@@ -20,11 +20,14 @@ package walkingkooka.validation.form;
 import walkingkooka.Either;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.environment.FakeEnvironmentContext;
+import walkingkooka.net.email.EmailAddress;
+import walkingkooka.text.LineEnding;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 public class FakeFormHandlerContext<R extends ValidationReference, S> extends FakeEnvironmentContext implements FormHandlerContext<R, S> {
@@ -61,7 +64,27 @@ public class FakeFormHandlerContext<R extends ValidationReference, S> extends Fa
     // EnvironmentConvert...............................................................................................
 
     @Override
+    public FormHandlerContext<R, S> cloneEnvironment() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public FormHandlerContext<R, S> removeEnvironmentValue(final EnvironmentValueName<?> name) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public FormHandlerContext<R, S> setLineEnding(final LineEnding lineEnding) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public FormHandlerContext<R, S> setLocale(final Locale locale) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public FormHandlerContext<R, S> setUser(final Optional<EmailAddress> user) {
         throw new UnsupportedOperationException();
     }
 

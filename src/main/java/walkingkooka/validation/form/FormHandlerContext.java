@@ -23,8 +23,10 @@ import walkingkooka.collect.set.SortedSets;
 import walkingkooka.convert.CanConvert;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
+import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.CharacterConstant;
+import walkingkooka.text.LineEnding;
 import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.ValidationErrorList;
 import walkingkooka.validation.ValidationReference;
@@ -34,6 +36,7 @@ import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -154,7 +157,20 @@ public interface FormHandlerContext<R extends ValidationReference, S> extends Ca
      */
     S saveFormFieldValues(final List<FormField<R>> formFields);
 
+    // EnvironmentContext..............................................................................................
+
+    @Override
+    FormHandlerContext<R, S> cloneEnvironment();
 
     @Override
     FormHandlerContext<R, S> removeEnvironmentValue(final EnvironmentValueName<?> name);
+
+    @Override
+    FormHandlerContext<R, S> setLineEnding(final LineEnding lineEnding);
+
+    @Override
+    FormHandlerContext<R, S> setLocale(final Locale locale);
+
+    @Override
+    FormHandlerContext<R, S> setUser(final Optional<EmailAddress> user);
 }
