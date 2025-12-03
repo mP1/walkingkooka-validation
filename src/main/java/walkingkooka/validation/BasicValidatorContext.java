@@ -120,7 +120,7 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
         final EnvironmentContext cloned = environmentContext.cloneEnvironment();
 
         // Recreate only if different cloned EnvironmentContext, cloned environment should be equals
-        return environmentContext == cloned ?
+        return environmentContext.equals(cloned) ?
             this :
             new BasicValidatorContext<>(
                 this.validationReference,
@@ -128,6 +128,22 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
                 this.referenceToExpressionEvaluationContext,
                 this.canConvert,
                 Objects.requireNonNull(cloned, "environmentContext")
+            );
+    }
+
+    @Override
+    public ValidatorContext<T> setEnvironmentContext(final EnvironmentContext environmentContext) {
+        final EnvironmentContext before = this.environmentContext;
+        final EnvironmentContext after = before.setEnvironmentContext(environmentContext);
+
+        return before.equals(after) ?
+            this :
+            new BasicValidatorContext<>(
+                this.validationReference,
+                this.validatorSelectorToValidator,
+                this.referenceToExpressionEvaluationContext,
+                this.canConvert,
+                Objects.requireNonNull(after, "environmentContext")
             );
     }
 
@@ -179,6 +195,31 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
 
     // Object...........................................................................................................
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            this.validationReference,
+            this.validatorSelectorToValidator,
+            this.referenceToExpressionEvaluationContext,
+            this.canConvert,
+            this.environmentContext
+        );
+    }
+
+    @Override
+    public boolean equals(final Object other) {
+        return this == other ||
+            (other instanceof BasicValidatorContext &&
+                this.equals0((BasicValidatorContext<?>) other));
+    }
+
+    private boolean equals0(final BasicValidatorContext<?> other) {
+        return this.validationReference.equals(other.validationReference) &&
+            this.validatorSelectorToValidator.equals(other.validatorSelectorToValidator) &&
+            this.referenceToExpressionEvaluationContext.equals(other.referenceToExpressionEvaluationContext) &&
+            this.canConvert.equals(other.canConvert) &&
+            this.environmentContext.equals(other.environmentContext);
+    }
     @Override
     public String toString() {
         return this.validationReference +

@@ -17,6 +17,7 @@
 
 package walkingkooka.validation.form.expression;
 
+import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
@@ -33,6 +34,9 @@ public interface FormHandlerExpressionEvaluationContext<R extends ValidationRefe
 
     @Override
     FormHandlerExpressionEvaluationContext<R, S> cloneEnvironment();
+
+    @Override
+    FormHandlerExpressionEvaluationContext<R, S> setEnvironmentContext(final EnvironmentContext environmentContext);
 
     @Override
     FormHandlerExpressionEvaluationContext<R, S> setLineEnding(final LineEnding lineEnding);

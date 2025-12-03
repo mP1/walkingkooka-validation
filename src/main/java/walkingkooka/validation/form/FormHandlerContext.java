@@ -163,6 +163,9 @@ public interface FormHandlerContext<R extends ValidationReference, S> extends Ca
     FormHandlerContext<R, S> cloneEnvironment();
 
     @Override
+    FormHandlerContext<R, S> setEnvironmentContext(final EnvironmentContext environmentContext);
+
+    @Override
     FormHandlerContext<R, S> removeEnvironmentValue(final EnvironmentValueName<?> name);
 
     @Override

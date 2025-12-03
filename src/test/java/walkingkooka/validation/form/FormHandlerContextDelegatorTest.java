@@ -17,6 +17,7 @@
 
 package walkingkooka.validation.form;
 
+import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.LineEnding;
@@ -102,6 +103,12 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                 }
 
                 @Override
+                public FormHandlerContext<TestValidationReference, Void> setEnvironmentContext(final EnvironmentContext environmentContext) {
+                    Objects.requireNonNull(environmentContext, "environmentContext");
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
                 public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
                     Objects.requireNonNull(name, "name");
 
@@ -139,6 +146,12 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
 
         @Override
         public FormHandlerContext<TestValidationReference, Void> cloneEnvironment() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public FormHandlerContext<TestValidationReference, Void> setEnvironmentContext(final EnvironmentContext environmentContext) {
+            Objects.requireNonNull(environmentContext, "environmentContext");
             throw new UnsupportedOperationException();
         }
 
