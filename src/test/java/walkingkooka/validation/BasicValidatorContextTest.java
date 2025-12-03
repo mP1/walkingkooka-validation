@@ -42,6 +42,7 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -202,14 +203,44 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
         );
     }
 
+    // setEnvironmentContext............................................................................................
+
+    @Test
+    public void testSetEnvironmentContext() {
+        final BasicValidatorContext<TestValidationReference> context = this.createContext();
+
+        final EnvironmentContext different = EnvironmentContexts.fake();
+
+        this.checkNotEquals(
+            ENVIRONMENT_CONTEXT,
+            different
+        );
+
+        final ValidatorContext<TestValidationReference> set = context.setEnvironmentContext(different);
+
+        assertNotSame(
+            context,
+            set
+        );
+
+        this.checkEquals(
+            this.createContext(different),
+            set
+        );
+    }
+
     @Override
     public BasicValidatorContext<TestValidationReference> createContext() {
+        return this.createContext(ENVIRONMENT_CONTEXT);
+    }
+
+    private BasicValidatorContext<TestValidationReference> createContext(final EnvironmentContext environmentContext) {
         return BasicValidatorContext.with(
             VALIDATION_REFERENCE,
             VALIDATOR_SELECTOR_TO_VALIDATOR,
             REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
             CAN_CONVERT,
-            ENVIRONMENT_CONTEXT
+            environmentContext
         );
     }
 

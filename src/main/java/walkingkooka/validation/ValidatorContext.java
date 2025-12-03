@@ -85,6 +85,9 @@ public interface ValidatorContext<T extends ValidationReference> extends CanConv
     ValidatorContext<T> cloneEnvironment();
 
     @Override
+    ValidatorContext<T> setEnvironmentContext(final EnvironmentContext environmentContext);
+
+    @Override
     ValidatorContext<T> setLineEnding(final LineEnding lineEnding);
 
     @Override

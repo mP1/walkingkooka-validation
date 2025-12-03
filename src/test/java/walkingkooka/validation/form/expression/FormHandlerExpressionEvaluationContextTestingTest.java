@@ -20,6 +20,7 @@ package walkingkooka.validation.form.expression;
 import walkingkooka.Either;
 import walkingkooka.datetime.DateTimeContext;
 import walkingkooka.datetime.DateTimeContextDelegator;
+import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.locale.LocaleContext;
 import walkingkooka.locale.LocaleContextDelegator;
@@ -174,6 +175,12 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
 
         @Override
         public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> cloneEnvironment() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> setEnvironmentContext(final EnvironmentContext environmentContext) {
+            Objects.requireNonNull(environmentContext, "environmentContext");
             throw new UnsupportedOperationException();
         }
 

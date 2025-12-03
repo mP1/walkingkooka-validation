@@ -18,6 +18,7 @@
 package walkingkooka.validation.form;
 
 import walkingkooka.Either;
+import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.environment.FakeEnvironmentContext;
 import walkingkooka.net.email.EmailAddress;
@@ -65,6 +66,11 @@ public class FakeFormHandlerContext<R extends ValidationReference, S> extends Fa
 
     @Override
     public FormHandlerContext<R, S> cloneEnvironment() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public FormHandlerContext<R, S> setEnvironmentContext(final EnvironmentContext environmentContext) {
         throw new UnsupportedOperationException();
     }
 

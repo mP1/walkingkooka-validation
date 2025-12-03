@@ -17,6 +17,7 @@
 
 package walkingkooka.validation.form.expression;
 
+import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContext;
@@ -313,6 +314,12 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
 
         @Override
         public TestFormHandlerExpressionEvaluationContextDelegator cloneEnvironment() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public TestFormHandlerExpressionEvaluationContextDelegator setEnvironmentContext(final EnvironmentContext environmentContext) {
+            Objects.requireNonNull(environmentContext, "environmentContext");
             throw new UnsupportedOperationException();
         }
 

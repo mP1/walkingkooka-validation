@@ -18,6 +18,7 @@
 package walkingkooka.validation;
 
 import walkingkooka.convert.FakeConverterContext;
+import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.LineEnding;
@@ -57,6 +58,11 @@ public class FakeValidatorContext<T extends ValidationReference> extends FakeCon
 
     @Override
     public ValidatorContext<T> cloneEnvironment() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public ValidatorContext<T> setEnvironmentContext(final EnvironmentContext environmentContext) {
         throw new UnsupportedOperationException();
     }
 
