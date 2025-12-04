@@ -133,17 +133,14 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
 
     @Override
     public ValidatorContext<T> setEnvironmentContext(final EnvironmentContext environmentContext) {
-        final EnvironmentContext before = this.environmentContext;
-        final EnvironmentContext after = before.setEnvironmentContext(environmentContext);
-
-        return before.equals(after) ?
+        return this.environmentContext == environmentContext ?
             this :
             new BasicValidatorContext<>(
                 this.validationReference,
                 this.validatorSelectorToValidator,
                 this.referenceToExpressionEvaluationContext,
                 this.canConvert,
-                Objects.requireNonNull(after, "environmentContext")
+                Objects.requireNonNull(environmentContext, "environmentContext")
             );
     }
 

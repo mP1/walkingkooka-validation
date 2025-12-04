@@ -92,6 +92,16 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                 }
 
                 @Override
+                public LineEnding lineEnding() {
+                    return LineEnding.NL;
+                }
+
+                @Override
+                public Locale locale() {
+                    return Locale.ENGLISH;
+                }
+
+                @Override
                 public FormHandlerContext<TestValidationReference, Void> setLocale(final Locale locale) {
                     Objects.requireNonNull(locale, "locale");
                     throw new UnsupportedOperationException();
@@ -152,7 +162,8 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
         @Override
         public FormHandlerContext<TestValidationReference, Void> setEnvironmentContext(final EnvironmentContext environmentContext) {
             Objects.requireNonNull(environmentContext, "environmentContext");
-            throw new UnsupportedOperationException();
+
+            return new TestFormHandlerContextDelegator();
         }
 
         @Override

@@ -320,7 +320,8 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
         @Override
         public TestFormHandlerExpressionEvaluationContextDelegator setEnvironmentContext(final EnvironmentContext environmentContext) {
             Objects.requireNonNull(environmentContext, "environmentContext");
-            throw new UnsupportedOperationException();
+
+            return new TestFormHandlerExpressionEvaluationContextDelegator();
         }
 
         @Override
@@ -333,7 +334,7 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
 
         @Override
         public LineEnding lineEnding() {
-            throw new UnsupportedOperationException();
+            return LineEnding.NL;
         }
 
         @Override
@@ -341,6 +342,11 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
             Objects.requireNonNull(lineEnding, "lineEnding");
 
             return new TestFormHandlerExpressionEvaluationContextDelegator();
+        }
+
+        @Override
+        public Locale locale() {
+            return Locale.ENGLISH;
         }
 
         @Override

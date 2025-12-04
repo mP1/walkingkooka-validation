@@ -141,7 +141,8 @@ public final class FormHandlerContextTestingTest implements FormHandlerContextTe
         @Override
         public FormHandlerContext<TestValidationReference, Void> setEnvironmentContext(final EnvironmentContext environmentContext) {
             Objects.requireNonNull(environmentContext, "environmentContext");
-            throw new UnsupportedOperationException();
+
+            return new TestFormHandlerContext();
         }
 
         @Override
