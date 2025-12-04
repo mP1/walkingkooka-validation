@@ -181,7 +181,8 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         @Override
         public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> setEnvironmentContext(final EnvironmentContext environmentContext) {
             Objects.requireNonNull(environmentContext, "environmentContext");
-            throw new UnsupportedOperationException();
+
+            return new TestFormHandlerExpressionEvaluationContext();
         }
 
         @Override
@@ -217,7 +218,7 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
 
         @Override
         public Optional<EmailAddress> user() {
-            throw new UnsupportedOperationException();
+            return ANONYMOUS;
         }
 
         @Override
@@ -228,7 +229,7 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
 
         @Override
         public LineEnding lineEnding() {
-            throw new UnsupportedOperationException();
+            return LineEnding.NL;
         }
 
         @Override
@@ -244,7 +245,7 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
 
         @Override
         public Locale locale() {
-            throw new UnsupportedOperationException();
+            return Locale.ENGLISH;
         }
 
         @Override

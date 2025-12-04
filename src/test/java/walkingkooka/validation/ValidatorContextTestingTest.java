@@ -144,7 +144,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         @Override
         public TestValidatorContext setEnvironmentContext(final EnvironmentContext environmentContext) {
             Objects.requireNonNull(environmentContext, "environmentContext");
-            throw new UnsupportedOperationException();
+            return new TestValidatorContext();
         }
 
         @Override
