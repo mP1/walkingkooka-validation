@@ -19,6 +19,7 @@ package walkingkooka.validation.form;
 
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
+import walkingkooka.environment.EnvironmentValueWatcher;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.LineEnding;
 import walkingkooka.validation.TestValidationReference;
@@ -43,7 +44,22 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
     }
 
     @Override
+    public void testSetLineEndingWithDifferentAndWatcher() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void testSetLocaleWithDifferent() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetLocaleWithDifferentAndWatcher() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetUserWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
 
@@ -189,6 +205,18 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                                                                        final T value) {
             Objects.requireNonNull(name, "name");
             Objects.requireNonNull(value, "value");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Runnable addEventValueWatcher(final EnvironmentValueWatcher watcher) {
+            Objects.requireNonNull(watcher, "watcher");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Runnable addEventValueWatcherOnce(final EnvironmentValueWatcher watcher) {
+            Objects.requireNonNull(watcher, "watcher");
             throw new UnsupportedOperationException();
         }
 

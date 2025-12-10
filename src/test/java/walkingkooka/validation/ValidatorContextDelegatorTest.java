@@ -90,7 +90,22 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
     );
 
     @Override
+    public void testSetLineEndingWithDifferentAndWatcher() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void testSetLocaleWithDifferent() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetLocaleWithDifferentAndWatcher() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetUserWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
 

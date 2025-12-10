@@ -19,6 +19,7 @@ package walkingkooka.validation.form.expression;
 
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
+import walkingkooka.environment.EnvironmentValueWatcher;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionReference;
@@ -136,6 +137,16 @@ public class FakeFormHandlerExpressionEvaluationContext<R extends ValidationRefe
     @Override
     public FormHandlerExpressionEvaluationContext<R, S> setLocale(final Locale locale) {
         Objects.requireNonNull(locale, "locale");
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Runnable addEventValueWatcher(final EnvironmentValueWatcher watcher) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Runnable addEventValueWatcherOnce(final EnvironmentValueWatcher watcher) {
         throw new UnsupportedOperationException();
     }
 }
