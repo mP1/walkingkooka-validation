@@ -83,12 +83,14 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
         DECIMAL_NUMBER_CONTEXT
     );
 
-    private final static EnvironmentContext ENVIRONMENT_CONTEXT = EnvironmentContexts.empty(
-        LINE_ENDING,
-        LOCALE,
-        LocalDateTime::now, // now
-        Optional.of(
-            EmailAddress.parse("user@example.com")
+    private final static EnvironmentContext ENVIRONMENT_CONTEXT = EnvironmentContexts.readOnly(
+        EnvironmentContexts.empty(
+            LINE_ENDING,
+            LOCALE,
+            LocalDateTime::now, // now
+            Optional.of(
+                EmailAddress.parse("user@example.com")
+            )
         )
     );
 
@@ -185,8 +187,8 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
             "canConvert"
         );
 
-        assertSame(
-            ENVIRONMENT_CONTEXT,
+        checkEquals(
+            ENVIRONMENT_CONTEXT.cloneEnvironment(),
             different.environmentContext,
             "environmentContext"
         );
@@ -237,7 +239,9 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
 
     @Override
     public BasicValidatorContext<TestValidationReference> createContext() {
-        return this.createContext(ENVIRONMENT_CONTEXT);
+        return this.createContext(
+            ENVIRONMENT_CONTEXT.cloneEnvironment()
+        );
     }
 
     private BasicValidatorContext<TestValidationReference> createContext(final EnvironmentContext environmentContext) {
