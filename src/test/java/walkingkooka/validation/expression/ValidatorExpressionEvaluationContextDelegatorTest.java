@@ -70,6 +70,11 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
     }
 
     @Override
+    public int decimalNumberDigitCount() {
+        return DECIMAL_NUMBER_CONTEXT.decimalNumberDigitCount();
+    }
+
+    @Override
     public MathContext mathContext() {
         return DECIMAL_NUMBER_CONTEXT.mathContext();
     }
@@ -121,6 +126,11 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
                 @Override
                 public String currencySymbol() {
                     return DECIMAL_NUMBER_CONTEXT.currencySymbol();
+                }
+
+                @Override
+                public int decimalNumberDigitCount() {
+                    return DECIMAL_NUMBER_CONTEXT.decimalNumberDigitCount();
                 }
 
                 @Override

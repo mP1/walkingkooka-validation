@@ -99,6 +99,12 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
     }
 
     @Override
+    public int decimalNumberDigitCount() {
+        return this.decimalNumberContext()
+            .decimalNumberDigitCount();
+    }
+
+    @Override
     public MathContext mathContext() {
         return DECIMAL_NUMBER_CONTEXT.mathContext();
     }
@@ -145,6 +151,11 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
                 @Override
                 public String currencySymbol() {
                     return DECIMAL_NUMBER_CONTEXT.currencySymbol();
+                }
+
+                @Override
+                public int decimalNumberDigitCount() {
+                    return DECIMAL_NUMBER_CONTEXT.decimalNumberDigitCount();
                 }
 
                 @Override
