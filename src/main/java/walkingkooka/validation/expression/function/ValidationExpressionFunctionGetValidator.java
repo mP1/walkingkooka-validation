@@ -76,6 +76,6 @@ final class ValidationExpressionFunctionGetValidator<R extends ValidationReferen
     @Override
     ValidatorSelector applyNonNullParameters(final List<Object> parameters,
                                              final C context) {
-        return VALIDATOR_SELECTOR.getOrFail(parameters, 0);
+        return VALIDATOR_SELECTOR.getOrFail(parameters, 0, context);
     }
 }
