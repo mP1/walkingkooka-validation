@@ -68,7 +68,7 @@ final class FormHandlerExpressionFunctionRequiredFormFields<R extends Validation
     @Override
     ValidationErrorList<R> applyNonNullParameters(final List<Object> parameters,
                                                   final C context) {
-        final List<FormField<R>> formFields = this.formFields.getOrFail(parameters, 0);
+        final List<FormField<R>> formFields = this.formFields.getOrFail(parameters, 0, context);
 
         final List<ValidationError<R>> errors = Lists.array();
         final Set<R> requiredFields = this.fields;
