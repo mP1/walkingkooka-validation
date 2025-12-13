@@ -19,6 +19,7 @@ package walkingkooka.validation.form.expression;
 
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContextDelegator;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
@@ -27,8 +28,8 @@ import walkingkooka.validation.form.FormField;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
-import java.util.Set;
 
 public interface FormHandlerExpressionEvaluationContextDelegator<R extends ValidationReference, S> extends FormHandlerExpressionEvaluationContext<R, S>,
     ExpressionEvaluationContextDelegator {
@@ -54,29 +55,30 @@ public interface FormHandlerExpressionEvaluationContextDelegator<R extends Valid
     }
 
     @Override
+    default FormHandlerExpressionEvaluationContext<R, S> setLineEnding(final LineEnding lineEnding) {
+        this.environmentContext()
+            .setLineEnding(lineEnding);
+        return this;
+    }
+
+    @Override
+    default FormHandlerExpressionEvaluationContext<R, S> setLocale(final Locale locale) {
+        this.environmentContext()
+            .setLocale(locale);
+        return this;
+    }
+
+    @Override
+    default FormHandlerExpressionEvaluationContext<R, S> setUser(final Optional<EmailAddress> user) {
+        this.environmentContext()
+            .setUser(user);
+        return this;
+    }
+
+    @Override
     FormHandlerExpressionEvaluationContext<R, S> expressionEvaluationContext();
 
-    // ExpressionEvaluationContext......................................................................................
-
-    @Override
-    default <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
-        return this.expressionEvaluationContext()
-            .environmentValue(name);
-    }
-
-    @Override
-    default Set<EnvironmentValueName<?>> environmentValueNames() {
-        return this.expressionEvaluationContext()
-            .environmentValueNames();
-    }
-
-    @Override
-    default Optional<EmailAddress> user() {
-        return this.expressionEvaluationContext()
-            .user();
-    }
-
-    // FormHandlerExpressionEvaluationContext.............................................................................
+    // FormHandlerExpressionEvaluationContext...........................................................................
 
     @Override
     default Form<R> form() {

@@ -19,13 +19,19 @@ package walkingkooka.validation.expression;
 
 import walkingkooka.Either;
 import walkingkooka.datetime.DateTimeSymbols;
+import walkingkooka.environment.EnvironmentContext;
+import walkingkooka.environment.EnvironmentContextDelegator;
+import walkingkooka.environment.EnvironmentContexts;
+import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.locale.LocaleContext;
 import walkingkooka.locale.LocaleContextDelegator;
 import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.math.DecimalNumberContexts;
+import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.CaseSensitivity;
+import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionNumberKind;
@@ -85,6 +91,7 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
     final static class TestValidatorExpressionEvaluationContext implements ValidatorExpressionEvaluationContext<TestValidationReference>,
         DecimalNumberContextDelegator,
+        EnvironmentContextDelegator,
         LocaleContextDelegator {
 
         @Override
@@ -213,22 +220,84 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
             return DECIMAL_NUMBER_CONTEXT.mathContext();
         }
 
+        // EnvironmentContext...........................................................................................
+
+        @Override
+        public TestValidatorExpressionEvaluationContext cloneEnvironment() {
+            return new TestValidatorExpressionEvaluationContext();
+        }
+
+        @Override
+        public TestValidatorExpressionEvaluationContext setEnvironmentContext(final EnvironmentContext context) {
+            Objects.requireNonNull(context, "context");
+
+            return new TestValidatorExpressionEvaluationContext();
+        }
+
+        @Override
+        public <T> TestValidatorExpressionEvaluationContext setEnvironmentValue(final EnvironmentValueName<T> name,
+                                                                                final T value) {
+            this.environmentContext()
+                .setEnvironmentValue(
+                    name,
+                    value
+                );
+            return this;
+        }
+
+        @Override
+        public TestValidatorExpressionEvaluationContext removeEnvironmentValue(final EnvironmentValueName<?> name) {
+            this.environmentContext()
+                .removeEnvironmentValue(name);
+            return this;
+        }
+
+        @Override
+        public TestValidatorExpressionEvaluationContext setLineEnding(final LineEnding lineEnding) {
+            this.environmentContext()
+                .setLineEnding(lineEnding);
+            return this;
+        }
+
+        @Override
+        public Locale locale() {
+            return this.environmentContext()
+                .locale();
+        }
+
+        @Override
+        public TestValidatorExpressionEvaluationContext setLocale(final Locale locale) {
+            this.environmentContext()
+                .setLocale(locale);
+            return this;
+        }
+
+        @Override
+        public TestValidatorExpressionEvaluationContext setUser(final Optional<EmailAddress> user) {
+            this.environmentContext()
+                .setUser(user);
+            return this;
+        }
+
+        @Override
+        public EnvironmentContext environmentContext() {
+            return this.environmentContext;
+        }
+
+        private final EnvironmentContext environmentContext = EnvironmentContexts.map(
+            EnvironmentContexts.empty(
+                LineEnding.NL,
+                DECIMAL_NUMBER_CONTEXT.locale(),
+                LocalDateTime::now,
+                EnvironmentContext.ANONYMOUS
+            )
+        );
+
         // LocaleContext................................................................................................
 
         @Override
         public LocaleContext localeContext() {
             return LocaleContexts.jre(Locale.ENGLISH);
-        }
-
-        @Override
-        public Locale locale() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public ValidatorExpressionEvaluationContext<TestValidationReference> setLocale(final Locale locale) {
-            Objects.requireNonNull(locale, "locale");
-            throw new UnsupportedOperationException();
         }
 
         @Override

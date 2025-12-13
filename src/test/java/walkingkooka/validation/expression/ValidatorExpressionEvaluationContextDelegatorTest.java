@@ -18,18 +18,23 @@
 package walkingkooka.validation.expression;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.environment.EnvironmentContext;
+import walkingkooka.environment.EnvironmentContexts;
+import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.math.DecimalNumberContexts;
+import walkingkooka.net.email.EmailAddress;
+import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.expression.ValidatorExpressionEvaluationContextDelegatorTest.TestValidatorExpressionEvaluationContextDelegator;
-import walkingkooka.validation.expression.ValidatorExpressionEvaluationContextTestingTest.TestValidatorExpressionEvaluationContext;
 import walkingkooka.validation.form.Form;
 
 import java.math.MathContext;
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
@@ -117,7 +122,7 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
                 }
 
                 @Override
-                public TestValidatorExpressionEvaluationContext enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {
+                public TestValidatorExpressionEvaluationContextDelegator enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {
                     Objects.requireNonNull(function, "function");
 
                     throw new UnsupportedOperationException();
@@ -241,10 +246,75 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
         }
 
         @Override
-        public ValidatorExpressionEvaluationContext<TestValidationReference> setLocale(final Locale locale) {
-            Objects.requireNonNull(locale, "locale");
-            throw new UnsupportedOperationException();
+        public TestValidatorExpressionEvaluationContextDelegator cloneEnvironment() {
+            return new TestValidatorExpressionEvaluationContextDelegator();
         }
+
+        @Override
+        public TestValidatorExpressionEvaluationContextDelegator setEnvironmentContext(final EnvironmentContext context) {
+            Objects.requireNonNull(context, "context");
+
+            return new TestValidatorExpressionEvaluationContextDelegator();
+        }
+
+        @Override
+        public <T> TestValidatorExpressionEvaluationContextDelegator setEnvironmentValue(final EnvironmentValueName<T> name,
+                                                                                         final T value) {
+            this.environmentContext()
+                .setEnvironmentValue(
+                    name,
+                    value
+                );
+            return this;
+        }
+
+        @Override
+        public TestValidatorExpressionEvaluationContextDelegator removeEnvironmentValue(final EnvironmentValueName<?> name) {
+            this.environmentContext()
+                .removeEnvironmentValue(name);
+            return this;
+        }
+
+        @Override
+        public TestValidatorExpressionEvaluationContextDelegator setLineEnding(final LineEnding lineEnding) {
+            this.environmentContext()
+                .setLineEnding(lineEnding);
+            return this;
+        }
+
+        @Override
+        public Locale locale() {
+            return this.environmentContext()
+                .locale();
+        }
+
+        @Override
+        public TestValidatorExpressionEvaluationContextDelegator setLocale(final Locale locale) {
+            this.environmentContext()
+                .setLocale(locale);
+            return this;
+        }
+
+        @Override
+        public TestValidatorExpressionEvaluationContextDelegator setUser(final Optional<EmailAddress> user) {
+            this.environmentContext()
+                .setUser(user);
+            return this;
+        }
+
+        @Override
+        public EnvironmentContext environmentContext() {
+            return this.environmentContext;
+        }
+
+        private final EnvironmentContext environmentContext = EnvironmentContexts.map(
+            EnvironmentContexts.empty(
+                LineEnding.NL,
+                DECIMAL_NUMBER_CONTEXT.locale(),
+                LocalDateTime::now,
+                EnvironmentContext.ANONYMOUS
+            )
+        );
 
         @Override
         public String toString() {
