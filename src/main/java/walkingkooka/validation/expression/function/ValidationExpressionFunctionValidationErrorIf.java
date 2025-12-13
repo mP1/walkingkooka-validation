@@ -88,13 +88,13 @@ final class ValidationExpressionFunctionValidationErrorIf<R extends ValidationRe
     ValidationError<R> applyNonNullParameters(final List<Object> parameters,
                                               final C context) {
 
-        final Expression expression = EXPRESSION.getOrFail(parameters, 0, context);
+        final Expression expression = EXPRESSION.getOrFail(parameters, 0);
 
         return context.convertOrFail(
             context.evaluateExpression(expression),
             Boolean.class
         ).booleanValue() ?
-            VALIDATION_ERROR.getOrFail(parameters, 1, context) :
+            VALIDATION_ERROR.getOrFail(parameters, 1) :
             null;
     }
 }

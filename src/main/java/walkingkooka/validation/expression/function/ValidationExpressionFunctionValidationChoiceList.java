@@ -139,8 +139,7 @@ final class ValidationExpressionFunctionValidationChoiceList<R extends Validatio
             case 1:
                 for (final Object value : VALUES.getOrFail(
                     parameters,
-                    0,
-                    context
+                    0
                 )) {
                     final String label = context.convertOrFail(
                         value,
@@ -158,13 +157,11 @@ final class ValidationExpressionFunctionValidationChoiceList<R extends Validatio
             case 2:
                 final StringList labels = LABELS.getOrFail(
                     parameters,
-                    0,
-                    context
+                    0
                 );
                 final List<?> values1 = VALUES.getOrFail(
                     parameters,
-                    1,
-                    context
+                    1
                 );
                 final int labelCount = labels.size();
                 final int valueCount = values1.size();
