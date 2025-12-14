@@ -286,6 +286,12 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
+        public Object evaluate(final String expression) {
+            Objects.requireNonNull(expression, "expression");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public boolean isPure(final ExpressionFunctionName name) {
             Objects.requireNonNull(name, "name");
 
