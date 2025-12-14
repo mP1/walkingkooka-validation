@@ -149,6 +149,12 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
                 }
 
                 @Override
+                public Object evaluate(final String expression) {
+                    Objects.requireNonNull(expression, "expression");
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
                 public String currencySymbol() {
                     return DECIMAL_NUMBER_CONTEXT.currencySymbol();
                 }
