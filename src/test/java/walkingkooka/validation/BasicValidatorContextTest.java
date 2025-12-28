@@ -87,7 +87,14 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
         EnvironmentContexts.empty(
             LINE_ENDING,
             LOCALE,
-            LocalDateTime::now, // now
+            () -> LocalDateTime.of(
+                1999,
+                12,
+                31,
+                12,
+                58,
+                59
+            ), // now
             Optional.of(
                 EmailAddress.parse("user@example.com")
             )
@@ -235,6 +242,16 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
             this.createContext(different),
             set
         );
+    }
+
+    @Override
+    public void testRemoveEnvironmentValueWithNowFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetEnvironmentValueWithNowFails() {
+        throw new UnsupportedOperationException();
     }
 
     @Override
