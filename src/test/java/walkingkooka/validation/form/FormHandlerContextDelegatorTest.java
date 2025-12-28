@@ -44,6 +44,16 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
     }
 
     @Override
+    public void testRemoveEnvironmentValueWithNowFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetEnvironmentValueWithNowFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void testSetLineEndingWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }

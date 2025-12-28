@@ -49,6 +49,16 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
     private final static Locale LOCALE = Locale.ENGLISH;
 
     @Override
+    public void testRemoveEnvironmentValueWithNowFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetEnvironmentValueWithNowFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void testSetLineEndingWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
