@@ -34,6 +34,11 @@ import java.util.Optional;
 public final class FormHandlerContextDelegatorTest implements FormHandlerContextTesting<TestFormHandlerContextDelegator, TestValidationReference, Void> {
 
     @Override
+    public void testEnvironmentValueLineEndingEqualsLineEnding() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void testEnvironmentValueLocaleEqualsLocale() {
         throw new UnsupportedOperationException();
     }

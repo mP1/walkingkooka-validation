@@ -38,6 +38,11 @@ import java.util.Set;
 public final class FormHandlerContextTestingTest implements FormHandlerContextTesting<TestFormHandlerContext, TestValidationReference, Void> {
 
     @Override
+    public void testEnvironmentValueLineEndingEqualsLineEnding() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void testEnvironmentValueLocaleEqualsLocale() {
         throw new UnsupportedOperationException();
     }

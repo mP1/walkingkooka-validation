@@ -62,6 +62,11 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
     }
 
     @Override
+    public void testEnvironmentValueLineEndingEqualsLineEnding() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void testEnvironmentValueLocaleEqualsLocale() {
         throw new UnsupportedOperationException();
     }
