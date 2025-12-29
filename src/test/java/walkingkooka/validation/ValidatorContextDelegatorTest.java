@@ -73,7 +73,7 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
             LOCALE, // locale
             1950, // defaultYear
             50, // twoDigitYear
-            LocalDateTime::now
+            () -> LocalDateTime.MIN
         ),
         DECIMAL_NUMBER_CONTEXT
     );
@@ -82,7 +82,7 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
         EnvironmentContexts.empty(
             LINE_ENDING,
             LOCALE,
-            LocalDateTime::now, // now
+            () -> LocalDateTime.MIN, // now
             Optional.of(
                 EmailAddress.parse("user@example.com")
             )

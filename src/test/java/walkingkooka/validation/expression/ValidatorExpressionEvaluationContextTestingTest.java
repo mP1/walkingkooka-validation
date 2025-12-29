@@ -53,6 +53,8 @@ import java.util.function.Function;
 public final class ValidatorExpressionEvaluationContextTestingTest implements ValidatorExpressionEvaluationContextTesting<TestValidationReference, TestValidatorExpressionEvaluationContext>,
     DecimalNumberContextDelegator {
 
+    private final static LocalDateTime NOW = LocalDateTime.MIN;
+
     @Override
     public void testEnterScopeGivesDifferentInstance() {
         throw new UnsupportedOperationException();
@@ -188,7 +190,7 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
         @Override
         public LocalDateTime now() {
-            throw new UnsupportedOperationException();
+            return ValidatorExpressionEvaluationContextTestingTest.NOW;
         }
 
         @Override
@@ -288,7 +290,7 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
             EnvironmentContexts.empty(
                 LineEnding.NL,
                 DECIMAL_NUMBER_CONTEXT.locale(),
-                LocalDateTime::now,
+                () -> ValidatorExpressionEvaluationContextTestingTest.NOW,
                 EnvironmentContext.ANONYMOUS
             )
         );
