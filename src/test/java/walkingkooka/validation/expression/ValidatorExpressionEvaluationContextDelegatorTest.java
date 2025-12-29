@@ -317,7 +317,7 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
             EnvironmentContexts.empty(
                 LineEnding.NL,
                 DECIMAL_NUMBER_CONTEXT.locale(),
-                LocalDateTime::now,
+                () -> LocalDateTime.MIN,
                 EnvironmentContext.ANONYMOUS
             )
         );

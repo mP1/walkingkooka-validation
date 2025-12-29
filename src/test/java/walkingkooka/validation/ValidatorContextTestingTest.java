@@ -214,7 +214,14 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
             LOCALE,
             1950,
             50,
-            LocalDateTime::now
+            () -> LocalDateTime.of(
+                1999,
+                12,
+                31,
+                12,
+                58,
+                59
+            )
         ),
         DecimalNumberContexts.american(
             MathContext.DECIMAL32
