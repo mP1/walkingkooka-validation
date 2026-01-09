@@ -17,8 +17,8 @@
 
 package walkingkooka.validation.form;
 
-import walkingkooka.convert.CanConvert;
-import walkingkooka.convert.CanConvertDelegator;
+import walkingkooka.convert.ConverterLike;
+import walkingkooka.convert.ConverterLikeDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.environment.EnvironmentValueName;
@@ -33,7 +33,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 public interface FormHandlerContextDelegator<R extends ValidationReference, S> extends FormHandlerContext<R, S>,
-    CanConvertDelegator,
+    ConverterLikeDelegator,
     EnvironmentContextDelegator {
 
     @Override
@@ -68,10 +68,10 @@ public interface FormHandlerContextDelegator<R extends ValidationReference, S> e
 
     FormHandlerContext<R, S> formHandlerContext();
 
-    // CanConvertDelegator..............................................................................................
+    // ConverterLikeDelegator...........................................................................................
 
     @Override
-    default CanConvert canConvert() {
+    default ConverterLike converterLike() {
         return this.formHandlerContext();
     }
 

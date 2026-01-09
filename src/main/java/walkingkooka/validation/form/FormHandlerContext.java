@@ -20,7 +20,7 @@ package walkingkooka.validation.form;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.SortedSets;
-import walkingkooka.convert.CanConvert;
+import walkingkooka.convert.ConverterLike;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.net.email.EmailAddress;
@@ -45,7 +45,7 @@ import java.util.Set;
 /**
  * A {@link walkingkooka.Context} that accompanies a {@link FormHandler}.
  */
-public interface FormHandlerContext<R extends ValidationReference, S> extends CanConvert,
+public interface FormHandlerContext<R extends ValidationReference, S> extends ConverterLike,
     HasForm<R>,
     EnvironmentContext {
 

@@ -17,8 +17,8 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.convert.CanConvert;
-import walkingkooka.convert.CanConvertDelegator;
+import walkingkooka.convert.ConverterLike;
+import walkingkooka.convert.ConverterLikeDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.environment.EnvironmentValueName;
@@ -34,19 +34,19 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 final class BasicValidatorContext<T extends ValidationReference> implements ValidatorContext<T>,
-    CanConvertDelegator,
+    ConverterLikeDelegator,
     EnvironmentContextDelegator {
 
     static <T extends ValidationReference> BasicValidatorContext<T> with(final T validationReference,
                                                                          final Function<ValidatorSelector, Validator<T, ? super ValidatorContext<T>>> validatorSelectorToValidator,
                                                                          final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
-                                                                         final CanConvert canConvert,
+                                                                         final ConverterLike converterLike,
                                                                          final EnvironmentContext environmentContext) {
         return new BasicValidatorContext<>(
             Objects.requireNonNull(validationReference, "validationReference"),
             Objects.requireNonNull(validatorSelectorToValidator, "validatorSelectorToValidator"),
             Objects.requireNonNull(referenceToExpressionEvaluationContext, "referenceToExpressionEvaluationContext"),
-            Objects.requireNonNull(canConvert, "canConvert"),
+            Objects.requireNonNull(converterLike, "converterLike"),
             Objects.requireNonNull(environmentContext, "environmentContext")
         );
     }
@@ -54,12 +54,12 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
     private BasicValidatorContext(final T validationReference,
                                   final Function<ValidatorSelector, Validator<T, ? super ValidatorContext<T>>> validatorSelectorToValidator,
                                   final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
-                                  final CanConvert canConvert,
+                                  final ConverterLike converterLike,
                                   final EnvironmentContext environmentContext) {
         this.validationReference = validationReference;
         this.validatorSelectorToValidator = validatorSelectorToValidator;
         this.referenceToExpressionEvaluationContext = referenceToExpressionEvaluationContext;
-        this.canConvert = canConvert;
+        this.converterLike = converterLike;
         this.environmentContext = environmentContext;
     }
 
@@ -78,7 +78,7 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
                 Objects.requireNonNull(validationReference, "validationReference"),
                 this.validatorSelectorToValidator,
                 this.referenceToExpressionEvaluationContext,
-                this.canConvert,
+                this.converterLike,
                 this.environmentContext
             );
     }
@@ -102,15 +102,15 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
 
     private final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext;
 
-    // CanConvertDelegator..............................................................................................
+    // ConverterLikeDelegator...........................................................................................
 
     @Override
-    public CanConvert canConvert() {
-        return this.canConvert;
+    public ConverterLike converterLike() {
+        return this.converterLike;
     }
 
     // @VisibleForTesting
-    final CanConvert canConvert;
+    final ConverterLike converterLike;
 
     // EnvironmentContext...............................................................................................
 
@@ -129,7 +129,7 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
                 this.validationReference,
                 this.validatorSelectorToValidator,
                 this.referenceToExpressionEvaluationContext,
-                this.canConvert,
+                this.converterLike,
                 Objects.requireNonNull(environmentContext, "environmentContext")
             );
     }
@@ -188,7 +188,7 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
             this.validationReference,
             this.validatorSelectorToValidator,
             this.referenceToExpressionEvaluationContext,
-            this.canConvert,
+            this.converterLike,
             this.environmentContext
         );
     }
@@ -204,7 +204,7 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
         return this.validationReference.equals(other.validationReference) &&
             this.validatorSelectorToValidator.equals(other.validatorSelectorToValidator) &&
             this.referenceToExpressionEvaluationContext.equals(other.referenceToExpressionEvaluationContext) &&
-            this.canConvert.equals(other.canConvert) &&
+            this.converterLike.equals(other.converterLike) &&
             this.environmentContext.equals(other.environmentContext);
     }
     @Override
@@ -215,7 +215,7 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
             " " +
             this.referenceToExpressionEvaluationContext +
             " " +
-            this.canConvert +
+            this.converterLike +
             " " +
             this.environmentContext;
     }

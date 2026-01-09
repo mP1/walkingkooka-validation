@@ -18,7 +18,7 @@
 package walkingkooka.validation.form;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.convert.CanConvertTesting;
+import walkingkooka.convert.ConverterLikeTesting;
 import walkingkooka.environment.EnvironmentContextTesting2;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
@@ -28,7 +28,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R extends ValidationReference, S> extends CanConvertTesting<C>,
+public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R extends ValidationReference, S> extends ConverterLikeTesting<C>,
     EnvironmentContextTesting2<C>,
     HasFormTesting<R> {
 
@@ -122,10 +122,10 @@ public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R
         );
     }
 
-    // CanConvert.......................................................................................................
+    // ConverterLike....................................................................................................
 
     @Override
-    default C createCanConvert() {
+    default C createConverterLike() {
         return this.createContext();
     }
 

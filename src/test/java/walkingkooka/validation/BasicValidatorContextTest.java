@@ -20,8 +20,8 @@ package walkingkooka.validation;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.ToStringTesting;
-import walkingkooka.convert.CanConvert;
 import walkingkooka.convert.ConverterContexts;
+import walkingkooka.convert.ConverterLike;
 import walkingkooka.convert.Converters;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.datetime.DateTimeSymbols;
@@ -66,7 +66,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
 
     private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
-    private final static CanConvert CAN_CONVERT = ConverterContexts.basic(
+    private final static ConverterLike CONVERTER_LIKE = ConverterContexts.basic(
         false, // canNumbersHaveGroupSeparator
         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // offset
         ',', // valueSeparator
@@ -109,7 +109,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
                 null,
                 VALIDATOR_SELECTOR_TO_VALIDATOR,
                 REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
-                CAN_CONVERT,
+                CONVERTER_LIKE,
                 ENVIRONMENT_CONTEXT
             )
         );
@@ -123,7 +123,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
                 VALIDATION_REFERENCE,
                 null,
                 REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
-                CAN_CONVERT,
+                CONVERTER_LIKE,
                 ENVIRONMENT_CONTEXT
             )
         );
@@ -137,7 +137,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
                 VALIDATION_REFERENCE,
                 VALIDATOR_SELECTOR_TO_VALIDATOR,
                 null,
-                CAN_CONVERT,
+                CONVERTER_LIKE,
                 ENVIRONMENT_CONTEXT
             )
         );
@@ -165,7 +165,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
                 VALIDATION_REFERENCE,
                 VALIDATOR_SELECTOR_TO_VALIDATOR,
                 REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
-                CAN_CONVERT,
+                CONVERTER_LIKE,
                 null
             )
         );
@@ -189,8 +189,8 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
         );
 
         assertSame(
-            CAN_CONVERT,
-            different.canConvert,
+            CONVERTER_LIKE,
+            different.converterLike,
             "canConvert"
         );
 
@@ -266,7 +266,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
             VALIDATION_REFERENCE,
             VALIDATOR_SELECTOR_TO_VALIDATOR,
             REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
-            CAN_CONVERT,
+            CONVERTER_LIKE,
             environmentContext
         );
     }
@@ -280,10 +280,10 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
                 VALIDATION_REFERENCE,
                 VALIDATOR_SELECTOR_TO_VALIDATOR,
                 REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
-                CAN_CONVERT,
+                CONVERTER_LIKE,
                 ENVIRONMENT_CONTEXT
             ).toString(),
-            VALIDATION_REFERENCE + " " + VALIDATOR_SELECTOR_TO_VALIDATOR + " " + REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION + " " + CAN_CONVERT + " " + ENVIRONMENT_CONTEXT
+            VALIDATION_REFERENCE + " " + VALIDATOR_SELECTOR_TO_VALIDATOR + " " + REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION + " " + CONVERTER_LIKE + " " + ENVIRONMENT_CONTEXT
         );
     }
 
