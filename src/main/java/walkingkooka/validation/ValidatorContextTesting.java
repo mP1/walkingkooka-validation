@@ -18,14 +18,14 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.convert.CanConvertTesting;
+import walkingkooka.convert.ConverterLikeTesting;
 import walkingkooka.environment.EnvironmentContextTesting2;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public interface ValidatorContextTesting<C extends ValidatorContext<R>, R extends ValidationReference> extends CanConvertTesting<C>,
+public interface ValidatorContextTesting<C extends ValidatorContext<R>, R extends ValidationReference> extends ConverterLikeTesting<C>,
     EnvironmentContextTesting2<C> {
 
     @Test
@@ -79,10 +79,10 @@ public interface ValidatorContextTesting<C extends ValidatorContext<R>, R extend
         );
     }
 
-    // context..........................................................................................................
+    // ConverterLike....................................................................................................
 
     @Override
-    default C createCanConvert() {
+    default C createConverterLike() {
         return this.createContext();
     }
 

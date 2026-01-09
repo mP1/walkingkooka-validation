@@ -17,8 +17,8 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.convert.CanConvert;
-import walkingkooka.convert.CanConvertDelegator;
+import walkingkooka.convert.ConverterLike;
+import walkingkooka.convert.ConverterLikeDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.environment.EnvironmentValueName;
@@ -31,7 +31,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 public interface ValidatorContextDelegator<T extends ValidationReference> extends ValidatorContext<T>,
-    CanConvertDelegator,
+    ConverterLikeDelegator,
     EnvironmentContextDelegator {
 
     // EnvironmentContextDelegator......................................................................................
@@ -74,10 +74,10 @@ public interface ValidatorContextDelegator<T extends ValidationReference> extend
             .expressionEvaluationContext(value);
     }
 
-    // CanConvertDelegator..............................................................................................
+    // ConverterLikeDelegator..............................................................................................
 
     @Override
-    default CanConvert canConvert() {
+    default ConverterLike converterLike() {
         return this.validatorContext();
     }
 

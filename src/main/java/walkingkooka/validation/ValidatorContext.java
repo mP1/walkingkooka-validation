@@ -17,7 +17,7 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.convert.CanConvert;
+import walkingkooka.convert.ConverterLike;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.net.email.EmailAddress;
@@ -32,7 +32,7 @@ import java.util.Optional;
 /**
  * {@link walkingkooka.Context} that accompanies a {@link Validator} during validation.
  */
-public interface ValidatorContext<T extends ValidationReference> extends CanConvert,
+public interface ValidatorContext<T extends ValidationReference> extends ConverterLike,
     EnvironmentContext {
 
     /**
