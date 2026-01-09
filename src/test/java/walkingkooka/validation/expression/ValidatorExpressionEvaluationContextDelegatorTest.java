@@ -61,6 +61,11 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public void testSetLineEndingWithDifferentAndWatcher() {
+        throw new UnsupportedOperationException();
+    }
+
     @Test
     public void testValidationValue() {
         this.validationValueAndCheck(
@@ -233,6 +238,11 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
                             offset,
                             count
                         );
+                }
+
+                @Override
+                public LineEnding lineEnding() {
+                    return LineEnding.NL;
                 }
             };
         }
