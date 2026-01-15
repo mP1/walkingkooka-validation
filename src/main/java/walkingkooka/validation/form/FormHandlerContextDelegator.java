@@ -21,9 +21,6 @@ import walkingkooka.convert.ConverterLike;
 import walkingkooka.convert.ConverterLikeDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
-import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.net.email.EmailAddress;
-import walkingkooka.text.LineEnding;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
 
@@ -75,38 +72,6 @@ public interface FormHandlerContextDelegator<R extends ValidationReference, S> e
     }
 
     // EnvironmentContext...............................................................................................
-
-    @Override
-    default <T> FormHandlerContext<R, S> setEnvironmentValue(final EnvironmentValueName<T> name,
-                                                             final T value) {
-        this.environmentContext()
-            .setEnvironmentValue(
-                name,
-                value
-            );
-        return this;
-    }
-
-    @Override
-    default FormHandlerContext<R, S> removeEnvironmentValue(final EnvironmentValueName<?> name) {
-        this.environmentContext()
-            .removeEnvironmentValue(name);
-        return this;
-    }
-
-    @Override
-    default FormHandlerContext<R, S> setLineEnding(final LineEnding lineEnding) {
-        this.environmentContext()
-            .setLineEnding(lineEnding);
-        return this;
-    }
-
-    @Override
-    default FormHandlerContext<R, S> setUser(final Optional<EmailAddress> user) {
-        this.environmentContext()
-            .setUser(user);
-        return this;
-    }
 
     @Override
     default EnvironmentContext environmentContext() {

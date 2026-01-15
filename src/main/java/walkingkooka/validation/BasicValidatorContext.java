@@ -21,14 +21,10 @@ import walkingkooka.convert.ConverterLike;
 import walkingkooka.convert.ConverterLikeDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
-import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.net.email.EmailAddress;
-import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.util.Objects;
-import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -131,36 +127,6 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
                 this.converterLike,
                 Objects.requireNonNull(environmentContext, "environmentContext")
             );
-    }
-
-    @Override
-    public ValidatorContext<T> setLineEnding(final LineEnding lineEnding) {
-        this.environmentContext.setLineEnding(lineEnding);
-        return this;
-    }
-
-    @Override
-    public ValidatorContext<T> setUser(final Optional<EmailAddress> user) {
-        this.environmentContext.setUser(user);
-        return this;
-    }
-
-    @Override
-    public <TT> BasicValidatorContext<T> setEnvironmentValue(final EnvironmentValueName<TT> name,
-                                                             final TT value) {
-        this.environmentContext.setEnvironmentValue(
-            name,
-            value
-        );
-        return this;
-    }
-
-    @Override
-    public ValidatorContext<T> removeEnvironmentValue(final EnvironmentValueName<?> name) {
-        this.environmentContext.removeEnvironmentValue(
-            name
-        );
-        return this;
     }
 
     // EnvironmentContextDelegator......................................................................................

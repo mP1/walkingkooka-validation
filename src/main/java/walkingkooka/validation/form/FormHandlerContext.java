@@ -22,11 +22,8 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.SortedSets;
 import walkingkooka.convert.ConverterLike;
 import walkingkooka.environment.EnvironmentContext;
-import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.CharacterConstant;
-import walkingkooka.text.LineEnding;
 import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.ValidationErrorList;
 import walkingkooka.validation.ValidationReference;
@@ -163,13 +160,4 @@ public interface FormHandlerContext<R extends ValidationReference, S> extends Co
 
     @Override
     FormHandlerContext<R, S> setEnvironmentContext(final EnvironmentContext environmentContext);
-
-    @Override
-    FormHandlerContext<R, S> removeEnvironmentValue(final EnvironmentValueName<?> name);
-
-    @Override
-    FormHandlerContext<R, S> setLineEnding(final LineEnding lineEnding);
-
-    @Override
-    FormHandlerContext<R, S> setUser(final Optional<EmailAddress> user);
 }

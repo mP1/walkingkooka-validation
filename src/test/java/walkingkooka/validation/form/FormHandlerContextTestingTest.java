@@ -142,34 +142,6 @@ public final class FormHandlerContextTestingTest implements FormHandlerContextTe
         }
 
         @Override
-        public LineEnding lineEnding() {
-            return LineEnding.NL;
-        }
-
-        @Override
-        public FormHandlerContext<TestValidationReference, Void> setLineEnding(final LineEnding lineEnding) {
-            Objects.requireNonNull(lineEnding, "lineEnding");
-            throw new UnsupportedOperationException();
-        }
-        
-        @Override
-        public Locale locale() {
-            return Locale.ENGLISH;
-        }
-
-        @Override
-        public void setLocale(final Locale locale) {
-            Objects.requireNonNull(locale, "locale");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public FormHandlerContext<TestValidationReference, Void> setUser(final Optional<EmailAddress> user) {
-            Objects.requireNonNull(user, "user");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
         public FormHandlerContext<TestValidationReference, Void> cloneEnvironment() {
             throw new UnsupportedOperationException();
         }
@@ -189,7 +161,7 @@ public final class FormHandlerContextTestingTest implements FormHandlerContextTe
         }
 
         @Override
-        public <T> TestFormHandlerContext setEnvironmentValue(final EnvironmentValueName<T> name,
+        public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
                                                               final T value) {
             Objects.requireNonNull(name, "name");
             Objects.requireNonNull(value, "value");
@@ -197,7 +169,7 @@ public final class FormHandlerContextTestingTest implements FormHandlerContextTe
         }
 
         @Override
-        public TestFormHandlerContext removeEnvironmentValue(final EnvironmentValueName<?> name) {
+        public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
             Objects.requireNonNull(name, "name");
             throw new UnsupportedOperationException();
         }
@@ -208,12 +180,40 @@ public final class FormHandlerContextTestingTest implements FormHandlerContextTe
         }
 
         @Override
+        public LineEnding lineEnding() {
+            return LineEnding.NL;
+        }
+
+        @Override
+        public void setLineEnding(final LineEnding lineEnding) {
+            Objects.requireNonNull(lineEnding, "lineEnding");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Locale locale() {
+            return Locale.ENGLISH;
+        }
+
+        @Override
+        public void setLocale(final Locale locale) {
+            Objects.requireNonNull(locale, "locale");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public LocalDateTime now() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public Optional<EmailAddress> user() {
             return Optional.empty();
         }
 
         @Override
-        public LocalDateTime now() {
+        public void setUser(final Optional<EmailAddress> user) {
+            Objects.requireNonNull(user, "user");
             throw new UnsupportedOperationException();
         }
 

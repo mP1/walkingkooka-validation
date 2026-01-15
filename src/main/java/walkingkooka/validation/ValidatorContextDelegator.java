@@ -21,35 +21,12 @@ import walkingkooka.convert.ConverterLike;
 import walkingkooka.convert.ConverterLikeDelegator;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
-import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.net.email.EmailAddress;
-import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
-
-import java.util.Optional;
 
 public interface ValidatorContextDelegator<T extends ValidationReference> extends ValidatorContext<T>,
     ConverterLikeDelegator,
     EnvironmentContextDelegator {
-
-    // EnvironmentContextDelegator......................................................................................
-
-    @Override
-    default <TT> ValidatorContext<T> setEnvironmentValue(final EnvironmentValueName<TT> name,
-                                                         final TT value) {
-        this.environmentContext()
-            .setEnvironmentValue(
-                name,
-                value
-            );
-        return this;
-    }
-
-    @Override
-    default ValidatorContext<T> removeEnvironmentValue(final EnvironmentValueName<?> name) {
-        throw new UnsupportedOperationException();
-    }
 
     // ValidatorContextDelegator.......................................................................................
 
@@ -81,27 +58,6 @@ public interface ValidatorContextDelegator<T extends ValidationReference> extend
     }
 
     // EnvironmentContextDelegator......................................................................................
-
-    @Override
-    default ValidatorContext<T> setLineEnding(final LineEnding lineEnding) {
-        this.environmentContext()
-            .setLineEnding(lineEnding);
-        return this;
-    }
-
-//    @Override
-//    default ValidatorContext<T> setLocale(final Locale locale) {
-//        this.environmentContext()
-//            .setLocale(locale);
-//        return this;
-//    }
-
-    @Override
-    default ValidatorContext<T> setUser(final Optional<EmailAddress> user) {
-        this.environmentContext()
-            .setUser(user);
-        return this;
-    }
     
     @Override
     default EnvironmentContext environmentContext() {

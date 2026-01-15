@@ -22,14 +22,12 @@ import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.environment.EnvironmentContexts;
-import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.locale.LocaleContext;
 import walkingkooka.locale.LocaleContextDelegator;
 import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.math.DecimalNumberContexts;
-import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
@@ -237,47 +235,13 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
         }
 
         @Override
-        public <T> TestValidatorExpressionEvaluationContext setEnvironmentValue(final EnvironmentValueName<T> name,
-                                                                                final T value) {
-            this.environmentContext()
-                .setEnvironmentValue(
-                    name,
-                    value
-                );
-            return this;
-        }
-
-        @Override
-        public TestValidatorExpressionEvaluationContext removeEnvironmentValue(final EnvironmentValueName<?> name) {
-            this.environmentContext()
-                .removeEnvironmentValue(name);
-            return this;
-        }
-
-        @Override
-        public TestValidatorExpressionEvaluationContext setLineEnding(final LineEnding lineEnding) {
-            this.environmentContext()
-                .setLineEnding(lineEnding);
-            return this;
-        }
-
-        @Override
         public Locale locale() {
-            return this.environmentContext()
-                .locale();
+            return this.environmentContext.locale();
         }
 
         @Override
         public void setLocale(final Locale locale) {
-            this.environmentContext()
-                .setLocale(locale);
-        }
-
-        @Override
-        public TestValidatorExpressionEvaluationContext setUser(final Optional<EmailAddress> user) {
-            this.environmentContext()
-                .setUser(user);
-            return this;
+            this.environmentContext.setLocale(locale);
         }
 
         @Override
