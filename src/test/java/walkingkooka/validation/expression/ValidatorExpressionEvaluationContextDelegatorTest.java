@@ -305,13 +305,6 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
         }
 
         @Override
-        public TestValidatorExpressionEvaluationContextDelegator setLocale(final Locale locale) {
-            this.environmentContext()
-                .setLocale(locale);
-            return this;
-        }
-
-        @Override
         public TestValidatorExpressionEvaluationContextDelegator setUser(final Optional<EmailAddress> user) {
             this.environmentContext()
                 .setUser(user);

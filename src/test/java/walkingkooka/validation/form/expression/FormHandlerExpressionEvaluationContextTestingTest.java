@@ -295,7 +295,7 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
-        public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> setLocale(final Locale locale) {
+        public void setLocale(final Locale locale) {
             Objects.requireNonNull(locale, "locale");
             throw new UnsupportedOperationException();
         }

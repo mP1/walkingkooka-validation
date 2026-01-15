@@ -22,7 +22,6 @@ import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.HasForm;
 
-import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -36,7 +35,4 @@ public interface ValidatorExpressionEvaluationContext<R extends ValidationRefere
 
     @Override
     ValidatorExpressionEvaluationContext<R> enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function);
-
-    @Override
-    ValidatorExpressionEvaluationContext<R> setLocale(final Locale locale);
 }

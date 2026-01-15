@@ -402,10 +402,10 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
         }
 
         @Override
-        public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> setLocale(final Locale locale  ) {
+        public void setLocale(final Locale locale  ) {
             Objects.requireNonNull(locale, "locale");
 
-            return new TestFormHandlerExpressionEvaluationContextDelegator();
+            throw new UnsupportedOperationException();
         }
 
         @Override

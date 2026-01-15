@@ -36,7 +36,6 @@ import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -170,9 +169,6 @@ public interface FormHandlerContext<R extends ValidationReference, S> extends Co
 
     @Override
     FormHandlerContext<R, S> setLineEnding(final LineEnding lineEnding);
-
-    @Override
-    FormHandlerContext<R, S> setLocale(final Locale locale);
 
     @Override
     FormHandlerContext<R, S> setUser(final Optional<EmailAddress> user);

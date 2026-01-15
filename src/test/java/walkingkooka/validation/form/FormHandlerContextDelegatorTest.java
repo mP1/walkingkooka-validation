@@ -138,7 +138,7 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                 }
 
                 @Override
-                public FormHandlerContext<TestValidationReference, Void> setLocale(final Locale locale) {
+                public void setLocale(final Locale locale) {
                     Objects.requireNonNull(locale, "locale");
                     throw new UnsupportedOperationException();
                 }
@@ -209,7 +209,7 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
         }
         
         @Override
-        public FormHandlerContext<TestValidationReference, Void> setLocale(final Locale locale) {
+        public void setLocale(final Locale locale) {
             Objects.requireNonNull(locale, "locale");
             throw new UnsupportedOperationException();
         }

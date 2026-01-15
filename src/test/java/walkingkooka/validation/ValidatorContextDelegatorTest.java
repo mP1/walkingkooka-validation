@@ -163,7 +163,7 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
         private final ValidatorContext<TestValidationReference> context;
 
         @Override
-        public ValidatorContext<TestValidationReference> setLocale(final Locale locale) {
+        public void setLocale(final Locale locale) {
             Objects.requireNonNull(locale, "locale");
             throw new UnsupportedOperationException();
         }

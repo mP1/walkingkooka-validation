@@ -28,7 +28,6 @@ import walkingkooka.validation.ValidatorContext;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 public class FakeFormHandlerContext<R extends ValidationReference, S> extends FakeEnvironmentContext implements FormHandlerContext<R, S> {
@@ -81,11 +80,6 @@ public class FakeFormHandlerContext<R extends ValidationReference, S> extends Fa
 
     @Override
     public FormHandlerContext<R, S> setLineEnding(final LineEnding lineEnding) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public FormHandlerContext<R, S> setLocale(final Locale locale) {
         throw new UnsupportedOperationException();
     }
 

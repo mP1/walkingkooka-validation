@@ -24,7 +24,6 @@ import walkingkooka.tree.expression.ExpressionEvaluationContextDelegator;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.Form;
 
-import java.util.Locale;
 import java.util.Optional;
 
 public interface ValidatorExpressionEvaluationContextDelegator<R extends ValidationReference> extends ValidatorExpressionEvaluationContext<R>,
@@ -54,13 +53,6 @@ public interface ValidatorExpressionEvaluationContextDelegator<R extends Validat
     default ValidatorExpressionEvaluationContext<R> setLineEnding(final LineEnding lineEnding) {
         this.environmentContext()
             .setLineEnding(lineEnding);
-        return this;
-    }
-
-    @Override
-    default ValidatorExpressionEvaluationContext<R> setLocale(final Locale locale) {
-        this.environmentContext()
-            .setLocale(locale);
         return this;
     }
 
