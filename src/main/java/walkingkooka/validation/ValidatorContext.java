@@ -26,7 +26,6 @@ import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
-import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -89,9 +88,6 @@ public interface ValidatorContext<T extends ValidationReference> extends Convert
 
     @Override
     ValidatorContext<T> setLineEnding(final LineEnding lineEnding);
-
-    @Override
-    ValidatorContext<T> setLocale(final Locale locale);
 
     @Override
     ValidatorContext<T> setUser(final Optional<EmailAddress> user);

@@ -78,7 +78,7 @@ public class FakeValidatorContext<T extends ValidationReference> extends FakeCon
     }
 
     @Override
-    public ValidatorContext<T> setLocale(final Locale locale) {
+    public void setLocale(final Locale locale) {
         throw new UnsupportedOperationException();
     }
 

@@ -28,7 +28,6 @@ import walkingkooka.validation.form.FormField;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 public interface FormHandlerExpressionEvaluationContextDelegator<R extends ValidationReference, S> extends FormHandlerExpressionEvaluationContext<R, S>,
@@ -58,13 +57,6 @@ public interface FormHandlerExpressionEvaluationContextDelegator<R extends Valid
     default FormHandlerExpressionEvaluationContext<R, S> setLineEnding(final LineEnding lineEnding) {
         this.environmentContext()
             .setLineEnding(lineEnding);
-        return this;
-    }
-
-    @Override
-    default FormHandlerExpressionEvaluationContext<R, S> setLocale(final Locale locale) {
-        this.environmentContext()
-            .setLocale(locale);
         return this;
     }
 

@@ -22,7 +22,6 @@ import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.Form;
 
-import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -39,11 +38,6 @@ public class FakeValidatorExpressionEvaluationContext<R extends ValidationRefere
 
     @Override
     public ValidatorExpressionEvaluationContext<R> enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> scoped) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public ValidatorExpressionEvaluationContext<R> setLocale(final Locale locale) {
         throw new UnsupportedOperationException();
     }
 

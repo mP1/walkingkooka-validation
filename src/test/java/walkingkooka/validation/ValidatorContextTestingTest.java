@@ -135,7 +135,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         }
 
         @Override
-        public ValidatorContext<TestValidationReference> setLocale(final Locale locale) {
+        public void setLocale(final Locale locale) {
             Objects.requireNonNull(locale, "locale");
             throw new UnsupportedOperationException();
         }

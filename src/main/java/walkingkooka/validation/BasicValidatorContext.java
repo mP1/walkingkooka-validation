@@ -27,7 +27,6 @@ import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
-import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -137,12 +136,6 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
     @Override
     public ValidatorContext<T> setLineEnding(final LineEnding lineEnding) {
         this.environmentContext.setLineEnding(lineEnding);
-        return this;
-    }
-
-    @Override
-    public ValidatorContext<T> setLocale(final Locale locale) {
-        this.environmentContext.setLocale(locale);
         return this;
     }
 

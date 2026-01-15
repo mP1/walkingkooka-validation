@@ -268,10 +268,9 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
         }
 
         @Override
-        public TestValidatorExpressionEvaluationContext setLocale(final Locale locale) {
+        public void setLocale(final Locale locale) {
             this.environmentContext()
                 .setLocale(locale);
-            return this;
         }
 
         @Override
