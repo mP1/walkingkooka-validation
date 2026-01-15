@@ -128,22 +128,6 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                 }
 
                 @Override
-                public LineEnding lineEnding() {
-                    return LineEnding.NL;
-                }
-
-                @Override
-                public Locale locale() {
-                    return Locale.ENGLISH;
-                }
-
-                @Override
-                public void setLocale(final Locale locale) {
-                    Objects.requireNonNull(locale, "locale");
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
                 public FormHandlerContext<TestValidationReference, Void> cloneEnvironment() {
                     throw new UnsupportedOperationException();
                 }
@@ -162,16 +146,32 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                 }
 
                 @Override
-                public <T> FormHandlerContext<TestValidationReference, Void> setEnvironmentValue(final EnvironmentValueName<T> name,
-                                                                                                 final T value) {
+                public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
+                                                    final T value) {
                     Objects.requireNonNull(name, "name");
                     Objects.requireNonNull(value, "value");
                     throw new UnsupportedOperationException();
                 }
 
                 @Override
-                public FormHandlerContext<TestValidationReference, Void> removeEnvironmentValue(final EnvironmentValueName<?> name) {
+                public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
                     Objects.requireNonNull(name, "name");
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
+                public LineEnding lineEnding() {
+                    return LineEnding.NL;
+                }
+
+                @Override
+                public Locale locale() {
+                    return Locale.ENGLISH;
+                }
+
+                @Override
+                public void setLocale(final Locale locale) {
+                    Objects.requireNonNull(locale, "locale");
                     throw new UnsupportedOperationException();
                 }
 
@@ -183,7 +183,7 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                 }
 
                 @Override
-                public FormHandlerContext<TestValidationReference, Void> setUser(final Optional<EmailAddress> user) {
+                public void setUser(final Optional<EmailAddress> user) {
                     Objects.requireNonNull(user, "user");
                     throw new UnsupportedOperationException();
                 }
@@ -203,7 +203,15 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
         }
 
         @Override
-        public FormHandlerContext<TestValidationReference, Void> setLineEnding(final LineEnding lineEnding) {
+        public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
+                                            final T value) {
+            Objects.requireNonNull(name, "name");
+            Objects.requireNonNull(value, "value");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void setLineEnding(final LineEnding lineEnding) {
             Objects.requireNonNull(lineEnding, "lineEnding");
             throw new UnsupportedOperationException();
         }
@@ -215,16 +223,8 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
         }
 
         @Override
-        public FormHandlerContext<TestValidationReference, Void> setUser(final Optional<EmailAddress> user) {
+        public void setUser(final Optional<EmailAddress> user) {
             Objects.requireNonNull(user, "user");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public <T> TestFormHandlerContextDelegator setEnvironmentValue(final EnvironmentValueName<T> name,
-                                                                       final T value) {
-            Objects.requireNonNull(name, "name");
-            Objects.requireNonNull(value, "value");
             throw new UnsupportedOperationException();
         }
 

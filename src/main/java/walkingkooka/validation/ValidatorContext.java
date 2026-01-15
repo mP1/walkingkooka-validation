@@ -19,9 +19,6 @@ package walkingkooka.validation;
 
 import walkingkooka.convert.ConverterLike;
 import walkingkooka.environment.EnvironmentContext;
-import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.net.email.EmailAddress;
-import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
@@ -85,17 +82,4 @@ public interface ValidatorContext<T extends ValidationReference> extends Convert
 
     @Override
     ValidatorContext<T> setEnvironmentContext(final EnvironmentContext environmentContext);
-
-    @Override
-    ValidatorContext<T> setLineEnding(final LineEnding lineEnding);
-
-    @Override
-    ValidatorContext<T> setUser(final Optional<EmailAddress> user);
-
-    @Override
-    <TT> ValidatorContext<T> setEnvironmentValue(final EnvironmentValueName<TT> name,
-                                                 final TT value);
-
-    @Override
-    ValidatorContext<T> removeEnvironmentValue(final EnvironmentValueName<?> name);
 }

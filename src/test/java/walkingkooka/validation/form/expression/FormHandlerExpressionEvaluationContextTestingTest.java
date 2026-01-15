@@ -244,27 +244,16 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
-        public <T> TestFormHandlerExpressionEvaluationContext setEnvironmentValue(final EnvironmentValueName<T> name,
-                                                                                  final T value) {
+        public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
+                                            final T value) {
             Objects.requireNonNull(name, "name");
             Objects.requireNonNull(value, "value");
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public TestFormHandlerExpressionEvaluationContext removeEnvironmentValue(final EnvironmentValueName<?> name) {
+        public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
             Objects.requireNonNull(name, "name");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Optional<EmailAddress> user() {
-            return ANONYMOUS;
-        }
-
-        @Override
-        public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> setUser(final Optional<EmailAddress> user) {
-            Objects.requireNonNull(user, "user");
             throw new UnsupportedOperationException();
         }
 
@@ -274,8 +263,19 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
-        public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> setLineEnding(LineEnding lineEnding) {
+        public void setLineEnding(LineEnding lineEnding) {
             Objects.requireNonNull(lineEnding, "lineEnding");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Optional<EmailAddress> user() {
+            return ANONYMOUS;
+        }
+
+        @Override
+        public void setUser(final Optional<EmailAddress> user) {
+            Objects.requireNonNull(user, "user");
             throw new UnsupportedOperationException();
         }
 

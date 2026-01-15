@@ -18,10 +18,6 @@
 package walkingkooka.validation.form.expression;
 
 import walkingkooka.environment.EnvironmentContext;
-import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.environment.EnvironmentValueWatcher;
-import walkingkooka.net.email.EmailAddress;
-import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import walkingkooka.validation.ValidationReference;
@@ -31,9 +27,7 @@ import walkingkooka.validation.form.FormField;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Function;
 
 public class FakeFormHandlerExpressionEvaluationContext<R extends ValidationReference, S> extends FakeExpressionEvaluationContext implements FormHandlerExpressionEvaluationContext<R, S> {
@@ -81,65 +75,6 @@ public class FakeFormHandlerExpressionEvaluationContext<R extends ValidationRefe
 
     @Override
     public FormHandlerExpressionEvaluationContext<R, S> setEnvironmentContext(final EnvironmentContext environmentContext) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public <T> Optional<T> environmentValue(final EnvironmentValueName<T> environmentValueName) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Set<EnvironmentValueName<?>> environmentValueNames() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public <T> FormHandlerExpressionEvaluationContext<R, S> setEnvironmentValue(final EnvironmentValueName<T> name,
-                                                                                final T value) {
-        Objects.requireNonNull(name, "name");
-        Objects.requireNonNull(value, "value");
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public FormHandlerExpressionEvaluationContext<R, S> removeEnvironmentValue(final EnvironmentValueName<?> name) {
-        Objects.requireNonNull(name, "name");
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Optional<EmailAddress> user() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public FormHandlerExpressionEvaluationContext<R, S> setUser(final Optional<EmailAddress> user) {
-        throw new UnsupportedOperationException();
-    }
-
-    // HasLineEnding....................................................................................................
-
-    @Override
-    public LineEnding lineEnding() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public FormHandlerExpressionEvaluationContext<R, S> setLineEnding(final LineEnding lineEnding) {
-        Objects.requireNonNull(lineEnding, "lineEnding");
-        throw new UnsupportedOperationException();
-    }
-
-    // LocaleContext....................................................................................................
-
-    @Override
-    public Runnable addEventValueWatcher(final EnvironmentValueWatcher watcher) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Runnable addEventValueWatcherOnce(final EnvironmentValueWatcher watcher) {
         throw new UnsupportedOperationException();
     }
 }

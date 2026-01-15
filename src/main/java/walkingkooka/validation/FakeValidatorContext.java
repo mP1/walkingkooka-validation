@@ -68,26 +68,6 @@ public class FakeValidatorContext<T extends ValidationReference> extends FakeCon
     }
 
     @Override
-    public LineEnding lineEnding() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public ValidatorContext<T> setLineEnding(final LineEnding lineEnding) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void setLocale(final Locale locale) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public ValidatorContext<T> setUser(final Optional<EmailAddress> user) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public <T> Optional<T> environmentValue(final EnvironmentValueName<T> environmentValueName) {
         throw new UnsupportedOperationException();
     }
@@ -98,7 +78,7 @@ public class FakeValidatorContext<T extends ValidationReference> extends FakeCon
     }
 
     @Override
-    public <TT> ValidatorContext<T> setEnvironmentValue(final EnvironmentValueName<TT> name,
+    public <TT> void setEnvironmentValue(final EnvironmentValueName<TT> name,
                                                         final TT value) {
         Objects.requireNonNull(name, "name");
         Objects.requireNonNull(value, "value");
@@ -106,8 +86,28 @@ public class FakeValidatorContext<T extends ValidationReference> extends FakeCon
     }
 
     @Override
-    public ValidatorContext<T> removeEnvironmentValue(final EnvironmentValueName<?> name) {
+    public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
         Objects.requireNonNull(name, "name");
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public LineEnding lineEnding() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setLineEnding(final LineEnding lineEnding) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setLocale(final Locale locale) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setUser(final Optional<EmailAddress> user) {
         throw new UnsupportedOperationException();
     }
 

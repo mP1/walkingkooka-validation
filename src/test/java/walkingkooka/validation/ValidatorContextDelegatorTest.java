@@ -163,18 +163,6 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
         private final ValidatorContext<TestValidationReference> context;
 
         @Override
-        public void setLocale(final Locale locale) {
-            Objects.requireNonNull(locale, "locale");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public ValidatorContext<TestValidationReference> setUser(final Optional<EmailAddress> user) {
-            Objects.requireNonNull(user, "user");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
         public TestValidatorContext cloneEnvironment() {
             throw new UnsupportedOperationException();
         }
@@ -187,16 +175,28 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
         }
 
         @Override
-        public <T> TestValidatorContext setEnvironmentValue(final EnvironmentValueName<T> name,
-                                                            final T value) {
+        public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
+                                            final T value) {
             Objects.requireNonNull(name, "name");
             Objects.requireNonNull(value, "value");
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public TestValidatorContext removeEnvironmentValue(final EnvironmentValueName<?> name) {
+        public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
             Objects.requireNonNull(name, "name");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void setLocale(final Locale locale) {
+            Objects.requireNonNull(locale, "locale");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void setUser(final Optional<EmailAddress> user) {
+            Objects.requireNonNull(user, "user");
             throw new UnsupportedOperationException();
         }
 

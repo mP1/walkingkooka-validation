@@ -17,9 +17,6 @@
 
 package walkingkooka.validation.expression;
 
-import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.net.email.EmailAddress;
-import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContextDelegator;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.Form;
@@ -30,38 +27,6 @@ public interface ValidatorExpressionEvaluationContextDelegator<R extends Validat
     ExpressionEvaluationContextDelegator {
 
     // ExpressionEvaluationContextDelegator.............................................................................
-
-    @Override
-    default <T> ValidatorExpressionEvaluationContext<R> setEnvironmentValue(final EnvironmentValueName<T> name,
-                                                                            final T value) {
-        this.expressionEvaluationContext()
-            .setEnvironmentValue(
-                name,
-                value
-            );
-        return this;
-    }
-
-    @Override
-    default ValidatorExpressionEvaluationContext<R> removeEnvironmentValue(final EnvironmentValueName<?> name) {
-        this.expressionEvaluationContext()
-            .removeEnvironmentValue(name);
-        return this;
-    }
-
-    @Override
-    default ValidatorExpressionEvaluationContext<R> setLineEnding(final LineEnding lineEnding) {
-        this.environmentContext()
-            .setLineEnding(lineEnding);
-        return this;
-    }
-
-    @Override
-    default ValidatorExpressionEvaluationContext<R> setUser(final Optional<EmailAddress> user) {
-        this.environmentContext()
-            .setUser(user);
-        return this;
-    }
 
     @Override
     ValidatorExpressionEvaluationContext<R> expressionEvaluationContext();
