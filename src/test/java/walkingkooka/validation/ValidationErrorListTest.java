@@ -178,7 +178,7 @@ public final class ValidationErrorListTest implements ImmutableListTesting<Valid
                 "    },\n" +
                 "    \"message\": \"Something went wrong 123\",\n" +
                 "    \"value\": {\n" +
-                "      \"type\": \"url\",\n" +
+                "      \"type\": \"absolute-url\",\n" +
                 "      \"value\": \"https://example.com\"\n" +
                 "    }\n" +
                 "  }\n" +

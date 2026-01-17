@@ -450,7 +450,7 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
                 "  \"label\": \"Label123\",\n" +
                 "  \"type\": \"type-1\",\n" +
                 "  \"value\": {\n" +
-                "    \"type\": \"url\",\n" +
+                "    \"type\": \"absolute-url\",\n" +
                 "    \"value\": \"https://example.com\"\n" +
                 "  },\n" +
                 "  \"validator\": \"hello-validator\"\n" +

@@ -175,7 +175,7 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                 "    \"label\": \"Label2\",\n" +
                 "    \"type\": \"type222\",\n" +
                 "    \"value\": {\n" +
-                "      \"type\": \"url\",\n" +
+                "      \"type\": \"absolute-url\",\n" +
                 "      \"value\": \"https://example.com/2\"\n" +
                 "    }\n" +
                 "  }\n" +
