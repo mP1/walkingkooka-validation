@@ -168,7 +168,7 @@ public final class ValidationCheckboxTest implements ClassTesting<ValidationChec
                 "    \"value\": \"1999-12-31\"\n" +
                 "  },\n" +
                 "  \"false\": {\n" +
-                "    \"type\": \"url\",\n" +
+                "    \"type\": \"absolute-url\",\n" +
                 "    \"value\": \"https://example.com\"\n" +
                 "  }\n" +
                 "}"
