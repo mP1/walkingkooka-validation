@@ -17,6 +17,7 @@
 
 package walkingkooka.validation.form;
 
+import walkingkooka.Cast;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.environment.EnvironmentValueWatcher;
@@ -142,7 +143,19 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                 public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
                     Objects.requireNonNull(name, "name");
 
-                    throw new UnsupportedOperationException();
+                    return Cast.to(
+                        LOCALE.equals(name) ?
+                            Optional.of(
+                                this.locale()
+                            ) :
+                            LINE_ENDING.equals(name) ?
+                                Optional.of(
+                                    this.lineEnding()
+                                ) :
+                                USER.equals(name) ?
+                                    this.user() :
+                                    Optional.empty()
+                    );
                 }
 
                 @Override
