@@ -29,6 +29,7 @@ import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.text.CaseSensitivity;
+import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionFunctionName;
@@ -142,6 +143,11 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
         @Override
         public long dateOffset() {
             return 0;
+        }
+
+        @Override
+        public Indentation indentation() {
+            return Indentation.SPACES2;
         }
 
         @Override

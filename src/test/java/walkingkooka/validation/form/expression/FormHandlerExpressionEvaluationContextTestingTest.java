@@ -31,6 +31,7 @@ import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.CaseSensitivity;
+import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionFunctionName;
@@ -195,6 +196,11 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         @Override
         public long dateOffset() {
             return 0;
+        }
+
+        @Override
+        public Indentation indentation() {
+            return Indentation.SPACES2;
         }
 
         @Override
