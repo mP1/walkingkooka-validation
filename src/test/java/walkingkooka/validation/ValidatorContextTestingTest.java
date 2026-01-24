@@ -60,6 +60,11 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
     }
 
     @Override
+    public void testSetIndentationWithDifferentAndWatcher() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void testSetLineEndingWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
@@ -119,6 +124,17 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
             throw new UnsupportedOperationException();
         }
 
+        @Override
+        public Indentation indentation() {
+            return ValidatorContextTestingTest.INDENTATION;
+        }
+
+        @Override
+        public void setIndentation(final Indentation indentation) {
+            Objects.requireNonNull(indentation, "indentation");
+            throw new UnsupportedOperationException();
+        }
+        
         @Override
         public LineEnding lineEnding() {
             return ValidatorContextTestingTest.LINE_ENDING;
@@ -190,6 +206,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         @Override
         public EnvironmentContext environmentContext() {
             return EnvironmentContexts.empty(
+                Indentation.SPACES2,
                 LineEnding.NL,
                 ValidatorContextTestingTest.LOCALE,
                 this,

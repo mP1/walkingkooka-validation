@@ -98,6 +98,11 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
     }
 
     @Override
+    public void testSetIndentationWithDifferentAndWatcher() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void testSetLineEndingWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
@@ -201,6 +206,12 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         @Override
         public Indentation indentation() {
             return Indentation.SPACES2;
+        }
+
+        @Override
+        public void setIndentation(final Indentation indentation) {
+            Objects.requireNonNull(indentation, "indentation");
+            throw new UnsupportedOperationException();
         }
 
         @Override

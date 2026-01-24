@@ -24,6 +24,7 @@ import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.math.DecimalNumberContexts;
+import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionReference;
@@ -278,6 +279,7 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
 
         private final EnvironmentContext environmentContext = EnvironmentContexts.map(
             EnvironmentContexts.empty(
+                Indentation.SPACES2,
                 LineEnding.NL,
                 DECIMAL_NUMBER_CONTEXT.locale(),
                 () -> LocalDateTime.MIN,
