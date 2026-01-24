@@ -22,6 +22,7 @@ import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.environment.EnvironmentValueWatcher;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidatorContext;
@@ -61,6 +62,11 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
 
     @Override
     public void testSetEnvironmentValueWithNowFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetIndentationWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
 
@@ -144,17 +150,21 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                     Objects.requireNonNull(name, "name");
 
                     return Cast.to(
-                        LOCALE.equals(name) ?
+                        INDENTATION.equals(name) ?
                             Optional.of(
-                                this.locale()
+                                this.indentation()
                             ) :
-                            LINE_ENDING.equals(name) ?
+                            LOCALE.equals(name) ?
                                 Optional.of(
-                                    this.lineEnding()
+                                    this.locale()
                                 ) :
-                                USER.equals(name) ?
-                                    this.user() :
-                                    Optional.empty()
+                                LINE_ENDING.equals(name) ?
+                                    Optional.of(
+                                        this.lineEnding()
+                                    ) :
+                                    USER.equals(name) ?
+                                        this.user() :
+                                        Optional.empty()
                     );
                 }
 
@@ -170,6 +180,11 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                 public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
                     Objects.requireNonNull(name, "name");
                     throw new UnsupportedOperationException();
+                }
+
+                @Override
+                public Indentation indentation() {
+                    return Indentation.SPACES2;
                 }
 
                 @Override

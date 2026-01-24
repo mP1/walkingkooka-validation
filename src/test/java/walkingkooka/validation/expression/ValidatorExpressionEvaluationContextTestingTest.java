@@ -65,6 +65,11 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
     }
 
     @Override
+    public void testSetIndentationWithDifferentAndWatcher() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public TestValidatorExpressionEvaluationContext createContext() {
         return new TestValidatorExpressionEvaluationContext();
     }
@@ -257,6 +262,7 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
         private final EnvironmentContext environmentContext = EnvironmentContexts.map(
             EnvironmentContexts.empty(
+                Indentation.SPACES2,
                 LineEnding.NL,
                 DECIMAL_NUMBER_CONTEXT.locale(),
                 () -> ValidatorExpressionEvaluationContextTestingTest.NOW,

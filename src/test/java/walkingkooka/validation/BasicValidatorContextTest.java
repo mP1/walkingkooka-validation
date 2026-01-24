@@ -90,6 +90,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
     private final static EnvironmentContext ENVIRONMENT_CONTEXT = EnvironmentContexts.readOnly(
         Predicates.always(), // all values are readonly
         EnvironmentContexts.empty(
+            INDENTATION,
             LINE_ENDING,
             LOCALE,
             () -> LocalDateTime.of(

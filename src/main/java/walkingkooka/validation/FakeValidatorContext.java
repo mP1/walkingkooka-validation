@@ -22,6 +22,7 @@ import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.environment.EnvironmentValueWatcher;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
@@ -91,6 +92,16 @@ public class FakeValidatorContext<T extends ValidationReference> extends FakeCon
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public Indentation indentation() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setIndentation(final Indentation indentation) {
+        throw new UnsupportedOperationException();
+    }
+    
     @Override
     public LineEnding lineEnding() {
         throw new UnsupportedOperationException();

@@ -22,6 +22,7 @@ import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.environment.EnvironmentValueWatcher;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidatorContext;
@@ -64,6 +65,11 @@ public final class FormHandlerContextTestingTest implements FormHandlerContextTe
 
     @Override
     public void testSetEnvironmentValueWithNowFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetIndentationWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
 
@@ -179,6 +185,17 @@ public final class FormHandlerContextTestingTest implements FormHandlerContextTe
             throw new UnsupportedOperationException();
         }
 
+        @Override
+        public Indentation indentation() {
+            return Indentation.SPACES2;
+        }
+
+        @Override
+        public void setIndentation(final Indentation indentation) {
+            Objects.requireNonNull(indentation, "indentation");
+            throw new UnsupportedOperationException();
+        }
+        
         @Override
         public LineEnding lineEnding() {
             return LineEnding.NL;
