@@ -46,6 +46,7 @@ import walkingkooka.validation.form.FormField;
 import walkingkooka.validation.form.expression.FormHandlerExpressionEvaluationContextTestingTest.TestFormHandlerExpressionEvaluationContext;
 
 import java.math.MathContext;
+import java.time.ZoneOffset;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
@@ -114,6 +115,11 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
 
     @Override
     public void testSetLocaleWithDifferentAndWatcher() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetTimeOffsetWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
 
@@ -282,6 +288,17 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         @Override
         public void setLineEnding(LineEnding lineEnding) {
             Objects.requireNonNull(lineEnding, "lineEnding");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public ZoneOffset timeOffset() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void setTimeOffset(final ZoneOffset timeOffset) {
+            Objects.requireNonNull(timeOffset, "timeOffset");
             throw new UnsupportedOperationException();
         }
 
