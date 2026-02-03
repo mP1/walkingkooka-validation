@@ -27,6 +27,7 @@ import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
+import java.time.ZoneOffset;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
@@ -114,6 +115,16 @@ public class FakeValidatorContext<T extends ValidationReference> extends FakeCon
 
     @Override
     public void setLocale(final Locale locale) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public ZoneOffset timeOffset() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setTimeOffset(final ZoneOffset timeOffset) {
         throw new UnsupportedOperationException();
     }
 

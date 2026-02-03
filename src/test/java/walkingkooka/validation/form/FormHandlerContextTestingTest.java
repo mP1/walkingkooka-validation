@@ -29,6 +29,7 @@ import walkingkooka.validation.ValidatorContext;
 import walkingkooka.validation.form.FormHandlerContextTestingTest.TestFormHandlerContext;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
@@ -85,6 +86,11 @@ public final class FormHandlerContextTestingTest implements FormHandlerContextTe
 
     @Override
     public void testSetLocaleWithDifferentAndWatcher() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetTimeOffsetWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
 
@@ -220,6 +226,17 @@ public final class FormHandlerContextTestingTest implements FormHandlerContextTe
 
         @Override
         public LocalDateTime now() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public ZoneOffset timeOffset() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void setTimeOffset(final ZoneOffset timeOffset) {
+            Objects.requireNonNull(timeOffset, "timeOffset");
             throw new UnsupportedOperationException();
         }
 
