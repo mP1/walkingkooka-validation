@@ -43,6 +43,7 @@ import walkingkooka.validation.form.Form;
 
 import java.math.MathContext;
 import java.time.LocalDateTime;
+import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -262,6 +263,7 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
         private final EnvironmentContext environmentContext = EnvironmentContexts.map(
             EnvironmentContexts.empty(
+                Currency.getInstance("AUD"),
                 Indentation.SPACES2,
                 LineEnding.NL,
                 DECIMAL_NUMBER_CONTEXT.locale(),
