@@ -39,6 +39,7 @@ import walkingkooka.validation.provider.ValidatorSelector;
 import java.math.MathContext;
 import java.text.DateFormatSymbols;
 import java.time.LocalDateTime;
+import java.util.Currency;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
@@ -56,6 +57,11 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
 
     @Override
     public void testSetEnvironmentValueWithNowFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetCurrencyWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
 
@@ -211,6 +217,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         @Override
         public EnvironmentContext environmentContext() {
             return EnvironmentContexts.empty(
+                Currency.getInstance("AUD"),
                 Indentation.SPACES2,
                 LineEnding.NL,
                 ValidatorContextTestingTest.LOCALE,

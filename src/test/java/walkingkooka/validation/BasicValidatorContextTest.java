@@ -39,6 +39,7 @@ import walkingkooka.validation.provider.ValidatorSelector;
 import java.math.MathContext;
 import java.text.DateFormatSymbols;
 import java.time.LocalDateTime;
+import java.util.Currency;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -50,6 +51,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class BasicValidatorContextTest implements ValidatorContextTesting<BasicValidatorContext<TestValidationReference>, TestValidationReference>,
     ToStringTesting<BasicValidatorContext<TestValidationReference>> {
+
+    private final static Currency CURRENCY = Currency.getInstance("AUD");
 
     private final static LineEnding LINE_ENDING = LineEnding.NL;
 
@@ -90,6 +93,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
     private final static EnvironmentContext ENVIRONMENT_CONTEXT = EnvironmentContexts.readOnly(
         Predicates.always(), // all values are readonly
         EnvironmentContexts.empty(
+            CURRENCY,
             INDENTATION,
             LINE_ENDING,
             LOCALE,
@@ -258,6 +262,14 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
     @Override
     public void testSetEnvironmentValueWithNowFails() {
         throw new UnsupportedOperationException();
+    }
+
+    @Test
+    public void testCurrency() {
+        this.currencyAndCheck(
+            this.createContext(),
+            CURRENCY
+        );
     }
 
     @Override
