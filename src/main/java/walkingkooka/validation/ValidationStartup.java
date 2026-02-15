@@ -23,6 +23,7 @@ import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.validation.form.provider.FormHandlerAliasSet;
 import walkingkooka.validation.form.provider.FormHandlerInfoSet;
 import walkingkooka.validation.form.provider.FormHandlerSelector;
+import walkingkooka.validation.provider.OptionalValidatorSelector;
 import walkingkooka.validation.provider.ValidatorAliasSet;
 import walkingkooka.validation.provider.ValidatorInfoSet;
 import walkingkooka.validation.provider.ValidatorSelector;
@@ -50,7 +51,7 @@ public final class ValidationStartup implements PublicStaticHelper {
         ValidatorAliasSet.EMPTY.size();
         ValidatorInfoSet.EMPTY.size();
         ValidatorSelector.parse("hello");
-
+        OptionalValidatorSelector.EMPTY.value();
     }
 
     public static void init() {
