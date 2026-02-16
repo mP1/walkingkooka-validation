@@ -392,14 +392,12 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
                 @Override
                 public Set<Locale> findByLocaleText(final String text,
                                                     final int offset,
-                                                    final int count,
-                                                    final Locale locale) {
-                    return LocaleContexts.jre(locale)
+                                                    final int count) {
+                    return LocaleContexts.jre(Locale.ENGLISH)
                         .findByLocaleText(
                             text,
                             offset,
-                            count,
-                            locale
+                            count
                         );
                 }
             };
