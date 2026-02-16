@@ -236,12 +236,14 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
                 @Override
                 public Set<Locale> findByLocaleText(final String text,
                                                     final int offset,
-                                                    final int count) {
-                    return LocaleContexts.jre(Locale.ENGLISH)
+                                                    final int count,
+                                                    final Locale locale) {
+                    return LocaleContexts.jre(locale)
                         .findByLocaleText(
                             text,
                             offset,
-                            count
+                            count,
+                            locale
                         );
                 }
 
