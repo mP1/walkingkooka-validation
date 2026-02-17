@@ -395,6 +395,12 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
                             count
                         );
                 }
+
+                @Override
+                public Optional<Locale> localeForLanguageTag(final String languageTag) {
+                    Objects.requireNonNull(languageTag, "languageTag");
+                    throw new UnsupportedOperationException();
+                }
             };
         }
 

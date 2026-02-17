@@ -233,6 +233,15 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
     }
 
     private final static ConverterContext CONVERTER_CONTEXT = ConverterContexts.basic(
+        (l) -> {
+            throw new UnsupportedOperationException();
+        }, // canCurrencyForLocale
+        (l) -> {
+            throw new UnsupportedOperationException();
+        }, // canDateTimeSymbolsForLocale
+        (l) -> {
+            throw new UnsupportedOperationException();
+        }, // canDecimalNumberSymbolsForLocale
         false, // canNumbersHaveGroupSeparator
         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // dateOffset
         Indentation.SPACES2,

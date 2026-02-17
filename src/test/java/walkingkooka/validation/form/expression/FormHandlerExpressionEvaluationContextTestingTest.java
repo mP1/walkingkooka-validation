@@ -211,6 +211,11 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
+        public Optional<Currency> currencyForLocale(final Locale locale) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public long dateOffset() {
             return 0;
         }
