@@ -241,6 +241,12 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
                 }
 
                 @Override
+                public Optional<Locale> localeForLanguageTag(final String languageTag) {
+                    Objects.requireNonNull(languageTag, "languageTag");
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
                 public LineEnding lineEnding() {
                     return LineEnding.NL;
                 }
