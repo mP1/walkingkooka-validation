@@ -74,6 +74,9 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
         (l) -> {
             throw new UnsupportedOperationException();
         }, // canDecimalNumberSymbolsForLocale
+        (lt) -> {
+            throw new UnsupportedOperationException();
+        }, // canLocaleForLanguageTag
         false, // canNumbersHaveGroupSeparator
         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // offset
         Indentation.SPACES2,
