@@ -27,6 +27,7 @@ import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.environment.EnvironmentValueName;
+import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.Indentation;
@@ -236,15 +237,6 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         (l) -> {
             throw new UnsupportedOperationException();
         }, // canCurrencyForLocale
-        (l) -> {
-            throw new UnsupportedOperationException();
-        }, // canDateTimeSymbolsForLocale
-        (l) -> {
-            throw new UnsupportedOperationException();
-        }, // canDecimalNumberSymbolsForLocale
-        (lt) -> {
-            throw new UnsupportedOperationException();
-        }, // canLocaleForLanguageTag
         false, // canNumbersHaveGroupSeparator
         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // dateOffset
         Indentation.SPACES2,
@@ -269,7 +261,8 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         ),
         DecimalNumberContexts.american(
             MathContext.DECIMAL32
-        )
+        ),
+        LocaleContexts.fake()
     );
 
     // class............................................................................................................
