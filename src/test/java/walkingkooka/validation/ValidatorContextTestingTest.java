@@ -21,13 +21,13 @@ import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.ConverterContextDelegator;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
+import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.Indentation;
@@ -234,15 +234,13 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
     }
 
     private final static ConverterContext CONVERTER_CONTEXT = ConverterContexts.basic(
-        (l) -> {
-            throw new UnsupportedOperationException();
-        }, // canCurrencyForLocale
         false, // canNumbersHaveGroupSeparator
         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // dateOffset
         Indentation.SPACES2,
         LineEnding.NL,
         ',', // valueSeparator
         Converters.objectToString(),
+        CurrencyLocaleContexts.fake(),
         DateTimeContexts.basic(
             DateTimeSymbols.fromDateFormatSymbols(
                 new DateFormatSymbols(LOCALE)
@@ -261,8 +259,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         ),
         DecimalNumberContexts.american(
             MathContext.DECIMAL32
-        ),
-        LocaleContexts.fake()
+        )
     );
 
     // class............................................................................................................
