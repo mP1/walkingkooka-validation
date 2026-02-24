@@ -20,12 +20,12 @@ package walkingkooka.validation;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
+import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
@@ -66,15 +66,13 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
     private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
     private final static ConverterContext CONVERTER_CONTEXT = ConverterContexts.basic(
-        (l) -> {
-            throw new UnsupportedOperationException();
-        }, // canCurrencyForLocale
         false, // canNumbersHaveGroupSeparator
         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // offset
         Indentation.SPACES2,
         LineEnding.NL,
         ',', // valueSeparator
         Converters.simple(),
+        CurrencyLocaleContexts.fake(),
         DateTimeContexts.basic(
             DateTimeSymbols.fromDateFormatSymbols(
                 new DateFormatSymbols(LOCALE)
@@ -84,8 +82,7 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
             50, // twoDigitYear
             () -> LocalDateTime.MIN
         ),
-        DECIMAL_NUMBER_CONTEXT,
-        LocaleContexts.fake()
+        DECIMAL_NUMBER_CONTEXT
     );
 
     private final static EnvironmentContext ENVIRONMENT_CONTEXT = EnvironmentContexts.readOnly(
