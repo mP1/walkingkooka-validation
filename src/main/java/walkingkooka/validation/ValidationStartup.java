@@ -20,6 +20,8 @@ package walkingkooka.validation;
 import walkingkooka.plugin.PluginStartup;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
+import walkingkooka.validation.form.Form;
+import walkingkooka.validation.form.FormName;
 import walkingkooka.validation.form.provider.FormHandlerAliasSet;
 import walkingkooka.validation.form.provider.FormHandlerInfoSet;
 import walkingkooka.validation.form.provider.FormHandlerSelector;
@@ -35,6 +37,10 @@ public final class ValidationStartup implements PublicStaticHelper {
 
     static {
         PluginStartup.init();
+
+        Form.with(
+            FormName.with("Hello")
+        );
 
         ValidationCheckbox.TRUE_FALSE.trueValue();
         ValidationChoiceList.EMPTY.toString();
