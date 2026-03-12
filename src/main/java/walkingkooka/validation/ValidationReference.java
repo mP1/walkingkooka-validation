@@ -20,7 +20,7 @@ package walkingkooka.validation;
 import walkingkooka.text.HasText;
 
 /**
- * Tag for an identifier that names a field that can be validated.
+ * Tag for an identifier that names a value that can be validated.
  */
 public interface ValidationReference extends HasText {
 
