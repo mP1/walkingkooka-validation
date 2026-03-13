@@ -20,7 +20,9 @@ package walkingkooka.validation.form;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
+import walkingkooka.InvalidTextLengthException;
 import walkingkooka.net.Url;
+import walkingkooka.text.CharSequences;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
@@ -156,6 +158,30 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
         assertThrows(
             NullPointerException.class,
             () -> this.createObject().setLabel(null)
+        );
+    }
+
+    @Test
+    public void testSetLabelWithInvalidLengthFails() {
+        final InvalidTextLengthException thrown = assertThrows(
+            InvalidTextLengthException.class,
+            () -> this.createObject()
+                .setLabel(
+                    CharSequences.repeating('A', FormField.MAX_LABEL_LENGTH + 1)
+                        .toString()
+                )
+        );
+
+        this.checkEquals(
+            FormField.MIN_LABEL_LENGTH,
+            thrown.min(),
+            "min"
+        );
+
+        this.checkEquals(
+            FormField.MAX_LABEL_LENGTH,
+            thrown.max(),
+            "max"
         );
     }
 
