@@ -18,6 +18,7 @@
 package walkingkooka.validation.form;
 
 import walkingkooka.Cast;
+import walkingkooka.InvalidTextLengthException;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
@@ -89,6 +90,10 @@ public final class FormField<R extends ValidationReference> implements TreePrint
 
     public final static String NO_LABEL = "";
 
+    public final static int MIN_LABEL_LENGTH = 0;
+
+    public final static int MAX_LABEL_LENGTH = 50;
+
     public String label() {
         return this.label;
     }
@@ -98,7 +103,7 @@ public final class FormField<R extends ValidationReference> implements TreePrint
             this :
             new FormField<>(
                 this.reference,
-                Objects.requireNonNull(label, "label"),
+                InvalidTextLengthException.throwIfFail("label", label, MIN_LABEL_LENGTH, MAX_LABEL_LENGTH),
                 this.type,
                 this.value,
                 this.validator
