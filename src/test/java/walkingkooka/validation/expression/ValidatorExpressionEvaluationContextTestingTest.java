@@ -18,6 +18,7 @@
 package walkingkooka.validation.expression;
 
 import walkingkooka.Either;
+import walkingkooka.currency.CurrencyCode;
 import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
@@ -147,7 +148,7 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
         }
 
         @Override
-        public Optional<Currency> currencyForCurrencyCode(final String currencyCode) {
+        public Optional<Currency> currencyForCurrencyCode(final CurrencyCode currencyCode) {
             Objects.requireNonNull(currencyCode, "currencyCode");
             throw new UnsupportedOperationException();
         }
