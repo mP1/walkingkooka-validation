@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.locale.LocaleContexts;
+import walkingkooka.locale.LocaleLanguageTag;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.math.DecimalNumberContexts;
@@ -241,7 +242,7 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
                 }
 
                 @Override
-                public Optional<Locale> localeForLanguageTag(final String languageTag) {
+                public Optional<Locale> localeForLanguageTag(final LocaleLanguageTag languageTag) {
                     Objects.requireNonNull(languageTag, "languageTag");
                     throw new UnsupportedOperationException();
                 }
