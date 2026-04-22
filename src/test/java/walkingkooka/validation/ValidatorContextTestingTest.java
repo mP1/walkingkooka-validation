@@ -21,6 +21,7 @@ import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.ConverterContextDelegator;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
+import walkingkooka.currency.CurrencyCode;
 import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.datetime.DateTimeSymbols;
@@ -178,6 +179,11 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         @Override
         public ExpressionEvaluationContext expressionEvaluationContext(final Object value) {
             return ExpressionEvaluationContexts.fake();
+        }
+
+        @Override
+        public CurrencyCode currencyCode() {
+            return CONVERTER_CONTEXT.currencyCode();
         }
 
         @Override
