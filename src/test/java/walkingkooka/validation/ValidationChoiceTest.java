@@ -20,6 +20,7 @@ package walkingkooka.validation;
 import org.junit.jupiter.api.Test;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
+import walkingkooka.ValueTesting;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.json.JsonNode;
@@ -33,7 +34,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class ValidationChoiceTest implements ClassTesting<ValidationChoice>,
     HashCodeEqualsDefinedTesting2<ValidationChoice>,
     JsonNodeMarshallingTesting<ValidationChoice>,
-    ToStringTesting<ValidationChoice> {
+    ToStringTesting<ValidationChoice>,
+    ValueTesting {
 
     private final static String LABEL = "Label111";
     private final static Optional<Object> VALUE = Optional.of(222);
@@ -73,10 +75,9 @@ public final class ValidationChoiceTest implements ClassTesting<ValidationChoice
             "label"
         );
 
-        this.checkEquals(
-            VALUE,
-            choice.value(),
-            "value"
+        this.valueAndCheck(
+            choice,
+            VALUE
         );
     }
 
