@@ -26,7 +26,7 @@ import walkingkooka.plugin.PluginSelectorLikeTesting;
 import walkingkooka.plugin.ProviderContext;
 import walkingkooka.plugin.ProviderContexts;
 import walkingkooka.reflect.JavaVisibility;
-import walkingkooka.text.CharSequences;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.TestValidationReference;
@@ -40,7 +40,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class ValidatorSelectorTest implements PluginSelectorLikeTesting<ValidatorSelector, ValidatorName> {
+public final class ValidatorSelectorTest implements PluginSelectorLikeTesting<ValidatorSelector, ValidatorName>,
+    ThrowableTesting {
 
     private final static ValidatorName NAME = ValidatorName.with("super-magic-validator123");
 
@@ -88,12 +89,12 @@ public final class ValidatorSelectorTest implements PluginSelectorLikeTesting<Va
                 )
         );
 
-        this.checkEquals(
+        this.getMessageAndCheck(
+            thrown,
             new InvalidCharacterException(
                 text,
                 text.indexOf(' ')
-            ).getMessage(),
-            thrown.getMessage()
+            ).getMessage()
         );
     }
 
@@ -429,10 +430,9 @@ public final class ValidatorSelectorTest implements PluginSelectorLikeTesting<Va
                     context
                 )
         );
-        this.checkEquals(
-            expected,
-            thrown.getMessage(),
-            () -> "validator " + CharSequences.quoteAndEscape(selector)
+        this.getMessageAndCheck(
+            thrown,
+            expected
         );
     }
 

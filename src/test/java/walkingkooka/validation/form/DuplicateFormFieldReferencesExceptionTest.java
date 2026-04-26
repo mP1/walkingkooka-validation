@@ -31,7 +31,7 @@ public final class DuplicateFormFieldReferencesExceptionTest implements Throwabl
 
     @Test
     public void testGetMessage() {
-        this.checkMessage(
+        this.getMessageAndCheck(
             new DuplicateFormFieldReferencesException(
                 new LinkedHashSet<>(
                     Lists.of(

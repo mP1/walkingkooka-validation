@@ -26,6 +26,7 @@ import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.Converters;
 import walkingkooka.math.NumberList;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidationChoice;
@@ -36,7 +37,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class ValidationExpressionFunctionValidationChoiceListTest implements ExpressionFunctionTesting<ValidationExpressionFunctionValidationChoiceList<TestValidationReference, FakeValidatorExpressionEvaluationContext<TestValidationReference>>, ValidationChoiceList, FakeValidatorExpressionEvaluationContext<TestValidationReference>> {
+public final class ValidationExpressionFunctionValidationChoiceListTest implements ExpressionFunctionTesting<ValidationExpressionFunctionValidationChoiceList<TestValidationReference, FakeValidatorExpressionEvaluationContext<TestValidationReference>>, ValidationChoiceList, FakeValidatorExpressionEvaluationContext<TestValidationReference>>,
+    ThrowableTesting {
 
     // apply............................................................................................................
 
@@ -88,9 +90,9 @@ public final class ValidationExpressionFunctionValidationChoiceListTest implemen
             )
         );
 
-        this.checkEquals(
-            "Invalid values count 3 != labels count 2",
-            thrown.getMessage()
+        this.getMessageAndCheck(
+            thrown,
+            "Invalid values count 3 != labels count 2"
         );
     }
 

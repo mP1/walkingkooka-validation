@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidationError;
@@ -32,7 +33,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class FormHandlerExpressionFunctionRequiredFormFieldsTest implements ExpressionFunctionTesting<FormHandlerExpressionFunctionRequiredFormFields<TestValidationReference, Void, FakeFormHandlerExpressionEvaluationContext<TestValidationReference, Void>>, ValidationErrorList<TestValidationReference>, FakeFormHandlerExpressionEvaluationContext<TestValidationReference, Void>> {
+public final class FormHandlerExpressionFunctionRequiredFormFieldsTest implements ExpressionFunctionTesting<FormHandlerExpressionFunctionRequiredFormFields<TestValidationReference, Void, FakeFormHandlerExpressionEvaluationContext<TestValidationReference, Void>>, ValidationErrorList<TestValidationReference>, FakeFormHandlerExpressionEvaluationContext<TestValidationReference, Void>>,
+    ThrowableTesting {
 
     private final static TestValidationReference FIELD1 = new TestValidationReference("Field1");
     private final static TestValidationReference FIELD2 = new TestValidationReference("Field2");
@@ -54,9 +56,9 @@ public final class FormHandlerExpressionFunctionRequiredFormFieldsTest implement
                 Sets.empty()
             )
         );
-        this.checkEquals(
-            "Empty required form fields",
-            thrown.getMessage()
+        this.getMessageAndCheck(
+            thrown,
+            "Empty required form fields"
         );
     }
 
