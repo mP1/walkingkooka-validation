@@ -20,13 +20,15 @@ package walkingkooka.validation.form.expression.function.provider;
 import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.text.CaseSensitivity;
 
 import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class FormHandlerExpressionFunctionProvidersTest implements PublicStaticHelperTesting<FormHandlerExpressionFunctionProviders> {
+public final class FormHandlerExpressionFunctionProvidersTest implements PublicStaticHelperTesting<FormHandlerExpressionFunctionProviders>,
+    ThrowableTesting {
 
     // expressionFunctionProvider.......................................................................................
 
@@ -38,9 +40,9 @@ public final class FormHandlerExpressionFunctionProvidersTest implements PublicS
                 .expressionFunctionInfos()
         );
 
-        this.checkEquals(
-            "Functions cannot be empty",
-            thrown.getMessage()
+        this.getMessageAndCheck(
+            thrown,
+            "Functions cannot be empty"
         );
     }
 

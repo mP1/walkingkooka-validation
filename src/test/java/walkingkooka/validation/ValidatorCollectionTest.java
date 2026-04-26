@@ -20,6 +20,7 @@ package walkingkooka.validation;
 import org.junit.jupiter.api.Test;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.reflect.ThrowableTesting;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ValidatorCollectionTest implements ValidatorTesting2<ValidatorCollection<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    HashCodeEqualsDefinedTesting2<ValidatorCollection<TestValidationReference, TestValidatorContext>> {
+    HashCodeEqualsDefinedTesting2<ValidatorCollection<TestValidationReference, TestValidatorContext>>,
+    ThrowableTesting {
 
     private final static Object VALUE = "Value111";
 
@@ -142,9 +144,9 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
             )
         );
 
-        this.checkEquals(
-            "Invalid maxErrors -1 <= 0",
-            thrown.getMessage()
+        this.getMessageAndCheck(
+            thrown,
+            "Invalid maxErrors -1 <= 0"
         );
     }
 
@@ -158,9 +160,9 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
             )
         );
 
-        this.checkEquals(
-            "Invalid maxErrors 0 <= 0",
-            thrown.getMessage()
+        this.getMessageAndCheck(
+            thrown,
+            "Invalid maxErrors 0 <= 0"
         );
     }
 
@@ -185,9 +187,9 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
             )
         );
 
-        this.checkEquals(
-            "Invalid maxErrors 0 <= 0",
-            thrown.getMessage()
+        this.getMessageAndCheck(
+            thrown,
+            "Invalid maxErrors 0 <= 0"
         );
     }
 

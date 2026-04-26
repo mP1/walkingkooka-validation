@@ -22,6 +22,7 @@ import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.validation.FakeValidator;
 import walkingkooka.validation.FakeValidatorContext;
 import walkingkooka.validation.TestValidationReference;
@@ -36,7 +37,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class FormHandlerContextTest implements ClassTesting2<FormHandlerContext<TestValidationReference, Void>> {
+public final class FormHandlerContextTest implements ClassTesting2<FormHandlerContext<TestValidationReference, Void>>,
+    ThrowableTesting {
 
     // validateFormFields...............................................................................................
 
@@ -74,10 +76,9 @@ public final class FormHandlerContextTest implements ClassTesting2<FormHandlerCo
             )
         );
 
-        this.checkEquals(
-            "Form contains unknown fields: Field1,Field5",
-            thrown.getMessage(),
-            thrown::toString
+        this.getMessageAndCheck(
+                thrown,
+            "Form contains unknown fields: Field1,Field5"
         );
     }
 
