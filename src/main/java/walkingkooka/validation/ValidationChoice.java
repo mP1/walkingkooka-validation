@@ -18,9 +18,9 @@
 package walkingkooka.validation;
 
 import walkingkooka.Cast;
+import walkingkooka.HasValue;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.UsesToStringBuilder;
-import walkingkooka.Value;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
@@ -37,7 +37,7 @@ import java.util.Optional;
 /**
  * A single choice within a list of choices.
  */
-public final class ValidationChoice implements Value<Optional<Object>>,
+public final class ValidationChoice implements HasValue<Optional<Object>>,
     UsesToStringBuilder,
     TreePrintable{
 
