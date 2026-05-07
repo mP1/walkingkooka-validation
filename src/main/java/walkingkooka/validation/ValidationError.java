@@ -18,9 +18,9 @@
 package walkingkooka.validation;
 
 import walkingkooka.Cast;
+import walkingkooka.HasValue;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.UsesToStringBuilder;
-import walkingkooka.Value;
 import walkingkooka.text.HasText;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
@@ -37,7 +37,7 @@ import java.util.Optional;
 /**
  * Reports a single error for the identified field or component. The message and value components are optional.
  */
-public final class ValidationError<T extends ValidationReference> implements Value<Optional<Object>>,
+public final class ValidationError<T extends ValidationReference> implements HasValue<Optional<Object>>,
     HasText,
     UsesToStringBuilder,
     TreePrintable {

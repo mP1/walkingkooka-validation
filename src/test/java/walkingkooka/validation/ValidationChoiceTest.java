@@ -18,9 +18,9 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.HasValueTesting;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
-import walkingkooka.ValueTesting;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.json.JsonNode;
@@ -35,7 +35,7 @@ public final class ValidationChoiceTest implements ClassTesting<ValidationChoice
     HashCodeEqualsDefinedTesting2<ValidationChoice>,
     JsonNodeMarshallingTesting<ValidationChoice>,
     ToStringTesting<ValidationChoice>,
-    ValueTesting {
+    HasValueTesting {
 
     private final static String LABEL = "Label111";
     private final static Optional<Object> VALUE = Optional.of(222);

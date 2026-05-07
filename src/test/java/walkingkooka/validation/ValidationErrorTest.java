@@ -19,9 +19,9 @@ package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
+import walkingkooka.HasValueTesting;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
-import walkingkooka.ValueTesting;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.HasTextTesting;
@@ -42,7 +42,7 @@ public final class ValidationErrorTest implements HasTextTesting,
     ClassTesting<ValidationError<TestValidationReference>>,
     TreePrintableTesting,
     JsonNodeMarshallingTesting<ValidationError<TestValidationReference>>,
-    ValueTesting {
+    HasValueTesting {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("Hello");
 

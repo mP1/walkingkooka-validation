@@ -1,7 +1,7 @@
 package walkingkooka.validation.provider;
 
 import walkingkooka.Cast;
-import walkingkooka.Value;
+import walkingkooka.HasValue;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -13,7 +13,7 @@ import java.util.Optional;
 /**
  * A typed {@link Optional} necessary because generic types are lost in java.
  */
-public final class OptionalValidatorSelector implements Value<Optional<ValidatorSelector>> {
+public final class OptionalValidatorSelector implements HasValue<Optional<ValidatorSelector>> {
 
     public final static OptionalValidatorSelector EMPTY = new OptionalValidatorSelector(Optional.empty());
 
