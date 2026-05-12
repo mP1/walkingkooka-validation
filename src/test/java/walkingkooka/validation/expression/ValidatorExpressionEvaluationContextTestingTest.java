@@ -19,8 +19,6 @@ package walkingkooka.validation.expression;
 
 import walkingkooka.Either;
 import walkingkooka.currency.CurrencyCode;
-import walkingkooka.currency.CurrencyExchangeRater;
-import walkingkooka.currency.CurrencyExchangeRaterDelegator;
 import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
@@ -100,7 +98,6 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
     private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
     final static class TestValidatorExpressionEvaluationContext implements ValidatorExpressionEvaluationContext<TestValidationReference>,
-        CurrencyExchangeRaterDelegator,
         DecimalNumberContextDelegator,
         EnvironmentContextDelegator,
         LocaleContextDelegator {
@@ -323,15 +320,6 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
         public Form<TestValidationReference> form() {
             throw new UnsupportedOperationException();
         }
-
-        // CurrencyExchangeRaterDelegator...............................................................................
-
-        @Override
-        public CurrencyExchangeRater currencyExchangeRater() {
-            throw new UnsupportedOperationException();
-        }
-
-        // Object.......................................................................................................
 
         @Override
         public String toString() {

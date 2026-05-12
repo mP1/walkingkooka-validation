@@ -20,7 +20,6 @@ package walkingkooka.validation;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
-import walkingkooka.currency.CurrencyExchangeRaters;
 import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.datetime.DateTimeSymbols;
@@ -73,7 +72,6 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
         LineEnding.NL,
         ',', // valueSeparator
         Converters.simple(),
-        CurrencyExchangeRaters.fake(),
         CurrencyLocaleContexts.fake(),
         DateTimeContexts.basic(
             DateTimeSymbols.fromDateFormatSymbols(

@@ -22,7 +22,6 @@ import walkingkooka.convert.ConverterContextDelegator;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.Converters;
 import walkingkooka.currency.CurrencyCode;
-import walkingkooka.currency.CurrencyExchangeRaters;
 import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.datetime.DateTimeSymbols;
@@ -247,7 +246,6 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         LineEnding.NL,
         ',', // valueSeparator
         Converters.objectToString(),
-        CurrencyExchangeRaters.fake(),
         CurrencyLocaleContexts.fake(),
         DateTimeContexts.basic(
             DateTimeSymbols.fromDateFormatSymbols(
