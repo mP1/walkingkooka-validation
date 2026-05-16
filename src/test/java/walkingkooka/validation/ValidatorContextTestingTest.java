@@ -17,6 +17,7 @@
 
 package walkingkooka.validation;
 
+import walkingkooka.convert.BinaryNumberConverterFunctions;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.ConverterContextDelegator;
 import walkingkooka.convert.ConverterContexts;
@@ -246,6 +247,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         LineEnding.NL,
         ',', // valueSeparator
         Converters.objectToString(),
+        BinaryNumberConverterFunctions.fake(), // multiplier
         CurrencyLocaleContexts.fake(),
         DateTimeContexts.basic(
             DateTimeSymbols.fromDateFormatSymbols(

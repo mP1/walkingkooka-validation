@@ -20,6 +20,7 @@ package walkingkooka.validation;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.ToStringTesting;
+import walkingkooka.convert.BinaryNumberConverterFunctions;
 import walkingkooka.convert.ConverterContexts;
 import walkingkooka.convert.ConverterLike;
 import walkingkooka.convert.Converters;
@@ -79,6 +80,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
         LineEnding.NL,
         ',', // valueSeparator
         Converters.simple(),
+        BinaryNumberConverterFunctions.fake(), // multiplier
         CurrencyLocaleContexts.fake(),
         DateTimeContexts.basic(
             DateTimeSymbols.fromDateFormatSymbols(

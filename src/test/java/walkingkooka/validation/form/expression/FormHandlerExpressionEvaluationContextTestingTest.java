@@ -239,6 +239,13 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
+        public <N extends Number> N multiply(final Number left,
+                                             final Number right,
+                                             final Class<N> type) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
         public char valueSeparator() {
             throw new UnsupportedOperationException();
         }
