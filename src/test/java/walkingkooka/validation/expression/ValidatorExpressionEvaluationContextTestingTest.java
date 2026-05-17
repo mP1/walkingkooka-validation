@@ -19,6 +19,7 @@ package walkingkooka.validation.expression;
 
 import walkingkooka.Either;
 import walkingkooka.currency.CurrencyCode;
+import walkingkooka.currency.CurrencyExchange;
 import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
@@ -49,6 +50,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
 
 public final class ValidatorExpressionEvaluationContextTestingTest implements ValidatorExpressionEvaluationContextTesting<TestValidationReference, TestValidatorExpressionEvaluationContext>,
@@ -144,6 +146,20 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
         @Override
         public boolean canNumbersHaveGroupSeparator() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Set<CurrencyExchange> currencyExchanges() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Optional<Number> currencyExchangeRate(final CurrencyExchange currencyExchange,
+                                                     final Optional<LocalDateTime> dateTime) {
+            Objects.requireNonNull(currencyExchange, "currencyExchange");
+            Objects.requireNonNull(dateTime, "dateTime");
+
             throw new UnsupportedOperationException();
         }
 
