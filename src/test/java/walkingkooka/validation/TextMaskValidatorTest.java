@@ -711,8 +711,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
                 "    TextMaskValidatorComponentNot ~\n" +
                 "      TextMaskValidatorComponentCharacterLetter A\n" +
                 "    TextMaskValidatorComponentRepeating *\n" +
-                "      TextMaskValidatorComponentCharacterLetter A\n" +
-                "  \n"
+                "      TextMaskValidatorComponentCharacterLetter A\n"
         );
     }
 

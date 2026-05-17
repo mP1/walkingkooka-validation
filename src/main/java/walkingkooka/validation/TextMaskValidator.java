@@ -153,6 +153,6 @@ final class TextMaskValidator<R extends ValidationReference, C extends Validator
             }
             printer.outdent();
         }
-        printer.println();
+        printer.outdent();
     }
 }
