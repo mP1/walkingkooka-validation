@@ -18,6 +18,7 @@
 package walkingkooka.validation.form.expression;
 
 import walkingkooka.Cast;
+import walkingkooka.currency.CurrencyExchange;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.environment.EnvironmentValueWatcher;
@@ -39,6 +40,7 @@ import walkingkooka.validation.form.expression.FormHandlerExpressionEvaluationCo
 import walkingkooka.validation.form.expression.FormHandlerExpressionEvaluationContextTestingTest.TestFormHandlerExpressionEvaluationContext;
 
 import java.math.MathContext;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Currency;
 import java.util.List;
@@ -272,6 +274,15 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
                 @Override
                 public Optional<Optional<Object>> reference(final ExpressionReference reference) {
                     Objects.requireNonNull(reference, "reference");
+
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
+                public Optional<Number> currencyExchangeRate(final CurrencyExchange currencyExchange,
+                                                             final Optional<LocalDateTime> dateTime) {
+                    Objects.requireNonNull(currencyExchange, "currencyExchange");
+                    Objects.requireNonNull(dateTime, "dateTime");
 
                     throw new UnsupportedOperationException();
                 }
