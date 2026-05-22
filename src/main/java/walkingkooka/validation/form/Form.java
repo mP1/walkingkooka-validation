@@ -412,8 +412,8 @@ public final class Form<T extends ValidationReference> implements HasContentType
 
     @Override
     public Optional<MediaType> contentType() {
-        return Optional.of(
-            HasContentType.json(Form.class)
-        );
+        return Optional.of(CONTENT_TYPE);
     }
+
+    public final static MediaType CONTENT_TYPE = HasContentType.json(Form.class);
 }
