@@ -46,6 +46,7 @@ import walkingkooka.net.DataUrl;
 import walkingkooka.net.MailToUrl;
 import walkingkooka.net.RelativeUrl;
 import walkingkooka.net.email.EmailAddress;
+import walkingkooka.net.header.HasContentTypeTesting;
 import walkingkooka.plugin.PluginNameTesting;
 import walkingkooka.tree.expression.AddExpression;
 import walkingkooka.tree.expression.AndExpression;
@@ -91,7 +92,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-final public class ValueTypeTest implements PluginNameTesting<ValueType> {
+final public class ValueTypeTest implements PluginNameTesting<ValueType>,
+    HasContentTypeTesting {
 
     @Override
     public void testTypeNaming() {
@@ -2548,6 +2550,16 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType> {
         return ValueType.unmarshall(
             from,
             context
+        );
+    }
+
+    // HasContentType...................................................................................................
+
+    @Test
+    public void testContentType() {
+        this.contentTypeAndCheck(
+            this.createObject(),
+            "application/json+walkingkooka.validation.ValueType"
         );
     }
 
