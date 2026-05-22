@@ -17,6 +17,8 @@
 
 package walkingkooka.validation.provider;
 
+import walkingkooka.net.header.HasContentType;
+import walkingkooka.net.header.MediaType;
 import walkingkooka.plugin.PluginSelector;
 import walkingkooka.plugin.PluginSelectorLike;
 import walkingkooka.plugin.ProviderContext;
@@ -42,6 +44,8 @@ public final class ValidatorSelector implements PluginSelectorLike<ValidatorName
      * {@see PluginSelectorLike#nameOnlyComparator}
      */
     public static Comparator<ValidatorSelector> NAME_ONLY_COMPARATOR = PluginSelectorLike.nameOnlyComparator();
+
+    public final static MediaType CONTENT_TYPE = HasContentType.json(ValidatorSelector.class);
 
     /**
      * Parses the given text into a {@link ValidatorSelector}. Note the text following the {@link ValidatorName} is not validated in any form and simply stored.
