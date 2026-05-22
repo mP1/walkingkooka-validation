@@ -547,6 +547,16 @@ public final class FormHandlerSelectorTest implements PluginSelectorLikeTesting<
         );
     }
 
+    // HasContentType...................................................................................................
+
+    @Test
+    public void testContentType() {
+        this.contentTypeAndCheck(
+            this.createObject(),
+            "application/json+walkingkooka.validation.form.provider.FormHandlerSelector"
+        );
+    }
+
     // type name testing................................................................................................
 
     @Override

@@ -17,6 +17,8 @@
 
 package walkingkooka.validation.form.provider;
 
+import walkingkooka.net.header.HasContentType;
+import walkingkooka.net.header.MediaType;
 import walkingkooka.plugin.PluginSelector;
 import walkingkooka.plugin.PluginSelectorLike;
 import walkingkooka.plugin.ProviderContext;
@@ -31,6 +33,7 @@ import walkingkooka.validation.form.FormHandlerContext;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Contains the {@link FormHandlerName} and some text which may contain an expression for a {@link FormHandler}.
@@ -197,6 +200,15 @@ public final class FormHandlerSelector implements PluginSelectorLike<FormHandler
             FormHandlerSelector::marshall,
             FormHandlerSelector.class
         );
+    }
+
+    // HasContentType...................................................................................................
+
+    public final static MediaType CONTENT_TYPE = HasContentType.json(FormHandlerSelector.class);
+
+    @Override
+    public Optional<MediaType> contentType() {
+        return Optional.of(CONTENT_TYPE);
     }
 
     // TreePrintable....................................................................................................

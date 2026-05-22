@@ -34,6 +34,7 @@ import walkingkooka.validation.ValidatorContext;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Contains the {@link ValidatorName} and some text which may contain an expression for a {@link Validator}.
@@ -207,6 +208,13 @@ public final class ValidatorSelector implements PluginSelectorLike<ValidatorName
             ValidatorSelector::marshall,
             ValidatorSelector.class
         );
+    }
+
+    // HasContentType...................................................................................................
+
+    @Override
+    public Optional<MediaType> contentType() {
+        return Optional.of(CONTENT_TYPE);
     }
 
     // TreePrintable....................................................................................................
