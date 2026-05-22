@@ -547,6 +547,16 @@ public final class ValidatorSelectorTest implements PluginSelectorLikeTesting<Va
         );
     }
 
+    // HasContentType...................................................................................................
+
+    @Test
+    public void testContentType() {
+        this.contentTypeAndCheck(
+            this.createObject(),
+            ValidatorSelector.CONTENT_TYPE
+        );
+    }
+
     // type name testing................................................................................................
 
     @Override
