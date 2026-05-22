@@ -25,6 +25,7 @@ import walkingkooka.collect.iterator.IteratorTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.SortedSets;
+import walkingkooka.net.header.HasContentTypeTesting;
 import walkingkooka.net.http.server.hateos.HateosResourceTesting;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
@@ -47,6 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FormTest implements HateosResourceTesting<Form<TestValidationReference>, FormName>,
     ClassTesting2<Form<TestValidationReference>>,
+    HasContentTypeTesting,
     HashCodeEqualsDefinedTesting2<Form<TestValidationReference>>,
     ToStringTesting<Form<TestValidationReference>>,
     JsonNodeMarshallingTesting<Form<TestValidationReference>>,
@@ -589,6 +591,16 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
             form1,
             form2,
             form3
+        );
+    }
+
+    // HasContentType...................................................................................................
+
+    @Test
+    public void testContentType() {
+        this.contentTypeAndCheck(
+            this.createObject(),
+            "application/json+walkingkooka.validation.form.Form"
         );
     }
 

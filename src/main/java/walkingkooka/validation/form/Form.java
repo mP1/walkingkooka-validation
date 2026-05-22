@@ -20,6 +20,8 @@ package walkingkooka.validation.form;
 import walkingkooka.Cast;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.net.header.HasContentType;
+import walkingkooka.net.header.MediaType;
 import walkingkooka.net.http.server.hateos.HateosResource;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
@@ -44,7 +46,8 @@ import java.util.Optional;
 /**
  * A form has a name and defines one or more fields each with their own validator.
  */
-public final class Form<T extends ValidationReference> implements HateosResource<FormName>,
+public final class Form<T extends ValidationReference> implements HasContentType,
+    HateosResource<FormName>,
     TreePrintable{
 
     /**
@@ -403,5 +406,14 @@ public final class Form<T extends ValidationReference> implements HateosResource
             }
             printer.outdent();
         }
+    }
+
+    // HasContentType...................................................................................................
+
+    @Override
+    public Optional<MediaType> contentType() {
+        return Optional.of(
+            HasContentType.json(Form.class)
+        );
     }
 }
