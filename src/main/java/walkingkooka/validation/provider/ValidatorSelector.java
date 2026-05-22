@@ -43,7 +43,7 @@ public final class ValidatorSelector implements PluginSelectorLike<ValidatorName
     /**
      * {@see PluginSelectorLike#nameOnlyComparator}
      */
-    public static Comparator<ValidatorSelector> NAME_ONLY_COMPARATOR = PluginSelectorLike.nameOnlyComparator();
+    public final static Comparator<ValidatorSelector> NAME_ONLY_COMPARATOR = PluginSelectorLike.nameOnlyComparator();
 
     public final static MediaType CONTENT_TYPE = HasContentType.json(ValidatorSelector.class);
 
