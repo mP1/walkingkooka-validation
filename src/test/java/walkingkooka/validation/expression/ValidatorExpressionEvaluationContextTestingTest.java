@@ -44,6 +44,7 @@ import walkingkooka.validation.expression.ValidatorExpressionEvaluationContextTe
 import walkingkooka.validation.form.Form;
 
 import java.math.MathContext;
+import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 import java.util.Currency;
 import java.util.List;
@@ -146,6 +147,11 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
         @Override
         public boolean canNumbersHaveGroupSeparator() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Charset charset() {
             throw new UnsupportedOperationException();
         }
 
