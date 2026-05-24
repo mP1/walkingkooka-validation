@@ -48,6 +48,7 @@ import walkingkooka.validation.form.FormField;
 import walkingkooka.validation.form.expression.FormHandlerExpressionEvaluationContextTestingTest.TestFormHandlerExpressionEvaluationContext;
 
 import java.math.MathContext;
+import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Comparator;
@@ -210,6 +211,11 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
 
         @Override
         public boolean canNumbersHaveGroupSeparator() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Charset charset() {
             throw new UnsupportedOperationException();
         }
 

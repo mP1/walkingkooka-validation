@@ -39,6 +39,7 @@ import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.math.MathContext;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormatSymbols;
 import java.time.LocalDateTime;
 import java.util.Currency;
@@ -75,6 +76,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
 
     private final static ConverterLike CONVERTER_LIKE = ConverterContexts.basic(
         false, // canNumbersHaveGroupSeparator
+        StandardCharsets.UTF_8,
         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // offset
         Indentation.SPACES2,
         LineEnding.NL,
