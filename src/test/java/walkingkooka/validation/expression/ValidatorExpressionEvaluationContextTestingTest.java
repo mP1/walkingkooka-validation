@@ -45,6 +45,7 @@ import walkingkooka.validation.form.Form;
 
 import java.math.MathContext;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Currency;
 import java.util.List;
@@ -152,7 +153,7 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
         @Override
         public Charset charset() {
-            throw new UnsupportedOperationException();
+            return StandardCharsets.UTF_8;
         }
 
         @Override
@@ -304,6 +305,7 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
         private final EnvironmentContext environmentContext = EnvironmentContexts.map(
             EnvironmentContexts.empty(
+                StandardCharsets.UTF_8,
                 Currency.getInstance("AUD"),
                 Indentation.SPACES2,
                 LineEnding.NL,

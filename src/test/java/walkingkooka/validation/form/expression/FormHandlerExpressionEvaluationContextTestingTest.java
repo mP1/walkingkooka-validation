@@ -49,6 +49,7 @@ import walkingkooka.validation.form.expression.FormHandlerExpressionEvaluationCo
 
 import java.math.MathContext;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Comparator;
@@ -215,11 +216,6 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
         }
 
         @Override
-        public Charset charset() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
         public Set<CurrencyExchange> currencyExchanges() {
             throw new UnsupportedOperationException();
         }
@@ -327,6 +323,17 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
             throw new UnsupportedOperationException();
         }
 
+        @Override
+        public Charset charset() {
+            return StandardCharsets.UTF_8;
+        }
+
+        @Override
+        public void setCharset(final Charset charset) {
+            Objects.requireNonNull(charset, "charset");
+            throw new UnsupportedOperationException();
+        }
+        
         @Override
         public Currency currency() {
             return Currency.getInstance("AUD");

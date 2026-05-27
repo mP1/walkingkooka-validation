@@ -40,6 +40,8 @@ import walkingkooka.validation.form.expression.FormHandlerExpressionEvaluationCo
 import walkingkooka.validation.form.expression.FormHandlerExpressionEvaluationContextTestingTest.TestFormHandlerExpressionEvaluationContext;
 
 import java.math.MathContext;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Currency;
@@ -297,25 +299,29 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
                     Objects.requireNonNull(name, "name");
 
                     return Cast.to(
-                        CURRENCY.equals(name) ?
+                        CHARSET.equals(name) ?
                             Optional.of(
-                                this.currency()
+                                this.charset()
                             ) :
-                            INDENTATION.equals(name) ?
+                            CURRENCY.equals(name) ?
                                 Optional.of(
-                                    this.indentation()
+                                    this.currency()
                                 ) :
-                                LOCALE.equals(name) ?
+                                INDENTATION.equals(name) ?
                                     Optional.of(
-                                        this.locale()
+                                        this.indentation()
                                     ) :
-                                    LINE_ENDING.equals(name) ?
+                                    LOCALE.equals(name) ?
                                         Optional.of(
-                                            this.lineEnding()
+                                            this.locale()
                                         ) :
-                                        USER.equals(name) ?
-                                            this.user() :
-                                            Optional.empty()
+                                        LINE_ENDING.equals(name) ?
+                                            Optional.of(
+                                                this.lineEnding()
+                                            ) :
+                                            USER.equals(name) ?
+                                                this.user() :
+                                                Optional.empty()
                     );
                 }
 
@@ -331,6 +337,11 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
                 public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
                     Objects.requireNonNull(name, "name");
                     throw new UnsupportedOperationException();
+                }
+
+                @Override
+                public Charset charset() {
+                    return StandardCharsets.UTF_8;
                 }
 
                 @Override

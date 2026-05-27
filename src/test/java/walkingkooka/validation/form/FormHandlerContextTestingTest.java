@@ -28,6 +28,8 @@ import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidatorContext;
 import walkingkooka.validation.form.FormHandlerContextTestingTest.TestFormHandlerContext;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Comparator;
@@ -197,6 +199,17 @@ public final class FormHandlerContextTestingTest implements FormHandlerContextTe
             throw new UnsupportedOperationException();
         }
 
+        @Override
+        public Charset charset() {
+            return StandardCharsets.UTF_8;
+        }
+
+        @Override
+        public void setCharset(final Charset charset) {
+            Objects.requireNonNull(charset, "charset");
+            throw new UnsupportedOperationException();
+        }
+        
         @Override
         public Currency currency() {
             return Currency.getInstance("AUD");
