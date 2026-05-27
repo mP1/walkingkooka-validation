@@ -92,6 +92,7 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
     private final static EnvironmentContext ENVIRONMENT_CONTEXT = EnvironmentContexts.readOnly(
         Predicates.always(), // all values are readonly
         EnvironmentContexts.empty(
+            StandardCharsets.UTF_8,
             Currency.getInstance("AUD"),
             INDENTATION,
             LINE_ENDING,

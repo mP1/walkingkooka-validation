@@ -28,6 +28,8 @@ import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidatorContext;
 import walkingkooka.validation.form.FormHandlerContextDelegatorTest.TestFormHandlerContextDelegator;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
@@ -161,25 +163,29 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                     Objects.requireNonNull(name, "name");
 
                     return Cast.to(
-                        CURRENCY.equals(name) ?
+                        CHARSET.equals(name) ?
                             Optional.of(
-                                this.currency()
+                                this.charset()
                             ) :
-                            INDENTATION.equals(name) ?
+                            CURRENCY.equals(name) ?
                                 Optional.of(
-                                    this.indentation()
+                                    this.currency()
                                 ) :
-                                LOCALE.equals(name) ?
+                                INDENTATION.equals(name) ?
                                     Optional.of(
-                                        this.locale()
+                                        this.indentation()
                                     ) :
-                                    LINE_ENDING.equals(name) ?
+                                    LOCALE.equals(name) ?
                                         Optional.of(
-                                            this.lineEnding()
+                                            this.locale()
                                         ) :
-                                        USER.equals(name) ?
-                                            this.user() :
-                                            Optional.empty()
+                                        LINE_ENDING.equals(name) ?
+                                            Optional.of(
+                                                this.lineEnding()
+                                            ) :
+                                            USER.equals(name) ?
+                                                this.user() :
+                                                Optional.empty()
                     );
                 }
 
@@ -195,6 +201,11 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                 public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
                     Objects.requireNonNull(name, "name");
                     throw new UnsupportedOperationException();
+                }
+
+                @Override
+                public Charset charset() {
+                    return StandardCharsets.UTF_8;
                 }
 
                 @Override

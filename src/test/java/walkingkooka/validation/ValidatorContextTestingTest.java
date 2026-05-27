@@ -40,6 +40,7 @@ import walkingkooka.validation.ValidatorContextTestingTest.TestValidatorContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.math.MathContext;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormatSymbols;
 import java.time.LocalDateTime;
@@ -49,6 +50,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 public final class ValidatorContextTestingTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference> {
+
+    private final static Charset CHARSET = StandardCharsets.UTF_8;
 
     private final static LineEnding LINE_ENDING = LineEnding.NL;
 
@@ -140,6 +143,17 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         }
 
         @Override
+        public Charset charset() {
+            return ValidatorContextTestingTest.CHARSET;
+        }
+
+        @Override
+        public void setCharset(final Charset charset) {
+            Objects.requireNonNull(charset, "charset");
+            throw new UnsupportedOperationException();
+        }
+        
+        @Override
         public Indentation indentation() {
             return ValidatorContextTestingTest.INDENTATION;
         }
@@ -226,6 +240,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         @Override
         public EnvironmentContext environmentContext() {
             return EnvironmentContexts.empty(
+                ValidatorContextTestingTest.CHARSET,
                 Currency.getInstance("AUD"),
                 Indentation.SPACES2,
                 LineEnding.NL,
@@ -243,7 +258,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
 
     private final static ConverterContext CONVERTER_CONTEXT = ConverterContexts.basic(
         false, // canNumbersHaveGroupSeparator
-        StandardCharsets.UTF_8,
+        CHARSET,
         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // dateOffset
         Indentation.SPACES2,
         LineEnding.NL,
