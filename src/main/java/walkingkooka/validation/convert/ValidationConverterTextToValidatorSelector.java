@@ -59,6 +59,6 @@ final class ValidationConverterTextToValidatorSelector<C extends ConverterContex
 
     @Override
     public String toString() {
-        return "Text to " + ValidatorSelector.class.getSimpleName();
+        return TEXT + " to " + ValidatorSelector.class.getSimpleName();
     }
 }

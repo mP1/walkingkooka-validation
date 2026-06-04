@@ -81,7 +81,7 @@ public final class ValidationConverterTextToValidatorSelectorTest extends Valida
     public void testToString() {
         this.toStringAndCheck(
             ValidationConverterTextToValidatorSelector.instance(),
-            "Text to ValidatorSelector"
+            "TEXT to ValidatorSelector"
         );
     }
 

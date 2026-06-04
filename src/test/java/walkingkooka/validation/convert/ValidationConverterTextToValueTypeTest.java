@@ -81,7 +81,7 @@ public final class ValidationConverterTextToValueTypeTest extends ValidationConv
     public void testToString() {
         this.toStringAndCheck(
             ValidationConverterTextToValueType.instance(),
-            "Text to ValueType"
+            "TEXT to ValueType"
         );
     }
 

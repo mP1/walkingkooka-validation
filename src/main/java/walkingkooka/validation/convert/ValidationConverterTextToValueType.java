@@ -59,6 +59,6 @@ final class ValidationConverterTextToValueType<C extends ConverterContext> imple
 
     @Override
     public String toString() {
-        return "Text to " + ValueType.class.getSimpleName();
+        return TEXT + " to " + ValueType.class.getSimpleName();
     }
 }
