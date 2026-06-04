@@ -59,6 +59,6 @@ final class ValidationConverterTextToFormName<C extends ConverterContext> implem
 
     @Override
     public String toString() {
-        return "Text to " + FormName.class.getSimpleName();
+        return TEXT + " to " + FormName.class.getSimpleName();
     }
 }

@@ -81,7 +81,7 @@ public final class ValidationConverterTextToFormNameTest extends ValidationConve
     public void testToString() {
         this.toStringAndCheck(
             ValidationConverterTextToFormName.instance(),
-            "Text to FormName"
+            "TEXT to FormName"
         );
     }
 
