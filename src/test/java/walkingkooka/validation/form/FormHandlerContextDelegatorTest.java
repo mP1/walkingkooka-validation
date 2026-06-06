@@ -20,7 +20,7 @@ package walkingkooka.validation.form;
 import walkingkooka.Cast;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.environment.EnvironmentValueWatcher;
+import walkingkooka.environment.EnvironmentWatcher;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
@@ -288,13 +288,13 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
         }
 
         @Override
-        public Runnable addEnvironmentValueWatcher(final EnvironmentValueWatcher watcher) {
+        public Runnable addEnvironmentWatcher(final EnvironmentWatcher watcher) {
             Objects.requireNonNull(watcher, "watcher");
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public Runnable addEnvironmentValueWatcherOnce(final EnvironmentValueWatcher watcher) {
+        public Runnable addEnvironmentWatcherOnce(final EnvironmentWatcher watcher) {
             Objects.requireNonNull(watcher, "watcher");
             throw new UnsupportedOperationException();
         }

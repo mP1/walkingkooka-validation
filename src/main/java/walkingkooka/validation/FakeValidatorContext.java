@@ -20,7 +20,7 @@ package walkingkooka.validation;
 import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.environment.EnvironmentValueWatcher;
+import walkingkooka.environment.EnvironmentWatcher;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
@@ -161,12 +161,12 @@ public class FakeValidatorContext<T extends ValidationReference> extends FakeCon
     }
 
     @Override
-    public Runnable addEnvironmentValueWatcher(final EnvironmentValueWatcher watcher) {
+    public Runnable addEnvironmentWatcher(final EnvironmentWatcher watcher) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Runnable addEnvironmentValueWatcherOnce(final EnvironmentValueWatcher watcher) {
+    public Runnable addEnvironmentWatcherOnce(final EnvironmentWatcher watcher) {
         throw new UnsupportedOperationException();
     }
 }
