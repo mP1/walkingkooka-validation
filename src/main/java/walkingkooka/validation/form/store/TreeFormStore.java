@@ -18,6 +18,7 @@
 package walkingkooka.validation.form.store;
 
 import walkingkooka.store.Store;
+import walkingkooka.store.StoreWatcher;
 import walkingkooka.store.Stores;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.Form;
@@ -28,7 +29,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Consumer;
 
 final class TreeFormStore<R extends ValidationReference> implements FormStore<R> {
 
@@ -61,22 +61,8 @@ final class TreeFormStore<R extends ValidationReference> implements FormStore<R>
     }
 
     @Override
-    public Runnable addSaveWatcher(final Consumer<Form<R>> watcher) {
-        Objects.requireNonNull(watcher, "watcher");
-
-        return this.store.addSaveWatcher(
-            watcher::accept
-        );
-    }
-
-    @Override
     public void delete(final FormName form) {
         this.store.delete(form);
-    }
-
-    @Override
-    public Runnable addDeleteWatcher(final Consumer<FormName> watcher) {
-        return this.store.addDeleteWatcher(watcher);
     }
 
     @Override
@@ -110,6 +96,13 @@ final class TreeFormStore<R extends ValidationReference> implements FormStore<R>
             from,
             to
         );
+    }
+
+    @Override
+    public Runnable addStoreWatcher(final StoreWatcher<Form<R>> watcher) {
+        Objects.requireNonNull(watcher, "watcher");
+
+        return this.store.addStoreWatcher(watcher);
     }
 
     private final Store<FormName, Form<R>> store;
