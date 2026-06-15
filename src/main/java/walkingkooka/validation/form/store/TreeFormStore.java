@@ -100,15 +100,11 @@ final class TreeFormStore<R extends ValidationReference> implements FormStore<R>
 
     @Override
     public Runnable addStoreWatcher(final StoreWatcher<Form<R>> watcher) {
-        Objects.requireNonNull(watcher, "watcher");
-
         return this.store.addStoreWatcher(watcher);
     }
 
     @Override
     public Runnable addStoreWatcherOnce(final StoreWatcher<Form<R>> watcher) {
-        Objects.requireNonNull(watcher, "watcher");
-
         return this.store.addStoreWatcherOnce(watcher);
     }
 
