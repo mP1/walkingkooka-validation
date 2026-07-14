@@ -33,8 +33,6 @@ import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.predicate.Predicates;
-import walkingkooka.text.LineEnding;
-import walkingkooka.text.TextPrinting;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
@@ -81,10 +79,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
         ',', // valueSeparator
         Converters.simple(),
         BinaryNumberConverterFunctions.fake(), // multiplier
-        TextPrinting.with(
-            INDENTATION,
-            LineEnding.NL
-        ).setCharset(StandardCharsets.UTF_8),
+        BINARY_TEXT_CONTEXT,
         CurrencyLocaleContexts.fake(),
         DateTimeContexts.basic(
             DateTimeSymbols.fromDateFormatSymbols(
