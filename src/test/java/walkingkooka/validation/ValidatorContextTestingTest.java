@@ -243,7 +243,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
             return EnvironmentContexts.empty(
                 ValidatorContextTestingTest.CHARSET,
                 Currency.getInstance("AUD"),
-                Indentation.SPACES2,
+                ValidatorContextTestingTest.INDENTATION,
                 LineEnding.NL,
                 ValidatorContextTestingTest.LOCALE,
                 this,
@@ -264,7 +264,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         Converters.objectToString(),
         BinaryNumberConverterFunctions.fake(), // multiplier
         TextPrinting.with(
-            Indentation.SPACES2,
+            ValidatorContextTestingTest.INDENTATION,
             LineEnding.NL
         ).setCharset(CHARSET),
         CurrencyLocaleContexts.fake(),
