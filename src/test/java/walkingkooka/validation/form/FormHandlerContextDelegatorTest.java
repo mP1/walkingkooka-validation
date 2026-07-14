@@ -215,7 +215,7 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
 
                 @Override
                 public Indentation indentation() {
-                    return Indentation.SPACES2;
+                    return FormHandlerContextDelegatorTest.INDENTATION;
                 }
 
                 @Override

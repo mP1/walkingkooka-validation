@@ -33,7 +33,6 @@ import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.predicate.Predicates;
-import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.text.TextPrinting;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
@@ -85,7 +84,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
         Converters.simple(),
         BinaryNumberConverterFunctions.fake(), // multiplier
         TextPrinting.with(
-            Indentation.SPACES2,
+            INDENTATION,
             LineEnding.NL
         ).setCharset(StandardCharsets.UTF_8),
         CurrencyLocaleContexts.fake(),
