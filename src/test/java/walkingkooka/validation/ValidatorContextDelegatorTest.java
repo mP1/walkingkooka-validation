@@ -33,6 +33,7 @@ import walkingkooka.net.email.EmailAddress;
 import walkingkooka.predicate.Predicates;
 import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
+import walkingkooka.text.TextPrinting;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.ValidatorContextDelegatorTest.TestValidatorContext;
 import walkingkooka.validation.provider.ValidatorSelector;
@@ -69,13 +70,14 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
 
     private final static ConverterContext CONVERTER_CONTEXT = ConverterContexts.basic(
         false, // canNumbersHaveGroupSeparator
-        StandardCharsets.UTF_8,
         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // offset
-        Indentation.SPACES2,
-        LineEnding.NL,
         ',', // valueSeparator
         Converters.simple(),
         BinaryNumberConverterFunctions.fake(), // multiplier
+        TextPrinting.with(
+            Indentation.SPACES2,
+            LineEnding.NL
+        ).setCharset(StandardCharsets.UTF_8),
         CurrencyLocaleContexts.fake(),
         DateTimeContexts.basic(
             DateTimeSymbols.fromDateFormatSymbols(

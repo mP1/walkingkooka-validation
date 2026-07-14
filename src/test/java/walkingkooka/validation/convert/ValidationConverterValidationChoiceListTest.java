@@ -74,7 +74,7 @@ public final class ValidationConverterValidationChoiceListTest extends Validatio
     @Test
     public void testConvertStringCsv() {
         this.convertAndCheck(
-            "value111, value222,, value444",
+            "value111,value222,,value444",
             ValidationChoiceList.EMPTY
                 .concat(
                     ValidationChoice.with(
