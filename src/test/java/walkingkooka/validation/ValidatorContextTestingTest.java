@@ -34,7 +34,6 @@ import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
-import walkingkooka.text.TextPrinting;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionEvaluationContexts;
 import walkingkooka.validation.ValidatorContextTestingTest.TestValidatorContext;
@@ -261,10 +260,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         ',', // valueSeparator
         Converters.objectToString(),
         BinaryNumberConverterFunctions.fake(), // multiplier
-        TextPrinting.with(
-            ValidatorContextTestingTest.INDENTATION,
-            LineEnding.NL
-        ).setCharset(CHARSET),
+        BINARY_TEXT_CONTEXT,
         CurrencyLocaleContexts.fake(),
         DateTimeContexts.basic(
             DateTimeSymbols.fromDateFormatSymbols(
