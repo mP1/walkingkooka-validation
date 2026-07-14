@@ -76,7 +76,7 @@ public final class ValidationConverterValidationCheckboxTest extends ValidationC
     @Test
     public void testConvertStringToValidationCheckbox() {
         this.convertAndCheck(
-            "true111, false222",
+            "true111,false222",
             ValidationCheckbox.with(
                 Optional.of(
                     "true111"

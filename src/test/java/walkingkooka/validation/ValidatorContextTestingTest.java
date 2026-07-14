@@ -34,6 +34,7 @@ import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
+import walkingkooka.text.TextPrinting;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionEvaluationContexts;
 import walkingkooka.validation.ValidatorContextTestingTest.TestValidatorContext;
@@ -258,13 +259,14 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
 
     private final static ConverterContext CONVERTER_CONTEXT = ConverterContexts.basic(
         false, // canNumbersHaveGroupSeparator
-        CHARSET,
         Converters.EXCEL_1900_DATE_SYSTEM_OFFSET, // dateOffset
-        Indentation.SPACES2,
-        LineEnding.NL,
         ',', // valueSeparator
         Converters.objectToString(),
         BinaryNumberConverterFunctions.fake(), // multiplier
+        TextPrinting.with(
+            Indentation.SPACES2,
+            LineEnding.NL
+        ).setCharset(CHARSET),
         CurrencyLocaleContexts.fake(),
         DateTimeContexts.basic(
             DateTimeSymbols.fromDateFormatSymbols(
