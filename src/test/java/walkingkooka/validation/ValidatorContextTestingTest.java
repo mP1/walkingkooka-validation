@@ -54,8 +54,6 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
 
     private final static Charset CHARSET = StandardCharsets.UTF_8;
 
-    private final static LineEnding LINE_ENDING = LineEnding.NL;
-
     private final static Locale LOCALE = Locale.ENGLISH;
 
     @Override
