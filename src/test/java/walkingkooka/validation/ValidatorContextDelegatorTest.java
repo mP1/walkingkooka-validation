@@ -50,8 +50,6 @@ import java.util.function.Function;
 
 public final class ValidatorContextDelegatorTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference> {
 
-    private final static LineEnding LINE_ENDING = LineEnding.NL;
-
     private final static Locale LOCALE = Locale.ENGLISH;
 
     private final static TestValidationReference VALIDATION_REFERENCE = new TestValidationReference("A1");
