@@ -41,7 +41,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormatSymbols;
 import java.time.LocalDateTime;
-import java.util.Currency;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -55,8 +54,6 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
     ToStringTesting<BasicValidatorContext<TestValidationReference>> {
 
     private final static Charset CHARSET = StandardCharsets.UTF_8;
-
-    private final static Currency CURRENCY = Currency.getInstance("AUD");
 
     private final static Locale LOCALE = Locale.ENGLISH;
 
