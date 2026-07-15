@@ -31,7 +31,6 @@ import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContexts;
-import walkingkooka.net.email.EmailAddress;
 import walkingkooka.predicate.Predicates;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
@@ -40,7 +39,6 @@ import java.math.MathContext;
 import java.text.DateFormatSymbols;
 import java.time.LocalDateTime;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -102,9 +100,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
                 58,
                 59
             ), // now
-            Optional.of(
-                EmailAddress.parse("user@example.com")
-            )
+            OPTIONAL_USER
         )
     );
 

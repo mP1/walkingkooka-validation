@@ -236,9 +236,7 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
 
                 @Override
                 public Optional<EmailAddress> user() {
-                    return Optional.of(
-                        EmailAddress.parse("user@example.com")
-                    );
+                    return OPTIONAL_USER;
                 }
 
                 @Override
