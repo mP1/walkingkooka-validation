@@ -92,9 +92,7 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
             LINE_ENDING,
             LOCALE,
             () -> LocalDateTime.MIN, // now
-            Optional.of(
-                EmailAddress.parse("user@example.com")
-            )
+            OPTIONAL_USER
         )
     );
 
