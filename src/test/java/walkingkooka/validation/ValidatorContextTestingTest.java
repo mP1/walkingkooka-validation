@@ -41,7 +41,6 @@ import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.math.MathContext;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.text.DateFormatSymbols;
 import java.time.LocalDateTime;
 import java.util.Currency;
@@ -50,8 +49,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 public final class ValidatorContextTestingTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference> {
-
-    private final static Charset CHARSET = StandardCharsets.UTF_8;
 
     private final static Locale LOCALE = Locale.ENGLISH;
 

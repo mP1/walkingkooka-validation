@@ -37,8 +37,6 @@ import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.math.MathContext;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.text.DateFormatSymbols;
 import java.time.LocalDateTime;
 import java.util.Locale;
@@ -52,8 +50,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class BasicValidatorContextTest implements ValidatorContextTesting<BasicValidatorContext<TestValidationReference>, TestValidationReference>,
     ToStringTesting<BasicValidatorContext<TestValidationReference>> {
-
-    private final static Charset CHARSET = StandardCharsets.UTF_8;
 
     private final static Locale LOCALE = Locale.ENGLISH;
 
