@@ -109,7 +109,7 @@ public final class EmailAddressValidatorTest implements ValidatorTesting2<EmailA
             private final Converter<TestValidatorContext> converter = Converters.collection(
                 Lists.of(
                     Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
-                    Converters.hasText()
+                    Converters.toText()
                 )
             );
 

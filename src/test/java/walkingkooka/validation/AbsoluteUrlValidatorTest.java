@@ -109,7 +109,7 @@ public final class AbsoluteUrlValidatorTest implements ValidatorTesting2<Absolut
             private final Converter<TestValidatorContext> converter = Converters.collection(
                 Lists.of(
                     Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
-                    Converters.hasText()
+                    Converters.toText()
                 )
             );
 

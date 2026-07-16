@@ -658,7 +658,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
             private final Converter<TestValidatorContext> converter = Converters.collection(
                 Lists.of(
                     Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
-                    Converters.hasText()
+                    Converters.toText()
                 )
             );
 
