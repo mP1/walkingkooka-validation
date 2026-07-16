@@ -25,21 +25,17 @@ import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.datetime.DateTimeContexts;
 import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.environment.EnvironmentContext;
-import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
-import walkingkooka.predicate.Predicates;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.ValidatorContextDelegatorTest.TestValidatorContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.math.MathContext;
-import java.nio.charset.StandardCharsets;
 import java.text.DateFormatSymbols;
 import java.time.LocalDateTime;
-import java.util.Currency;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
@@ -81,19 +77,6 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
             () -> LocalDateTime.MIN
         ),
         DECIMAL_NUMBER_CONTEXT
-    );
-
-    private final static EnvironmentContext ENVIRONMENT_CONTEXT = EnvironmentContexts.readOnly(
-        Predicates.always(), // all values are readonly
-        EnvironmentContexts.empty(
-            StandardCharsets.UTF_8,
-            Currency.getInstance("AUD"),
-            INDENTATION,
-            LINE_ENDING,
-            LOCALE,
-            () -> LocalDateTime.MIN, // now
-            OPTIONAL_USER
-        )
     );
 
     @Override

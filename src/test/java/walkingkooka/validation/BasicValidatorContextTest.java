@@ -31,7 +31,6 @@ import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContexts;
-import walkingkooka.predicate.Predicates;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
@@ -82,26 +81,6 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
             LocalDateTime::now
         ),
         DECIMAL_NUMBER_CONTEXT
-    );
-
-    private final static EnvironmentContext ENVIRONMENT_CONTEXT = EnvironmentContexts.readOnly(
-        Predicates.always(), // all values are readonly
-        EnvironmentContexts.empty(
-            CHARSET,
-            CURRENCY,
-            INDENTATION,
-            LINE_ENDING,
-            LOCALE,
-            () -> LocalDateTime.of(
-                1999,
-                12,
-                31,
-                12,
-                58,
-                59
-            ), // now
-            OPTIONAL_USER
-        )
     );
 
     @Test
