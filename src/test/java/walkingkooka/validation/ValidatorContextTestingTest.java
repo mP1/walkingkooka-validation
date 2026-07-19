@@ -29,7 +29,7 @@ import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.math.DecimalNumberContexts;
+import walkingkooka.math.DecimalNumberContextTesting;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
@@ -38,7 +38,6 @@ import walkingkooka.tree.expression.ExpressionEvaluationContexts;
 import walkingkooka.validation.ValidatorContextTestingTest.TestValidatorContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
-import java.math.MathContext;
 import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 import java.util.Currency;
@@ -47,7 +46,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 public final class ValidatorContextTestingTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference>,
-    DateTimeContextTesting {
+    DateTimeContextTesting,
+    DecimalNumberContextTesting {
 
     @Override
     public void testRemoveEnvironmentValueWithNowFails() {
@@ -257,9 +257,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
         BINARY_TEXT_CONTEXT,
         CurrencyLocaleContexts.fake(),
         DATE_TIME_CONTEXT,
-        DecimalNumberContexts.american(
-            MathContext.DECIMAL32
-        )
+        DECIMAL_NUMBER_CONTEXT
     );
 
     // class............................................................................................................
