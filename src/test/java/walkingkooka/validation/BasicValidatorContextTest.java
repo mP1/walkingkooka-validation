@@ -28,12 +28,10 @@ import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.datetime.DateTimeContextTesting;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContexts;
-import walkingkooka.math.DecimalNumberContext;
-import walkingkooka.math.DecimalNumberContexts;
+import walkingkooka.math.DecimalNumberContextTesting;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
-import java.math.MathContext;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -43,6 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class BasicValidatorContextTest implements ValidatorContextTesting<BasicValidatorContext<TestValidationReference>, TestValidationReference>,
     DateTimeContextTesting,
+    DecimalNumberContextTesting,
     ToStringTesting<BasicValidatorContext<TestValidationReference>> {
 
     private final static TestValidationReference VALIDATION_REFERENCE = new TestValidationReference("A1");
@@ -55,8 +54,6 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting<
                                                                                                                                                       final TestValidationReference validationReference) -> {
         throw new UnsupportedOperationException();
     };
-
-    private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
     private final static ConverterLike CONVERTER_LIKE = ConverterContexts.basic(
         false, // canNumbersHaveGroupSeparator
