@@ -24,7 +24,6 @@ import walkingkooka.locale.LocaleContexts;
 import walkingkooka.locale.LocaleLanguageTag;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
-import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionFunctionName;
@@ -97,8 +96,6 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
     public DecimalNumberContext decimalNumberContext() {
         return DECIMAL_NUMBER_CONTEXT;
     }
-
-    private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
     // class............................................................................................................
 

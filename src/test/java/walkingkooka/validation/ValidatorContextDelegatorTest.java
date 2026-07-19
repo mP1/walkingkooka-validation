@@ -25,14 +25,12 @@ import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.datetime.DateTimeContextTesting;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.math.DecimalNumberContext;
-import walkingkooka.math.DecimalNumberContexts;
+import walkingkooka.math.DecimalNumberContextTesting;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.validation.ValidatorContextDelegatorTest.TestValidatorContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
-import java.math.MathContext;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
@@ -40,7 +38,8 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public final class ValidatorContextDelegatorTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference>,
-    DateTimeContextTesting {
+    DateTimeContextTesting,
+    DecimalNumberContextTesting {
 
     private final static TestValidationReference VALIDATION_REFERENCE = new TestValidationReference("A1");
 
@@ -52,8 +51,6 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
                                                                                                                                                       final TestValidationReference validationReference) -> {
         throw new UnsupportedOperationException();
     };
-
-    private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
     private final static ConverterContext CONVERTER_CONTEXT = ConverterContexts.basic(
         false, // canNumbersHaveGroupSeparator

@@ -30,7 +30,6 @@ import walkingkooka.locale.LocaleContextDelegator;
 import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
-import walkingkooka.math.DecimalNumberContexts;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.Indentation;
@@ -167,8 +166,6 @@ public final class FormHandlerExpressionEvaluationContextTestingTest implements 
     public DecimalNumberContext decimalNumberContext() {
         return DECIMAL_NUMBER_CONTEXT;
     }
-
-    private final static DecimalNumberContext DECIMAL_NUMBER_CONTEXT = DecimalNumberContexts.american(MathContext.DECIMAL32);
 
     final static class TestFormHandlerExpressionEvaluationContext implements FormHandlerExpressionEvaluationContext<TestValidationReference, Void>,
         DateTimeContextDelegator,
