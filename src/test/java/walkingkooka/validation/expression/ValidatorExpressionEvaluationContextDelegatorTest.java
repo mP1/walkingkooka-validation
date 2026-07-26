@@ -19,12 +19,10 @@ package walkingkooka.validation.expression;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.environment.EnvironmentContext;
-import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.locale.LocaleContexts;
 import walkingkooka.locale.LocaleLanguageTag;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
-import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionReference;
@@ -33,9 +31,6 @@ import walkingkooka.validation.expression.ValidatorExpressionEvaluationContextDe
 import walkingkooka.validation.form.Form;
 
 import java.math.MathContext;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.util.Currency;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
@@ -283,17 +278,7 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
             return this.environmentContext;
         }
 
-        private final EnvironmentContext environmentContext = EnvironmentContexts.map(
-            EnvironmentContexts.empty(
-                StandardCharsets.UTF_8,
-                Currency.getInstance("AUD"),
-                Indentation.SPACES2,
-                LineEnding.NL,
-                DECIMAL_NUMBER_CONTEXT.locale(),
-                () -> LocalDateTime.MIN,
-                EnvironmentContext.ANONYMOUS
-            )
-        );
+        private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
 
         @Override
         public String toString() {
