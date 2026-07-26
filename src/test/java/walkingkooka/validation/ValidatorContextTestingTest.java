@@ -27,7 +27,6 @@ import walkingkooka.currency.CurrencyLocaleContexts;
 import walkingkooka.datetime.DateTimeContextTesting;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
-import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.math.DecimalNumberContextTesting;
 import walkingkooka.net.email.EmailAddress;
@@ -40,7 +39,6 @@ import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.nio.charset.Charset;
 import java.time.LocalDateTime;
-import java.util.Currency;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
@@ -65,32 +63,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
     }
 
     @Override
-    public void testSetIndentationWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLineEndingWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLocaleWithDifferent() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLocaleWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public void testSetTimeOffsetWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetUserWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
 
@@ -136,52 +109,47 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
 
         @Override
         public Charset charset() {
-            return ValidatorContextTestingTest.CHARSET;
+            return this.environmentContext.charset();
         }
 
         @Override
         public void setCharset(final Charset charset) {
-            Objects.requireNonNull(charset, "charset");
-            throw new UnsupportedOperationException();
+            this.environmentContext.setCharset(charset);
         }
         
         @Override
         public Indentation indentation() {
-            return ValidatorContextTestingTest.INDENTATION;
+            return this.environmentContext.indentation();
         }
 
         @Override
         public void setIndentation(final Indentation indentation) {
-            Objects.requireNonNull(indentation, "indentation");
-            throw new UnsupportedOperationException();
+            this.environmentContext.setIndentation(indentation);
         }
         
         @Override
         public LineEnding lineEnding() {
-            return ValidatorContextTestingTest.LINE_ENDING;
+            return this.environmentContext.lineEnding();
         }
 
         @Override
         public void setLineEnding(final LineEnding lineEnding) {
-            Objects.requireNonNull(lineEnding, "lineEnding");
-            throw new UnsupportedOperationException();
+            this.environmentContext.setLineEnding(lineEnding);
         }
         
         @Override
         public Locale locale() {
-            return ValidatorContextTestingTest.LOCALE;
+            return this.environmentContext.locale();
         }
 
         @Override
         public void setLocale(final Locale locale) {
-            Objects.requireNonNull(locale, "locale");
-            throw new UnsupportedOperationException();
+            this.environmentContext.setLocale(locale);
         }
 
         @Override
         public void setUser(final Optional<EmailAddress> user) {
-            Objects.requireNonNull(user, "user");
-            throw new UnsupportedOperationException();
+            this.environmentContext.setUser(user);
         }
 
         @Override
@@ -201,7 +169,7 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
 
         @Override
         public LocalDateTime now() {
-            return CONVERTER_CONTEXT.now();
+            return this.environmentContext.now();
         }
 
         @Override
@@ -231,16 +199,10 @@ public final class ValidatorContextTestingTest implements ValidatorContextTestin
 
         @Override
         public EnvironmentContext environmentContext() {
-            return EnvironmentContexts.empty(
-                ValidatorContextTestingTest.CHARSET,
-                Currency.getInstance("AUD"),
-                ValidatorContextTestingTest.INDENTATION,
-                LineEnding.NL,
-                ValidatorContextTestingTest.LOCALE,
-                this,
-                Optional.empty()
-            );
+            return this.environmentContext;
         }
+
+        private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
 
         @Override
         public String toString() {
