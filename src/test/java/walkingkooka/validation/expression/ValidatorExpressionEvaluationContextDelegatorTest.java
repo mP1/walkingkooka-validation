@@ -19,7 +19,6 @@ package walkingkooka.validation.expression;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.environment.EnvironmentContext;
-import walkingkooka.locale.LocaleContexts;
 import walkingkooka.locale.LocaleLanguageTag;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
@@ -226,8 +225,7 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
                 public Set<Locale> findByLocaleText(final String text,
                                                     final int offset,
                                                     final int count) {
-                    return LocaleContexts.jre(Locale.ENGLISH)
-                        .findByLocaleText(
+                    return LOCALE_CONTEXT.findByLocaleText(
                             text,
                             offset,
                             count
@@ -242,7 +240,7 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
 
                 @Override
                 public LineEnding lineEnding() {
-                    return LineEnding.NL;
+                    return ValidatorExpressionEvaluationContextDelegatorTest.LINE_ENDING;
                 }
             };
         }
