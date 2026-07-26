@@ -23,15 +23,12 @@ import walkingkooka.currency.CurrencyExchange;
 import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
-import walkingkooka.environment.EnvironmentContexts;
 import walkingkooka.locale.LocaleContext;
 import walkingkooka.locale.LocaleContextDelegator;
-import walkingkooka.locale.LocaleContexts;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.Indentation;
-import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionNumberKind;
@@ -44,7 +41,6 @@ import walkingkooka.validation.form.Form;
 
 import java.math.MathContext;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Currency;
 import java.util.List;
@@ -56,8 +52,6 @@ import java.util.function.Function;
 
 public final class ValidatorExpressionEvaluationContextTestingTest implements ValidatorExpressionEvaluationContextTesting<TestValidationReference, TestValidatorExpressionEvaluationContext>,
     DecimalNumberContextDelegator {
-
-    private final static LocalDateTime NOW = LocalDateTime.MIN;
 
     @Override
     public void testEnterScopeGivesDifferentInstance() {
@@ -150,7 +144,7 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
         @Override
         public Charset charset() {
-            return StandardCharsets.UTF_8;
+            return ValidatorExpressionEvaluationContextTestingTest.CHARSET;
         }
 
         @Override
@@ -185,7 +179,7 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
         @Override
         public Indentation indentation() {
-            return Indentation.SPACES2;
+            return ValidatorExpressionEvaluationContextTestingTest.INDENTATION;
         }
 
         @Override
@@ -300,23 +294,13 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
             return this.environmentContext;
         }
 
-        private final EnvironmentContext environmentContext = EnvironmentContexts.map(
-            EnvironmentContexts.empty(
-                StandardCharsets.UTF_8,
-                Currency.getInstance("AUD"),
-                Indentation.SPACES2,
-                LineEnding.NL,
-                DECIMAL_NUMBER_CONTEXT.locale(),
-                () -> ValidatorExpressionEvaluationContextTestingTest.NOW,
-                EnvironmentContext.ANONYMOUS
-            )
-        );
+        private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
 
         // LocaleContext................................................................................................
 
         @Override
         public LocaleContext localeContext() {
-            return LocaleContexts.jre(Locale.ENGLISH);
+            return LOCALE_CONTEXT;
         }
 
         @Override
