@@ -18,14 +18,14 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.convert.ConverterLikeTesting;
+import walkingkooka.convert.ConverterLikeTesting2;
 import walkingkooka.environment.EnvironmentContextTesting2;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public interface ValidatorContextTesting<C extends ValidatorContext<R>, R extends ValidationReference> extends ConverterLikeTesting<C>,
+public interface ValidatorContextTesting<C extends ValidatorContext<R>, R extends ValidationReference> extends ConverterLikeTesting2<C>,
     EnvironmentContextTesting2<C> {
 
     @Test
