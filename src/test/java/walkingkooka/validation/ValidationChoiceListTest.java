@@ -184,6 +184,28 @@ public class ValidationChoiceListTest implements ListTesting2<ValidationChoiceLi
         return this.createList();
     }
 
+    // firstOrEmpty.....................................................................................................
+
+    @Test
+    public void testFirstOrEmptyWhenEmpty() {
+        this.firstOrEmptyAndCheck(
+            ValidationChoiceList.EMPTY
+        );
+    }
+
+    @Test
+    public void testFirstOrEmptyWhenNotEmpty() {
+        this.firstOrEmptyAndCheck(
+            ValidationChoiceList.EMPTY
+                .concat(
+                    CHOICE1
+                ).concat(
+                    CHOICE2
+                ),
+            CHOICE1
+        );
+    }
+
     // class............................................................................................................
 
     @Override

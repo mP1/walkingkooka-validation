@@ -197,6 +197,34 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
         return this.createList();
     }
 
+    // firstOrEmpty.....................................................................................................
+
+    @Test
+    public void testFirstOrEmptyWhenEmpty() {
+        this.firstOrEmptyAndCheck(
+            FormFieldList.empty()
+        );
+    }
+
+    @Test
+    public void testFirstOrEmptyWhenNotEmpty() {
+        final FormField<TestValidationReference> first = FormField.with(
+            new TestValidationReference("111")
+        );
+
+        this.firstOrEmptyAndCheck(
+            FormFieldList.<TestValidationReference>empty()
+                .concat(
+                    first
+                ).concat(
+                    FormField.with(
+                        new TestValidationReference("222")
+                    )
+                ),
+            first
+        );
+    }
+
     // ClassTesting.....................................................................................................
 
     @Override

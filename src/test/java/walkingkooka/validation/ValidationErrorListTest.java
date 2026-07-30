@@ -200,6 +200,34 @@ public final class ValidationErrorListTest implements ImmutableListTesting<Valid
         return this.createList();
     }
 
+    // firstOrEmpty.....................................................................................................
+
+    @Test
+    public void testFirstOrEmptyWhenEmpty() {
+        this.firstOrEmptyAndCheck(
+            ValidationErrorList.empty()
+        );
+    }
+
+    @Test
+    public void testFirstOrEmptyWhenNotEmpty() {
+        final ValidationError<TestValidationReference> first = ValidationError.with(
+            new TestValidationReference("Hello")
+        );
+
+        this.firstOrEmptyAndCheck(
+            ValidationErrorList.<TestValidationReference>empty()
+                .concat(
+                    first
+                ).concat(
+                    ValidationError.with(
+                        new TestValidationReference("222")
+                    )
+                ),
+            first
+        );
+    }
+
     // ClassTesting.....................................................................................................
 
     @Override
