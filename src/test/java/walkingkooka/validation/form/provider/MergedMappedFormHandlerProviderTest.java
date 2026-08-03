@@ -154,7 +154,7 @@ public final class MergedMappedFormHandlerProviderTest implements FormHandlerPro
     public void testToString() {
         this.toStringAndCheck(
             this.createFormHandlerProvider(),
-            "https://example.com/provider-only-form-handler-222 provider-only-form-handler-222,https://example.com/renamed-form-handler-111 renamed-rename-form-handler-111"
+            "https://example.com/provider-only-form-handler-222 provider-only-form-handler-222, https://example.com/renamed-form-handler-111 renamed-rename-form-handler-111"
         );
     }
 

@@ -153,7 +153,7 @@ public final class MergedMappedValidatorProviderTest implements ValidatorProvide
     public void testToString() {
         this.toStringAndCheck(
             this.createValidatorProvider(),
-            "https://example.com/provider-only-validator-222 provider-only-validator-222,https://example.com/renamed-validator-111 renamed-rename-validator-111"
+            "https://example.com/provider-only-validator-222 provider-only-validator-222, https://example.com/renamed-validator-111 renamed-rename-validator-111"
         );
     }
 
