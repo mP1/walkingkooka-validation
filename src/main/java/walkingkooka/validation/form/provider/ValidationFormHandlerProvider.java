@@ -4,6 +4,8 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.net.UrlPath;
 import walkingkooka.plugin.ProviderContext;
+import walkingkooka.text.printer.IndentingPrinter;
+import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.FormHandler;
 import walkingkooka.validation.form.FormHandlerContext;
@@ -15,7 +17,8 @@ import java.util.Objects;
 /**
  * A {@link FormHandlerProvider} that uses the {@link FormHandlerProvider} defined in {@link FormHandlers}.
  */
-final class ValidationFormHandlerProvider implements FormHandlerProvider {
+final class ValidationFormHandlerProvider implements FormHandlerProvider,
+    TreePrintable {
 
     /**
      * Singleton
@@ -102,5 +105,21 @@ final class ValidationFormHandlerProvider implements FormHandlerProvider {
     @Override
     public String toString() {
         return this.getClass().getSimpleName();
+    }
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public void printTree(final IndentingPrinter printer) {
+        printer.println(this.getClass().getSimpleName());
+
+        printer.indent();
+        {
+            TreePrintable.printTreeOrToString(
+                this.formHandlerInfos(),
+                printer
+            );
+        }
+        printer.outdent();
     }
 }

@@ -96,9 +96,10 @@ public final class ValidationFormHandlerProviderTest implements FormHandlerProvi
     @Test
     public void testTreePrint() {
         this.treePrintAndCheck(
-            ValidationFormHandlerProvider.INSTANCE.formHandlerInfos(),
-            "FormHandlerInfoSet\n" +
-                "  https://github.com/mP1/walkingkooka-validation/FormHandler/basic basic\n"
+            this.createFormHandlerProvider(),
+            "ValidationFormHandlerProvider\n" +
+                "  FormHandlerInfoSet\n" +
+                "    https://github.com/mP1/walkingkooka-validation/FormHandler/basic basic\n"
         );
     }
 
