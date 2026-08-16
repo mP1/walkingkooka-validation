@@ -36,7 +36,7 @@ import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.validation.TestValidationReference;
-import walkingkooka.validation.expression.ValidatorExpressionEvaluationContextTestingTest.TestValidatorExpressionEvaluationContext;
+import walkingkooka.validation.expression.ValidatorExpressionEvaluationContextTesting2Test.TestValidatorExpressionEvaluationContext;
 import walkingkooka.validation.form.Form;
 
 import java.math.MathContext;
@@ -50,7 +50,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
-public final class ValidatorExpressionEvaluationContextTestingTest implements ValidatorExpressionEvaluationContextTesting<TestValidationReference, TestValidatorExpressionEvaluationContext>,
+public final class ValidatorExpressionEvaluationContextTesting2Test implements ValidatorExpressionEvaluationContextTesting2<TestValidationReference, TestValidatorExpressionEvaluationContext>,
     DecimalNumberContextDelegator {
 
     @Override
@@ -144,7 +144,7 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
         @Override
         public Charset charset() {
-            return ValidatorExpressionEvaluationContextTestingTest.CHARSET;
+            return ValidatorExpressionEvaluationContextTesting2Test.CHARSET;
         }
 
         @Override
@@ -179,7 +179,7 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
         @Override
         public Indentation indentation() {
-            return ValidatorExpressionEvaluationContextTestingTest.INDENTATION;
+            return ValidatorExpressionEvaluationContextTesting2Test.INDENTATION;
         }
 
         @Override
@@ -233,7 +233,7 @@ public final class ValidatorExpressionEvaluationContextTestingTest implements Va
 
         @Override
         public LocalDateTime now() {
-            return ValidatorExpressionEvaluationContextTestingTest.NOW;
+            return ValidatorExpressionEvaluationContextTesting2Test.NOW;
         }
 
         @Override
