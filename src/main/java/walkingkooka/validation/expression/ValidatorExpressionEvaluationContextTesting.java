@@ -17,23 +17,20 @@
 
 package walkingkooka.validation.expression;
 
-import walkingkooka.tree.expression.ExpressionEvaluationContextTesting2;
-import walkingkooka.validation.ValidationReference;
-import walkingkooka.validation.form.HasFormTesting;
+import walkingkooka.tree.expression.ExpressionEvaluationContextTesting;
 
 import java.util.Optional;
 
-public interface ValidatorExpressionEvaluationContextTesting<R extends ValidationReference, C extends ValidatorExpressionEvaluationContext<R>> extends ExpressionEvaluationContextTesting2<C>,
-    HasFormTesting<R> {
+public interface ValidatorExpressionEvaluationContextTesting extends ExpressionEvaluationContextTesting {
 
-    default void validationValueAndCheck(final ValidatorExpressionEvaluationContext<R> context) {
+    default void validationValueAndCheck(final ValidatorExpressionEvaluationContext<?> context) {
         this.validationValueAndCheck(
             context,
             Optional.empty()
         );
     }
 
-    default void validationValueAndCheck(final ValidatorExpressionEvaluationContext<R> context,
+    default void validationValueAndCheck(final ValidatorExpressionEvaluationContext<?> context,
                                          final Object expected) {
         this.validationValueAndCheck(
             context,
@@ -41,23 +38,11 @@ public interface ValidatorExpressionEvaluationContextTesting<R extends Validatio
         );
     }
 
-    default void validationValueAndCheck(final ValidatorExpressionEvaluationContext<R> context,
+    default void validationValueAndCheck(final ValidatorExpressionEvaluationContext<?> context,
                                          final Optional<Object> expected) {
         this.checkEquals(
             expected,
             context.validationValue()
         );
-    }
-
-    // ExpressionEvaluationContextTesting...............................................................................
-
-    @Override
-    default C createConverterLike() {
-        return this.createContext();
-    }
-
-    @Override
-    default String typeNameSuffix() {
-        return ValidatorExpressionEvaluationContext.class.getSimpleName();
     }
 }

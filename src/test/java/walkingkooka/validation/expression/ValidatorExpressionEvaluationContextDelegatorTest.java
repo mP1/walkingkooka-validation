@@ -36,7 +36,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
-public final class ValidatorExpressionEvaluationContextDelegatorTest implements ValidatorExpressionEvaluationContextTesting<TestValidationReference, TestValidatorExpressionEvaluationContextDelegator>,
+public final class ValidatorExpressionEvaluationContextDelegatorTest implements ValidatorExpressionEvaluationContextTesting2<TestValidationReference, TestValidatorExpressionEvaluationContextDelegator>,
     DecimalNumberContextDelegator {
 
     private final static Optional<Object> VALIDATION_VALUE = Optional.of("ValidationValue123");
