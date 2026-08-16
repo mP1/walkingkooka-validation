@@ -26,7 +26,7 @@ import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidatorContext;
-import walkingkooka.validation.form.FormHandlerContextTestingTest.TestFormHandlerContext;
+import walkingkooka.validation.form.FormHandlerContextTesting2Test.TestFormHandlerContext;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -40,7 +40,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-public final class FormHandlerContextTestingTest implements FormHandlerContextTesting<TestFormHandlerContext, TestValidationReference, Void> {
+public final class FormHandlerContextTesting2Test implements FormHandlerContextTesting2<TestFormHandlerContext, TestValidationReference, Void> {
 
     @Override
     public void testEnvironmentValueLineEndingEqualsLineEnding() {

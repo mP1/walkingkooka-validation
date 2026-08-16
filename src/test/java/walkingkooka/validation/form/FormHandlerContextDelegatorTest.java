@@ -36,7 +36,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 
-public final class FormHandlerContextDelegatorTest implements FormHandlerContextTesting<TestFormHandlerContextDelegator, TestValidationReference, Void> {
+public final class FormHandlerContextDelegatorTest implements FormHandlerContextTesting2<TestFormHandlerContextDelegator, TestValidationReference, Void> {
 
     @Override
     public void testEnvironmentValueLineEndingEqualsLineEnding() {
