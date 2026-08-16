@@ -17,13 +17,13 @@
 
 package walkingkooka.validation.expression;
 
-import walkingkooka.tree.expression.ExpressionEvaluationContextTesting;
+import walkingkooka.tree.expression.ExpressionEvaluationContextTesting2;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.HasFormTesting;
 
 import java.util.Optional;
 
-public interface ValidatorExpressionEvaluationContextTesting<R extends ValidationReference, C extends ValidatorExpressionEvaluationContext<R>> extends ExpressionEvaluationContextTesting<C>,
+public interface ValidatorExpressionEvaluationContextTesting<R extends ValidationReference, C extends ValidatorExpressionEvaluationContext<R>> extends ExpressionEvaluationContextTesting2<C>,
     HasFormTesting<R> {
 
     default void validationValueAndCheck(final ValidatorExpressionEvaluationContext<R> context) {

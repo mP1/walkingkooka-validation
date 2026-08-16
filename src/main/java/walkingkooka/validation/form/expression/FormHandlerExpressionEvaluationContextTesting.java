@@ -17,11 +17,11 @@
 
 package walkingkooka.validation.form.expression;
 
-import walkingkooka.tree.expression.ExpressionEvaluationContextTesting;
+import walkingkooka.tree.expression.ExpressionEvaluationContextTesting2;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.FormHandlerContextTesting;
 
-public interface FormHandlerExpressionEvaluationContextTesting<R extends ValidationReference, S, C extends FormHandlerExpressionEvaluationContext<R, S>> extends ExpressionEvaluationContextTesting<C>,
+public interface FormHandlerExpressionEvaluationContextTesting<R extends ValidationReference, S, C extends FormHandlerExpressionEvaluationContext<R, S>> extends ExpressionEvaluationContextTesting2<C>,
     FormHandlerContextTesting<C, R, S> {
 
     @Override
