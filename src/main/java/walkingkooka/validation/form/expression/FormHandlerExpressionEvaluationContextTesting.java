@@ -17,20 +17,9 @@
 
 package walkingkooka.validation.form.expression;
 
-import walkingkooka.tree.expression.ExpressionEvaluationContextTesting2;
-import walkingkooka.validation.ValidationReference;
-import walkingkooka.validation.form.FormHandlerContextTesting2;
+import walkingkooka.tree.expression.ExpressionEvaluationContextTesting;
+import walkingkooka.validation.form.FormHandlerContextTesting;
 
-public interface FormHandlerExpressionEvaluationContextTesting<R extends ValidationReference, S, C extends FormHandlerExpressionEvaluationContext<R, S>> extends ExpressionEvaluationContextTesting2<C>,
-    FormHandlerContextTesting2<C, R, S> {
-
-    @Override
-    default C createConverterLike() {
-        return this.createContext();
-    }
-
-    @Override
-    default String typeNameSuffix() {
-        return FormHandlerExpressionEvaluationContext.class.getSimpleName();
-    }
+public interface FormHandlerExpressionEvaluationContextTesting extends ExpressionEvaluationContextTesting,
+    FormHandlerContextTesting {
 }

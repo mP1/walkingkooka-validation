@@ -36,7 +36,7 @@ import walkingkooka.validation.ValidatorContext;
 import walkingkooka.validation.form.Form;
 import walkingkooka.validation.form.FormField;
 import walkingkooka.validation.form.expression.FormHandlerExpressionEvaluationContextDelegatorTest.TestFormHandlerExpressionEvaluationContextDelegator;
-import walkingkooka.validation.form.expression.FormHandlerExpressionEvaluationContextTestingTest.TestFormHandlerExpressionEvaluationContext;
+import walkingkooka.validation.form.expression.FormHandlerExpressionEvaluationContextTesting2Test.TestFormHandlerExpressionEvaluationContext;
 
 import java.math.MathContext;
 import java.nio.charset.Charset;
@@ -51,7 +51,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
-public final class FormHandlerExpressionEvaluationContextDelegatorTest implements FormHandlerExpressionEvaluationContextTesting<TestValidationReference, Void, TestFormHandlerExpressionEvaluationContextDelegator>,
+public final class FormHandlerExpressionEvaluationContextDelegatorTest implements FormHandlerExpressionEvaluationContextTesting2<TestValidationReference, Void, TestFormHandlerExpressionEvaluationContextDelegator>,
     DecimalNumberContextDelegator {
 
     @Override
