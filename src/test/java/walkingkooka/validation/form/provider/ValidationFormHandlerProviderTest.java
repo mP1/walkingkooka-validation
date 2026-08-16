@@ -31,7 +31,7 @@ import walkingkooka.validation.form.FormHandlers;
 
 import java.util.Arrays;
 
-public final class ValidationFormHandlerProviderTest implements FormHandlerProviderTesting<ValidationFormHandlerProvider> {
+public final class ValidationFormHandlerProviderTest implements FormHandlerProviderTesting2<ValidationFormHandlerProvider> {
 
     @Test
     public void testFormHandlerSelector() {

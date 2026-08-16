@@ -33,7 +33,7 @@ import walkingkooka.validation.form.FormHandlerContext;
 
 import java.util.List;
 
-public final class AliasesFormHandlerProviderTest implements FormHandlerProviderTesting<AliasesFormHandlerProvider> {
+public final class AliasesFormHandlerProviderTest implements FormHandlerProviderTesting2<AliasesFormHandlerProvider> {
 
     private final static String NAME1_STRING = "form-handler-1";
 

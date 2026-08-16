@@ -20,7 +20,7 @@ package walkingkooka.validation.form.provider;
 import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.JavaVisibility;
 
-public final class EmptyFormHandlerProviderTest implements FormHandlerProviderTesting<EmptyFormHandlerProvider> {
+public final class EmptyFormHandlerProviderTest implements FormHandlerProviderTesting2<EmptyFormHandlerProvider> {
 
     @Test
     public void testFormHandlerInfos() {

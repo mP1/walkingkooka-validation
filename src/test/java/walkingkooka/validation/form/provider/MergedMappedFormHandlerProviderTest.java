@@ -40,7 +40,7 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class MergedMappedFormHandlerProviderTest implements FormHandlerProviderTesting<MergedMappedFormHandlerProvider>,
+public final class MergedMappedFormHandlerProviderTest implements FormHandlerProviderTesting2<MergedMappedFormHandlerProvider>,
     ToStringTesting<MergedMappedFormHandlerProvider> {
 
     private final static AbsoluteUrl RENAMED_URL = Url.parseAbsolute("https://example.com/renamed-form-handler-111");
