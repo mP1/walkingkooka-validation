@@ -34,7 +34,7 @@ import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionEvaluationContexts;
-import walkingkooka.validation.ValidatorContextTestingTest.TestValidatorContext;
+import walkingkooka.validation.ValidatorContextTesting2Test.TestValidatorContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.nio.charset.Charset;
@@ -43,7 +43,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 
-public final class ValidatorContextTestingTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference>,
+public final class ValidatorContextTesting2Test implements ValidatorContextTesting2<TestValidatorContext, TestValidationReference>,
     DateTimeContextTesting,
     DecimalNumberContextTesting {
 

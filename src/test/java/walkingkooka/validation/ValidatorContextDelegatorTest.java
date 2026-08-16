@@ -37,7 +37,7 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public final class ValidatorContextDelegatorTest implements ValidatorContextTesting<TestValidatorContext, TestValidationReference>,
+public final class ValidatorContextDelegatorTest implements ValidatorContextTesting2<TestValidatorContext, TestValidationReference>,
     DateTimeContextTesting,
     DecimalNumberContextTesting {
 

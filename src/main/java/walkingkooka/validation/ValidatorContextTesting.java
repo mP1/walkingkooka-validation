@@ -17,41 +17,15 @@
 
 package walkingkooka.validation;
 
-import org.junit.jupiter.api.Test;
-import walkingkooka.convert.ConverterLikeTesting2;
-import walkingkooka.environment.EnvironmentContextTesting2;
+import walkingkooka.convert.ConverterLikeTesting;
+import walkingkooka.environment.EnvironmentContextTesting;
 import walkingkooka.validation.provider.ValidatorSelector;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+public interface ValidatorContextTesting extends ConverterLikeTesting,
+    EnvironmentContextTesting {
 
-public interface ValidatorContextTesting<C extends ValidatorContext<R>, R extends ValidationReference> extends ConverterLikeTesting2<C>,
-    EnvironmentContextTesting2<C> {
-
-    @Test
-    default void testSetValidationReferenceWithNullFails() {
-        final C context = this.createContext();
-
-        assertThrows(
-            NullPointerException.class,
-            () -> context.setValidationReference(null)
-        );
-    }
-
-    @Test
-    default void testSetValidationReferenceSame() {
-        final C context = this.createContext();
-
-        assertSame(
-            context,
-            context.setValidationReference(
-                context.validationReference()
-            )
-        );
-    }
-
-    default void validationReferenceAndCheck(final C context,
-                                             final R expected) {
+    default <R extends ValidationReference> void validationReferenceAndCheck(final ValidatorContext<R> context,
+                                                                             final R expected) {
         this.checkEquals(
             expected,
             context.validationReference(),
@@ -60,36 +34,13 @@ public interface ValidatorContextTesting<C extends ValidatorContext<R>, R extend
 
     // validator........................................................................................................
 
-    @Test
-    default void testValidatorWithNullValidatorSelectorFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createContext()
-                .validator(null)
-        );
-    }
-
-    default void validatorAndCheck(final C context,
-                                   final ValidatorSelector selector,
-                                   final Validator<R, C> expected) {
+    default <R extends ValidationReference, C extends ValidatorContext<R>> void validatorAndCheck(final C context,
+                                                                                                  final ValidatorSelector selector,
+                                                                                                  final Validator<R, C> expected) {
         this.checkEquals(
             expected,
             context.validator(selector),
             selector::toString
         );
-    }
-
-    // ConverterLike....................................................................................................
-
-    @Override
-    default C createConverterLike() {
-        return this.createContext();
-    }
-
-    // class............................................................................................................
-
-    @Override
-    default String typeNameSuffix() {
-        return ValidatorContext.class.getSimpleName();
     }
 }
