@@ -34,7 +34,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-public final class BasicFormHandlerTest implements FormHandlerTesting<
+public final class BasicFormHandlerTest implements FormHandlerTesting2<
     BasicFormHandler<TestValidationReference, BasicFormHandlerTest, FakeFormHandlerContext<TestValidationReference, BasicFormHandlerTest>>,
     TestValidationReference,
     BasicFormHandlerTest,

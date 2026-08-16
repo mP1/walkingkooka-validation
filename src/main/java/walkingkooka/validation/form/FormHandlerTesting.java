@@ -17,50 +17,19 @@
 
 package walkingkooka.validation.form;
 
-import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.reflect.ClassTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.ValidationReference;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+public interface FormHandlerTesting extends TreePrintableTesting {
 
-public interface FormHandlerTesting<H extends FormHandler<R, S, C>, R extends ValidationReference, S, C extends FormHandlerContext<R, S>> extends TreePrintableTesting,
-    ClassTesting<H> {
-
-    @Test
-    default void testPrepareFormWithNullFormFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createFormHandler()
-                .prepareForm(
-                    null,
-                    this.createContext()
-                )
-        );
-    }
-
-    @Test
-    default void testPrepareFormWithNullContextFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createFormHandler()
-                .prepareForm(
-                    Form.with(
-                        FormName.with("Form123")
-                    ),
-                    null
-                )
-        );
-    }
-
-    default void prepareFormAndCheck(final H handler,
-                                     final Form<R> form,
-                                     final C context,
-                                     final Form<R> expected) {
+    default <H extends FormHandler<R, S, C>, R extends ValidationReference, S, C extends FormHandlerContext<R, S>> void prepareFormAndCheck(final H handler,
+                                                                                                                                            final Form<R> form,
+                                                                                                                                            final C context,
+                                                                                                                                            final Form<R> expected) {
         this.checkEquals(
             expected,
             handler.prepareForm(
@@ -72,36 +41,10 @@ public interface FormHandlerTesting<H extends FormHandler<R, S, C>, R extends Va
 
     // validateForm.....................................................................................................
 
-    @Test
-    default void testValidateFormWithNullFormFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createFormHandler()
-                .validateForm(
-                    null,
-                    this.createContext()
-                )
-        );
-    }
-
-    @Test
-    default void testValidateFormWithNullContextFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createFormHandler()
-                .validateForm(
-                    Form.with(
-                        FormName.with("Form123")
-                    ),
-                    null
-                )
-        );
-    }
-
-    default void validateFormAndCheck(final H handler,
-                                      final Form<R> form,
-                                      final C context,
-                                      final ValidationError<R>... expected) {
+    default <H extends FormHandler<R, S, C>, R extends ValidationReference, S, C extends FormHandlerContext<R, S>> void validateFormAndCheck(final H handler,
+                                                                                                                                             final Form<R> form,
+                                                                                                                                             final C context,
+                                                                                                                                             final ValidationError<R>... expected) {
         this.validateFormAndCheck(
             handler,
             form,
@@ -110,10 +53,10 @@ public interface FormHandlerTesting<H extends FormHandler<R, S, C>, R extends Va
         );
     }
 
-    default void validateFormAndCheck(final H handler,
-                                      final Form<R> form,
-                                      final C context,
-                                      final List<ValidationError<R>> expected) {
+    default <H extends FormHandler<R, S, C>, R extends ValidationReference, S, C extends FormHandlerContext<R, S>> void validateFormAndCheck(final H handler,
+                                                                                                                                             final Form<R> form,
+                                                                                                                                             final C context,
+                                                                                                                                             final List<ValidationError<R>> expected) {
         this.checkEquals(
             expected,
             handler.validateForm(
@@ -125,36 +68,10 @@ public interface FormHandlerTesting<H extends FormHandler<R, S, C>, R extends Va
 
     // submitForm.......................................................................................................
 
-    @Test
-    default void testSubmitFormWithNullFormFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createFormHandler()
-                .submitForm(
-                    null,
-                    this.createContext()
-                )
-        );
-    }
-
-    @Test
-    default void testSubmitFormWithNullContextFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createFormHandler()
-                .submitForm(
-                    Form.with(
-                        FormName.with("Form123")
-                    ),
-                    null
-                )
-        );
-    }
-
-    default void submitFormAndCheck(final H handler,
-                                    final Form<R> form,
-                                    final C context,
-                                    final S expected) {
+    default <H extends FormHandler<R, S, C>, R extends ValidationReference, S, C extends FormHandlerContext<R, S>> void submitFormAndCheck(final H handler,
+                                                                                                                                           final Form<R> form,
+                                                                                                                                           final C context,
+                                                                                                                                           final S expected) {
         this.checkEquals(
             expected,
             handler.submitForm(
@@ -163,10 +80,4 @@ public interface FormHandlerTesting<H extends FormHandler<R, S, C>, R extends Va
             )
         );
     }
-
-    // helper...........................................................................................................
-
-    H createFormHandler();
-
-    C createContext();
 }
