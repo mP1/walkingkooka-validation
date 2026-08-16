@@ -39,7 +39,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class BasicValidatorContextTest implements ValidatorContextTesting<BasicValidatorContext<TestValidationReference>, TestValidationReference>,
+public final class BasicValidatorContextTest implements ValidatorContextTesting2<BasicValidatorContext<TestValidationReference>, TestValidationReference>,
     DateTimeContextTesting,
     DecimalNumberContextTesting,
     ToStringTesting<BasicValidatorContext<TestValidationReference>> {
