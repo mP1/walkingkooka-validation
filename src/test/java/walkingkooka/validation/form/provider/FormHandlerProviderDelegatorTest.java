@@ -20,7 +20,7 @@ package walkingkooka.validation.form.provider;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.validation.form.provider.FormHandlerProviderDelegatorTest.TestFormHandlerProvider;
 
-public final class FormHandlerProviderDelegatorTest implements FormHandlerProviderTesting<TestFormHandlerProvider> {
+public final class FormHandlerProviderDelegatorTest implements FormHandlerProviderTesting2<TestFormHandlerProvider> {
 
     @Override
     public TestFormHandlerProvider createFormHandlerProvider() {

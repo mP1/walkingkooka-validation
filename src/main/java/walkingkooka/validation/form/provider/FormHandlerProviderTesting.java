@@ -17,95 +17,16 @@
 
 package walkingkooka.validation.form.provider;
 
-import org.junit.jupiter.api.Test;
-import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.plugin.ProviderContext;
-import walkingkooka.plugin.ProviderContexts;
-import walkingkooka.plugin.ProviderTesting;
+import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.validation.form.FormHandler;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public interface FormHandlerProviderTesting<T extends FormHandlerProvider> extends ProviderTesting<T> {
-
-    // formHandler(FormHandlerSelector).....................................................................................
-
-    @Test
-    default void testFormHandlerSelectorWithNullSelectorFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createFormHandlerProvider()
-                .formHandler(
-                    null,
-                    ProviderContexts.fake()
-                )
-        );
-    }
-
-    @Test
-    default void testFormHandlerSelectorWithNullContextFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createFormHandlerProvider()
-                .formHandler(
-                    FormHandlerSelector.parse("form-handler"),
-                    null
-                )
-        );
-    }
-
-    default void formHandlerFails(final String selector,
-                                  final ProviderContext context) {
-        this.formHandlerFails(
-            FormHandlerSelector.parse(selector),
-            context
-        );
-    }
-
-    default void formHandlerFails(final FormHandlerSelector selector,
-                                  final ProviderContext context) {
-        this.formHandlerFails(
-            this.createFormHandlerProvider(),
-            selector,
-            context
-        );
-    }
-
-    default void formHandlerFails(final FormHandlerProvider provider,
-                                  final FormHandlerSelector selector,
-                                  final ProviderContext context) {
-        assertThrows(
-            IllegalArgumentException.class,
-            () -> selector.evaluateValueText(
-                provider,
-                context
-            )
-        );
-    }
-
-    default void formHandlerAndCheck(final String selector,
-                                     final ProviderContext context,
-                                     final FormHandler<?, ?, ?> expected) {
-        this.formHandlerAndCheck(
-            FormHandlerSelector.parse(selector),
-            context,
-            expected
-        );
-    }
-
-    default void formHandlerAndCheck(final FormHandlerSelector selector,
-                                     final ProviderContext context,
-                                     final FormHandler<?, ?, ?> expected) {
-        this.formHandlerAndCheck(
-            this.createFormHandlerProvider(),
-            selector,
-            context,
-            expected
-        );
-    }
+public interface FormHandlerProviderTesting extends TreePrintableTesting {
 
     default void formHandlerAndCheck(final FormHandlerProvider provider,
                                      final String selector,
@@ -134,56 +55,6 @@ public interface FormHandlerProviderTesting<T extends FormHandlerProvider> exten
 
     // formHandler(FormHandlerName, List<?>)................................................................................
 
-    @Test
-    default void testFormHandlerNameWithNullNameFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createFormHandlerProvider()
-                .formHandler(
-                    null,
-                    Lists.empty(),
-                    ProviderContexts.fake()
-                )
-        );
-    }
-
-    @Test
-    default void testFormHandlerNameWithNullValueFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createFormHandlerProvider()
-                .formHandler(
-                    FormHandlerName.with("hello"),
-                    null,
-                    ProviderContexts.fake()
-                )
-        );
-    }
-
-    @Test
-    default void testFormHandlerNameWithNullContextFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createFormHandlerProvider()
-                .formHandler(
-                    FormHandlerName.with("hello"),
-                    Lists.empty(),
-                    null
-                )
-        );
-    }
-
-    default void formHandlerFails(final FormHandlerName name,
-                                  final List<?> values,
-                                  final ProviderContext context) {
-        this.formHandlerFails(
-            this.createFormHandlerProvider(),
-            name,
-            values,
-            context
-        );
-    }
-
     default void formHandlerFails(final FormHandlerProvider provider,
                                   final FormHandlerName name,
                                   final List<?> values,
@@ -195,19 +66,6 @@ public interface FormHandlerProviderTesting<T extends FormHandlerProvider> exten
                 values,
                 context
             )
-        );
-    }
-
-    default void formHandlerAndCheck(final FormHandlerName name,
-                                     final List<?> values,
-                                     final ProviderContext context,
-                                     final FormHandler<?, ?, ?> expected) {
-        this.formHandlerAndCheck(
-            this.createFormHandlerProvider(),
-            name,
-            values,
-            context,
-            expected
         );
     }
 
@@ -229,13 +87,6 @@ public interface FormHandlerProviderTesting<T extends FormHandlerProvider> exten
 
     // formHandlerInfos...................................................................................................
 
-    default void formHandlerInfosAndCheck(final FormHandlerInfo... expected) {
-        this.formHandlerInfosAndCheck(
-            this.createFormHandlerProvider(),
-            expected
-        );
-    }
-
     default void formHandlerInfosAndCheck(final FormHandlerProvider provider,
                                           final FormHandlerInfo... expected) {
         this.formHandlerInfosAndCheck(
@@ -248,13 +99,6 @@ public interface FormHandlerProviderTesting<T extends FormHandlerProvider> exten
         );
     }
 
-    default void formHandlerInfosAndCheck(final FormHandlerInfoSet expected) {
-        this.formHandlerInfosAndCheck(
-            this.createFormHandlerProvider(),
-            expected
-        );
-    }
-
     default void formHandlerInfosAndCheck(final FormHandlerProvider provider,
                                           final FormHandlerInfoSet expected) {
         this.checkEquals(
@@ -263,6 +107,4 @@ public interface FormHandlerProviderTesting<T extends FormHandlerProvider> exten
             provider::toString
         );
     }
-
-    T createFormHandlerProvider();
 }
