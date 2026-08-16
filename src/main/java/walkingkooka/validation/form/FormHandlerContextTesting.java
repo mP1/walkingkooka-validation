@@ -17,35 +17,23 @@
 
 package walkingkooka.validation.form;
 
-import org.junit.jupiter.api.Test;
-import walkingkooka.convert.ConverterLikeTesting2;
-import walkingkooka.environment.EnvironmentContextTesting2;
+import walkingkooka.convert.ConverterLikeTesting;
+import walkingkooka.environment.EnvironmentContextTesting;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R extends ValidationReference, S> extends ConverterLikeTesting2<C>,
-    EnvironmentContextTesting2<C>,
+public interface FormHandlerContextTesting extends ConverterLikeTesting,
+    EnvironmentContextTesting,
     HasFormTesting {
 
     // validatorContext.................................................................................................
 
-    @Test
-    default void testValidatorContextWithNullReferenceFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createContext()
-                .validatorContext(null)
-        );
-    }
-
-    default void validatorContextAndCheck(final FormHandlerContext<R, S> context,
-                                          final R reference,
-                                          final ValidatorContext<R> expected) {
+    default <C extends FormHandlerContext<R, S>, R extends ValidationReference, S> void validatorContextAndCheck(final FormHandlerContext<R, S> context,
+                                                                                                                 final R reference,
+                                                                                                                 final ValidatorContext<R> expected) {
         this.checkEquals(
             expected,
             context.validatorContext(reference),
@@ -55,17 +43,8 @@ public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R
 
     // loadFieldValue...................................................................................................
 
-    @Test
-    default void testLoadFormFieldValueWithNullFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createContext()
-                .loadFormFieldValue(null)
-        );
-    }
-
-    default void loadFormFieldValueAndCheck(final C context,
-                                            final R reference) {
+    default <C extends FormHandlerContext<R, S>, R extends ValidationReference, S> void loadFormFieldValueAndCheck(final C context,
+                                                                                                                   final R reference) {
         this.loadFormFieldValueAndCheck(
             context,
             reference,
@@ -73,9 +52,9 @@ public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R
         );
     }
 
-    default void loadFormFieldValueAndCheck(final C context,
-                                            final R reference,
-                                            final Object expected) {
+    default <C extends FormHandlerContext<R, S>, R extends ValidationReference, S> void loadFormFieldValueAndCheck(final C context,
+                                                                                                                   final R reference,
+                                                                                                                   final Object expected) {
         this.loadFormFieldValueAndCheck(
             context,
             reference,
@@ -83,9 +62,9 @@ public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R
         );
     }
 
-    default void loadFormFieldValueAndCheck(final C context,
-                                            final R reference,
-                                            final Optional<Object> expected) {
+    default <C extends FormHandlerContext<R, S>, R extends ValidationReference, S> void loadFormFieldValueAndCheck(final C context,
+                                                                                                                   final R reference,
+                                                                                                                   final Optional<Object> expected) {
         this.checkEquals(
             expected,
             context.loadFormFieldValue(reference)
@@ -94,45 +73,12 @@ public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R
 
     // saveFieldValue...................................................................................................
 
-    @Test
-    default void testSaveFormFieldValuesWithNullFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createContext()
-                .saveFormFieldValues(null)
-        );
-    }
-
-    default void saveFormFieldValuesAndCheck(final C context,
-                                             final List<FormField<R>> formFields,
-                                             final S expected) {
+    default <C extends FormHandlerContext<R, S>, R extends ValidationReference, S> void saveFormFieldValuesAndCheck(final C context,
+                                                                                                                    final List<FormField<R>> formFields,
+                                                                                                                    final S expected) {
         this.checkEquals(
             expected,
             context.saveFormFieldValues(formFields)
         );
-    }
-
-    // validateFormFields...............................................................................................
-
-    @Test
-    default void testValidateFormWithNullFormFieldsFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> this.createContext().validatorContext(null)
-        );
-    }
-
-    // ConverterLike....................................................................................................
-
-    @Override
-    default C createConverterLike() {
-        return this.createContext();
-    }
-
-    // typeNameSuffix...................................................................................................
-
-    @Override
-    default String typeNameSuffix() {
-        return FormHandlerContext.class.getSimpleName();
     }
 }
