@@ -23,7 +23,7 @@ import walkingkooka.validation.form.HasFormTesting;
 
 public interface ValidatorExpressionEvaluationContextTesting2<R extends ValidationReference, C extends ValidatorExpressionEvaluationContext<R>> extends ValidatorExpressionEvaluationContextTesting,
     ExpressionEvaluationContextTesting2<C>,
-    HasFormTesting<R> {
+    HasFormTesting {
 
     // ExpressionEvaluationContextTesting...............................................................................
 

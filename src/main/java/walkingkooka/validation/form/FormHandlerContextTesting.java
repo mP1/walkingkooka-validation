@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public interface FormHandlerContextTesting<C extends FormHandlerContext<R, S>, R extends ValidationReference, S> extends ConverterLikeTesting2<C>,
     EnvironmentContextTesting2<C>,
-    HasFormTesting<R> {
+    HasFormTesting {
 
     // validatorContext.................................................................................................
 

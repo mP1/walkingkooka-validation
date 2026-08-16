@@ -20,12 +20,12 @@ package walkingkooka.validation.form;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.validation.ValidationReference;
 
-public interface HasFormTesting<R extends ValidationReference> extends TreePrintableTesting {
+public interface HasFormTesting extends TreePrintableTesting {
 
     // form.............................................................................................................
 
-    default void formAndCheck(final HasForm<R> hasForm,
-                              final Form<R> expected) {
+    default <R extends ValidationReference> void formAndCheck(final HasForm<R> hasForm,
+                                                              final Form<R> expected) {
         this.checkEquals(
             expected,
             hasForm.form()
