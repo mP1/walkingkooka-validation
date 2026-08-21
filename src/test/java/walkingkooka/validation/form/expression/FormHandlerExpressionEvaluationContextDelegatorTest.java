@@ -17,7 +17,6 @@
 
 package walkingkooka.validation.form.expression;
 
-import walkingkooka.Cast;
 import walkingkooka.currency.CurrencyExchange;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
@@ -40,7 +39,6 @@ import walkingkooka.validation.form.expression.FormHandlerExpressionEvaluationCo
 
 import java.math.MathContext;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Currency;
@@ -292,86 +290,65 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
                 }
 
                 @Override
-                public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
-                    Objects.requireNonNull(name, "name");
+                public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
+                    this.environmentContext.removeEnvironmentValue(name);
+                }
 
-                    return Cast.to(
-                        CHARSET.equals(name) ?
-                            Optional.of(
-                                this.charset()
-                            ) :
-                            CURRENCY.equals(name) ?
-                                Optional.of(
-                                    this.currency()
-                                ) :
-                                INDENTATION.equals(name) ?
-                                    Optional.of(
-                                        this.indentation()
-                                    ) :
-                                    LOCALE.equals(name) ?
-                                        Optional.of(
-                                            this.locale()
-                                        ) :
-                                        LINE_ENDING.equals(name) ?
-                                            Optional.of(
-                                                this.lineEnding()
-                                            ) :
-                                            USER.equals(name) ?
-                                                this.user() :
-                                                Optional.empty()
-                    );
+                @Override
+                public Charset charset() {
+                    return this.environmentContext.charset();
+                }
+
+                @Override
+                public Currency currency() {
+                    return this.environmentContext.currency();
+                }
+
+                @Override
+                public Indentation indentation() {
+                    return this.environmentContext.indentation();
+                }
+
+                @Override
+                public LineEnding lineEnding() {
+                    return this.environmentContext.lineEnding();
+                }
+
+                @Override
+                public void setLineEnding(final LineEnding lineEnding) {
+                    this.environmentContext.setLineEnding(lineEnding);
+                }
+                
+                @Override
+                public Optional<EmailAddress> user() {
+                    return this.environmentContext.user();
+                }
+
+                @Override
+                public void setUser(final Optional<EmailAddress> user) {
+                    this.environmentContext.setUser(user);
+                }
+
+                @Override
+                public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
+                    return this.environmentContext.environmentValue(name);
                 }
 
                 @Override
                 public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
                                                     final T value) {
-                    Objects.requireNonNull(name, "name");
-                    Objects.requireNonNull(value, "value");
-                    throw new UnsupportedOperationException();
+                    this.environmentContext.setEnvironmentValue(
+                        name,
+                        value
+                    );
                 }
 
                 @Override
-                public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
-                    Objects.requireNonNull(name, "name");
-                    throw new UnsupportedOperationException();
+                public EnvironmentValueName<?> parseEnvironmentValueName(final String name) {
+                    return this.environmentContext.parseEnvironmentValueName(name);
                 }
 
-                @Override
-                public Charset charset() {
-                    return StandardCharsets.UTF_8;
-                }
-
-                @Override
-                public Currency currency() {
-                    return Currency.getInstance("AUD");
-                }
-
-                @Override
-                public Indentation indentation() {
-                    return Indentation.SPACES2;
-                }
-
-                @Override
-                public LineEnding lineEnding() {
-                    return LineEnding.NL;
-                }
-
-                @Override
-                public void setLineEnding(final LineEnding lineEnding) {
-                    Objects.requireNonNull(lineEnding, "lineEnding");
-                    throw new UnsupportedOperationException();
-                }
-                
-                @Override
-                public Optional<EmailAddress> user() {
-                    return Optional.empty();
-                }
-
-                @Override
-                public void setUser(final Optional<EmailAddress> user) {
-                    Objects.requireNonNull(user, "user");
-                    throw new UnsupportedOperationException();
-                }
+                private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
 
                 @Override
                 public Form<TestValidationReference> form() {
