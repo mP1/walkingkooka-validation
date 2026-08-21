@@ -469,6 +469,13 @@ public final class FormHandlerExpressionEvaluationContextTesting2Test implements
             throw new UnsupportedOperationException();
         }
 
+        // CanParseEnvironmentValueName.................................................................................
+
+        @Override
+        public EnvironmentValueName<?> parseEnvironmentValueName(final String name) {
+            return ENVIRONMENT_CONTEXT.parseEnvironmentValueName(name);
+        }
+
         @Override
         public String toString() {
             return this.getClass().getSimpleName();

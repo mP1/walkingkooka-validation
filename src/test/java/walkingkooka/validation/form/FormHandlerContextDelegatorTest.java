@@ -244,6 +244,11 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                     Objects.requireNonNull(user, "user");
                     throw new UnsupportedOperationException();
                 }
+
+                @Override
+                public EnvironmentValueName<?> parseEnvironmentValueName(final String name) {
+                    return ENVIRONMENT_CONTEXT.parseEnvironmentValueName(name);
+                }
             };
         }
 
