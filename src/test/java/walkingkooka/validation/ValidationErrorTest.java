@@ -399,11 +399,11 @@ public final class ValidationErrorTest implements HasTextTesting,
     public void testUnmarshall() {
         this.unmarshallAndCheck(
             JsonNode.object()
-                .set(ValidationError.REFERENCE_PROPERTY, this.marshallContext().marshallWithType(REFERENCE))
+                .set(ValidationError.REFERENCE_PROPERTY, JSON_NODE_MARSHALL_CONTEXT.marshallWithType(REFERENCE))
                 .set(ValidationError.MESSAGE_PROPERTY, MESSAGE)
                 .set(
                     ValidationError.VALUE_PROPERTY,
-                    this.marshallContext()
+                    JSON_NODE_MARSHALL_CONTEXT
                         .marshallWithType(VALUE.get())
                 ),
             ValidationError.with(REFERENCE)
@@ -418,11 +418,11 @@ public final class ValidationErrorTest implements HasTextTesting,
             this.createObject()
                 .setValue(VALUE),
             JsonNode.object()
-                .set(ValidationError.REFERENCE_PROPERTY, this.marshallContext().marshallWithType(REFERENCE))
+                .set(ValidationError.REFERENCE_PROPERTY, JSON_NODE_MARSHALL_CONTEXT.marshallWithType(REFERENCE))
                 .set(ValidationError.MESSAGE_PROPERTY, MESSAGE)
                 .set(
                     ValidationError.VALUE_PROPERTY,
-                    this.marshallContext()
+                    JSON_NODE_MARSHALL_CONTEXT
                         .marshallWithType(VALUE.get())
                 )
         );
