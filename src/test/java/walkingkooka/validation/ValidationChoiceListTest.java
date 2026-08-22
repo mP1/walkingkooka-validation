@@ -25,7 +25,7 @@ import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Optional;
@@ -36,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ValidationChoiceListTest implements ListTesting2<ValidationChoiceList, ValidationChoice>,
     ClassTesting<ValidationChoiceList>,
     ImmutableListTesting<ValidationChoiceList, ValidationChoice>,
-    JsonNodeMarshallingTesting<ValidationChoiceList>,
+    JsonNodeMarshallerTesting<ValidationChoiceList>,
     ThrowableTesting {
 
     private final static ValidationChoice CHOICE1 = ValidationChoice.with(

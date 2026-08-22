@@ -24,7 +24,7 @@ import walkingkooka.net.Url;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.time.LocalDate;
@@ -35,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ValidationCheckboxTest implements ClassTesting<ValidationCheckbox>,
     HashCodeEqualsDefinedTesting2<ValidationCheckbox>,
-    JsonNodeMarshallingTesting<ValidationCheckbox>,
+    JsonNodeMarshallerTesting<ValidationCheckbox>,
     ToStringTesting<ValidationCheckbox> {
 
     private final static Optional<Object> TRUE = Optional.of("true111");

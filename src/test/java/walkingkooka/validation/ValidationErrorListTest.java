@@ -27,7 +27,7 @@ import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Optional;
@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class ValidationErrorListTest implements ImmutableListTesting<ValidationErrorList<TestValidationReference>, ValidationError<TestValidationReference>>,
     TreePrintableTesting,
     ClassTesting<ValidationErrorList<TestValidationReference>>,
-    JsonNodeMarshallingTesting<ValidationErrorList<TestValidationReference>> {
+    JsonNodeMarshallerTesting<ValidationErrorList<TestValidationReference>> {
 
     @Test
     public void testConcatErrorWithoutMessageAndWithoutValue() {
