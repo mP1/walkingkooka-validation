@@ -25,7 +25,7 @@ import walkingkooka.net.Url;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValueType;
@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormField<TestValidationReference>>,
-    JsonNodeMarshallingTesting<FormField<TestValidationReference>>,
+    JsonNodeMarshallerTesting<FormField<TestValidationReference>>,
     TreePrintableTesting {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("Hello");

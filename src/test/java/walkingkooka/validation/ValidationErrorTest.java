@@ -27,7 +27,7 @@ import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Optional;
@@ -41,7 +41,7 @@ public final class ValidationErrorTest implements HasTextTesting,
     ToStringTesting<ValidationError<TestValidationReference>>,
     ClassTesting<ValidationError<TestValidationReference>>,
     TreePrintableTesting,
-    JsonNodeMarshallingTesting<ValidationError<TestValidationReference>>,
+    JsonNodeMarshallerTesting<ValidationError<TestValidationReference>>,
     HasValueTesting {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("Hello");

@@ -31,7 +31,7 @@ import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidationError;
@@ -51,7 +51,7 @@ public final class FormTest implements HateosResourceTesting<Form<TestValidation
     HasContentTypeTesting,
     HashCodeEqualsDefinedTesting2<Form<TestValidationReference>>,
     ToStringTesting<Form<TestValidationReference>>,
-    JsonNodeMarshallingTesting<Form<TestValidationReference>>,
+    JsonNodeMarshallerTesting<Form<TestValidationReference>>,
     TreePrintableTesting,
     IteratorTesting {
 

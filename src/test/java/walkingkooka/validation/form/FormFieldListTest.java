@@ -27,7 +27,7 @@ import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallingTesting;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValueType;
@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 public final class FormFieldListTest implements ImmutableListTesting<FormFieldList<TestValidationReference>, FormField<TestValidationReference>>,
     TreePrintableTesting,
     ClassTesting<FormFieldList<TestValidationReference>>,
-    JsonNodeMarshallingTesting<FormFieldList<TestValidationReference>> {
+    JsonNodeMarshallerTesting<FormFieldList<TestValidationReference>> {
 
     @Test
     public void testWithFieldsSharingValidationReference() {
