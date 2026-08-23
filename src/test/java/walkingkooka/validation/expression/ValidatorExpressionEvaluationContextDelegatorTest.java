@@ -91,6 +91,19 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
         return DECIMAL_NUMBER_CONTEXT;
     }
 
+    // HasEnvironmentContext............................................................................................
+
+    @Test
+    @Override
+    public void testEnvironmentContext() {
+        final TestValidatorExpressionEvaluationContextDelegator context = new TestValidatorExpressionEvaluationContextDelegator();
+
+        this.environmentContextAndCheck(
+            context,
+            context.environmentContext
+        );
+    }
+
     // class............................................................................................................
 
     @Override

@@ -245,6 +245,17 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting2
         );
     }
 
+    // HasEnvironmentContext............................................................................................
+
+    @Test
+    @Override
+    public void testEnvironmentContext() {
+        this.environmentContextAndCheck(
+            this.createContext(ENVIRONMENT_CONTEXT),
+            ENVIRONMENT_CONTEXT
+        );
+    }
+
     // toString.........................................................................................................
 
     @Test
