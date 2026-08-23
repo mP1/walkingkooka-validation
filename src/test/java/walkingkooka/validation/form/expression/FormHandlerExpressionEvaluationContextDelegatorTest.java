@@ -17,6 +17,7 @@
 
 package walkingkooka.validation.form.expression;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.currency.CurrencyExchange;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
@@ -155,6 +156,19 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
         return DECIMAL_NUMBER_CONTEXT;
     }
 
+    // HasEnvironmentContext............................................................................................
+
+    @Test
+    @Override
+    public void testEnvironmentContext() {
+        final TestFormHandlerExpressionEvaluationContextDelegator context = new TestFormHandlerExpressionEvaluationContextDelegator();
+
+        this.environmentContextAndCheck(
+            context,
+            context.context
+        );
+    }
+
     // class............................................................................................................
 
     @Override
@@ -176,230 +190,232 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
 
         @Override
         public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> expressionEvaluationContext() {
-            return new FakeFormHandlerExpressionEvaluationContext<>() {
-
-                @Override
-                public TestFormHandlerExpressionEvaluationContext enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {
-                    Objects.requireNonNull(function, "function");
-
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public Object evaluate(final String expression) {
-                    Objects.requireNonNull(expression, "expression");
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public String currencySymbol() {
-                    return DECIMAL_NUMBER_CONTEXT.currencySymbol();
-                }
-
-                @Override
-                public int decimalNumberDigitCount() {
-                    return DECIMAL_NUMBER_CONTEXT.decimalNumberDigitCount();
-                }
-
-                @Override
-                public char decimalSeparator() {
-                    return DECIMAL_NUMBER_CONTEXT.decimalSeparator();
-                }
-
-                @Override
-                public String exponentSymbol() {
-                    return DECIMAL_NUMBER_CONTEXT.exponentSymbol();
-                }
-
-                @Override
-                public char groupSeparator() {
-                    return DECIMAL_NUMBER_CONTEXT.groupSeparator();
-                }
-
-                @Override
-                public String infinitySymbol() {
-                    return DECIMAL_NUMBER_CONTEXT.infinitySymbol();
-                }
-
-                @Override
-                public MathContext mathContext() {
-                    return DECIMAL_NUMBER_CONTEXT.mathContext();
-                }
-
-                @Override
-                public char monetaryDecimalSeparator() {
-                    return DECIMAL_NUMBER_CONTEXT.monetaryDecimalSeparator();
-                }
-
-                @Override
-                public String nanSymbol() {
-                    return DECIMAL_NUMBER_CONTEXT.nanSymbol();
-                }
-
-                @Override
-                public char negativeSign() {
-                    return DECIMAL_NUMBER_CONTEXT.negativeSign();
-                }
-
-                @Override
-                public char percentSymbol() {
-                    return DECIMAL_NUMBER_CONTEXT.percentSymbol();
-                }
-
-                @Override
-                public char permillSymbol() {
-                    return DECIMAL_NUMBER_CONTEXT.permillSymbol();
-                }
-
-                @Override
-                public char positiveSign() {
-                    return DECIMAL_NUMBER_CONTEXT.positiveSign();
-                }
-
-                @Override
-                public char zeroDigit() {
-                    return DECIMAL_NUMBER_CONTEXT.zeroDigit();
-                }
-
-                @Override
-                public boolean isPure(final ExpressionFunctionName name) {
-                    Objects.requireNonNull(name, "name");
-
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public Optional<Optional<Object>> reference(final ExpressionReference reference) {
-                    Objects.requireNonNull(reference, "reference");
-
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public Optional<Number> currencyExchangeRate(final CurrencyExchange currencyExchange,
-                                                             final Optional<LocalDateTime> dateTime) {
-                    Objects.requireNonNull(currencyExchange, "currencyExchange");
-                    Objects.requireNonNull(dateTime, "dateTime");
-
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> cloneEnvironment() {
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
-                    this.environmentContext.removeEnvironmentValue(name);
-                }
-
-                @Override
-                public Charset charset() {
-                    return this.environmentContext.charset();
-                }
-
-                @Override
-                public Currency currency() {
-                    return this.environmentContext.currency();
-                }
-
-                @Override
-                public Indentation indentation() {
-                    return this.environmentContext.indentation();
-                }
-
-                @Override
-                public LineEnding lineEnding() {
-                    return this.environmentContext.lineEnding();
-                }
-
-                @Override
-                public void setLineEnding(final LineEnding lineEnding) {
-                    this.environmentContext.setLineEnding(lineEnding);
-                }
-                
-                @Override
-                public Optional<EmailAddress> user() {
-                    return this.environmentContext.user();
-                }
-
-                @Override
-                public void setUser(final Optional<EmailAddress> user) {
-                    this.environmentContext.setUser(user);
-                }
-
-                @Override
-                public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
-                    return this.environmentContext.environmentValue(name);
-                }
-
-                @Override
-                public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
-                                                    final T value) {
-                    this.environmentContext.setEnvironmentValue(
-                        name,
-                        value
-                    );
-                }
-
-                @Override
-                public EnvironmentValueName<?> parseEnvironmentValueName(final String name) {
-                    return this.environmentContext.parseEnvironmentValueName(name);
-                }
-
-                private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
-
-                @Override
-                public Form<TestValidationReference> form() {
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public Comparator<TestValidationReference> formFieldReferenceComparator() {
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public ValidatorContext<TestValidationReference> validatorContext(final TestValidationReference reference) {
-                    Objects.requireNonNull(reference, "reference");
-
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public Optional<Object> loadFormFieldValue(final TestValidationReference reference) {
-                    Objects.requireNonNull(reference, "reference");
-
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public Void saveFormFieldValues(final List<FormField<TestValidationReference>> formFields) {
-                    Objects.requireNonNull(formFields, "formFields");
-
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public Set<Locale> findByLocaleText(final String text,
-                                                    final int offset,
-                                                    final int count) {
-                    return LocaleContexts.jre(Locale.ENGLISH)
-                        .findByLocaleText(
-                            text,
-                            offset,
-                            count
-                        );
-                }
-
-                @Override
-                public Optional<Locale> localeForLanguageTag(final LocaleLanguageTag languageTag) {
-                    Objects.requireNonNull(languageTag, "languageTag");
-                    throw new UnsupportedOperationException();
-                }
-            };
+            return this.context;
         }
+
+        private final FakeFormHandlerExpressionEvaluationContext<TestValidationReference, Void> context = new FakeFormHandlerExpressionEvaluationContext<>() {
+
+            @Override
+            public TestFormHandlerExpressionEvaluationContext enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {
+                Objects.requireNonNull(function, "function");
+
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public Object evaluate(final String expression) {
+                Objects.requireNonNull(expression, "expression");
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public String currencySymbol() {
+                return DECIMAL_NUMBER_CONTEXT.currencySymbol();
+            }
+
+            @Override
+            public int decimalNumberDigitCount() {
+                return DECIMAL_NUMBER_CONTEXT.decimalNumberDigitCount();
+            }
+
+            @Override
+            public char decimalSeparator() {
+                return DECIMAL_NUMBER_CONTEXT.decimalSeparator();
+            }
+
+            @Override
+            public String exponentSymbol() {
+                return DECIMAL_NUMBER_CONTEXT.exponentSymbol();
+            }
+
+            @Override
+            public char groupSeparator() {
+                return DECIMAL_NUMBER_CONTEXT.groupSeparator();
+            }
+
+            @Override
+            public String infinitySymbol() {
+                return DECIMAL_NUMBER_CONTEXT.infinitySymbol();
+            }
+
+            @Override
+            public MathContext mathContext() {
+                return DECIMAL_NUMBER_CONTEXT.mathContext();
+            }
+
+            @Override
+            public char monetaryDecimalSeparator() {
+                return DECIMAL_NUMBER_CONTEXT.monetaryDecimalSeparator();
+            }
+
+            @Override
+            public String nanSymbol() {
+                return DECIMAL_NUMBER_CONTEXT.nanSymbol();
+            }
+
+            @Override
+            public char negativeSign() {
+                return DECIMAL_NUMBER_CONTEXT.negativeSign();
+            }
+
+            @Override
+            public char percentSymbol() {
+                return DECIMAL_NUMBER_CONTEXT.percentSymbol();
+            }
+
+            @Override
+            public char permillSymbol() {
+                return DECIMAL_NUMBER_CONTEXT.permillSymbol();
+            }
+
+            @Override
+            public char positiveSign() {
+                return DECIMAL_NUMBER_CONTEXT.positiveSign();
+            }
+
+            @Override
+            public char zeroDigit() {
+                return DECIMAL_NUMBER_CONTEXT.zeroDigit();
+            }
+
+            @Override
+            public boolean isPure(final ExpressionFunctionName name) {
+                Objects.requireNonNull(name, "name");
+
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public Optional<Optional<Object>> reference(final ExpressionReference reference) {
+                Objects.requireNonNull(reference, "reference");
+
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public Optional<Number> currencyExchangeRate(final CurrencyExchange currencyExchange,
+                                                         final Optional<LocalDateTime> dateTime) {
+                Objects.requireNonNull(currencyExchange, "currencyExchange");
+                Objects.requireNonNull(dateTime, "dateTime");
+
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> cloneEnvironment() {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
+                this.environmentContext.removeEnvironmentValue(name);
+            }
+
+            @Override
+            public Charset charset() {
+                return this.environmentContext.charset();
+            }
+
+            @Override
+            public Currency currency() {
+                return this.environmentContext.currency();
+            }
+
+            @Override
+            public Indentation indentation() {
+                return this.environmentContext.indentation();
+            }
+
+            @Override
+            public LineEnding lineEnding() {
+                return this.environmentContext.lineEnding();
+            }
+
+            @Override
+            public void setLineEnding(final LineEnding lineEnding) {
+                this.environmentContext.setLineEnding(lineEnding);
+            }
+
+            @Override
+            public Optional<EmailAddress> user() {
+                return this.environmentContext.user();
+            }
+
+            @Override
+            public void setUser(final Optional<EmailAddress> user) {
+                this.environmentContext.setUser(user);
+            }
+
+            @Override
+            public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
+                return this.environmentContext.environmentValue(name);
+            }
+
+            @Override
+            public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
+                                                final T value) {
+                this.environmentContext.setEnvironmentValue(
+                    name,
+                    value
+                );
+            }
+
+            @Override
+            public EnvironmentValueName<?> parseEnvironmentValueName(final String name) {
+                return this.environmentContext.parseEnvironmentValueName(name);
+            }
+
+            private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
+
+            @Override
+            public Form<TestValidationReference> form() {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public Comparator<TestValidationReference> formFieldReferenceComparator() {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public ValidatorContext<TestValidationReference> validatorContext(final TestValidationReference reference) {
+                Objects.requireNonNull(reference, "reference");
+
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public Optional<Object> loadFormFieldValue(final TestValidationReference reference) {
+                Objects.requireNonNull(reference, "reference");
+
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public Void saveFormFieldValues(final List<FormField<TestValidationReference>> formFields) {
+                Objects.requireNonNull(formFields, "formFields");
+
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public Set<Locale> findByLocaleText(final String text,
+                                                final int offset,
+                                                final int count) {
+                return LocaleContexts.jre(Locale.ENGLISH)
+                    .findByLocaleText(
+                        text,
+                        offset,
+                        count
+                    );
+            }
+
+            @Override
+            public Optional<Locale> localeForLanguageTag(final LocaleLanguageTag languageTag) {
+                Objects.requireNonNull(languageTag, "languageTag");
+                throw new UnsupportedOperationException();
+            }
+        };
 
         @Override
         public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {

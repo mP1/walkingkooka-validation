@@ -17,6 +17,7 @@
 
 package walkingkooka.validation;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.convert.BinaryNumberConverterFunctions;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.ConverterContextDelegator;
@@ -70,6 +71,19 @@ public final class ValidatorContextTesting2Test implements ValidatorContextTesti
     @Override
     public TestValidatorContext createContext() {
         return new TestValidatorContext();
+    }
+
+    // HasEnvironmentContext............................................................................................
+
+    @Test
+    @Override
+    public void testEnvironmentContext() {
+        final TestValidatorContext context = new TestValidatorContext();
+
+        this.environmentContextAndCheck(
+            context,
+            context.environmentContext
+        );
     }
 
     static class TestValidatorContext implements ValidatorContext<TestValidationReference>,

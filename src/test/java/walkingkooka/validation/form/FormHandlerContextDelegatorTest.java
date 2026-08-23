@@ -113,6 +113,13 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
         throw new UnsupportedOperationException();
     }
 
+    // HasExpressionContext.............................................................................................
+
+    @Override
+    public void testEnvironmentContext() {
+        throw new UnsupportedOperationException();
+    }
+
     // class............................................................................................................
 
     @Override

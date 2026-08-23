@@ -17,6 +17,7 @@
 
 package walkingkooka.validation.expression;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.Either;
 import walkingkooka.currency.CurrencyCode;
 import walkingkooka.currency.CurrencyExchange;
@@ -71,6 +72,19 @@ public final class ValidatorExpressionEvaluationContextTesting2Test implements V
     @Override
     public TestValidatorExpressionEvaluationContext createContext() {
         return new TestValidatorExpressionEvaluationContext();
+    }
+
+    // HasEnvironmentContext............................................................................................
+
+    @Test
+    @Override
+    public void testEnvironmentContext() {
+        final TestValidatorExpressionEvaluationContext context = new TestValidatorExpressionEvaluationContext();
+
+        this.environmentContextAndCheck(
+            context,
+            context.environmentContext
+        );
     }
 
     // DecimalNumberContext.............................................................................................
