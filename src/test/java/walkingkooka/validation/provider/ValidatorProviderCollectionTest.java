@@ -22,7 +22,6 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.plugin.ProviderContext;
 import walkingkooka.plugin.ProviderContexts;
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.validation.Validators;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -85,15 +84,10 @@ public final class ValidatorProviderCollectionTest implements ValidatorProviderT
         );
     }
 
-    // ClassTesting.....................................................................................................
+    // Class......g.....................................................................................................
 
     @Override
     public Class<ValidatorProviderCollection> type() {
         return ValidatorProviderCollection.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }

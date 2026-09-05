@@ -323,11 +323,6 @@ public final class ValidationValidatorProviderTest implements ValidatorProviderT
     // class............................................................................................................
 
     @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
-    }
-
-    @Override
     public Class<ValidationValidatorProvider> type() {
         return ValidationValidatorProvider.class;
     }
