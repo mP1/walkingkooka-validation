@@ -25,7 +25,6 @@ import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.Url;
 import walkingkooka.plugin.ProviderContext;
 import walkingkooka.plugin.ProviderContexts;
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.FakeFormHandlerContext;
@@ -170,10 +169,5 @@ public final class FilteredMappedFormHandlerProviderTest implements FormHandlerP
     @Override
     public Class<FilteredMappedFormHandlerProvider> type() {
         return FilteredMappedFormHandlerProvider.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }

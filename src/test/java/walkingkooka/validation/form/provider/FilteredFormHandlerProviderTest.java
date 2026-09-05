@@ -17,8 +17,6 @@
 
 package walkingkooka.validation.form.provider;
 
-import walkingkooka.reflect.JavaVisibility;
-
 public final class FilteredFormHandlerProviderTest implements FormHandlerProviderTesting2<FilteredFormHandlerProvider> {
 
     @Override
@@ -46,10 +44,5 @@ public final class FilteredFormHandlerProviderTest implements FormHandlerProvide
     @Override
     public Class<FilteredFormHandlerProvider> type() {
         return FilteredFormHandlerProvider.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }
