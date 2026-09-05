@@ -18,7 +18,6 @@
 package walkingkooka.validation.form.provider;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.reflect.JavaVisibility;
 
 public final class EmptyFormHandlerProviderTest implements FormHandlerProviderTesting2<EmptyFormHandlerProvider> {
 
@@ -40,10 +39,5 @@ public final class EmptyFormHandlerProviderTest implements FormHandlerProviderTe
     @Override
     public Class<EmptyFormHandlerProvider> type() {
         return EmptyFormHandlerProvider.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }

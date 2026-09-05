@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.net.UrlPath;
 import walkingkooka.plugin.ProviderContexts;
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.MethodAttributes;
 import walkingkooka.text.CaseKind;
 import walkingkooka.tree.json.JsonNode;
@@ -128,10 +127,5 @@ public final class ValidationFormHandlerProviderTest implements FormHandlerProvi
     @Override
     public Class<ValidationFormHandlerProvider> type() {
         return ValidationFormHandlerProvider.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }

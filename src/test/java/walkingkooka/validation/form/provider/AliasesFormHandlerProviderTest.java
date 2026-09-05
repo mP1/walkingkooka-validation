@@ -23,7 +23,6 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.plugin.ProviderContext;
 import walkingkooka.plugin.ProviderContexts;
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.FakeFormHandler;
@@ -241,10 +240,5 @@ public final class AliasesFormHandlerProviderTest implements FormHandlerProvider
     @Override
     public Class<AliasesFormHandlerProvider> type() {
         return AliasesFormHandlerProvider.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }
