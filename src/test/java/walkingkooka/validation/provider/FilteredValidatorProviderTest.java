@@ -22,7 +22,6 @@ import walkingkooka.ToStringTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.plugin.ProviderContext;
 import walkingkooka.plugin.ProviderContexts;
-import walkingkooka.reflect.JavaVisibility;
 
 import java.util.List;
 
@@ -84,10 +83,5 @@ public final class FilteredValidatorProviderTest implements ValidatorProviderTes
     @Override
     public Class<FilteredValidatorProvider> type() {
         return FilteredValidatorProvider.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }

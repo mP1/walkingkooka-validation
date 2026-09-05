@@ -23,7 +23,6 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.plugin.ProviderContext;
 import walkingkooka.plugin.ProviderContexts;
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.validation.FakeValidator;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.TestValidatorContext;
@@ -240,10 +239,5 @@ public final class AliasesValidatorProviderTest implements ValidatorProviderTest
     @Override
     public Class<AliasesValidatorProvider> type() {
         return AliasesValidatorProvider.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }
