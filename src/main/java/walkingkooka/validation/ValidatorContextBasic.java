@@ -28,16 +28,16 @@ import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-final class BasicValidatorContext<T extends ValidationReference> implements ValidatorContext<T>,
+final class ValidatorContextBasic<T extends ValidationReference> implements ValidatorContext<T>,
     ConverterLikeDelegator,
     EnvironmentContextDelegator {
 
-    static <T extends ValidationReference> BasicValidatorContext<T> with(final T validationReference,
+    static <T extends ValidationReference> ValidatorContextBasic<T> with(final T validationReference,
                                                                          final Function<ValidatorSelector, Validator<T, ? super ValidatorContext<T>>> validatorSelectorToValidator,
                                                                          final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
                                                                          final ConverterLike converterLike,
                                                                          final EnvironmentContext environmentContext) {
-        return new BasicValidatorContext<>(
+        return new ValidatorContextBasic<>(
             Objects.requireNonNull(validationReference, "validationReference"),
             Objects.requireNonNull(validatorSelectorToValidator, "validatorSelectorToValidator"),
             Objects.requireNonNull(referenceToExpressionEvaluationContext, "referenceToExpressionEvaluationContext"),
@@ -46,7 +46,7 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
         );
     }
 
-    private BasicValidatorContext(final T validationReference,
+    private ValidatorContextBasic(final T validationReference,
                                   final Function<ValidatorSelector, Validator<T, ? super ValidatorContext<T>>> validatorSelectorToValidator,
                                   final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
                                   final ConverterLike converterLike,
@@ -69,7 +69,7 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
     public ValidatorContext<T> setValidationReference(final T validationReference) {
         return this.validationReference.equals(validationReference) ?
             this :
-            new BasicValidatorContext<>(
+            new ValidatorContextBasic<>(
                 Objects.requireNonNull(validationReference, "validationReference"),
                 this.validatorSelectorToValidator,
                 this.referenceToExpressionEvaluationContext,
@@ -120,7 +120,7 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
     public ValidatorContext<T> setEnvironmentContext(final EnvironmentContext environmentContext) {
         return this.environmentContext == environmentContext ?
             this :
-            new BasicValidatorContext<>(
+            new ValidatorContextBasic<>(
                 this.validationReference,
                 this.validatorSelectorToValidator,
                 this.referenceToExpressionEvaluationContext,
@@ -155,11 +155,11 @@ final class BasicValidatorContext<T extends ValidationReference> implements Vali
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-            (other instanceof BasicValidatorContext &&
-                this.equals0((BasicValidatorContext<?>) other));
+            (other instanceof ValidatorContextBasic &&
+                this.equals0((ValidatorContextBasic<?>) other));
     }
 
-    private boolean equals0(final BasicValidatorContext<?> other) {
+    private boolean equals0(final ValidatorContextBasic<?> other) {
         return this.validationReference.equals(other.validationReference) &&
             this.validatorSelectorToValidator.equals(other.validatorSelectorToValidator) &&
             this.referenceToExpressionEvaluationContext.equals(other.referenceToExpressionEvaluationContext) &&

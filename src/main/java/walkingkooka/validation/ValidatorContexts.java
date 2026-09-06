@@ -39,14 +39,14 @@ public final class ValidatorContexts implements PublicStaticHelper {
     }
 
     /**
-     * {@see BasicValidatorContext}
+     * {@see ValidatorContextBasic}
      */
     public static <T extends ValidationReference> ValidatorContext<T> basic(final T validationReference,
                                                                             final Function<ValidatorSelector, Validator<T, ? super ValidatorContext<T>>> validatorSelectorToValidator,
                                                                             final BiFunction<Object, T, ExpressionEvaluationContext> referenceToExpressionEvaluationContext,
                                                                             final ConverterLike converterLike,
                                                                             final EnvironmentContext environmentContext) {
-        return BasicValidatorContext.with(
+        return ValidatorContextBasic.with(
             validationReference,
             validatorSelectorToValidator,
             referenceToExpressionEvaluationContext,

@@ -39,10 +39,10 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class BasicValidatorContextTest implements ValidatorContextTesting2<BasicValidatorContext<TestValidationReference>, TestValidationReference>,
+public final class ValidatorContextBasicTest implements ValidatorContextTesting2<ValidatorContextBasic<TestValidationReference>, TestValidationReference>,
     DateTimeContextTesting,
     DecimalNumberContextTesting,
-    ToStringTesting<BasicValidatorContext<TestValidationReference>> {
+    ToStringTesting<ValidatorContextBasic<TestValidationReference>> {
 
     private final static TestValidationReference VALIDATION_REFERENCE = new TestValidationReference("A1");
 
@@ -71,7 +71,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting2
     public void testWithNullValidationReferenceFails() {
         assertThrows(
             NullPointerException.class,
-            () -> BasicValidatorContext.with(
+            () -> ValidatorContextBasic.with(
                 null,
                 VALIDATOR_SELECTOR_TO_VALIDATOR,
                 REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
@@ -85,7 +85,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting2
     public void testWithNullValidationSelectorToValidatorFails() {
         assertThrows(
             NullPointerException.class,
-            () -> BasicValidatorContext.with(
+            () -> ValidatorContextBasic.with(
                 VALIDATION_REFERENCE,
                 null,
                 REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
@@ -99,7 +99,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting2
     public void testWithNullValidationReferenceToExpressionEvaluationContextFails() {
         assertThrows(
             NullPointerException.class,
-            () -> BasicValidatorContext.with(
+            () -> ValidatorContextBasic.with(
                 VALIDATION_REFERENCE,
                 VALIDATOR_SELECTOR_TO_VALIDATOR,
                 null,
@@ -113,7 +113,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting2
     public void testWithNullCanConvertFails() {
         assertThrows(
             NullPointerException.class,
-            () -> BasicValidatorContext.with(
+            () -> ValidatorContextBasic.with(
                 VALIDATION_REFERENCE,
                 VALIDATOR_SELECTOR_TO_VALIDATOR,
                 REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
@@ -127,7 +127,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting2
     public void testWithNullEnvironmentContextFails() {
         assertThrows(
             NullPointerException.class,
-            () -> BasicValidatorContext.with(
+            () -> ValidatorContextBasic.with(
                 VALIDATION_REFERENCE,
                 VALIDATOR_SELECTOR_TO_VALIDATOR,
                 REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
@@ -143,8 +143,8 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting2
     public void testSetValidationReferenceWithDifferent() {
         final TestValidationReference differentReference = new TestValidationReference("Different");
 
-        final BasicValidatorContext<TestValidationReference> context = this.createContext();
-        final BasicValidatorContext<TestValidationReference> different = Cast.to(
+        final ValidatorContextBasic<TestValidationReference> context = this.createContext();
+        final ValidatorContextBasic<TestValidationReference> different = Cast.to(
             context.setValidationReference(differentReference)
         );
 
@@ -171,7 +171,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting2
 
     @Test
     public void testCloneEnvironment() {
-        final BasicValidatorContext<TestValidationReference> before = this.createContext();
+        final ValidatorContextBasic<TestValidationReference> before = this.createContext();
         final ValidatorContext<TestValidationReference> after = before.cloneEnvironment();
         assertNotSame(
             before,
@@ -188,7 +188,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting2
 
     @Test
     public void testSetEnvironmentContext() {
-        final BasicValidatorContext<TestValidationReference> context = this.createContext();
+        final ValidatorContextBasic<TestValidationReference> context = this.createContext();
 
         final EnvironmentContext different = EnvironmentContexts.fake();
 
@@ -229,14 +229,14 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting2
     }
 
     @Override
-    public BasicValidatorContext<TestValidationReference> createContext() {
+    public ValidatorContextBasic<TestValidationReference> createContext() {
         return this.createContext(
             ENVIRONMENT_CONTEXT.cloneEnvironment()
         );
     }
 
-    private BasicValidatorContext<TestValidationReference> createContext(final EnvironmentContext environmentContext) {
-        return BasicValidatorContext.with(
+    private ValidatorContextBasic<TestValidationReference> createContext(final EnvironmentContext environmentContext) {
+        return ValidatorContextBasic.with(
             VALIDATION_REFERENCE,
             VALIDATOR_SELECTOR_TO_VALIDATOR,
             REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
@@ -261,7 +261,7 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting2
     @Test
     public void testToString() {
         this.toStringAndCheck(
-            BasicValidatorContext.with(
+            ValidatorContextBasic.with(
                 VALIDATION_REFERENCE,
                 VALIDATOR_SELECTOR_TO_VALIDATOR,
                 REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
@@ -275,8 +275,8 @@ public final class BasicValidatorContextTest implements ValidatorContextTesting2
     // class............................................................................................................
 
     @Override
-    public Class<BasicValidatorContext<TestValidationReference>> type() {
-        return Cast.to(BasicValidatorContext.class);
+    public Class<ValidatorContextBasic<TestValidationReference>> type() {
+        return Cast.to(ValidatorContextBasic.class);
     }
 
     @Override
