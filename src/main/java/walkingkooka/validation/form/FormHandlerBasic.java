@@ -29,19 +29,19 @@ import java.util.Optional;
 /**
  * A {@link FormHandler} that delegates to the provided {@link FormHandlerContext} to prepare, validate and submit a form.
  */
-final class BasicFormHandler<R extends ValidationReference, S, C extends FormHandlerContext<R, S>> implements FormHandler<R, S, C> {
+final class FormHandlerBasic<R extends ValidationReference, S, C extends FormHandlerContext<R, S>> implements FormHandler<R, S, C> {
 
     /**
      * Type safe getter
      */
-    static <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> BasicFormHandler<R, S, C> instance() {
-        return new BasicFormHandler<>();
+    static <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandlerBasic<R, S, C> instance() {
+        return new FormHandlerBasic<>();
     }
 
     /**
      * Private ctor use factory.
      */
-    private BasicFormHandler() {
+    private FormHandlerBasic() {
         super();
     }
 
