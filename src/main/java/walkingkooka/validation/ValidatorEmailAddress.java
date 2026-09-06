@@ -25,15 +25,15 @@ import java.util.Objects;
 /**
  * A {@link Validator} that verifies that {@link String} is a {@link EmailAddress}.
  */
-final class EmailAddressValidator<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
+final class ValidatorEmailAddress<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
 
-    static <R extends ValidationReference, C extends ValidatorContext<R>> EmailAddressValidator<R, C> instance() {
+    static <R extends ValidationReference, C extends ValidatorContext<R>> ValidatorEmailAddress<R, C> instance() {
         return INSTANCE;
     }
 
-    private final static EmailAddressValidator INSTANCE = new EmailAddressValidator<>();
+    private final static ValidatorEmailAddress INSTANCE = new ValidatorEmailAddress<>();
 
-    private EmailAddressValidator() {
+    private ValidatorEmailAddress() {
         super();
     }
 

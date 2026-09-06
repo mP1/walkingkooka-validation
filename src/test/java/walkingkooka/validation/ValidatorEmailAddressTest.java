@@ -26,8 +26,8 @@ import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
 import walkingkooka.net.email.EmailAddress;
 
-public final class EmailAddressValidatorTest implements ValidatorTesting2<EmailAddressValidator<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    ToStringTesting<EmailAddressValidator<TestValidationReference, TestValidatorContext>> {
+public final class ValidatorEmailAddressTest implements ValidatorTesting2<ValidatorEmailAddress<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
+    ToStringTesting<ValidatorEmailAddress<TestValidationReference, TestValidatorContext>> {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("HelloField");
 
@@ -88,8 +88,8 @@ public final class EmailAddressValidatorTest implements ValidatorTesting2<EmailA
     }
 
     @Override
-    public EmailAddressValidator<TestValidationReference, TestValidatorContext> createValidator() {
-        return EmailAddressValidator.instance();
+    public ValidatorEmailAddress<TestValidationReference, TestValidatorContext> createValidator() {
+        return ValidatorEmailAddress.instance();
     }
 
     @Override
@@ -126,14 +126,14 @@ public final class EmailAddressValidatorTest implements ValidatorTesting2<EmailA
     public void testToString() {
         this.toStringAndCheck(
             this.createValidator(),
-            EmailAddressValidator.class.getSimpleName()
+            ValidatorEmailAddress.class.getSimpleName()
         );
     }
 
     // class............................................................................................................
 
     @Override
-    public Class<EmailAddressValidator<TestValidationReference, TestValidatorContext>> type() {
-        return Cast.to(EmailAddressValidator.class);
+    public Class<ValidatorEmailAddress<TestValidationReference, TestValidatorContext>> type() {
+        return Cast.to(ValidatorEmailAddress.class);
     }
 }
