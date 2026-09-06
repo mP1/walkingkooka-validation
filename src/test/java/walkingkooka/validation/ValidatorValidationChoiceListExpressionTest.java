@@ -29,8 +29,8 @@ import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import java.util.List;
 import java.util.Optional;
 
-public final class ValidationChoiceListExpressionValidatorTest implements ValidatorTesting2<ValidationChoiceListExpressionValidator<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    ToStringTesting<ValidationChoiceListExpressionValidator<TestValidationReference, TestValidatorContext>> {
+public final class ValidatorValidationChoiceListExpressionTest implements ValidatorTesting2<ValidatorValidationChoiceListExpression<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
+    ToStringTesting<ValidatorValidationChoiceListExpression<TestValidationReference, TestValidatorContext>> {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("HelloField");
 
@@ -141,7 +141,7 @@ public final class ValidationChoiceListExpressionValidatorTest implements Valida
     }
 
     @Override
-    public ValidationChoiceListExpressionValidator<TestValidationReference, TestValidatorContext> createValidator() {
+    public ValidatorValidationChoiceListExpression<TestValidationReference, TestValidatorContext> createValidator() {
         return this.createValidator(
             ValidationChoice.with(
                 "Label1",
@@ -150,14 +150,14 @@ public final class ValidationChoiceListExpressionValidatorTest implements Valida
         );
     }
 
-    private ValidationChoiceListExpressionValidator<TestValidationReference, TestValidatorContext> createValidator(final ValidationChoice... choices) {
+    private ValidatorValidationChoiceListExpression<TestValidationReference, TestValidatorContext> createValidator(final ValidationChoice... choices) {
         return this.createValidator(
             Lists.of(choices)
         );
     }
 
-    private ValidationChoiceListExpressionValidator<TestValidationReference, TestValidatorContext> createValidator(final List<ValidationChoice> choices) {
-        return ValidationChoiceListExpressionValidator.with(
+    private ValidatorValidationChoiceListExpression<TestValidationReference, TestValidatorContext> createValidator(final List<ValidationChoice> choices) {
+        return ValidatorValidationChoiceListExpression.with(
             Expression.value(choices),
             MESSAGE
         );
@@ -205,7 +205,7 @@ public final class ValidationChoiceListExpressionValidatorTest implements Valida
         );
 
         this.toStringAndCheck(
-            ValidationChoiceListExpressionValidator.with(
+            ValidatorValidationChoiceListExpression.with(
                 expression,
                 MESSAGE
             ),
@@ -216,7 +216,7 @@ public final class ValidationChoiceListExpressionValidatorTest implements Valida
     // class............................................................................................................
 
     @Override
-    public Class<ValidationChoiceListExpressionValidator<TestValidationReference, TestValidatorContext>> type() {
-        return Cast.to(ValidationChoiceListExpressionValidator.class);
+    public Class<ValidatorValidationChoiceListExpression<TestValidationReference, TestValidatorContext>> type() {
+        return Cast.to(ValidatorValidationChoiceListExpression.class);
     }
 }
