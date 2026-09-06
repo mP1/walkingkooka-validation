@@ -22,8 +22,8 @@ import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.ToStringTesting;
 
-public final class TextLengthValidatorTest implements ValidatorTesting2<TextLengthValidator<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    ToStringTesting<TextLengthValidator<TestValidationReference, TestValidatorContext>> {
+public final class ValidatorTextLengthTest implements ValidatorTesting2<ValidatorTextLength<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
+    ToStringTesting<ValidatorTextLength<TestValidationReference, TestValidatorContext>> {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("HelloField");
 
@@ -68,8 +68,8 @@ public final class TextLengthValidatorTest implements ValidatorTesting2<TextLeng
     }
 
     @Override
-    public TextLengthValidator<TestValidationReference, TestValidatorContext> createValidator() {
-        return TextLengthValidator.with(
+    public ValidatorTextLength<TestValidationReference, TestValidatorContext> createValidator() {
+        return ValidatorTextLength.with(
             2,
             4
         );
@@ -108,7 +108,7 @@ public final class TextLengthValidatorTest implements ValidatorTesting2<TextLeng
     // class............................................................................................................
 
     @Override
-    public Class<TextLengthValidator<TestValidationReference, TestValidatorContext>> type() {
-        return Cast.to(TextLengthValidator.class);
+    public Class<ValidatorTextLength<TestValidationReference, TestValidatorContext>> type() {
+        return Cast.to(ValidatorTextLength.class);
     }
 }

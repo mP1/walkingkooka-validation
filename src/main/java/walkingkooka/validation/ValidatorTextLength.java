@@ -25,9 +25,9 @@ import java.util.Objects;
 /**
  * A {@link Validator} that assumes a {@link String text} value and verifies its length is between the given range.
  */
-final class TextLengthValidator<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
+final class ValidatorTextLength<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
 
-    static <R extends ValidationReference, C extends ValidatorContext<R>> TextLengthValidator<R, C> with(final int minLength,
+    static <R extends ValidationReference, C extends ValidatorContext<R>> ValidatorTextLength<R, C> with(final int minLength,
                                                                                                          final int maxLength) {
         if (minLength < 0) {
             throw new IllegalArgumentException("Invalid minLength " + minLength + " < 0");
@@ -35,13 +35,13 @@ final class TextLengthValidator<R extends ValidationReference, C extends Validat
         if (maxLength < minLength) {
             throw new IllegalArgumentException("Invalid maxLength " + maxLength + " < " + minLength);
         }
-        return new TextLengthValidator<>(
+        return new ValidatorTextLength<>(
             minLength,
             maxLength
         );
     }
 
-    private TextLengthValidator(final int minLength,
+    private ValidatorTextLength(final int minLength,
                                 final int maxLength) {
         super();
         this.minLength = minLength;
@@ -106,10 +106,10 @@ final class TextLengthValidator<R extends ValidationReference, C extends Validat
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-            other instanceof TextLengthValidator && this.equals0((TextLengthValidator<?, ?>) other);
+            other instanceof ValidatorTextLength && this.equals0((ValidatorTextLength<?, ?>) other);
     }
 
-    private boolean equals0(final TextLengthValidator<?, ?> other) {
+    private boolean equals0(final ValidatorTextLength<?, ?> other) {
         return this.minLength == other.minLength &&
             this.maxLength == other.maxLength;
     }
