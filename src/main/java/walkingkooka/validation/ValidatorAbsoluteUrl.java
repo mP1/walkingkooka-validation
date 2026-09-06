@@ -26,15 +26,15 @@ import java.util.Objects;
 /**
  * A {@link Validator} that verifies that {@link String} is a {@link AbsoluteUrl}.
  */
-final class AbsoluteUrlValidator<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
+final class ValidatorAbsoluteUrl<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
 
-    static <R extends ValidationReference, C extends ValidatorContext<R>> AbsoluteUrlValidator<R, C> instance() {
+    static <R extends ValidationReference, C extends ValidatorContext<R>> ValidatorAbsoluteUrl<R, C> instance() {
         return INSTANCE;
     }
 
-    private final static AbsoluteUrlValidator INSTANCE = new AbsoluteUrlValidator<>();
+    private final static ValidatorAbsoluteUrl INSTANCE = new ValidatorAbsoluteUrl<>();
 
-    private AbsoluteUrlValidator() {
+    private ValidatorAbsoluteUrl() {
         super();
     }
 
