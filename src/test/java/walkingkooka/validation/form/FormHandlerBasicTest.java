@@ -34,11 +34,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-public final class BasicFormHandlerTest implements FormHandlerTesting2<
-    BasicFormHandler<TestValidationReference, BasicFormHandlerTest, FakeFormHandlerContext<TestValidationReference, BasicFormHandlerTest>>,
+public final class FormHandlerBasicTest implements FormHandlerTesting2<
+    FormHandlerBasic<TestValidationReference, FormHandlerBasicTest, FakeFormHandlerContext<TestValidationReference, FormHandlerBasicTest>>,
     TestValidationReference,
-    BasicFormHandlerTest,
-    FakeFormHandlerContext<TestValidationReference, BasicFormHandlerTest>
+    FormHandlerBasicTest,
+    FakeFormHandlerContext<TestValidationReference, FormHandlerBasicTest>
     > {
 
     @Test
@@ -304,12 +304,12 @@ public final class BasicFormHandlerTest implements FormHandlerTesting2<
             form,
             new FakeFormHandlerContext<>() {
                 @Override
-                public BasicFormHandlerTest saveFormFieldValues(final List<FormField<TestValidationReference>> formFields) {
+                public FormHandlerBasicTest saveFormFieldValues(final List<FormField<TestValidationReference>> formFields) {
                     checkEquals(
                         form.fields(),
                         formFields
                     );
-                    return BasicFormHandlerTest.this;
+                    return FormHandlerBasicTest.this;
                 }
             },
             this
@@ -317,20 +317,20 @@ public final class BasicFormHandlerTest implements FormHandlerTesting2<
     }
 
     @Override
-    public BasicFormHandler<TestValidationReference, BasicFormHandlerTest, FakeFormHandlerContext<TestValidationReference, BasicFormHandlerTest>> createFormHandler() {
-        return BasicFormHandler.instance();
+    public FormHandlerBasic<TestValidationReference, FormHandlerBasicTest, FakeFormHandlerContext<TestValidationReference, FormHandlerBasicTest>> createFormHandler() {
+        return FormHandlerBasic.instance();
     }
 
     @Override
-    public FakeFormHandlerContext<TestValidationReference, BasicFormHandlerTest> createContext() {
+    public FakeFormHandlerContext<TestValidationReference, FormHandlerBasicTest> createContext() {
         return new FakeFormHandlerContext<>();
     }
 
     // class............................................................................................................
 
     @Override
-    public Class<BasicFormHandler<TestValidationReference, BasicFormHandlerTest, FakeFormHandlerContext<TestValidationReference, BasicFormHandlerTest>>> type() {
-        return Cast.to(BasicFormHandler.class);
+    public Class<FormHandlerBasic<TestValidationReference, FormHandlerBasicTest, FakeFormHandlerContext<TestValidationReference, FormHandlerBasicTest>>> type() {
+        return Cast.to(FormHandlerBasic.class);
     }
 
     @Override
