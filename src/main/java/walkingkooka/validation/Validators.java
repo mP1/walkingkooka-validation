@@ -42,11 +42,11 @@ public final class Validators implements PublicStaticHelper {
     }
 
     /**
-     * {@see ValidationChoiceListExpressionValidator}
+     * {@see ValidatorValidationChoiceListExpression}
      */
     public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> choiceList(final Expression expression,
                                                                                                             final String message) {
-        return ValidationChoiceListExpressionValidator.with(
+        return ValidatorValidationChoiceListExpression.with(
             expression,
             message
         );

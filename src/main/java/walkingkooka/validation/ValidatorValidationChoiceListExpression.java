@@ -30,17 +30,17 @@ import java.util.Optional;
  * The validation value will always return a {@link ValidationErrorList} with the choices, no message indicates a PASS,
  * the value was found in the choices, otherwise the message will be added to the {@link ValidationError}.
  */
-final class ValidationChoiceListExpressionValidator<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
+final class ValidatorValidationChoiceListExpression<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
 
-    static <R extends ValidationReference, C extends ValidatorContext<R>> ValidationChoiceListExpressionValidator<R, C> with(final Expression expression,
+    static <R extends ValidationReference, C extends ValidatorContext<R>> ValidatorValidationChoiceListExpression<R, C> with(final Expression expression,
                                                                                                                              final String message) {
-        return new ValidationChoiceListExpressionValidator<>(
+        return new ValidatorValidationChoiceListExpression<>(
             Objects.requireNonNull(expression, "expression"),
             CharSequences.failIfNullOrEmpty(message, "message")
         );
     }
 
-    private ValidationChoiceListExpressionValidator(final Expression expression,
+    private ValidatorValidationChoiceListExpression(final Expression expression,
                                                     final String message) {
         super();
         this.expression = expression;
@@ -99,10 +99,10 @@ final class ValidationChoiceListExpressionValidator<R extends ValidationReferenc
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-            other instanceof ValidationChoiceListExpressionValidator && this.equals0((ValidationChoiceListExpressionValidator<?, ?>) other);
+            other instanceof ValidatorValidationChoiceListExpression && this.equals0((ValidatorValidationChoiceListExpression<?, ?>) other);
     }
 
-    private boolean equals0(final ValidationChoiceListExpressionValidator<?, ?> other) {
+    private boolean equals0(final ValidatorValidationChoiceListExpression<?, ?> other) {
         return this.expression.equals(other.expression) &&
             this.message.equals(other.message);
     }
