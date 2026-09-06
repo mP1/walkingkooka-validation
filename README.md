@@ -38,7 +38,7 @@ which is used by the Spreadsheet to display a drop down of choices.
 - [checkbox](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/javex/walkingkooka/validation/ValidatorValidationCheckboxExpression.java)
 - [choice-list](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/javex/walkingkooka/validation/ValidationChoiceListExpressionValidator.java)
 - [collection](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/javex/walkingkooka/validation/ValidatorCollection.java)
-- [email-address](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/EmailAddressValidator.java)
+- [email-address](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ValidatorEmailAddress.java)
 - [expression](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ValidatorExpression.java)
 - [non-null](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ValidatorNonNull.java)
 - [text-length](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ValidatorTextLength.java)

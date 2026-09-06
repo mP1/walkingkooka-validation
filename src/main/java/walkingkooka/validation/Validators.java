@@ -64,10 +64,10 @@ public final class Validators implements PublicStaticHelper {
     }
 
     /**
-     * {@link EmailAddressValidator}
+     * {@link ValidatorEmailAddress}
      */
     public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> emailAddress() {
-        return EmailAddressValidator.instance();
+        return ValidatorEmailAddress.instance();
     }
 
     /**
