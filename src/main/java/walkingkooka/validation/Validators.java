@@ -71,10 +71,10 @@ public final class Validators implements PublicStaticHelper {
     }
 
     /**
-     * {@see ExpressionValidator}
+     * {@see ValidatorExpression}
      */
     public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> expression(final Expression expression) {
-        return ExpressionValidator.with(expression);
+        return ValidatorExpression.with(expression);
     }
 
     /**

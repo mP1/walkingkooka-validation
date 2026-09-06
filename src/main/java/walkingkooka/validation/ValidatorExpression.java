@@ -27,15 +27,15 @@ import java.util.Objects;
  * A {@link Validator} which executes the given {@link Expression} passing the validation value as a reference called VALUE.
  * The expression must return null or an empty list to indicate no validation errors.
  */
-final class ExpressionValidator<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
+final class ValidatorExpression<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
 
-    static <R extends ValidationReference, C extends ValidatorContext<R>> ExpressionValidator<R, C> with(final Expression expression) {
-        return new ExpressionValidator<>(
+    static <R extends ValidationReference, C extends ValidatorContext<R>> ValidatorExpression<R, C> with(final Expression expression) {
+        return new ValidatorExpression<>(
             Objects.requireNonNull(expression, "expression")
         );
     }
 
-    private ExpressionValidator(final Expression expression) {
+    private ValidatorExpression(final Expression expression) {
         super();
         this.expression = expression;
     }
@@ -80,10 +80,10 @@ final class ExpressionValidator<R extends ValidationReference, C extends Validat
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-            other instanceof ExpressionValidator && this.equals0((ExpressionValidator<?, ?>) other);
+            other instanceof ValidatorExpression && this.equals0((ValidatorExpression<?, ?>) other);
     }
 
-    private boolean equals0(final ExpressionValidator<?, ?> other) {
+    private boolean equals0(final ValidatorExpression<?, ?> other) {
         return this.expression.equals(other.expression);
     }
 
