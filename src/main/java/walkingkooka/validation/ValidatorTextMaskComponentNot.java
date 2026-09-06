@@ -19,24 +19,20 @@ package walkingkooka.validation;
 
 import walkingkooka.Cast;
 import walkingkooka.text.cursor.TextCursor;
-import walkingkooka.text.cursor.TextCursorSavePoint;
 import walkingkooka.text.printer.IndentingPrinter;
 
 import java.util.Iterator;
-import java.util.Objects;
 
 /**
- * Makes the wrapped {@link TextMaskValidatorComponent} optional.
+ * Inverts the matching of the next {@link ValidatorTextMaskComponent}.
  */
-final class TextMaskValidatorComponentOptional<T extends ValidationReference> extends TextMaskValidatorComponent<T> {
+final class ValidatorTextMaskComponentNot<T extends ValidationReference> extends ValidatorTextMaskComponent<T> {
 
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> with(final TextMaskValidatorComponent<T> component) {
-        return new TextMaskValidatorComponentOptional<>(
-            Objects.requireNonNull(component, "component")
-        );
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> with(final ValidatorTextMaskComponent<T> component) {
+        return new ValidatorTextMaskComponentNot<>(component);
     }
 
-    private TextMaskValidatorComponentOptional(final TextMaskValidatorComponent<T> component) {
+    private ValidatorTextMaskComponentNot(final ValidatorTextMaskComponent<T> component) {
         super();
         this.component = component;
     }
@@ -44,43 +40,24 @@ final class TextMaskValidatorComponentOptional<T extends ValidationReference> ex
     @Override
     ValidationErrorList<T> tryMatch(final TextCursor text,
                                     final boolean invertNext,
-                                    final Iterator<TextMaskValidatorComponent<T>> nextComponent,
+                                    final Iterator<ValidatorTextMaskComponent<T>> nextComponent,
                                     final ValidatorContext<T> context) {
-        final TextCursorSavePoint save = text.save();
-
-        final ValidationErrorList<T> errors = this.component.tryMatch(
-            text,
-            false, // invert
-            nextComponent,
-            context
-        );
-
-        if (errors.isNotEmpty()) {
-            save.restore();
-        }
-
-        return nextComponent.hasNext() ?
-            nextComponent.next()
-                .tryMatch(
-                    text,
-                    false, // invertNext
-                    nextComponent,
-                    context
-                ) :
-            this.invalidCharacterIfNotEmpty(
+        return this.component.tryMatch(
                 text,
+                false == invertNext, // invert
+                nextComponent,
                 context
             );
     }
 
     @Override //
     CharSequence expected() {
-        return "optional " + this.component.expected();
+        return "not " + this.component.expected();
     }
 
-    private final TextMaskValidatorComponent<T> component;
+    private final ValidatorTextMaskComponent<T> component;
 
-    // Object...........................................................................................................
+// Object...........................................................................................................
 
     @Override
     public int hashCode() {
@@ -91,24 +68,24 @@ final class TextMaskValidatorComponentOptional<T extends ValidationReference> ex
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-            other instanceof TextMaskValidatorComponentOptional &&
+            other instanceof ValidatorTextMaskComponentNot &&
                 this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final TextMaskValidatorComponentOptional<?> other) {
+    private boolean equals0(final ValidatorTextMaskComponentNot<?> other) {
         return this.component.equals(other.component);
     }
 
     @Override
     public String toString() {
-        return this.component.toString() + OPTIONAL;
+        return NOT + this.component.toString();
     }
 
     // TreePrintable....................................................................................................
 
     @Override
     public void printTree(final IndentingPrinter printer) {
-        printer.println(this.getClass().getSimpleName() + " " + OPTIONAL);
+        printer.println(this.getClass().getSimpleName() + " " + NOT);
         printer.indent();
         {
             this.component.printTree(printer);

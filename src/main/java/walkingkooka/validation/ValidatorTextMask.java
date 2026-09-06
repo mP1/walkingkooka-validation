@@ -43,14 +43,14 @@ import java.util.List;
  * <li><code>&star;</code> Makes the preceding mask component repeat while true</li>
  * </ul>
  */
-final class TextMaskValidator<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C>,
+final class ValidatorTextMask<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C>,
     TreePrintable {
 
-    static <R extends ValidationReference, C extends ValidatorContext<R>> TextMaskValidator<R, C> parse(final String mask) {
+    static <R extends ValidationReference, C extends ValidatorContext<R>> ValidatorTextMask<R, C> parse(final String mask) {
         CharSequences.failIfNullOrEmpty(mask, "mask");
 
-        return new TextMaskValidator<>(
-            TextMaskValidatorComponent.parse(
+        return new ValidatorTextMask<>(
+            ValidatorTextMaskComponent.parse(
                 TextCursors.charSequence(mask)
             ),
             mask
@@ -58,7 +58,7 @@ final class TextMaskValidator<R extends ValidationReference, C extends Validator
     }
 
     // @VisibleForTesting
-    TextMaskValidator(final List<TextMaskValidatorComponent<R>> components,
+    ValidatorTextMask(final List<ValidatorTextMaskComponent<R>> components,
                       final String mask) {
         this.components = components;
         this.mask = mask;
@@ -93,7 +93,7 @@ final class TextMaskValidator<R extends ValidationReference, C extends Validator
 
     private List<ValidationError<R>> validateText(final String text,
                                                   final C context) {
-        final Iterator<TextMaskValidatorComponent<R>> components = this.components.iterator();
+        final Iterator<ValidatorTextMaskComponent<R>> components = this.components.iterator();
 
         return components.next()
             .tryMatch(
@@ -107,7 +107,7 @@ final class TextMaskValidator<R extends ValidationReference, C extends Validator
     /**
      * One or more components
      */
-    private final List<TextMaskValidatorComponent<R>> components;
+    private final List<ValidatorTextMaskComponent<R>> components;
 
     // Object...........................................................................................................
 
@@ -119,11 +119,11 @@ final class TextMaskValidator<R extends ValidationReference, C extends Validator
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-            other instanceof TextMaskValidator &&
+            other instanceof ValidatorTextMask &&
                 this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final TextMaskValidator<?, ?> other) {
+    private boolean equals0(final ValidatorTextMask<?, ?> other) {
         return this.components.equals(other.components);
     }
 
@@ -147,7 +147,7 @@ final class TextMaskValidator<R extends ValidationReference, C extends Validator
 
             printer.indent();
             {
-                for(final TextMaskValidatorComponent<R> component : this.components) {
+                for(final ValidatorTextMaskComponent<R> component : this.components) {
                     component.printTree(printer);
                 }
             }

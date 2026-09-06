@@ -17,12 +17,10 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.Cast;
+public abstract class ValidatorTextMaskComponentCharacterTestCase<C extends ValidatorTextMaskComponentCharacter<?>>
+    extends ValidatorTextMaskComponentTestCase<C> {
 
-public final class TextMaskValidatorComponentCharacterDigitTest extends TextMaskValidatorComponentCharacterTestCase<TextMaskValidatorComponentCharacterDigit<?>> {
-
-    @Override
-    public Class<TextMaskValidatorComponentCharacterDigit<?>> type() {
-        return Cast.to(TextMaskValidatorComponentCharacterDigit.class);
+    ValidatorTextMaskComponentCharacterTestCase() {
+        super();
     }
 }

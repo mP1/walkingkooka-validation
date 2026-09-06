@@ -17,15 +17,15 @@
 
 package walkingkooka.validation;
 
-final class TextMaskValidatorComponentCharacterUpperCaseLetter<T extends ValidationReference> extends TextMaskValidatorComponentCharacter<T> {
+final class ValidatorTextMaskComponentCharacterUpperCaseLetter<T extends ValidationReference> extends ValidatorTextMaskComponentCharacter<T> {
 
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> instance() {
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> instance() {
         return INSTANCE;
     }
 
-    private final static TextMaskValidatorComponentCharacterUpperCaseLetter INSTANCE = new TextMaskValidatorComponentCharacterUpperCaseLetter<>();
+    private final static ValidatorTextMaskComponentCharacterUpperCaseLetter INSTANCE = new ValidatorTextMaskComponentCharacterUpperCaseLetter<>();
 
-    private TextMaskValidatorComponentCharacterUpperCaseLetter() {
+    private ValidatorTextMaskComponentCharacterUpperCaseLetter() {
         super();
     }
 

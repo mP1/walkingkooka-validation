@@ -23,11 +23,11 @@ import walkingkooka.text.CharSequences;
 /**
  * Matches the given character verbatim. This is also used to match a backslash escaped character.
  */
-final class TextMaskValidatorComponentCharacterChar<T extends ValidationReference> extends TextMaskValidatorComponentCharacter<T> {
+final class ValidatorTextMaskComponentCharacterChar<T extends ValidationReference> extends ValidatorTextMaskComponentCharacter<T> {
 
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> with(final char c,
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> with(final char c,
                                                                               final String toString) {
-        TextMaskValidatorComponentCharacterChar<T> component;
+        ValidatorTextMaskComponentCharacterChar<T> component;
 
         switch (c) {
             case DASH:
@@ -40,7 +40,7 @@ final class TextMaskValidatorComponentCharacterChar<T extends ValidationReferenc
                 component = SPACE_COMPONENT;
                 break;
             default:
-                component = new TextMaskValidatorComponentCharacterChar<>(
+                component = new ValidatorTextMaskComponentCharacterChar<>(
                     c,
                     toString
                 );
@@ -49,19 +49,19 @@ final class TextMaskValidatorComponentCharacterChar<T extends ValidationReferenc
         return component;
     }
 
-    private final static TextMaskValidatorComponentCharacterChar DASH_COMPONENT = new TextMaskValidatorComponentCharacterChar<>(
+    private final static ValidatorTextMaskComponentCharacterChar DASH_COMPONENT = new ValidatorTextMaskComponentCharacterChar<>(
         DASH
     );
 
-    private final static TextMaskValidatorComponentCharacterChar SLASH_COMPONENT = new TextMaskValidatorComponentCharacterChar<>(
+    private final static ValidatorTextMaskComponentCharacterChar SLASH_COMPONENT = new ValidatorTextMaskComponentCharacterChar<>(
         SLASH
     );
 
-    private final static TextMaskValidatorComponentCharacterChar SPACE_COMPONENT = new TextMaskValidatorComponentCharacterChar<>(
+    private final static ValidatorTextMaskComponentCharacterChar SPACE_COMPONENT = new ValidatorTextMaskComponentCharacterChar<>(
         SPACE
     );
 
-    private TextMaskValidatorComponentCharacterChar(final char c) {
+    private ValidatorTextMaskComponentCharacterChar(final char c) {
         this(
             c,
             CharSequences.quoteIfChars(c)
@@ -69,7 +69,7 @@ final class TextMaskValidatorComponentCharacterChar<T extends ValidationReferenc
         );
     }
 
-    private TextMaskValidatorComponentCharacterChar(final char c,
+    private ValidatorTextMaskComponentCharacterChar(final char c,
                                                     final String toString) {
         super();
         this.c = c;
@@ -99,11 +99,11 @@ final class TextMaskValidatorComponentCharacterChar<T extends ValidationReferenc
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-            other instanceof TextMaskValidatorComponentCharacterChar &&
+            other instanceof ValidatorTextMaskComponentCharacterChar &&
                 this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final TextMaskValidatorComponentCharacterChar<?> other) {
+    private boolean equals0(final ValidatorTextMaskComponentCharacterChar<?> other) {
         return this.c == other.c;
     }
 

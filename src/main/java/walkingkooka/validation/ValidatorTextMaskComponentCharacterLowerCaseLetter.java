@@ -17,30 +17,30 @@
 
 package walkingkooka.validation;
 
-final class TextMaskValidatorComponentCharacterAny<T extends ValidationReference> extends TextMaskValidatorComponentCharacter<T> {
+final class ValidatorTextMaskComponentCharacterLowerCaseLetter<T extends ValidationReference> extends ValidatorTextMaskComponentCharacter<T> {
 
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> instance() {
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> instance() {
         return INSTANCE;
     }
 
-    private final static TextMaskValidatorComponentCharacterAny INSTANCE = new TextMaskValidatorComponentCharacterAny<>();
+    private final static ValidatorTextMaskComponentCharacterLowerCaseLetter INSTANCE = new ValidatorTextMaskComponentCharacterLowerCaseLetter<>();
 
-    private TextMaskValidatorComponentCharacterAny() {
+    private ValidatorTextMaskComponentCharacterLowerCaseLetter() {
         super();
     }
 
     @Override //
     boolean isMatch(final char c) {
-        return true;
+        return Character.isLowerCase(c);
     }
 
     @Override //
     CharSequence expected() {
-        return "character";
+        return "lower-case letter";
     }
 
     @Override
     public String toString() {
-        return String.valueOf(ANY);
+        return String.valueOf(LOWER_CASE_LETTER);
     }
 }

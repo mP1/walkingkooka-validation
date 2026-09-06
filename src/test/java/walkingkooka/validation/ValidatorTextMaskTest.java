@@ -28,10 +28,10 @@ import walkingkooka.convert.Converters;
 import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 
-public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskValidator<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    ToStringTesting<TextMaskValidator<TestValidationReference, TestValidatorContext>>,
-    ParseStringTesting<TextMaskValidator<TestValidationReference, TestValidatorContext>>,
-    HashCodeEqualsDefinedTesting2<TextMaskValidator<TestValidationReference, TestValidatorContext>>,
+public final class ValidatorTextMaskTest implements ValidatorTesting2<ValidatorTextMask<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
+    ToStringTesting<ValidatorTextMask<TestValidationReference, TestValidatorContext>>,
+    ParseStringTesting<ValidatorTextMask<TestValidationReference, TestValidatorContext>>,
+    HashCodeEqualsDefinedTesting2<ValidatorTextMask<TestValidationReference, TestValidatorContext>>,
     TreePrintableTesting {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("HelloField");
@@ -82,7 +82,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseAny() {
         this.parseMaskAndCheck(
             "?",
-            TextMaskValidatorComponent.any()
+            ValidatorTextMaskComponent.any()
         );
     }
 
@@ -90,8 +90,8 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseAnyAny() {
         this.parseMaskAndCheck(
             "??",
-            TextMaskValidatorComponent.any(),
-            TextMaskValidatorComponent.any()
+            ValidatorTextMaskComponent.any(),
+            ValidatorTextMaskComponent.any()
         );
     }
 
@@ -99,9 +99,9 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseAnyAnyAny() {
         this.parseMaskAndCheck(
             "???",
-            TextMaskValidatorComponent.any(),
-            TextMaskValidatorComponent.any(),
-            TextMaskValidatorComponent.any()
+            ValidatorTextMaskComponent.any(),
+            ValidatorTextMaskComponent.any(),
+            ValidatorTextMaskComponent.any()
         );
     }
 
@@ -109,7 +109,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseBackslashLetter() {
         this.parseMaskAndCheck(
             "\\1",
-            TextMaskValidatorComponent.escaped('1')
+            ValidatorTextMaskComponent.escaped('1')
         );
     }
 
@@ -117,8 +117,8 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseBackslashLetterLetter() {
         this.parseMaskAndCheck(
             "\\1A",
-            TextMaskValidatorComponent.escaped('1'),
-            TextMaskValidatorComponent.letter()
+            ValidatorTextMaskComponent.escaped('1'),
+            ValidatorTextMaskComponent.letter()
         );
     }
 
@@ -126,8 +126,8 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseDigitDigit() {
         this.parseMaskAndCheck(
             "99",
-            TextMaskValidatorComponent.digit(),
-            TextMaskValidatorComponent.digit()
+            ValidatorTextMaskComponent.digit(),
+            ValidatorTextMaskComponent.digit()
         );
     }
 
@@ -135,8 +135,8 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseLetterLetter() {
         this.parseMaskAndCheck(
             "AA",
-            TextMaskValidatorComponent.letter(),
-            TextMaskValidatorComponent.letter()
+            ValidatorTextMaskComponent.letter(),
+            ValidatorTextMaskComponent.letter()
         );
     }
 
@@ -144,8 +144,8 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseLowerCaseLetterLowerCaseLetter() {
         this.parseMaskAndCheck(
             "LL",
-            TextMaskValidatorComponent.lowerCaseLetter(),
-            TextMaskValidatorComponent.lowerCaseLetter()
+            ValidatorTextMaskComponent.lowerCaseLetter(),
+            ValidatorTextMaskComponent.lowerCaseLetter()
         );
     }
 
@@ -153,8 +153,8 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseNotLetter() {
         this.parseMaskAndCheck(
             "~A",
-            TextMaskValidatorComponent.not(
-                TextMaskValidatorComponent.letter()
+            ValidatorTextMaskComponent.not(
+                ValidatorTextMaskComponent.letter()
             )
         );
     }
@@ -163,10 +163,10 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseNotLetterDigit() {
         this.parseMaskAndCheck(
             "~A9",
-            TextMaskValidatorComponent.not(
-                TextMaskValidatorComponent.letter()
+            ValidatorTextMaskComponent.not(
+                ValidatorTextMaskComponent.letter()
             ),
-            TextMaskValidatorComponent.digit()
+            ValidatorTextMaskComponent.digit()
         );
     }
 
@@ -174,11 +174,11 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseNotLetterNotDigit() {
         this.parseMaskAndCheck(
             "~A~9",
-            TextMaskValidatorComponent.not(
-                TextMaskValidatorComponent.letter()
+            ValidatorTextMaskComponent.not(
+                ValidatorTextMaskComponent.letter()
             ),
-            TextMaskValidatorComponent.not(
-                TextMaskValidatorComponent.digit()
+            ValidatorTextMaskComponent.not(
+                ValidatorTextMaskComponent.digit()
             )
         );
     }
@@ -187,7 +187,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseQuoted() {
         this.parseMaskAndCheck(
             "\"A\"",
-            TextMaskValidatorComponent.textLiteral("A")
+            ValidatorTextMaskComponent.textLiteral("A")
         );
     }
 
@@ -195,7 +195,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseQuoted2() {
         this.parseMaskAndCheck(
             "\"Hello\"",
-            TextMaskValidatorComponent.textLiteral("Hello")
+            ValidatorTextMaskComponent.textLiteral("Hello")
         );
     }
 
@@ -203,8 +203,8 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseQuotedLetter() {
         this.parseMaskAndCheck(
             "\"A\"9",
-            TextMaskValidatorComponent.textLiteral("A"),
-            TextMaskValidatorComponent.digit()
+            ValidatorTextMaskComponent.textLiteral("A"),
+            ValidatorTextMaskComponent.digit()
         );
     }
 
@@ -212,8 +212,8 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseUpperCaseLetterUpperCaseLetter() {
         this.parseMaskAndCheck(
             "UU",
-            TextMaskValidatorComponent.upperCaseLetter(),
-            TextMaskValidatorComponent.upperCaseLetter()
+            ValidatorTextMaskComponent.upperCaseLetter(),
+            ValidatorTextMaskComponent.upperCaseLetter()
         );
     }
 
@@ -221,8 +221,8 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseOptionalLetter() {
         this.parseMaskAndCheck(
             "A+",
-            TextMaskValidatorComponent.optional(
-                TextMaskValidatorComponent.letter()
+            ValidatorTextMaskComponent.optional(
+                ValidatorTextMaskComponent.letter()
             )
         );
     }
@@ -231,16 +231,16 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     public void testParseOptionalLetterDigit() {
         this.parseMaskAndCheck(
             "A+9",
-            TextMaskValidatorComponent.optional(
-                TextMaskValidatorComponent.letter()
+            ValidatorTextMaskComponent.optional(
+                ValidatorTextMaskComponent.letter()
             ),
-            TextMaskValidatorComponent.digit()
+            ValidatorTextMaskComponent.digit()
         );
     }
 
     private void parseMaskAndCheck(final String mask,
-                                   final TextMaskValidatorComponent<TestValidationReference>...components) {
-        final TextMaskValidator<TestValidationReference, TestValidatorContext> validator = new TextMaskValidator<>(
+                                   final ValidatorTextMaskComponent<TestValidationReference>...components) {
+        final ValidatorTextMask<TestValidationReference, TestValidatorContext> validator = new ValidatorTextMask<>(
             Lists.of(components),
             mask
         );
@@ -256,8 +256,8 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     }
 
     @Override
-    public TextMaskValidator<TestValidationReference, TestValidatorContext> parseString(final String mask) {
-        return TextMaskValidator.parse(mask);
+    public ValidatorTextMask<TestValidationReference, TestValidatorContext> parseString(final String mask) {
+        return ValidatorTextMask.parse(mask);
     }
 
     @Override
@@ -624,7 +624,7 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
                                       final String text,
                                       final ValidationError<TestValidationReference>...expected) {
         this.validateAndCheck(
-            TextMaskValidator.parse(mask),
+            ValidatorTextMask.parse(mask),
             text,
             this.createContext(),
             expected
@@ -632,10 +632,10 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     }
 
     @Override
-    public TextMaskValidator<TestValidationReference, TestValidatorContext> createValidator() {
-        return new TextMaskValidator<>(
+    public ValidatorTextMask<TestValidationReference, TestValidatorContext> createValidator() {
+        return new ValidatorTextMask<>(
             Lists.of(
-                TextMaskValidatorComponent.any()
+                ValidatorTextMaskComponent.any()
             ),
             "?"
         );
@@ -672,12 +672,12 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     // hashCode/equals..................................................................................................
 
     @Override
-    public TextMaskValidator<TestValidationReference, TestValidatorContext> createObject() {
-        return new TextMaskValidator<>(
+    public ValidatorTextMask<TestValidationReference, TestValidatorContext> createObject() {
+        return new ValidatorTextMask<>(
             Lists.of(
-                TextMaskValidatorComponent.any(),
-                TextMaskValidatorComponent.not(
-                    TextMaskValidatorComponent.letter()
+                ValidatorTextMaskComponent.any(),
+                ValidatorTextMaskComponent.not(
+                    ValidatorTextMaskComponent.letter()
                 )
             ),
             "?~A"
@@ -699,26 +699,26 @@ public final class TextMaskValidatorTest implements ValidatorTesting2<TextMaskVa
     @Test
     public void testTreePrint() {
         this.treePrintAndCheck(
-            TextMaskValidator.parse("?A9LU\"Hello\"~AA*"),
-            "TextMaskValidator\n" +
+            ValidatorTextMask.parse("?A9LU\"Hello\"~AA*"),
+            "ValidatorTextMask\n" +
                 "  \"?A9LU\\\"Hello\\\"~AA*\"\n" +
-                "    TextMaskValidatorComponentCharacterAny ?\n" +
-                "    TextMaskValidatorComponentCharacterLetter A\n" +
-                "    TextMaskValidatorComponentCharacterDigit 9\n" +
-                "    TextMaskValidatorComponentCharacterLowerCaseLetter L\n" +
-                "    TextMaskValidatorComponentCharacterUpperCaseLetter U\n" +
-                "    TextMaskValidatorComponentTextLiteral \"Hello\"\n" +
-                "    TextMaskValidatorComponentNot ~\n" +
-                "      TextMaskValidatorComponentCharacterLetter A\n" +
-                "    TextMaskValidatorComponentRepeating *\n" +
-                "      TextMaskValidatorComponentCharacterLetter A\n"
+                "    ValidatorTextMaskComponentCharacterAny ?\n" +
+                "    ValidatorTextMaskComponentCharacterLetter A\n" +
+                "    ValidatorTextMaskComponentCharacterDigit 9\n" +
+                "    ValidatorTextMaskComponentCharacterLowerCaseLetter L\n" +
+                "    ValidatorTextMaskComponentCharacterUpperCaseLetter U\n" +
+                "    ValidatorTextMaskComponentTextLiteral \"Hello\"\n" +
+                "    ValidatorTextMaskComponentNot ~\n" +
+                "      ValidatorTextMaskComponentCharacterLetter A\n" +
+                "    ValidatorTextMaskComponentRepeating *\n" +
+                "      ValidatorTextMaskComponentCharacterLetter A\n"
         );
     }
 
     // class............................................................................................................
 
     @Override
-    public Class<TextMaskValidator<TestValidationReference, TestValidatorContext>> type() {
-        return Cast.to(TextMaskValidator.class);
+    public Class<ValidatorTextMask<TestValidationReference, TestValidatorContext>> type() {
+        return Cast.to(ValidatorTextMask.class);
     }
 }

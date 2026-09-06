@@ -103,10 +103,10 @@ public final class Validators implements PublicStaticHelper {
     }
 
     /**
-     * {@see TextMaskValidator}
+     * {@see ValidatorTextMask}
      */
     public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> textMask(final String mask) {
-        return TextMaskValidator.parse(mask);
+        return ValidatorTextMask.parse(mask);
     }
 
     /**
