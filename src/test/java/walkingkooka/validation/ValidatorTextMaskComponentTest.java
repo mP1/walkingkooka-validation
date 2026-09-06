@@ -24,36 +24,36 @@ import walkingkooka.ToStringTesting;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 
-public final class TextMaskValidatorComponentTest implements ClassTesting<TextMaskValidatorComponent<?>>,
+public final class ValidatorTextMaskComponentTest implements ClassTesting<ValidatorTextMaskComponent<?>>,
     HashCodeEqualsDefinedTesting,
-    ToStringTesting<TextMaskValidatorComponent<?>> {
+    ToStringTesting<ValidatorTextMaskComponent<?>> {
 
     // hashCode/equals..................................................................................................
 
     @Test
     public void testEqualsAnyAny() {
         this.checkEquals(
-            TextMaskValidatorComponent.any(),
-            TextMaskValidatorComponent.any()
+            ValidatorTextMaskComponent.any(),
+            ValidatorTextMaskComponent.any()
         );
     }
 
     @Test
     public void testEqualsLetterAndLetter() {
         this.checkEquals(
-            TextMaskValidatorComponent.letter(),
-            TextMaskValidatorComponent.letter()
+            ValidatorTextMaskComponent.letter(),
+            ValidatorTextMaskComponent.letter()
         );
     }
 
     @Test
     public void testEqualsNotLetterAndNotLetter() {
         this.checkEquals(
-            TextMaskValidatorComponent.not(
-                TextMaskValidatorComponent.letter()
+            ValidatorTextMaskComponent.not(
+                ValidatorTextMaskComponent.letter()
             ),
-            TextMaskValidatorComponent.not(
-                TextMaskValidatorComponent.letter()
+            ValidatorTextMaskComponent.not(
+                ValidatorTextMaskComponent.letter()
             )
         );
     }
@@ -63,7 +63,7 @@ public final class TextMaskValidatorComponentTest implements ClassTesting<TextMa
     @Test
     public void testToStringWithAny() {
         this.toStringAndCheck(
-            TextMaskValidatorComponent.any(),
+            ValidatorTextMaskComponent.any(),
             "?"
         );
     }
@@ -71,7 +71,7 @@ public final class TextMaskValidatorComponentTest implements ClassTesting<TextMa
     @Test
     public void testToStringWithDigit() {
         this.toStringAndCheck(
-            TextMaskValidatorComponent.digit(),
+            ValidatorTextMaskComponent.digit(),
             "9"
         );
     }
@@ -79,7 +79,7 @@ public final class TextMaskValidatorComponentTest implements ClassTesting<TextMa
     @Test
     public void testToStringWithLetter() {
         this.toStringAndCheck(
-            TextMaskValidatorComponent.letter(),
+            ValidatorTextMaskComponent.letter(),
             "A"
         );
     }
@@ -87,7 +87,7 @@ public final class TextMaskValidatorComponentTest implements ClassTesting<TextMa
     @Test
     public void testToStringWithLowerCaseLetter() {
         this.toStringAndCheck(
-            TextMaskValidatorComponent.lowerCaseLetter(),
+            ValidatorTextMaskComponent.lowerCaseLetter(),
             "L"
         );
     }
@@ -95,8 +95,8 @@ public final class TextMaskValidatorComponentTest implements ClassTesting<TextMa
     @Test
     public void testToStringWithNot() {
         this.toStringAndCheck(
-            TextMaskValidatorComponent.not(
-                TextMaskValidatorComponent.letter()
+            ValidatorTextMaskComponent.not(
+                ValidatorTextMaskComponent.letter()
             ),
             "~A"
         );
@@ -105,8 +105,8 @@ public final class TextMaskValidatorComponentTest implements ClassTesting<TextMa
     @Test
     public void testToStringWithOptionalLetter() {
         this.toStringAndCheck(
-            TextMaskValidatorComponent.optional(
-                TextMaskValidatorComponent.upperCaseLetter()
+            ValidatorTextMaskComponent.optional(
+                ValidatorTextMaskComponent.upperCaseLetter()
             ),
             "U+"
         );
@@ -115,8 +115,8 @@ public final class TextMaskValidatorComponentTest implements ClassTesting<TextMa
     @Test
     public void testToStringWithRepeatingLetter() {
         this.toStringAndCheck(
-            TextMaskValidatorComponent.repeating(
-                TextMaskValidatorComponent.upperCaseLetter()
+            ValidatorTextMaskComponent.repeating(
+                ValidatorTextMaskComponent.upperCaseLetter()
             ),
             "U*"
         );
@@ -125,7 +125,7 @@ public final class TextMaskValidatorComponentTest implements ClassTesting<TextMa
     @Test
     public void testToStringWithUpperCaseLetter() {
         this.toStringAndCheck(
-            TextMaskValidatorComponent.upperCaseLetter(),
+            ValidatorTextMaskComponent.upperCaseLetter(),
             "U"
         );
     }
@@ -133,8 +133,8 @@ public final class TextMaskValidatorComponentTest implements ClassTesting<TextMa
     // class............................................................................................................
 
     @Override
-    public Class<TextMaskValidatorComponent<?>> type() {
-        return Cast.to(TextMaskValidatorComponent.class);
+    public Class<ValidatorTextMaskComponent<?>> type() {
+        return Cast.to(ValidatorTextMaskComponent.class);
     }
 
     @Override

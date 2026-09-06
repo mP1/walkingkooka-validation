@@ -17,20 +17,30 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.reflect.ClassTesting;
-import walkingkooka.reflect.JavaVisibility;
+final class ValidatorTextMaskComponentCharacterDigit<T extends ValidationReference> extends ValidatorTextMaskComponentCharacter<T> {
 
-public abstract class TextMaskValidatorComponentTestCase<C extends TextMaskValidatorComponent<?>>
-    implements ClassTesting<C> {
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> instance() {
+        return INSTANCE;
+    }
 
-    TextMaskValidatorComponentTestCase() {
+    private final static ValidatorTextMaskComponentCharacterDigit INSTANCE = new ValidatorTextMaskComponentCharacterDigit<>();
+
+    private ValidatorTextMaskComponentCharacterDigit() {
         super();
     }
 
-    // class............................................................................................................
+    @Override //
+    boolean isMatch(final char c) {
+        return Character.isDigit(c);
+    }
+
+    @Override //
+    CharSequence expected() {
+        return "digit";
+    }
 
     @Override
-    public final JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
+    public String toString() {
+        return String.valueOf(DIGIT);
     }
 }

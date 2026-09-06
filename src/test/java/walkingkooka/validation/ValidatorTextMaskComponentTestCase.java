@@ -17,12 +17,20 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.Cast;
+import walkingkooka.reflect.ClassTesting;
+import walkingkooka.reflect.JavaVisibility;
 
-public final class TextMaskValidatorComponentRepeatingNextTest extends TextMaskValidatorComponentTestCase<TextMaskValidatorComponentRepeatingNext<?>> {
+public abstract class ValidatorTextMaskComponentTestCase<C extends ValidatorTextMaskComponent<?>>
+    implements ClassTesting<C> {
+
+    ValidatorTextMaskComponentTestCase() {
+        super();
+    }
+
+    // class............................................................................................................
 
     @Override
-    public Class<TextMaskValidatorComponentRepeatingNext<?>> type() {
-        return Cast.to(TextMaskValidatorComponentRepeatingNext.class);
+    public final JavaVisibility typeVisibility() {
+        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }

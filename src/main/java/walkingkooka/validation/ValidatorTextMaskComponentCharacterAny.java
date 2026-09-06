@@ -17,30 +17,30 @@
 
 package walkingkooka.validation;
 
-final class TextMaskValidatorComponentCharacterDigit<T extends ValidationReference> extends TextMaskValidatorComponentCharacter<T> {
+final class ValidatorTextMaskComponentCharacterAny<T extends ValidationReference> extends ValidatorTextMaskComponentCharacter<T> {
 
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> instance() {
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> instance() {
         return INSTANCE;
     }
 
-    private final static TextMaskValidatorComponentCharacterDigit INSTANCE = new TextMaskValidatorComponentCharacterDigit<>();
+    private final static ValidatorTextMaskComponentCharacterAny INSTANCE = new ValidatorTextMaskComponentCharacterAny<>();
 
-    private TextMaskValidatorComponentCharacterDigit() {
+    private ValidatorTextMaskComponentCharacterAny() {
         super();
     }
 
     @Override //
     boolean isMatch(final char c) {
-        return Character.isDigit(c);
+        return true;
     }
 
     @Override //
     CharSequence expected() {
-        return "digit";
+        return "character";
     }
 
     @Override
     public String toString() {
-        return String.valueOf(DIGIT);
+        return String.valueOf(ANY);
     }
 }

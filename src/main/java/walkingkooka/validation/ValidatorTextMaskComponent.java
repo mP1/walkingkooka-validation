@@ -26,10 +26,10 @@ import walkingkooka.text.printer.TreePrintable;
 import java.util.Iterator;
 import java.util.List;
 
-abstract class TextMaskValidatorComponent<T extends ValidationReference> implements TreePrintable {
+abstract class ValidatorTextMaskComponent<T extends ValidationReference> implements TreePrintable {
 
-    static <T extends ValidationReference> List<TextMaskValidatorComponent<T>> parse(final TextCursor mask) {
-        List<TextMaskValidatorComponent<T>> components = Lists.array();
+    static <T extends ValidationReference> List<ValidatorTextMaskComponent<T>> parse(final TextCursor mask) {
+        List<ValidatorTextMaskComponent<T>> components = Lists.array();
 
         final int MODE_NORMAL = 1;
         final int MODE_BACK_SLASH_ESCAPE = 2;
@@ -41,7 +41,7 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
 
         int mode = MODE_NORMAL;
 
-        TextMaskValidatorComponent<T> component = null;
+        ValidatorTextMaskComponent<T> component = null;
         StringBuilder textLiteral = null;
 
         while (mask.isNotEmpty()) {
@@ -241,17 +241,17 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
     final static char ANY = '?';
 
     /**
-     * {@link TextMaskValidatorComponentCharacterAny}
+     * {@link ValidatorTextMaskComponentCharacterAny}
      */
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> any() {
-        return TextMaskValidatorComponentCharacterAny.instance();
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> any() {
+        return ValidatorTextMaskComponentCharacterAny.instance();
     }
 
     /**
-     * {@link TextMaskValidatorComponentCharacterChar}
+     * {@link ValidatorTextMaskComponentCharacterChar}
      */
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> character(final char c) {
-        return TextMaskValidatorComponentCharacterChar.with(
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> character(final char c) {
+        return ValidatorTextMaskComponentCharacterChar.with(
             c,
             CharSequences.quoteIfChars(c).toString()
         );
@@ -260,17 +260,17 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
     final static char DIGIT = '9';
 
     /**
-     * {@link TextMaskValidatorComponentCharacterDigit}
+     * {@link ValidatorTextMaskComponentCharacterDigit}
      */
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> digit() {
-        return TextMaskValidatorComponentCharacterDigit.instance();
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> digit() {
+        return ValidatorTextMaskComponentCharacterDigit.instance();
     }
 
     /**
      * Matches the given character which was escaped in the initial mask
      */
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> escaped(final char c) {
-        return TextMaskValidatorComponentCharacterChar.with(
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> escaped(final char c) {
+        return ValidatorTextMaskComponentCharacterChar.with(
             c,
             "\\" + CharSequences.escape(
                 Character.toString(c)
@@ -281,71 +281,71 @@ abstract class TextMaskValidatorComponent<T extends ValidationReference> impleme
     final static char LETTER = 'A';
 
     /**
-     * {@link TextMaskValidatorComponentCharacterLetter}
+     * {@link ValidatorTextMaskComponentCharacterLetter}
      */
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> letter() {
-        return TextMaskValidatorComponentCharacterLetter.instance();
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> letter() {
+        return ValidatorTextMaskComponentCharacterLetter.instance();
     }
 
     final static char LOWER_CASE_LETTER = 'L';
 
     /**
-     * {@link TextMaskValidatorComponentCharacterLowerCaseLetter}
+     * {@link ValidatorTextMaskComponentCharacterLowerCaseLetter}
      */
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> lowerCaseLetter() {
-        return TextMaskValidatorComponentCharacterLowerCaseLetter.instance();
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> lowerCaseLetter() {
+        return ValidatorTextMaskComponentCharacterLowerCaseLetter.instance();
     }
 
     final static char NOT = '~';
 
     /**
-     * {@link TextMaskValidatorComponentNot}
+     * {@link ValidatorTextMaskComponentNot}
      */
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> not(final TextMaskValidatorComponent<T> component) {
-        return TextMaskValidatorComponentNot.with(component);
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> not(final ValidatorTextMaskComponent<T> component) {
+        return ValidatorTextMaskComponentNot.with(component);
     }
 
     final static char OPTIONAL = '+';
 
     /**
-     * {@link TextMaskValidatorComponentOptional}
+     * {@link ValidatorTextMaskComponentOptional}
      */
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> optional(final TextMaskValidatorComponent<T> component) {
-        return TextMaskValidatorComponentOptional.with(component);
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> optional(final ValidatorTextMaskComponent<T> component) {
+        return ValidatorTextMaskComponentOptional.with(component);
     }
 
     final static char REPEATING = '*';
 
     /**
-     * {@link TextMaskValidatorComponentRepeating}
+     * {@link ValidatorTextMaskComponentRepeating}
      */
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> repeating(final TextMaskValidatorComponent<T> component) {
-        return TextMaskValidatorComponentRepeating.with(component);
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> repeating(final ValidatorTextMaskComponent<T> component) {
+        return ValidatorTextMaskComponentRepeating.with(component);
     }
 
    final static char UPPER_CASE_LETTER = 'U';
     
     /**
-     * {@see TextMaskValidatorComponentTextLiteral}
+     * {@see ValidatorTextMaskComponentTextLiteral}
      */
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> textLiteral(final String text) {
-        return TextMaskValidatorComponentTextLiteral.with(text);
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> textLiteral(final String text) {
+        return ValidatorTextMaskComponentTextLiteral.with(text);
     }
 
     /**
-     * {@link TextMaskValidatorComponentCharacterUpperCaseLetter}
+     * {@link ValidatorTextMaskComponentCharacterUpperCaseLetter}
      */
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> upperCaseLetter() {
-        return TextMaskValidatorComponentCharacterUpperCaseLetter.instance();
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> upperCaseLetter() {
+        return ValidatorTextMaskComponentCharacterUpperCaseLetter.instance();
     }
 
-    TextMaskValidatorComponent() {
+    ValidatorTextMaskComponent() {
         super();
     }
 
     abstract ValidationErrorList<T> tryMatch(final TextCursor text,
                                              final boolean not,
-                                             final Iterator<TextMaskValidatorComponent<T>> nextComponent,
+                                             final Iterator<ValidatorTextMaskComponent<T>> nextComponent,
                                              final ValidatorContext<T> context);
 
     final ValidationErrorList<T> endOfText(final ValidatorContext<T> context) {

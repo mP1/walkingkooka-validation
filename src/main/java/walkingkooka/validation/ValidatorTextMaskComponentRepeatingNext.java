@@ -24,24 +24,24 @@ import walkingkooka.text.printer.IndentingPrinter;
 import java.util.Iterator;
 
 /**
- * Always returns no errors used as the next component by {@link TextMaskValidatorComponentRepeating}.
+ * Always returns no errors used as the next component by {@link ValidatorTextMaskComponentRepeating}.
  */
-final class TextMaskValidatorComponentRepeatingNext<T extends ValidationReference> extends TextMaskValidatorComponent<T> {
+final class ValidatorTextMaskComponentRepeatingNext<T extends ValidationReference> extends ValidatorTextMaskComponent<T> {
 
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> instance() {
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> instance() {
         return Cast.to(INSTANCE);
     }
 
-    private final static TextMaskValidatorComponentRepeatingNext INSTANCE = new TextMaskValidatorComponentRepeatingNext<>();
+    private final static ValidatorTextMaskComponentRepeatingNext INSTANCE = new ValidatorTextMaskComponentRepeatingNext<>();
 
-    private TextMaskValidatorComponentRepeatingNext() {
+    private ValidatorTextMaskComponentRepeatingNext() {
         super();
     }
 
     @Override
     ValidationErrorList<T> tryMatch(final TextCursor text,
                                     final boolean invertNext,
-                                    final Iterator<TextMaskValidatorComponent<T>> nextComponent,
+                                    final Iterator<ValidatorTextMaskComponent<T>> nextComponent,
                                     final ValidatorContext<T> context) {
         return context.validationErrorList();
     }

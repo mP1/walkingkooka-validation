@@ -19,10 +19,10 @@ package walkingkooka.validation;
 
 import walkingkooka.Cast;
 
-public final class TextMaskValidatorComponentCharacterLowerCaseLetterTest extends TextMaskValidatorComponentCharacterTestCase<TextMaskValidatorComponentCharacterLowerCaseLetter<?>> {
+public final class ValidatorTextMaskComponentRepeatingNextTest extends ValidatorTextMaskComponentTestCase<ValidatorTextMaskComponentRepeatingNext<?>> {
 
     @Override
-    public Class<TextMaskValidatorComponentCharacterLowerCaseLetter<?>> type() {
-        return Cast.to(TextMaskValidatorComponentCharacterLowerCaseLetter.class);
+    public Class<ValidatorTextMaskComponentRepeatingNext<?>> type() {
+        return Cast.to(ValidatorTextMaskComponentRepeatingNext.class);
     }
 }

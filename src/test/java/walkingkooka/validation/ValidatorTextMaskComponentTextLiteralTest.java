@@ -19,10 +19,10 @@ package walkingkooka.validation;
 
 import walkingkooka.Cast;
 
-public final class TextMaskValidatorComponentOptionalTest extends TextMaskValidatorComponentTestCase<TextMaskValidatorComponentOptional<?>> {
+public final class ValidatorTextMaskComponentTextLiteralTest extends ValidatorTextMaskComponentTestCase<ValidatorTextMaskComponentTextLiteral<?>> {
 
     @Override
-    public Class<TextMaskValidatorComponentOptional<?>> type() {
-        return Cast.to(TextMaskValidatorComponentOptional.class);
+    public Class<ValidatorTextMaskComponentTextLiteral<?>> type() {
+        return Cast.to(ValidatorTextMaskComponentTextLiteral.class);
     }
 }

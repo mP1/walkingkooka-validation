@@ -27,13 +27,13 @@ import java.util.Iterator;
 /**
  * Matches a text literal.
  */
-final class TextMaskValidatorComponentTextLiteral<T extends ValidationReference> extends TextMaskValidatorComponent<T> {
+final class ValidatorTextMaskComponentTextLiteral<T extends ValidationReference> extends ValidatorTextMaskComponent<T> {
 
-    static <T extends ValidationReference> TextMaskValidatorComponent<T> with(final String text) {
-        return new TextMaskValidatorComponentTextLiteral<>(text);
+    static <T extends ValidationReference> ValidatorTextMaskComponent<T> with(final String text) {
+        return new ValidatorTextMaskComponentTextLiteral<>(text);
     }
 
-    private TextMaskValidatorComponentTextLiteral(final String text) {
+    private ValidatorTextMaskComponentTextLiteral(final String text) {
         super();
         this.text = text;
     }
@@ -41,7 +41,7 @@ final class TextMaskValidatorComponentTextLiteral<T extends ValidationReference>
     @Override
     ValidationErrorList<T> tryMatch(final TextCursor text,
                                     final boolean invertNext,
-                                    final Iterator<TextMaskValidatorComponent<T>> nextComponent,
+                                    final Iterator<ValidatorTextMaskComponent<T>> nextComponent,
                                     final ValidatorContext<T> context) {
         return text.isEmpty() ?
             this.endOfText(context) :
@@ -55,7 +55,7 @@ final class TextMaskValidatorComponentTextLiteral<T extends ValidationReference>
 
     private ValidationErrorList<T> tryMatchNotEmpty(final TextCursor text,
                                                     final boolean invertNext,
-                                                    final Iterator<TextMaskValidatorComponent<T>> nextComponent,
+                                                    final Iterator<ValidatorTextMaskComponent<T>> nextComponent,
                                                     final ValidatorContext<T> context) {
         final String textLiteral = this.text;
         final int textLiteralLength = textLiteral.length();
@@ -129,11 +129,11 @@ final class TextMaskValidatorComponentTextLiteral<T extends ValidationReference>
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-            other instanceof TextMaskValidatorComponentTextLiteral &&
+            other instanceof ValidatorTextMaskComponentTextLiteral &&
                 this.equals0(Cast.to(other));
     }
 
-    private boolean equals0(final TextMaskValidatorComponentTextLiteral<?> other) {
+    private boolean equals0(final ValidatorTextMaskComponentTextLiteral<?> other) {
         return this.text.equals(other.text);
     }
 

@@ -23,18 +23,18 @@ import walkingkooka.text.printer.IndentingPrinter;
 import java.util.Iterator;
 
 /**
- * Base class for a {@link TextMaskValidatorComponent} that matches a single character.
+ * Base class for a {@link ValidatorTextMaskComponent} that matches a single character.
  */
-abstract class TextMaskValidatorComponentCharacter<T extends ValidationReference> extends TextMaskValidatorComponent<T> {
+abstract class ValidatorTextMaskComponentCharacter<T extends ValidationReference> extends ValidatorTextMaskComponent<T> {
 
-    TextMaskValidatorComponentCharacter() {
+    ValidatorTextMaskComponentCharacter() {
         super();
     }
 
     @Override//
     final ValidationErrorList<T> tryMatch(final TextCursor text,
                                           final boolean invertNext,
-                                          final Iterator<TextMaskValidatorComponent<T>> nextComponent,
+                                          final Iterator<ValidatorTextMaskComponent<T>> nextComponent,
                                           final ValidatorContext<T> context) {
         ValidationErrorList<T> errors;
 
