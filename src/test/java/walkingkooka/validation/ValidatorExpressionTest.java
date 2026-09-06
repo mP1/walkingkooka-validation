@@ -24,8 +24,8 @@ import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 
-public final class ExpressionValidatorTest implements ValidatorTesting2<ExpressionValidator<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    ToStringTesting<ExpressionValidator<TestValidationReference, TestValidatorContext>> {
+public final class ValidatorExpressionTest implements ValidatorTesting2<ValidatorExpression<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
+    ToStringTesting<ValidatorExpression<TestValidationReference, TestValidatorContext>> {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("HelloField");
 
@@ -42,8 +42,8 @@ public final class ExpressionValidatorTest implements ValidatorTesting2<Expressi
     }
 
     @Override
-    public ExpressionValidator<TestValidationReference, TestValidatorContext> createValidator() {
-        return ExpressionValidator.with(
+    public ValidatorExpression<TestValidationReference, TestValidatorContext> createValidator() {
+        return ValidatorExpression.with(
             Expression.value(
                 ValidationError.with(REFERENCE)
                     .setMessage(MESSAGE)
@@ -82,7 +82,7 @@ public final class ExpressionValidatorTest implements ValidatorTesting2<Expressi
         );
 
         this.toStringAndCheck(
-            ExpressionValidator.with(expression),
+            ValidatorExpression.with(expression),
             expression.toString()
         );
     }
@@ -90,7 +90,7 @@ public final class ExpressionValidatorTest implements ValidatorTesting2<Expressi
     // class............................................................................................................
 
     @Override
-    public Class<ExpressionValidator<TestValidationReference, TestValidatorContext>> type() {
-        return Cast.to(ExpressionValidator.class);
+    public Class<ValidatorExpression<TestValidationReference, TestValidatorContext>> type() {
+        return Cast.to(ValidatorExpression.class);
     }
 }
