@@ -28,15 +28,15 @@ import java.util.Optional;
  * A {@link Validator} which executes the given {@link Expression}, which returns a {@link ValidationCheckbox}.
  * Note the validation value must match one of the values in {@link ValidationCheckbox}.
  */
-final class ValidationCheckboxExpressionValidator<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
+final class ValidatorValidationCheckboxExpression<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
 
-    static <R extends ValidationReference, C extends ValidatorContext<R>> ValidationCheckboxExpressionValidator<R, C> with(final Expression expression) {
-        return new ValidationCheckboxExpressionValidator<>(
+    static <R extends ValidationReference, C extends ValidatorContext<R>> ValidatorValidationCheckboxExpression<R, C> with(final Expression expression) {
+        return new ValidatorValidationCheckboxExpression<>(
             Objects.requireNonNull(expression, "expression")
         );
     }
 
-    private ValidationCheckboxExpressionValidator(final Expression expression) {
+    private ValidatorValidationCheckboxExpression(final Expression expression) {
         super();
         this.expression = expression;
     }
@@ -87,10 +87,10 @@ final class ValidationCheckboxExpressionValidator<R extends ValidationReference,
     @Override
     public boolean equals(final Object other) {
         return this == other ||
-            other instanceof ValidationCheckboxExpressionValidator && this.equals0((ValidationCheckboxExpressionValidator<?, ?>) other);
+            other instanceof ValidatorValidationCheckboxExpression && this.equals0((ValidatorValidationCheckboxExpression<?, ?>) other);
     }
 
-    private boolean equals0(final ValidationCheckboxExpressionValidator<?, ?> other) {
+    private boolean equals0(final ValidatorValidationCheckboxExpression<?, ?> other) {
         return this.expression.equals(other.expression);
     }
 

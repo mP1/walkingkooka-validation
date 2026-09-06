@@ -27,8 +27,8 @@ import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 
 import java.util.Optional;
 
-public final class ValidationCheckboxExpressionValidatorTest implements ValidatorTesting2<ValidationCheckboxExpressionValidator<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    ToStringTesting<ValidationCheckboxExpressionValidator<TestValidationReference, TestValidatorContext>> {
+public final class ValidatorValidationCheckboxExpressionTest implements ValidatorTesting2<ValidatorValidationCheckboxExpression<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
+    ToStringTesting<ValidatorValidationCheckboxExpression<TestValidationReference, TestValidatorContext>> {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("HelloField");
 
@@ -94,8 +94,8 @@ public final class ValidationCheckboxExpressionValidatorTest implements Validato
     }
 
     @Override
-    public ValidationCheckboxExpressionValidator<TestValidationReference, TestValidatorContext> createValidator() {
-        return ValidationCheckboxExpressionValidator.with(
+    public ValidatorValidationCheckboxExpression<TestValidationReference, TestValidatorContext> createValidator() {
+        return ValidatorValidationCheckboxExpression.with(
             Expression.value(CHECKBOX)
         );
     }
@@ -140,7 +140,7 @@ public final class ValidationCheckboxExpressionValidatorTest implements Validato
         );
 
         this.toStringAndCheck(
-            ValidationCheckboxExpressionValidator.with(
+            ValidatorValidationCheckboxExpression.with(
                 expression
             ),
             "1+23"
@@ -150,7 +150,7 @@ public final class ValidationCheckboxExpressionValidatorTest implements Validato
     // class............................................................................................................
 
     @Override
-    public Class<ValidationCheckboxExpressionValidator<TestValidationReference, TestValidatorContext>> type() {
-        return Cast.to(ValidationCheckboxExpressionValidator.class);
+    public Class<ValidatorValidationCheckboxExpression<TestValidationReference, TestValidatorContext>> type() {
+        return Cast.to(ValidatorValidationCheckboxExpression.class);
     }
 }
