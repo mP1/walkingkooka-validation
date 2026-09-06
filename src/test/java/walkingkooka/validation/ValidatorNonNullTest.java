@@ -21,8 +21,8 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.ToStringTesting;
 
-public final class NonNullValidatorTest implements ValidatorTesting2<NonNullValidator<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    ToStringTesting<NonNullValidator<TestValidationReference, TestValidatorContext>> {
+public final class ValidatorNonNullTest implements ValidatorTesting2<ValidatorNonNull<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
+    ToStringTesting<ValidatorNonNull<TestValidationReference, TestValidatorContext>> {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("HelloField");
 
@@ -45,8 +45,8 @@ public final class NonNullValidatorTest implements ValidatorTesting2<NonNullVali
     }
 
     @Override
-    public NonNullValidator<TestValidationReference, TestValidatorContext> createValidator() {
-        return NonNullValidator.instance();
+    public ValidatorNonNull<TestValidationReference, TestValidatorContext> createValidator() {
+        return ValidatorNonNull.instance();
     }
 
     @Override
@@ -65,7 +65,7 @@ public final class NonNullValidatorTest implements ValidatorTesting2<NonNullVali
     @Test
     public void testToString() {
         this.toStringAndCheck(
-            NonNullValidator.instance(),
+            ValidatorNonNull.instance(),
             "NonNull"
         );
     }
@@ -73,7 +73,7 @@ public final class NonNullValidatorTest implements ValidatorTesting2<NonNullVali
     // class............................................................................................................
 
     @Override
-    public Class<NonNullValidator<TestValidationReference, TestValidatorContext>> type() {
-        return Cast.to(NonNullValidator.class);
+    public Class<ValidatorNonNull<TestValidationReference, TestValidatorContext>> type() {
+        return Cast.to(ValidatorNonNull.class);
     }
 }

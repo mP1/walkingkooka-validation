@@ -26,21 +26,21 @@ import java.util.Objects;
 /**
  * A {@link Validator} that adds an error if the value is null.
  */
-final class NonNullValidator<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
+final class ValidatorNonNull<R extends ValidationReference, C extends ValidatorContext<R>> implements Validator<R, C> {
 
     /**
      * Type safe getter
      */
-    static <R extends ValidationReference, C extends ValidatorContext<R>> NonNullValidator<R, C> instance() {
+    static <R extends ValidationReference, C extends ValidatorContext<R>> ValidatorNonNull<R, C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static NonNullValidator<?, ?> INSTANCE = new NonNullValidator<>();
+    private final static ValidatorNonNull<?, ?> INSTANCE = new ValidatorNonNull<>();
 
-    private NonNullValidator() {
+    private ValidatorNonNull() {
         super();
     }
 
