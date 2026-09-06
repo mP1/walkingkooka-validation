@@ -26,8 +26,8 @@ import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
 import walkingkooka.net.AbsoluteUrl;
 
-public final class AbsoluteUrlValidatorTest implements ValidatorTesting2<AbsoluteUrlValidator<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    ToStringTesting<AbsoluteUrlValidator<TestValidationReference, TestValidatorContext>> {
+public final class ValidatorAbsoluteUrlTest implements ValidatorTesting2<ValidatorAbsoluteUrl<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
+    ToStringTesting<ValidatorAbsoluteUrl<TestValidationReference, TestValidatorContext>> {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("HelloField");
 
@@ -88,8 +88,8 @@ public final class AbsoluteUrlValidatorTest implements ValidatorTesting2<Absolut
     }
 
     @Override
-    public AbsoluteUrlValidator<TestValidationReference, TestValidatorContext> createValidator() {
-        return AbsoluteUrlValidator.instance();
+    public ValidatorAbsoluteUrl<TestValidationReference, TestValidatorContext> createValidator() {
+        return ValidatorAbsoluteUrl.instance();
     }
 
     @Override
@@ -126,14 +126,14 @@ public final class AbsoluteUrlValidatorTest implements ValidatorTesting2<Absolut
     public void testToString() {
         this.toStringAndCheck(
             this.createValidator(),
-            AbsoluteUrlValidator.class.getSimpleName()
+            ValidatorAbsoluteUrl.class.getSimpleName()
         );
     }
 
     // class............................................................................................................
 
     @Override
-    public Class<AbsoluteUrlValidator<TestValidationReference, TestValidatorContext>> type() {
-        return Cast.to(AbsoluteUrlValidator.class);
+    public Class<ValidatorAbsoluteUrl<TestValidationReference, TestValidatorContext>> type() {
+        return Cast.to(ValidatorAbsoluteUrl.class);
     }
 }

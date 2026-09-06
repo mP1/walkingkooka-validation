@@ -28,10 +28,10 @@ import java.util.List;
 public final class Validators implements PublicStaticHelper {
 
     /**
-     * {@link AbsoluteUrlValidator}
+     * {@link ValidatorAbsoluteUrl}
      */
     public static <R extends ValidationReference, C extends ValidatorContext<R>> Validator<R, C> absoluteUrl() {
-        return AbsoluteUrlValidator.instance();
+        return ValidatorAbsoluteUrl.instance();
     }
 
     /**
