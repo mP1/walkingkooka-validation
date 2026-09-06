@@ -41,5 +41,5 @@ which is used by the Spreadsheet to display a drop down of choices.
 - [email-address](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/EmailAddressValidator.java)
 - [expression](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ValidatorExpression.java)
 - [non-null](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/NonNullValidator.java)
-- [text-length](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/TextLengthValidator.java)
+- [text-length](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/ValidatorTextLength.java)
 - [text-mask](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/TextMaskValidator.java)
