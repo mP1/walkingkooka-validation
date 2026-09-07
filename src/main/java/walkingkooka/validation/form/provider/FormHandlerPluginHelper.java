@@ -129,7 +129,7 @@ final class FormHandlerPluginHelper implements PluginHelper<FormHandlerName,
 
     @Override
     public FormHandlerAliasSet aliasSet(final SortedSet<FormHandlerAlias> aliases) {
-        return FormHandlerAliasSet.with(aliases);
+        return FormHandlerAliasSet.EMPTY.setElements(aliases);
     }
 
     @Override

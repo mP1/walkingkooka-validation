@@ -60,13 +60,6 @@ public final class FormHandlerAliasSet extends AbstractSet<FormHandlerAlias>
      */
     public final static CharacterConstant SEPARATOR = PluginAliasSet.SEPARATOR;
 
-    /**
-     * Factory that creates {@link FormHandlerAliasSet} with the given aliases.
-     */
-    public static FormHandlerAliasSet with(final SortedSet<FormHandlerAlias> aliases) {
-        return EMPTY.setElements(aliases);
-    }
-
     public static FormHandlerAliasSet parse(final String text) {
         return new FormHandlerAliasSet(
             PluginAliasSet.parse(
