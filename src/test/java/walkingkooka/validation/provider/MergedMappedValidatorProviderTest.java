@@ -159,7 +159,7 @@ public final class MergedMappedValidatorProviderTest implements ValidatorProvide
     @Override
     public MergedMappedValidatorProvider createValidatorProvider() {
         return MergedMappedValidatorProvider.with(
-            ValidatorInfoSet.with(
+            ValidatorInfoSet.EMPTY.setElements(
                 Sets.of(
                     ValidatorInfo.with(
                         RENAMED_URL,
@@ -188,7 +188,7 @@ public final class MergedMappedValidatorProviderTest implements ValidatorProvide
 
                 @Override
                 public ValidatorInfoSet validatorInfos() {
-                    return ValidatorInfoSet.with(
+                    return ValidatorInfoSet.EMPTY.setElements(
                         Sets.of(
                             ValidatorInfo.with(
                                 RENAMED_URL,

@@ -49,7 +49,7 @@ final class ValidationValidatorProvider implements ValidatorProvider,
     private ValidationValidatorProvider() {
         super();
 
-        this.infos = ValidatorInfoSet.with(
+        this.infos = ValidatorInfoSet.EMPTY.setElements(
             Sets.readOnly(
                 ValidatorName.NAME_TO_FACTORY.keySet()
                     .stream()

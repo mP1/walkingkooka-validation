@@ -240,7 +240,7 @@ public interface ValidatorProviderTesting<T extends ValidatorProvider> extends P
                                         final ValidatorInfo... expected) {
         this.validatorInfosAndCheck(
             provider,
-            ValidatorInfoSet.with(
+            ValidatorInfoSet.EMPTY.setElements(
                 Sets.of(
                     expected
                 )

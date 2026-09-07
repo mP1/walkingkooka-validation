@@ -222,7 +222,7 @@ public final class AliasesValidatorProviderTest implements ValidatorProviderTest
 
                 @Override
                 public ValidatorInfoSet validatorInfos() {
-                    return ValidatorInfoSet.with(
+                    return ValidatorInfoSet.EMPTY.setElements(
                         Sets.of(
                             INFO1,
                             INFO2,
