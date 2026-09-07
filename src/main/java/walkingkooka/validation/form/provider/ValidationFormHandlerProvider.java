@@ -83,7 +83,7 @@ final class ValidationFormHandlerProvider implements FormHandlerProvider,
         return INFOS;
     }
 
-    private final static FormHandlerInfoSet INFOS = FormHandlerInfoSet.with(
+    private final static FormHandlerInfoSet INFOS = FormHandlerInfoSet.EMPTY.setElements(
         Sets.of(
             formHandlerInfo(FormHandlerName.BASIC)
         )

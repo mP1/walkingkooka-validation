@@ -37,7 +37,7 @@ public final class FormHandlerInfoSetTest implements PluginInfoSetLikeTesting<Fo
 
         assertSame(
             set,
-            FormHandlerInfoSet.with(set)
+            FormHandlerInfoSet.EMPTY.setElements(set)
         );
     }
 
@@ -67,7 +67,7 @@ public final class FormHandlerInfoSetTest implements PluginInfoSetLikeTesting<Fo
 
     @Override
     public FormHandlerInfoSet createSet() {
-        return FormHandlerInfoSet.with(
+        return FormHandlerInfoSet.EMPTY.setElements(
             Sets.of(
                 this.info()
             )
@@ -107,7 +107,7 @@ public final class FormHandlerInfoSetTest implements PluginInfoSetLikeTesting<Fo
     @Test
     public void testMarshallNotEmpty2() {
         this.marshallAndCheck(
-            FormHandlerInfoSet.with(
+            FormHandlerInfoSet.EMPTY.setElements(
                 Sets.of(
                     FormHandlerInfo.with(
                         Url.parseAbsolute("https://example.com/test123"),
@@ -134,7 +134,7 @@ public final class FormHandlerInfoSetTest implements PluginInfoSetLikeTesting<Fo
 
     @Override
     public FormHandlerInfoSet createJsonNodeMarshallingValue() {
-        return FormHandlerInfoSet.with(
+        return FormHandlerInfoSet.EMPTY.setElements(
             Sets.of(
                 FormHandlerInfo.with(
                     Url.parseAbsolute("https://example.com/test111"),
