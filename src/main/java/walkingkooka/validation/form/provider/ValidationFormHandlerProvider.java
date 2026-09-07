@@ -64,15 +64,11 @@ final class ValidationFormHandlerProvider implements FormHandlerProvider,
     private <R extends ValidationReference, S, C extends FormHandlerContext<R, S>> FormHandler<R, S, C> formHandler0(final FormHandlerName name,
                                                                                                                      final List<?> values,
                                                                                                                      final ProviderContext context) {
-        final int count = values.size();
-
         final FormHandler<R, S, C> formHandler;
 
         switch (name.value()) {
             case FormHandlerName.BASIC_STRING:
-                if (0 != count) {
-                    throw new IllegalArgumentException("Got " + count + " expected 0 values");
-                }
+                this.noParameterCheck(values);
                 formHandler = FormHandlers.basic();
                 break;
             default:
