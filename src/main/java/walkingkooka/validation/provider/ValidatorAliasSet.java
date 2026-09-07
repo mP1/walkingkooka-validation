@@ -60,15 +60,6 @@ public final class ValidatorAliasSet extends AbstractSet<ValidatorAlias>
      */
     public final static CharacterConstant SEPARATOR = PluginAliasSet.SEPARATOR;
 
-    /**
-     * Factory that creates {@link ValidatorAliasSet} with the given aliases.
-     */
-    public static ValidatorAliasSet with(final SortedSet<ValidatorAlias> aliases) {
-        return aliases instanceof ValidatorAliasSet ?
-            (ValidatorAliasSet) aliases :
-            EMPTY.setElements(aliases);
-    }
-
     public static ValidatorAliasSet parse(final String text) {
         return new ValidatorAliasSet(
             PluginAliasSet.parse(
