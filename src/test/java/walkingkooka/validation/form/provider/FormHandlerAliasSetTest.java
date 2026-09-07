@@ -27,7 +27,6 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FormHandlerAliasSetTest implements PluginAliasSetLikeTesting<FormHandlerName,
     FormHandlerInfo,
@@ -38,34 +37,6 @@ public final class FormHandlerAliasSetTest implements PluginAliasSetLikeTesting<
     HashCodeEqualsDefinedTesting2<FormHandlerAliasSet>,
     ToStringTesting<FormHandlerAliasSet>,
     JsonNodeMarshallerTesting<FormHandlerAliasSet> {
-
-    // with.............................................................................................................
-
-    @Test
-    public void testWithNullFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> FormHandlerAliasSet.with(null)
-        );
-    }
-
-    @Test
-    public void testWithEmpty() {
-        assertSame(
-            FormHandlerAliasSet.EMPTY,
-            FormHandlerAliasSet.with(SortedSets.empty())
-        );
-    }
-
-    @Test
-    public void testWithFormHandlerAliasSetDoesntWrap() {
-        final FormHandlerAliasSet set = this.createSet();
-
-        assertSame(
-            set,
-            FormHandlerAliasSet.with(set)
-        );
-    }
 
     // name.............................................................................................................
 
@@ -103,6 +74,14 @@ public final class FormHandlerAliasSetTest implements PluginAliasSetLikeTesting<
             this.createSet(),
             FormHandlerName.with("custom-alias"),
             FormHandlerSelector.parse("custom(1)")
+        );
+    }
+
+    @Test
+    public void testSetElementsWithEmpty() {
+        assertSame(
+            FormHandlerAliasSet.EMPTY,
+            FormHandlerAliasSet.EMPTY.setElements(SortedSets.empty())
         );
     }
 
