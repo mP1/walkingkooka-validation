@@ -27,7 +27,6 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ValidatorAliasSetTest implements PluginAliasSetLikeTesting<ValidatorName,
     ValidatorInfo,
@@ -38,34 +37,6 @@ public final class ValidatorAliasSetTest implements PluginAliasSetLikeTesting<Va
     HashCodeEqualsDefinedTesting2<ValidatorAliasSet>,
     ToStringTesting<ValidatorAliasSet>,
     JsonNodeMarshallerTesting<ValidatorAliasSet> {
-
-    // with.............................................................................................................
-
-    @Test
-    public void testWithNullFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> ValidatorAliasSet.with(null)
-        );
-    }
-
-    @Test
-    public void testWithEmpty() {
-        assertSame(
-            ValidatorAliasSet.EMPTY,
-            ValidatorAliasSet.with(SortedSets.empty())
-        );
-    }
-
-    @Test
-    public void testWithValidatorAliasSetDoesntWrap() {
-        final ValidatorAliasSet set = this.createSet();
-
-        assertSame(
-            set,
-            ValidatorAliasSet.with(set)
-        );
-    }
 
     // name.............................................................................................................
 
@@ -103,6 +74,24 @@ public final class ValidatorAliasSetTest implements PluginAliasSetLikeTesting<Va
             this.createSet(),
             ValidatorName.with("custom-alias"),
             ValidatorSelector.parse("custom(1)")
+        );
+    }
+
+    @Test
+    public void testSetElementsWithEmpty() {
+        assertSame(
+            ValidatorAliasSet.EMPTY,
+            ValidatorAliasSet.EMPTY.setElements(SortedSets.empty())
+        );
+    }
+
+    @Test
+    public void testSetElementsDoesntWrap() {
+        final ValidatorAliasSet set = this.createSet();
+
+        assertSame(
+            set,
+            ValidatorAliasSet.EMPTY.setElements(set)
         );
     }
 

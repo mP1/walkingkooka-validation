@@ -129,7 +129,7 @@ final class ValidatorPluginHelper implements PluginHelper<ValidatorName,
 
     @Override
     public ValidatorAliasSet aliasSet(final SortedSet<ValidatorAlias> aliases) {
-        return ValidatorAliasSet.with(aliases);
+        return ValidatorAliasSet.EMPTY.setElements(aliases);
     }
 
     @Override
