@@ -160,7 +160,7 @@ public final class MergedMappedFormHandlerProviderTest implements FormHandlerPro
     @Override
     public MergedMappedFormHandlerProvider createFormHandlerProvider() {
         return MergedMappedFormHandlerProvider.with(
-            FormHandlerInfoSet.with(
+            FormHandlerInfoSet.EMPTY.setElements(
                 Sets.of(
                     FormHandlerInfo.with(
                         RENAMED_URL,
@@ -189,7 +189,7 @@ public final class MergedMappedFormHandlerProviderTest implements FormHandlerPro
 
                 @Override
                 public FormHandlerInfoSet formHandlerInfos() {
-                    return FormHandlerInfoSet.with(
+                    return FormHandlerInfoSet.EMPTY.setElements(
                         Sets.of(
                             FormHandlerInfo.with(
                                 RENAMED_URL,

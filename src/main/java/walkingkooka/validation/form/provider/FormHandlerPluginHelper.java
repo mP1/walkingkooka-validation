@@ -103,7 +103,7 @@ final class FormHandlerPluginHelper implements PluginHelper<FormHandlerName,
 
     @Override
     public FormHandlerInfoSet infoSet(final Set<FormHandlerInfo> infos) {
-        return FormHandlerInfoSet.with(infos);
+        return FormHandlerInfoSet.EMPTY.setElements(infos);
     }
 
     @Override

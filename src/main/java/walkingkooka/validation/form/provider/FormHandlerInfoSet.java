@@ -30,7 +30,6 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -52,23 +51,6 @@ public final class FormHandlerInfoSet extends AbstractSet<FormHandlerInfo> imple
                 FormHandlerInfo::parse
             )
         );
-    }
-
-    public static FormHandlerInfoSet with(final Set<FormHandlerInfo> infos) {
-        FormHandlerInfoSet with;
-
-        if (infos instanceof FormHandlerInfoSet) {
-            with = (FormHandlerInfoSet) infos;
-        } else {
-            final PluginInfoSet<FormHandlerName, FormHandlerInfo> pluginInfoSet = PluginInfoSet.with(
-                Objects.requireNonNull(infos, "infos")
-            );
-            with = pluginInfoSet.isEmpty() ?
-                EMPTY :
-                new FormHandlerInfoSet(pluginInfoSet);
-        }
-
-        return with;
     }
 
     private FormHandlerInfoSet(final PluginInfoSet<FormHandlerName, FormHandlerInfo> pluginInfoSet) {
@@ -167,7 +149,7 @@ public final class FormHandlerInfoSet extends AbstractSet<FormHandlerInfo> imple
 
     @Override
     public FormHandlerInfoSet setElements(final Collection<FormHandlerInfo> infos) {
-        final FormHandlerInfoSet after;
+        FormHandlerInfoSet after;
 
         if (infos instanceof FormHandlerInfoSet) {
             after = (FormHandlerInfoSet) infos;
@@ -175,7 +157,7 @@ public final class FormHandlerInfoSet extends AbstractSet<FormHandlerInfo> imple
             after = new FormHandlerInfoSet(
                 this.pluginInfoSet.setElements(infos)
             );
-            return this.pluginInfoSet.equals(infos) ?
+            after = this.equals(after) ?
                 this :
                 after;
 
@@ -231,7 +213,7 @@ public final class FormHandlerInfoSet extends AbstractSet<FormHandlerInfo> imple
     // @VisibleForTesting
     static FormHandlerInfoSet unmarshall(final JsonNode node,
                                          final JsonNodeUnmarshallContext context) {
-        return with(
+        return EMPTY.setElements(
             context.unmarshallSet(
                 node,
                 FormHandlerInfo.class

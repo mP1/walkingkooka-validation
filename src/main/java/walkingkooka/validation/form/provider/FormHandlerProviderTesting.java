@@ -91,7 +91,7 @@ public interface FormHandlerProviderTesting extends TreePrintableTesting {
                                           final FormHandlerInfo... expected) {
         this.formHandlerInfosAndCheck(
             provider,
-            FormHandlerInfoSet.with(
+            FormHandlerInfoSet.EMPTY.setElements(
                 Sets.of(
                     expected
                 )

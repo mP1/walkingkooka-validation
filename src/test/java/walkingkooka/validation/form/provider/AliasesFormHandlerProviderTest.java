@@ -223,7 +223,7 @@ public final class AliasesFormHandlerProviderTest implements FormHandlerProvider
 
                 @Override
                 public FormHandlerInfoSet formHandlerInfos() {
-                    return FormHandlerInfoSet.with(
+                    return FormHandlerInfoSet.EMPTY.setElements(
                         Sets.of(
                             INFO1,
                             INFO2,
