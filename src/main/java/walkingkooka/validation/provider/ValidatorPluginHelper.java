@@ -103,7 +103,7 @@ final class ValidatorPluginHelper implements PluginHelper<ValidatorName,
 
     @Override
     public ValidatorInfoSet infoSet(final Set<ValidatorInfo> infos) {
-        return ValidatorInfoSet.with(infos);
+        return ValidatorInfoSet.EMPTY.setElements(infos);
     }
 
     @Override

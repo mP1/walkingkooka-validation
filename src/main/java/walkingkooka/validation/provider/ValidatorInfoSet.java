@@ -30,7 +30,6 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -52,23 +51,6 @@ public final class ValidatorInfoSet extends AbstractSet<ValidatorInfo> implement
                 ValidatorInfo::parse
             )
         );
-    }
-
-    public static ValidatorInfoSet with(final Collection<ValidatorInfo> infos) {
-        ValidatorInfoSet with;
-
-        if (infos instanceof ValidatorInfoSet) {
-            with = (ValidatorInfoSet) infos;
-        } else {
-            final PluginInfoSet<ValidatorName, ValidatorInfo> pluginInfoSet = PluginInfoSet.with(
-                Objects.requireNonNull(infos, "infos")
-            );
-            with = pluginInfoSet.isEmpty() ?
-                EMPTY :
-                new ValidatorInfoSet(pluginInfoSet);
-        }
-
-        return with;
     }
 
     private ValidatorInfoSet(final PluginInfoSet<ValidatorName, ValidatorInfo> pluginInfoSet) {
@@ -167,7 +149,7 @@ public final class ValidatorInfoSet extends AbstractSet<ValidatorInfo> implement
 
     @Override
     public ValidatorInfoSet setElements(final Collection<ValidatorInfo> infos) {
-        final ValidatorInfoSet after;
+        ValidatorInfoSet after;
 
         if (infos instanceof ValidatorInfoSet) {
             after = (ValidatorInfoSet) infos;
@@ -175,7 +157,7 @@ public final class ValidatorInfoSet extends AbstractSet<ValidatorInfo> implement
             after = new ValidatorInfoSet(
                 this.pluginInfoSet.setElements(infos)
             );
-            return this.pluginInfoSet.equals(infos) ?
+            after = this.equals(after) ?
                 this :
                 after;
 
@@ -231,7 +213,7 @@ public final class ValidatorInfoSet extends AbstractSet<ValidatorInfo> implement
     // @VisibleForTesting
     static ValidatorInfoSet unmarshall(final JsonNode node,
                                        final JsonNodeUnmarshallContext context) {
-        return with(
+        return EMPTY.setElements(
             context.unmarshallSet(
                 node,
                 ValidatorInfo.class

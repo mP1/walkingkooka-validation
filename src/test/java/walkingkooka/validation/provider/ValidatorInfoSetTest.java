@@ -37,7 +37,7 @@ public final class ValidatorInfoSetTest implements PluginInfoSetLikeTesting<Vali
 
         assertSame(
             set,
-            ValidatorInfoSet.with(set)
+            ValidatorInfoSet.EMPTY.setElements(set)
         );
     }
 
@@ -67,7 +67,7 @@ public final class ValidatorInfoSetTest implements PluginInfoSetLikeTesting<Vali
 
     @Override
     public ValidatorInfoSet createSet() {
-        return ValidatorInfoSet.with(
+        return ValidatorInfoSet.EMPTY.setElements(
             Sets.of(
                 this.info()
             )
@@ -107,7 +107,7 @@ public final class ValidatorInfoSetTest implements PluginInfoSetLikeTesting<Vali
     @Test
     public void testMarshallNotEmpty2() {
         this.marshallAndCheck(
-            ValidatorInfoSet.with(
+            ValidatorInfoSet.EMPTY.setElements(
                 Sets.of(
                     ValidatorInfo.with(
                         Url.parseAbsolute("https://example.com/test123"),
@@ -134,7 +134,7 @@ public final class ValidatorInfoSetTest implements PluginInfoSetLikeTesting<Vali
 
     @Override
     public ValidatorInfoSet createJsonNodeMarshallingValue() {
-        return ValidatorInfoSet.with(
+        return ValidatorInfoSet.EMPTY.setElements(
             Sets.of(
                 ValidatorInfo.with(
                     Url.parseAbsolute("https://example.com/test111"),

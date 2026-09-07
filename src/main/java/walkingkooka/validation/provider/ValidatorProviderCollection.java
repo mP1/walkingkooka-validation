@@ -96,7 +96,7 @@ final class ValidatorProviderCollection implements ValidatorProvider {
 
     @Override
     public ValidatorInfoSet validatorInfos() {
-        return ValidatorInfoSet.with(
+        return ValidatorInfoSet.EMPTY.setElements(
             this.providers.infos()
         );
     }
