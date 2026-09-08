@@ -27,8 +27,6 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.SortedSets;
 import walkingkooka.net.header.HasContentTypeTesting;
 import walkingkooka.net.http.server.hateos.HateosResourceTesting2;
-import walkingkooka.reflect.ClassTesting2;
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
@@ -47,7 +45,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class FormTest implements HateosResourceTesting2<Form<TestValidationReference>, FormName>,
-    ClassTesting2<Form<TestValidationReference>>,
     HasContentTypeTesting,
     HashCodeEqualsDefinedTesting2<Form<TestValidationReference>>,
     ToStringTesting<Form<TestValidationReference>>,
@@ -96,16 +93,6 @@ public final class FormTest implements HateosResourceTesting2<Form<TestValidatio
         );
 
     // with.............................................................................................................
-
-    @Override
-    public void testAllConstructorsVisibility() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testIfClassIsFinalIfAllConstructorsArePrivate() {
-        throw new UnsupportedOperationException();
-    }
 
     @Test
     public void testWithNullNameFails() {
@@ -609,10 +596,5 @@ public final class FormTest implements HateosResourceTesting2<Form<TestValidatio
     @Override
     public Class<Form<TestValidationReference>> type() {
         return Cast.to(Form.class);
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 }
