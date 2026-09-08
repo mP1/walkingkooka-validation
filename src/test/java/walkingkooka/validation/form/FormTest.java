@@ -26,7 +26,7 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.SortedSets;
 import walkingkooka.net.header.HasContentTypeTesting;
-import walkingkooka.net.http.server.hateos.HateosResourceTesting;
+import walkingkooka.net.http.server.hateos.HateosResourceTesting2;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.text.printer.TreePrintableTesting;
@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class FormTest implements HateosResourceTesting<Form<TestValidationReference>, FormName>,
+public final class FormTest implements HateosResourceTesting2<Form<TestValidationReference>, FormName>,
     ClassTesting2<Form<TestValidationReference>>,
     HasContentTypeTesting,
     HashCodeEqualsDefinedTesting2<Form<TestValidationReference>>,
