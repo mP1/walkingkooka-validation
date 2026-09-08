@@ -157,9 +157,11 @@ public final class FormHandlerInfoSet extends AbstractSet<FormHandlerInfo> imple
             after = new FormHandlerInfoSet(
                 this.pluginInfoSet.setElements(infos)
             );
-            after = this.equals(after) ?
-                this :
-                after;
+            after = after.isEmpty() ?
+                EMPTY :
+                this.equals(after) ?
+                    this :
+                    after;
 
         }
 
