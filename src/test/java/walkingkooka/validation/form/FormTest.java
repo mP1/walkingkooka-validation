@@ -27,9 +27,7 @@ import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.SortedSets;
 import walkingkooka.net.header.HasContentTypeTesting;
 import walkingkooka.net.http.server.hateos.HateosResourceTesting2;
-import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
-import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidationError;
@@ -48,8 +46,6 @@ public final class FormTest implements HateosResourceTesting2<Form<TestValidatio
     HasContentTypeTesting,
     HashCodeEqualsDefinedTesting2<Form<TestValidationReference>>,
     ToStringTesting<Form<TestValidationReference>>,
-    JsonNodeMarshallerTesting<Form<TestValidationReference>>,
-    TreePrintableTesting,
     IteratorTesting {
 
     private final static FormName NAME = FormName.with("name123");
