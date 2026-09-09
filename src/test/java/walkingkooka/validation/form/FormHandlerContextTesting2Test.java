@@ -117,6 +117,11 @@ public final class FormHandlerContextTesting2Test implements FormHandlerContextT
         return TestFormHandlerContext.class;
     }
 
+    @Override
+    public void testTestNaming() {
+        throw new UnsupportedOperationException();
+    }
+
     static class TestFormHandlerContext implements FormHandlerContext<TestValidationReference, Void> {
 
         @Override

@@ -115,6 +115,11 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
         return new TestValidatorContext();
     }
 
+    @Override
+    public void testTestNaming() {
+        throw new UnsupportedOperationException();
+    }
+
     // HasEnvironmentContext............................................................................................
 
     @Test

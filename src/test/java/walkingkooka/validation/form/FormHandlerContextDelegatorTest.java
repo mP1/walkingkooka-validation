@@ -127,6 +127,11 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
         return TestFormHandlerContextDelegator.class;
     }
 
+    @Override
+    public void testTestNaming() {
+        throw new UnsupportedOperationException();
+    }
+
     final static class TestFormHandlerContextDelegator implements FormHandlerContextDelegator<TestValidationReference, Void> {
 
         @Override

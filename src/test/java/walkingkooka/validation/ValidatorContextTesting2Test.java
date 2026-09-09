@@ -73,6 +73,11 @@ public final class ValidatorContextTesting2Test implements ValidatorContextTesti
         return new TestValidatorContext();
     }
 
+    @Override
+    public void testTestNaming() {
+        throw new UnsupportedOperationException();
+    }
+
     // HasEnvironmentContext............................................................................................
 
     @Test

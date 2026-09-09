@@ -74,6 +74,11 @@ public final class ValidatorExpressionEvaluationContextTesting2Test implements V
         return new TestValidatorExpressionEvaluationContext();
     }
 
+    @Override
+    public void testTestNaming() {
+        throw new UnsupportedOperationException();
+    }
+
     // HasEnvironmentContext............................................................................................
 
     @Test
