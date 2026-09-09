@@ -148,6 +148,11 @@ public final class FormHandlerExpressionEvaluationContextTesting2Test implements
         return new TestFormHandlerExpressionEvaluationContext();
     }
 
+    @Override
+    public void testTestNaming() {
+        throw new UnsupportedOperationException();
+    }
+
     // DecimalNumberContext..............................................................................................
 
     @Override
