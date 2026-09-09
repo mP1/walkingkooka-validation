@@ -17,7 +17,6 @@
 
 package walkingkooka.validation.form;
 
-import walkingkooka.Cast;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.environment.EnvironmentWatcher;
@@ -29,7 +28,6 @@ import walkingkooka.validation.ValidatorContext;
 import walkingkooka.validation.form.FormHandlerContextDelegatorTest.TestFormHandlerContextDelegator;
 
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
@@ -37,31 +35,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 public final class FormHandlerContextDelegatorTest implements FormHandlerContextTesting2<TestFormHandlerContextDelegator, TestValidationReference, Void> {
-
-    @Override
-    public void testEnvironmentValueLineEndingEqualsLineEnding() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testEnvironmentValueLocaleEqualsLocale() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testEnvironmentValueNowEqualsNow() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testEnvironmentValueUserEqualsUser() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testRemoveEnvironmentValueWithNowFails() {
-        throw new UnsupportedOperationException();
-    }
 
     @Override
     public void testSetEnvironmentValueWithNowFails() {
@@ -172,95 +145,69 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
 
                 @Override
                 public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
-                    Objects.requireNonNull(name, "name");
-
-                    return Cast.to(
-                        CHARSET.equals(name) ?
-                            Optional.of(
-                                this.charset()
-                            ) :
-                            CURRENCY.equals(name) ?
-                                Optional.of(
-                                    this.currency()
-                                ) :
-                                INDENTATION.equals(name) ?
-                                    Optional.of(
-                                        this.indentation()
-                                    ) :
-                                    LOCALE.equals(name) ?
-                                        Optional.of(
-                                            this.locale()
-                                        ) :
-                                        LINE_ENDING.equals(name) ?
-                                            Optional.of(
-                                                this.lineEnding()
-                                            ) :
-                                            USER.equals(name) ?
-                                                this.user() :
-                                                Optional.empty()
-                    );
+                    return this.environmentContext.environmentValue(name);
                 }
 
                 @Override
                 public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
                                                     final T value) {
-                    Objects.requireNonNull(name, "name");
-                    Objects.requireNonNull(value, "value");
-                    throw new UnsupportedOperationException();
+                    this.environmentContext.setEnvironmentValue(
+                        name,
+                        value
+                    );
                 }
 
                 @Override
                 public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
-                    Objects.requireNonNull(name, "name");
-                    throw new UnsupportedOperationException();
+                    this.environmentContext.removeEnvironmentValue(name);
                 }
 
                 @Override
                 public Charset charset() {
-                    return StandardCharsets.UTF_8;
+                    return this.environmentContext.charset();
                 }
 
                 @Override
                 public Currency currency() {
-                    return Currency.getInstance("AUD");
+                    return this.environmentContext.currency();
                 }
 
                 @Override
                 public Indentation indentation() {
-                    return FormHandlerContextDelegatorTest.INDENTATION;
+                    return this.environmentContext.indentation();
                 }
 
                 @Override
                 public LineEnding lineEnding() {
-                    return LineEnding.NL;
+                    return this.environmentContext.lineEnding();
                 }
 
                 @Override
                 public Locale locale() {
-                    return Locale.ENGLISH;
+                    return this.environmentContext.locale();
                 }
 
                 @Override
                 public void setLocale(final Locale locale) {
-                    Objects.requireNonNull(locale, "locale");
-                    throw new UnsupportedOperationException();
+                    this.environmentContext.setLocale(locale);
                 }
 
                 @Override
                 public Optional<EmailAddress> user() {
-                    return OPTIONAL_USER;
+                    return this.environmentContext.user();
                 }
 
                 @Override
                 public void setUser(final Optional<EmailAddress> user) {
-                    Objects.requireNonNull(user, "user");
-                    throw new UnsupportedOperationException();
+                    this.environmentContext.setUser(user);
                 }
 
                 @Override
                 public EnvironmentValueName<?> parseEnvironmentValueName(final String name) {
-                    return ENVIRONMENT_CONTEXT.parseEnvironmentValueName(name);
+                    return this.environmentContext.parseEnvironmentValueName(name);
                 }
+
+                private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
             };
         }
 
