@@ -25,6 +25,7 @@ import walkingkooka.collect.iterator.IteratorTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.SortedSets;
+import walkingkooka.naming.HasNameTesting;
 import walkingkooka.net.header.HasContentTypeTesting;
 import walkingkooka.net.http.server.hateos.HateosResourceTesting2;
 import walkingkooka.tree.json.JsonNode;
@@ -45,6 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class FormTest implements HateosResourceTesting2<Form<TestValidationReference>, FormName>,
     HasContentTypeTesting,
     HashCodeEqualsDefinedTesting2<Form<TestValidationReference>>,
+    HasNameTesting,
     ToStringTesting<Form<TestValidationReference>>,
     IteratorTesting {
 
@@ -144,14 +146,6 @@ public final class FormTest implements HateosResourceTesting2<Form<TestValidatio
         this.nameAndCheck(
             form,
             NAME
-        );
-    }
-
-    private void nameAndCheck(final Form<TestValidationReference> form,
-                              final FormName name) {
-        this.checkEquals(
-            name,
-            form.name()
         );
     }
 

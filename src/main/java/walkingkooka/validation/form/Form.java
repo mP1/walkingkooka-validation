@@ -20,6 +20,7 @@ package walkingkooka.validation.form;
 import walkingkooka.Cast;
 import walkingkooka.ToStringBuilder;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.naming.HasName;
 import walkingkooka.net.header.HasContentType;
 import walkingkooka.net.header.MediaType;
 import walkingkooka.net.http.server.hateos.HateosResource;
@@ -48,6 +49,7 @@ import java.util.Optional;
  */
 public final class Form<T extends ValidationReference> implements HasContentType,
     HateosResource<FormName>,
+    HasName<FormName>,
     TreePrintable{
 
     /**
@@ -91,6 +93,7 @@ public final class Form<T extends ValidationReference> implements HasContentType
 
     // name.............................................................................................................
 
+    @Override
     public FormName name() {
         return this.name;
     }
