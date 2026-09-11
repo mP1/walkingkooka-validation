@@ -19,28 +19,22 @@ package walkingkooka.validation.form;
 
 import walkingkooka.Either;
 import walkingkooka.environment.EnvironmentContext;
-import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.environment.EnvironmentWatcher;
-import walkingkooka.net.email.EmailAddress;
-import walkingkooka.text.Indentation;
-import walkingkooka.text.LineEnding;
+import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidatorContext;
 import walkingkooka.validation.form.FormHandlerContextTesting2Test.TestFormHandlerContext;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.Comparator;
-import java.util.Currency;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 public final class FormHandlerContextTesting2Test implements FormHandlerContextTesting2<TestFormHandlerContext, TestValidationReference, Void> {
+
+    @Override
+    public void testEnvironmentContext() {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
     public void testEnvironmentValueLineEndingEqualsLineEnding() {
@@ -122,7 +116,8 @@ public final class FormHandlerContextTesting2Test implements FormHandlerContextT
         throw new UnsupportedOperationException();
     }
 
-    static class TestFormHandlerContext implements FormHandlerContext<TestValidationReference, Void> {
+    static class TestFormHandlerContext implements FormHandlerContext<TestValidationReference, Void>,
+        EnvironmentContextDelegator {
 
         @Override
         public Form<TestValidationReference> form() {
@@ -178,132 +173,14 @@ public final class FormHandlerContextTesting2Test implements FormHandlerContextT
             return new TestFormHandlerContext();
         }
 
-        @Override
-        public <T> Optional<T> environmentValue(final EnvironmentValueName<T> environmentValueName) {
-            Objects.requireNonNull(environmentValueName, "environmentValueName");
-
-            throw new UnsupportedOperationException();
-        }
+        // EnvironmentContextDelegator..................................................................................
 
         @Override
-        public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
-                                                              final T value) {
-            Objects.requireNonNull(name, "name");
-            Objects.requireNonNull(value, "value");
-            throw new UnsupportedOperationException();
+        public EnvironmentContext environmentContext() {
+            return this.environmentContext;
         }
 
-        @Override
-        public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
-            Objects.requireNonNull(name, "name");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Set<EnvironmentValueName<?>> environmentValueNames() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Charset charset() {
-            return StandardCharsets.UTF_8;
-        }
-
-        @Override
-        public void setCharset(final Charset charset) {
-            Objects.requireNonNull(charset, "charset");
-            throw new UnsupportedOperationException();
-        }
-        
-        @Override
-        public Currency currency() {
-            return Currency.getInstance("AUD");
-        }
-
-        @Override
-        public void setCurrency(final Currency currency) {
-            Objects.requireNonNull(currency, "currency");
-            throw new UnsupportedOperationException();
-        }
-        
-        @Override
-        public Indentation indentation() {
-            return Indentation.SPACES2;
-        }
-
-        @Override
-        public void setIndentation(final Indentation indentation) {
-            Objects.requireNonNull(indentation, "indentation");
-            throw new UnsupportedOperationException();
-        }
-        
-        @Override
-        public LineEnding lineEnding() {
-            return LineEnding.NL;
-        }
-
-        @Override
-        public void setLineEnding(final LineEnding lineEnding) {
-            Objects.requireNonNull(lineEnding, "lineEnding");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Locale locale() {
-            return Locale.ENGLISH;
-        }
-
-        @Override
-        public void setLocale(final Locale locale) {
-            Objects.requireNonNull(locale, "locale");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public LocalDateTime now() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public ZoneOffset timeOffset() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void setTimeOffset(final ZoneOffset timeOffset) {
-            Objects.requireNonNull(timeOffset, "timeOffset");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Optional<EmailAddress> user() {
-            return Optional.empty();
-        }
-
-        @Override
-        public void setUser(final Optional<EmailAddress> user) {
-            Objects.requireNonNull(user, "user");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Runnable addEnvironmentWatcher(final EnvironmentWatcher watcher) {
-            Objects.requireNonNull(watcher, "watcher");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Runnable addEnvironmentWatcherOnce(final EnvironmentWatcher watcher) {
-            Objects.requireNonNull(watcher, "watcher");
-            throw new UnsupportedOperationException();
-        }
-
-        // CanParseEnvironmentValueName.....................................................................................
-
-        @Override
-        public EnvironmentValueName<?> parseEnvironmentValueName(final String name) {
-            return ENVIRONMENT_CONTEXT.parseEnvironmentValueName(name);
-        }
+        private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
 
         @Override
         public String toString() {

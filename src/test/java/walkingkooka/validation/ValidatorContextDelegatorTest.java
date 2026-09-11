@@ -101,6 +101,11 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
     }
 
     @Override
+    public void testSetLoggingLevelWithDifferentAndWatcher() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void testSetTimeOffsetWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
