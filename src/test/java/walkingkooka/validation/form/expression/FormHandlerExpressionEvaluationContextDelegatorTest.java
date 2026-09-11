@@ -24,6 +24,7 @@ import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.environment.EnvironmentWatcher;
 import walkingkooka.locale.LocaleContexts;
 import walkingkooka.locale.LocaleLanguageTag;
+import walkingkooka.logging.LoggingLevel;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.net.email.EmailAddress;
@@ -89,6 +90,11 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
     }
 
     @Override
+    public void testLogWithNullLoggingLevelFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void testRemoveEnvironmentValueWithNowFails() {
         throw new UnsupportedOperationException();
     }
@@ -120,6 +126,11 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
 
     @Override
     public void testSetLocaleWithDifferentAndWatcher() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetLoggingLevelWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
 
@@ -339,6 +350,16 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
             @Override
             public void setLineEnding(final LineEnding lineEnding) {
                 this.environmentContext.setLineEnding(lineEnding);
+            }
+
+            @Override
+            public LoggingLevel loggingLevel() {
+                return this.environmentContext.loggingLevel();
+            }
+
+            @Override
+            public void setLoggingLevel(final LoggingLevel loggingLevel) {
+                this.environmentContext.setLoggingLevel(loggingLevel);
             }
 
             @Override

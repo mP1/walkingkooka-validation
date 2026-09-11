@@ -18,22 +18,17 @@
 package walkingkooka.validation.form.expression;
 
 import walkingkooka.Either;
-import walkingkooka.currency.CurrencyCode;
-import walkingkooka.currency.CurrencyExchange;
+import walkingkooka.currency.CurrencyLocaleContext;
+import walkingkooka.currency.CurrencyLocaleContextDelegator;
+import walkingkooka.currency.CurrencyLocaleContextTesting;
 import walkingkooka.datetime.DateTimeContext;
 import walkingkooka.datetime.DateTimeContextDelegator;
+import walkingkooka.datetime.DateTimeContextTesting;
 import walkingkooka.environment.EnvironmentContext;
-import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.environment.EnvironmentWatcher;
-import walkingkooka.locale.LocaleContext;
-import walkingkooka.locale.LocaleContextDelegator;
-import walkingkooka.locale.LocaleContexts;
+import walkingkooka.environment.EnvironmentContextDelegator;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
-import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.CaseSensitivity;
-import walkingkooka.text.Indentation;
-import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionNumberKind;
@@ -47,20 +42,18 @@ import walkingkooka.validation.form.FormField;
 import walkingkooka.validation.form.expression.FormHandlerExpressionEvaluationContextTesting2Test.TestFormHandlerExpressionEvaluationContext;
 
 import java.math.MathContext;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.Comparator;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Function;
 
 public final class FormHandlerExpressionEvaluationContextTesting2Test implements FormHandlerExpressionEvaluationContextTesting2<TestValidationReference, Void, TestFormHandlerExpressionEvaluationContext>,
+    CurrencyLocaleContextTesting,
+    DateTimeContextTesting,
     DecimalNumberContextDelegator {
 
     @Override
@@ -69,77 +62,12 @@ public final class FormHandlerExpressionEvaluationContextTesting2Test implements
     }
 
     @Override
-    public void testEnvironmentValueLineEndingEqualsLineEnding() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testEnvironmentValueLocaleEqualsLocale() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testEnvironmentValueNowEqualsNow() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testEnvironmentValueUserEqualsUser() {
+    public void testEnvironmentContext() {
         throw new UnsupportedOperationException();
     }
 
     @Override
     public void testEvaluateExpressionUnknownFunctionNameFails() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testRemoveEnvironmentValueWithNowFails() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetEnvironmentValueWithNowFails() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetCurrencyWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetIndentationWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLineEndingWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLocaleWithDifferent() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLocaleWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetTimeOffsetWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetUserWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testUserNotNull() {
         throw new UnsupportedOperationException();
     }
 
@@ -173,9 +101,10 @@ public final class FormHandlerExpressionEvaluationContextTesting2Test implements
     }
 
     final static class TestFormHandlerExpressionEvaluationContext implements FormHandlerExpressionEvaluationContext<TestValidationReference, Void>,
+        CurrencyLocaleContextDelegator,
         DateTimeContextDelegator,
         DecimalNumberContextDelegator,
-        LocaleContextDelegator {
+        EnvironmentContextDelegator {
 
         @Override
         public TestFormHandlerExpressionEvaluationContext enterScope(final Function<ExpressionReference, Optional<Optional<Object>>> function) {
@@ -218,44 +147,8 @@ public final class FormHandlerExpressionEvaluationContextTesting2Test implements
         }
 
         @Override
-        public Set<CurrencyExchange> currencyExchanges() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Optional<Number> currencyExchangeRate(final CurrencyExchange currencyExchange,
-                                                     final Optional<LocalDateTime> dateTime) {
-            Objects.requireNonNull(currencyExchange, "currencyExchange");
-            Objects.requireNonNull(dateTime, "dateTime");
-
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Optional<Currency> currencyForCurrencyCode(final CurrencyCode currencyCode) {
-            Objects.requireNonNull(currencyCode, "currencyCode");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Optional<Currency> currencyForLocale(final Locale locale) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
         public long dateOffset() {
             return 0;
-        }
-
-        @Override
-        public Indentation indentation() {
-            return Indentation.SPACES2;
-        }
-
-        @Override
-        public void setIndentation(final Indentation indentation) {
-            Objects.requireNonNull(indentation, "indentation");
-            throw new UnsupportedOperationException();
         }
 
         @Override
@@ -283,130 +176,6 @@ public final class FormHandlerExpressionEvaluationContextTesting2Test implements
         }
 
         @Override
-        public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> cloneEnvironment() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> setEnvironmentContext(final EnvironmentContext environmentContext) {
-            Objects.requireNonNull(environmentContext, "environmentContext");
-
-            return new TestFormHandlerExpressionEvaluationContext();
-        }
-
-        @Override
-        public DateTimeContext dateTimeContext() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
-            Objects.requireNonNull(name, "name");
-
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Set<EnvironmentValueName<?>> environmentValueNames() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
-                                            final T value) {
-            Objects.requireNonNull(name, "name");
-            Objects.requireNonNull(value, "value");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
-            Objects.requireNonNull(name, "name");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Charset charset() {
-            return StandardCharsets.UTF_8;
-        }
-
-        @Override
-        public void setCharset(final Charset charset) {
-            Objects.requireNonNull(charset, "charset");
-            throw new UnsupportedOperationException();
-        }
-        
-        @Override
-        public Currency currency() {
-            return Currency.getInstance("AUD");
-        }
-
-        @Override
-        public void setCurrency(final Currency currency) {
-            Objects.requireNonNull(currency, "currency");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public LineEnding lineEnding() {
-            return LineEnding.NL;
-        }
-
-        @Override
-        public void setLineEnding(LineEnding lineEnding) {
-            Objects.requireNonNull(lineEnding, "lineEnding");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public ZoneOffset timeOffset() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void setTimeOffset(final ZoneOffset timeOffset) {
-            Objects.requireNonNull(timeOffset, "timeOffset");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Optional<EmailAddress> user() {
-            return ANONYMOUS;
-        }
-
-        @Override
-        public void setUser(final Optional<EmailAddress> user) {
-            Objects.requireNonNull(user, "user");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public DecimalNumberContext decimalNumberContext() {
-            return DECIMAL_NUMBER_CONTEXT;
-        }
-
-        @Override
-        public Locale locale() {
-            return Locale.ENGLISH;
-        }
-
-        @Override
-        public LocaleContext localeContext() {
-            return LocaleContexts.jre(Locale.ENGLISH);
-        }
-
-        @Override
-        public void setLocale(final Locale locale) {
-            Objects.requireNonNull(locale, "locale");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public MathContext mathContext() {
-            return DECIMAL_NUMBER_CONTEXT.mathContext();
-        }
-
-        @Override
         public Object evaluate(final String expression) {
             Objects.requireNonNull(expression, "expression");
             throw new UnsupportedOperationException();
@@ -421,7 +190,7 @@ public final class FormHandlerExpressionEvaluationContextTesting2Test implements
 
         @Override
         public ExpressionNumberKind expressionNumberKind() {
-            throw new UnsupportedOperationException();
+            return EXPRESSION_NUMBER_KIND;
         }
 
         @Override
@@ -462,24 +231,77 @@ public final class FormHandlerExpressionEvaluationContextTesting2Test implements
             throw new UnsupportedOperationException();
         }
 
+        // CurrencyLocaleContext........................................................................................
+
         @Override
-        public Runnable addEnvironmentWatcher(final EnvironmentWatcher watcher) {
-            Objects.requireNonNull(watcher, "watcher");
+        public CurrencyLocaleContext currencyLocaleContext() {
+            return CURRENCY_LOCALE_CONTEXT;
+        }
+
+        // DateTimeContext..............................................................................................
+
+        @Override
+        public DateTimeContext dateTimeContext() {
+            return DATE_TIME_CONTEXT;
+        }
+
+        // DecimalNumberContextDelegator................................................................................
+
+        @Override
+        public MathContext mathContext() {
+            return DECIMAL_NUMBER_CONTEXT.mathContext();
+        }
+
+        @Override
+        public DecimalNumberContext decimalNumberContext() {
+            return DECIMAL_NUMBER_CONTEXT;
+        }
+
+        // EnvironmentContextDelegator..................................................................................
+
+        @Override
+        public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> cloneEnvironment() {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public Runnable addEnvironmentWatcherOnce(final EnvironmentWatcher watcher) {
-            Objects.requireNonNull(watcher, "watcher");
-            throw new UnsupportedOperationException();
-        }
+        public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> setEnvironmentContext(final EnvironmentContext environmentContext) {
+            Objects.requireNonNull(environmentContext, "environmentContext");
 
-        // CanParseEnvironmentValueName.................................................................................
+            return new TestFormHandlerExpressionEvaluationContext();
+        }
 
         @Override
-        public EnvironmentValueName<?> parseEnvironmentValueName(final String name) {
-            return ENVIRONMENT_CONTEXT.parseEnvironmentValueName(name);
+        public Currency currency() {
+            return this.environmentContext.currency();
         }
+
+        @Override
+        public void setCurrency(final Currency currency) {
+            this.environmentContext.setCurrency(currency);
+        }
+
+        @Override
+        public Locale locale() {
+            return this.environmentContext.locale();
+        }
+
+        @Override
+        public void setLocale(final Locale locale) {
+            this.environmentContext.setLocale(locale);
+        }
+
+        @Override
+        public LocalDateTime now() {
+            return this.environmentContext.now();
+        }
+
+        @Override
+        public EnvironmentContext environmentContext() {
+            return this.environmentContext;
+        }
+
+        private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
 
         @Override
         public String toString() {

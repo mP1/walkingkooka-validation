@@ -20,6 +20,7 @@ package walkingkooka.validation.form;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.environment.EnvironmentWatcher;
+import walkingkooka.logging.LoggingLevel;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
@@ -35,6 +36,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 public final class FormHandlerContextDelegatorTest implements FormHandlerContextTesting2<TestFormHandlerContextDelegator, TestValidationReference, Void> {
+
+    @Override
+    public void testLogWithNullLoggingLevelFails() {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
     public void testSetEnvironmentValueWithNowFails() {
@@ -63,6 +69,11 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
 
     @Override
     public void testSetLocaleWithDifferentAndWatcher() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void testSetLoggingLevelWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
 
@@ -193,6 +204,16 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
                 }
 
                 @Override
+                public LoggingLevel loggingLevel() {
+                    return this.environmentContext.loggingLevel();
+                }
+
+                @Override
+                public void setLoggingLevel(final LoggingLevel loggingLevel) {
+                    this.environmentContext.setLoggingLevel(loggingLevel);
+                }
+
+                @Override
                 public Optional<EmailAddress> user() {
                     return this.environmentContext.user();
                 }
@@ -240,6 +261,12 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
         @Override
         public void setLocale(final Locale locale) {
             Objects.requireNonNull(locale, "locale");
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void setLoggingLevel(final LoggingLevel loggingLevel) {
+            Objects.requireNonNull(loggingLevel, "loggingLevel");
             throw new UnsupportedOperationException();
         }
 
