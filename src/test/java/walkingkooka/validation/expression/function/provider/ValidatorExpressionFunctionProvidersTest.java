@@ -19,7 +19,6 @@ package walkingkooka.validation.expression.function.provider;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.plugin.ProviderContexts;
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.expression.function.provider.ExpressionFunctionInfoSet;
@@ -86,11 +85,6 @@ public final class ValidatorExpressionFunctionProvidersTest implements PublicSta
     @Override
     public Class<ValidatorExpressionFunctionProviders> type() {
         return ValidatorExpressionFunctionProviders.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     @Override

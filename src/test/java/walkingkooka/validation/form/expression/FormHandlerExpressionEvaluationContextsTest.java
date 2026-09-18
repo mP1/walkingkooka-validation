@@ -17,7 +17,6 @@
 
 package walkingkooka.validation.form.expression;
 
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
@@ -27,11 +26,6 @@ public final class FormHandlerExpressionEvaluationContextsTest implements Public
     @Override
     public Class<FormHandlerExpressionEvaluationContexts> type() {
         return FormHandlerExpressionEvaluationContexts.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     @Override

@@ -18,7 +18,6 @@
 package walkingkooka.validation.form.expression.function.provider;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.text.CaseSensitivity;
@@ -51,11 +50,6 @@ public final class FormHandlerExpressionFunctionProvidersTest implements PublicS
     @Override
     public Class<FormHandlerExpressionFunctionProviders> type() {
         return FormHandlerExpressionFunctionProviders.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     @Override
