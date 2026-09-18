@@ -17,7 +17,6 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
@@ -32,10 +31,5 @@ public final class ValidationStartupTest implements PublicStaticHelperTesting<Va
     @Override
     public Class<ValidationStartup> type() {
         return ValidationStartup.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 }

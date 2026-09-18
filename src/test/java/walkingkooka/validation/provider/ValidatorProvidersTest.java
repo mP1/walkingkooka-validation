@@ -17,7 +17,6 @@
 
 package walkingkooka.validation.provider;
 
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
@@ -27,11 +26,6 @@ public final class ValidatorProvidersTest implements PublicStaticHelperTesting<V
     @Override
     public Class<ValidatorProviders> type() {
         return ValidatorProviders.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     @Override

@@ -17,7 +17,6 @@
 
 package walkingkooka.validation.expression.function;
 
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
@@ -27,11 +26,6 @@ public final class ValidatorExpressionFunctionsTest implements PublicStaticHelpe
     @Override
     public Class<ValidatorExpressionFunctions> type() {
         return ValidatorExpressionFunctions.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     @Override

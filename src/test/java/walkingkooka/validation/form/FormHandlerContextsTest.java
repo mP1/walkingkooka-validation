@@ -17,7 +17,6 @@
 
 package walkingkooka.validation.form;
 
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
@@ -27,11 +26,6 @@ public final class FormHandlerContextsTest implements PublicStaticHelperTesting<
     @Override
     public Class<FormHandlerContexts> type() {
         return FormHandlerContexts.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     @Override

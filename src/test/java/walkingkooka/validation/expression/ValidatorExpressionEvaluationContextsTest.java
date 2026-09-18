@@ -17,7 +17,6 @@
 
 package walkingkooka.validation.expression;
 
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
@@ -27,11 +26,6 @@ public final class ValidatorExpressionEvaluationContextsTest implements PublicSt
     @Override
     public Class<ValidatorExpressionEvaluationContexts> type() {
         return ValidatorExpressionEvaluationContexts.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     @Override

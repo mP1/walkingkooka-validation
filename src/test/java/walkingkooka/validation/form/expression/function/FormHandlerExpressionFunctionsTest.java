@@ -17,7 +17,6 @@
 
 package walkingkooka.validation.form.expression.function;
 
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
@@ -27,11 +26,6 @@ public final class FormHandlerExpressionFunctionsTest implements PublicStaticHel
     @Override
     public Class<FormHandlerExpressionFunctions> type() {
         return FormHandlerExpressionFunctions.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     @Override

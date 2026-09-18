@@ -17,7 +17,6 @@
 
 package walkingkooka.validation.form;
 
-import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 
 import java.lang.reflect.Method;
@@ -27,11 +26,6 @@ public final class FormHandlersTest implements PublicStaticHelperTesting<FormHan
     @Override
     public Class<FormHandlers> type() {
         return FormHandlers.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 
     @Override
