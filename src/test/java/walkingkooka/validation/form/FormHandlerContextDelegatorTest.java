@@ -20,6 +20,7 @@ package walkingkooka.validation.form;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.environment.EnvironmentWatcher;
+import walkingkooka.logging.LoggerPath;
 import walkingkooka.logging.LoggingLevel;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.Indentation;
@@ -287,6 +288,18 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
             Objects.requireNonNull(watcher, "watcher");
             throw new UnsupportedOperationException();
         }
+
+        @Override
+        public void logEnter(final LoggerPath logger) {
+            this.environmentContext.logEnter(logger);
+        }
+
+        @Override
+        public void logExit() {
+            this.environmentContext.logExit();
+        }
+
+        private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
 
         @Override
         public String toString() {

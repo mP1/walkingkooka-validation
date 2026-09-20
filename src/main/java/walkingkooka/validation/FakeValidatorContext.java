@@ -21,6 +21,7 @@ import walkingkooka.convert.FakeConverterContext;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.environment.EnvironmentWatcher;
+import walkingkooka.logging.LoggerPath;
 import walkingkooka.logging.LoggingLevel;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.Indentation;
@@ -182,6 +183,16 @@ public class FakeValidatorContext<T extends ValidationReference> extends FakeCon
     }
 
     // LoggingContext...................................................................................................
+
+    @Override
+    public void logEnter(final LoggerPath logger) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void logExit() {
+        throw new UnsupportedOperationException();
+    }
 
     @Override
     public void debug(final String message) {

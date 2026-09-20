@@ -24,6 +24,7 @@ import walkingkooka.environment.EnvironmentValueName;
 import walkingkooka.environment.EnvironmentWatcher;
 import walkingkooka.locale.LocaleContexts;
 import walkingkooka.locale.LocaleLanguageTag;
+import walkingkooka.logging.LoggerPath;
 import walkingkooka.logging.LoggingLevel;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
@@ -516,6 +517,18 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
             Objects.requireNonNull(watcher, "watcher");
             throw new UnsupportedOperationException();
         }
+
+        @Override
+        public void logEnter(final LoggerPath logger) {
+            this.environmentContext.logEnter(logger);
+        }
+
+        @Override
+        public void logExit() {
+            this.environmentContext.logExit();
+        }
+
+        private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
 
         @Override
         public String toString() {
