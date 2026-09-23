@@ -22,12 +22,12 @@ import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.tree.expression.Expression;
-import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
+import walkingkooka.tree.expression.function.ExpressionFunctionTesting2;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.expression.FakeValidatorExpressionEvaluationContext;
 
-public final class ValidationExpressionFunctionValidationErrorIfTest implements ExpressionFunctionTesting<ValidationExpressionFunctionValidationErrorIf<TestValidationReference, FakeValidatorExpressionEvaluationContext<TestValidationReference>>, ValidationError<TestValidationReference>, FakeValidatorExpressionEvaluationContext<TestValidationReference>> {
+public final class ValidationExpressionFunctionValidationErrorIfTest implements ExpressionFunctionTesting2<ValidationExpressionFunctionValidationErrorIf<TestValidationReference, FakeValidatorExpressionEvaluationContext<TestValidationReference>>, ValidationError<TestValidationReference>, FakeValidatorExpressionEvaluationContext<TestValidationReference>> {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("Field123");
 

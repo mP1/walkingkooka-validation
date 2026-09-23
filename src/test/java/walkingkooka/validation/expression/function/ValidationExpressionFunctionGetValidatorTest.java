@@ -20,7 +20,7 @@ package walkingkooka.validation.expression.function;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
+import walkingkooka.tree.expression.function.ExpressionFunctionTesting2;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.expression.ValidatorExpressionEvaluationContext;
 import walkingkooka.validation.expression.ValidatorExpressionEvaluationContexts;
@@ -28,7 +28,7 @@ import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.util.Arrays;
 
-public final class ValidationExpressionFunctionGetValidatorTest implements ExpressionFunctionTesting<ValidationExpressionFunctionGetValidator<TestValidationReference, ValidatorExpressionEvaluationContext<TestValidationReference>>, ValidatorSelector, ValidatorExpressionEvaluationContext<TestValidationReference>> {
+public final class ValidationExpressionFunctionGetValidatorTest implements ExpressionFunctionTesting2<ValidationExpressionFunctionGetValidator<TestValidationReference, ValidatorExpressionEvaluationContext<TestValidationReference>>, ValidatorSelector, ValidatorExpressionEvaluationContext<TestValidationReference>> {
 
     // apply............................................................................................................
 

@@ -27,7 +27,7 @@ import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.Converters;
 import walkingkooka.math.NumberList;
 import walkingkooka.reflect.ThrowableTesting;
-import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
+import walkingkooka.tree.expression.function.ExpressionFunctionTesting2;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidationChoice;
 import walkingkooka.validation.ValidationChoiceList;
@@ -37,7 +37,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class ValidationExpressionFunctionValidationChoiceListTest implements ExpressionFunctionTesting<ValidationExpressionFunctionValidationChoiceList<TestValidationReference, FakeValidatorExpressionEvaluationContext<TestValidationReference>>, ValidationChoiceList, FakeValidatorExpressionEvaluationContext<TestValidationReference>>,
+public final class ValidationExpressionFunctionValidationChoiceListTest implements ExpressionFunctionTesting2<ValidationExpressionFunctionValidationChoiceList<TestValidationReference, FakeValidatorExpressionEvaluationContext<TestValidationReference>>, ValidationChoiceList, FakeValidatorExpressionEvaluationContext<TestValidationReference>>,
     ThrowableTesting {
 
     // apply............................................................................................................
