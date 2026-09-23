@@ -22,7 +22,7 @@ import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.reflect.ThrowableTesting;
-import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
+import walkingkooka.tree.expression.function.ExpressionFunctionTesting2;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.ValidationErrorList;
@@ -33,7 +33,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class FormHandlerExpressionFunctionRequiredFormFieldsTest implements ExpressionFunctionTesting<FormHandlerExpressionFunctionRequiredFormFields<TestValidationReference, Void, FakeFormHandlerExpressionEvaluationContext<TestValidationReference, Void>>, ValidationErrorList<TestValidationReference>, FakeFormHandlerExpressionEvaluationContext<TestValidationReference, Void>>,
+public final class FormHandlerExpressionFunctionRequiredFormFieldsTest implements ExpressionFunctionTesting2<FormHandlerExpressionFunctionRequiredFormFields<TestValidationReference, Void, FakeFormHandlerExpressionEvaluationContext<TestValidationReference, Void>>, ValidationErrorList<TestValidationReference>, FakeFormHandlerExpressionEvaluationContext<TestValidationReference, Void>>,
     ThrowableTesting {
 
     private final static TestValidationReference FIELD1 = new TestValidationReference("Field1");

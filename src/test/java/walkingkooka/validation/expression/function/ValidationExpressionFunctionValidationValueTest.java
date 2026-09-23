@@ -20,13 +20,13 @@ package walkingkooka.validation.expression.function;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.tree.expression.function.ExpressionFunction;
-import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
+import walkingkooka.tree.expression.function.ExpressionFunctionTesting2;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.expression.FakeValidatorExpressionEvaluationContext;
 
 import java.util.Optional;
 
-public final class ValidationExpressionFunctionValidationValueTest implements ExpressionFunctionTesting<ValidationExpressionFunctionValidationValue<TestValidationReference, FakeValidatorExpressionEvaluationContext<TestValidationReference>>, Object, FakeValidatorExpressionEvaluationContext<TestValidationReference>> {
+public final class ValidationExpressionFunctionValidationValueTest implements ExpressionFunctionTesting2<ValidationExpressionFunctionValidationValue<TestValidationReference, FakeValidatorExpressionEvaluationContext<TestValidationReference>>, Object, FakeValidatorExpressionEvaluationContext<TestValidationReference>> {
 
     // apply............................................................................................................
 
