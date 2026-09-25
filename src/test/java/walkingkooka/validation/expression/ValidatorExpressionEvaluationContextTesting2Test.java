@@ -29,7 +29,6 @@ import walkingkooka.locale.LocaleContextDelegator;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
 import walkingkooka.text.CaseSensitivity;
-import walkingkooka.text.Indentation;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionNumberKind;
@@ -41,7 +40,6 @@ import walkingkooka.validation.expression.ValidatorExpressionEvaluationContextTe
 import walkingkooka.validation.form.Form;
 
 import java.math.MathContext;
-import java.nio.charset.Charset;
 import java.time.LocalDateTime;
 import java.util.Currency;
 import java.util.List;
@@ -162,11 +160,6 @@ public final class ValidatorExpressionEvaluationContextTesting2Test implements V
         }
 
         @Override
-        public Charset charset() {
-            return ValidatorExpressionEvaluationContextTesting2Test.CHARSET;
-        }
-
-        @Override
         public Set<CurrencyExchange> currencyExchanges() {
             throw new UnsupportedOperationException();
         }
@@ -194,11 +187,6 @@ public final class ValidatorExpressionEvaluationContextTesting2Test implements V
         @Override
         public long dateOffset() {
             return 0;
-        }
-
-        @Override
-        public Indentation indentation() {
-            return ValidatorExpressionEvaluationContextTesting2Test.INDENTATION;
         }
 
         @Override

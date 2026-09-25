@@ -30,6 +30,7 @@ import walkingkooka.validation.ValidatorContext;
 import walkingkooka.validation.form.FormHandlerContextDelegatorTest.TestFormHandlerContextDelegator;
 
 import java.nio.charset.Charset;
+import java.time.ZoneOffset;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
@@ -44,47 +45,7 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
     }
 
     @Override
-    public void testSetEnvironmentValueWithNowFails() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetCurrencyWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetIndentationWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLineEndingWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLocaleWithDifferent() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLocaleWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLoggingLevelWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetTimeOffsetWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetUserWithDifferentAndWatcher() {
+    public void testIsLoggingEnabledWithNullLoggingLevelFails() {
         throw new UnsupportedOperationException();
     }
 
@@ -121,117 +82,169 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
 
         @Override
         public FormHandlerContext<TestValidationReference, Void> formHandlerContext() {
-            return new FakeFormHandlerContext<>() {
-
-                @Override
-                public ValidatorContext<TestValidationReference> validatorContext(final TestValidationReference reference) {
-                    Objects.requireNonNull(reference, "reference");
-
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public Optional<Object> loadFormFieldValue(final TestValidationReference reference) {
-                    Objects.requireNonNull(reference, "reference");
-
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public Void saveFormFieldValues(final List<FormField<TestValidationReference>> formFields) {
-                    Objects.requireNonNull(formFields, "formFields");
-
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public FormHandlerContext<TestValidationReference, Void> cloneEnvironment() {
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public FormHandlerContext<TestValidationReference, Void> setEnvironmentContext(final EnvironmentContext environmentContext) {
-                    Objects.requireNonNull(environmentContext, "environmentContext");
-                    throw new UnsupportedOperationException();
-                }
-
-                @Override
-                public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
-                    return this.environmentContext.environmentValue(name);
-                }
-
-                @Override
-                public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
-                                                    final T value) {
-                    this.environmentContext.setEnvironmentValue(
-                        name,
-                        value
-                    );
-                }
-
-                @Override
-                public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
-                    this.environmentContext.removeEnvironmentValue(name);
-                }
-
-                @Override
-                public Charset charset() {
-                    return this.environmentContext.charset();
-                }
-
-                @Override
-                public Currency currency() {
-                    return this.environmentContext.currency();
-                }
-
-                @Override
-                public Indentation indentation() {
-                    return this.environmentContext.indentation();
-                }
-
-                @Override
-                public LineEnding lineEnding() {
-                    return this.environmentContext.lineEnding();
-                }
-
-                @Override
-                public Locale locale() {
-                    return this.environmentContext.locale();
-                }
-
-                @Override
-                public void setLocale(final Locale locale) {
-                    this.environmentContext.setLocale(locale);
-                }
-
-                @Override
-                public LoggingLevel loggingLevel() {
-                    return this.environmentContext.loggingLevel();
-                }
-
-                @Override
-                public void setLoggingLevel(final LoggingLevel loggingLevel) {
-                    this.environmentContext.setLoggingLevel(loggingLevel);
-                }
-
-                @Override
-                public Optional<EmailAddress> user() {
-                    return this.environmentContext.user();
-                }
-
-                @Override
-                public void setUser(final Optional<EmailAddress> user) {
-                    this.environmentContext.setUser(user);
-                }
-
-                @Override
-                public EnvironmentValueName<?> parseEnvironmentValueName(final String name) {
-                    return this.environmentContext.parseEnvironmentValueName(name);
-                }
-
-                private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
-            };
+            return this.formHandlerContext;
         }
+
+        private final FormHandlerContext<TestValidationReference, Void> formHandlerContext = new FakeFormHandlerContext<>() {
+
+            @Override
+            public ValidatorContext<TestValidationReference> validatorContext(final TestValidationReference reference) {
+                Objects.requireNonNull(reference, "reference");
+
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public Optional<Object> loadFormFieldValue(final TestValidationReference reference) {
+                Objects.requireNonNull(reference, "reference");
+
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public Void saveFormFieldValues(final List<FormField<TestValidationReference>> formFields) {
+                Objects.requireNonNull(formFields, "formFields");
+
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public FormHandlerContext<TestValidationReference, Void> cloneEnvironment() {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public FormHandlerContext<TestValidationReference, Void> setEnvironmentContext(final EnvironmentContext environmentContext) {
+                Objects.requireNonNull(environmentContext, "environmentContext");
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
+                return this.environmentContext.environmentValue(name);
+            }
+
+            @Override
+            public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
+                                                final T value) {
+                this.environmentContext.setEnvironmentValue(
+                    name,
+                    value
+                );
+            }
+
+            @Override
+            public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
+                this.environmentContext.removeEnvironmentValue(name);
+            }
+
+            @Override
+            public Charset charset() {
+                return this.environmentContext.charset();
+            }
+
+            @Override
+            public void setCharset(final Charset charset) {
+                this.environmentContext.setCharset(charset);
+            }
+
+            @Override
+            public Currency currency() {
+                return this.environmentContext.currency();
+            }
+
+            @Override
+            public void setCurrency(final Currency currency) {
+                this.environmentContext.setCurrency(currency);
+            }
+
+            @Override
+            public Indentation indentation() {
+                return this.environmentContext.indentation();
+            }
+
+            @Override
+            public void setIndentation(final Indentation indentation) {
+                this.environmentContext.setIndentation(indentation);
+            }
+
+            @Override
+            public LineEnding lineEnding() {
+                return this.environmentContext.lineEnding();
+            }
+
+            @Override
+            public void setLineEnding(final LineEnding lineEnding) {
+                this.environmentContext.setLineEnding(lineEnding);
+            }
+
+            @Override
+            public Locale locale() {
+                return this.environmentContext.locale();
+            }
+
+            @Override
+            public void setLocale(final Locale locale) {
+                this.environmentContext.setLocale(locale);
+            }
+
+            @Override
+            public LoggingLevel loggingLevel() {
+                return this.environmentContext.loggingLevel();
+            }
+
+            @Override
+            public void setLoggingLevel(final LoggingLevel loggingLevel) {
+                this.environmentContext.setLoggingLevel(loggingLevel);
+            }
+
+            @Override
+            public ZoneOffset timeOffset() {
+                return this.environmentContext.timeOffset();
+            }
+
+            @Override
+            public void setTimeOffset(final ZoneOffset timeOffset) {
+                this.environmentContext.setTimeOffset(timeOffset);
+            }
+
+            @Override
+            public Optional<EmailAddress> user() {
+                return this.environmentContext.user();
+            }
+
+            @Override
+            public void setUser(final Optional<EmailAddress> user) {
+                this.environmentContext.setUser(user);
+            }
+
+            @Override
+            public Runnable addEnvironmentWatcher(final EnvironmentWatcher watcher) {
+                return this.environmentContext.addEnvironmentWatcher(watcher);
+            }
+
+            @Override
+            public Runnable addEnvironmentWatcherOnce(final EnvironmentWatcher watcher) {
+                return this.environmentContext.addEnvironmentWatcherOnce(watcher);
+            }
+
+            @Override
+            public EnvironmentValueName<?> parseEnvironmentValueName(final String name) {
+                return this.environmentContext.parseEnvironmentValueName(name);
+            }
+
+            @Override
+            public void logEnter(final LoggerPath logger) {
+                this.environmentContext.logEnter(logger);
+            }
+
+            @Override
+            public void logExit() {
+                this.environmentContext.logExit();
+            }
+
+            private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
+        };
 
         @Override
         public FormHandlerContext<TestValidationReference, Void> cloneEnvironment() {
@@ -246,65 +259,29 @@ public final class FormHandlerContextDelegatorTest implements FormHandlerContext
         }
 
         @Override
-        public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
-                                            final T value) {
-            Objects.requireNonNull(name, "name");
-            Objects.requireNonNull(value, "value");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void setLineEnding(final LineEnding lineEnding) {
-            Objects.requireNonNull(lineEnding, "lineEnding");
-            throw new UnsupportedOperationException();
-        }
-        
-        @Override
-        public void setLocale(final Locale locale) {
-            Objects.requireNonNull(locale, "locale");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void setLoggingLevel(final LoggingLevel loggingLevel) {
-            Objects.requireNonNull(loggingLevel, "loggingLevel");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void setUser(final Optional<EmailAddress> user) {
-            Objects.requireNonNull(user, "user");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
         public Runnable addEnvironmentWatcher(final EnvironmentWatcher watcher) {
-            Objects.requireNonNull(watcher, "watcher");
-            throw new UnsupportedOperationException();
+            return this.formHandlerContext.addEnvironmentWatcher(watcher);
         }
 
         @Override
         public Runnable addEnvironmentWatcherOnce(final EnvironmentWatcher watcher) {
-            Objects.requireNonNull(watcher, "watcher");
-            throw new UnsupportedOperationException();
+            return this.formHandlerContext.addEnvironmentWatcherOnce(watcher);
         }
 
         @Override
         public boolean isLoggingEnabled(final LoggingLevel loggingLevel) {
-            return this.environmentContext.isLoggingEnabled(loggingLevel);
+            return this.formHandlerContext.isLoggingEnabled(loggingLevel);
         }
 
         @Override
         public void logEnter(final LoggerPath logger) {
-            this.environmentContext.logEnter(logger);
+            this.formHandlerContext.logEnter(logger);
         }
 
         @Override
         public void logExit() {
-            this.environmentContext.logExit();
+            this.formHandlerContext.logExit();
         }
-
-        private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
 
         @Override
         public String toString() {

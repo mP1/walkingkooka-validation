@@ -43,6 +43,7 @@ import walkingkooka.validation.form.expression.FormHandlerExpressionEvaluationCo
 import java.math.MathContext;
 import java.nio.charset.Charset;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Comparator;
 import java.util.Currency;
 import java.util.List;
@@ -66,82 +67,12 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
     }
 
     @Override
-    public void testEnvironmentValueLineEndingEqualsLineEnding() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testEnvironmentValueLocaleEqualsLocale() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testEnvironmentValueNowEqualsNow() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testEnvironmentValueUserEqualsUser() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public void testLocaleTextWithNullFails() {
         throw new UnsupportedOperationException();
     }
 
     @Override
     public void testLogWithNullLoggingLevelFails() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testRemoveEnvironmentValueWithNowFails() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetEnvironmentValueWithNowFails() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetCurrencyWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetIndentationWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLineEndingWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLocaleWithDifferent() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLocaleWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLoggingLevelWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetTimeOffsetWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetUserWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
 
@@ -324,8 +255,22 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
             }
 
             @Override
+            public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
+                return this.environmentContext.environmentValue(name);
+            }
+
+            @Override
             public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
                 this.environmentContext.removeEnvironmentValue(name);
+            }
+
+            @Override
+            public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
+                                                final T value) {
+                this.environmentContext.setEnvironmentValue(
+                    name,
+                    value
+                );
             }
 
             @Override
@@ -334,13 +279,28 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
             }
 
             @Override
+            public void setCharset(final Charset charset) {
+                this.environmentContext.setCharset(charset);
+            }
+
+            @Override
             public Currency currency() {
                 return this.environmentContext.currency();
             }
 
             @Override
+            public void setCurrency(final Currency currency) {
+                this.environmentContext.setCurrency(currency);
+            }
+
+            @Override
             public Indentation indentation() {
                 return this.environmentContext.indentation();
+            }
+
+            @Override
+            public void setIndentation(final Indentation indentation) {
+                this.environmentContext.setIndentation(indentation);
             }
 
             @Override
@@ -354,6 +314,16 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
             }
 
             @Override
+            public Locale locale() {
+                return this.environmentContext.locale();
+            }
+
+            @Override
+            public void setLocale(final Locale locale) {
+                this.environmentContext.setLocale(locale);
+            }
+
+            @Override
             public LoggingLevel loggingLevel() {
                 return this.environmentContext.loggingLevel();
             }
@@ -361,6 +331,21 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
             @Override
             public void setLoggingLevel(final LoggingLevel loggingLevel) {
                 this.environmentContext.setLoggingLevel(loggingLevel);
+            }
+
+            @Override
+            public LocalDateTime now() {
+                return this.environmentContext.now();
+            }
+
+            @Override
+            public ZoneOffset timeOffset() {
+                return this.environmentContext.timeOffset();
+            }
+
+            @Override
+            public void setTimeOffset(final ZoneOffset timeOffset) {
+                this.environmentContext.setTimeOffset(timeOffset);
             }
 
             @Override
@@ -374,22 +359,34 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
             }
 
             @Override
-            public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
-                return this.environmentContext.environmentValue(name);
+            public Runnable addEnvironmentWatcher(final EnvironmentWatcher watcher) {
+                return this.environmentContext.addEnvironmentWatcher(watcher);
             }
 
             @Override
-            public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
-                                                final T value) {
-                this.environmentContext.setEnvironmentValue(
-                    name,
-                    value
-                );
+            public Runnable addEnvironmentWatcherOnce(final EnvironmentWatcher watcher) {
+                return this.environmentContext.addEnvironmentWatcherOnce(watcher);
             }
 
             @Override
             public EnvironmentValueName<?> parseEnvironmentValueName(final String name) {
                 return this.environmentContext.parseEnvironmentValueName(name);
+            }
+
+
+            @Override
+            public boolean isLoggingEnabled(final LoggingLevel loggingLevel) {
+                return this.environmentContext.isLoggingEnabled(loggingLevel);
+            }
+
+            @Override
+            public void logEnter(final LoggerPath logger) {
+                this.environmentContext.logEnter(logger);
+            }
+
+            @Override
+            public void logExit() {
+                this.environmentContext.logExit();
             }
 
             private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
@@ -469,72 +466,22 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
 
             return new TestFormHandlerExpressionEvaluationContextDelegator();
         }
-
-        @Override
-        public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
-                                            final T value) {
-            Objects.requireNonNull(name, "name");
-            Objects.requireNonNull(value, "value");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public LineEnding lineEnding() {
-            return LineEnding.NL;
-        }
-
-        @Override
-        public void setLineEnding(final LineEnding lineEnding) {
-            Objects.requireNonNull(lineEnding, "lineEnding");
-        }
-
-        @Override
-        public Locale locale() {
-            return Locale.ENGLISH;
-        }
-
-        @Override
-        public void setLocale(final Locale locale  ) {
-            Objects.requireNonNull(locale, "locale");
-
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void setUser(final Optional<EmailAddress> user) {
-            Objects.requireNonNull(user, "user");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Runnable addEnvironmentWatcher(final EnvironmentWatcher watcher) {
-            Objects.requireNonNull(watcher, "watcher");
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Runnable addEnvironmentWatcherOnce(final EnvironmentWatcher watcher) {
-            Objects.requireNonNull(watcher, "watcher");
-            throw new UnsupportedOperationException();
-        }
-
+        
         @Override
         public boolean isLoggingEnabled(final LoggingLevel loggingLevel) {
-            return this.environmentContext.isLoggingEnabled(loggingLevel);
+            return this.context.isLoggingEnabled(loggingLevel);
         }
 
         @Override
         public void logEnter(final LoggerPath logger) {
-            this.environmentContext.logEnter(logger);
+            this.context.logEnter(logger);
         }
 
         @Override
         public void logExit() {
-            this.environmentContext.logExit();
+            this.context.logExit();
         }
-
-        private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
-
+        
         @Override
         public String toString() {
             return this.getClass().getSimpleName();
