@@ -49,31 +49,6 @@ public final class ValidatorContextTesting2Test implements ValidatorContextTesti
     DecimalNumberContextTesting {
 
     @Override
-    public void testRemoveEnvironmentValueWithNowFails() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetEnvironmentValueWithNowFails() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetCurrencyWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLoggingLevelWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetTimeOffsetWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public TestValidatorContext createContext() {
         return new TestValidatorContext();
     }
@@ -210,15 +185,15 @@ public final class ValidatorContextTesting2Test implements ValidatorContextTesti
         @Override
         public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
                                             final T value) {
-            Objects.requireNonNull(name, "name");
-            Objects.requireNonNull(value, "value");
-            throw new UnsupportedOperationException();
+            this.environmentContext.setEnvironmentValue(
+                name,
+                value
+            );
         }
 
         @Override
         public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
-            Objects.requireNonNull(name, "name");
-            throw new UnsupportedOperationException();
+            this.environmentContext.removeEnvironmentValue(name);
         }
 
         @Override

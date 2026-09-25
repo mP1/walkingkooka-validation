@@ -147,7 +147,7 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
                     VALIDATOR_SELECTOR_TO_VALIDATOR,
                     REFERENCE_EXPRESSION_EVALUATION_CONTEXT_FUNCTION,
                     CONVERTER_CONTEXT,
-                    ENVIRONMENT_CONTEXT
+                    ENVIRONMENT_CONTEXT.cloneEnvironment()
                 )
             );
         }
@@ -190,27 +190,22 @@ public final class ValidatorContextDelegatorTest implements ValidatorContextTest
         @Override
         public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
                                             final T value) {
-            Objects.requireNonNull(name, "name");
-            Objects.requireNonNull(value, "value");
-            throw new UnsupportedOperationException();
+            this.context.setEnvironmentValue(name, value);
         }
 
         @Override
         public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
-            Objects.requireNonNull(name, "name");
-            throw new UnsupportedOperationException();
+            this.context.removeEnvironmentValue(name);
         }
 
         @Override
         public void setLocale(final Locale locale) {
-            Objects.requireNonNull(locale, "locale");
-            throw new UnsupportedOperationException();
+            this.context.setLocale(locale);
         }
 
         @Override
         public void setUser(final Optional<EmailAddress> user) {
-            Objects.requireNonNull(user, "user");
-            throw new UnsupportedOperationException();
+            this.context.setUser(user);
         }
 
         @Override
