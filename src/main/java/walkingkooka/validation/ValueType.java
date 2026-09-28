@@ -32,6 +32,7 @@ import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -100,6 +101,10 @@ final public class ValueType implements PluginNameLike<ValueType>,
     public final static String CSV_LIST_STRING = "list(csv)";
 
     public final static ValueType CSV_LIST = new ValueType(CSV_LIST_STRING);
+
+    public static final String CURRENCY_STRING = "currency";
+
+    public static final ValueType CURRENCY = new ValueType(CURRENCY_STRING);
     
     public final static String DATA_URL_STRING = "url(data)";
 
@@ -310,6 +315,9 @@ final public class ValueType implements PluginNameLike<ValueType>,
         switch (klass) {
             case "java.lang.Boolean":
                 valueType = BOOLEAN;
+                break;
+            case "java.util.Currency":
+                valueType = CURRENCY;
                 break;
             case "walkingkooka.net.email.EmailAddress":
                 valueType = EMAIL;
@@ -546,6 +554,9 @@ final public class ValueType implements PluginNameLike<ValueType>,
             case CSV_LIST_STRING:
                 valueType = CSV_LIST;
                 break;
+            case CURRENCY_STRING:
+                valueType = CURRENCY;
+                break;
             case DATE_STRING:
                 valueType = DATE;
                 break;
@@ -729,6 +740,13 @@ final public class ValueType implements PluginNameLike<ValueType>,
         return BOOLEAN_STRING.equals(this.prefix());
     }
 
+    /**
+     * Returns true if this {@link ValueType} is a {@link Currency}.
+     */
+    public boolean isCurrency() {
+        return CURRENCY_STRING.equals(this.prefix());
+    }
+    
     /**
      * Returns true if this {@link ValueType} is a date value such as {@link #DATE}, but not {@link #DATE_TIME}.
      */
