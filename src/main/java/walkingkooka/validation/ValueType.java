@@ -18,6 +18,7 @@
 package walkingkooka.validation;
 
 import walkingkooka.Cast;
+import walkingkooka.currency.CurrencyCode;
 import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.naming.Name;
 import walkingkooka.net.header.HasContentType;
@@ -105,6 +106,10 @@ final public class ValueType implements PluginNameLike<ValueType>,
     public static final String CURRENCY_STRING = "currency";
 
     public static final ValueType CURRENCY = new ValueType(CURRENCY_STRING);
+
+    public static final String CURRENCY_CODE_STRING = "currency-code";
+
+    public static final ValueType CURRENCY_CODE = new ValueType(CURRENCY_CODE_STRING);
     
     public final static String DATA_URL_STRING = "url(data)";
 
@@ -318,6 +323,9 @@ final public class ValueType implements PluginNameLike<ValueType>,
                 break;
             case "java.util.Currency":
                 valueType = CURRENCY;
+                break;
+            case "walkingkooka.currency.CurrencyCode":
+                valueType = CURRENCY_CODE;
                 break;
             case "walkingkooka.net.email.EmailAddress":
                 valueType = EMAIL;
@@ -557,6 +565,9 @@ final public class ValueType implements PluginNameLike<ValueType>,
             case CURRENCY_STRING:
                 valueType = CURRENCY;
                 break;
+            case CURRENCY_CODE_STRING:
+                valueType = CURRENCY_CODE;
+                break;
             case DATE_STRING:
                 valueType = DATE;
                 break;
@@ -745,6 +756,13 @@ final public class ValueType implements PluginNameLike<ValueType>,
      */
     public boolean isCurrency() {
         return CURRENCY_STRING.equals(this.prefix());
+    }
+
+    /**
+     * Returns true if this {@link ValueType} is a {@link CurrencyCode}.
+     */
+    public boolean isCurrencyCode() {
+        return CURRENCY_CODE_STRING.equals(this.prefix());
     }
     
     /**
