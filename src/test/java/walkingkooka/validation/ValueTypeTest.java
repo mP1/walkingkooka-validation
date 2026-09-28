@@ -38,6 +38,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.BooleanList;
 import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.StringList;
+import walkingkooka.currency.CurrencyCode;
 import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.math.DecimalNumberSymbols;
 import walkingkooka.math.NumberList;
@@ -172,6 +173,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
         this.fromClassNameAndCheck(
             Currency.class,
             ValueType.CURRENCY
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithCurrencyCode() {
+        this.fromClassNameAndCheck(
+            CurrencyCode.class,
+            ValueType.CURRENCY_CODE
         );
     }
 
@@ -696,6 +705,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
     public void testIsAnyWithBoolean() {
         this.isAnyAndCheck(
             ValueType.BOOLEAN,
+            false
+        );
+    }
+
+    @Test
+    public void testIsAnyWithCurrencyCode() {
+        this.isAnyAndCheck(
+            ValueType.CURRENCY_CODE,
             false
         );
     }
