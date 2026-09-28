@@ -87,6 +87,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Currency;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -163,6 +164,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
         this.fromClassNameAndCheck(
             CsvStringList.class,
             ValueType.CSV_LIST
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithCurrency() {
+        this.fromClassNameAndCheck(
+            Currency.class,
+            ValueType.CURRENCY
         );
     }
 
