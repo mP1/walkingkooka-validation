@@ -233,6 +233,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
     }
 
     @Test
+    public void testFromClassNameWithEmail() {
+        this.fromClassNameAndCheck(
+            EmailAddress.class,
+            ValueType.EMAIL
+        );
+    }
+
+    @Test
     public void testFromClassNameWithEqualsExpression() {
         this.fromClassNameAndCheck(
             EqualsExpression.class,

@@ -147,6 +147,10 @@ final public class ValueType implements PluginNameLike<ValueType>,
 
     public final static ValueType EMAIL = new ValueType(EMAIL_STRING);
 
+    public final static String ENVIRONMENT_STRING = "environment";
+
+    public final static ValueType ENVIRONMENT = new ValueType(ENVIRONMENT_STRING);
+
     public final static String EQUALS_EXPRESSION_STRING = "expression(equals)";
 
     public final static ValueType EQUALS_EXPRESSION = new ValueType(EQUALS_EXPRESSION_STRING);
@@ -387,6 +391,9 @@ final public class ValueType implements PluginNameLike<ValueType>,
             case "walkingkooka.datetime.LocalDateTimeList":
                 valueType = DATE_TIME_LIST;
                 break;
+            case "walkingkooka.environment.Environment":
+                valueType = ENVIRONMENT;
+                break;
             case "walkingkooka.validation.ValidationError":
                 valueType = ERROR;
                 break;
@@ -591,6 +598,9 @@ final public class ValueType implements PluginNameLike<ValueType>,
                 break;
             case EMAIL_STRING:
                 valueType = EMAIL;
+                break;
+            case ENVIRONMENT_STRING:
+                valueType = ENVIRONMENT;
                 break;
             case EQUALS_EXPRESSION_STRING:
                 valueType = EQUALS_EXPRESSION;
@@ -798,6 +808,13 @@ final public class ValueType implements PluginNameLike<ValueType>,
      */
     public boolean isEmail() {
         return EMAIL_STRING.equals(this.prefix());
+    }
+
+    /**
+     * Returns true if this {@link ValueType} is a {@link walkingkooka.environment.Environment}.
+     */
+    public boolean isEnvironment() {
+        return ENVIRONMENT_STRING.equals(this.prefix());
     }
 
     /**
