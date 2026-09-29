@@ -40,6 +40,7 @@ import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.StringList;
 import walkingkooka.currency.CurrencyCode;
 import walkingkooka.datetime.DateTimeSymbols;
+import walkingkooka.environment.Environment;
 import walkingkooka.math.DecimalNumberSymbols;
 import walkingkooka.math.NumberList;
 import walkingkooka.net.AbsoluteUrl;
@@ -597,6 +598,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
         this.fromClassNameAndCheck(
             EmailAddress.class,
             ValueType.EMAIL
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithEnvironment() {
+        this.fromClassNameAndCheck(
+            Environment.class,
+            ValueType.ENVIRONMENT
         );
     }
 
