@@ -114,6 +114,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
     }
 
     @Test
+    public void testFromClassNameWithAbsoluteUrl() {
+        this.fromClassNameAndCheck(
+            AbsoluteUrl.class,
+            ValueType.ABSOLUTE_URL
+        );
+    }
+
+    @Test
     public void testFromClassNameWithAddExpression() {
         this.fromClassNameAndCheck(
             AddExpression.class,
@@ -126,6 +134,22 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
         this.fromClassNameAndCheck(
             AndExpression.class,
             ValueType.AND_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithBigDecimal() {
+        this.fromClassNameAndCheck(
+            BigDecimal.class,
+            ValueType.with("number(BigDecimal)")
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithBigInteger() {
+        this.fromClassNameAndCheck(
+            BigInteger.class,
+            ValueType.with("number(BigInteger)")
         );
     }
 
@@ -150,6 +174,22 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
         this.fromClassNameAndCheck(
             BooleanList.class,
             ValueType.BOOLEAN_LIST
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithByteType() {
+        this.fromClassNameAndCheck(
+            Byte.TYPE,
+            ValueType.with("byte")
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithByteClass() {
+        this.fromClassNameAndCheck(
+            Byte.class,
+            ValueType.with("number(Byte)")
         );
     }
 
@@ -202,154 +242,10 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
     }
 
     @Test
-    public void testFromClassNameWithLocalDate() {
-        this.fromClassNameAndCheck(
-            LocalDate.class,
-            ValueType.DATE
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithLocalDateTime() {
-        this.fromClassNameAndCheck(
-            LocalDateTime.class,
-            ValueType.DATE_TIME
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithLocalTime() {
-        this.fromClassNameAndCheck(
-            LocalTime.class,
-            ValueType.TIME
-        );
-    }
-
-    @Test
     public void testFromClassNameWithDivideExpression() {
         this.fromClassNameAndCheck(
             CallExpression.class,
             ValueType.CALL_EXPRESSION
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithEmail() {
-        this.fromClassNameAndCheck(
-            EmailAddress.class,
-            ValueType.EMAIL
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithEqualsExpression() {
-        this.fromClassNameAndCheck(
-            EqualsExpression.class,
-            ValueType.EQUALS_EXPRESSION
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithExpression() {
-        this.fromClassNameAndCheck(
-            Expression.class,
-            ValueType.EXPRESSION
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithGreaterThanExpression() {
-        this.fromClassNameAndCheck(
-            GreaterThanExpression.class,
-            ValueType.GREATER_THAN_EXPRESSION
-        );
-    }
-    
-    @Test
-    public void testFromClassNameWithGreaterThanEqualsExpression() {
-        this.fromClassNameAndCheck(
-            GreaterThanEqualsExpression.class,
-            ValueType.GREATER_THAN_EQUALS_EXPRESSION
-        );
-    }
-    
-    @Test
-    public void testFromClassNameWithByteType() {
-        this.fromClassNameAndCheck(
-            Byte.TYPE,
-            ValueType.with("byte")
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithByteClass() {
-        this.fromClassNameAndCheck(
-            Byte.class,
-            ValueType.with("number(Byte)")
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithShortType() {
-        this.fromClassNameAndCheck(
-            Short.TYPE,
-            ValueType.with("short")
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithShortClass() {
-        this.fromClassNameAndCheck(
-            Short.class,
-            ValueType.with("number(Short)")
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithIntegerType() {
-        this.fromClassNameAndCheck(
-            Integer.TYPE,
-            ValueType.with("int")
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithIntegerClass() {
-        this.fromClassNameAndCheck(
-            Integer.class,
-            ValueType.with("number(Integer)")
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithLongType() {
-        this.fromClassNameAndCheck(
-            Long.TYPE,
-            ValueType.with("long")
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithLongClass() {
-        this.fromClassNameAndCheck(
-            Long.class,
-            ValueType.with("number(Long)")
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithFloatType() {
-        this.fromClassNameAndCheck(
-            Float.TYPE,
-            ValueType.with("float")
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithFloatClass() {
-        this.fromClassNameAndCheck(
-            Float.class,
-            ValueType.with("number(Float)")
         );
     }
 
@@ -370,18 +266,90 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
     }
 
     @Test
-    public void testFromClassNameWithBigDecimal() {
+    public void testFromClassNameWithEmail() {
         this.fromClassNameAndCheck(
-            BigDecimal.class,
-            ValueType.with("number(BigDecimal)")
+            EmailAddress.class,
+            ValueType.EMAIL
         );
     }
 
     @Test
-    public void testFromClassNameWithBigInteger() {
+    public void testFromClassNameWithEmailAddress() {
         this.fromClassNameAndCheck(
-            BigInteger.class,
-            ValueType.with("number(BigInteger)")
+            EmailAddress.class,
+            ValueType.EMAIL
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithEnvironment() {
+        this.fromClassNameAndCheck(
+            Environment.class,
+            ValueType.ENVIRONMENT
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithEqualsExpression() {
+        this.fromClassNameAndCheck(
+            EqualsExpression.class,
+            ValueType.EQUALS_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithExpression() {
+        this.fromClassNameAndCheck(
+            Expression.class,
+            ValueType.EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithFloatType() {
+        this.fromClassNameAndCheck(
+            Float.TYPE,
+            ValueType.with("float")
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithFloatClass() {
+        this.fromClassNameAndCheck(
+            Float.class,
+            ValueType.with("number(Float)")
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithGreaterThanExpression() {
+        this.fromClassNameAndCheck(
+            GreaterThanExpression.class,
+            ValueType.GREATER_THAN_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithGreaterThanEqualsExpression() {
+        this.fromClassNameAndCheck(
+            GreaterThanEqualsExpression.class,
+            ValueType.GREATER_THAN_EQUALS_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithIntegerType() {
+        this.fromClassNameAndCheck(
+            Integer.TYPE,
+            ValueType.with("int")
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithIntegerClass() {
+        this.fromClassNameAndCheck(
+            Integer.class,
+            ValueType.with("number(Integer)")
         );
     }
 
@@ -474,6 +442,46 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
     }
 
     @Test
+    public void testFromClassNameWithLocalDate() {
+        this.fromClassNameAndCheck(
+            LocalDate.class,
+            ValueType.DATE
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithLocalDateTime() {
+        this.fromClassNameAndCheck(
+            LocalDateTime.class,
+            ValueType.DATE_TIME
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithLocalTime() {
+        this.fromClassNameAndCheck(
+            LocalTime.class,
+            ValueType.TIME
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithLongType() {
+        this.fromClassNameAndCheck(
+            Long.TYPE,
+            ValueType.with("long")
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithLongClass() {
+        this.fromClassNameAndCheck(
+            Long.class,
+            ValueType.with("number(Long)")
+        );
+    }
+
+    @Test
     public void testFromClassNameWithModuloExpression() {
         this.fromClassNameAndCheck(
             ModuloExpression.class,
@@ -512,7 +520,7 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
             ValueType.NOT_EQUALS_EXPRESSION
         );
     }
-    
+
     @Test
     public void testFromClassNameWithNotExpression() {
         this.fromClassNameAndCheck(
@@ -520,12 +528,20 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
             ValueType.NOT_EXPRESSION
         );
     }
-    
+
     @Test
     public void testFromClassNameWithNumberList() {
         this.fromClassNameAndCheck(
             NumberList.class,
             ValueType.NUMBER_LIST
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithObject() {
+        this.fromClassNameAndCheck(
+            Object.class,
+            ValueType.ANY
         );
     }
 
@@ -550,6 +566,22 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
         this.fromClassNameAndCheck(
             ReferenceExpression.class,
             ValueType.REFERENCE_EXPRESSION
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithShortType() {
+        this.fromClassNameAndCheck(
+            Short.TYPE,
+            ValueType.with("short")
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithShortClass() {
+        this.fromClassNameAndCheck(
+            Short.class,
+            ValueType.with("number(Short)")
         );
     }
 
@@ -594,26 +626,26 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
     }
 
     @Test
-    public void testFromClassNameWithEmailAddress() {
+    public void testFromClassNameWithValidationChoiceList() {
         this.fromClassNameAndCheck(
-            EmailAddress.class,
-            ValueType.EMAIL
+            ValidationChoiceList.class,
+            ValueType.CHOICE_LIST
         );
     }
 
     @Test
-    public void testFromClassNameWithEnvironment() {
+    public void testFromClassNameWithValidationError() {
         this.fromClassNameAndCheck(
-            Environment.class,
-            ValueType.ENVIRONMENT
+            ValidationError.class,
+            ValueType.ERROR
         );
     }
 
     @Test
-    public void testFromClassNameWithAbsoluteUrl() {
+    public void testFromClassNameWithValidationErrorList() {
         this.fromClassNameAndCheck(
-            AbsoluteUrl.class,
-            ValueType.ABSOLUTE_URL
+            ValidationErrorList.class,
+            ValueType.ERROR_LIST
         );
     }
 
@@ -638,38 +670,6 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
         this.fromClassNameAndCheck(
             XorExpression.class,
             ValueType.XOR_EXPRESSION
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithObject() {
-        this.fromClassNameAndCheck(
-            Object.class,
-            ValueType.ANY
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithValidationChoiceList() {
-        this.fromClassNameAndCheck(
-            ValidationChoiceList.class,
-            ValueType.CHOICE_LIST
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithValidationError() {
-        this.fromClassNameAndCheck(
-            ValidationError.class,
-            ValueType.ERROR
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithValidationErrorList() {
-        this.fromClassNameAndCheck(
-            ValidationErrorList.class,
-            ValueType.ERROR_LIST
         );
     }
 
