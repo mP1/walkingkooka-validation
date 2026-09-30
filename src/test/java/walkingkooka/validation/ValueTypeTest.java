@@ -39,6 +39,7 @@ import walkingkooka.collect.list.BooleanList;
 import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.StringList;
 import walkingkooka.currency.CurrencyCode;
+import walkingkooka.currency.CurrencyValue;
 import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.environment.Environment;
 import walkingkooka.math.DecimalNumberSymbols;
@@ -222,6 +223,14 @@ final public class ValueTypeTest implements PluginNameTesting<ValueType>,
         this.fromClassNameAndCheck(
             CurrencyCode.class,
             ValueType.CURRENCY_CODE
+        );
+    }
+
+    @Test
+    public void testFromClassNameWithCurrencyValue() {
+        this.fromClassNameAndCheck(
+            CurrencyValue.class,
+            ValueType.CURRENCY_VALUE
         );
     }
 

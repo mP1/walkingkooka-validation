@@ -19,6 +19,7 @@ package walkingkooka.validation;
 
 import walkingkooka.Cast;
 import walkingkooka.currency.CurrencyCode;
+import walkingkooka.currency.CurrencyValue;
 import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.naming.Name;
 import walkingkooka.net.header.HasContentType;
@@ -110,7 +111,11 @@ final public class ValueType implements PluginNameLike<ValueType>,
     public static final String CURRENCY_CODE_STRING = "currency-code";
 
     public static final ValueType CURRENCY_CODE = new ValueType(CURRENCY_CODE_STRING);
-    
+
+    public static final String CURRENCY_VALUE_STRING = "currency-value";
+
+    public static final ValueType CURRENCY_VALUE = new ValueType(CURRENCY_VALUE_STRING);
+
     public final static String DATA_URL_STRING = "url(data)";
 
     public final static ValueType DATA_URL = new ValueType(DATA_URL_STRING);
@@ -375,6 +380,9 @@ final public class ValueType implements PluginNameLike<ValueType>,
             case "walkingkooka.currency.CurrencyCode":
                 valueType = CURRENCY_CODE;
                 break;
+            case "walkingkooka.currency.CurrencyValue":
+                valueType = CURRENCY_VALUE;
+                break;
             case "walkingkooka.datetime.DateTimeSymbols":
                 valueType = DATE_TIME_SYMBOLS;
                 break;
@@ -575,6 +583,9 @@ final public class ValueType implements PluginNameLike<ValueType>,
             case CURRENCY_CODE_STRING:
                 valueType = CURRENCY_CODE;
                 break;
+            case CURRENCY_VALUE_STRING:
+                valueType = CURRENCY_VALUE;
+                break;
             case DATE_STRING:
                 valueType = DATE;
                 break;
@@ -773,6 +784,13 @@ final public class ValueType implements PluginNameLike<ValueType>,
      */
     public boolean isCurrencyCode() {
         return CURRENCY_CODE_STRING.equals(this.prefix());
+    }
+
+    /**
+     * Returns true if this {@link ValueType} is a {@link CurrencyValue}.
+     */
+    public boolean isCurrencyValue() {
+        return CURRENCY_VALUE_STRING.equals(this.prefix());
     }
     
     /**
