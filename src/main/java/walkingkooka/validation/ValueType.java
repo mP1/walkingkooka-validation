@@ -325,9 +325,6 @@ final public class ValueType implements PluginNameLike<ValueType>,
             case "java.lang.Boolean":
                 valueType = BOOLEAN;
                 break;
-            case "java.util.Currency":
-                valueType = CURRENCY;
-                break;
             case "java.lang.Object":
                 valueType = ANY;
                 break;
@@ -356,6 +353,9 @@ final public class ValueType implements PluginNameLike<ValueType>,
                 break;
             case "java.time.LocalTime":
                 valueType = TIME;
+                break;
+            case "java.util.Currency":
+                valueType = CURRENCY;
                 break;
             case "java.util.List":
                 valueType = LIST;
