@@ -328,38 +328,6 @@ final public class ValueType implements PluginNameLike<ValueType>,
             case "java.util.Currency":
                 valueType = CURRENCY;
                 break;
-            case "walkingkooka.currency.CurrencyCode":
-                valueType = CURRENCY_CODE;
-                break;
-            case "walkingkooka.net.email.EmailAddress":
-                valueType = EMAIL;
-                break;
-            case "walkingkooka.net.Url":
-                valueType = URL;
-                break;
-            case "walkingkooka.net.AbsoluteUrl":
-                valueType = ABSOLUTE_URL;
-                break;
-            case "walkingkooka.net.DataUrl":
-                valueType = DATA_URL;
-                break;
-            case "walkingkooka.net.MailToUrl":
-                valueType = MAIL_TO_URL;
-                break;
-            case "walkingkooka.net.RelativeUrl":
-                valueType = RELATIVE_URL;
-                break;
-            case "walkingkooka.datetime.DateTimeSymbols":
-                valueType = DATE_TIME_SYMBOLS;
-                break;
-            case "walkingkooka.math.DecimalNumberSymbols":
-                valueType = DECIMAL_NUMBER_SYMBOLS;
-                break;
-            case "walkingkooka.tree.expression.ExpressionNumber":
-            case "walkingkooka.tree.expression.ExpressionNumberBigDecimal":
-            case "walkingkooka.tree.expression.ExpressionNumberDouble":
-                valueType = NUMBER;
-                break;
             case "java.lang.Object":
                 valueType = ANY;
                 break;
@@ -372,45 +340,6 @@ final public class ValueType implements PluginNameLike<ValueType>,
             case "java.math.BigDecimal":
             case "java.math.BigInteger":
                 valueType = with("number(" + classSimpleName(klass) + ")");
-                break;
-            case "java.util.List":
-                valueType = LIST;
-                break;
-            case "walkingkooka.collect.list.BooleanList":
-                valueType = BOOLEAN_LIST;
-                break;
-            case "walkingkooka.validation.ValidationChoiceList":
-                valueType = CHOICE_LIST;
-                break;
-            case "walkingkooka.collect.list.CsvStringList":
-                valueType = CSV_LIST;
-                break;
-            case "walkingkooka.datetime.LocalDateList":
-                valueType = DATE_LIST;
-                break;
-            case "walkingkooka.datetime.LocalDateTimeList":
-                valueType = DATE_TIME_LIST;
-                break;
-            case "walkingkooka.environment.Environment":
-                valueType = ENVIRONMENT;
-                break;
-            case "walkingkooka.validation.ValidationError":
-                valueType = ERROR;
-                break;
-            case "walkingkooka.validation.ValidationErrorList":
-                valueType = ERROR_LIST;
-                break;
-            case "walkingkooka.datetime.LocalTimeList":
-                valueType = TIME_LIST;
-                break;
-            case "walkingkooka.math.NumberList":
-                valueType = NUMBER_LIST;
-                break;
-            case "walkingkooka.collect.list.StringList":
-                valueType = STRING_LIST;
-                break;
-            case "java.util.Locale":
-                valueType = LOCALE;
                 break;
             case "java.lang.String":
                 valueType = TEXT;
@@ -427,6 +356,68 @@ final public class ValueType implements PluginNameLike<ValueType>,
                 break;
             case "java.time.LocalTime":
                 valueType = TIME;
+                break;
+            case "java.util.List":
+                valueType = LIST;
+                break;
+            case "java.util.Locale":
+                valueType = LOCALE;
+                break;
+            case "walkingkooka.collect.list.BooleanList":
+                valueType = BOOLEAN_LIST;
+                break;
+            case "walkingkooka.collect.list.CsvStringList":
+                valueType = CSV_LIST;
+                break;
+            case "walkingkooka.collect.list.StringList":
+                valueType = STRING_LIST;
+                break;
+            case "walkingkooka.currency.CurrencyCode":
+                valueType = CURRENCY_CODE;
+                break;
+            case "walkingkooka.datetime.DateTimeSymbols":
+                valueType = DATE_TIME_SYMBOLS;
+                break;
+            case "walkingkooka.datetime.LocalDateList":
+                valueType = DATE_LIST;
+                break;
+            case "walkingkooka.datetime.LocalDateTimeList":
+                valueType = DATE_TIME_LIST;
+                break;
+            case "walkingkooka.datetime.LocalTimeList":
+                valueType = TIME_LIST;
+                break;
+            case "walkingkooka.environment.Environment":
+                valueType = ENVIRONMENT;
+                break;
+            case "walkingkooka.math.DecimalNumberSymbols":
+                valueType = DECIMAL_NUMBER_SYMBOLS;
+                break;
+            case "walkingkooka.math.NumberList":
+                valueType = NUMBER_LIST;
+                break;
+            case "walkingkooka.net.AbsoluteUrl":
+                valueType = ABSOLUTE_URL;
+                break;
+            case "walkingkooka.net.DataUrl":
+                valueType = DATA_URL;
+                break;
+            case "walkingkooka.net.MailToUrl":
+                valueType = MAIL_TO_URL;
+                break;
+            case "walkingkooka.net.RelativeUrl":
+                valueType = RELATIVE_URL;
+                break;
+            case "walkingkooka.net.Url":
+                valueType = URL;
+                break;
+            case "walkingkooka.net.email.EmailAddress":
+                valueType = EMAIL;
+                break;
+            case "walkingkooka.tree.expression.ExpressionNumber":
+            case "walkingkooka.tree.expression.ExpressionNumberBigDecimal":
+            case "walkingkooka.tree.expression.ExpressionNumberDouble":
+                valueType = NUMBER;
                 break;
             case "walkingkooka.tree.expression.AddExpression":
                 valueType = ADD_EXPRESSION;
@@ -520,6 +511,15 @@ final public class ValueType implements PluginNameLike<ValueType>,
                 break;
             case "walkingkooka.tree.json.JsonString":
                 valueType = JSON_STRING;
+                break;
+            case "walkingkooka.validation.ValidationChoiceList":
+                valueType = CHOICE_LIST;
+                break;
+            case "walkingkooka.validation.ValidationError":
+                valueType = ERROR;
+                break;
+            case "walkingkooka.validation.ValidationErrorList":
+                valueType = ERROR_LIST;
                 break;
             default:
                 valueType = with(klass);
