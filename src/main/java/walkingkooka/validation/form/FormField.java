@@ -351,7 +351,7 @@ public final class FormField<R extends ValidationReference> implements TreePrint
     }
 
     static {
-        ValueType.with("text");
+        ValueType.TEXT.value();
         ValidatorSelector.parse("hello");
 
         JsonNodeContext.register(

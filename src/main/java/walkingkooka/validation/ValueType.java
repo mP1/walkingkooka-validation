@@ -18,34 +18,97 @@
 package walkingkooka.validation;
 
 import walkingkooka.Cast;
+import walkingkooka.HasValue;
+import walkingkooka.InvalidTextLengthException;
+import walkingkooka.collect.list.BooleanList;
+import walkingkooka.collect.list.CsvStringList;
+import walkingkooka.collect.list.StringList;
+import walkingkooka.collect.list.TsvStringList;
+import walkingkooka.collect.map.Maps;
 import walkingkooka.currency.CurrencyCode;
+import walkingkooka.currency.CurrencyCodeSet;
 import walkingkooka.currency.CurrencyValue;
 import walkingkooka.datetime.DateTimeSymbols;
+import walkingkooka.datetime.LocalDateList;
+import walkingkooka.datetime.LocalDateTimeList;
+import walkingkooka.datetime.LocalTimeList;
+import walkingkooka.environment.Environment;
+import walkingkooka.environment.EnvironmentValueName;
+import walkingkooka.locale.LocaleLanguageTag;
+import walkingkooka.locale.LocaleLanguageTagSet;
+import walkingkooka.math.DecimalNumberSymbols;
+import walkingkooka.math.NumberList;
 import walkingkooka.naming.Name;
+import walkingkooka.net.AbsoluteUrl;
+import walkingkooka.net.DataUrl;
+import walkingkooka.net.MailToUrl;
+import walkingkooka.net.RelativeUrl;
+import walkingkooka.net.email.EmailAddress;
 import walkingkooka.net.header.HasContentType;
 import walkingkooka.net.header.MediaType;
 import walkingkooka.net.http.server.hateos.HateosResourceName;
 import walkingkooka.plugin.PluginName;
-import walkingkooka.plugin.PluginNameLike;
 import walkingkooka.text.CaseSensitivity;
+import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasCaseSensitivity;
+import walkingkooka.text.printer.IndentingPrinter;
+import walkingkooka.text.printer.TreePrintable;
+import walkingkooka.tree.expression.AddExpression;
+import walkingkooka.tree.expression.AndExpression;
+import walkingkooka.tree.expression.CallExpression;
+import walkingkooka.tree.expression.DivideExpression;
+import walkingkooka.tree.expression.EqualsExpression;
+import walkingkooka.tree.expression.Expression;
+import walkingkooka.tree.expression.ExpressionNumber;
+import walkingkooka.tree.expression.ExpressionNumberKind;
+import walkingkooka.tree.expression.GreaterThanEqualsExpression;
+import walkingkooka.tree.expression.GreaterThanExpression;
+import walkingkooka.tree.expression.LambdaFunctionExpression;
+import walkingkooka.tree.expression.LessThanEqualsExpression;
+import walkingkooka.tree.expression.LessThanExpression;
+import walkingkooka.tree.expression.ListExpression;
+import walkingkooka.tree.expression.ModuloExpression;
+import walkingkooka.tree.expression.MultiplyExpression;
+import walkingkooka.tree.expression.NamedFunctionExpression;
+import walkingkooka.tree.expression.NegativeExpression;
+import walkingkooka.tree.expression.NotEqualsExpression;
+import walkingkooka.tree.expression.NotExpression;
+import walkingkooka.tree.expression.OrExpression;
+import walkingkooka.tree.expression.PowerExpression;
+import walkingkooka.tree.expression.ReferenceExpression;
+import walkingkooka.tree.expression.SubtractExpression;
+import walkingkooka.tree.expression.ValueExpression;
+import walkingkooka.tree.expression.XorExpression;
+import walkingkooka.tree.json.JsonArray;
+import walkingkooka.tree.json.JsonBoolean;
 import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.JsonNull;
+import walkingkooka.tree.json.JsonNumber;
+import walkingkooka.tree.json.JsonObject;
+import walkingkooka.tree.json.JsonString;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
 /**
  * The {@link Name} of a supported validation value. Note names must be lower-cased kebab-case not camel-case.
  */
-final public class ValueType implements PluginNameLike<ValueType>,
-    HasCaseSensitivity,
-    HasContentType {
+final public class ValueType implements HasCaseSensitivity,
+    HasContentType,
+    HasValue<String>,
+    TreePrintable {
 
     public static final String HATEOS_RESOURCE_NAME_STRING = "type";
 
@@ -66,689 +129,268 @@ final public class ValueType implements PluginNameLike<ValueType>,
      */
     public final static int MAX_LENGTH = PluginName.MAX_LENGTH;
 
+    private final static Map<String, ValueType> CLASS_NAME_TO_VALUE_TYPE = Maps.sorted();
+
+    private final static Map<Class<?>, ValueType> CLASS_TO_VALUE_TYPE = Maps.hash();
+
+    static {
+        register("url(absolute)", AbsoluteUrl.class);
+        register("expression(add)", AddExpression.class);
+        register("expression(and)", AndExpression.class);
+        ANY = register("*", Object.class);
+        BOOLEAN = register("boolean", Boolean.class);
+        register("list(boolean)", BooleanList.class);
+        register("expression(call)", CallExpression.class);
+        register("list(choice)", ValidationChoiceList.class);
+        register("list(csv)", CsvStringList.class);
+        register("currency", Currency.class);
+        register("currency-code", CurrencyCode.class);
+        register("currency-code-set", CurrencyCodeSet.class);
+        register("currency-value", CurrencyValue.class);
+        register("url(data)", DataUrl.class);
+        DATE = register("date", LocalDate.class);
+        register("list(date)", LocalDateList.class);
+        register("date(date-time-symbols)", DateTimeSymbols.class);
+        register("number(decimal-number-symbols)", DecimalNumberSymbols.class);
+        DATE_TIME = register("date-time", LocalDateTime.class);
+        register("list(date-time)", LocalDateTimeList.class);
+        register("expression(divide)", DivideExpression.class);
+        EMAIL = register("email", EmailAddress.class);
+        register("environment", Environment.class);
+        register("environment-value-name", EnvironmentValueName.class);
+        register("expression", Expression.class);
+        register("expression(equals)", EqualsExpression.class);
+        register("expression(greater-than)", GreaterThanExpression.class);
+        register("expression(greater-than-equals)", GreaterThanEqualsExpression.class);
+        register("json", JsonNode.class);
+        register("json(array)", JsonArray.class);
+        register("json(boolean)", JsonBoolean.class);
+        register("json(null)", JsonNull.class);
+        register("json(number)", JsonNumber.class);
+        register("json(object)", JsonObject.class);
+        register("json(string)", JsonString.class);
+        register("expression(lambda)", LambdaFunctionExpression.class);
+        register("expression(less-than)", LessThanExpression.class);
+        register("expression(less-than-equals)", LessThanEqualsExpression.class);
+        register("list", List.class);
+        register("expression(list)", ListExpression.class);
+        LOCALE = register("locale", Locale.class);
+        register("locale-language-tag", LocaleLanguageTag.class);
+        register("locale-language-tag-set", LocaleLanguageTagSet.class);
+        register("url(mail-to)", MailToUrl.class);
+        register("expression(modulo)", ModuloExpression.class);
+        register("expression(multiply)", MultiplyExpression.class);
+        register("expression(named-function)", NamedFunctionExpression.class);
+        register("expression(negative)", NegativeExpression.class);
+        register("expression(not)", NotExpression.class);
+        register("expression(not-equals)", NotEqualsExpression.class);
+
+        NUMBER = register("number", ExpressionNumber.class);
+        CLASS_TO_VALUE_TYPE.put(
+            ExpressionNumberKind.BIG_DECIMAL.zero()
+                .getClass(),
+            ValueType.NUMBER
+        );
+        CLASS_NAME_TO_VALUE_TYPE.put(
+            ExpressionNumberKind.BIG_DECIMAL.zero()
+                .getClass()
+                .getSimpleName(),
+            ValueType.NUMBER
+        );
+        CLASS_TO_VALUE_TYPE.put(
+            ExpressionNumberKind.DOUBLE.zero()
+                .getClass(),
+            ValueType.NUMBER
+        );
+        CLASS_NAME_TO_VALUE_TYPE.put(
+            ExpressionNumberKind.DOUBLE.zero()
+                .getClass()
+                .getSimpleName(),
+            ValueType.NUMBER
+        );
+
+        register("whole-number(byte)", Byte.class);
+        register("number(double)", Double.class);
+        register("number(float)", Float.class);
+        register("whole-number(integer)", Integer.class);
+        register("whole-number(long)", Long.class);
+        register("whole-number(short)", Short.class);
+        register("number(big-decimal)", BigDecimal.class);
+        register("whole-number(big-integer)", BigInteger.class);
+        register("list(number)", NumberList.class);
+        register("expression(or)", OrExpression.class);
+        register("expression(power)", PowerExpression.class);
+        register("expression(reference)", ReferenceExpression.class);
+        register("url(relative)", RelativeUrl.class);
+        register("text(StringBuffer)", StringBuffer.class);
+        register("text(StringBuilder)", StringBuilder.class);
+        register("list(string)", StringList.class);
+        register("expression(subtract)", SubtractExpression.class);
+
+        TEXT = register("text", String.class);
+        CLASS_TO_VALUE_TYPE.put(
+            String.class,
+            ValueType.TEXT
+        );
+
+        TIME = register("time", LocalTime.class);
+        register("list(time)", LocalTimeList.class);
+        register("list(tsv)", TsvStringList.class);
+        register("expression(value)", ValueExpression.class);
+        ERROR = register("error", ValidationError.class);
+        ERROR_LIST = register("list(error)", ValidationErrorList.class);
+        register("expression(xor)", XorExpression.class);
+    }
+
+    static {
+        CLASS_NAME_TO_VALUE_TYPE.put(
+            "number(big-decimal)",
+            ValueType.NUMBER
+        );
+        CLASS_NAME_TO_VALUE_TYPE.put(
+            "number(double)",
+            ValueType.NUMBER
+        );
+    }
+
+    public static ValueType register(final String label,
+                                     final Class<?> type) {
+        CharSequences.failIfNullOrEmpty(label, "label");
+        Objects.requireNonNull(type, "type");
+
+        if (CLASS_NAME_TO_VALUE_TYPE.containsKey(label)) {
+            throw new IllegalArgumentException("Duplicate type " + label + " registration");
+        }
+
+        final ValueType valueType = new ValueType(label, type);
+
+        final String typeName = type.getSimpleName();
+
+        if (CLASS_NAME_TO_VALUE_TYPE.containsKey(typeName)) {
+            throw new IllegalArgumentException("Duplicate type " + typeName + " registration");
+        }
+        if(false == label.equals(typeName)) {
+            CLASS_NAME_TO_VALUE_TYPE.put(
+                label,
+                valueType
+            );
+        }
+        CLASS_NAME_TO_VALUE_TYPE.put(
+            typeName,
+            valueType
+        );
+        CLASS_TO_VALUE_TYPE.put(
+            type,
+            valueType
+        );
+
+        return valueType;
+    }
+
+    public static Optional<ValueType> fromClass(final Class<?> klass) {
+        Objects.requireNonNull(klass, "klass");
+
+        return Optional.ofNullable(
+            CLASS_TO_VALUE_TYPE.get(klass)
+        );
+    }
+
+    public static ValueType fromClassOrFail(final Class<?> klass) {
+        ValueType valueType = fromClass(klass)
+            .orElse(null);
+        if (null == valueType) {
+            valueType = new ValueType(
+                klass.getSimpleName(),
+                klass
+            );
+        }
+        return valueType;
+    }
+
+    public static Optional<ValueType> fromClassName(final String name) {
+        Objects.requireNonNull(name, "name");
+
+        return Optional.ofNullable(
+            CLASS_NAME_TO_VALUE_TYPE.get(name)
+        );
+    }
+
     // constants........................................................................................................
-
-    public final static String ABSOLUTE_URL_STRING = "url(absolute)";
-
-    public final static ValueType ABSOLUTE_URL = new ValueType(ABSOLUTE_URL_STRING);
-
-    public final static String ADD_EXPRESSION_STRING = "expression(add)";
-
-    public final static ValueType ADD_EXPRESSION = new ValueType(ADD_EXPRESSION_STRING);
-
-    public final static String AND_EXPRESSION_STRING = "expression(and)";
-
-    public final static ValueType AND_EXPRESSION = new ValueType(AND_EXPRESSION_STRING);
 
     public final static String ANY_STRING = "*";
 
-    public final static ValueType ANY = new ValueType(ANY_STRING);
+    public final static ValueType ANY;
 
     public final static String BOOLEAN_STRING = "boolean";
 
-    public final static ValueType BOOLEAN = new ValueType(BOOLEAN_STRING);
-
-    public final static String BOOLEAN_LIST_STRING = "list(boolean)";
-
-    public final static ValueType BOOLEAN_LIST = new ValueType(BOOLEAN_LIST_STRING);
-
-    public final static String CALL_EXPRESSION_STRING = "expression(call)";
-
-    public final static ValueType CALL_EXPRESSION = new ValueType(CALL_EXPRESSION_STRING);
-
-    public final static String CHOICE_LIST_STRING = "list(choice)";
-
-    public final static ValueType CHOICE_LIST = new ValueType(CHOICE_LIST_STRING);
-
-    public final static String CSV_LIST_STRING = "list(csv)";
-
-    public final static ValueType CSV_LIST = new ValueType(CSV_LIST_STRING);
+    public final static ValueType BOOLEAN;
 
     public static final String CURRENCY_STRING = "currency";
 
-    public static final ValueType CURRENCY = new ValueType(CURRENCY_STRING);
-
-    public static final String CURRENCY_CODE_STRING = "currency-code";
-
-    public static final ValueType CURRENCY_CODE = new ValueType(CURRENCY_CODE_STRING);
-
-    public static final String CURRENCY_VALUE_STRING = "currency-value";
-
-    public static final ValueType CURRENCY_VALUE = new ValueType(CURRENCY_VALUE_STRING);
-
-    public final static String DATA_URL_STRING = "url(data)";
-
-    public final static ValueType DATA_URL = new ValueType(DATA_URL_STRING);
-
     public final static String DATE_STRING = "date";
 
-    public final static ValueType DATE = new ValueType(DATE_STRING);
-    
-    public final static String DATE_LIST_STRING = "list(date)";
+    public final static ValueType DATE;
 
-    public final static ValueType DATE_LIST = new ValueType(DATE_LIST_STRING);
-    
     public final static String DATE_TIME_STRING = "date-time";
 
-    public final static ValueType DATE_TIME = new ValueType(DATE_TIME_STRING);
+    public final static ValueType DATE_TIME;
 
-    public final static String DATE_TIME_LIST_STRING = "list(date-time)";
-
-    public final static ValueType DATE_TIME_LIST = new ValueType(DATE_TIME_LIST_STRING);
-
-    public final static String DATE_TIME_SYMBOLS_STRING = "date-time-symbols";
-
-    public final static ValueType DATE_TIME_SYMBOLS = new ValueType(DATE_TIME_SYMBOLS_STRING);
-
-    public final static String DECIMAL_NUMBER_SYMBOLS_STRING = "decimal-number-symbols";
-
-    public final static ValueType DECIMAL_NUMBER_SYMBOLS = new ValueType(DECIMAL_NUMBER_SYMBOLS_STRING);
-
-    public final static String DIVIDE_EXPRESSION_STRING = "expression(divide)";
-
-    public final static ValueType DIVIDE_EXPRESSION = new ValueType(DIVIDE_EXPRESSION_STRING);
-    
     public final static String EMAIL_STRING = "email";
 
-    public final static ValueType EMAIL = new ValueType(EMAIL_STRING);
+    public final static ValueType EMAIL;
 
     public final static String ENVIRONMENT_STRING = "environment";
 
-    public final static ValueType ENVIRONMENT = new ValueType(ENVIRONMENT_STRING);
-
-    public final static String EQUALS_EXPRESSION_STRING = "expression(equals)";
-
-    public final static ValueType EQUALS_EXPRESSION = new ValueType(EQUALS_EXPRESSION_STRING);
-
     public final static String ERROR_STRING = "error";
 
-    public final static ValueType ERROR = new ValueType(ERROR_STRING);
+    public final static ValueType ERROR;
 
     public final static String ERROR_LIST_STRING = "list(error)";
 
-    public final static ValueType ERROR_LIST = new ValueType(ERROR_LIST_STRING);
+    public final static ValueType ERROR_LIST;
 
     public final static String EXPRESSION_STRING = "expression";
 
-    public final static ValueType EXPRESSION = new ValueType(EXPRESSION_STRING);
-
-    public final static String GREATER_THAN_EXPRESSION_STRING = "expression(greater-than)";
-
-    public final static ValueType GREATER_THAN_EXPRESSION = new ValueType(GREATER_THAN_EXPRESSION_STRING);
-
-    public final static String GREATER_THAN_EQUALS_EXPRESSION_STRING = "expression(greater-than-equals)";
-
-    public final static ValueType GREATER_THAN_EQUALS_EXPRESSION = new ValueType(GREATER_THAN_EQUALS_EXPRESSION_STRING);
-
     public final static String JSON_NODE_STRING = "json";
-
-    public final static ValueType JSON_NODE = new ValueType(JSON_NODE_STRING);
-
-    public final static String JSON_ARRAY_STRING = "json(array)";
-
-    public final static ValueType JSON_ARRAY = new ValueType(JSON_ARRAY_STRING);
-
-    public final static String JSON_BOOLEAN_STRING = "json(boolean)";
-
-    public final static ValueType JSON_BOOLEAN = new ValueType(JSON_BOOLEAN_STRING);
-    
-    public final static String JSON_NULL_STRING = "json(null)";
-
-    public final static ValueType JSON_NULL = new ValueType(JSON_NULL_STRING);
-
-    public final static String JSON_NUMBER_STRING = "json(number)";
-
-    public final static ValueType JSON_NUMBER = new ValueType(JSON_NUMBER_STRING);
-
-    public final static String JSON_OBJECT_STRING = "json(object)";
-
-    public final static ValueType JSON_OBJECT = new ValueType(JSON_OBJECT_STRING);
-
-    public final static String JSON_STRING_STRING = "json(string)";
-
-    public final static ValueType JSON_STRING = new ValueType(JSON_STRING_STRING);
-
-    public final static String LAMBDA_FUNCTION_EXPRESSION_STRING = "expression(lambda-function)";
-
-    public final static ValueType LAMBDA_FUNCTION_EXPRESSION = new ValueType(LAMBDA_FUNCTION_EXPRESSION_STRING);
-
-    public final static String LESS_THAN_EXPRESSION_STRING = "expression(less-than)";
-
-    public final static ValueType LESS_THAN_EXPRESSION = new ValueType(LESS_THAN_EXPRESSION_STRING);
-
-    public final static String LESS_THAN_EQUALS_EXPRESSION_STRING = "expression(less-than-equals)";
-
-    public final static ValueType LESS_THAN_EQUALS_EXPRESSION = new ValueType(LESS_THAN_EQUALS_EXPRESSION_STRING);
 
     public final static String LIST_STRING = "list";
 
-    public final static ValueType LIST = new ValueType(LIST_STRING);
-
-    public final static String LIST_EXPRESSION_STRING = "expression(list)";
-
-    public final static ValueType LIST_EXPRESSION = new ValueType(LIST_EXPRESSION_STRING);
-    
     public final static String LOCALE_STRING = "locale";
 
-    public final static ValueType LOCALE = new ValueType(LOCALE_STRING);
-
-    public final static String MAIL_TO_URL_STRING = "url(mail-to)";
-
-    public final static ValueType MAIL_TO_URL = new ValueType(MAIL_TO_URL_STRING);
-
-    public final static String MODULO_EXPRESSION_STRING = "expression(modulo)";
-
-    public final static ValueType MODULO_EXPRESSION = new ValueType(MODULO_EXPRESSION_STRING);
-    
-    public final static String MULTIPLY_EXPRESSION_STRING = "expression(multiply)";
-
-    public final static ValueType MULTIPLY_EXPRESSION = new ValueType(MULTIPLY_EXPRESSION_STRING);
-
-    public final static String NAMED_FUNCTION_EXPRESSION_STRING = "expression(named-function)";
-
-    public final static ValueType NAMED_FUNCTION_EXPRESSION = new ValueType(NAMED_FUNCTION_EXPRESSION_STRING);
-
-    public final static String NEGATIVE_EXPRESSION_STRING = "expression(negative)";
-
-    public final static ValueType NEGATIVE_EXPRESSION = new ValueType(NEGATIVE_EXPRESSION_STRING);
-    
-    public final static String NOT_EQUALS_EXPRESSION_STRING = "expression(not-equals)";
-
-    public final static ValueType NOT_EQUALS_EXPRESSION = new ValueType(NOT_EQUALS_EXPRESSION_STRING);
-
-    public final static String NOT_EXPRESSION_STRING = "expression(not)";
-
-    public final static ValueType NOT_EXPRESSION = new ValueType(NOT_EXPRESSION_STRING);
+    public final static ValueType LOCALE;
 
     public final static String NUMBER_STRING = "number";
 
-    public final static ValueType NUMBER = new ValueType(NUMBER_STRING);
-
-    public final static String NUMBER_LIST_STRING = "list(number)";
-
-    public final static ValueType NUMBER_LIST = new ValueType(NUMBER_LIST_STRING);
-
-    public final static String OR_EXPRESSION_STRING = "expression(or)";
-
-    public final static ValueType OR_EXPRESSION = new ValueType(OR_EXPRESSION_STRING);
-
-    public final static String POWER_EXPRESSION_STRING = "expression(power)";
-
-    public final static ValueType POWER_EXPRESSION = new ValueType(POWER_EXPRESSION_STRING);
-
-    public final static String REFERENCE_EXPRESSION_STRING = "expression(reference)";
-
-    public final static ValueType REFERENCE_EXPRESSION = new ValueType(REFERENCE_EXPRESSION_STRING);
-    
-    public final static String RELATIVE_URL_STRING = "url(relative)";
-
-    public final static ValueType RELATIVE_URL = new ValueType(RELATIVE_URL_STRING);
-
-    public final static String STRING_LIST_STRING = "list(text)";
-
-    public final static ValueType STRING_LIST = new ValueType(STRING_LIST_STRING);
-
-    public final static String SUBTRACT_EXPRESSION_STRING = "expression(subtract)";
-
-    public final static ValueType SUBTRACT_EXPRESSION = new ValueType(SUBTRACT_EXPRESSION_STRING);
+    public final static ValueType NUMBER;
 
     public final static String TEXT_STRING = "text";
 
-    public final static ValueType TEXT = new ValueType(TEXT_STRING);
+    public final static ValueType TEXT;
 
     public final static String TIME_STRING = "time";
 
-    public final static ValueType TIME = new ValueType(TIME_STRING);
-
-    public final static String TIME_LIST_STRING = "list(time)";
-
-    public final static ValueType TIME_LIST = new ValueType(TIME_LIST_STRING);
+    public final static ValueType TIME;
 
     public final static String URL_STRING = "url";
 
-    public final static ValueType URL = new ValueType(URL_STRING);
-
-    public final static String VALUE_EXPRESSION_STRING = "expression(value)";
-
-    public final static ValueType VALUE_EXPRESSION = new ValueType(VALUE_EXPRESSION_STRING);
-    
     public final static String WHOLE_NUMBER_STRING = "whole-number";
-
-    public final static ValueType WHOLE_NUMBER = new ValueType(WHOLE_NUMBER_STRING);
-
-    public final static String XOR_EXPRESSION_STRING = "expression(xor)";
-
-    public final static ValueType XOR_EXPRESSION = new ValueType(XOR_EXPRESSION_STRING);
-
-    /**
-     * Gets a {@link ValueType} for the given {@link Class#getName()}.
-     */
-    public static ValueType fromClassName(final String klass) {
-        ValueType valueType;
-
-        switch (klass) {
-            case "java.lang.Boolean":
-                valueType = BOOLEAN;
-                break;
-            case "java.lang.Object":
-                valueType = ANY;
-                break;
-            case "java.lang.Byte":
-            case "java.lang.Short":
-            case "java.lang.Integer":
-            case "java.lang.Long":
-            case "java.lang.Float":
-            case "java.lang.Double":
-            case "java.math.BigDecimal":
-            case "java.math.BigInteger":
-                valueType = with("number(" + classSimpleName(klass) + ")");
-                break;
-            case "java.lang.String":
-                valueType = TEXT;
-                break;
-            case "java.lang.StringBuffer":
-            case "java.lang.StringBuilder":
-                valueType = with("text(" + classSimpleName(klass) + ")");
-                break;
-            case "java.time.LocalDate":
-                valueType = DATE;
-                break;
-            case "java.time.LocalDateTime":
-                valueType = DATE_TIME;
-                break;
-            case "java.time.LocalTime":
-                valueType = TIME;
-                break;
-            case "java.util.Currency":
-                valueType = CURRENCY;
-                break;
-            case "java.util.List":
-                valueType = LIST;
-                break;
-            case "java.util.Locale":
-                valueType = LOCALE;
-                break;
-            case "walkingkooka.collect.list.BooleanList":
-                valueType = BOOLEAN_LIST;
-                break;
-            case "walkingkooka.collect.list.CsvStringList":
-                valueType = CSV_LIST;
-                break;
-            case "walkingkooka.collect.list.StringList":
-                valueType = STRING_LIST;
-                break;
-            case "walkingkooka.currency.CurrencyCode":
-                valueType = CURRENCY_CODE;
-                break;
-            case "walkingkooka.currency.CurrencyValue":
-                valueType = CURRENCY_VALUE;
-                break;
-            case "walkingkooka.datetime.DateTimeSymbols":
-                valueType = DATE_TIME_SYMBOLS;
-                break;
-            case "walkingkooka.datetime.LocalDateList":
-                valueType = DATE_LIST;
-                break;
-            case "walkingkooka.datetime.LocalDateTimeList":
-                valueType = DATE_TIME_LIST;
-                break;
-            case "walkingkooka.datetime.LocalTimeList":
-                valueType = TIME_LIST;
-                break;
-            case "walkingkooka.environment.Environment":
-                valueType = ENVIRONMENT;
-                break;
-            case "walkingkooka.math.DecimalNumberSymbols":
-                valueType = DECIMAL_NUMBER_SYMBOLS;
-                break;
-            case "walkingkooka.math.NumberList":
-                valueType = NUMBER_LIST;
-                break;
-            case "walkingkooka.net.AbsoluteUrl":
-                valueType = ABSOLUTE_URL;
-                break;
-            case "walkingkooka.net.DataUrl":
-                valueType = DATA_URL;
-                break;
-            case "walkingkooka.net.MailToUrl":
-                valueType = MAIL_TO_URL;
-                break;
-            case "walkingkooka.net.RelativeUrl":
-                valueType = RELATIVE_URL;
-                break;
-            case "walkingkooka.net.Url":
-                valueType = URL;
-                break;
-            case "walkingkooka.net.email.EmailAddress":
-                valueType = EMAIL;
-                break;
-            case "walkingkooka.tree.expression.ExpressionNumber":
-            case "walkingkooka.tree.expression.ExpressionNumberBigDecimal":
-            case "walkingkooka.tree.expression.ExpressionNumberDouble":
-                valueType = NUMBER;
-                break;
-            case "walkingkooka.tree.expression.AddExpression":
-                valueType = ADD_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.AndExpression":
-                valueType = AND_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.CallExpression":
-                valueType = CALL_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.DivideExpression":
-                valueType = DIVIDE_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.EqualsExpression":
-                valueType = EQUALS_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.Expression":
-                valueType = EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.GreaterThanExpression":
-                valueType = GREATER_THAN_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.GreaterThanEqualsExpression":
-                valueType = GREATER_THAN_EQUALS_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.LambdaFunctionExpression":
-                valueType = LAMBDA_FUNCTION_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.LessThanExpression":
-                valueType = LESS_THAN_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.LessThanEqualsExpression":
-                valueType = LESS_THAN_EQUALS_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.ListExpression":
-                valueType = LIST_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.ModuloExpression":
-                valueType = MODULO_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.MultiplyExpression":
-                valueType = MULTIPLY_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.NamedFunctionExpression":
-                valueType = NAMED_FUNCTION_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.NegativeExpression":
-                valueType = NEGATIVE_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.NotEqualsExpression":
-                valueType = NOT_EQUALS_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.NotExpression":
-                valueType = NOT_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.OrExpression":
-                valueType = OR_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.PowerExpression":
-                valueType = POWER_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.ReferenceExpression":
-                valueType = REFERENCE_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.SubtractExpression":
-                valueType = SUBTRACT_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.ValueExpression":
-                valueType = VALUE_EXPRESSION;
-                break;
-            case "walkingkooka.tree.expression.XorExpression":
-                valueType = XOR_EXPRESSION;
-                break;
-            case "walkingkooka.tree.json.JsonNode":
-                valueType = JSON_NODE;
-                break;
-            case "walkingkooka.tree.json.JsonArray":
-                valueType = JSON_ARRAY;
-                break;
-            case "walkingkooka.tree.json.JsonBoolean":
-                valueType = JSON_BOOLEAN;
-                break;
-            case "walkingkooka.tree.json.JsonNull":
-                valueType = JSON_NULL;
-                break;
-            case "walkingkooka.tree.json.JsonNumber":
-                valueType = JSON_NUMBER;
-                break;
-            case "walkingkooka.tree.json.JsonObject":
-                valueType = JSON_OBJECT;
-                break;
-            case "walkingkooka.tree.json.JsonString":
-                valueType = JSON_STRING;
-                break;
-            case "walkingkooka.validation.ValidationChoiceList":
-                valueType = CHOICE_LIST;
-                break;
-            case "walkingkooka.validation.ValidationError":
-                valueType = ERROR;
-                break;
-            case "walkingkooka.validation.ValidationErrorList":
-                valueType = ERROR_LIST;
-                break;
-            default:
-                valueType = with(klass);
-                break;
-        }
-
-        return valueType;
-    }
-
-    private static String classSimpleName(final String className) {
-        final int index = className.lastIndexOf('.');
-        return -1 == index ?
-            className :
-            className.substring(index + 1);
-    }
-
-    /**
-     * Factory that creates a {@link ValueType}
-     */
-    public static ValueType with(final String name) {
-        Objects.requireNonNull(name, "name");
-
-        ValueType valueType;
-
-        switch (name) {
-            case ADD_EXPRESSION_STRING:
-                valueType = ADD_EXPRESSION;
-                break;
-            case AND_EXPRESSION_STRING:
-                valueType = AND_EXPRESSION;
-                break;
-            case ANY_STRING:
-                valueType = ANY;
-                break;
-            case BOOLEAN_STRING:
-                valueType = BOOLEAN;
-                break;
-            case BOOLEAN_LIST_STRING:
-                valueType = BOOLEAN_LIST;
-                break;
-            case CALL_EXPRESSION_STRING:
-                valueType = CALL_EXPRESSION;
-                break;
-            case CHOICE_LIST_STRING:
-                valueType = CHOICE_LIST;
-                break;
-            case CSV_LIST_STRING:
-                valueType = CSV_LIST;
-                break;
-            case CURRENCY_STRING:
-                valueType = CURRENCY;
-                break;
-            case CURRENCY_CODE_STRING:
-                valueType = CURRENCY_CODE;
-                break;
-            case CURRENCY_VALUE_STRING:
-                valueType = CURRENCY_VALUE;
-                break;
-            case DATE_STRING:
-                valueType = DATE;
-                break;
-            case DATE_LIST_STRING:
-                valueType = DATE_LIST;
-                break;
-            case DATE_TIME_STRING:
-                valueType = DATE_TIME;
-                break;
-            case DATE_TIME_LIST_STRING:
-                valueType = DATE_TIME_LIST;
-                break;
-            case DATE_TIME_SYMBOLS_STRING:
-                valueType = DATE_TIME_SYMBOLS;
-                break;
-            case DECIMAL_NUMBER_SYMBOLS_STRING:
-                valueType = DECIMAL_NUMBER_SYMBOLS;
-                break;
-            case DIVIDE_EXPRESSION_STRING:
-                valueType = DIVIDE_EXPRESSION;
-                break;
-            case EMAIL_STRING:
-                valueType = EMAIL;
-                break;
-            case ENVIRONMENT_STRING:
-                valueType = ENVIRONMENT;
-                break;
-            case EQUALS_EXPRESSION_STRING:
-                valueType = EQUALS_EXPRESSION;
-                break;
-            case ERROR_STRING:
-                valueType = ERROR;
-                break;
-            case ERROR_LIST_STRING:
-                valueType = ERROR_LIST;
-                break;
-            case EXPRESSION_STRING:
-                valueType = EXPRESSION;
-                break;
-            case GREATER_THAN_EXPRESSION_STRING:
-                valueType = GREATER_THAN_EXPRESSION;
-                break;
-            case GREATER_THAN_EQUALS_EXPRESSION_STRING:
-                valueType = GREATER_THAN_EQUALS_EXPRESSION;
-                break;
-            case JSON_NODE_STRING:
-                valueType = JSON_NODE;
-                break;
-            case JSON_ARRAY_STRING:
-                valueType = JSON_ARRAY;
-                break;
-            case JSON_BOOLEAN_STRING:
-                valueType = JSON_BOOLEAN;
-                break;
-            case JSON_NULL_STRING:
-                valueType = JSON_NULL;
-                break;
-            case JSON_NUMBER_STRING:
-                valueType = JSON_NUMBER;
-                break;
-            case JSON_OBJECT_STRING:
-                valueType = JSON_OBJECT;
-                break;
-            case JSON_STRING_STRING:
-                valueType = JSON_STRING;
-                break;
-            case LAMBDA_FUNCTION_EXPRESSION_STRING:
-                valueType = LAMBDA_FUNCTION_EXPRESSION;
-                break;
-            case LESS_THAN_EXPRESSION_STRING:
-                valueType = LESS_THAN_EXPRESSION;
-                break;
-            case LESS_THAN_EQUALS_EXPRESSION_STRING:
-                valueType = LESS_THAN_EQUALS_EXPRESSION;
-                break;
-            case LIST_STRING:
-                valueType = LIST;
-                break;
-            case LIST_EXPRESSION_STRING:
-                valueType = LIST_EXPRESSION;
-                break;
-            case LOCALE_STRING:
-                valueType = LOCALE;
-                break;
-            case MODULO_EXPRESSION_STRING:
-                valueType = MODULO_EXPRESSION;
-                break;
-            case MULTIPLY_EXPRESSION_STRING:
-                valueType = MULTIPLY_EXPRESSION;
-                break;
-            case NEGATIVE_EXPRESSION_STRING:
-                valueType = NEGATIVE_EXPRESSION;
-                break;
-            case NOT_EQUALS_EXPRESSION_STRING:
-                valueType = NOT_EQUALS_EXPRESSION;
-                break;
-            case NOT_EXPRESSION_STRING:
-                valueType = NOT_EXPRESSION;
-                break;
-            case NUMBER_STRING:
-                valueType = NUMBER;
-                break;
-            case NUMBER_LIST_STRING:
-                valueType = NUMBER_LIST;
-                break;
-            case OR_EXPRESSION_STRING:
-                valueType = OR_EXPRESSION;
-                break;
-            case POWER_EXPRESSION_STRING:
-                valueType = POWER_EXPRESSION;
-                break;
-            case REFERENCE_EXPRESSION_STRING:
-                valueType = REFERENCE_EXPRESSION;
-                break;
-            case SUBTRACT_EXPRESSION_STRING:
-                valueType = SUBTRACT_EXPRESSION;
-                break;
-            case TEXT_STRING:
-                valueType = TEXT;
-                break;
-            case STRING_LIST_STRING:
-                valueType = STRING_LIST;
-                break;
-            case TIME_STRING:
-                valueType = TIME;
-                break;
-            case TIME_LIST_STRING:
-                valueType = TIME_LIST;
-                break;
-            case URL_STRING:
-                valueType = URL;
-                break;
-            case VALUE_EXPRESSION_STRING:
-                valueType = VALUE_EXPRESSION;
-                break;
-            case WHOLE_NUMBER_STRING:
-                valueType = WHOLE_NUMBER;
-                break;
-            case XOR_EXPRESSION_STRING:
-                valueType = XOR_EXPRESSION;
-                break;
-            default:
-                // FIXME weakness doesnt allow all possible class names, eg those with non ascii letters will fail
-                PluginName.with(
-                    name.replace('.', '-')
-                        .replace('$', '-')
-                        .replace('(', '-')
-                        .replace(')', '-')
-                        .toLowerCase()
-                );
-                valueType = new ValueType(name);
-                break;
-        }
-
-        return valueType;
-    }
 
     /**
      * Private constructor
      */
-    private ValueType(final String name) {
+    private ValueType(final String name,
+                      final Class<?> type) {
         super();
+
+        InvalidTextLengthException.throwIfFail(
+            "name",
+            name,
+            MIN_LENGTH,
+            MAX_LENGTH
+        );
+
         this.name = name;
+        this.type = type;
     }
 
     @Override
@@ -758,15 +400,22 @@ final public class ValueType implements PluginNameLike<ValueType>,
 
     private final String name;
 
+    public Class<?> type() {
+        return this.type;
+    }
+
+    private final Class<?> type;
+
     /**
      * Only returns true if this is ANY.
      */
     public boolean isAny() {
-        return ANY == this;
+        //return ANY == this;
+        return Object.class == this.type;
     }
 
     /**
-     * Returns true if this {@link ValueType} is a boolean value like {@link #BOOLEAN}
+     * Returns true if this {@link ValueType} is a boolean value like {@link Boolean}
      */
     public boolean isBoolean() {
         return BOOLEAN_STRING.equals(this.prefix());
@@ -780,45 +429,17 @@ final public class ValueType implements PluginNameLike<ValueType>,
     }
 
     /**
-     * Returns true if this {@link ValueType} is a {@link CurrencyCode}.
-     */
-    public boolean isCurrencyCode() {
-        return CURRENCY_CODE_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is a {@link CurrencyValue}.
-     */
-    public boolean isCurrencyValue() {
-        return CURRENCY_VALUE_STRING.equals(this.prefix());
-    }
-    
-    /**
-     * Returns true if this {@link ValueType} is a date value such as {@link #DATE}, but not {@link #DATE_TIME}.
+     * Returns true if this {@link ValueType} is a date value such as {@link java.time.LocalDate}, but not {@link java.time.LocalDateTime}.
      */
     public boolean isDate() {
         return DATE_STRING.equals(this.prefix());
     }
 
     /**
-     * Returns true if this {@link ValueType} is a date value such as {@link #DATE_TIME}, but not {@link #DATE}.
+     * Returns true if this {@link ValueType} is a date value such as {@link java.time.LocalDateTime}, but not {@link java.time.LocalDate}.
      */
     public boolean isDateTime() {
         return DATE_TIME_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is {@link DateTimeSymbols}
-     */
-    public boolean isDateTimeSymbols() {
-        return DATE_TIME_SYMBOLS_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is {@link walkingkooka.math.DecimalNumberSymbols}
-     */
-    public boolean isDecimalNumberSymbols() {
-        return DECIMAL_NUMBER_SYMBOLS_STRING.equals(this.prefix());
     }
 
     /**
@@ -869,34 +490,40 @@ final public class ValueType implements PluginNameLike<ValueType>,
     public boolean isLocale() {
         return LOCALE_STRING.equals(this.prefix());
     }
-    
+
     /**
-     * Returns true if this {@link ValueType} is text such as {@link #NUMBER}.
+     * Returns true if this {@link ValueType} is a number such as {@link Byte}.
      */
     public boolean isNumber() {
-        final String prefix = this.prefix();
-        return NUMBER_STRING.equals(prefix) || WHOLE_NUMBER_STRING.equals(prefix);
+        return NUMBER_STRING.equals(this.prefix());
     }
 
     /**
-     * Returns true if this {@link ValueType} is text such as {@link #TEXT}.
+     * Returns true if this {@link ValueType} is text such as {@link String}.
      */
     public boolean isText() {
         return TEXT_STRING.equals(this.prefix());
     }
 
     /**
-     * Returns true if this {@link ValueType} is text such as {@link #TIME}.
+     * Returns true if this {@link ValueType} is a time value such as {@link java.time.LocalTime}.
      */
     public boolean isTime() {
         return TIME_STRING.equals(this.prefix());
     }
 
     /**
-     * Returns true if this {@link ValueType} is text such as {@link #URL}.
+     * Returns true if this {@link ValueType} is url value such as {@link walkingkooka.net.AbsoluteUrl}.
      */
     public boolean isUrl() {
         return URL_STRING.equals(this.prefix());
+    }
+
+    /**
+     * Returns true if this {@link ValueType} is a whole number such as {@link Integer}.
+     */
+    public boolean isWholeNumber() {
+        return WHOLE_NUMBER_STRING.equals(this.prefix());
     }
 
     /**
@@ -919,7 +546,10 @@ final public class ValueType implements PluginNameLike<ValueType>,
 
     @Override
     public int hashCode() {
-        return this.name.hashCode();
+        return Objects.hash(
+            this.name,
+            this.type
+        );
     }
 
     @Override
@@ -930,7 +560,8 @@ final public class ValueType implements PluginNameLike<ValueType>,
     }
 
     private boolean equals0(final ValueType other) {
-        return this.compareTo(other) == 0;
+        return this.name.equals(other.name) &&
+            this.type.equals(other.type);
     }
 
     @Override
@@ -942,7 +573,9 @@ final public class ValueType implements PluginNameLike<ValueType>,
 
     static ValueType unmarshall(final JsonNode node,
                                 final JsonNodeUnmarshallContext context) {
-        return with(node.stringOrFail());
+        final String className = node.stringOrFail();
+        return fromClassName(className)
+            .orElseThrow(() -> new IllegalArgumentException("Unknown ValueType with class name " + CharSequences.quote(className)));
     }
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {
@@ -975,4 +608,11 @@ final public class ValueType implements PluginNameLike<ValueType>,
     }
 
     public final static CaseSensitivity CASE_SENSITIVITY = CaseSensitivity.SENSITIVE;
+
+    // TreePrintable....................................................................................................
+
+    @Override
+    public void printTree(final IndentingPrinter printer) {
+        printer.println(this.name);
+    }
 }

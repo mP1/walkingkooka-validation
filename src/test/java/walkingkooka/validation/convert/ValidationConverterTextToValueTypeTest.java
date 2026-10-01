@@ -37,11 +37,9 @@ public final class ValidationConverterTextToValueTypeTest extends ValidationConv
 
     @Test
     public void testConvertStringToValueTypeName() {
-        final String text = "text";
-
         this.convertAndCheck(
-            text,
-            ValueType.with(text)
+            ValueType.TEXT.value(),
+            ValueType.TEXT
         );
     }
 

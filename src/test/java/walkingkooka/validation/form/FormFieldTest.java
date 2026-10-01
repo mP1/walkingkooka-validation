@@ -47,10 +47,10 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
     private final static String DIFFERENT_LABEL = "DifferentLabel456";
 
     private final static Optional<ValueType> TYPE = Optional.of(
-        ValueType.with("type-1")
+        ValueType.TEXT
     );
     private final static Optional<ValueType> DIFFERENT_TYPE = Optional.of(
-        ValueType.with("different-type-2")
+        ValueType.BOOLEAN
     );
 
     private final static Optional<Object> VALUE = Optional.of(
@@ -474,7 +474,7 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
                 "    \"value\": \"Hello\"\n" +
                 "  },\n" +
                 "  \"label\": \"Label123\",\n" +
-                "  \"type\": \"type-1\",\n" +
+                "  \"type\": \"text\",\n" +
                 "  \"value\": {\n" +
                 "    \"type\": \"absolute-url\",\n" +
                 "    \"value\": \"https://example.com\"\n" +
@@ -520,7 +520,7 @@ public final class FormFieldTest implements HashCodeEqualsDefinedTesting2<FormFi
                 "  label:\n" +
                 "    \"Label123\"\n" +
                 "  type:\n" +
-                "    type-1\n" +
+                "    text\n" +
                 "  value:\n" +
                 "    https://example.com (walkingkooka.net.AbsoluteUrl)\n" +
                 "  validator:\n" +
