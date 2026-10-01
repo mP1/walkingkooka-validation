@@ -51,6 +51,7 @@ import walkingkooka.net.header.HasContentType;
 import walkingkooka.net.header.MediaType;
 import walkingkooka.net.http.server.hateos.HateosResourceName;
 import walkingkooka.plugin.PluginName;
+import walkingkooka.predicate.character.CharPredicates;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasCaseSensitivity;
@@ -414,6 +415,16 @@ final public class ValueType implements Comparable<ValueType>,
             MIN_LENGTH,
             MAX_LENGTH
         );
+
+        if (false == "*".equals(name)) {
+            CharPredicates.failIfNullOrEmptyOrInitialAndPartFalse(
+                name,
+                "name",
+                CharPredicates.letter(),
+                CharPredicates.letterOrDigit()
+                    .or(CharPredicates.any("/-"))
+            );
+        }
 
         this.name = name;
         this.type = type;
