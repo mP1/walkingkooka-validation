@@ -106,7 +106,8 @@ import java.util.Optional;
 /**
  * The {@link Name} of a supported validation value. Note names must be lower-cased kebab-case not camel-case.
  */
-final public class ValueType implements HasCaseSensitivity,
+final public class ValueType implements Comparable<ValueType>,
+    HasCaseSensitivity,
     HasContentType,
     HasText,
     HasValue<String>,
@@ -525,5 +526,16 @@ final public class ValueType implements HasCaseSensitivity,
     @Override
     public void printTree(final IndentingPrinter printer) {
         printer.println(this.name);
+    }
+
+    // Comparable.......................................................................................................
+
+    @Override
+    public int compareTo(final ValueType other) {
+        return CASE_SENSITIVITY.comparator()
+            .compare(
+                this.name,
+                other.name
+            );
     }
 }
