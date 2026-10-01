@@ -326,6 +326,11 @@ final public class ValueType implements HasCaseSensitivity,
         );
     }
 
+    public static ValueType fromClassNameOrFail(final String name) {
+        return fromClassName(name)
+            .orElseThrow(() -> new IllegalArgumentException("Unknown type " + CharSequences.quoteIfChars(name)));
+    }
+
     // constants........................................................................................................
 
     public final static String ANY_STRING = "*";
