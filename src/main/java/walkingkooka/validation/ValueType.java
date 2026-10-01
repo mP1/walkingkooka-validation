@@ -41,8 +41,10 @@ import walkingkooka.math.NumberList;
 import walkingkooka.naming.Name;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.DataUrl;
+import walkingkooka.net.HasUrlFragment;
 import walkingkooka.net.MailToUrl;
 import walkingkooka.net.RelativeUrl;
+import walkingkooka.net.UrlFragment;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.net.header.HasContentType;
 import walkingkooka.net.header.MediaType;
@@ -111,6 +113,7 @@ final public class ValueType implements Comparable<ValueType>,
     HasCaseSensitivity,
     HasContentType,
     HasText,
+    HasUrlFragment,
     HasValue<String>,
     Predicate<ValueType>,
     TreePrintable {
@@ -412,6 +415,12 @@ final public class ValueType implements Comparable<ValueType>,
 
         this.name = name;
         this.type = type;
+
+        this.urlFragment = UrlFragment.with(
+            name.replace('/',
+                '-'
+            )
+        );
     }
 
     @Override
@@ -522,6 +531,18 @@ final public class ValueType implements Comparable<ValueType>,
     public String text() {
         return this.name;
     }
+
+    // HasUrlFragment...................................................................................................
+
+    /**
+     * Returns the {@link UrlFragment}, holding the {@link #text()} with slashes replaced by dash.
+     */
+    @Override
+    public UrlFragment urlFragment() {
+        return this.urlFragment;
+    }
+
+    private final UrlFragment urlFragment;
 
     // Predicate........................................................................................................
 

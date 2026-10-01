@@ -29,6 +29,7 @@ import walkingkooka.datetime.DateTimeSymbols;
 import walkingkooka.environment.Environment;
 import walkingkooka.math.DecimalNumberSymbols;
 import walkingkooka.math.NumberList;
+import walkingkooka.net.HasUrlFragmentTesting;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.net.header.HasContentTypeTesting;
 import walkingkooka.predicate.PredicateTesting2;
@@ -83,6 +84,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     HasTextTesting,
+    HasUrlFragmentTesting,
     HasValueTesting,
     HasContentTypeTesting,
     ComparableTesting2<ValueType>,
@@ -1535,6 +1537,32 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
         this.contentTypeAndCheck(
             this.createObject(),
             "application/json+walkingkooka.validation.ValueType"
+        );
+    }
+
+    // HasUrlFragment...................................................................................................
+
+    @Test
+    public void testUrlFragmentWithNumber() {
+        this.urlFragmentAndCheck(
+            ValueType.NUMBER,
+            "number"
+        );
+    }
+
+    @Test
+    public void testUrlFragmentWithWholeNumber() {
+        this.urlFragmentAndCheck(
+            ValueType.WHOLE_NUMBER,
+            "number-whole"
+        );
+    }
+
+    @Test
+    public void testUrlFragmentWithInteger() {
+        this.urlFragmentAndCheck(
+            ValueType.fromClassOrFail(Integer.class),
+            "number-whole-integer"
         );
     }
 
