@@ -19,10 +19,10 @@ package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.HasValueTesting;
-import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.collect.list.BooleanList;
 import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.StringList;
+import walkingkooka.compare.ComparableTesting2;
 import walkingkooka.currency.CurrencyCode;
 import walkingkooka.currency.CurrencyValue;
 import walkingkooka.datetime.DateTimeSymbols;
@@ -84,7 +84,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     HasTextTesting,
     HasValueTesting,
     HasContentTypeTesting,
-    HashCodeEqualsDefinedTesting2<ValueType>,
+    ComparableTesting2<ValueType>,
     JsonNodeMarshallerTesting<ValueType> {
 
     // HasText..........................................................................................................
@@ -1446,7 +1446,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     }
 
     @Override
-    public ValueType createObject() {
+    public ValueType createComparable() {
         return ValueType.TEXT;
     }
 
