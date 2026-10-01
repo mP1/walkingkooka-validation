@@ -215,22 +215,22 @@ final public class ValueType implements Comparable<ValueType>,
         );
 
         WHOLE_NUMBER = new ValueType(
-            "whole-number",
+            "number/whole",
             Number.class
         );
         CLASS_NAME_TO_VALUE_TYPE.put(
-            "whole-number",
+            "number/whole",
             ValueType.WHOLE_NUMBER
         );
 
-        register("whole-number/byte", Byte.class);
+        register("number/whole/byte", Byte.class);
         register("number/double", Double.class);
         register("number/float", Float.class);
-        register("whole-number/integer", Integer.class);
-        register("whole-number/long", Long.class);
-        register("whole-number/short", Short.class);
+        register("number/whole/integer", Integer.class);
+        register("number/whole/long", Long.class);
+        register("number/whole/short", Short.class);
         register("number/big-decimal", BigDecimal.class);
-        register("whole-number/big-integer", BigInteger.class);
+        register("number/whole/big-integer", BigInteger.class);
         register("list/number", NumberList.class);
         register("expression/or", OrExpression.class);
         register("expression/power", PowerExpression.class);
@@ -434,7 +434,7 @@ final public class ValueType implements Comparable<ValueType>,
         if (null == this.parent) {
             final String name = this.name;
 
-            final int slash = name.indexOf('/');
+            final int slash = name.lastIndexOf('/');
             if (-1 == slash) {
                 this.parent = Optional.empty();
             } else {
