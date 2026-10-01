@@ -44,6 +44,7 @@ import walkingkooka.net.DataUrl;
 import walkingkooka.net.HasUrlFragment;
 import walkingkooka.net.MailToUrl;
 import walkingkooka.net.RelativeUrl;
+import walkingkooka.net.Url;
 import walkingkooka.net.UrlFragment;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.net.header.HasContentType;
@@ -253,6 +254,7 @@ final public class ValueType implements Comparable<ValueType>,
         TIME = register("time", LocalTime.class);
         register("list/time", LocalTimeList.class);
         register("list/tsv", TsvStringList.class);
+        register("url", Url.class);
         register("expression/value", ValueExpression.class);
         ERROR = register("error", ValidationError.class);
         ERROR_LIST = register("list/error", ValidationErrorList.class);
