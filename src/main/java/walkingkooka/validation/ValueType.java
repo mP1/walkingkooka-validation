@@ -238,7 +238,7 @@ final public class ValueType implements Comparable<ValueType>,
         register("expression/or", OrExpression.class);
         register("expression/power", PowerExpression.class);
         register("expression/reference", ReferenceExpression.class);
-        register("url(relative", RelativeUrl.class);
+        register("url/relative", RelativeUrl.class);
         register("text/StringBuffer", StringBuffer.class);
         register("text/StringBuilder", StringBuilder.class);
         register("list/string", StringList.class);
