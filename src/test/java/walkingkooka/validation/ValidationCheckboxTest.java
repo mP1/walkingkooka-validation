@@ -21,8 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
 import walkingkooka.net.Url;
-import walkingkooka.reflect.ClassTesting;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -33,7 +32,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public final class ValidationCheckboxTest implements ClassTesting<ValidationCheckbox>,
+public final class ValidationCheckboxTest implements PublicClassTesting<ValidationCheckbox>,
     HashCodeEqualsDefinedTesting2<ValidationCheckbox>,
     JsonNodeMarshallerTesting<ValidationCheckbox>,
     ToStringTesting<ValidationCheckbox> {
@@ -194,10 +193,5 @@ public final class ValidationCheckboxTest implements ClassTesting<ValidationChec
     @Override
     public Class<ValidationCheckbox> type() {
         return ValidationCheckbox.class;
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 }
