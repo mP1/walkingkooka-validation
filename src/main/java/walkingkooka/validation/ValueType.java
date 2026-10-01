@@ -102,6 +102,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 /**
  * The {@link Name} of a supported validation value. Note names must be lower-cased kebab-case not camel-case.
@@ -111,6 +112,7 @@ final public class ValueType implements Comparable<ValueType>,
     HasContentType,
     HasText,
     HasValue<String>,
+    Predicate<ValueType>,
     TreePrintable {
 
     public static final String HATEOS_RESOURCE_NAME_STRING = "type";
@@ -519,6 +521,35 @@ final public class ValueType implements Comparable<ValueType>,
     @Override
     public String text() {
         return this.name;
+    }
+
+    // Predicate........................................................................................................
+
+    /**
+     * This may be used to test if the given {@link ValueType} is equal or has a parent equal to this.
+     * <pre>
+     * NUMBER.test(FLOAT)
+     * true
+     *
+     * WHOLE_NUMBER.test(FLOAT)
+     * false
+     * </pre>
+     */
+    @Override
+    public boolean test(final ValueType other) {
+        boolean test = null != other;
+
+        if (test) {
+            test = this.equals(other);
+            if (false == test) {
+                test = this.test(
+                    other.parent()
+                        .orElse(null)
+                );
+            }
+        }
+
+        return test;
     }
 
     // TreePrintable....................................................................................................
