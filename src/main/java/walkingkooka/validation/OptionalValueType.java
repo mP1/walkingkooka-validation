@@ -49,7 +49,7 @@ public final class OptionalValueType implements HasValue<Optional<ValueType>>,
 
         return value.isPresent() ?
                 new OptionalValueType(value) :
-                Cast.to(EMPTY);
+                EMPTY;
     }
 
     // value............................................................................................................
