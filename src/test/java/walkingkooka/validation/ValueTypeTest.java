@@ -39,6 +39,7 @@ import walkingkooka.net.RelativeUrl;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.net.header.HasContentTypeTesting;
 import walkingkooka.reflect.PublicClassTesting;
+import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.expression.AddExpression;
 import walkingkooka.tree.expression.AndExpression;
 import walkingkooka.tree.expression.CallExpression;
@@ -89,10 +90,21 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 final public class ValueTypeTest implements PublicClassTesting<ValueType>,
+    HasTextTesting,
     HasValueTesting,
     HasContentTypeTesting,
     HashCodeEqualsDefinedTesting2<ValueType>,
     JsonNodeMarshallerTesting<ValueType> {
+
+    // HasText..........................................................................................................
+
+    @Test
+    public void testText() {
+        this.textAndCheck(
+            ValueType.TEXT,
+            "text"
+        );
+    }
 
     // fromClass........................................................................................................
 

@@ -51,6 +51,7 @@ import walkingkooka.plugin.PluginName;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasCaseSensitivity;
+import walkingkooka.text.HasText;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.expression.AddExpression;
@@ -107,6 +108,7 @@ import java.util.Optional;
  */
 final public class ValueType implements HasCaseSensitivity,
     HasContentType,
+    HasText,
     HasValue<String>,
     TreePrintable {
 
@@ -608,6 +610,13 @@ final public class ValueType implements HasCaseSensitivity,
     }
 
     public final static CaseSensitivity CASE_SENSITIVITY = CaseSensitivity.SENSITIVE;
+
+    // HasText..........................................................................................................
+
+    @Override
+    public String text() {
+        return this.name;
+    }
 
     // TreePrintable....................................................................................................
 
