@@ -136,56 +136,56 @@ final public class ValueType implements HasCaseSensitivity,
     private final static Map<Class<?>, ValueType> CLASS_TO_VALUE_TYPE = Maps.hash();
 
     static {
-        register("url(absolute)", AbsoluteUrl.class);
-        register("expression(add)", AddExpression.class);
-        register("expression(and)", AndExpression.class);
+        register("url/absolute", AbsoluteUrl.class);
+        register("expression/add", AddExpression.class);
+        register("expression/and", AndExpression.class);
         ANY = register("*", Object.class);
         BOOLEAN = register("boolean", Boolean.class);
-        register("list(boolean)", BooleanList.class);
-        register("expression(call)", CallExpression.class);
-        register("list(choice)", ValidationChoiceList.class);
-        register("list(csv)", CsvStringList.class);
+        register("list/boolean", BooleanList.class);
+        register("expression/call", CallExpression.class);
+        register("list/choice", ValidationChoiceList.class);
+        register("list/csv", CsvStringList.class);
         register("currency", Currency.class);
         register("currency-code", CurrencyCode.class);
         register("currency-code-set", CurrencyCodeSet.class);
         register("currency-value", CurrencyValue.class);
-        register("url(data)", DataUrl.class);
+        register("url/data", DataUrl.class);
         DATE = register("date", LocalDate.class);
-        register("list(date)", LocalDateList.class);
-        register("date(date-time-symbols)", DateTimeSymbols.class);
-        register("number(decimal-number-symbols)", DecimalNumberSymbols.class);
+        register("list/date", LocalDateList.class);
+        register("date/date-time-symbols", DateTimeSymbols.class);
+        register("number/decimal-number-symbols", DecimalNumberSymbols.class);
         DATE_TIME = register("date-time", LocalDateTime.class);
-        register("list(date-time)", LocalDateTimeList.class);
-        register("expression(divide)", DivideExpression.class);
+        register("list/date-time", LocalDateTimeList.class);
+        register("expression/divide", DivideExpression.class);
         EMAIL = register("email", EmailAddress.class);
         register("environment", Environment.class);
         register("environment-value-name", EnvironmentValueName.class);
         register("expression", Expression.class);
-        register("expression(equals)", EqualsExpression.class);
-        register("expression(greater-than)", GreaterThanExpression.class);
-        register("expression(greater-than-equals)", GreaterThanEqualsExpression.class);
+        register("expression/equals", EqualsExpression.class);
+        register("expression/greater-than", GreaterThanExpression.class);
+        register("expression/greater-than-equals", GreaterThanEqualsExpression.class);
         register("json", JsonNode.class);
-        register("json(array)", JsonArray.class);
-        register("json(boolean)", JsonBoolean.class);
-        register("json(null)", JsonNull.class);
-        register("json(number)", JsonNumber.class);
-        register("json(object)", JsonObject.class);
-        register("json(string)", JsonString.class);
-        register("expression(lambda)", LambdaFunctionExpression.class);
-        register("expression(less-than)", LessThanExpression.class);
-        register("expression(less-than-equals)", LessThanEqualsExpression.class);
+        register("json/array", JsonArray.class);
+        register("json/boolean", JsonBoolean.class);
+        register("json/null", JsonNull.class);
+        register("json/number", JsonNumber.class);
+        register("json/object", JsonObject.class);
+        register("json/string", JsonString.class);
+        register("expression/lambda", LambdaFunctionExpression.class);
+        register("expression/less-than", LessThanExpression.class);
+        register("expression/less-than-equals", LessThanEqualsExpression.class);
         register("list", List.class);
-        register("expression(list)", ListExpression.class);
+        register("expression/list", ListExpression.class);
         LOCALE = register("locale", Locale.class);
         register("locale-language-tag", LocaleLanguageTag.class);
         register("locale-language-tag-set", LocaleLanguageTagSet.class);
-        register("url(mail-to)", MailToUrl.class);
-        register("expression(modulo)", ModuloExpression.class);
-        register("expression(multiply)", MultiplyExpression.class);
-        register("expression(named-function)", NamedFunctionExpression.class);
-        register("expression(negative)", NegativeExpression.class);
-        register("expression(not)", NotExpression.class);
-        register("expression(not-equals)", NotEqualsExpression.class);
+        register("url/mail-to", MailToUrl.class);
+        register("expression/modulo", ModuloExpression.class);
+        register("expression/multiply", MultiplyExpression.class);
+        register("expression/named-function", NamedFunctionExpression.class);
+        register("expression/negative", NegativeExpression.class);
+        register("expression/not", NotExpression.class);
+        register("expression/not-equals", NotEqualsExpression.class);
 
         NUMBER = register("number", ExpressionNumber.class);
         CLASS_TO_VALUE_TYPE.put(
@@ -211,23 +211,32 @@ final public class ValueType implements HasCaseSensitivity,
             ValueType.NUMBER
         );
 
-        register("whole-number(byte)", Byte.class);
-        register("number(double)", Double.class);
-        register("number(float)", Float.class);
-        register("whole-number(integer)", Integer.class);
-        register("whole-number(long)", Long.class);
-        register("whole-number(short)", Short.class);
-        register("number(big-decimal)", BigDecimal.class);
-        register("whole-number(big-integer)", BigInteger.class);
-        register("list(number)", NumberList.class);
-        register("expression(or)", OrExpression.class);
-        register("expression(power)", PowerExpression.class);
-        register("expression(reference)", ReferenceExpression.class);
-        register("url(relative)", RelativeUrl.class);
-        register("text(StringBuffer)", StringBuffer.class);
-        register("text(StringBuilder)", StringBuilder.class);
-        register("list(string)", StringList.class);
-        register("expression(subtract)", SubtractExpression.class);
+        WHOLE_NUMBER = new ValueType(
+            "whole-number",
+            Number.class
+        );
+        CLASS_NAME_TO_VALUE_TYPE.put(
+            "whole-number",
+            ValueType.WHOLE_NUMBER
+        );
+
+        register("whole-number/byte", Byte.class);
+        register("number/double", Double.class);
+        register("number/float", Float.class);
+        register("whole-number/integer", Integer.class);
+        register("whole-number/long", Long.class);
+        register("whole-number/short", Short.class);
+        register("number/big-decimal", BigDecimal.class);
+        register("whole-number/big-integer", BigInteger.class);
+        register("list/number", NumberList.class);
+        register("expression/or", OrExpression.class);
+        register("expression/power", PowerExpression.class);
+        register("expression/reference", ReferenceExpression.class);
+        register("url(relative", RelativeUrl.class);
+        register("text/StringBuffer", StringBuffer.class);
+        register("text/StringBuilder", StringBuilder.class);
+        register("list/string", StringList.class);
+        register("expression/subtract", SubtractExpression.class);
 
         TEXT = register("text", String.class);
         CLASS_TO_VALUE_TYPE.put(
@@ -236,12 +245,12 @@ final public class ValueType implements HasCaseSensitivity,
         );
 
         TIME = register("time", LocalTime.class);
-        register("list(time)", LocalTimeList.class);
-        register("list(tsv)", TsvStringList.class);
-        register("expression(value)", ValueExpression.class);
+        register("list/time", LocalTimeList.class);
+        register("list/tsv", TsvStringList.class);
+        register("expression/value", ValueExpression.class);
         ERROR = register("error", ValidationError.class);
-        ERROR_LIST = register("list(error)", ValidationErrorList.class);
-        register("expression(xor)", XorExpression.class);
+        ERROR_LIST = register("list/error", ValidationErrorList.class);
+        register("expression/xor", XorExpression.class);
     }
 
     static {
@@ -375,6 +384,8 @@ final public class ValueType implements HasCaseSensitivity,
 
     public final static String URL_STRING = "url";
 
+    public final static ValueType WHOLE_NUMBER;
+
     public final static String WHOLE_NUMBER_STRING = "whole-number";
 
     /**
@@ -409,140 +420,26 @@ final public class ValueType implements HasCaseSensitivity,
     private final Class<?> type;
 
     /**
-     * Only returns true if this is ANY.
-     */
-    public boolean isAny() {
-        //return ANY == this;
-        return Object.class == this.type;
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is a boolean value like {@link Boolean}
-     */
-    public boolean isBoolean() {
-        return BOOLEAN_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is a {@link Currency}.
-     */
-    public boolean isCurrency() {
-        return CURRENCY_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is a date value such as {@link java.time.LocalDate}, but not {@link java.time.LocalDateTime}.
-     */
-    public boolean isDate() {
-        return DATE_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is a date value such as {@link java.time.LocalDateTime}, but not {@link java.time.LocalDate}.
-     */
-    public boolean isDateTime() {
-        return DATE_TIME_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is a {@link walkingkooka.net.email.EmailAddress}.
-     */
-    public boolean isEmail() {
-        return EMAIL_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is a {@link walkingkooka.environment.Environment}.
-     */
-    public boolean isEnvironment() {
-        return ENVIRONMENT_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType}.
-     */
-    public boolean isError() {
-        return ERROR_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType}.
-     */
-    public boolean isExpression() {
-        return EXPRESSION_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType}.
-     */
-    public boolean isJson() {
-        return JSON_NODE_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is a {@link List}.
-     */
-    public boolean isList() {
-        return LIST_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is a {@link Locale}.
-     */
-    public boolean isLocale() {
-        return LOCALE_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is a number such as {@link Byte}.
-     */
-    public boolean isNumber() {
-        return NUMBER_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is text such as {@link String}.
-     */
-    public boolean isText() {
-        return TEXT_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is a time value such as {@link java.time.LocalTime}.
-     */
-    public boolean isTime() {
-        return TIME_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is url value such as {@link walkingkooka.net.AbsoluteUrl}.
-     */
-    public boolean isUrl() {
-        return URL_STRING.equals(this.prefix());
-    }
-
-    /**
-     * Returns true if this {@link ValueType} is a whole number such as {@link Integer}.
-     */
-    public boolean isWholeNumber() {
-        return WHOLE_NUMBER_STRING.equals(this.prefix());
-    }
-
-    /**
      * Extracts the prefix for the value type, aka the text before any left-parens.
      */
-    public String prefix() {
-        final String name = this.name;
+    public Optional<ValueType> parent() {
+        if (null == this.parent) {
+            final String name = this.name;
 
-        final int leftParens = name.indexOf('(');
+            final int slash = name.indexOf('/');
+            if (-1 == slash) {
+                this.parent = Optional.empty();
+            } else {
+                this.parent = fromClassName(
+                    name.substring(0, slash)
+                );
+            }
+        }
 
-        return -1 == leftParens ?
-            name :
-            name.substring(
-                0,
-                leftParens
-            );
+        return this.parent;
     }
+
+    private Optional<ValueType> parent;
 
     // Object...........................................................................................................
 
