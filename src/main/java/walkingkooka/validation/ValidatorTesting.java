@@ -17,11 +17,11 @@
 
 package walkingkooka.validation;
 
-import walkingkooka.test.Testing;
+import walkingkooka.text.printer.TreePrintableTesting;
 
 import java.util.List;
 
-public interface ValidatorTesting extends Testing {
+public interface ValidatorTesting extends TreePrintableTesting {
 
     default <R extends ValidationReference, C extends ValidatorContext<R>> void validateAndCheck(final Validator<R, C> validator,
                                                                                                  final Object value,
