@@ -23,8 +23,7 @@ import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.net.Url;
 import walkingkooka.net.email.EmailAddress;
-import walkingkooka.reflect.ClassTesting;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
@@ -37,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ValidationErrorListTest implements ImmutableListTesting<ValidationErrorList<TestValidationReference>, ValidationError<TestValidationReference>>,
     TreePrintableTesting,
-    ClassTesting<ValidationErrorList<TestValidationReference>>,
+    PublicClassTesting<ValidationErrorList<TestValidationReference>>,
     JsonNodeMarshallerTesting<ValidationErrorList<TestValidationReference>> {
 
     @Test
@@ -228,15 +227,10 @@ public final class ValidationErrorListTest implements ImmutableListTesting<Valid
         );
     }
 
-    // ClassTesting.....................................................................................................
+    // Class............................................................................................................
 
     @Override
     public Class<ValidationErrorList<TestValidationReference>> type() {
         return Cast.to(ValidationErrorList.class);
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 }
