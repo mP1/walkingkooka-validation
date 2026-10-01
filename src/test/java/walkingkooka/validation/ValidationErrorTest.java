@@ -22,8 +22,7 @@ import walkingkooka.Cast;
 import walkingkooka.HasValueTesting;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.ToStringTesting;
-import walkingkooka.reflect.ClassTesting;
-import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
@@ -39,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class ValidationErrorTest implements HasTextTesting,
     HashCodeEqualsDefinedTesting2<ValidationError<TestValidationReference>>,
     ToStringTesting<ValidationError<TestValidationReference>>,
-    ClassTesting<ValidationError<TestValidationReference>>,
+    PublicClassTesting<ValidationError<TestValidationReference>>,
     TreePrintableTesting,
     JsonNodeMarshallerTesting<ValidationError<TestValidationReference>>,
     HasValueTesting {
@@ -447,10 +446,5 @@ public final class ValidationErrorTest implements HasTextTesting,
     @Override
     public Class<ValidationError<TestValidationReference>> type() {
         return Cast.to(ValidationError.class);
-    }
-
-    @Override
-    public JavaVisibility typeVisibility() {
-        return JavaVisibility.PUBLIC;
     }
 }
