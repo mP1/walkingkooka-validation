@@ -96,9 +96,7 @@ public final class OptionalValueTypeTest implements PublicClassTesting<OptionalV
 
     @Test
     public void testToString() {
-        final Optional<ValueType> value = Optional.of(
-            ValueType.with("hello-123")
-        );
+        final Optional<ValueType> value = Optional.of(ValueType.TEXT);
 
         this.toStringAndCheck(
             OptionalValueType.with(value),
@@ -162,7 +160,7 @@ public final class OptionalValueTypeTest implements PublicClassTesting<OptionalV
         this.marshallRoundTripTwiceAndCheck(
             OptionalValueType.with(
                 Optional.of(
-                    ValueType.with("hello-123")
+                    ValueType.TEXT
                 )
             )
         );
@@ -181,7 +179,7 @@ public final class OptionalValueTypeTest implements PublicClassTesting<OptionalV
     public OptionalValueType createJsonNodeMarshallingValue() {
         return OptionalValueType.with(
             Optional.of(
-                ValueType.with("hello-123")
+                ValueType.TEXT
             )
         );
     }
@@ -201,11 +199,11 @@ public final class OptionalValueTypeTest implements PublicClassTesting<OptionalV
         this.treePrintAndCheck(
             OptionalValueType.with(
                 Optional.of(
-                    ValueType.with("hello-123")
+                    ValueType.TEXT
                 )
             ),
             "OptionalValueType\n" +
-                "  hello-123\n"
+                "  text\n"
         );
     }
 

@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.Url;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.reflect.ClassTesting;
@@ -78,7 +79,7 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                     ).setLabel("Label111")
                     .setType(
                         Optional.of(
-                            ValueType.with("type222")
+                            ValueType.TEXT
                         )
                     ).setValue(
                         Optional.of("Value333")
@@ -103,7 +104,7 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                 "      \"value\": \"Hello\"\n" +
                 "    },\n" +
                 "    \"label\": \"Label111\",\n" +
-                "    \"type\": \"type222\",\n" +
+                "    \"type\": \"text\",\n" +
                 "    \"value\": \"Value333\",\n" +
                 "    \"validator\": \"validator-4444\"\n" +
                 "  }\n" +
@@ -121,7 +122,7 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                 "      \"value\": \"Hello\"\n" +
                 "    },\n" +
                 "    \"label\": \"Label111\",\n" +
-                "    \"type\": \"type222\",\n" +
+                "    \"type\": \"text\",\n" +
                 "    \"value\": \"Value333\",\n" +
                 "    \"validator\": \"validator-4444\"\n" +
                 "  }\n" +
@@ -147,9 +148,7 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                         new TestValidationReference("Hello2")
                     ).setLabel("Label2"
                     ).setType(
-                        Optional.of(
-                            ValueType.with("type222")
-                        )
+                        ValueType.fromClass(AbsoluteUrl.class)
                     ).setValue(
                         Optional.of(
                             Url.parse("https://example.com/2")
@@ -173,7 +172,7 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                 "      \"value\": \"Hello2\"\n" +
                 "    },\n" +
                 "    \"label\": \"Label2\",\n" +
-                "    \"type\": \"type222\",\n" +
+                "    \"type\": \"url(absolute)\",\n" +
                 "    \"value\": {\n" +
                 "      \"type\": \"absolute-url\",\n" +
                 "      \"value\": \"https://example.com/2\"\n" +
