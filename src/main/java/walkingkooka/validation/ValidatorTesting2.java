@@ -18,12 +18,14 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.reflect.PackagePrivateClassTesting;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public interface ValidatorTesting2<V extends Validator<R, C>, R extends ValidationReference, C extends ValidatorContext<R>> extends ValidatorTesting {
+public interface ValidatorTesting2<V extends Validator<R, C>, R extends ValidationReference, C extends ValidatorContext<R>> extends ValidatorTesting,
+    PackagePrivateClassTesting<V> {
 
     // validate.........................................................................................................
 

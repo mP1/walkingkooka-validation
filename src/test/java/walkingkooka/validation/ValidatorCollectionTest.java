@@ -18,6 +18,7 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.Cast;
 import walkingkooka.HashCodeEqualsDefinedTesting2;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.reflect.ThrowableTesting;
@@ -311,5 +312,11 @@ public final class ValidatorCollectionTest implements ValidatorTesting2<Validato
             MAX_ERRORS,
             VALIDATORS
         );
+    }
+
+    // class............................................................................................................
+
+    public Class<ValidatorCollection<TestValidationReference, TestValidatorContext>> type() {
+        return Cast.to(ValidatorCollection.class);
     }
 }

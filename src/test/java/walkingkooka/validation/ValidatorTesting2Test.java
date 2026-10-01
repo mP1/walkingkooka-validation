@@ -70,4 +70,16 @@ public class ValidatorTesting2Test implements ValidatorTesting2<TestValidator, T
 
         private final List<ValidationError<TestValidationReference>> errors;
     }
+
+    // class............................................................................................................
+
+    @Override
+    public Class<TestValidator> type() {
+        return TestValidator.class;
+    }
+
+    @Override
+    public void testTestNaming() {
+        throw new UnsupportedOperationException();
+    }
 }
