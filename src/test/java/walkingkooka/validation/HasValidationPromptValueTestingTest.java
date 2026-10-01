@@ -18,10 +18,12 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.reflect.PublicClassTesting;
 
 import java.util.Optional;
 
-public final class HasValidationPromptValueTestingTest implements HasValidationPromptValueTesting {
+public final class HasValidationPromptValueTestingTest implements HasValidationPromptValueTesting,
+    PublicClassTesting<HasValidationPromptValue> {
 
     @Test
     public void testValidationPromptValueAndCheck() {
@@ -71,5 +73,17 @@ public final class HasValidationPromptValueTestingTest implements HasValidationP
         }
 
         private final Optional<ValidationPromptValue> value;
+    }
+
+    // class............................................................................................................
+
+    @Override
+    public Class<HasValidationPromptValue> type() {
+        return HasValidationPromptValue.class;
+    }
+
+    @Override
+    public void testTestNaming() {
+        throw new UnsupportedOperationException();
     }
 }
