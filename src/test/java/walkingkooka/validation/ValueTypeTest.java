@@ -31,6 +31,7 @@ import walkingkooka.math.DecimalNumberSymbols;
 import walkingkooka.math.NumberList;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.net.header.HasContentTypeTesting;
+import walkingkooka.predicate.PredicateTesting2;
 import walkingkooka.reflect.PublicClassTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.expression.AddExpression;
@@ -85,7 +86,8 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     HasValueTesting,
     HasContentTypeTesting,
     ComparableTesting2<ValueType>,
-    JsonNodeMarshallerTesting<ValueType> {
+    JsonNodeMarshallerTesting<ValueType>,
+    PredicateTesting2<ValueType, ValueType> {
 
     // HasText..........................................................................................................
 
@@ -1535,10 +1537,76 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
         );
     }
 
+    // Predicate........................................................................................................
+
+    @Test
+    public void testTestTextWithString() {
+        this.testAndCheck(
+            ValueType.TEXT,
+            ValueType.fromClassOrFail(String.class),
+            true
+        );
+    }
+
+    @Test
+    public void testTestNumberWithNumber() {
+        this.testAndCheck(
+            ValueType.NUMBER,
+            ValueType.NUMBER,
+            true
+        );
+    }
+
+    @Test
+    public void testTestNumberWithByte() {
+        this.testAndCheck(
+            ValueType.NUMBER,
+            ValueType.fromClassOrFail(Byte.class),
+            false
+        );
+    }
+
+    @Test
+    public void testTestNumberWithFloat() {
+        this.testAndCheck(
+            ValueType.NUMBER,
+            ValueType.fromClassOrFail(Float.class),
+            true
+        );
+    }
+
+    @Test
+    public void testTestWholeNumberWithByte() {
+        this.testAndCheck(
+            ValueType.WHOLE_NUMBER,
+            ValueType.fromClassOrFail(Byte.class),
+            true
+        );
+    }
+
+    @Test
+    public void testTestWholeNumberWithFloat() {
+        this.testAndCheck(
+            ValueType.WHOLE_NUMBER,
+            ValueType.fromClassOrFail(Float.class),
+            false
+        );
+    }
+
+    @Override
+    public ValueType createPredicate() {
+        return this.createComparable();
+    }
+
     // class............................................................................................................
 
     @Override
     public Class<ValueType> type() {
         return ValueType.class;
+    }
+
+    @Override
+    public void testTypeNaming() {
+        throw new UnsupportedOperationException();
     }
 }
