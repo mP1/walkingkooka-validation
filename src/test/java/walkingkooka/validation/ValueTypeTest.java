@@ -173,7 +173,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithBigInteger() {
         this.fromClassAndCheck(
             BigInteger.class,
-            "number/whole/BigInteger"
+            "number/wholeNumber/BigInteger"
         );
     }
 
@@ -204,7 +204,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithByteClass() {
         this.fromClassAndCheck(
             Byte.class,
-            "number/whole/Byte"
+            "number/wholeNumber/Byte"
         );
     }
 
@@ -361,7 +361,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithIntegerClass() {
         this.fromClassAndCheck(
             Integer.class,
-            "number/whole/Integer"
+            "number/wholeNumber/Integer"
         );
     }
 
@@ -488,7 +488,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithLongClass() {
         this.fromClassAndCheck(
             Long.class,
-            "number/whole/Long"
+            "number/wholeNumber/Long"
         );
     }
 
@@ -591,7 +591,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithShortClass() {
         this.fromClassAndCheck(
             Short.class,
-            "number/whole/Short"
+            "number/wholeNumber/Short"
         );
     }
 
@@ -742,7 +742,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testParseWithBigInteger() {
         this.parseStringAndCheck(
             BigInteger.class,
-            "number/whole/BigInteger"
+            "number/wholeNumber/BigInteger"
         );
     }
 
@@ -781,7 +781,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromParseWithByteClass() {
         this.parseStringAndCheck(
             Byte.class,
-            "number/whole/Byte"
+            "number/wholeNumber/Byte"
         );
     }
 
@@ -966,7 +966,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromParseWithIntegerClass() {
         this.parseStringAndCheck(
             Integer.class,
-            "number/whole/Integer"
+            "number/wholeNumber/Integer"
         );
     }
 
@@ -1093,7 +1093,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromParseWithLongClass() {
         this.parseStringAndCheck(
             Long.class,
-            "number/whole/Long"
+            "number/wholeNumber/Long"
         );
     }
 
@@ -1196,7 +1196,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromParseWithShortClass() {
         this.parseStringAndCheck(
             Short.class,
-            "number/whole/Short"
+            "number/wholeNumber/Short"
         );
     }
 
@@ -1647,7 +1647,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testUrlFragmentWithNumber() {
         this.urlFragmentAndCheck(
             ValueType.NUMBER,
-            "number-Number"
+            "Number"
         );
     }
 
@@ -1655,7 +1655,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testUrlFragmentWithWholeNumber() {
         this.urlFragmentAndCheck(
             ValueType.WHOLE_NUMBER_PARENT,
-            "number-whole"
+            "wholeNumber"
         );
     }
 
@@ -1663,7 +1663,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testUrlFragmentWithInteger() {
         this.urlFragmentAndCheck(
             ValueType.fromClassOrFail(Integer.class),
-            "number-whole-Integer"
+            "Integer"
         );
     }
 
