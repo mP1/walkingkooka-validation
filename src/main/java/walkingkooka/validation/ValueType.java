@@ -141,26 +141,26 @@ final public class ValueType implements Comparable<ValueType>,
 
         BOOLEAN = register("boolean", Boolean.class);
 
-        register("currency", Object.class);
-        register("currency/Currency", Currency.class);
-        register("currency/CurrencyCode", CurrencyCode.class);
-        register("currency/CurrencyCodeSet", CurrencyCodeSet.class);
-        register("currency/CurrencyValue", CurrencyValue.class);
+        CURRENCY_PARENT = register("currency", Object.class);
+        CURRENCY = register("currency/Currency", Currency.class);
+        CURRENCY_CODE = register("currency/CurrencyCode", CurrencyCode.class);
+        CURRENCY_CODE_SET = register("currency/CurrencyCodeSet", CurrencyCodeSet.class);
+        CURRENCY_VALUE = register("currency/CurrencyValue", CurrencyValue.class);
 
-        register("date-time", Object.class);
+        DATE_TIME_PARENT = register("date-time", Object.class);
         DATE = register("date-time/Date", LocalDate.class);
-        register("date-time/DateTimeSymbols", DateTimeSymbols.class);
+        DATE_TIME_SYMBOLS = register("date-time/DateTimeSymbols", DateTimeSymbols.class);
         DATE_TIME = register("date-time/DateTime", LocalDateTime.class);
         TIME = register("date-time/Time", LocalTime.class);
 
-        EMAIL = register("email", Object.class);
-        register("email/EmailAddress", EmailAddress.class);
+        EMAIL_PARENT = register("email", Object.class);
+        EMAIL = register("email/EmailAddress", EmailAddress.class);
 
-        register("environment", Object.class);
-        register("environment/Environment", Environment.class);
-        register("environment/EnvironmentValueName", EnvironmentValueName.class);
+        ENVIRONMENT_PARENT = register("environment", Object.class);
+        ENVIRONMENT = register("environment/Environment", Environment.class);
+        ENVIRONMENT_VALUE_NAME = register("environment/EnvironmentValueName", EnvironmentValueName.class);
 
-        register("expression", Expression.class);
+        EXPRESSION_PARENT = register("expression", Expression.class);
         register("expression/AddExpression", AddExpression.class);
         register("expression/AndExpression", AndExpression.class);
         register("expression/CallExpression", CallExpression.class);
@@ -185,109 +185,111 @@ final public class ValueType implements Comparable<ValueType>,
         register("expression/ValueExpression", ValueExpression.class);
         register("expression/XorExpression", XorExpression.class);
 
-        register("error", Object.class);
+        ERROR_PARENT = register("error", Object.class);
         ERROR = register("error/Error", ValidationError.class);
 
-        register("json", JsonNode.class);
-        register("json/JsonArray", JsonArray.class);
-        register("json/JsonBoolean", JsonBoolean.class);
-        register("json/JsonNull", JsonNull.class);
-        register("json/JsonNumber", JsonNumber.class);
-        register("json/JsonObject", JsonObject.class);
-        register("json/JsonString", JsonString.class);
+        JSON_PARENT = register("json", JsonNode.class);
+        JSON_ARRAY = register("json/JsonArray", JsonArray.class);
+        JSON_BOOLEAN = register("json/JsonBoolean", JsonBoolean.class);
+        JSON_NULL = register("json/JsonNull", JsonNull.class);
+        JSON_NUMBER = register("json/JsonNumber", JsonNumber.class);
+        JSON_OBJECT = register("json/JsonObject", JsonObject.class);
+        JSON_STRING = register("json/JsonString", JsonString.class);
 
-        register("list", List.class);
-        register("list/BooleanList", BooleanList.class);
-        register("list/DateList", LocalDateList.class);
-        register("list/DateTimeList", LocalDateTimeList.class);
-        register("list/ChoiceList", ValidationChoiceList.class);
-        register("list/Csv", CsvStringList.class);
+        LIST_PARENT = register("list", List.class);
+        BOOLEAN_LIST = register("list/BooleanList", BooleanList.class);
+        DATE_LIST = register("list/DateList", LocalDateList.class);
+        DATE_TIME_LIST = register("list/DateTimeList", LocalDateTimeList.class);
+        CHOICE_LIST = register("list/ChoiceList", ValidationChoiceList.class);
+        CSV = register("list/Csv", CsvStringList.class);
         ERROR_LIST = register("list/ErrorList", ValidationErrorList.class);
-        register("list/NumberList", NumberList.class);
-        register("list/StringList", StringList.class);
-        register("list/TimeList", LocalTimeList.class);
-        register("list/Tsv", TsvStringList.class);
+        NUMBER_LIST = register("list/NumberList", NumberList.class);
+        STRING_LIST = register("list/StringList", StringList.class);
+        TIME_LIST = register("list/TimeList", LocalTimeList.class);
+        TSV = register("list/Tsv", TsvStringList.class);
 
-        LOCALE = register("locale", Object.class);
-        register("locale/Locale", Locale.class);
-        register("locale/LocaleLanguageTag", LocaleLanguageTag.class);
-        register("locale/LocaleLanguageTagSet", LocaleLanguageTagSet.class);
+        LOCALE_PARENT = register("locale", Object.class);
+        LOCALE = register("locale/Locale", Locale.class);
+        LOCALE_LANGUAGE_TAG = register("locale/LocaleLanguageTag", LocaleLanguageTag.class);
+        LOCALE_LANGUAGE_TAG_SET = register("locale/LocaleLanguageTagSet", LocaleLanguageTagSet.class);
 
-        NUMBER = register("number", Object.class);
+        NUMBER_PARENT = register("number", Object.class);
 
-        final ValueType expressionNumber = new ValueType(
+        final ValueType number = new ValueType(
             "number/Number",
             ExpressionNumber.class
         );
-        ;
+
         CLASS_TO_VALUE_TYPE.put(
             ExpressionNumber.class,
-            expressionNumber
+            number
         );
         CLASS_NAME_TO_VALUE_TYPE.put(
             ExpressionNumber.class.getName(),
-            expressionNumber
+            number
         );
         CLASS_NAME_TO_VALUE_TYPE.put(
-            expressionNumber.value(),
-            expressionNumber
+            number.value(),
+            number
         );
         CLASS_TO_VALUE_TYPE.put(
             ExpressionNumberKind.BIG_DECIMAL.zero()
                 .getClass(),
-            expressionNumber
+            number
         );
         CLASS_NAME_TO_VALUE_TYPE.put(
             ExpressionNumberKind.BIG_DECIMAL.zero()
                 .getClass()
                 .getName(),
-            expressionNumber
+            number
         );
         CLASS_TO_VALUE_TYPE.put(
             ExpressionNumberKind.DOUBLE.zero()
                 .getClass(),
-            expressionNumber
+            number
         );
         CLASS_NAME_TO_VALUE_TYPE.put(
             ExpressionNumberKind.DOUBLE.zero()
                 .getClass()
                 .getName(),
-            expressionNumber
+            number
         );
 
-        WHOLE_NUMBER = new ValueType(
+        NUMBER = number;
+
+        WHOLE_NUMBER_PARENT = new ValueType(
             "number/whole",
             Number.class
         );
         CLASS_NAME_TO_VALUE_TYPE.put(
             "number/whole",
-            ValueType.WHOLE_NUMBER
+            ValueType.WHOLE_NUMBER_PARENT
         );
 
-        register("number/DecimalNumberSymbols", DecimalNumberSymbols.class);
-        register("number/whole/Byte", Byte.class);
-        register("number/Double", Double.class);
-        register("number/Float", Float.class);
-        register("number/whole/Integer", Integer.class);
-        register("number/whole/Long", Long.class);
-        register("number/whole/Short", Short.class);
-        register("number/BigDecimal", BigDecimal.class);
-        register("number/whole/BigInteger", BigInteger.class);
+        DECIMAL_NUMBER_SYMBOLS = register("number/DecimalNumberSymbols", DecimalNumberSymbols.class);
+        BYTE = register("number/whole/Byte", Byte.class);
+        DOUBLE = register("number/Double", Double.class);
+        FLOAT = register("number/Float", Float.class);
+        INTEGER = register("number/whole/Integer", Integer.class);
+        LONG = register("number/whole/Long", Long.class);
+        SHORT = register("number/whole/Short", Short.class);
+        BIG_DECIMAL = register("number/BigDecimal", BigDecimal.class);
+        BIG_INTEGER = register("number/whole/BigInteger", BigInteger.class);
 
-        TEXT = register("text", Object.class);
-        final ValueType string = register("text/Text", String.class);
+        TEXT_PARENT = register("text", Object.class);
+        TEXT = register("text/Text", String.class);
         CLASS_TO_VALUE_TYPE.put(
             String.class,
-            string
+            ValueType.TEXT
         );
-        register("text/StringBuffer", StringBuffer.class);
-        register("text/StringBuilder", StringBuilder.class);
+        STRING_BUFFER = register("text/StringBuffer", StringBuffer.class);
+        STRING_BUILDER = register("text/StringBuilder", StringBuilder.class);
 
-        register("url", Url.class);
-        register("url/AbsoluteUrl", AbsoluteUrl.class);
-        register("url/DataUrl", DataUrl.class);
-        register("url/MailToUrl", MailToUrl.class);
-        register("url/relative", RelativeUrl.class);
+        URL_PARENT = register("url", Url.class);
+        ABSOLUTE_URL = register("url/AbsoluteUrl", AbsoluteUrl.class);
+        DATA_URL = register("url/DataUrl", DataUrl.class);
+        MAIL_TO_URL = register("url/MailToUrl", MailToUrl.class);
+        RELATIVE_URL = register("url/RelativeUrl", RelativeUrl.class);
     }
 
     public static ValueType register(final String label,
@@ -372,25 +374,127 @@ final public class ValueType implements Comparable<ValueType>,
 
     public final static ValueType BOOLEAN;
 
+    public final static ValueType CURRENCY_PARENT;
+
+    public final static ValueType CURRENCY;
+
+    public final static ValueType CURRENCY_CODE;
+
+    public final static ValueType CURRENCY_CODE_SET;
+
+    public final static ValueType CURRENCY_VALUE;
+
     public final static ValueType DATE;
+
+    public final static ValueType DATE_TIME_PARENT;
 
     public final static ValueType DATE_TIME;
 
+    public final static ValueType DATE_TIME_SYMBOLS;
+
+    public final static ValueType EMAIL_PARENT;
+
     public final static ValueType EMAIL;
+
+    public final static ValueType ERROR_PARENT;
 
     public final static ValueType ERROR;
 
     public final static ValueType ERROR_LIST;
 
+    public final static ValueType EXPRESSION_PARENT;
+
+    public final static ValueType ENVIRONMENT_PARENT;
+
+    public final static ValueType ENVIRONMENT;
+
+    public final static ValueType ENVIRONMENT_VALUE_NAME;
+
+    public final static ValueType JSON_PARENT;
+
+    public final static ValueType JSON_ARRAY;
+
+    public final static ValueType JSON_BOOLEAN;
+
+    public final static ValueType JSON_NULL;
+
+    public final static ValueType JSON_NUMBER;
+
+    public final static ValueType JSON_OBJECT;
+
+    public final static ValueType JSON_STRING;
+
+    public final static ValueType LIST_PARENT;
+
+    public final static ValueType BOOLEAN_LIST;
+
+    public final static ValueType CHOICE_LIST;
+
+    public final static ValueType CSV;
+
+    public final static ValueType DATE_LIST;
+
+    public final static ValueType DATE_TIME_LIST;
+
+    public final static ValueType NUMBER_LIST;
+
+    public final static ValueType STRING_LIST;
+
+    public final static ValueType TIME_LIST;
+
+    public final static ValueType TSV;
+
+    public final static ValueType LOCALE_PARENT;
+
     public final static ValueType LOCALE;
+
+    public final static ValueType LOCALE_LANGUAGE_TAG;
+
+    public final static ValueType LOCALE_LANGUAGE_TAG_SET;
+
+    public final static ValueType NUMBER_PARENT;
 
     public final static ValueType NUMBER;
 
+    public final static ValueType DECIMAL_NUMBER_SYMBOLS;
+
+    public final static ValueType BIG_DECIMAL;
+
+    public final static ValueType BIG_INTEGER;
+
+    public final static ValueType BYTE;
+
+    public final static ValueType DOUBLE;
+
+    public final static ValueType FLOAT;
+
+    public final static ValueType INTEGER;
+
+    public final static ValueType LONG;
+
+    public final static ValueType SHORT;
+
+    public final static ValueType TEXT_PARENT;
+
     public final static ValueType TEXT;
+
+    public final static ValueType STRING_BUFFER;
+
+    public final static ValueType STRING_BUILDER;
 
     public final static ValueType TIME;
 
-    public final static ValueType WHOLE_NUMBER;
+    public final static ValueType URL_PARENT;
+
+    public final static ValueType ABSOLUTE_URL;
+
+    public final static ValueType DATA_URL;
+
+    public final static ValueType MAIL_TO_URL;
+
+    public final static ValueType RELATIVE_URL;
+
+    public final static ValueType WHOLE_NUMBER_PARENT;
 
     /**
      * Private constructor

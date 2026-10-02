@@ -203,7 +203,7 @@ public final class OptionalValueTypeTest implements PublicClassTesting<OptionalV
                 )
             ),
             "OptionalValueType\n" +
-                "  text\n"
+                "  text/Text\n"
         );
     }
 
