@@ -54,7 +54,7 @@ final class ValidationConverterTextToValueType<C extends ConverterContext> imple
     public Object parseText(final String text,
                             final Class<?> type,
                             final C context) {
-        return ValueType.fromClassName(text)
+        return ValueType.parse(text)
             .orElse(null);
     }
 

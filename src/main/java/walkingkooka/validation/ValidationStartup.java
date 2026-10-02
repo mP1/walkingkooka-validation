@@ -48,7 +48,7 @@ public final class ValidationStartup implements PublicStaticHelper {
         ValidationError.NO_VALUE.isPresent();
         ValidationErrorList.empty().toString();
 
-        ValueType.ANY_STRING.toString();
+        ValueType.ANY.toString();
 
         FormHandlerAliasSet.EMPTY.size();
         FormHandlerInfoSet.EMPTY.size();
