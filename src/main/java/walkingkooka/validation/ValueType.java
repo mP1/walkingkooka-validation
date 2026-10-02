@@ -635,7 +635,7 @@ final public class ValueType implements Comparable<ValueType>,
     }
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {
-        return JsonNode.string(this.toString());
+        return JsonNode.string(this.text());
     }
 
     static {

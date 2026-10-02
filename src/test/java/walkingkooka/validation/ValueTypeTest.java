@@ -1583,17 +1583,25 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     }
 
     @Test
-    public void testUnmarshallText() {
+    public void testUnmarshallTextFull() {
         this.unmarshallAndCheck2(
             "text/Text",
-            ValueType.parseOrFail("text/Text")
+            ValueType.TEXT
+        );
+    }
+
+    @Test
+    public void testUnmarshallTextWithText() {
+        this.unmarshallAndCheck2(
+            "Text",
+            ValueType.TEXT
         );
     }
 
     @Test
     public void testUnmarshallTime() {
         this.unmarshallAndCheck2(
-            "date-time/Time",
+            "Time",
             ValueType.TIME
         );
     }
