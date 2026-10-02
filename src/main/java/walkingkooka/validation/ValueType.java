@@ -139,7 +139,7 @@ final public class ValueType implements Comparable<ValueType>,
     static {
         ANY = register("*", Object.class);
 
-        BOOLEAN = register("boolean", Boolean.class);
+        BOOLEAN = register("Boolean", Boolean.class);
 
         CURRENCY_PARENT = register("currency", Object.class);
         CURRENCY = register("currency/Currency", Currency.class);
