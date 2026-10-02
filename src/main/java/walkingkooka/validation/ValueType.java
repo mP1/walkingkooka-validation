@@ -262,23 +262,23 @@ final public class ValueType implements Comparable<ValueType>,
         NUMBER = number;
 
         WHOLE_NUMBER_PARENT = new ValueType(
-            "number/whole",
+            "number/wholeNumber",
             Number.class
         );
         CLASS_NAME_TO_VALUE_TYPE.put(
-            "number/whole",
+            "number/wholeNumber",
             ValueType.WHOLE_NUMBER_PARENT
         );
 
         DECIMAL_NUMBER_SYMBOLS = register("number/DecimalNumberSymbols", DecimalNumberSymbols.class);
-        BYTE = register("number/whole/Byte", Byte.class);
+        BYTE = register("number/wholeNumber/Byte", Byte.class);
         DOUBLE = register("number/Double", Double.class);
         FLOAT = register("number/Float", Float.class);
-        INTEGER = register("number/whole/Integer", Integer.class);
-        LONG = register("number/whole/Long", Long.class);
-        SHORT = register("number/whole/Short", Short.class);
+        INTEGER = register("number/wholeNumber/Integer", Integer.class);
+        LONG = register("number/wholeNumber/Long", Long.class);
+        SHORT = register("number/wholeNumber/Short", Short.class);
         BIG_DECIMAL = register("number/BigDecimal", BigDecimal.class);
-        BIG_INTEGER = register("number/whole/BigInteger", BigInteger.class);
+        BIG_INTEGER = register("number/wholeNumber/BigInteger", BigInteger.class);
 
         TEXT_PARENT = register("text", Object.class);
         TEXT = register("text/Text", String.class);
@@ -565,7 +565,7 @@ final public class ValueType implements Comparable<ValueType>,
 
         // urlFragment..................................................................................................
         this.urlFragment = UrlFragment.with(
-            value.replace('/',
+            text.replace('/',
                 '-'
             )
         );
