@@ -144,7 +144,7 @@ public final class OptionalValueTypeTest implements PublicClassTesting<OptionalV
                     ValueType.DATE
                 )
             ),
-                "\"date\""
+                "\"date-time/Date\""
         );
     }
 

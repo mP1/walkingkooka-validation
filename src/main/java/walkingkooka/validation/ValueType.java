@@ -129,84 +129,130 @@ final public class ValueType implements Comparable<ValueType>,
      */
     public final static int MAX_LENGTH = PluginName.MAX_LENGTH;
 
+    /**
+     * Fully qualified class name to {@link ValueType}.
+     */
     private final static Map<String, ValueType> CLASS_NAME_TO_VALUE_TYPE = Maps.sorted();
 
     private final static Map<Class<?>, ValueType> CLASS_TO_VALUE_TYPE = Maps.hash();
 
     static {
-        register("url/absolute", AbsoluteUrl.class);
-        register("expression/add", AddExpression.class);
-        register("expression/and", AndExpression.class);
         ANY = register("*", Object.class);
-        BOOLEAN = register("boolean", Boolean.class);
-        register("list/boolean", BooleanList.class);
-        register("expression/call", CallExpression.class);
-        register("list/choice", ValidationChoiceList.class);
-        register("list/csv", CsvStringList.class);
-        register("currency", Currency.class);
-        register("currency-code", CurrencyCode.class);
-        register("currency-code-set", CurrencyCodeSet.class);
-        register("currency-value", CurrencyValue.class);
-        register("url/data", DataUrl.class);
-        DATE = register("date", LocalDate.class);
-        register("list/date", LocalDateList.class);
-        register("date/date-time-symbols", DateTimeSymbols.class);
-        register("number/decimal-number-symbols", DecimalNumberSymbols.class);
-        DATE_TIME = register("date-time", LocalDateTime.class);
-        register("list/date-time", LocalDateTimeList.class);
-        register("expression/divide", DivideExpression.class);
-        EMAIL = register("email", EmailAddress.class);
-        register("environment", Environment.class);
-        register("environment-value-name", EnvironmentValueName.class);
-        register("expression", Expression.class);
-        register("expression/equals", EqualsExpression.class);
-        register("expression/greater-than", GreaterThanExpression.class);
-        register("expression/greater-than-equals", GreaterThanEqualsExpression.class);
-        register("json", JsonNode.class);
-        register("json/array", JsonArray.class);
-        register("json/boolean", JsonBoolean.class);
-        register("json/null", JsonNull.class);
-        register("json/number", JsonNumber.class);
-        register("json/object", JsonObject.class);
-        register("json/string", JsonString.class);
-        register("expression/lambda", LambdaFunctionExpression.class);
-        register("expression/less-than", LessThanExpression.class);
-        register("expression/less-than-equals", LessThanEqualsExpression.class);
-        register("list", List.class);
-        register("expression/list", ListExpression.class);
-        LOCALE = register("locale", Locale.class);
-        register("locale-language-tag", LocaleLanguageTag.class);
-        register("locale-language-tag-set", LocaleLanguageTagSet.class);
-        register("url/mail-to", MailToUrl.class);
-        register("expression/modulo", ModuloExpression.class);
-        register("expression/multiply", MultiplyExpression.class);
-        register("expression/named-function", NamedFunctionExpression.class);
-        register("expression/negative", NegativeExpression.class);
-        register("expression/not", NotExpression.class);
-        register("expression/not-equals", NotEqualsExpression.class);
 
-        NUMBER = register("number", ExpressionNumber.class);
+        BOOLEAN = register("boolean", Boolean.class);
+
+        register("currency", Object.class);
+        register("currency/Currency", Currency.class);
+        register("currency/CurrencyCode", CurrencyCode.class);
+        register("currency/CurrencyCodeSet", CurrencyCodeSet.class);
+        register("currency/CurrencyValue", CurrencyValue.class);
+
+        register("date-time", Object.class);
+        DATE = register("date-time/Date", LocalDate.class);
+        register("date-time/DateTimeSymbols", DateTimeSymbols.class);
+        DATE_TIME = register("date-time/DateTime", LocalDateTime.class);
+        TIME = register("date-time/Time", LocalTime.class);
+
+        EMAIL = register("email", Object.class);
+        register("email/EmailAddress", EmailAddress.class);
+
+        register("environment", Object.class);
+        register("environment/Environment", Environment.class);
+        register("environment/EnvironmentValueName", EnvironmentValueName.class);
+
+        register("expression", Expression.class);
+        register("expression/AddExpression", AddExpression.class);
+        register("expression/AndExpression", AndExpression.class);
+        register("expression/CallExpression", CallExpression.class);
+        register("expression/DivideExpression", DivideExpression.class);
+        register("expression/EqualsExpression", EqualsExpression.class);
+        register("expression/GreaterThanExpression", GreaterThanExpression.class);
+        register("expression/GreaterThanEqualsExpression", GreaterThanEqualsExpression.class);
+        register("expression/LambdaFunctionExpression", LambdaFunctionExpression.class);
+        register("expression/LessThanExpression", LessThanExpression.class);
+        register("expression/LessThanEqualsExpression", LessThanEqualsExpression.class);
+        register("expression/ListExpression", ListExpression.class);
+        register("expression/ModuloExpression", ModuloExpression.class);
+        register("expression/MultiplyExpression", MultiplyExpression.class);
+        register("expression/NamedFunctionExpression", NamedFunctionExpression.class);
+        register("expression/NegativeExpression", NegativeExpression.class);
+        register("expression/NotExpression", NotExpression.class);
+        register("expression/NotEqualsExpression", NotEqualsExpression.class);
+        register("expression/OrExpression", OrExpression.class);
+        register("expression/PowerExpression", PowerExpression.class);
+        register("expression/ReferenceExpression", ReferenceExpression.class);
+        register("expression/SubtractExpression", SubtractExpression.class);
+        register("expression/ValueExpression", ValueExpression.class);
+        register("expression/XorExpression", XorExpression.class);
+
+        register("error", Object.class);
+        ERROR = register("error/Error", ValidationError.class);
+
+        register("json", JsonNode.class);
+        register("json/JsonArray", JsonArray.class);
+        register("json/JsonBoolean", JsonBoolean.class);
+        register("json/JsonNull", JsonNull.class);
+        register("json/JsonNumber", JsonNumber.class);
+        register("json/JsonObject", JsonObject.class);
+        register("json/JsonString", JsonString.class);
+
+        register("list", List.class);
+        register("list/BooleanList", BooleanList.class);
+        register("list/DateList", LocalDateList.class);
+        register("list/DateTimeList", LocalDateTimeList.class);
+        register("list/ChoiceList", ValidationChoiceList.class);
+        register("list/Csv", CsvStringList.class);
+        ERROR_LIST = register("list/ErrorList", ValidationErrorList.class);
+        register("list/NumberList", NumberList.class);
+        register("list/StringList", StringList.class);
+        register("list/TimeList", LocalTimeList.class);
+        register("list/Tsv", TsvStringList.class);
+
+        LOCALE = register("locale", Object.class);
+        register("locale/Locale", Locale.class);
+        register("locale/LocaleLanguageTag", LocaleLanguageTag.class);
+        register("locale/LocaleLanguageTagSet", LocaleLanguageTagSet.class);
+
+        NUMBER = register("number", Object.class);
+
+        final ValueType expressionNumber = new ValueType(
+            "number/Number",
+            ExpressionNumber.class
+        );
+        ;
+        CLASS_TO_VALUE_TYPE.put(
+            ExpressionNumber.class,
+            expressionNumber
+        );
+        CLASS_NAME_TO_VALUE_TYPE.put(
+            ExpressionNumber.class.getName(),
+            expressionNumber
+        );
+        CLASS_NAME_TO_VALUE_TYPE.put(
+            expressionNumber.value(),
+            expressionNumber
+        );
         CLASS_TO_VALUE_TYPE.put(
             ExpressionNumberKind.BIG_DECIMAL.zero()
                 .getClass(),
-            ValueType.NUMBER
+            expressionNumber
         );
         CLASS_NAME_TO_VALUE_TYPE.put(
             ExpressionNumberKind.BIG_DECIMAL.zero()
                 .getClass()
-                .getSimpleName(),
-            ValueType.NUMBER
+                .getName(),
+            expressionNumber
         );
         CLASS_TO_VALUE_TYPE.put(
             ExpressionNumberKind.DOUBLE.zero()
                 .getClass(),
-            ValueType.NUMBER
+            expressionNumber
         );
         CLASS_NAME_TO_VALUE_TYPE.put(
             ExpressionNumberKind.DOUBLE.zero()
                 .getClass()
-                .getSimpleName(),
-            ValueType.NUMBER
+                .getName(),
+            expressionNumber
         );
 
         WHOLE_NUMBER = new ValueType(
@@ -218,49 +264,30 @@ final public class ValueType implements Comparable<ValueType>,
             ValueType.WHOLE_NUMBER
         );
 
-        register("number/whole/byte", Byte.class);
-        register("number/double", Double.class);
-        register("number/float", Float.class);
-        register("number/whole/integer", Integer.class);
-        register("number/whole/long", Long.class);
-        register("number/whole/short", Short.class);
-        register("number/big-decimal", BigDecimal.class);
-        register("number/whole/big-integer", BigInteger.class);
-        register("list/number", NumberList.class);
-        register("expression/or", OrExpression.class);
-        register("expression/power", PowerExpression.class);
-        register("expression/reference", ReferenceExpression.class);
-        register("url/relative", RelativeUrl.class);
-        register("text/StringBuffer", StringBuffer.class);
-        register("text/StringBuilder", StringBuilder.class);
-        register("list/string", StringList.class);
-        register("expression/subtract", SubtractExpression.class);
+        register("number/DecimalNumberSymbols", DecimalNumberSymbols.class);
+        register("number/whole/Byte", Byte.class);
+        register("number/Double", Double.class);
+        register("number/Float", Float.class);
+        register("number/whole/Integer", Integer.class);
+        register("number/whole/Long", Long.class);
+        register("number/whole/Short", Short.class);
+        register("number/BigDecimal", BigDecimal.class);
+        register("number/whole/BigInteger", BigInteger.class);
 
-        TEXT = register("text", String.class);
+        TEXT = register("text", Object.class);
+        final ValueType string = register("text/Text", String.class);
         CLASS_TO_VALUE_TYPE.put(
             String.class,
-            ValueType.TEXT
+            string
         );
+        register("text/StringBuffer", StringBuffer.class);
+        register("text/StringBuilder", StringBuilder.class);
 
-        TIME = register("time", LocalTime.class);
-        register("list/time", LocalTimeList.class);
-        register("list/tsv", TsvStringList.class);
         register("url", Url.class);
-        register("expression/value", ValueExpression.class);
-        ERROR = register("error", ValidationError.class);
-        ERROR_LIST = register("list/error", ValidationErrorList.class);
-        register("expression/xor", XorExpression.class);
-    }
-
-    static {
-        CLASS_NAME_TO_VALUE_TYPE.put(
-            "number(big-decimal)",
-            ValueType.NUMBER
-        );
-        CLASS_NAME_TO_VALUE_TYPE.put(
-            "number(double)",
-            ValueType.NUMBER
-        );
+        register("url/AbsoluteUrl", AbsoluteUrl.class);
+        register("url/DataUrl", DataUrl.class);
+        register("url/MailToUrl", MailToUrl.class);
+        register("url/relative", RelativeUrl.class);
     }
 
     public static ValueType register(final String label,
@@ -274,25 +301,34 @@ final public class ValueType implements Comparable<ValueType>,
 
         final ValueType valueType = new ValueType(label, type);
 
-        final String typeName = type.getSimpleName();
+        final String typeName = type.getName();
 
-        if (CLASS_NAME_TO_VALUE_TYPE.containsKey(typeName)) {
-            throw new IllegalArgumentException("Duplicate type " + typeName + " registration");
+        if (Object.class != type || "*".equals(label)) {
+            if (CLASS_NAME_TO_VALUE_TYPE.containsKey(typeName)) {
+                throw new IllegalArgumentException("Duplicate type " + typeName + " registration");
+            }
+            if (false == label.equals(typeName)) {
+                CLASS_NAME_TO_VALUE_TYPE.put(
+                    label,
+                    valueType
+                );
+            }
+            CLASS_NAME_TO_VALUE_TYPE.put(
+                typeName,
+                valueType
+            );
+            CLASS_TO_VALUE_TYPE.put(
+                type,
+                valueType
+            );
         }
-        if(false == label.equals(typeName)) {
+
+        if (false == label.equals(typeName)) {
             CLASS_NAME_TO_VALUE_TYPE.put(
                 label,
                 valueType
             );
         }
-        CLASS_NAME_TO_VALUE_TYPE.put(
-            typeName,
-            valueType
-        );
-        CLASS_TO_VALUE_TYPE.put(
-            type,
-            valueType
-        );
 
         return valueType;
     }
@@ -317,7 +353,7 @@ final public class ValueType implements Comparable<ValueType>,
         return valueType;
     }
 
-    public static Optional<ValueType> fromClassName(final String name) {
+    public static Optional<ValueType> parse(final String name) {
         Objects.requireNonNull(name, "name");
 
         return Optional.ofNullable(
@@ -325,113 +361,100 @@ final public class ValueType implements Comparable<ValueType>,
         );
     }
 
-    public static ValueType fromClassNameOrFail(final String name) {
-        return fromClassName(name)
+    public static ValueType parseOrFail(final String name) {
+        return parse(name)
             .orElseThrow(() -> new IllegalArgumentException("Unknown type " + CharSequences.quoteIfChars(name)));
     }
 
     // constants........................................................................................................
 
-    public final static String ANY_STRING = "*";
-
     public final static ValueType ANY;
-
-    public final static String BOOLEAN_STRING = "boolean";
 
     public final static ValueType BOOLEAN;
 
-    public static final String CURRENCY_STRING = "currency";
-
-    public final static String DATE_STRING = "date";
-
     public final static ValueType DATE;
-
-    public final static String DATE_TIME_STRING = "date-time";
 
     public final static ValueType DATE_TIME;
 
-    public final static String EMAIL_STRING = "email";
-
     public final static ValueType EMAIL;
-
-    public final static String ENVIRONMENT_STRING = "environment";
-
-    public final static String ERROR_STRING = "error";
 
     public final static ValueType ERROR;
 
-    public final static String ERROR_LIST_STRING = "list(error)";
-
     public final static ValueType ERROR_LIST;
-
-    public final static String EXPRESSION_STRING = "expression";
-
-    public final static String JSON_NODE_STRING = "json";
-
-    public final static String LIST_STRING = "list";
-
-    public final static String LOCALE_STRING = "locale";
 
     public final static ValueType LOCALE;
 
-    public final static String NUMBER_STRING = "number";
-
     public final static ValueType NUMBER;
-
-    public final static String TEXT_STRING = "text";
 
     public final static ValueType TEXT;
 
-    public final static String TIME_STRING = "time";
-
     public final static ValueType TIME;
 
-    public final static String URL_STRING = "url";
-
     public final static ValueType WHOLE_NUMBER;
-
-    public final static String WHOLE_NUMBER_STRING = "whole-number";
 
     /**
      * Private constructor
      */
-    private ValueType(final String name,
+    private ValueType(final String value,
                       final Class<?> type) {
         super();
 
         InvalidTextLengthException.throwIfFail(
             "name",
-            name,
+            value,
             MIN_LENGTH,
             MAX_LENGTH
         );
 
-        if (false == "*".equals(name)) {
+        this.value = value;
+        this.type = type;
+
+        // text ........................................................................................................
+        final String text;
+
+        if (false == "*".equals(value)) {
             CharPredicates.failIfNullOrEmptyOrInitialAndPartFalse(
-                name,
+                value,
                 "name",
                 CharPredicates.letter(),
-                CharPredicates.letterOrDigit()
-                    .or(CharPredicates.any("/-"))
+                CharPredicates.letterOrDigit().or(CharPredicates.any(" /-"))
             );
         }
 
-        this.name = name;
-        this.type = type;
+        // parent.......................................................................................................
+        final int slash = value.lastIndexOf('/');
+        if (-1 == slash) {
+            this.parent = Optional.empty();
+            text = value;
+        } else {
+            this.parent = parse(
+                value.substring(0, slash)
+            );
+            text = value.substring(
+                slash + 1
+            );
+        }
 
+        this.text = text;
+
+        // urlFragment..................................................................................................
         this.urlFragment = UrlFragment.with(
-            name.replace('/',
+            value.replace('/',
                 '-'
             )
         );
     }
 
+    // HasValue.........................................................................................................
+
     @Override
     public String value() {
-        return this.name;
+        return this.value;
     }
 
-    private final String name;
+    private final String value;
+
+    // type.............................................................................................................
 
     public Class<?> type() {
         return this.type;
@@ -439,34 +462,23 @@ final public class ValueType implements Comparable<ValueType>,
 
     private final Class<?> type;
 
+    // parent...........................................................................................................
+
     /**
-     * Extracts the prefix for the value type, aka the text before any left-parens.
+     * Extracts the prefix for the value type, aka the text before the last '/'.
      */
     public Optional<ValueType> parent() {
-        if (null == this.parent) {
-            final String name = this.name;
-
-            final int slash = name.lastIndexOf('/');
-            if (-1 == slash) {
-                this.parent = Optional.empty();
-            } else {
-                this.parent = fromClassName(
-                    name.substring(0, slash)
-                );
-            }
-        }
-
         return this.parent;
     }
 
-    private Optional<ValueType> parent;
+    private final Optional<ValueType> parent;
 
     // Object...........................................................................................................
 
     @Override
     public int hashCode() {
         return Objects.hash(
-            this.name,
+            this.value,
             this.type
         );
     }
@@ -479,22 +491,21 @@ final public class ValueType implements Comparable<ValueType>,
     }
 
     private boolean equals0(final ValueType other) {
-        return this.name.equals(other.name) &&
+        return this.value.equals(other.value) &&
             this.type.equals(other.type);
     }
 
     @Override
     public String toString() {
-        return this.name;
+        return this.value;
     }
 
     // Json.............................................................................................................
 
     static ValueType unmarshall(final JsonNode node,
                                 final JsonNodeUnmarshallContext context) {
-        final String className = node.stringOrFail();
-        return fromClassName(className)
-            .orElseThrow(() -> new IllegalArgumentException("Unknown ValueType with class name " + CharSequences.quote(className)));
+        final String value = node.stringOrFail();
+        return parseOrFail(value);
     }
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {
@@ -532,8 +543,10 @@ final public class ValueType implements Comparable<ValueType>,
 
     @Override
     public String text() {
-        return this.name;
+        return this.text;
     }
+
+    private final String text;
 
     // HasUrlFragment...................................................................................................
 
@@ -580,7 +593,7 @@ final public class ValueType implements Comparable<ValueType>,
 
     @Override
     public void printTree(final IndentingPrinter printer) {
-        printer.println(this.name);
+        printer.println(this.value);
     }
 
     // Comparable.......................................................................................................
@@ -589,8 +602,8 @@ final public class ValueType implements Comparable<ValueType>,
     public int compareTo(final ValueType other) {
         return CASE_SENSITIVITY.comparator()
             .compare(
-                this.name,
-                other.name
+                this.value,
+                other.value
             );
     }
 }

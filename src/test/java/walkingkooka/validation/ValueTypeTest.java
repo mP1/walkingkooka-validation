@@ -34,6 +34,7 @@ import walkingkooka.net.email.EmailAddress;
 import walkingkooka.net.header.HasContentTypeTesting;
 import walkingkooka.predicate.PredicateTesting2;
 import walkingkooka.reflect.PublicClassTesting;
+import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.expression.AddExpression;
 import walkingkooka.tree.expression.CallExpression;
@@ -89,6 +90,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     HasContentTypeTesting,
     ComparableTesting2<ValueType>,
     JsonNodeMarshallerTesting<ValueType>,
+    ParseStringTesting<Optional<ValueType>>,
     PredicateTesting2<ValueType, ValueType> {
 
     // HasText..........................................................................................................
@@ -98,6 +100,54 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
         this.textAndCheck(
             ValueType.TEXT,
             "text"
+        );
+    }
+
+    @Test
+    public void testTextWithDateTimeSymbols() {
+        this.textAndCheck(
+            ValueType.fromClassOrFail(DateTimeSymbols.class),
+            "DateTimeSymbols"
+        );
+    }
+
+    @Test
+    public void testTextWithExpressionNumber() {
+        this.textAndCheck(
+            ValueType.fromClassOrFail(
+                ExpressionNumber.class
+            ),
+            "Number"
+        );
+    }
+
+    @Test
+    public void testTextWithExpressionNumberBigDecimal() {
+        this.textAndCheck(
+            ValueType.fromClassOrFail(
+                ExpressionNumberKind.BIG_DECIMAL.zero()
+                    .getClass()
+            ),
+            "Number"
+        );
+    }
+
+    @Test
+    public void testTextWithExpressionNumberDouble() {
+        this.textAndCheck(
+            ValueType.fromClassOrFail(
+                ExpressionNumberKind.DOUBLE.zero()
+                    .getClass()
+            ),
+            "Number"
+        );
+    }
+
+    @Test
+    public void testTextWithString() {
+        this.textAndCheck(
+            ValueType.fromClassOrFail(String.class),
+            "Text"
         );
     }
 
@@ -115,7 +165,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithBigDecimal() {
         this.fromClassAndCheck(
             BigDecimal.class,
-            "number/big-decimal"
+            "number/BigDecimal"
         );
     }
 
@@ -123,7 +173,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithBigInteger() {
         this.fromClassAndCheck(
             BigInteger.class,
-            "number/whole/big-integer"
+            "number/whole/BigInteger"
         );
     }
 
@@ -139,7 +189,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithBooleanList() {
         this.fromClassAndCheck(
             BooleanList.class,
-            "list/boolean"
+            "list/BooleanList"
         );
     }
 
@@ -154,7 +204,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithByteClass() {
         this.fromClassAndCheck(
             Byte.class,
-            "number/whole/byte"
+            "number/whole/Byte"
         );
     }
 
@@ -162,7 +212,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithCallExpression() {
         this.fromClassAndCheck(
             CallExpression.class,
-            "expression/call"
+            "expression/CallExpression"
         );
     }
 
@@ -170,7 +220,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithCsvStringList() {
         this.fromClassAndCheck(
             CsvStringList.class,
-            "list/csv"
+            "list/Csv"
         );
     }
 
@@ -178,7 +228,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithCurrency() {
         this.fromClassAndCheck(
             Currency.class,
-            "currency"
+            "currency/Currency"
         );
     }
 
@@ -186,7 +236,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithCurrencyCode() {
         this.fromClassAndCheck(
             CurrencyCode.class,
-            "currency-code"
+            "currency/CurrencyCode"
         );
     }
 
@@ -194,7 +244,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithCurrencyValue() {
         this.fromClassAndCheck(
             CurrencyValue.class,
-            "currency-value"
+            "currency/CurrencyValue"
         );
     }
 
@@ -202,7 +252,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithDateTimeSymbols() {
         this.fromClassAndCheck(
             DateTimeSymbols.class,
-            "date/date-time-symbols"
+            "date-time/DateTimeSymbols"
         );
     }
 
@@ -210,7 +260,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithDecimalNumberSymbols() {
         this.fromClassAndCheck(
             DecimalNumberSymbols.class,
-            "number/decimal-number-symbols"
+            "number/DecimalNumberSymbols"
         );
     }
 
@@ -218,7 +268,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithDivideExpression() {
         this.fromClassAndCheck(
             DivideExpression.class,
-            "expression/divide"
+            "expression/DivideExpression"
         );
     }
 
@@ -233,15 +283,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithDoubleClass() {
         this.fromClassAndCheck(
             Double.class,
-            "number/double"
-        );
-    }
-
-    @Test
-    public void testFromClassWithEmail() {
-        this.fromClassAndCheck(
-            EmailAddress.class,
-            ValueType.EMAIL
+            "number/Double"
         );
     }
 
@@ -249,7 +291,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithEmailAddress() {
         this.fromClassAndCheck(
             EmailAddress.class,
-            ValueType.EMAIL
+            "email/EmailAddress"
         );
     }
 
@@ -257,7 +299,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithEnvironment() {
         this.fromClassAndCheck(
             Environment.class,
-            "environment"
+            "environment/Environment"
         );
     }
 
@@ -265,7 +307,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithEqualsExpression() {
         this.fromClassAndCheck(
             EqualsExpression.class,
-            "expression/equals"
+            "expression/EqualsExpression"
         );
     }
 
@@ -288,7 +330,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithFloatClass() {
         this.fromClassAndCheck(
             Float.class,
-            "number/float"
+            "number/Float"
         );
     }
 
@@ -296,7 +338,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithGreaterThanExpression() {
         this.fromClassAndCheck(
             GreaterThanExpression.class,
-            "expression/greater-than"
+            "expression/GreaterThanExpression"
         );
     }
 
@@ -304,7 +346,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithGreaterThanEqualsExpression() {
         this.fromClassAndCheck(
             GreaterThanEqualsExpression.class,
-            "expression/greater-than-equals"
+            "expression/GreaterThanEqualsExpression"
         );
     }
 
@@ -319,7 +361,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithIntegerClass() {
         this.fromClassAndCheck(
             Integer.class,
-            "number/whole/integer"
+            "number/whole/Integer"
         );
     }
 
@@ -327,7 +369,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithJsonArray() {
         this.fromClassAndCheck(
             JsonArray.class,
-            "json/array"
+            "json/JsonArray"
         );
     }
 
@@ -335,7 +377,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithJsonBoolean() {
         this.fromClassAndCheck(
             JsonBoolean.class,
-            "json/boolean"
+            "json/JsonBoolean"
         );
     }
 
@@ -343,7 +385,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithJsonNull() {
         this.fromClassAndCheck(
             JsonNull.class,
-            "json/null"
+            "json/JsonNull"
         );
     }
 
@@ -359,7 +401,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithJsonNumber() {
         this.fromClassAndCheck(
             JsonNumber.class,
-            "json/number"
+            "json/JsonNumber"
         );
     }
 
@@ -367,7 +409,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithJsonObject() {
         this.fromClassAndCheck(
             JsonObject.class,
-            "json/object"
+            "json/JsonObject"
         );
     }
 
@@ -375,7 +417,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithJsonString() {
         this.fromClassAndCheck(
             JsonString.class,
-            "json/string"
+            "json/JsonString"
         );
     }
 
@@ -383,7 +425,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithLessThanExpression() {
         this.fromClassAndCheck(
             LessThanExpression.class,
-            "expression/less-than"
+            "expression/LessThanExpression"
         );
     }
 
@@ -391,7 +433,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithLessThanEqualsExpression() {
         this.fromClassAndCheck(
             LessThanEqualsExpression.class,
-            "expression/less-than-equals"
+            "expression/LessThanEqualsExpression"
         );
     }
 
@@ -407,7 +449,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithListExpression() {
         this.fromClassAndCheck(
             ListExpression.class,
-            "expression/list"
+            "expression/ListExpression"
         );
     }
 
@@ -446,7 +488,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithLongClass() {
         this.fromClassAndCheck(
             Long.class,
-            "number/whole/long"
+            "number/whole/Long"
         );
     }
 
@@ -454,7 +496,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithModuloExpression() {
         this.fromClassAndCheck(
             ModuloExpression.class,
-            "expression/modulo"
+            "expression/ModuloExpression"
         );
     }
 
@@ -462,7 +504,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithMultiplyExpression() {
         this.fromClassAndCheck(
             MultiplyExpression.class,
-            "expression/multiply"
+            "expression/MultiplyExpression"
         );
     }
 
@@ -470,7 +512,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithNamedFunctionExpression() {
         this.fromClassAndCheck(
             NamedFunctionExpression.class,
-            "expression/named-function"
+            "expression/NamedFunctionExpression"
         );
     }
 
@@ -478,7 +520,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithNegativeExpression() {
         this.fromClassAndCheck(
             NegativeExpression.class,
-            "expression/negative"
+            "expression/NegativeExpression"
         );
     }
 
@@ -486,7 +528,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithNotEqualsExpression() {
         this.fromClassAndCheck(
             NotEqualsExpression.class,
-            "expression/not-equals"
+            "expression/NotEqualsExpression"
         );
     }
 
@@ -494,7 +536,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithNotExpression() {
         this.fromClassAndCheck(
             NotExpression.class,
-            "expression/not"
+            "expression/NotExpression"
         );
     }
 
@@ -502,7 +544,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithNumberList() {
         this.fromClassAndCheck(
             NumberList.class,
-            "list/number"
+            "list/NumberList"
         );
     }
 
@@ -518,7 +560,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithOrExpression() {
         this.fromClassAndCheck(
             OrExpression.class,
-            "expression/or"
+            "expression/OrExpression"
         );
     }
 
@@ -526,7 +568,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithPowerExpression() {
         this.fromClassAndCheck(
             PowerExpression.class,
-            "expression/power"
+            "expression/PowerExpression"
         );
     }
 
@@ -534,7 +576,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithReferenceExpression() {
         this.fromClassAndCheck(
             ReferenceExpression.class,
-            "expression/reference"
+            "expression/ReferenceExpression"
         );
     }
 
@@ -549,7 +591,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithShortClass() {
         this.fromClassAndCheck(
             Short.class,
-            "number/whole/short"
+            "number/whole/Short"
         );
     }
 
@@ -557,7 +599,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithString() {
         this.fromClassAndCheck(
             String.class,
-            ValueType.TEXT
+            ValueType.parse("text/Text")
         );
     }
 
@@ -581,7 +623,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithStringList() {
         this.fromClassAndCheck(
             StringList.class,
-            "list/string"
+            "list/StringList"
         );
     }
 
@@ -589,7 +631,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithSubtractExpression() {
         this.fromClassAndCheck(
             SubtractExpression.class,
-            "expression/subtract"
+            "expression/SubtractExpression"
         );
     }
 
@@ -597,7 +639,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithValidationChoiceList() {
         this.fromClassAndCheck(
             ValidationChoiceList.class,
-            "list/choice"
+            "list/ChoiceList"
         );
     }
 
@@ -621,7 +663,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithValueExpression() {
         this.fromClassAndCheck(
             ValueExpression.class,
-            "expression/value"
+            "expression/ValueExpression"
         );
     }
 
@@ -629,7 +671,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithXorExpression() {
         this.fromClassAndCheck(
             XorExpression.class,
-            "expression/xor"
+            "expression/XorExpression"
         );
     }
 
@@ -673,584 +715,581 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
         );
     }
 
-    // fromClassName....................................................................................................
+    // parse............................................................................................................
+
+    @Override
+    public void testParseStringEmptyFails() {
+        throw new UnsupportedOperationException();
+    }
 
     @Test
-    public void testFromClassNameWithNullFails() {
+    public void testParseWithNullFails() {
         assertThrows(
             NullPointerException.class,
-            () -> ValueType.fromClassName(null)
+            () -> ValueType.parse(null)
         );
     }
 
     @Test
-    public void testFromClassNameWithBigDecimal() {
-        this.fromClassNameAndCheck(
+    public void testParseWithBigDecimal() {
+        this.parseStringAndCheck(
             BigDecimal.class,
-            "number/big-decimal"
+            "number/BigDecimal"
         );
     }
 
     @Test
-    public void testFromClassNameWithBigInteger() {
-        this.fromClassNameAndCheck(
+    public void testParseWithBigInteger() {
+        this.parseStringAndCheck(
             BigInteger.class,
-            "number/whole/big-integer"
+            "number/whole/BigInteger"
         );
     }
 
     @Test
-    public void testFromClassNameWithBooleanType() {
-        this.fromClassNameAndCheck(
+    public void testParseWithBooleanType() {
+        this.parseStringAndCheck(
             Boolean.TYPE,
             ValueType.BOOLEAN
         );
     }
 
     @Test
-    public void testFromClassNameWithBooleanClass() {
-        this.fromClassNameAndCheck(
+    public void testFromParseWithBooleanClass() {
+        this.parseStringAndCheck(
             Boolean.class,
             ValueType.BOOLEAN
         );
     }
 
     @Test
-    public void testFromClassNameWithBooleanList() {
-        this.fromClassNameAndCheck(
+    public void testParseWithBooleanList() {
+        this.parseStringAndCheck(
             BooleanList.class,
-            "list/boolean"
+            "list/BooleanList"
         );
     }
 
     @Test
-    public void testFromClassNameWithByteType() {
-        this.fromClassNameAndCheck(
+    public void testParseWithByteType() {
+        this.parseStringAndCheck(
             Byte.TYPE
         );
     }
 
     @Test
-    public void testFromClassNameWithByteClass() {
-        this.fromClassNameAndCheck(
+    public void testFromParseWithByteClass() {
+        this.parseStringAndCheck(
             Byte.class,
-            "number/whole/byte"
+            "number/whole/Byte"
         );
     }
 
     @Test
-    public void testFromClassNameWithCallExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithCallExpression() {
+        this.parseStringAndCheck(
             CallExpression.class,
-            "expression/call"
+            "expression/CallExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithCsvStringList() {
-        this.fromClassNameAndCheck(
+    public void testParseWithCsvStringList() {
+        this.parseStringAndCheck(
             CsvStringList.class,
-            "list/csv"
+            "list/Csv"
         );
     }
 
     @Test
-    public void testFromClassNameWithCurrency() {
-        this.fromClassNameAndCheck(
+    public void testParseWithCurrency() {
+        this.parseStringAndCheck(
             Currency.class,
-            "currency"
+            "currency/Currency"
         );
     }
 
     @Test
-    public void testFromClassNameWithCurrencyCode() {
-        this.fromClassNameAndCheck(
+    public void testParseWithCurrencyCode() {
+        this.parseStringAndCheck(
             CurrencyCode.class,
-            "currency-code"
+            "currency/CurrencyCode"
         );
     }
 
     @Test
-    public void testFromClassNameWithCurrencyValue() {
-        this.fromClassNameAndCheck(
+    public void testParseWithCurrencyValue() {
+        this.parseStringAndCheck(
             CurrencyValue.class,
-            "currency-value"
+            "currency/CurrencyValue"
         );
     }
 
     @Test
-    public void testFromClassNameWithDateTimeSymbols() {
-        this.fromClassNameAndCheck(
+    public void testParseWithDateTimeSymbols() {
+        this.parseStringAndCheck(
             DateTimeSymbols.class,
-            "date/date-time-symbols"
+            "date-time/DateTimeSymbols"
         );
     }
 
     @Test
-    public void testFromClassNameWithDecimalNumberSymbols() {
-        this.fromClassNameAndCheck(
+    public void testParseWithDecimalNumberSymbols() {
+        this.parseStringAndCheck(
             DecimalNumberSymbols.class,
-            "number/decimal-number-symbols"
+            "number/DecimalNumberSymbols"
         );
     }
 
     @Test
-    public void testFromClassNameWithDivideExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithDivideExpression() {
+        this.parseStringAndCheck(
             DivideExpression.class,
-            "expression/divide"
+            "expression/DivideExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithDoubleType() {
-        this.fromClassNameAndCheck(
+    public void testParseWithDoubleType() {
+        this.parseStringAndCheck(
             Double.TYPE
         );
     }
 
     @Test
-    public void testFromClassNameWithDoubleClass() {
-        this.fromClassNameAndCheck(
+    public void testFromParseWithDoubleClass() {
+        this.parseStringAndCheck(
             Double.class,
-            "number/double"
+            "number/Double"
         );
     }
 
     @Test
-    public void testFromClassNameWithEmail() {
-        this.fromClassNameAndCheck(
+    public void testParseWithEmailAddress() {
+        this.parseStringAndCheck(
             EmailAddress.class,
-            ValueType.EMAIL
+            "email/EmailAddress"
         );
     }
 
     @Test
-    public void testFromClassNameWithEmailAddress() {
-        this.fromClassNameAndCheck(
-            EmailAddress.class,
-            ValueType.EMAIL
-        );
-    }
-
-    @Test
-    public void testFromClassNameWithEnvironment() {
-        this.fromClassNameAndCheck(
+    public void testParseWithEnvironment() {
+        this.parseStringAndCheck(
             Environment.class,
-            "environment"
+            "environment/Environment"
         );
     }
 
     @Test
-    public void testFromClassNameWithEqualsExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithEqualsExpression() {
+        this.parseStringAndCheck(
             EqualsExpression.class,
-            "expression/equals"
+            "expression/EqualsExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithExpression() {
+        this.parseStringAndCheck(
             Expression.class,
             "expression"
         );
     }
 
     @Test
-    public void testFromClassNameWithExpressionNumber() {
-        this.fromClassNameAndCheck(
+    public void testParseWithExpressionNumber() {
+        this.parseStringAndCheck(
             ExpressionNumber.class,
-            "number"
+            "number/Number"
         );
     }
 
     @Test
-    public void testFromClassNameWithExpressionNumberBigDecimal() {
-        this.fromClassNameAndCheck(
+    public void testParseWithExpressionNumberBigDecimal() {
+        this.parseStringAndCheck(
             ExpressionNumberKind.BIG_DECIMAL.zero()
                 .getClass()
-                .getSimpleName(),
-            "number"
+                .getName(),
+            "number/Number"
         );
     }
 
     @Test
-    public void testFromClassNameWithExpressionNumberDouble() {
-        this.fromClassNameAndCheck(
+    public void testParseWithExpressionNumberDouble() {
+        this.parseStringAndCheck(
             ExpressionNumberKind.DOUBLE.zero()
                 .getClass()
-                .getSimpleName(),
-            "number"
+                .getName(),
+            "number/Number"
         );
     }
 
     @Test
-    public void testFromClassNameWithFloatType() {
-        this.fromClassNameAndCheck(
+    public void testParseWithFloatType() {
+        this.parseStringAndCheck(
             Float.TYPE
         );
     }
 
     @Test
-    public void testFromClassNameWithFloatClass() {
-        this.fromClassNameAndCheck(
+    public void testFromParseWithFloatClass() {
+        this.parseStringAndCheck(
             Float.class,
-            "number/float"
+            "number/Float"
         );
     }
 
     @Test
-    public void testFromClassNameWithGreaterThanExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithGreaterThanExpression() {
+        this.parseStringAndCheck(
             GreaterThanExpression.class,
-            "expression/greater-than"
+            "expression/GreaterThanExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithGreaterThanEqualsExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithGreaterThanEqualsExpression() {
+        this.parseStringAndCheck(
             GreaterThanEqualsExpression.class,
-            "expression/greater-than-equals"
+            "expression/GreaterThanEqualsExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithIntegerType() {
-        this.fromClassNameAndCheck(
+    public void testParseWithIntegerType() {
+        this.parseStringAndCheck(
             Integer.TYPE
         );
     }
 
     @Test
-    public void testFromClassNameWithIntegerClass() {
-        this.fromClassNameAndCheck(
+    public void testFromParseWithIntegerClass() {
+        this.parseStringAndCheck(
             Integer.class,
-            "number/whole/integer"
+            "number/whole/Integer"
         );
     }
 
     @Test
-    public void testFromClassNameWithJsonArray() {
-        this.fromClassNameAndCheck(
+    public void testParseWithJsonArray() {
+        this.parseStringAndCheck(
             JsonArray.class,
-            "json/array"
+            "json/JsonArray"
         );
     }
 
     @Test
-    public void testFromClassNameWithJsonBoolean() {
-        this.fromClassNameAndCheck(
+    public void testParseWithJsonBoolean() {
+        this.parseStringAndCheck(
             JsonBoolean.class,
-            "json/boolean"
+            "json/JsonBoolean"
         );
     }
 
     @Test
-    public void testFromClassNameWithJsonNull() {
-        this.fromClassNameAndCheck(
+    public void testParseWithJsonNull() {
+        this.parseStringAndCheck(
             JsonNull.class,
-            "json/null"
+            "json/JsonNull"
         );
     }
 
     @Test
-    public void testFromClassNameWithJsonNode() {
-        this.fromClassNameAndCheck(
+    public void testParseWithJsonNode() {
+        this.parseStringAndCheck(
             JsonNode.class,
             "json"
         );
     }
 
     @Test
-    public void testFromClassNameWithJsonNumber() {
-        this.fromClassNameAndCheck(
+    public void testParseWithJsonNumber() {
+        this.parseStringAndCheck(
             JsonNumber.class,
-            "json/number"
+            "json/JsonNumber"
         );
     }
 
     @Test
-    public void testFromClassNameWithJsonObject() {
-        this.fromClassNameAndCheck(
+    public void testParseWithJsonObject() {
+        this.parseStringAndCheck(
             JsonObject.class,
-            "json/object"
+            "json/JsonObject"
         );
     }
 
     @Test
-    public void testFromClassNameWithJsonString() {
-        this.fromClassNameAndCheck(
+    public void testParseWithJsonString() {
+        this.parseStringAndCheck(
             JsonString.class,
-            "json/string"
+            "json/JsonString"
         );
     }
 
     @Test
-    public void testFromClassNameWithLessThanExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithLessThanExpression() {
+        this.parseStringAndCheck(
             LessThanExpression.class,
-            "expression/less-than"
+            "expression/LessThanExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithLessThanEqualsExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithLessThanEqualsExpression() {
+        this.parseStringAndCheck(
             LessThanEqualsExpression.class,
-            "expression/less-than-equals"
+            "expression/LessThanEqualsExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithList() {
-        this.fromClassNameAndCheck(
+    public void testParseWithList() {
+        this.parseStringAndCheck(
             List.class,
             "list"
         );
     }
 
     @Test
-    public void testFromClassNameWithListExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithListExpression() {
+        this.parseStringAndCheck(
             ListExpression.class,
-            "expression/list"
+            "expression/ListExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithLocalDate() {
-        this.fromClassNameAndCheck(
+    public void testParseWithLocalDate() {
+        this.parseStringAndCheck(
             LocalDate.class,
             ValueType.DATE
         );
     }
 
     @Test
-    public void testFromClassNameWithLocalDateTime() {
-        this.fromClassNameAndCheck(
+    public void testParseWithLocalDateTime() {
+        this.parseStringAndCheck(
             LocalDateTime.class,
             ValueType.DATE_TIME
         );
     }
 
     @Test
-    public void testFromClassNameWithLocalTime() {
-        this.fromClassNameAndCheck(
+    public void testParseWithLocalTime() {
+        this.parseStringAndCheck(
             LocalTime.class,
             ValueType.TIME
         );
     }
 
     @Test
-    public void testFromClassNameWithLongType() {
-        this.fromClassNameAndCheck(
+    public void testParseWithLongType() {
+        this.parseStringAndCheck(
             Long.TYPE
         );
     }
 
     @Test
-    public void testFromClassNameWithLongClass() {
-        this.fromClassNameAndCheck(
+    public void testFromParseWithLongClass() {
+        this.parseStringAndCheck(
             Long.class,
-            "number/whole/long"
+            "number/whole/Long"
         );
     }
 
     @Test
-    public void testFromClassNameWithModuloExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithModuloExpression() {
+        this.parseStringAndCheck(
             ModuloExpression.class,
-            "expression/modulo"
+            "expression/ModuloExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithMultiplyExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithMultiplyExpression() {
+        this.parseStringAndCheck(
             MultiplyExpression.class,
-            "expression/multiply"
+            "expression/MultiplyExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithNamedFunctionExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithNamedFunctionExpression() {
+        this.parseStringAndCheck(
             NamedFunctionExpression.class,
-            "expression/named-function"
+            "expression/NamedFunctionExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithNegativeExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithNegativeExpression() {
+        this.parseStringAndCheck(
             NegativeExpression.class,
-            "expression/negative"
+            "expression/NegativeExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithNotEqualsExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithNotEqualsExpression() {
+        this.parseStringAndCheck(
             NotEqualsExpression.class,
-            "expression/not-equals"
+            "expression/NotEqualsExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithNotExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithNotExpression() {
+        this.parseStringAndCheck(
             NotExpression.class,
-            "expression/not"
+            "expression/NotExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithNumberList() {
-        this.fromClassNameAndCheck(
+    public void testParseWithNumberList() {
+        this.parseStringAndCheck(
             NumberList.class,
-            "list/number"
+            "list/NumberList"
         );
     }
 
     @Test
-    public void testFromClassNameWithObject() {
-        this.fromClassNameAndCheck(
+    public void testParseWithObject() {
+        this.parseStringAndCheck(
             Object.class,
             ValueType.ANY
         );
     }
 
     @Test
-    public void testFromClassNameWithOrExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithOrExpression() {
+        this.parseStringAndCheck(
             OrExpression.class,
-            "expression/or"
+            "expression/OrExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithPowerExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithPowerExpression() {
+        this.parseStringAndCheck(
             PowerExpression.class,
-            "expression/power"
+            "expression/PowerExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithReferenceExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithReferenceExpression() {
+        this.parseStringAndCheck(
             ReferenceExpression.class,
-            "expression/reference"
+            "expression/ReferenceExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithShortType() {
-        this.fromClassNameAndCheck(
+    public void testParseWithShortType() {
+        this.parseStringAndCheck(
             Short.TYPE
         );
     }
 
     @Test
-    public void testFromClassNameWithShortClass() {
-        this.fromClassNameAndCheck(
+    public void testFromParseWithShortClass() {
+        this.parseStringAndCheck(
             Short.class,
-            "number/whole/short"
+            "number/whole/Short"
         );
     }
 
     @Test
-    public void testFromClassNameWithString() {
-        this.fromClassNameAndCheck(
+    public void testParseWithString() {
+        this.parseStringAndCheck(
             String.class,
-            ValueType.TEXT
+            "text/Text"
         );
     }
 
     @Test
-    public void testFromClassNameWithStringBuffer() {
-        this.fromClassNameAndCheck(
+    public void testParseWithStringBuffer() {
+        this.parseStringAndCheck(
             StringBuffer.class,
             "text/StringBuffer"
         );
     }
 
     @Test
-    public void testFromClassNameWithStringBuilder() {
-        this.fromClassNameAndCheck(
+    public void testParseWithStringBuilder() {
+        this.parseStringAndCheck(
             StringBuilder.class,
             "text/StringBuilder"
         );
     }
 
     @Test
-    public void testFromClassNameWithStringList() {
-        this.fromClassNameAndCheck(
+    public void testParseWithStringList() {
+        this.parseStringAndCheck(
             StringList.class,
-            "list/string"
+            "list/StringList"
         );
     }
 
     @Test
-    public void testFromClassNameWithSubtractExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithSubtractExpression() {
+        this.parseStringAndCheck(
             SubtractExpression.class,
-            "expression/subtract"
+            "expression/SubtractExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithValidationChoiceList() {
-        this.fromClassNameAndCheck(
+    public void testParseWithValidationChoiceList() {
+        this.parseStringAndCheck(
             ValidationChoiceList.class,
-            "list/choice"
+            "list/ChoiceList"
         );
     }
 
     @Test
-    public void testFromClassNameWithValidationError() {
-        this.fromClassNameAndCheck(
+    public void testParseWithValidationError() {
+        this.parseStringAndCheck(
             ValidationError.class,
             ValueType.ERROR
         );
     }
 
     @Test
-    public void testFromClassNameWithValidationErrorList() {
-        this.fromClassNameAndCheck(
+    public void testParseWithValidationErrorList() {
+        this.parseStringAndCheck(
             ValidationErrorList.class,
             ValueType.ERROR_LIST
         );
     }
 
     @Test
-    public void testFromClassNameWithValueExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithValueExpression() {
+        this.parseStringAndCheck(
             ValueExpression.class,
-            "expression/value"
+            "expression/ValueExpression"
         );
     }
 
     @Test
-    public void testFromClassNameWithXorExpression() {
-        this.fromClassNameAndCheck(
+    public void testParseWithXorExpression() {
+        this.parseStringAndCheck(
             XorExpression.class,
-            "expression/xor"
+            "expression/XorExpression"
         );
     }
 
-    private void fromClassNameAndCheck(final Class<?> klass) {
-        this.checkEquals(
-            Optional.empty(),
-            ValueType.fromClassName(klass.getSimpleName())
+    private void parseStringAndCheck(final Class<?> klass) {
+        this.parseStringAndCheck(
+            klass.getName(),
+            Optional.empty()
         );
     }
 
-    private void fromClassNameAndCheck(final String name,
-                                       final String expected) {
-        final ValueType valueType = ValueType.fromClassName(name)
+    private void parseStringAndCheck(final String name,
+                                     final String expected) {
+        final ValueType valueType = this.parseString(name)
             .orElseThrow(() -> new AssertionError("Missing " + name));
 
         this.valueAndCheck(
@@ -1259,10 +1298,15 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
         );
     }
 
-    private void fromClassNameAndCheck(final Class<?> klass,
-                                       final String expected) {
-        final ValueType valueType = ValueType.fromClassName(klass.getSimpleName())
+    private void parseStringAndCheck(final Class<?> klass,
+                                     final String expected) {
+        final ValueType valueType = this.parseString(klass.getName())
             .orElseThrow(() -> new AssertionError("Missing " + klass));
+
+        this.parseStringAndCheck(
+            valueType.value(),
+            Optional.of(valueType)
+        );
 
         this.valueAndCheck(
             valueType,
@@ -1276,20 +1320,35 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
         );
     }
 
-    private void fromClassNameAndCheck(final Class<?> klass,
-                                       final ValueType expected) {
-        this.fromClassNameAndCheck(
+    private void parseStringAndCheck(final Class<?> klass,
+                                     final ValueType expected) {
+        this.parseStringAndCheck(
             klass,
             Optional.of(expected)
         );
     }
 
-    private void fromClassNameAndCheck(final Class<?> klass,
-                                       final Optional<ValueType> expected) {
+    private void parseStringAndCheck(final Class<?> klass,
+                                     final Optional<ValueType> expected) {
         this.checkEquals(
             expected,
-            ValueType.fromClassName(klass.getSimpleName())
+            ValueType.parse(klass.getName())
         );
+    }
+
+    @Override
+    public Optional<ValueType> parseString(final String text) {
+        return ValueType.parse(text);
+    }
+
+    @Override
+    public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> thrown) {
+        return thrown;
+    }
+
+    @Override
+    public RuntimeException parseStringFailedExpected(final RuntimeException thrown) {
+        return thrown;
     }
 
     // parent...........................................................................................................
@@ -1377,7 +1436,8 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testParentWithExpressionNumberBigDecimal() {
         this.parentAndCheck(
             ExpressionNumberKind.BIG_DECIMAL.zero()
-                .getClass()
+                .getClass(),
+            ValueType.NUMBER
         );
     }
 
@@ -1385,10 +1445,11 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testParentWithExpressionNumberDouble() {
         this.parentAndCheck(
             ExpressionNumberKind.DOUBLE.zero()
-                .getClass()
+                .getClass(),
+            ValueType.NUMBER
         );
     }
-    
+
     @Test
     public void testParentWithExpressionAdd() {
         this.parentAndCheck(
@@ -1460,7 +1521,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     @Test
     public void testUnmarshallAny() {
         this.unmarshallAndCheck2(
-            ValueType.ANY_STRING,
+            "*",
             ValueType.ANY
         );
     }
@@ -1468,7 +1529,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     @Test
     public void testUnmarshallBoolean() {
         this.unmarshallAndCheck2(
-            ValueType.BOOLEAN_STRING,
+            "boolean",
             ValueType.BOOLEAN
         );
     }
@@ -1476,7 +1537,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     @Test
     public void testUnmarshallDate() {
         this.unmarshallAndCheck2(
-            ValueType.DATE_STRING,
+            "date-time/Date",
             ValueType.DATE
         );
     }
@@ -1484,7 +1545,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     @Test
     public void testUnmarshallDateTime() {
         this.unmarshallAndCheck2(
-            ValueType.DATE_TIME_STRING,
+            "date-time/DateTime",
             ValueType.DATE_TIME
         );
     }
@@ -1492,15 +1553,15 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     @Test
     public void testUnmarshallText() {
         this.unmarshallAndCheck2(
-            ValueType.TEXT_STRING,
-            ValueType.TEXT
+            "text/Text",
+            ValueType.parseOrFail("text/Text")
         );
     }
 
     @Test
     public void testUnmarshallTime() {
         this.unmarshallAndCheck2(
-            ValueType.TIME_STRING,
+            "date-time/Time",
             ValueType.TIME
         );
     }
@@ -1562,7 +1623,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testUrlFragmentWithInteger() {
         this.urlFragmentAndCheck(
             ValueType.fromClassOrFail(Integer.class),
-            "number-whole-integer"
+            "number-whole-Integer"
         );
     }
 
