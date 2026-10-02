@@ -291,7 +291,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testFromClassWithEmailAddress() {
         this.fromClassAndCheck(
             EmailAddress.class,
-            "email/EmailAddress"
+            "email/Email"
         );
     }
 
@@ -867,7 +867,15 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testParseWithEmailAddress() {
         this.parseStringAndCheck(
             EmailAddress.class,
-            "email/EmailAddress"
+            "email/Email"
+        );
+    }
+
+    @Test
+    public void testParseWithEmailEmail() {
+        this.parseStringAndCheck(
+            EmailAddress.class,
+            "email/Email"
         );
     }
 
@@ -1464,6 +1472,14 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     }
 
     @Test
+    public void testParentWithEmailAddress() {
+        this.parentAndCheck(
+            EmailAddress.class,
+            ValueType.EMAIL_PARENT
+        );
+    }
+
+    @Test
     public void testParentWithExpressionNumberBigDecimal() {
         this.parentAndCheck(
             ExpressionNumberKind.BIG_DECIMAL.zero()
@@ -1578,6 +1594,14 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
         this.unmarshallAndCheck2(
             "date-time/DateTime",
             ValueType.DATE_TIME
+        );
+    }
+
+    @Test
+    public void testUnmarshallEmail() {
+        this.unmarshallAndCheck2(
+            "email/Email",
+            ValueType.EMAIL
         );
     }
 
