@@ -749,8 +749,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     @Test
     public void testParseWithBooleanType() {
         this.parseStringAndCheck(
-            Boolean.TYPE,
-            ValueType.BOOLEAN
+            Boolean.TYPE
         );
     }
 
@@ -1561,7 +1560,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     @Test
     public void testUnmarshallBoolean() {
         this.unmarshallAndCheck2(
-            "boolean",
+            "Boolean",
             ValueType.BOOLEAN
         );
     }
