@@ -49,7 +49,6 @@ import walkingkooka.net.UrlFragment;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.net.header.HasContentType;
 import walkingkooka.net.header.MediaType;
-import walkingkooka.net.http.server.hateos.HateosResourceName;
 import walkingkooka.plugin.PluginName;
 import walkingkooka.predicate.character.CharPredicates;
 import walkingkooka.text.CaseSensitivity;
@@ -119,15 +118,6 @@ final public class ValueType implements Comparable<ValueType>,
     HasValue<String>,
     Predicate<ValueType>,
     TreePrintable {
-
-    public static final String HATEOS_RESOURCE_NAME_STRING = "type";
-
-    public static final HateosResourceName HATEOS_RESOURCE_NAME = HateosResourceName.with(HATEOS_RESOURCE_NAME_STRING);
-
-    public static boolean isChar(final int pos,
-                                 final char c) {
-        return PluginName.isChar(pos, c);
-    }
 
     /**
      * The minimum valid length
