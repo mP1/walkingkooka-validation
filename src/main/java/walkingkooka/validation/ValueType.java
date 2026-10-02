@@ -377,11 +377,21 @@ final public class ValueType implements Comparable<ValueType>,
         return valueType;
     }
 
-    public static Optional<ValueType> parse(final String name) {
-        Objects.requireNonNull(name, "name");
+    /**
+     * Supports parsing the given text into a previously registered {@link ValueType}.
+     * <pre>
+     * Text
+     * {@link ValueType#TEXT}
+     *
+     * text/Text
+     * {@link ValueType#TEXT}
+     * </pre>
+     */
+    public static Optional<ValueType> parse(final String text) {
+        Objects.requireNonNull(text, "text");
 
         return Optional.ofNullable(
-            CLASS_NAME_TO_VALUE_TYPE.get(name)
+            CLASS_NAME_TO_VALUE_TYPE.get(text)
         );
     }
 
@@ -678,6 +688,10 @@ final public class ValueType implements Comparable<ValueType>,
 
     /**
      * Returns the {@link UrlFragment}, holding the {@link #text()} with slashes replaced by dash.
+     * <pre>
+     * {@link ValueType#TEXT}
+     * "Text"
+     * </pre>
      */
     @Override
     public UrlFragment urlFragment() {
