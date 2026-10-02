@@ -1280,6 +1280,30 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
         );
     }
 
+    @Test
+    public void testParseWithTextNumberParent() {
+        this.parseStringAndCheck(
+            "number",
+            ValueType.NUMBER_PARENT
+        );
+    }
+
+    @Test
+    public void testParseWithTextNumber() {
+        this.parseStringAndCheck(
+            "Number",
+            ValueType.NUMBER
+        );
+    }
+
+    @Test
+    public void testParseWithTextText() {
+        this.parseStringAndCheck(
+            "Text",
+            ValueType.TEXT
+        );
+    }
+
     private void parseStringAndCheck(final Class<?> klass) {
         this.parseStringAndCheck(
             klass.getName(),
@@ -1333,6 +1357,14 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
         this.checkEquals(
             expected,
             ValueType.parse(klass.getName())
+        );
+    }
+
+    private void parseStringAndCheck(final String text,
+                                     final ValueType expected) {
+        this.parseStringAndCheck(
+            text,
+            Optional.of(expected)
         );
     }
 
