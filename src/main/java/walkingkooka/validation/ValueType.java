@@ -225,6 +225,10 @@ final public class ValueType implements Comparable<ValueType>,
             number
         );
         CLASS_NAME_TO_VALUE_TYPE.put(
+            "Number",
+            number
+        );
+        CLASS_NAME_TO_VALUE_TYPE.put(
             ExpressionNumber.class.getName(),
             number
         );
@@ -304,11 +308,22 @@ final public class ValueType implements Comparable<ValueType>,
         final ValueType valueType = new ValueType(label, type);
 
         final String typeName = type.getName();
+        final boolean check = Object.class != type || "*".equals(label);
 
-        if (Object.class != type || "*".equals(label)) {
+        if (check) {
             if (CLASS_NAME_TO_VALUE_TYPE.containsKey(typeName)) {
                 throw new IllegalArgumentException("Duplicate type " + typeName + " registration");
             }
+        }
+
+        final String text = valueType.text();
+        if(check) {
+            if (CLASS_NAME_TO_VALUE_TYPE.containsKey(text)) {
+                throw new IllegalArgumentException("Duplicate text " + CharSequences.quoteIfChars(text) + " for " + CharSequences.quoteIfChars(label) + " registration");
+            }
+        }
+
+        if (check) {
             if (false == label.equals(typeName)) {
                 CLASS_NAME_TO_VALUE_TYPE.put(
                     label,
@@ -328,6 +343,13 @@ final public class ValueType implements Comparable<ValueType>,
         if (false == label.equals(typeName)) {
             CLASS_NAME_TO_VALUE_TYPE.put(
                 label,
+                valueType
+            );
+        }
+
+        if (false == label.equals(text)) {
+            CLASS_NAME_TO_VALUE_TYPE.put(
+                text,
                 valueType
             );
         }
