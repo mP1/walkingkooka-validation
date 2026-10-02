@@ -104,7 +104,7 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                 "      \"value\": \"Hello\"\n" +
                 "    },\n" +
                 "    \"label\": \"Label111\",\n" +
-                "    \"type\": \"text\",\n" +
+                "    \"type\": \"text/Text\",\n" +
                 "    \"value\": \"Value333\",\n" +
                 "    \"validator\": \"validator-4444\"\n" +
                 "  }\n" +
@@ -122,7 +122,7 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                 "      \"value\": \"Hello\"\n" +
                 "    },\n" +
                 "    \"label\": \"Label111\",\n" +
-                "    \"type\": \"text\",\n" +
+                "    \"type\": \"text/Text\",\n" +
                 "    \"value\": \"Value333\",\n" +
                 "    \"validator\": \"validator-4444\"\n" +
                 "  }\n" +

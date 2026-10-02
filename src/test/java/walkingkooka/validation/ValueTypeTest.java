@@ -99,7 +99,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testText() {
         this.textAndCheck(
             ValueType.TEXT,
-            "text"
+            "Text"
         );
     }
 
@@ -1356,8 +1356,8 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     @Test
     public void testParentWithWholeNumber() {
         this.parentAndCheck(
-            ValueType.WHOLE_NUMBER,
-            ValueType.NUMBER
+            ValueType.WHOLE_NUMBER_PARENT,
+            ValueType.NUMBER_PARENT
         );
     }
 
@@ -1365,7 +1365,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testParentWithByte() {
         this.parentAndCheck(
             Byte.class,
-            ValueType.WHOLE_NUMBER
+            ValueType.WHOLE_NUMBER_PARENT
         );
     }
 
@@ -1373,7 +1373,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testParentWithShort() {
         this.parentAndCheck(
             Short.class,
-            ValueType.WHOLE_NUMBER
+            ValueType.WHOLE_NUMBER_PARENT
         );
     }
 
@@ -1381,7 +1381,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testParentWithInteger() {
         this.parentAndCheck(
             Integer.class,
-            ValueType.WHOLE_NUMBER
+            ValueType.WHOLE_NUMBER_PARENT
         );
     }
 
@@ -1389,7 +1389,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testParentWithLong() {
         this.parentAndCheck(
             Long.class,
-            ValueType.WHOLE_NUMBER
+            ValueType.WHOLE_NUMBER_PARENT
         );
     }
 
@@ -1397,14 +1397,14 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testParentWithBigInteger() {
         this.parentAndCheck(
             BigInteger.class,
-            ValueType.WHOLE_NUMBER
+            ValueType.WHOLE_NUMBER_PARENT
         );
     }
 
     @Test
     public void testParentWithNumber() {
         this.parentAndCheck(
-            ValueType.NUMBER
+            ValueType.NUMBER_PARENT
         );
     }
 
@@ -1412,7 +1412,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testParentWithFloat() {
         this.parentAndCheck(
             Float.class,
-            ValueType.NUMBER
+            ValueType.NUMBER_PARENT
         );
     }
 
@@ -1420,7 +1420,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testParentWithDouble() {
         this.parentAndCheck(
             Double.class,
-            ValueType.NUMBER
+            ValueType.NUMBER_PARENT
         );
     }
 
@@ -1428,7 +1428,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     public void testParentWithBigDecimal() {
         this.parentAndCheck(
             BigDecimal.class,
-            ValueType.NUMBER
+            ValueType.NUMBER_PARENT
         );
     }
 
@@ -1437,7 +1437,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
         this.parentAndCheck(
             ExpressionNumberKind.BIG_DECIMAL.zero()
                 .getClass(),
-            ValueType.NUMBER
+            ValueType.NUMBER_PARENT
         );
     }
 
@@ -1446,7 +1446,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
         this.parentAndCheck(
             ExpressionNumberKind.DOUBLE.zero()
                 .getClass(),
-            ValueType.NUMBER
+            ValueType.NUMBER_PARENT
         );
     }
 
@@ -1604,17 +1604,25 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     // HasUrlFragment...................................................................................................
 
     @Test
+    public void testUrlFragmentWithNumberParent() {
+        this.urlFragmentAndCheck(
+            ValueType.NUMBER_PARENT,
+            "number"
+        );
+    }
+
+    @Test
     public void testUrlFragmentWithNumber() {
         this.urlFragmentAndCheck(
             ValueType.NUMBER,
-            "number"
+            "number-Number"
         );
     }
 
     @Test
     public void testUrlFragmentWithWholeNumber() {
         this.urlFragmentAndCheck(
-            ValueType.WHOLE_NUMBER,
+            ValueType.WHOLE_NUMBER_PARENT,
             "number-whole"
         );
     }
@@ -1639,10 +1647,19 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     }
 
     @Test
-    public void testTestNumberWithNumber() {
+    public void testTestNumberParentWithNumber() {
         this.testAndCheck(
+            ValueType.NUMBER_PARENT,
             ValueType.NUMBER,
-            ValueType.NUMBER,
+            true
+        );
+    }
+
+    @Test
+    public void testTestNumberParentWithNumberParent() {
+        this.testAndCheck(
+            ValueType.NUMBER_PARENT,
+            ValueType.NUMBER_PARENT,
             true
         );
     }
@@ -1650,7 +1667,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     @Test
     public void testTestNumberWithByte() {
         this.testAndCheck(
-            ValueType.NUMBER,
+            ValueType.NUMBER_PARENT,
             ValueType.fromClassOrFail(Byte.class),
             true
         );
@@ -1659,7 +1676,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     @Test
     public void testTestNumberWithFloat() {
         this.testAndCheck(
-            ValueType.NUMBER,
+            ValueType.NUMBER_PARENT,
             ValueType.fromClassOrFail(Float.class),
             true
         );
@@ -1668,7 +1685,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     @Test
     public void testTestWholeNumberWithByte() {
         this.testAndCheck(
-            ValueType.WHOLE_NUMBER,
+            ValueType.WHOLE_NUMBER_PARENT,
             ValueType.fromClassOrFail(Byte.class),
             true
         );
@@ -1677,7 +1694,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     @Test
     public void testTestWholeNumberWithFloat() {
         this.testAndCheck(
-            ValueType.WHOLE_NUMBER,
+            ValueType.WHOLE_NUMBER_PARENT,
             ValueType.fromClassOrFail(Float.class),
             false
         );
