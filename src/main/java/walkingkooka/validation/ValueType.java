@@ -154,7 +154,7 @@ final public class ValueType implements Comparable<ValueType>,
         TIME = register("date-time/Time", LocalTime.class);
 
         EMAIL_PARENT = register("email", Object.class);
-        EMAIL = register("email/EmailAddress", EmailAddress.class);
+        EMAIL = register("email/Email", EmailAddress.class);
 
         ENVIRONMENT_PARENT = register("environment", Object.class);
         ENVIRONMENT = register("environment/Environment", Environment.class);
