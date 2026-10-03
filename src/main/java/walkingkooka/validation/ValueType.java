@@ -116,6 +116,7 @@ final public class ValueType implements Comparable<ValueType>,
     HasText,
     HasUrlFragment,
     HasValue<String>,
+    HasValueType,
     Predicate<ValueType>,
     TreePrintable {
 
@@ -699,6 +700,13 @@ final public class ValueType implements Comparable<ValueType>,
     }
 
     private final UrlFragment urlFragment;
+
+    // HasValueType.....................................................................................................
+
+    @Override
+    public ValueType valueType() {
+        return this;
+    }
 
     // Predicate........................................................................................................
 
