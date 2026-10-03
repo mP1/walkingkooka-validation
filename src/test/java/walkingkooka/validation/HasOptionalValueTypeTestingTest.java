@@ -17,10 +17,29 @@
 
 package walkingkooka.validation;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.PublicClassTesting;
 
 public final class HasOptionalValueTypeTestingTest implements HasOptionalValueTypeTesting,
     PublicClassTesting<HasOptionalValueTypeTesting> {
+
+    @Test
+    public void testConstants() {
+        this.checkNotEquals(
+            VALUE_TYPE,
+            DIFFERENT_VALUE_TYPE
+        );
+    }
+
+    @Test
+    public void testOptionalConstants() {
+        this.checkNotEquals(
+            OPTIONAL_VALUE_TYPE,
+            OPTIONAL_DIFFERENT_VALUE_TYPE
+        );
+    }
+
+    // class............................................................................................................
 
     @Override
     public Class<HasOptionalValueTypeTesting> type() {

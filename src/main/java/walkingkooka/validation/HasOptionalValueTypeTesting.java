@@ -23,6 +23,14 @@ import java.util.Optional;
 
 public interface HasOptionalValueTypeTesting extends TreePrintableTesting {
 
+    ValueType VALUE_TYPE = ValueType.TEXT;
+
+    ValueType DIFFERENT_VALUE_TYPE = ValueType.NUMBER;
+
+    Optional<ValueType> OPTIONAL_VALUE_TYPE = Optional.of(VALUE_TYPE);
+
+    Optional<ValueType> OPTIONAL_DIFFERENT_VALUE_TYPE = Optional.of(DIFFERENT_VALUE_TYPE);
+
     default void valueTypeAndCheck(final HasOptionalValueType has) {
         this.valueTypeAndCheck(
             has,
