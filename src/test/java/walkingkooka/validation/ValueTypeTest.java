@@ -87,6 +87,7 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     HasTextTesting,
     HasUrlFragmentTesting,
     HasValueTesting,
+    HasValueTypeTesting,
     HasContentTypeTesting,
     ComparableTesting2<ValueType>,
     JsonNodeMarshallerTesting<ValueType>,
@@ -1766,6 +1767,16 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
     @Override
     public ValueType createPredicate() {
         return this.createComparable();
+    }
+
+    // HasValueType.....................................................................................................
+
+    @Test
+    public void testValueType() {
+        this.valueTypeAndCheck(
+            ValueType.TEXT,
+            ValueType.TEXT
+        );
     }
 
     // class............................................................................................................
