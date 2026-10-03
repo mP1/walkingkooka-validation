@@ -21,6 +21,10 @@ import walkingkooka.text.printer.TreePrintableTesting;
 
 public interface HasValueTypeTesting extends TreePrintableTesting {
 
+    ValueType VALUE_TYPE = ValueType.TEXT;
+
+    ValueType DIFFERENT_VALUE_TYPE = ValueType.NUMBER;
+
     default void valueTypeAndCheck(final HasValueType has,
                                    final ValueType expected) {
         this.checkEquals(
