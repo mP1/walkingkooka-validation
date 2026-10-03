@@ -17,10 +17,19 @@
 
 package walkingkooka.validation;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.PublicClassTesting;
 
 public final class HasValueTypeTestingTest implements HasValueTypeTesting,
     PublicClassTesting<HasValueTypeTesting> {
+
+    @Test
+    public void testConstants() {
+        this.checkNotEquals(
+            VALUE_TYPE,
+            DIFFERENT_VALUE_TYPE
+        );
+    }
 
     @Override
     public Class<HasValueTypeTesting> type() {
