@@ -83,6 +83,13 @@ public final class ValidationConvertConverters implements PublicStaticHelper {
     }
 
     /**
+     * {@see ValidationConverterToValueType}
+     */
+    public static <C extends ConverterContext> Converter<C> toValueType() {
+        return ValidationConverterToValueType.instance();
+    }
+
+    /**
      * Stop creation
      */
     private ValidationConvertConverters() {
