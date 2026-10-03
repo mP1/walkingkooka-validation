@@ -21,5 +21,7 @@ import java.util.Optional;
 
 public interface HasOptionalValueType {
 
+    Optional<ValueType> NO_VALUE_TYPE = Optional.empty();
+
     Optional<ValueType> valueType();
 }
