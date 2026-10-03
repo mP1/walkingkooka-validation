@@ -26,7 +26,7 @@ import walkingkooka.validation.provider.ValidatorSelector;
 
 import java.util.Optional;
 
-public final class ValidationConverterHasOptionalValidatorSelectorTest extends ValidationConverterTestCase<ValidationConverterHasOptionalValidatorSelector<ConverterContext>, ConverterContext> {
+public final class ValidationConverterToValidatorSelectorTest extends ValidationConverterTestCase<ValidationConverterToValidatorSelector<ConverterContext>, ConverterContext> {
 
     @Test
     public void testConvertNotHasOptionalValidatorSelector() {
@@ -67,8 +67,8 @@ public final class ValidationConverterHasOptionalValidatorSelectorTest extends V
     }
 
     @Override
-    public ValidationConverterHasOptionalValidatorSelector<ConverterContext> createConverter() {
-        return ValidationConverterHasOptionalValidatorSelector.instance();
+    public ValidationConverterToValidatorSelector<ConverterContext> createConverter() {
+        return ValidationConverterToValidatorSelector.instance();
     }
 
     @Override
@@ -77,7 +77,7 @@ public final class ValidationConverterHasOptionalValidatorSelectorTest extends V
     }
 
     @Override
-    public Class<ValidationConverterHasOptionalValidatorSelector<ConverterContext>> type() {
-        return Cast.to(ValidationConverterHasOptionalValidatorSelector.class);
+    public Class<ValidationConverterToValidatorSelector<ConverterContext>> type() {
+        return Cast.to(ValidationConverterToValidatorSelector.class);
     }
 }

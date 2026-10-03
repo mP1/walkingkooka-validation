@@ -27,13 +27,6 @@ import walkingkooka.reflect.PublicStaticHelper;
 public final class ValidationConvertConverters implements PublicStaticHelper {
 
     /**
-     * {@see ValidationConverterHasOptionalValidatorSelector}
-     */
-    public static <C extends ConverterContext> Converter<C> hasOptionalValidatorSelector() {
-        return ValidationConverterHasOptionalValidatorSelector.instance();
-    }
-
-    /**
      * {@see ValidationConverterTextToFormName}
      */
     public static <C extends ConverterContext> Converter<C> textToFormName() {
@@ -80,6 +73,13 @@ public final class ValidationConvertConverters implements PublicStaticHelper {
      */
     public static <C extends ConverterContext> Converter<C> toValidationErrorList() {
         return ValidationConverterValidationErrorList.instance();
+    }
+
+    /**
+     * {@see ValidationConverterToValidatorSelector}
+     */
+    public static <C extends ConverterContext> Converter<C> toValidatorSelector() {
+        return ValidationConverterToValidatorSelector.instance();
     }
 
     /**

@@ -27,21 +27,21 @@ import walkingkooka.validation.provider.ValidatorSelector;
 /**
  * A {@link walkingkooka.convert.Converter} that may be used to get a {@link ValidatorSelector}.
  */
-final class ValidationConverterHasOptionalValidatorSelector<C extends ConverterContext> implements ShortCircuitingConverter<C> {
+final class ValidationConverterToValidatorSelector<C extends ConverterContext> implements ShortCircuitingConverter<C> {
 
     /**
      * Type safe getter
      */
-    static <C extends ConverterContext> ValidationConverterHasOptionalValidatorSelector<C> instance() {
+    static <C extends ConverterContext> ValidationConverterToValidatorSelector<C> instance() {
         return Cast.to(INSTANCE);
     }
 
     /**
      * Singleton
      */
-    private final static ValidationConverterHasOptionalValidatorSelector<?> INSTANCE = new ValidationConverterHasOptionalValidatorSelector<>();
+    private final static ValidationConverterToValidatorSelector<?> INSTANCE = new ValidationConverterToValidatorSelector<>();
 
-    private ValidationConverterHasOptionalValidatorSelector() {
+    private ValidationConverterToValidatorSelector() {
         super();
     }
 

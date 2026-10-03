@@ -10,7 +10,6 @@ A validation framework that supports validating individual fields within a form.
 
 ## [Converters](https://github.com/mP1/walkingkooka-convert/blob/master/src/main/java/walkingkooka/convert/Converter.java)
 
-- [has-optional-validator-selector](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/convert/ValidationConverterHasOptionalValidatorSelector.java)
 - [text-to-form-name](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/convert/ValidationConverterTextToFormName.java)
 - [text-to-validator-selector](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/convert/ValidationConverterTextToValidatorSelector.java)
 - [text-to-value-type](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/convert/ValidationConverterTextToValueType.java)
@@ -18,6 +17,7 @@ A validation framework that supports validating individual fields within a form.
 - [to-validation-choice](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/convert/ValidationConverterToValidationChoice.java)
 - [to-validation-choice-list](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/convert/ValidationConverterValidationChoiceList.java)
 - [to-validation-error-list](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/convert/ValidationConverterValidationErrorList.java)
+- [to-validator-selector](https://github.com/mP1/walkingkooka-validation/blob/master/src/main/java/walkingkooka/validation/convert/ValidationConverterToValidatorSelector.java)
 
 ## [Functions](https://github.com/mP1/walkingkooka-tree/blob/master/src/main/java/walkingkooka/tree/expression/function/ExpressionFunction.java)
 
