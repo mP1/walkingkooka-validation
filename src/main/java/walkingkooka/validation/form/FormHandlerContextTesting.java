@@ -31,9 +31,9 @@ public interface FormHandlerContextTesting extends ConverterLikeTesting,
 
     // validatorContext.................................................................................................
 
-    default <C extends FormHandlerContext<R, S>, R extends ValidationReference, S> void validatorContextAndCheck(final FormHandlerContext<R, S> context,
-                                                                                                                 final R reference,
-                                                                                                                 final ValidatorContext<R> expected) {
+    default <R extends ValidationReference, S> void validatorContextAndCheck(final FormHandlerContext<R, S> context,
+                                                                             final R reference,
+                                                                             final ValidatorContext<R> expected) {
         this.checkEquals(
             expected,
             context.validatorContext(reference),
@@ -43,8 +43,8 @@ public interface FormHandlerContextTesting extends ConverterLikeTesting,
 
     // loadFieldValue...................................................................................................
 
-    default <C extends FormHandlerContext<R, S>, R extends ValidationReference, S> void loadFormFieldValueAndCheck(final C context,
-                                                                                                                   final R reference) {
+    default <R extends ValidationReference, S> void loadFormFieldValueAndCheck(final FormHandlerContext<R, S> context,
+                                                                               final R reference) {
         this.loadFormFieldValueAndCheck(
             context,
             reference,
@@ -52,9 +52,9 @@ public interface FormHandlerContextTesting extends ConverterLikeTesting,
         );
     }
 
-    default <C extends FormHandlerContext<R, S>, R extends ValidationReference, S> void loadFormFieldValueAndCheck(final C context,
-                                                                                                                   final R reference,
-                                                                                                                   final Object expected) {
+    default <R extends ValidationReference, S> void loadFormFieldValueAndCheck(final FormHandlerContext<R, S> context,
+                                                                               final R reference,
+                                                                               final Object expected) {
         this.loadFormFieldValueAndCheck(
             context,
             reference,
@@ -62,9 +62,9 @@ public interface FormHandlerContextTesting extends ConverterLikeTesting,
         );
     }
 
-    default <C extends FormHandlerContext<R, S>, R extends ValidationReference, S> void loadFormFieldValueAndCheck(final C context,
-                                                                                                                   final R reference,
-                                                                                                                   final Optional<Object> expected) {
+    default <R extends ValidationReference, S> void loadFormFieldValueAndCheck(final FormHandlerContext<R, S> context,
+                                                                               final R reference,
+                                                                               final Optional<Object> expected) {
         this.checkEquals(
             expected,
             context.loadFormFieldValue(reference)
@@ -73,9 +73,9 @@ public interface FormHandlerContextTesting extends ConverterLikeTesting,
 
     // saveFieldValue...................................................................................................
 
-    default <C extends FormHandlerContext<R, S>, R extends ValidationReference, S> void saveFormFieldValuesAndCheck(final C context,
-                                                                                                                    final List<FormField<R>> formFields,
-                                                                                                                    final S expected) {
+    default <R extends ValidationReference, S> void saveFormFieldValuesAndCheck(final FormHandlerContext<R, S> context,
+                                                                                final List<FormField<R>> formFields,
+                                                                                final S expected) {
         this.checkEquals(
             expected,
             context.saveFormFieldValues(formFields)
