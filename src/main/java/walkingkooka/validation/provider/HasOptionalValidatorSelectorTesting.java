@@ -17,12 +17,12 @@
 
 package walkingkooka.validation.provider;
 
-import walkingkooka.test.Testing;
+import walkingkooka.text.printer.TreePrintableTesting;
 
 import java.util.Objects;
 import java.util.Optional;
 
-public interface HasOptionalValidatorSelectorTesting extends Testing {
+public interface HasOptionalValidatorSelectorTesting extends TreePrintableTesting {
 
     default void validatorSelectorAndCheck(final HasOptionalValidatorSelector has) {
         this.validatorSelectorAndCheck(
