@@ -33,10 +33,10 @@ public final class FormStores implements PublicStaticHelper {
     }
 
     /**
-     * {@see TreeFormStore}
+     * {@see FormStoreTreeMapStore}
      */
     public static <R extends ValidationReference> FormStore<R> empty() {
-        return TreeFormStore.empty();
+        return FormStoreTreeMapStore.empty();
     }
 
     /**

@@ -23,11 +23,11 @@ import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.form.Form;
 import walkingkooka.validation.form.FormName;
 
-public final class TreeFormStoreTest implements FormStoreTesting<TreeFormStore<TestValidationReference>, TestValidationReference> {
+public final class FormStoreTreeMapStoreTest implements FormStoreTesting<FormStoreTreeMapStore<TestValidationReference>, TestValidationReference> {
 
     @Test
     public void testSaveAndLoad() {
-        final TreeFormStore<TestValidationReference> store = this.createStore();
+        final FormStoreTreeMapStore<TestValidationReference> store = this.createStore();
 
         final Form<TestValidationReference> form = this.value();
         store.save(form);
@@ -40,8 +40,8 @@ public final class TreeFormStoreTest implements FormStoreTesting<TreeFormStore<T
     }
 
     @Override
-    public TreeFormStore<TestValidationReference> createStore() {
-        return TreeFormStore.empty();
+    public FormStoreTreeMapStore<TestValidationReference> createStore() {
+        return FormStoreTreeMapStore.empty();
     }
 
     @Override
@@ -57,7 +57,7 @@ public final class TreeFormStoreTest implements FormStoreTesting<TreeFormStore<T
     // class............................................................................................................
 
     @Override
-    public Class<TreeFormStore<TestValidationReference>> type() {
-        return Cast.to(TreeFormStore.class);
+    public Class<FormStoreTreeMapStore<TestValidationReference>> type() {
+        return Cast.to(FormStoreTreeMapStore.class);
     }
 }
