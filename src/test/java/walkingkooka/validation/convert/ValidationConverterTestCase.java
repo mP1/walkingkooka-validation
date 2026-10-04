@@ -22,7 +22,6 @@ import walkingkooka.convert.Converter;
 import walkingkooka.convert.ConverterContext;
 import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.reflect.ClassTesting;
-import walkingkooka.reflect.JavaVisibility;
 
 public abstract class ValidationConverterTestCase<C extends Converter<X>, X extends ConverterContext> implements ConverterTesting2<C, X>,
     ToStringTesting<C>,
@@ -33,11 +32,6 @@ public abstract class ValidationConverterTestCase<C extends Converter<X>, X exte
     }
 
     // class............................................................................................................
-
-    @Override
-    public final JavaVisibility typeVisibility() {
-        return JavaVisibility.PACKAGE_PRIVATE;
-    }
 
     @Override
     public final String typeNamePrefix() {
