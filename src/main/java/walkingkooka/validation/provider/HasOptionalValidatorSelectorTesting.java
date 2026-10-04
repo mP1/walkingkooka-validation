@@ -24,6 +24,18 @@ import java.util.Optional;
 
 public interface HasOptionalValidatorSelectorTesting extends TreePrintableTesting {
 
+    ValidatorSelector VALIDATOR_SELECTOR = ValidatorSelector.parse(
+        ValidatorName.ABSOLUTE_URL.toString()
+    );
+
+    ValidatorSelector DIFFERENT_VALIDATOR_SELECTOR = ValidatorSelector.parse(
+        ValidatorName.EMAIL_ADDRESS.toString()
+    );
+
+    Optional<ValidatorSelector> OPTIONAL_VALIDATOR_SELECTOR = Optional.of(VALIDATOR_SELECTOR);
+
+    Optional<ValidatorSelector> OPTIONAL_DIFFERENT_VALIDATOR_SELECTOR = Optional.of(DIFFERENT_VALIDATOR_SELECTOR);
+
     default void validatorSelectorAndCheck(final HasOptionalValidatorSelector has) {
         this.validatorSelectorAndCheck(
             has,

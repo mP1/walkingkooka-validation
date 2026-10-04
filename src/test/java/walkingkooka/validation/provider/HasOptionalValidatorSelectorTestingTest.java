@@ -17,9 +17,30 @@
 
 package walkingkooka.validation.provider;
 
+import org.junit.jupiter.api.Test;
 import walkingkooka.reflect.PublicClassTesting;
 
-public final class HasOptionalValidatorSelectorTestingTest implements PublicClassTesting<HasOptionalValidatorSelectorTesting> {
+public final class HasOptionalValidatorSelectorTestingTest implements HasOptionalValidatorSelectorTesting,
+    PublicClassTesting<HasOptionalValidatorSelectorTesting> {
+
+    @Test
+    public void testConstants() {
+        this.checkNotEquals(
+            VALIDATOR_SELECTOR,
+            DIFFERENT_VALIDATOR_SELECTOR
+        );
+    }
+
+    @Test
+    public void testOptionalConstants() {
+        this.checkNotEquals(
+            OPTIONAL_VALIDATOR_SELECTOR,
+            OPTIONAL_DIFFERENT_VALIDATOR_SELECTOR
+        );
+    }
+
+    // class............................................................................................................
+
     @Override
     public Class<HasOptionalValidatorSelectorTesting> type() {
         return HasOptionalValidatorSelectorTesting.class;
