@@ -30,13 +30,13 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-final class TreeFormStore<R extends ValidationReference> implements FormStore<R> {
+final class FormStoreTreeMapStore<R extends ValidationReference> implements FormStore<R> {
 
-    static <R extends ValidationReference> TreeFormStore<R> empty() {
-        return new TreeFormStore<>();
+    static <R extends ValidationReference> FormStoreTreeMapStore<R> empty() {
+        return new FormStoreTreeMapStore<>();
     }
 
-    private TreeFormStore() {
+    private FormStoreTreeMapStore() {
         this.store = Stores.treeMap(
             Comparator.naturalOrder(),
             this::idSetter
