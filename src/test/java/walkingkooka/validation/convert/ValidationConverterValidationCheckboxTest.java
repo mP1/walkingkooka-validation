@@ -25,19 +25,12 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.FakeConverterContext;
-import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValidationCheckbox;
 
 import java.util.Optional;
 
 public final class ValidationConverterValidationCheckboxTest extends ValidationConverterTestCase<ValidationConverterValidationCheckbox<FakeConverterContext>, FakeConverterContext>
     implements ToStringTesting<ValidationConverterValidationCheckbox<FakeConverterContext>> {
-
-    private final static TestValidationReference TEST_VALIDATION_REFERENCE = new TestValidationReference("Hello");
-
-    private final static String MESSAGE = "Message111";
-
-    private final static String MESSAGE2 = "Message222";
 
     @Test
     public void testConvertValidationCheckboxToStringFails() {
