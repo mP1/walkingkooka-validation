@@ -69,6 +69,6 @@ final class ValidationConverterToValidatorSelector<C extends ConverterContext> i
 
     @Override
     public String toString() {
-        return HasOptionalValidatorSelector.class.getSimpleName();
+        return "to " + ValidatorSelector.class.getSimpleName();
     }
 }

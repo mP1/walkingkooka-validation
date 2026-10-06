@@ -76,6 +76,14 @@ public final class ValidationConverterToValidatorSelectorTest extends Validation
         return ConverterContexts.fake();
     }
 
+    @Test
+    public void testToString() {
+        this.toStringAndCheck(
+            this.createConverter(),
+            "to ValidatorSelector"
+        );
+    }
+
     @Override
     public Class<ValidationConverterToValidatorSelector<ConverterContext>> type() {
         return Cast.to(ValidationConverterToValidatorSelector.class);
