@@ -158,6 +158,6 @@ final class ValidationConverterValidationChoiceList<C extends ConverterContext> 
 
     @Override
     public String toString() {
-        return "* to " + ValidationChoiceList.class.getSimpleName();
+        return "to " + ValidationChoiceList.class.getSimpleName();
     }
 }
