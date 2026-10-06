@@ -226,7 +226,7 @@ public final class ValidationConverterValidationErrorListTest extends Validation
     public void testToString() {
         this.toStringAndCheck(
             ValidationConverterValidationErrorList.instance(),
-            "* to ValidationErrorList"
+            "to ValidationErrorList"
         );
     }
 
