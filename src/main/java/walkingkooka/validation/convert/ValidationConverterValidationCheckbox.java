@@ -131,6 +131,6 @@ final class ValidationConverterValidationCheckbox<C extends ConverterContext> im
 
     @Override
     public String toString() {
-        return "* to " + ValidationCheckbox.class.getSimpleName();
+        return "to " + ValidationCheckbox.class.getSimpleName();
     }
 }

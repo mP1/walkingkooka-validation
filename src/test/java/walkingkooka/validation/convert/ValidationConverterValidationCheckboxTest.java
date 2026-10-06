@@ -177,7 +177,7 @@ public final class ValidationConverterValidationCheckboxTest extends ValidationC
     public void testToString() {
         this.toStringAndCheck(
             ValidationConverterValidationCheckbox.instance(),
-            "* to ValidationCheckbox"
+            "to ValidationCheckbox"
         );
     }
 
