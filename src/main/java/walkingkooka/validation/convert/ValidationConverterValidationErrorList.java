@@ -141,6 +141,6 @@ final class ValidationConverterValidationErrorList<C extends ConverterContext> i
 
     @Override
     public String toString() {
-        return "* to " + ValidationErrorList.class.getSimpleName();
+        return "to " + ValidationErrorList.class.getSimpleName();
     }
 }
