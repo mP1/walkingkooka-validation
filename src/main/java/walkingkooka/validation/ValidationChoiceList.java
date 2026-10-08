@@ -76,9 +76,9 @@ public final class ValidationChoiceList extends AbstractList<ValidationChoice>
             validationChoiceList = (ValidationChoiceList) choices;
         } else {
             final List<ValidationChoice> copy = Lists.array();
-            for (final ValidationChoice name : choices) {
+            for (final ValidationChoice choice : choices) {
                 copy.add(
-                    Objects.requireNonNull(name, "includes null " + ValidationChoice.class.getSimpleName())
+                    Objects.requireNonNull(choice, "includes null " + ValidationChoice.class.getSimpleName())
                 );
             }
 
