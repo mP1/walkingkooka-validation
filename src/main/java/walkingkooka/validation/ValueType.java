@@ -321,6 +321,9 @@ final public class ValueType implements Comparable<ValueType>,
         MAIL_TO_URL = register("url/MailToUrl", MailToUrl.class);
         RELATIVE_URL = register("url/RelativeUrl", RelativeUrl.class);
 
+        META_PARENT = register("meta", Object.class);
+        MEDIA_TYPE = register("meta/MediaType", MediaType.class);
+
         VALUE_TYPE = register("valueType/ValueType", ValueType.class);
     }
 
@@ -539,6 +542,10 @@ final public class ValueType implements Comparable<ValueType>,
     public final static ValueType LONG;
 
     public final static ValueType MAIL_TO_URL;
+
+    public final static ValueType MEDIA_TYPE;
+
+    public final static ValueType META_PARENT;
 
     public final static ValueType MULTI_LINE_TEXT;
 
