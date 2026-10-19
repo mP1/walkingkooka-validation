@@ -99,6 +99,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
@@ -153,6 +154,7 @@ final public class ValueType implements Comparable<ValueType>,
         DATE_TIME_SYMBOLS = register("date-time/DateTimeSymbols", DateTimeSymbols.class);
         DATE_TIME = register("date-time/DateTime", LocalDateTime.class);
         TIME = register("date-time/Time", LocalTime.class);
+        ZONE_OFFSET = register("date-time/ZoneOffset", ZoneOffset.class);
 
         EMAIL_PARENT = register("email", Object.class);
         EMAIL = register("email/Email", EmailAddress.class);
@@ -531,6 +533,8 @@ final public class ValueType implements Comparable<ValueType>,
     public final static ValueType RELATIVE_URL;
 
     public final static ValueType WHOLE_NUMBER_PARENT;
+
+    public final static ValueType ZONE_OFFSET;
 
     /**
      * Private constructor
