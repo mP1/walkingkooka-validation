@@ -26,6 +26,7 @@ import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.StringList;
 import walkingkooka.collect.list.TsvStringList;
 import walkingkooka.collect.map.Maps;
+import walkingkooka.collect.set.TsvStringSet;
 import walkingkooka.currency.CurrencyCode;
 import walkingkooka.currency.CurrencyCodeSet;
 import walkingkooka.currency.CurrencyValue;
@@ -214,6 +215,7 @@ final public class ValueType implements Comparable<ValueType>,
         STRING_LIST = register("list/StringList", StringList.class);
         TIME_LIST = register("list/TimeList", LocalTimeList.class);
         TSV = register("list/Tsv", TsvStringList.class);
+        TSV_STRING_SET = register("set/TsvStringList", TsvStringSet.class);
 
         LOCALE_PARENT = register("locale", Object.class);
         LOCALE = register("locale/Locale", Locale.class);
@@ -540,6 +542,8 @@ final public class ValueType implements Comparable<ValueType>,
     public final static ValueType TIME_LIST;
 
     public final static ValueType TSV;
+
+    public final static ValueType TSV_STRING_SET;
 
     public final static ValueType URL_PARENT;
 
