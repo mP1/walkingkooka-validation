@@ -43,6 +43,7 @@ import walkingkooka.math.NumberList;
 import walkingkooka.naming.Name;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.DataUrl;
+import walkingkooka.net.HasHostAddress;
 import walkingkooka.net.HasUrlFragment;
 import walkingkooka.net.MailToUrl;
 import walkingkooka.net.RelativeUrl;
@@ -321,6 +322,8 @@ final public class ValueType implements Comparable<ValueType>,
         MAIL_TO_URL = register("url/MailToUrl", MailToUrl.class);
         RELATIVE_URL = register("url/RelativeUrl", RelativeUrl.class);
 
+        HAS_HOST_ADDRESS = register("url/HasHostAddress", HasHostAddress.class);
+
         META_PARENT = register("meta", Object.class);
         MEDIA_TYPE = register("meta/MediaType", MediaType.class);
 
@@ -504,6 +507,8 @@ final public class ValueType implements Comparable<ValueType>,
     public final static ValueType ENVIRONMENT_VALUE_NAME;
 
     public final static ValueType FLOAT;
+
+    public final static ValueType HAS_HOST_ADDRESS;
 
     public final static ValueType INDENTATION;
 
