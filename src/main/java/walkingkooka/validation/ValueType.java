@@ -99,6 +99,8 @@ import walkingkooka.tree.json.JsonString;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
+import walkingkooka.tree.json.pointer.JsonPointer;
+import walkingkooka.tree.json.select.JsonSelector;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -207,6 +209,10 @@ final public class ValueType implements Comparable<ValueType>,
         JSON_NUMBER = register("json/JsonNumber", JsonNumber.class);
         JSON_OBJECT = register("json/JsonObject", JsonObject.class);
         JSON_STRING = register("json/JsonString", JsonString.class);
+
+        SELECTOR_PARENT = register("selector", Object.class);
+        JSON_POINTER = register("selector/JsonPointer", JsonPointer.class);
+        JSON_SELECTOR = register("selector/JsonSelector", JsonSelector.class);
 
         LIST_PARENT = register("list", List.class);
         BOOLEAN_LIST = register("list/BooleanList", BooleanList.class);
@@ -512,6 +518,10 @@ final public class ValueType implements Comparable<ValueType>,
 
     public final static ValueType JSON_PARENT;
 
+    public final static ValueType JSON_POINTER;
+
+    public final static ValueType JSON_SELECTOR;
+
     public final static ValueType JSON_STRING;
 
     public final static ValueType LINE_ENDING;
@@ -541,6 +551,8 @@ final public class ValueType implements Comparable<ValueType>,
     public final static ValueType PROPERTIES;
 
     public final static ValueType RELATIVE_URL;
+
+    public final static ValueType SELECTOR_PARENT;
 
     public final static ValueType SHORT;
 
