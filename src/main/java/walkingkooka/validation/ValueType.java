@@ -287,6 +287,7 @@ final public class ValueType implements Comparable<ValueType>,
             String.class,
             ValueType.TEXT
         );
+        CHARACTER = register("text/Character", Character.class);
         STRING_BUFFER = register("text/StringBuffer", StringBuffer.class);
         STRING_BUILDER = register("text/StringBuilder", StringBuilder.class);
 
@@ -510,6 +511,8 @@ final public class ValueType implements Comparable<ValueType>,
     public final static ValueType TEXT_PARENT;
 
     public final static ValueType TEXT;
+
+    public final static ValueType CHARACTER;
 
     public final static ValueType STRING_BUFFER;
 
