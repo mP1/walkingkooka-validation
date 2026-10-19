@@ -96,6 +96,7 @@ import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.charset.Charset;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -292,6 +293,7 @@ final public class ValueType implements Comparable<ValueType>,
         CHARACTER = register("text/Character", Character.class);
         STRING_BUFFER = register("text/StringBuffer", StringBuffer.class);
         STRING_BUILDER = register("text/StringBuilder", StringBuilder.class);
+        CHARSET = register("text/Charset", Charset.class);
 
         URL_PARENT = register("url", Url.class);
         ABSOLUTE_URL = register("url/AbsoluteUrl", AbsoluteUrl.class);
@@ -409,6 +411,8 @@ final public class ValueType implements Comparable<ValueType>,
     public final static ValueType ANY;
 
     public final static ValueType BOOLEAN;
+
+    public final static ValueType CHARSET;
 
     public final static ValueType CURRENCY_PARENT;
 
