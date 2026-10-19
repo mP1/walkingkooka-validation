@@ -300,6 +300,8 @@ final public class ValueType implements Comparable<ValueType>,
         DATA_URL = register("url/DataUrl", DataUrl.class);
         MAIL_TO_URL = register("url/MailToUrl", MailToUrl.class);
         RELATIVE_URL = register("url/RelativeUrl", RelativeUrl.class);
+
+        VALUE_TYPE = register("valueType/ValueType", ValueType.class);
     }
 
     public static ValueType register(final String label,
@@ -537,6 +539,8 @@ final public class ValueType implements Comparable<ValueType>,
     public final static ValueType RELATIVE_URL;
 
     public final static ValueType WHOLE_NUMBER_PARENT;
+
+    public final static ValueType VALUE_TYPE;
 
     public final static ValueType ZONE_OFFSET;
 
