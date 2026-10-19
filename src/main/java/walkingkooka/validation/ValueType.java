@@ -55,6 +55,9 @@ import walkingkooka.net.header.MediaType;
 import walkingkooka.plugin.PluginName;
 import walkingkooka.predicate.character.CharPredicates;
 import walkingkooka.props.Properties;
+import walkingkooka.storage.StorageBinary;
+import walkingkooka.storage.StoragePath;
+import walkingkooka.storage.StorageValue;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasCaseSensitivity;
@@ -324,6 +327,12 @@ final public class ValueType implements Comparable<ValueType>,
 
         HAS_HOST_ADDRESS = register("url/HasHostAddress", HasHostAddress.class);
 
+        STORAGE_PARENT = register("storage", Object.class);
+
+        STORAGE_BINARY = register("storage/StorageBinary", StorageBinary.class);
+        STORAGE_PATH = register("storage/StoragePath", StoragePath.class);
+        STORAGE_VALUE = register("storage/StorageValue", StorageValue.class);
+
         META_PARENT = register("meta", Object.class);
         MEDIA_TYPE = register("meta/MediaType", MediaType.class);
 
@@ -567,6 +576,14 @@ final public class ValueType implements Comparable<ValueType>,
     public final static ValueType SELECTOR_PARENT;
 
     public final static ValueType SHORT;
+
+    public final static ValueType STORAGE_BINARY;
+
+    public final static ValueType STORAGE_PARENT;
+
+    public final static ValueType STORAGE_PATH;
+
+    public final static ValueType STORAGE_VALUE;
 
     public final static ValueType STRING_LIST;
 
