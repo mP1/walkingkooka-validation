@@ -53,6 +53,7 @@ import walkingkooka.net.header.HasContentType;
 import walkingkooka.net.header.MediaType;
 import walkingkooka.plugin.PluginName;
 import walkingkooka.predicate.character.CharPredicates;
+import walkingkooka.props.Properties;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasCaseSensitivity;
@@ -299,6 +300,7 @@ final public class ValueType implements Comparable<ValueType>,
         STRING_BUFFER = register("text/StringBuffer", StringBuffer.class);
         STRING_BUILDER = register("text/StringBuilder", StringBuilder.class);
         CHARSET = register("text/Charset", Charset.class);
+        PROPERTIES = register("text/Properties", Properties.class);
 
         URL_PARENT = register("url", Url.class);
         ABSOLUTE_URL = register("url/AbsoluteUrl", AbsoluteUrl.class);
@@ -522,6 +524,8 @@ final public class ValueType implements Comparable<ValueType>,
     public final static ValueType NUMBER;
 
     public final static ValueType NUMBER_LIST;
+
+    public final static ValueType PROPERTIES;
 
     public final static ValueType RELATIVE_URL;
 
