@@ -410,11 +410,27 @@ final public class ValueType implements Comparable<ValueType>,
 
     // constants........................................................................................................
 
+    public final static ValueType ABSOLUTE_URL;
+
     public final static ValueType ANY;
+
+    public final static ValueType BIG_DECIMAL;
+
+    public final static ValueType BIG_INTEGER;
 
     public final static ValueType BOOLEAN;
 
+    public final static ValueType BOOLEAN_LIST;
+
+    public final static ValueType BYTE;
+
+    public final static ValueType CHARACTER;
+
     public final static ValueType CHARSET;
+
+    public final static ValueType CHOICE_LIST;
+
+    public final static ValueType CSV;
 
     public final static ValueType CURRENCY_PARENT;
 
@@ -428,11 +444,21 @@ final public class ValueType implements Comparable<ValueType>,
 
     public final static ValueType DATE;
 
+    public final static ValueType DATE_LIST;
+
     public final static ValueType DATE_TIME_PARENT;
 
     public final static ValueType DATE_TIME;
 
+    public final static ValueType DATE_TIME_LIST;
+
     public final static ValueType DATE_TIME_SYMBOLS;
+
+    public final static ValueType DATA_URL;
+
+    public final static ValueType DECIMAL_NUMBER_SYMBOLS;
+
+    public final static ValueType DOUBLE;
 
     public final static ValueType EMAIL_PARENT;
 
@@ -452,7 +478,9 @@ final public class ValueType implements Comparable<ValueType>,
 
     public final static ValueType ENVIRONMENT_VALUE_NAME;
 
-    public final static ValueType JSON_PARENT;
+    public final static ValueType FLOAT;
+
+    public final static ValueType INTEGER;
 
     public final static ValueType JSON_ARRAY;
 
@@ -464,27 +492,11 @@ final public class ValueType implements Comparable<ValueType>,
 
     public final static ValueType JSON_OBJECT;
 
+    public final static ValueType JSON_PARENT;
+
     public final static ValueType JSON_STRING;
 
     public final static ValueType LIST_PARENT;
-
-    public final static ValueType BOOLEAN_LIST;
-
-    public final static ValueType CHOICE_LIST;
-
-    public final static ValueType CSV;
-
-    public final static ValueType DATE_LIST;
-
-    public final static ValueType DATE_TIME_LIST;
-
-    public final static ValueType NUMBER_LIST;
-
-    public final static ValueType STRING_LIST;
-
-    public final static ValueType TIME_LIST;
-
-    public final static ValueType TSV;
 
     public final static ValueType LOCALE_PARENT;
 
@@ -494,53 +506,41 @@ final public class ValueType implements Comparable<ValueType>,
 
     public final static ValueType LOCALE_LANGUAGE_TAG_SET;
 
+    public final static ValueType LONG;
+
+    public final static ValueType MAIL_TO_URL;
+
     public final static ValueType NUMBER_PARENT;
 
     public final static ValueType NUMBER;
 
-    public final static ValueType DECIMAL_NUMBER_SYMBOLS;
+    public final static ValueType NUMBER_LIST;
 
-    public final static ValueType BIG_DECIMAL;
-
-    public final static ValueType BIG_INTEGER;
-
-    public final static ValueType BYTE;
-
-    public final static ValueType DOUBLE;
-
-    public final static ValueType FLOAT;
-
-    public final static ValueType INTEGER;
-
-    public final static ValueType LONG;
+    public final static ValueType RELATIVE_URL;
 
     public final static ValueType SHORT;
 
-    public final static ValueType TEXT_PARENT;
-
-    public final static ValueType TEXT;
-
-    public final static ValueType CHARACTER;
+    public final static ValueType STRING_LIST;
 
     public final static ValueType STRING_BUFFER;
 
     public final static ValueType STRING_BUILDER;
 
+    public final static ValueType TEXT;
+
+    public final static ValueType TEXT_PARENT;
+
     public final static ValueType TIME;
+
+    public final static ValueType TIME_LIST;
+
+    public final static ValueType TSV;
 
     public final static ValueType URL_PARENT;
 
-    public final static ValueType ABSOLUTE_URL;
-
-    public final static ValueType DATA_URL;
-
-    public final static ValueType MAIL_TO_URL;
-
-    public final static ValueType RELATIVE_URL;
+    public final static ValueType VALUE_TYPE;
 
     public final static ValueType WHOLE_NUMBER_PARENT;
-
-    public final static ValueType VALUE_TYPE;
 
     public final static ValueType ZONE_OFFSET;
 
