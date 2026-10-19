@@ -58,6 +58,9 @@ import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.CharSequences;
 import walkingkooka.text.HasCaseSensitivity;
 import walkingkooka.text.HasText;
+import walkingkooka.text.Indentation;
+import walkingkooka.text.LineEnding;
+import walkingkooka.text.MultiLineText;
 import walkingkooka.text.printer.IndentingPrinter;
 import walkingkooka.text.printer.TreePrintable;
 import walkingkooka.tree.expression.AddExpression;
@@ -302,6 +305,10 @@ final public class ValueType implements Comparable<ValueType>,
         CHARSET = register("text/Charset", Charset.class);
         PROPERTIES = register("text/Properties", Properties.class);
 
+        INDENTATION = register("text/Indentation", Indentation.class);
+        LINE_ENDING = register("text/LineEnding", LineEnding.class);
+        MULTI_LINE_TEXT = register("text/MultiLineText", MultiLineText.class);
+
         URL_PARENT = register("url", Url.class);
         ABSOLUTE_URL = register("url/AbsoluteUrl", AbsoluteUrl.class);
         DATA_URL = register("url/DataUrl", DataUrl.class);
@@ -489,6 +496,8 @@ final public class ValueType implements Comparable<ValueType>,
 
     public final static ValueType FLOAT;
 
+    public final static ValueType INDENTATION;
+
     public final static ValueType INTEGER;
 
     public final static ValueType JSON_ARRAY;
@@ -505,6 +514,8 @@ final public class ValueType implements Comparable<ValueType>,
 
     public final static ValueType JSON_STRING;
 
+    public final static ValueType LINE_ENDING;
+
     public final static ValueType LIST_PARENT;
 
     public final static ValueType LOCALE_PARENT;
@@ -518,6 +529,8 @@ final public class ValueType implements Comparable<ValueType>,
     public final static ValueType LONG;
 
     public final static ValueType MAIL_TO_URL;
+
+    public final static ValueType MULTI_LINE_TEXT;
 
     public final static ValueType NUMBER_PARENT;
 
