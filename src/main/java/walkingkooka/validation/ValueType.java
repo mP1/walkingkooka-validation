@@ -109,6 +109,7 @@ import walkingkooka.tree.json.select.JsonSelector;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -329,6 +330,7 @@ final public class ValueType implements Comparable<ValueType>,
 
         STORAGE_PARENT = register("storage", Object.class);
 
+        PATH = register("storage/Path", Path.class);
         STORAGE_BINARY = register("storage/StorageBinary", StorageBinary.class);
         STORAGE_PATH = register("storage/StoragePath", StoragePath.class);
         STORAGE_VALUE = register("storage/StorageValue", StorageValue.class);
@@ -568,6 +570,8 @@ final public class ValueType implements Comparable<ValueType>,
     public final static ValueType NUMBER;
 
     public final static ValueType NUMBER_LIST;
+
+    public final static ValueType PATH;
 
     public final static ValueType PROPERTIES;
 

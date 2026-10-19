@@ -19,5 +19,6 @@
 <module>
     <inherits name="walkingkooka.environment.Environment"/>
     <inherits name="walkingkooka.convert.Convert"/>
+    <inherits name="walkingkooka.j2cl.java.nio.NIO"/>
     <source path=""/>
 </module>
