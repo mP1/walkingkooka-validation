@@ -17,6 +17,7 @@
 
 package walkingkooka.validation;
 
+import walkingkooka.Binary;
 import walkingkooka.Cast;
 import walkingkooka.HasValue;
 import walkingkooka.InvalidTextLengthException;
@@ -141,6 +142,8 @@ final public class ValueType implements Comparable<ValueType>,
 
     static {
         ANY = register("*", Object.class);
+
+        BINARY = register("Binary", Binary.class);
 
         BOOLEAN = register("Boolean", Boolean.class);
 
@@ -417,6 +420,8 @@ final public class ValueType implements Comparable<ValueType>,
     public final static ValueType BIG_DECIMAL;
 
     public final static ValueType BIG_INTEGER;
+
+    public final static ValueType BINARY;
 
     public final static ValueType BOOLEAN;
 
