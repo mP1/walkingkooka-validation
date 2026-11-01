@@ -29,7 +29,7 @@ import walkingkooka.validation.provider.ValidatorSelector;
 import java.util.List;
 
 /**
- * A function that returns the @link ValidatorSelector} from a source.
+ * A function that returns the {@link ValidatorSelector} from a source.
  */
 final class ValidationExpressionFunctionGetValidator<R extends ValidationReference, C extends ValidatorExpressionEvaluationContext<R>> extends ValidationExpressionFunction<ValidatorSelector, R, C> {
 
