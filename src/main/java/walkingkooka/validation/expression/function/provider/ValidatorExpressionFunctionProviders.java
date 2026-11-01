@@ -53,6 +53,7 @@ public final class ValidatorExpressionFunctionProviders implements PublicStaticH
             nameCaseSensitivity,
             Sets.of(
                 ValidatorExpressionFunctions.getValidator(),
+                ValidatorExpressionFunctions.validationChoiceList(),
                 ValidatorExpressionFunctions.validationErrorIf(),
                 ValidatorExpressionFunctions.validationValue(),
                 ValidatorExpressionFunctions.valueType()

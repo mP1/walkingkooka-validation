@@ -88,7 +88,8 @@ public final class ValidatorExpressionFunctionProvidersTest implements PublicSta
         this.checkEquals(
             ExpressionFunctionInfoSet.parse(
                 "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/getValidator getValidator," +
-                "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/validationErrorIf validationErrorIf," +
+                    "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/validationChoiceList validationChoiceList," +
+                    "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/validationErrorIf validationErrorIf," +
                     "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/validationValue validationValue," +
                     "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/valueType valueType",
                 caseSensitivity
