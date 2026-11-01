@@ -1,0 +1,90 @@
+/*
+ * Copyright 2025 Miroslav Pokorny (github.com/mP1)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+package walkingkooka.validation.expression.function;
+
+import org.junit.jupiter.api.Test;
+import walkingkooka.Cast;
+import walkingkooka.collect.list.Lists;
+import walkingkooka.tree.expression.function.ExpressionFunctionTesting2;
+import walkingkooka.validation.HasValueTypeTesting;
+import walkingkooka.validation.TestValidationReference;
+import walkingkooka.validation.ValueType;
+import walkingkooka.validation.expression.ValidatorExpressionEvaluationContext;
+import walkingkooka.validation.expression.ValidatorExpressionEvaluationContexts;
+
+import java.util.Arrays;
+
+public final class ValidationExpressionFunctionValueTypeTest implements ExpressionFunctionTesting2<ValidationExpressionFunctionValueType<TestValidationReference, ValidatorExpressionEvaluationContext<TestValidationReference>>, ValueType, ValidatorExpressionEvaluationContext<TestValidationReference>>,
+    HasValueTypeTesting {
+
+    // apply............................................................................................................
+
+    @Test
+    public void testApplyNullValueType() {
+        this.applyAndCheck(
+            Arrays.asList(
+                (Object)null
+            ),
+            null
+        );
+    }
+
+    @Test
+    public void testApplyValueType() {
+        this.applyAndCheck(
+            Lists.of(VALUE_TYPE),
+            VALUE_TYPE
+        );
+    }
+
+    @Test
+    public void testIsPure() {
+        this.isPureAndCheck(
+            this.createBiFunction(),
+            this.createContext(),
+            false
+        );
+    }
+
+    @Override
+    public ValidationExpressionFunctionValueType<TestValidationReference, ValidatorExpressionEvaluationContext<TestValidationReference>> createBiFunction() {
+        return ValidationExpressionFunctionValueType.instance();
+    }
+
+    @Override
+    public ValidatorExpressionEvaluationContext<TestValidationReference> createContext() {
+        return ValidatorExpressionEvaluationContexts.fake();
+    }
+
+    @Override
+    public int minimumParameterCount() {
+        return 1;
+    }
+
+    // class............................................................................................................
+
+    @Override
+    public Class<ValidationExpressionFunctionValueType<TestValidationReference, ValidatorExpressionEvaluationContext<TestValidationReference>>> type() {
+        return Cast.to(ValidationExpressionFunctionValueType.class);
+    }
+
+    @Override
+    public void testTypeNaming() {
+        throw new UnsupportedOperationException();
+    }
+}

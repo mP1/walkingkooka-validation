@@ -22,6 +22,7 @@ import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.validation.ValidationChoiceList;
 import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.ValidationReference;
+import walkingkooka.validation.ValueType;
 import walkingkooka.validation.expression.ValidatorExpressionEvaluationContext;
 import walkingkooka.validation.provider.ValidatorSelector;
 
@@ -56,6 +57,13 @@ public final class ValidatorExpressionFunctions implements PublicStaticHelper {
      */
     public static <R extends ValidationReference, C extends ValidatorExpressionEvaluationContext<R>> ExpressionFunction<Object, C> validationValue() {
         return ValidationExpressionFunctionValidationValue.instance();
+    }
+
+    /**
+     * {@see ValidationExpressionFunctionValueType}
+     */
+    public static <R extends ValidationReference, C extends ValidatorExpressionEvaluationContext<R>> ExpressionFunction<ValueType, C> valueType() {
+        return ValidationExpressionFunctionValueType.instance();
     }
 
     /**
