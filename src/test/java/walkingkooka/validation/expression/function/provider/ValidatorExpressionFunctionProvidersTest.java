@@ -66,13 +66,31 @@ public final class ValidatorExpressionFunctionProvidersTest implements PublicSta
     }
 
     @Test
+    public void testExpressionFunctionValueType() {
+        final CaseSensitivity caseSensitivity = CaseSensitivity.SENSITIVE;
+
+        this.checkEquals(
+            ValidatorExpressionFunctions.valueType(),
+            ValidatorExpressionFunctionProviders.expressionFunctionProvider(caseSensitivity)
+                .expressionFunction(
+                    ExpressionFunctionSelector.parse(
+                        "valueType",
+                        caseSensitivity
+                    ),
+                    ProviderContexts.fake()
+                )
+        );
+    }
+
+    @Test
     public void testExpressionFunctionInfos() {
         final CaseSensitivity caseSensitivity = CaseSensitivity.SENSITIVE;
         this.checkEquals(
             ExpressionFunctionInfoSet.parse(
                 "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/getValidator getValidator," +
                 "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/validationErrorIf validationErrorIf," +
-                    "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/validationValue validationValue",
+                    "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/validationValue validationValue," +
+                    "https://github.com/mP1/walkingkooka-validation/Validator/ExpressionFunction/valueType valueType",
                 caseSensitivity
             ),
             ValidatorExpressionFunctionProviders.expressionFunctionProvider(caseSensitivity)

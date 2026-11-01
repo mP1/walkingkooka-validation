@@ -54,7 +54,8 @@ public final class ValidatorExpressionFunctionProviders implements PublicStaticH
             Sets.of(
                 ValidatorExpressionFunctions.getValidator(),
                 ValidatorExpressionFunctions.validationErrorIf(),
-                ValidatorExpressionFunctions.validationValue()
+                ValidatorExpressionFunctions.validationValue(),
+                ValidatorExpressionFunctions.valueType()
             )
         );
     }
