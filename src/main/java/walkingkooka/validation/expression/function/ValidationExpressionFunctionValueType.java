@@ -70,7 +70,7 @@ final class ValidationExpressionFunctionValueType<R extends ValidationReference,
 
     @Override
     public boolean isPure(final ExpressionPurityContext context) {
-        return false; // ValueType parameter could change at anytime.
+        return true;
     }
 
     @Override
