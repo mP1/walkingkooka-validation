@@ -57,7 +57,7 @@ public final class ValidationExpressionFunctionValueTypeTest implements Expressi
         this.isPureAndCheck(
             this.createBiFunction(),
             this.createContext(),
-            false
+            true
         );
     }
 
