@@ -23,6 +23,7 @@ import walkingkooka.collect.list.BooleanList;
 import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.StringList;
 import walkingkooka.compare.ComparableTesting2;
+import walkingkooka.currency.CanHaveCurrencyValueTesting;
 import walkingkooka.currency.CurrencyCode;
 import walkingkooka.currency.CurrencyValue;
 import walkingkooka.datetime.DateTimeSymbols;
@@ -84,6 +85,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 final public class ValueTypeTest implements PublicClassTesting<ValueType>,
+    CanHaveCurrencyValueTesting,
     HasTextTesting,
     HasUrlFragmentTesting,
     HasValueTesting,
@@ -1776,6 +1778,48 @@ final public class ValueTypeTest implements PublicClassTesting<ValueType>,
         this.valueTypeAndCheck(
             ValueType.TEXT,
             ValueType.TEXT
+        );
+    }
+
+    // CanHaveCurrencyValue.............................................................................................
+
+    @Test
+    public void testShouldHaveCurrencyValueWithCurrency() {
+        this.shouldHaveCurrencyValueAndCheck(
+            ValueType.CURRENCY,
+            false
+        );
+    }
+
+    @Test
+    public void testShouldHaveCurrencyValueWithCurrencyParent() {
+        this.shouldHaveCurrencyValueAndCheck(
+            ValueType.CURRENCY_PARENT,
+            false
+        );
+    }
+
+    @Test
+    public void testShouldHaveCurrencyValueWithCurrencyValue() {
+        this.shouldHaveCurrencyValueAndCheck(
+            ValueType.CURRENCY_VALUE,
+            true
+        );
+    }
+
+    @Test
+    public void testShouldHaveCurrencyValueWithNumberParent() {
+        this.shouldHaveCurrencyValueAndCheck(
+            ValueType.NUMBER_PARENT,
+            false
+        );
+    }
+
+    @Test
+    public void testShouldHaveCurrencyValueWithNumber() {
+        this.shouldHaveCurrencyValueAndCheck(
+            ValueType.NUMBER,
+            false
         );
     }
 
