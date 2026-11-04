@@ -27,6 +27,7 @@ import walkingkooka.collect.list.StringList;
 import walkingkooka.collect.list.TsvStringList;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.TsvStringSet;
+import walkingkooka.currency.CanHaveCurrencyValue;
 import walkingkooka.currency.CurrencyCode;
 import walkingkooka.currency.CurrencyCodeSet;
 import walkingkooka.currency.CurrencyValue;
@@ -126,6 +127,7 @@ import java.util.function.Predicate;
  * The {@link Name} of a supported validation value. Note names must be lower-cased kebab-case not camel-case.
  */
 final public class ValueType implements Comparable<ValueType>,
+    CanHaveCurrencyValue,
     HasCaseSensitivity,
     HasContentType,
     HasText,
@@ -839,5 +841,12 @@ final public class ValueType implements Comparable<ValueType>,
                 this.value,
                 other.value
             );
+    }
+
+    // CanHaveCurrencyValue.............................................................................................
+
+    @Override
+    public boolean shouldHaveCurrencyValue() {
+        return CURRENCY_VALUE == this;
     }
 }
