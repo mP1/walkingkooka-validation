@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.ToStringTesting;
-import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
 import walkingkooka.net.AbsoluteUrl;
@@ -106,12 +105,7 @@ public final class ValidatorAbsoluteUrlTest implements ValidatorTesting2<Validat
                 );
             }
 
-            private final Converter<TestValidatorContext> converter = Converters.collection(
-                Lists.of(
-                    Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
-                    Converters.toText()
-                )
-            );
+            private final Converter<TestValidatorContext> converter = Converters.toText();
 
             @Override
             public TestValidationReference validationReference() {
