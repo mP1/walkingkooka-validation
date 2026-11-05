@@ -56,7 +56,7 @@ public final class ValidationConverterTextToValidatorSelectorTest extends Valida
             @Override
             public boolean canConvert(final Object value,
                                       final Class<?> type) {
-                return this.textTo.canConvert(
+                return this.converter.canConvert(
                     value,
                     type,
                     this
@@ -66,14 +66,14 @@ public final class ValidationConverterTextToValidatorSelectorTest extends Valida
             @Override
             public <T> Either<T, String> convert(final Object value,
                                                  final Class<T> target) {
-                return this.textTo.convert(
+                return this.converter.convert(
                     value,
                     target,
                     this
                 );
             }
 
-            private final Converter<FakeConverterContext> textTo = Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString();
+            private final Converter<FakeConverterContext> converter = Converters.toText();
         };
     }
 

@@ -655,12 +655,7 @@ public final class ValidatorTextMaskTest implements ValidatorTesting2<ValidatorT
                 );
             }
 
-            private final Converter<TestValidatorContext> converter = Converters.collection(
-                Lists.of(
-                    Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
-                    Converters.toText()
-                )
-            );
+            private final Converter<TestValidatorContext> converter = Converters.toText();
 
             @Override
             public TestValidationReference validationReference() {

@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.Either;
 import walkingkooka.ToStringTesting;
-import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
 import walkingkooka.net.email.EmailAddress;
@@ -106,12 +105,7 @@ public final class ValidatorEmailAddressTest implements ValidatorTesting2<Valida
                 );
             }
 
-            private final Converter<TestValidatorContext> converter = Converters.collection(
-                Lists.of(
-                    Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
-                    Converters.toText()
-                )
-            );
+            private final Converter<TestValidatorContext> converter = Converters.toText();
 
             @Override
             public TestValidationReference validationReference() {

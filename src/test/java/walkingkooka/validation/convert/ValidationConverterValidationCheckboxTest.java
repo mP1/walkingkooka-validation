@@ -152,7 +152,7 @@ public final class ValidationConverterValidationCheckboxTest extends ValidationC
 
             private final Converter converter = Converters.collection(
                 Lists.of(
-                    Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
+                    Converters.toText(),
                     Converters.textToCsvStringList()
                 )
             );

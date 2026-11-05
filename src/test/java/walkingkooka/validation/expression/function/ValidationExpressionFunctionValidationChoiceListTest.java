@@ -155,7 +155,7 @@ public final class ValidationExpressionFunctionValidationChoiceListTest implemen
 
             private final Converter<ConverterContext> converter = Converters.collection(
                 Lists.of(
-                    Converters.characterOrCharSequenceOrHasTextOrStringToCharacterOrCharSequenceOrString(),
+                    Converters.toText(),
                     Converters.objectToString(),
                     Converters.textToStringList()
                 )
