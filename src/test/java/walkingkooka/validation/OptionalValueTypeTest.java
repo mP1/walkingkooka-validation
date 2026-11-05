@@ -36,6 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class OptionalValueTypeTest implements PublicClassTesting<OptionalValueType>,
     CanBeEmptyTesting,
     HashCodeEqualsDefinedTesting2<OptionalValueType>,
+    HasOptionalValueTypeTesting,
     ToStringTesting<OptionalValueType>,
     JsonNodeMarshallerTesting<OptionalValueType>,
     TreePrintableTesting {
@@ -71,6 +72,25 @@ public final class OptionalValueTypeTest implements PublicClassTesting<OptionalV
         assertSame(
             value,
             optional.value()
+        );
+    }
+
+    // HasOptionalValueType..............................................................................................
+
+    @Test
+    public void testValueTypeWithEmpty() {
+        this.valueTypeAndCheck(
+            OptionalValueType.EMPTY
+        );
+    }
+
+    @Test
+    public void testValueTypeWithNotEmpty() {
+        this.valueTypeAndCheck(
+            this.createObject(),
+            Optional.of(
+                ValueType.TEXT
+            )
         );
     }
 

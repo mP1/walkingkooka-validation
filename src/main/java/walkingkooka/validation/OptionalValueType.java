@@ -35,8 +35,9 @@ import java.util.Optional;
  * to test and distinguish between empty Optionals of different values.
  */
 public final class OptionalValueType implements HasValue<Optional<ValueType>>,
-        CanBeEmpty,
-        TreePrintable {
+    HasOptionalValueType,
+    CanBeEmpty,
+    TreePrintable {
 
     public final static OptionalValueType EMPTY = new OptionalValueType(Optional.empty());
 
@@ -50,6 +51,13 @@ public final class OptionalValueType implements HasValue<Optional<ValueType>>,
         return value.isPresent() ?
                 new OptionalValueType(value) :
                 EMPTY;
+    }
+
+    // HasOptionalValueType.............................................................................................
+
+    @Override
+    public Optional<ValueType> valueType() {
+        return this.value;
     }
 
     // value............................................................................................................
