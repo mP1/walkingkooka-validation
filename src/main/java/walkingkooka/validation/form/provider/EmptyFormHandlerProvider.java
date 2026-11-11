@@ -63,4 +63,11 @@ final class EmptyFormHandlerProvider implements FormHandlerProvider {
     public FormHandlerInfoSet formHandlerInfos() {
         return FormHandlerInfoSet.EMPTY;
     }
+
+    // Object...........................................................................................................
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
 }

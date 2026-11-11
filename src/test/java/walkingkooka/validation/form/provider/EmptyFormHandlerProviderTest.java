@@ -18,8 +18,10 @@
 package walkingkooka.validation.form.provider;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.ToStringTesting;
 
-public final class EmptyFormHandlerProviderTest implements FormHandlerProviderTesting2<EmptyFormHandlerProvider> {
+public final class EmptyFormHandlerProviderTest implements FormHandlerProviderTesting2<EmptyFormHandlerProvider>,
+    ToStringTesting<EmptyFormHandlerProvider> {
 
     @Test
     public void testFormHandlerInfos() {
@@ -32,6 +34,16 @@ public final class EmptyFormHandlerProviderTest implements FormHandlerProviderTe
     @Override
     public EmptyFormHandlerProvider createFormHandlerProvider() {
         return EmptyFormHandlerProvider.INSTANCE;
+    }
+
+    // toString.........................................................................................................
+
+    @Test
+    public void testToString() {
+        this.toStringAndCheck(
+            this.createFormHandlerProvider(),
+            "EmptyFormHandlerProvider"
+        );
     }
 
     // class............................................................................................................
