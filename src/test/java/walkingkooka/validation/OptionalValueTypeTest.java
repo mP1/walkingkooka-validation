@@ -37,7 +37,7 @@ public final class OptionalValueTypeTest implements PublicClassTesting<OptionalV
     CanBeEmptyTesting,
     HashCodeEqualsDefinedTesting2<OptionalValueType>,
     HasOptionalValueTypeTesting,
-    ToStringTesting<OptionalValueType>,
+    ToStringTesting,
     JsonNodeMarshallerTesting<OptionalValueType>,
     TreePrintableTesting {
 

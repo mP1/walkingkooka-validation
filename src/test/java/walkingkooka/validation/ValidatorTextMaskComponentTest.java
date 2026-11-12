@@ -26,7 +26,7 @@ import walkingkooka.reflect.JavaVisibility;
 
 public final class ValidatorTextMaskComponentTest implements ClassTesting<ValidatorTextMaskComponent<?>>,
     HashCodeEqualsDefinedTesting,
-    ToStringTesting<ValidatorTextMaskComponent<?>> {
+    ToStringTesting {
 
     // hashCode/equals..................................................................................................
 

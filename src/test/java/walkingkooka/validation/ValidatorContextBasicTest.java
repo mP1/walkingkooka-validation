@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class ValidatorContextBasicTest implements ValidatorContextTesting2<ValidatorContextBasic<TestValidationReference>, TestValidationReference>,
     DateTimeContextTesting,
     DecimalNumberContextTesting,
-    ToStringTesting<ValidatorContextBasic<TestValidationReference>> {
+    ToStringTesting {
 
     private final static TestValidationReference VALIDATION_REFERENCE = new TestValidationReference("A1");
 

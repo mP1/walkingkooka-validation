@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.ToStringTesting;
 
 public final class EmptyFormHandlerProviderTest implements FormHandlerProviderTesting2<EmptyFormHandlerProvider>,
-    ToStringTesting<EmptyFormHandlerProvider> {
+    ToStringTesting {
 
     @Test
     public void testFormHandlerInfos() {

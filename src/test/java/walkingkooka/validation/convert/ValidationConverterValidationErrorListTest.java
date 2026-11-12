@@ -32,7 +32,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public final class ValidationConverterValidationErrorListTest extends ValidationConverterTestCase<ValidationConverterValidationErrorList<FakeConverterContext>, FakeConverterContext>
-    implements ToStringTesting<ValidationConverterValidationErrorList<FakeConverterContext>> {
+    implements ToStringTesting {
 
     private final static TestValidationReference TEST_VALIDATION_REFERENCE = new TestValidationReference("Hello");
 

@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ValidationErrorTest implements HasTextTesting,
     HashCodeEqualsDefinedTesting2<ValidationError<TestValidationReference>>,
-    ToStringTesting<ValidationError<TestValidationReference>>,
+    ToStringTesting,
     PublicClassTesting<ValidationError<TestValidationReference>>,
     TreePrintableTesting,
     JsonNodeMarshallerTesting<ValidationError<TestValidationReference>>,

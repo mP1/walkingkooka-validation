@@ -26,7 +26,7 @@ import walkingkooka.convert.Converters;
 import walkingkooka.net.email.EmailAddress;
 
 public final class ValidatorEmailAddressTest implements ValidatorTesting2<ValidatorEmailAddress<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    ToStringTesting<ValidatorEmailAddress<TestValidationReference, TestValidatorContext>> {
+    ToStringTesting {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("HelloField");
 

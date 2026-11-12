@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class ValidationChoiceTest implements PublicClassTesting<ValidationChoice>,
     HashCodeEqualsDefinedTesting2<ValidationChoice>,
     JsonNodeMarshallerTesting<ValidationChoice>,
-    ToStringTesting<ValidationChoice>,
+    ToStringTesting,
     HasValueTesting {
 
     private final static String LABEL = "Label111";

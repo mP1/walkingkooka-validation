@@ -22,7 +22,7 @@ import walkingkooka.Cast;
 import walkingkooka.ToStringTesting;
 
 public final class ValidatorNonNullTest implements ValidatorTesting2<ValidatorNonNull<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    ToStringTesting<ValidatorNonNull<TestValidationReference, TestValidatorContext>> {
+    ToStringTesting {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("HelloField");
 

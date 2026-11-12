@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Optional;
 
 public final class ValidatorValidationChoiceListExpressionTest implements ValidatorTesting2<ValidatorValidationChoiceListExpression<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    ToStringTesting<ValidatorValidationChoiceListExpression<TestValidationReference, TestValidatorContext>> {
+    ToStringTesting {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("HelloField");
 

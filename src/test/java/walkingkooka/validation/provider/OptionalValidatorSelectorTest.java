@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class OptionalValidatorSelectorTest implements ClassTesting<OptionalValidatorSelector>,
     HashCodeEqualsDefinedTesting2<OptionalValidatorSelector>,
-    ToStringTesting<OptionalValidatorSelector>,
+    ToStringTesting,
     JsonNodeMarshallerTesting<OptionalValidatorSelector> {
 
     private final static String SELECTOR = "test-validator-123";

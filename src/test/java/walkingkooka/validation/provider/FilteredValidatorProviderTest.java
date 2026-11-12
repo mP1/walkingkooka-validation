@@ -26,7 +26,7 @@ import walkingkooka.plugin.ProviderContexts;
 import java.util.List;
 
 public final class FilteredValidatorProviderTest implements ValidatorProviderTesting<FilteredValidatorProvider>,
-    ToStringTesting<FilteredValidatorProvider> {
+    ToStringTesting {
 
     private final static ProviderContext CONTEXT = ProviderContexts.fake();
 
