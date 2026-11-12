@@ -23,7 +23,7 @@ import walkingkooka.Either;
 import walkingkooka.ToStringTesting;
 
 public final class ValidatorTextLengthTest implements ValidatorTesting2<ValidatorTextLength<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    ToStringTesting<ValidatorTextLength<TestValidationReference, TestValidatorContext>> {
+    ToStringTesting {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("HelloField");
 

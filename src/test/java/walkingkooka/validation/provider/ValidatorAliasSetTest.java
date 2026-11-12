@@ -35,7 +35,7 @@ public final class ValidatorAliasSetTest implements PluginAliasSetLikeTesting<Va
     ValidatorAlias,
     ValidatorAliasSet>,
     HashCodeEqualsDefinedTesting2<ValidatorAliasSet>,
-    ToStringTesting<ValidatorAliasSet>,
+    ToStringTesting,
     JsonNodeMarshallerTesting<ValidatorAliasSet> {
 
     // name.............................................................................................................

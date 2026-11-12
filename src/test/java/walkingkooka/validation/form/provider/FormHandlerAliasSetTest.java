@@ -35,7 +35,7 @@ public final class FormHandlerAliasSetTest implements PluginAliasSetLikeTesting<
     FormHandlerAlias,
     FormHandlerAliasSet>,
     HashCodeEqualsDefinedTesting2<FormHandlerAliasSet>,
-    ToStringTesting<FormHandlerAliasSet>,
+    ToStringTesting,
     JsonNodeMarshallerTesting<FormHandlerAliasSet> {
 
     // name.............................................................................................................

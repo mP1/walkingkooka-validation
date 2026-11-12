@@ -47,7 +47,7 @@ public final class FormTest implements HateosResourceTesting2<Form<TestValidatio
     HasContentTypeTesting,
     HashCodeEqualsDefinedTesting2<Form<TestValidationReference>>,
     HasNameTesting,
-    ToStringTesting<Form<TestValidationReference>>,
+    ToStringTesting,
     IteratorTesting {
 
     private final static FormName NAME = FormName.with("name123");

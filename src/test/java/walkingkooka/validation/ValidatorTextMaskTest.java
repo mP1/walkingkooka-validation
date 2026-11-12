@@ -29,7 +29,7 @@ import walkingkooka.test.ParseStringTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 
 public final class ValidatorTextMaskTest implements ValidatorTesting2<ValidatorTextMask<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    ToStringTesting<ValidatorTextMask<TestValidationReference, TestValidatorContext>>,
+    ToStringTesting,
     ParseStringTesting<ValidatorTextMask<TestValidationReference, TestValidatorContext>>,
     HashCodeEqualsDefinedTesting2<ValidatorTextMask<TestValidationReference, TestValidatorContext>>,
     TreePrintableTesting {

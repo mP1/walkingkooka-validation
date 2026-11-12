@@ -35,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class ValidationCheckboxTest implements PublicClassTesting<ValidationCheckbox>,
     HashCodeEqualsDefinedTesting2<ValidationCheckbox>,
     JsonNodeMarshallerTesting<ValidationCheckbox>,
-    ToStringTesting<ValidationCheckbox> {
+    ToStringTesting {
 
     private final static Optional<Object> TRUE = Optional.of("true111");
     private final static Optional<Object> FALSE = Optional.of("false222");

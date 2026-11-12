@@ -24,7 +24,7 @@ import walkingkooka.convert.ConverterTesting2;
 import walkingkooka.reflect.ClassTesting;
 
 public abstract class ValidationConverterTestCase<C extends Converter<X>, X extends ConverterContext> implements ConverterTesting2<C, X>,
-    ToStringTesting<C>,
+    ToStringTesting,
     ClassTesting<C> {
 
     ValidationConverterTestCase() {

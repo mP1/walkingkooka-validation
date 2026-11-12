@@ -26,7 +26,7 @@ import walkingkooka.convert.Converters;
 import walkingkooka.net.AbsoluteUrl;
 
 public final class ValidatorAbsoluteUrlTest implements ValidatorTesting2<ValidatorAbsoluteUrl<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    ToStringTesting<ValidatorAbsoluteUrl<TestValidationReference, TestValidatorContext>> {
+    ToStringTesting {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("HelloField");
 

@@ -30,7 +30,7 @@ import walkingkooka.validation.ValidationCheckbox;
 import java.util.Optional;
 
 public final class ValidationConverterValidationCheckboxTest extends ValidationConverterTestCase<ValidationConverterValidationCheckbox<FakeConverterContext>, FakeConverterContext>
-    implements ToStringTesting<ValidationConverterValidationCheckbox<FakeConverterContext>> {
+    implements ToStringTesting {
 
     @Test
     public void testConvertValidationCheckboxToStringFails() {

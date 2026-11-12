@@ -28,7 +28,7 @@ import walkingkooka.tree.expression.FakeExpressionEvaluationContext;
 import java.util.Optional;
 
 public final class ValidatorValidationCheckboxExpressionTest implements ValidatorTesting2<ValidatorValidationCheckboxExpression<TestValidationReference, TestValidatorContext>, TestValidationReference, TestValidatorContext>,
-    ToStringTesting<ValidatorValidationCheckboxExpression<TestValidationReference, TestValidatorContext>> {
+    ToStringTesting {
 
     private final static TestValidationReference REFERENCE = new TestValidationReference("HelloField");
 
