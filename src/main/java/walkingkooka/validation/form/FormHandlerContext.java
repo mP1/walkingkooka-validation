@@ -23,7 +23,7 @@ import walkingkooka.collect.set.SortedSets;
 import walkingkooka.convert.ConverterLike;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.text.CharSequences;
-import walkingkooka.text.CharacterConstant;
+import walkingkooka.text.HasText;
 import walkingkooka.validation.ValidationError;
 import walkingkooka.validation.ValidationErrorList;
 import walkingkooka.validation.ValidationReference;
@@ -37,6 +37,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A {@link walkingkooka.Context} that accompanies a {@link FormHandler}.
@@ -137,10 +138,9 @@ public interface FormHandlerContext<R extends ValidationReference, S> extends Co
 
         if (false == unknownFields.isEmpty()) {
             throw new IllegalArgumentException(
-                "Form contains unknown fields: " + CharacterConstant.COMMA.toSeparatedString(
-                    unknownFields,
-                    R::text
-                )
+                "Form contains unknown fields: " + unknownFields.stream()
+                        .map(HasText::text)
+                            .collect(Collectors.joining(","))
             );
         }
 
