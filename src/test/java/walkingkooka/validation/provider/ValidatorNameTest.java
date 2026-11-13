@@ -24,7 +24,6 @@ import walkingkooka.reflect.FieldAttributes;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.MethodAttributes;
 import walkingkooka.text.CaseKind;
-import walkingkooka.text.CharacterConstant;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 import walkingkooka.validation.Validators;
@@ -32,7 +31,6 @@ import walkingkooka.validation.Validators;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 final public class ValidatorNameTest implements PluginNameTesting<ValidatorName> {
@@ -62,14 +60,10 @@ final public class ValidatorNameTest implements PluginNameTesting<ValidatorName>
             .collect(Collectors.toCollection(SortedSets::tree));
 
         this.checkEquals(
-            CharacterConstant.with('\n').toSeparatedString(
-                constantNames,
-                Function.identity()
-            ),
-            CharacterConstant.with('\n').toSeparatedString(
-                factoryNames,
-                Function.identity()
-            )
+            constantNames.stream()
+                .collect(Collectors.joining("\n")),
+            factoryNames.stream()
+                .collect(Collectors.joining("\n"))
         );
     }
 
