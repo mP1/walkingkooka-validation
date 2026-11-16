@@ -17,11 +17,11 @@
 
 package walkingkooka.validation.expression;
 
-import walkingkooka.tree.expression.ExpressionEvaluationContextTesting;
+import walkingkooka.environment.expression.EnvironmentExpressionEvaluationContextTesting;
 
 import java.util.Optional;
 
-public interface ValidatorExpressionEvaluationContextTesting extends ExpressionEvaluationContextTesting {
+public interface ValidatorExpressionEvaluationContextTesting extends EnvironmentExpressionEvaluationContextTesting {
 
     default void validationValueAndCheck(final ValidatorExpressionEvaluationContext<?> context) {
         this.validationValueAndCheck(

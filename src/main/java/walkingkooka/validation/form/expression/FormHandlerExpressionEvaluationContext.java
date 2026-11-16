@@ -18,7 +18,7 @@
 package walkingkooka.validation.form.expression;
 
 import walkingkooka.environment.EnvironmentContext;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
+import walkingkooka.environment.expression.EnvironmentExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.FormHandlerContext;
@@ -26,7 +26,7 @@ import walkingkooka.validation.form.FormHandlerContext;
 import java.util.Optional;
 import java.util.function.Function;
 
-public interface FormHandlerExpressionEvaluationContext<R extends ValidationReference, S> extends ExpressionEvaluationContext,
+public interface FormHandlerExpressionEvaluationContext<R extends ValidationReference, S> extends EnvironmentExpressionEvaluationContext,
     FormHandlerContext<R, S> {
 
     @Override

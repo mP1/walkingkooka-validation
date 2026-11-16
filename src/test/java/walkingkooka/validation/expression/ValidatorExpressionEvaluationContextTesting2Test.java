@@ -17,13 +17,14 @@
 
 package walkingkooka.validation.expression;
 
-import org.junit.jupiter.api.Test;
 import walkingkooka.Either;
 import walkingkooka.currency.CurrencyCode;
 import walkingkooka.currency.CurrencyExchange;
 import walkingkooka.datetime.DateTimeSymbols;
+import walkingkooka.datetime.HasNowTesting;
 import walkingkooka.environment.EnvironmentContext;
 import walkingkooka.environment.EnvironmentContextDelegator;
+import walkingkooka.environment.EnvironmentContextTesting;
 import walkingkooka.locale.LocaleContext;
 import walkingkooka.locale.LocaleContextDelegator;
 import walkingkooka.math.DecimalNumberContext;
@@ -50,7 +51,9 @@ import java.util.Set;
 import java.util.function.Function;
 
 public final class ValidatorExpressionEvaluationContextTesting2Test implements ValidatorExpressionEvaluationContextTesting2<TestValidationReference, TestValidatorExpressionEvaluationContext>,
-    DecimalNumberContextDelegator {
+    DecimalNumberContextDelegator,
+    EnvironmentContextTesting,
+    HasNowTesting {
 
     @Override
     public void testEnterScopeGivesDifferentInstance() {
@@ -63,11 +66,6 @@ public final class ValidatorExpressionEvaluationContextTesting2Test implements V
     }
 
     @Override
-    public void testSetIndentationWithDifferentAndWatcher() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public TestValidatorExpressionEvaluationContext createContext() {
         return new TestValidatorExpressionEvaluationContext();
     }
@@ -75,19 +73,6 @@ public final class ValidatorExpressionEvaluationContextTesting2Test implements V
     @Override
     public void testTestNaming() {
         throw new UnsupportedOperationException();
-    }
-
-    // HasEnvironmentContext............................................................................................
-
-    @Test
-    @Override
-    public void testEnvironmentContext() {
-        final TestValidatorExpressionEvaluationContext context = new TestValidatorExpressionEvaluationContext();
-
-        this.environmentContextAndCheck(
-            context,
-            context.environmentContext
-        );
     }
 
     // DecimalNumberContext.............................................................................................
