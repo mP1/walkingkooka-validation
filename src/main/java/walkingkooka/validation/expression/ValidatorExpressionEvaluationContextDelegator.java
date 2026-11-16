@@ -17,6 +17,7 @@
 
 package walkingkooka.validation.expression;
 
+import walkingkooka.environment.expression.EnvironmentExpressionEvaluationContext;
 import walkingkooka.environment.expression.EnvironmentExpressionEvaluationContextDelegator;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.Form;
@@ -29,7 +30,7 @@ public interface ValidatorExpressionEvaluationContextDelegator<R extends Validat
     // EnvironmentExpressionEvaluationContextDelegator..................................................................
 
     @Override
-    default ValidatorExpressionEvaluationContext<R> environmentExpressionEvaluationContext() {
+    default EnvironmentExpressionEvaluationContext environmentExpressionEvaluationContext() {
         return this.validatorExpressionEvaluationContext();
     }
 
@@ -37,13 +38,13 @@ public interface ValidatorExpressionEvaluationContextDelegator<R extends Validat
 
     @Override
     default Optional<Object> validationValue() {
-        return this.environmentExpressionEvaluationContext()
+        return this.validatorExpressionEvaluationContext()
             .validationValue();
     }
 
     @Override
     default Form<R> form() {
-        return this.environmentExpressionEvaluationContext()
+        return this.validatorExpressionEvaluationContext()
             .form();
     }
 
