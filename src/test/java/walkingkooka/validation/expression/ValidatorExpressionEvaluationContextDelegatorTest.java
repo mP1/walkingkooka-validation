@@ -19,14 +19,12 @@ package walkingkooka.validation.expression;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.environment.EnvironmentContext;
-import walkingkooka.environment.EnvironmentValueName;
-import walkingkooka.environment.EnvironmentWatcher;
+import walkingkooka.environment.EnvironmentContextTesting;
 import walkingkooka.locale.LocaleLanguageTag;
 import walkingkooka.logging.LoggerPath;
 import walkingkooka.logging.LoggingLevel;
 import walkingkooka.math.DecimalNumberContext;
 import walkingkooka.math.DecimalNumberContextDelegator;
-import walkingkooka.net.email.EmailAddress;
 import walkingkooka.text.Indentation;
 import walkingkooka.text.LineEnding;
 import walkingkooka.tree.expression.ExpressionFunctionName;
@@ -45,7 +43,8 @@ import java.util.Set;
 import java.util.function.Function;
 
 public final class ValidatorExpressionEvaluationContextDelegatorTest implements ValidatorExpressionEvaluationContextTesting2<TestValidationReference, TestValidatorExpressionEvaluationContextDelegator>,
-    DecimalNumberContextDelegator {
+    DecimalNumberContextDelegator,
+    EnvironmentContextTesting {
 
     private final static Optional<Object> VALIDATION_VALUE = Optional.of("ValidationValue123");
 
@@ -61,11 +60,6 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
 
     @Override
     public void testLocaleTextWithNullFails() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void testSetLineEndingWithDifferentAndWatcher() {
         throw new UnsupportedOperationException();
     }
 
@@ -99,19 +93,6 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
         return DECIMAL_NUMBER_CONTEXT;
     }
 
-    // HasEnvironmentContext............................................................................................
-
-    @Test
-    @Override
-    public void testEnvironmentContext() {
-        final TestValidatorExpressionEvaluationContextDelegator context = new TestValidatorExpressionEvaluationContextDelegator();
-
-        this.environmentContextAndCheck(
-            context,
-            context.expressionEvaluationContext
-        );
-    }
-
     // class............................................................................................................
 
     @Override
@@ -137,11 +118,11 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
     static final class TestValidatorExpressionEvaluationContextDelegator implements ValidatorExpressionEvaluationContextDelegator<TestValidationReference> {
 
         @Override
-        public ValidatorExpressionEvaluationContext<TestValidationReference> expressionEvaluationContext() {
-            return this.expressionEvaluationContext;
+        public ValidatorExpressionEvaluationContext<TestValidationReference> validatorExpressionEvaluationContext() {
+            return this.validatorExpressionEvaluationContext;
         }
 
-        private final FakeValidatorExpressionEvaluationContext<TestValidationReference> expressionEvaluationContext = new FakeValidatorExpressionEvaluationContext<>() {
+        private final FakeValidatorExpressionEvaluationContext<TestValidationReference> validatorExpressionEvaluationContext = new FakeValidatorExpressionEvaluationContext<>() {
 
             @Override
             public Optional<Object> validationValue() {
@@ -268,32 +249,8 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
             }
 
             @Override
-            public <T> Optional<T> environmentValue(final EnvironmentValueName<T> name) {
-                return this.environmentContext.environmentValue(name);
-            }
-
-            @Override
-            public <T> void setEnvironmentValue(final EnvironmentValueName<T> name,
-                                                final T value) {
-                this.environmentContext.setEnvironmentValue(
-                    name,
-                    value
-                );
-            }
-
-            @Override
-            public void removeEnvironmentValue(final EnvironmentValueName<?> name) {
-                this.environmentContext.removeEnvironmentValue(name);
-            }
-
-            @Override
             public Charset charset() {
                 return this.environmentContext.charset();
-            }
-
-            @Override
-            public void setCharset(final Charset charset) {
-                this.environmentContext.setCharset(charset);
             }
 
             @Override
@@ -302,18 +259,8 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
             }
 
             @Override
-            public void setIndentation(final Indentation indentation) {
-                this.environmentContext.setIndentation(indentation);
-            }
-
-            @Override
             public LineEnding lineEnding() {
                 return this.environmentContext.lineEnding();
-            }
-
-            @Override
-            public void setLineEnding(final LineEnding lineEnding) {
-                this.environmentContext.setLineEnding(lineEnding);
             }
 
             @Override
@@ -331,53 +278,33 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
                 return this.environmentContext.now();
             }
 
-            @Override
-            public void setUser(final Optional<EmailAddress> user) {
-                this.environmentContext.setUser(user);
-            }
-
-            @Override
-            public Runnable addEnvironmentWatcher(final EnvironmentWatcher watcher) {
-                return this.environmentContext.addEnvironmentWatcher(watcher);
-            }
-
-            @Override
-            public Runnable addEnvironmentWatcherOnce(final EnvironmentWatcher watcher) {
-                return this.environmentContext.addEnvironmentWatcherOnce(watcher);
-            }
-
-            @Override
-            public EnvironmentValueName<?> parseEnvironmentValueName(final String name) {
-                return this.environmentContext.parseEnvironmentValueName(name);
-            }
+            private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
 
             @Override
             public boolean isLoggingEnabled(final LoggingLevel level) {
-                return this.environmentContext.isLoggingEnabled(level);
+                return LOGGING_CONTEXT.isLoggingEnabled(level);
             }
 
             @Override
             public void logEnter(final LoggerPath logger) {
-                this.environmentContext.logEnter(logger);
+                LOGGING_CONTEXT.logEnter(logger);
             }
 
             @Override
             public void logExit() {
-                this.environmentContext.logExit();
+                LOGGING_CONTEXT.logExit();
             }
 
             @Override
             public void log(final LoggingLevel loggingLevel,
                             final String message,
                             final Throwable throwable) {
-                this.environmentContext.log(
+                LOGGING_CONTEXT.log(
                     loggingLevel,
                     message,
                     throwable
                 );
             }
-
-            private final EnvironmentContext environmentContext = ENVIRONMENT_CONTEXT.cloneEnvironment();
         };
 
         @Override
@@ -395,20 +322,14 @@ public final class ValidatorExpressionEvaluationContextDelegatorTest implements 
         }
 
         @Override
-        public TestValidatorExpressionEvaluationContextDelegator cloneEnvironment() {
+        public EnvironmentContext cloneEnvironment() {
             return new TestValidatorExpressionEvaluationContextDelegator();
         }
 
         @Override
-        public TestValidatorExpressionEvaluationContextDelegator setEnvironmentContext(final EnvironmentContext context) {
-            Objects.requireNonNull(context, "context");
-
-            return new TestValidatorExpressionEvaluationContextDelegator();
-        }
-
-        @Override
-        public EnvironmentContext environmentContext() {
-            return this.expressionEvaluationContext;
+        public EnvironmentContext setEnvironmentContext(final EnvironmentContext environmentContext) {
+            Objects.requireNonNull(environmentContext, "environmentContext");
+            throw new UnsupportedOperationException();
         }
 
         @Override

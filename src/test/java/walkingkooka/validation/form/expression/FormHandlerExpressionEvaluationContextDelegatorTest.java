@@ -137,7 +137,7 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
     static final class TestFormHandlerExpressionEvaluationContextDelegator implements FormHandlerExpressionEvaluationContextDelegator<TestValidationReference, Void> {
 
         @Override
-        public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> expressionEvaluationContext() {
+        public FormHandlerExpressionEvaluationContext<TestValidationReference, Void> formHandlerExpressionEvaluationContext() {
             return this.context;
         }
 
@@ -465,6 +465,16 @@ public final class FormHandlerExpressionEvaluationContextDelegatorTest implement
             Objects.requireNonNull(environmentContext, "environmentContext");
 
             return new TestFormHandlerExpressionEvaluationContextDelegator();
+        }
+
+        @Override
+        public Runnable addEnvironmentWatcher(final EnvironmentWatcher watcher) {
+            return this.context.addEnvironmentWatcher(watcher);
+        }
+
+        @Override
+        public Runnable addEnvironmentWatcherOnce(final EnvironmentWatcher watcher) {
+            return this.context.addEnvironmentWatcherOnce(watcher);
         }
         
         @Override

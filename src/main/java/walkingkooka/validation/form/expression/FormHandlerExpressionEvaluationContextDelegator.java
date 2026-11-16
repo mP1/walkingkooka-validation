@@ -17,7 +17,9 @@
 
 package walkingkooka.validation.form.expression;
 
-import walkingkooka.tree.expression.ExpressionEvaluationContextDelegator;
+import walkingkooka.currency.CurrencyCode;
+import walkingkooka.environment.expression.EnvironmentExpressionEvaluationContext;
+import walkingkooka.environment.expression.EnvironmentExpressionEvaluationContextDelegator;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.ValidatorContext;
 import walkingkooka.validation.form.Form;
@@ -25,45 +27,68 @@ import walkingkooka.validation.form.FormField;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 public interface FormHandlerExpressionEvaluationContextDelegator<R extends ValidationReference, S> extends FormHandlerExpressionEvaluationContext<R, S>,
-    ExpressionEvaluationContextDelegator {
+    EnvironmentExpressionEvaluationContextDelegator {
 
-    // ExpressionEvaluationContextDelegator.............................................................................
+    // EnvironmentExpressionEvaluationContextDelegator..................................................................
 
     @Override
-    FormHandlerExpressionEvaluationContext<R, S> expressionEvaluationContext();
+    default EnvironmentExpressionEvaluationContext environmentExpressionEvaluationContext() {
+        return this.formHandlerExpressionEvaluationContext();
+    }
+
+    @Override
+    default CurrencyCode currencyCode() {
+        return this.environmentExpressionEvaluationContext()
+            .currencyCode();
+    }
+
+    @Override
+    default Locale locale() {
+        return this.environmentExpressionEvaluationContext()
+            .locale();
+    }
+
+    @Override
+    default void setLocale(final Locale locale) {
+        this.environmentExpressionEvaluationContext()
+            .setLocale(locale);
+    }
+
+    FormHandlerExpressionEvaluationContext<R, S> formHandlerExpressionEvaluationContext();
 
     // FormHandlerExpressionEvaluationContext...........................................................................
 
     @Override
     default Form<R> form() {
-        return this.expressionEvaluationContext()
+        return this.formHandlerExpressionEvaluationContext()
             .form();
     }
 
     @Override
     default Comparator<R> formFieldReferenceComparator() {
-        return this.expressionEvaluationContext()
+        return this.formHandlerExpressionEvaluationContext()
             .formFieldReferenceComparator();
     }
 
     @Override
     default ValidatorContext<R> validatorContext(final R reference) {
-        return this.expressionEvaluationContext()
+        return this.formHandlerExpressionEvaluationContext()
             .validatorContext(reference);
     }
 
     @Override
     default Optional<Object> loadFormFieldValue(final R reference) {
-        return this.expressionEvaluationContext()
+        return this.formHandlerExpressionEvaluationContext()
             .loadFormFieldValue(reference);
     }
 
     @Override
     default S saveFormFieldValues(final List<FormField<R>> formFields) {
-        return this.expressionEvaluationContext()
+        return this.formHandlerExpressionEvaluationContext()
             .saveFormFieldValues(formFields);
     }
 }

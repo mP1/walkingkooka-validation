@@ -17,31 +17,35 @@
 
 package walkingkooka.validation.expression;
 
-import walkingkooka.tree.expression.ExpressionEvaluationContextDelegator;
+import walkingkooka.environment.expression.EnvironmentExpressionEvaluationContextDelegator;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.Form;
 
 import java.util.Optional;
 
 public interface ValidatorExpressionEvaluationContextDelegator<R extends ValidationReference> extends ValidatorExpressionEvaluationContext<R>,
-    ExpressionEvaluationContextDelegator {
+    EnvironmentExpressionEvaluationContextDelegator {
 
-    // ExpressionEvaluationContextDelegator.............................................................................
+    // EnvironmentExpressionEvaluationContextDelegator..................................................................
 
     @Override
-    ValidatorExpressionEvaluationContext<R> expressionEvaluationContext();
+    default ValidatorExpressionEvaluationContext<R> environmentExpressionEvaluationContext() {
+        return this.validatorExpressionEvaluationContext();
+    }
 
     // ValidatorExpressionEvaluationContext.............................................................................
 
     @Override
     default Optional<Object> validationValue() {
-        return this.expressionEvaluationContext()
+        return this.environmentExpressionEvaluationContext()
             .validationValue();
     }
 
     @Override
     default Form<R> form() {
-        return this.expressionEvaluationContext()
+        return this.environmentExpressionEvaluationContext()
             .form();
     }
+
+    ValidatorExpressionEvaluationContext<R> validatorExpressionEvaluationContext();
 }

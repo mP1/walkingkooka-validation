@@ -17,7 +17,7 @@
 
 package walkingkooka.validation.expression;
 
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
+import walkingkooka.environment.expression.EnvironmentExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionReference;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.HasForm;
@@ -25,7 +25,7 @@ import walkingkooka.validation.form.HasForm;
 import java.util.Optional;
 import java.util.function.Function;
 
-public interface ValidatorExpressionEvaluationContext<R extends ValidationReference> extends ExpressionEvaluationContext,
+public interface ValidatorExpressionEvaluationContext<R extends ValidationReference> extends EnvironmentExpressionEvaluationContext,
     HasForm<R> {
 
     /**

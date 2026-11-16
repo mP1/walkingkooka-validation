@@ -17,15 +17,15 @@
 
 package walkingkooka.validation.expression;
 
-import walkingkooka.tree.expression.ExpressionEvaluationContextTesting2;
+import walkingkooka.environment.expression.EnvironmentExpressionEvaluationContextTesting2;
 import walkingkooka.validation.ValidationReference;
 import walkingkooka.validation.form.HasFormTesting;
 
 public interface ValidatorExpressionEvaluationContextTesting2<R extends ValidationReference, C extends ValidatorExpressionEvaluationContext<R>> extends ValidatorExpressionEvaluationContextTesting,
-    ExpressionEvaluationContextTesting2<C>,
+    EnvironmentExpressionEvaluationContextTesting2<C>,
     HasFormTesting {
 
-    // ExpressionEvaluationContextTesting...............................................................................
+    // EnvironmentExpressionEvaluationContextTesting....................................................................
 
     @Override
     default C createConverterLike() {
