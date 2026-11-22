@@ -6,6 +6,10 @@ import walkingkooka.collect.list.ImmutableListDefaults;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.list.StringLikeList;
 import walkingkooka.text.CharSequences;
+import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.marshall.JsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.AbstractList;
 import java.util.Collection;
@@ -93,6 +97,31 @@ public final class ValueTypeList extends AbstractList<ValueType>
             (final ValueType valueType) -> null == valueType ?
                 "" :
                 valueType.toString()
+        );
+    }
+
+    // json.............................................................................................................
+
+    static {
+        JsonNodeContext.register(
+            JsonNodeContext.computeTypeName(ValueTypeList.class),
+            ValueTypeList::unmarshall,
+            ValueTypeList::marshall,
+            ValueTypeList.class
+        );
+    }
+
+    private JsonNode marshall(final JsonNodeMarshallContext context) {
+        return context.marshall(this.csvStringList());
+    }
+
+    static ValueTypeList unmarshall(final JsonNode node,
+                                    final JsonNodeUnmarshallContext context) {
+        return ValueTypeList.fromStringLikeList(
+            context.unmarshall(
+                node,
+                CsvStringList.class
+            )
         );
     }
 }

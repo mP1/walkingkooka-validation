@@ -6,12 +6,16 @@ import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.list.StringLikeList;
 import walkingkooka.collect.list.StringList;
+import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ValueTypeListTest implements ImmutableListTesting<ValueTypeList, ValueType>,
     HasValueTypeTesting,
-    HasCsvStringListTsvStringListTesting2<ValueTypeList> {
+    HasCsvStringListTsvStringListTesting2<ValueTypeList>,
+    JsonNodeMarshallerTesting<ValueTypeList> {
 
     @Test
     public void testFromStringLikeListWithNullFails() {
@@ -144,6 +148,31 @@ public final class ValueTypeListTest implements ImmutableListTesting<ValueTypeLi
                 "\"\"\n" +
                 "\"number/Number\""
         );
+    }
+
+    // json.............................................................................................................
+
+    @Test
+    public void testMarshall() {
+        this.marshallAndCheck(
+            ValueTypeList.EMPTY.concat(VALUE_TYPE)
+                .concat(DIFFERENT_VALUE_TYPE),
+            "\"text/Text,number/Number\""
+        );
+    }
+
+    @Override
+    public ValueTypeList unmarshall(final JsonNode jsonNode,
+                                    final JsonNodeUnmarshallContext context) {
+        return ValueTypeList.unmarshall(
+            jsonNode,
+            context
+        );
+    }
+
+    @Override
+    public ValueTypeList createJsonNodeMarshallingValue() {
+        return this.createList();
     }
 
     // class............................................................................................................
