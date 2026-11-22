@@ -7,6 +7,9 @@ import walkingkooka.collect.list.HasCsvStringListTsvStringListTesting2;
 import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.list.StringList;
+import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Arrays;
 
@@ -14,7 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ValidatorSelectorListTest implements ImmutableListTesting<ValidatorSelectorList, ValidatorSelector>,
     HasCsvStringListTsvStringListTesting2<ValidatorSelectorList>,
-    HasOptionalValidatorSelectorTesting {
+    HasOptionalValidatorSelectorTesting,
+    JsonNodeMarshallerTesting<ValidatorSelectorList> {
 
     // fromStringLikeList................................................................................................
 
@@ -170,6 +174,31 @@ public final class ValidatorSelectorListTest implements ImmutableListTesting<Val
 
     @Override
     public ValidatorSelectorList createHasCsvStringListTsvStringList() {
+        return this.createList();
+    }
+
+    // json.............................................................................................................
+
+    @Test
+    public void testMarshall() {
+        this.marshallAndCheck(
+            ValidatorSelectorList.EMPTY.concat(VALIDATOR_SELECTOR)
+                .concat(DIFFERENT_VALIDATOR_SELECTOR),
+            "\"absolute-url,email-address\""
+        );
+    }
+
+    @Override
+    public ValidatorSelectorList unmarshall(final JsonNode jsonNode,
+                                            final JsonNodeUnmarshallContext context) {
+        return ValidatorSelectorList.unmarshall(
+            jsonNode,
+            context
+        );
+    }
+
+    @Override
+    public ValidatorSelectorList createJsonNodeMarshallingValue() {
         return this.createList();
     }
 

@@ -5,6 +5,10 @@ import walkingkooka.collect.list.HasCsvStringListTsvStringList;
 import walkingkooka.collect.list.ImmutableListDefaults;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.list.StringLikeList;
+import walkingkooka.tree.json.JsonNode;
+import walkingkooka.tree.json.marshall.JsonNodeContext;
+import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
+import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.AbstractList;
 import java.util.Collection;
@@ -92,6 +96,31 @@ public final class ValidatorSelectorList extends AbstractList<ValidatorSelector>
         return CsvStringList.makeCsvStringList(
             this.list,
             ValidatorSelector::text
+        );
+    }
+
+    // json.............................................................................................................
+
+    static {
+        JsonNodeContext.register(
+            JsonNodeContext.computeTypeName(ValidatorSelectorList.class),
+            ValidatorSelectorList::unmarshall,
+            ValidatorSelectorList::marshall,
+            ValidatorSelectorList.class
+        );
+    }
+
+    private JsonNode marshall(final JsonNodeMarshallContext context) {
+        return context.marshall(this.csvStringList());
+    }
+
+    static ValidatorSelectorList unmarshall(final JsonNode node,
+                                            final JsonNodeUnmarshallContext context) {
+        return ValidatorSelectorList.fromStringLikeList(
+            context.unmarshall(
+                node,
+                CsvStringList.class
+            )
         );
     }
 }
