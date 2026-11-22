@@ -1,8 +1,7 @@
 package walkingkooka.validation;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.collect.list.HasCsvStringListTesting;
-import walkingkooka.collect.list.HasTsvStringListTesting;
+import walkingkooka.collect.list.HasCsvStringListTsvStringListTesting2;
 import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.list.StringLikeList;
@@ -12,8 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ValueTypeListTest implements ImmutableListTesting<ValueTypeList, ValueType>,
     HasValueTypeTesting,
-    HasCsvStringListTesting,
-    HasTsvStringListTesting {
+    HasCsvStringListTsvStringListTesting2<ValueTypeList> {
 
     @Test
     public void testFromStringLikeListWithNullFails() {
@@ -103,6 +101,11 @@ public final class ValueTypeListTest implements ImmutableListTesting<ValueTypeLi
     @Override
     public ValueTypeList createList() {
         return ValueTypeList.EMPTY;
+    }
+
+    @Override
+    public ValueTypeList createHasCsvStringListTsvStringList() {
+        return this.createList();
     }
 
     // HasCsvStringList.................................................................................................
