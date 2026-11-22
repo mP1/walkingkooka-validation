@@ -1,12 +1,10 @@
 package walkingkooka.validation;
 
 import walkingkooka.collect.list.CsvStringList;
-import walkingkooka.collect.list.HasCsvStringList;
-import walkingkooka.collect.list.HasTsvStringList;
+import walkingkooka.collect.list.HasCsvStringListTsvStringList;
 import walkingkooka.collect.list.ImmutableListDefaults;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.list.StringLikeList;
-import walkingkooka.collect.list.TsvStringList;
 import walkingkooka.text.CharSequences;
 
 import java.util.AbstractList;
@@ -20,8 +18,7 @@ import java.util.stream.Collectors;
  */
 public final class ValueTypeList extends AbstractList<ValueType>
     implements ImmutableListDefaults<ValueTypeList, ValueType>,
-    HasCsvStringList,
-    HasTsvStringList {
+    HasCsvStringListTsvStringList {
 
     public final static ValueTypeList EMPTY = new ValueTypeList(Lists.empty());
 
@@ -96,15 +93,6 @@ public final class ValueTypeList extends AbstractList<ValueType>
             (final ValueType valueType) -> null == valueType ?
                 "" :
                 valueType.toString()
-        );
-    }
-
-    // HasTsvStringList.................................................................................................
-
-    @Override
-    public TsvStringList tsvStringList() {
-        return TsvStringList.EMPTY.setElements(
-            this.csvStringList()
         );
     }
 }
