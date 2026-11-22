@@ -29,6 +29,7 @@ import walkingkooka.validation.provider.OptionalValidatorSelector;
 import walkingkooka.validation.provider.ValidatorAliasSet;
 import walkingkooka.validation.provider.ValidatorInfoSet;
 import walkingkooka.validation.provider.ValidatorSelector;
+import walkingkooka.validation.provider.ValidatorSelectorList;
 
 /**
  * Used to force all values types to register their {@link JsonNodeContext#register}
@@ -48,7 +49,9 @@ public final class ValidationStartup implements PublicStaticHelper {
         ValidationError.NO_VALUE.isPresent();
         ValidationErrorList.empty().toString();
 
-        ValueType.ANY.toString();
+        ValueTypeList.EMPTY.concat(
+            ValueType.ANY
+        );
 
         FormHandlerAliasSet.EMPTY.size();
         FormHandlerInfoSet.EMPTY.size();
@@ -56,7 +59,9 @@ public final class ValidationStartup implements PublicStaticHelper {
 
         ValidatorAliasSet.EMPTY.size();
         ValidatorInfoSet.EMPTY.size();
-        ValidatorSelector.parse("hello");
+        ValidatorSelectorList.EMPTY.concat(
+            ValidatorSelector.parse("hello")
+        );
         OptionalValidatorSelector.EMPTY.value();
     }
 
