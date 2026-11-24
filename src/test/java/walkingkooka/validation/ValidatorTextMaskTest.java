@@ -260,15 +260,6 @@ public final class ValidatorTextMaskTest implements ValidatorTesting2<ValidatorT
         return ValidatorTextMask.parse(mask);
     }
 
-    @Override
-    public Class<? extends RuntimeException> parseStringFailedExpected(final Class<? extends RuntimeException> thrown) {
-        return thrown;
-    }
-
-    @Override
-    public RuntimeException parseStringFailedExpected(final RuntimeException thrown) {
-        return thrown;
-    }
     // validate.........................................................................................................
 
     @Test
