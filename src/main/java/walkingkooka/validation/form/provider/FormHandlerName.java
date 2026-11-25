@@ -56,13 +56,18 @@ final public class FormHandlerName implements PluginNameLike<FormHandlerName> {
 
     // constants........................................................................................................
 
+    private final static String FORM_HANDLER_NAME_LABEL = FormHandlerName.class.getSimpleName();
+
     final static String BASIC_STRING = "basic";
 
     public final static FormHandlerName BASIC = registerConstant(BASIC_STRING);
-    
+
     private static FormHandlerName registerConstant(final String name) {
         return new FormHandlerName(
-            PluginName.with(name)
+            PluginName.with(
+                FORM_HANDLER_NAME_LABEL,
+                name
+            )
         );
     }
 
@@ -80,8 +85,10 @@ final public class FormHandlerName implements PluginNameLike<FormHandlerName> {
                 break;
             default:
                 formHandlerName = new FormHandlerName(
-                    PluginName.with(name)
-                        .checkLength("FormHandler")
+                    PluginName.with(
+                            FORM_HANDLER_NAME_LABEL,
+                            name
+                        ).checkLength("FormHandler")
                 );
                 break;
         }

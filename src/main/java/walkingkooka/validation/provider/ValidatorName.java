@@ -296,7 +296,10 @@ final public class ValidatorName implements PluginNameLike<ValidatorName> {
      */
     private ValidatorName(final String name) {
         super();
-        this.name = PluginName.with(name);
+        this.name = PluginName.with(
+            ValidatorName.class.getSimpleName(),
+            name
+        );
     }
 
     @Override
