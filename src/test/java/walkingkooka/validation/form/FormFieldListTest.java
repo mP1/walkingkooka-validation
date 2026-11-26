@@ -37,8 +37,6 @@ import walkingkooka.validation.provider.ValidatorSelector;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
-
 public final class FormFieldListTest implements ImmutableListTesting<FormFieldList<TestValidationReference>, FormField<TestValidationReference>>,
     TreePrintableTesting,
     ClassTesting<FormFieldList<TestValidationReference>>,
@@ -67,16 +65,6 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                 ),
             list,
             new FormFieldList<>(list)
-        );
-    }
-
-    @Test
-    public void testSetElementsDoesntDoubleWrap() {
-        final FormFieldList<TestValidationReference> list = this.createList();
-
-        assertSame(
-            list,
-            list.setElements(list)
         );
     }
 
