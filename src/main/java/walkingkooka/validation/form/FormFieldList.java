@@ -64,7 +64,7 @@ public final class FormFieldList<T extends ValidationReference> extends Abstract
 
     @Override
     public void elementCheck(final FormField<T> field) {
-        Objects.requireNonNull(field, "field");
+        Objects.requireNonNull(field, "FormFieldList includes null field");
     }
 
     @Override

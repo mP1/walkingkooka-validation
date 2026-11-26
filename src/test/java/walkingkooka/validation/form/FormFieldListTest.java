@@ -26,6 +26,7 @@ import walkingkooka.net.Url;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
+import walkingkooka.reflect.ThrowableTesting;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
@@ -37,10 +38,32 @@ import walkingkooka.validation.provider.ValidatorSelector;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public final class FormFieldListTest implements ImmutableListTesting<FormFieldList<TestValidationReference>, FormField<TestValidationReference>>,
     TreePrintableTesting,
     ClassTesting<FormFieldList<TestValidationReference>>,
-    JsonNodeMarshallerTesting<FormFieldList<TestValidationReference>> {
+    JsonNodeMarshallerTesting<FormFieldList<TestValidationReference>>,
+    ThrowableTesting {
+
+    @Test
+    public void testSetElementsWithListIncludesNullFails() {
+        this.getMessageAndCheck(
+            assertThrows(
+                NullPointerException.class,
+                () -> FormFieldList.<TestValidationReference>empty()
+                    .setElements(
+                        Lists.of(
+                            FormField.with(
+                                new TestValidationReference("Hello")
+                            ).setLabel("Label1"),
+                            null
+                        )
+                    )
+            ),
+            "FormFieldList includes null field"
+        );
+    }
 
     @Test
     public void testSetElementsWithFieldsSharingValidationReference() {
