@@ -34,6 +34,7 @@ import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValueType;
 import walkingkooka.validation.provider.ValidatorSelector;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -44,19 +45,28 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
     JsonNodeMarshallerTesting<FormFieldList<TestValidationReference>> {
 
     @Test
-    public void testWithFieldsSharingValidationReference() {
+    public void testSetElementsWithFieldsSharingValidationReference() {
         final TestValidationReference duplicate = new TestValidationReference("DuplicateFieldReference");
 
-        FormFieldList.with(
-            Lists.of(
-                FormField.with(duplicate)
-                    .setLabel("Label1"),
-                FormField.with(duplicate)
-                    .setLabel("Label2"),
-                FormField.with(
-                    new TestValidationReference("Field3")
-                ).setLabel("Label3")
-            )
+        final List<FormField<TestValidationReference>> list = Lists.of(
+            FormField.with(duplicate)
+                .setLabel("Label1"),
+            FormField.with(duplicate)
+                .setLabel("Label2"),
+            FormField.with(
+                new TestValidationReference("Field3")
+            ).setLabel("Label3")
+        );
+
+        this.setElementsAndCheck(
+            FormFieldList.<TestValidationReference>empty()
+                .concat(
+                    FormField.with(
+                        new TestValidationReference("Field3")
+                    )
+                ),
+            list,
+            new FormFieldList<>(list)
         );
     }
 

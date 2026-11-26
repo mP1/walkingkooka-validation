@@ -61,20 +61,18 @@ public final class FormTest implements HateosResourceTesting2<Form<TestValidatio
         FormHandlerSelector.parse("different-test-form-handler")
     );
 
-    private final static FormFieldList<TestValidationReference> FIELDS = FormFieldList.with(
-        Lists.of(
+    private final static FormFieldList<TestValidationReference> FIELDS = FormFieldList.<TestValidationReference>empty()
+        .concat(
             FormField.with(
                 new TestValidationReference("Field111")
             )
-        )
-    );
-    private final static FormFieldList<TestValidationReference> DIFFERENT_FIELDS = FormFieldList.with(
-        Lists.of(
+        );
+    private final static FormFieldList<TestValidationReference> DIFFERENT_FIELDS = FormFieldList.<TestValidationReference>empty()
+        .concat(
             FormField.with(
                 new TestValidationReference("DifferentField222")
             )
-        )
-    );
+        );
 
     private final static ValidationErrorList<TestValidationReference> ERRORS = ValidationErrorList.<TestValidationReference>empty()
         .concat(
