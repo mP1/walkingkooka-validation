@@ -142,9 +142,8 @@ public final class Form<T extends ValidationReference> implements HasContentType
     }
 
     public Form<T> setFields(final List<FormField<T>> fields) {
-        final FormFieldList<T> copy = FormFieldList.with(
-            Objects.requireNonNull(fields, "fields")
-        );
+        final FormFieldList<T> copy = FormFieldList.<T>empty()
+            .setElements(fields);
 
         return this.fields.equals(copy) ?
             this :

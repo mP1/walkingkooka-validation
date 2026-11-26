@@ -19,6 +19,7 @@ package walkingkooka.validation.form;
 
 import walkingkooka.Cast;
 import walkingkooka.collect.list.ImmutableListDefaults;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -27,6 +28,7 @@ import walkingkooka.validation.ValidationReference;
 
 import java.util.AbstractList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -44,45 +46,20 @@ public final class FormFieldList<T extends ValidationReference> extends Abstract
         return Cast.to(EMPTY);
     }
 
-    private static final FormFieldList<?> EMPTY = new FormFieldList<>(
-        new FormField[0]
-    );
+    private static final FormFieldList<?> EMPTY = new FormFieldList<>(Lists.empty());
 
-    /**
-     * Factory that takes a copy and returns a {@link FormFieldList}.
-     */
-    public static <T extends ValidationReference> FormFieldList<T> with(final Collection<FormField<T>> fields) {
-        Objects.requireNonNull(fields, "fields");
-
-        final int size = fields.size();
-        final FormField<T>[] copy = new FormField[fields.size()];
-        fields.toArray(copy);
-
-        final FormFieldList<T> result;
-        switch (size) {
-            case 0:
-                result = empty();
-                break;
-            default:
-                result = new FormFieldList<>(copy);
-                break;
-        }
-
-        return result;
-    }
-
-    private FormFieldList(final FormField<T>[] list) {
+    FormFieldList(final List<FormField<T>> list) {
         this.list = list;
     }
 
     @Override
     public FormField<T> get(final int index) {
-        return this.list[index];
+        return this.list.get(index);
     }
 
     @Override
     public int size() {
-        return this.list.length;
+        return this.list.size();
     }
 
     @Override
@@ -91,27 +68,46 @@ public final class FormFieldList<T extends ValidationReference> extends Abstract
     }
 
     @Override
-    public FormFieldList<T> setElements(final Collection<FormField<T>> fields) {
-        final FormFieldList<T> copy = with(fields);
-        return this.equals(copy) ?
-            this :
-            copy;
+    public FormFieldList<T> setElements(final Collection<FormField<T>> collection) {
+        final FormFieldList<T> formFieldList;
+
+        if (collection instanceof FormFieldList) {
+            formFieldList = (FormFieldList<T>) collection;
+        } else {
+            Objects.requireNonNull(collection, "collection");
+
+            final List<FormField<T>> copy = Lists.array();
+            for (final FormField<T> formField : collection) {
+                this.elementCheck(formField);
+
+                copy.add(formField);
+            }
+
+            formFieldList = copy.isEmpty() ?
+                empty() :
+                copy.equals(this) ?
+                    this :
+                    new FormFieldList<>(copy);
+        }
+
+        return formFieldList;
     }
 
-    private final FormField<T>[] list;
+    private final List<FormField<T>> list;
 
     // Json.............................................................................................................
 
     static <T extends ValidationReference> FormFieldList<T> unmarshall(final JsonNode node,
                                                                        final JsonNodeUnmarshallContext context) {
-        return with(
-            Cast.to(
-                context.unmarshallList(
-                    node,
-                    FormField.class
+        return FormFieldList.<T>empty()
+            .setElements(
+                Cast.to(
+                    context.unmarshallList(
+                        node,
+                        FormField.class
+                    )
                 )
-            )
-        );
+            );
     }
 
     private JsonNode marshall(final JsonNodeMarshallContext context) {
