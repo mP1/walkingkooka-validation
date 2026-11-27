@@ -6,6 +6,7 @@ import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.list.StringLikeList;
 import walkingkooka.collect.list.StringList;
+import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
@@ -15,6 +16,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ValueTypeListTest implements ImmutableListTesting<ValueTypeList, ValueType>,
+    HasTextTesting,
     HasValueTypeTesting,
     HasCsvStringListTsvStringListTesting2<ValueTypeList>,
     JsonNodeMarshallerTesting<ValueTypeList> {
@@ -190,6 +192,30 @@ public final class ValueTypeListTest implements ImmutableListTesting<ValueTypeLi
     @Override
     public ValueTypeList createHasCsvStringListTsvStringList() {
         return this.createList();
+    }
+
+    // HasText..........................................................................................................
+
+    @Test
+    public void testText() {
+        this.csvStringListAndCheck(
+            ValueTypeList.EMPTY.concat(VALUE_TYPE)
+                .concat(DIFFERENT_VALUE_TYPE),
+            "\"text/Text\"\n" +
+                "\"number/Number\""
+        );
+    }
+
+    @Test
+    public void testTextIncludesNull() {
+        this.csvStringListAndCheck(
+            ValueTypeList.EMPTY.concat(VALUE_TYPE)
+                .concat(DIFFERENT_VALUE_TYPE)
+                .concat(null),
+            "\"text/Text\"\n" +
+                "\"number/Number\"\n" +
+                "\"\""
+        );
     }
 
     // HasCsvStringList.................................................................................................
