@@ -68,26 +68,14 @@ public final class FormFieldList<T extends ValidationReference> extends Abstract
     }
 
     @Override
-    public FormFieldList<T> setElements(final Collection<FormField<T>> formFields) {
-        final FormFieldList<T> formFieldList;
-
-        if (formFields instanceof FormFieldList) {
-            formFieldList = (FormFieldList<T>) formFields;
-        } else {
-            Objects.requireNonNull(formFields, "formFields");
-
-            final List<FormField<T>> copy = Lists.array();
-            for (final FormField<T> formField : formFields) {
-                this.elementCheck(formField);
-                copy.add(formField);
-            }
-
-            formFieldList = this.equals(copy) ?
-                this :
-                this.replaceFormFields(copy);
-        }
-
-        return formFieldList;
+    public FormFieldList<T> setElements(final Collection<FormField<T>> elements) {
+        return (FormFieldList<T>)
+            this.setElementsMaybeCreate(
+                elements,
+                (final Collection<FormField<T>> collection) -> collection instanceof FormFieldList,
+                this::elementCheck,
+                this::replaceFormFields
+            );
     }
 
     @Override

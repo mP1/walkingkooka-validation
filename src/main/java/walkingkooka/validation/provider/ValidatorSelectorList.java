@@ -56,26 +56,14 @@ public final class ValidatorSelectorList extends AbstractList<ValidatorSelector>
     }
 
     @Override
-    public ValidatorSelectorList setElements(final Collection<ValidatorSelector> validatorSelectors) {
-        final ValidatorSelectorList validatorSelectorList;
-
-        if (validatorSelectors instanceof ValidatorSelectorList) {
-            validatorSelectorList = (ValidatorSelectorList) validatorSelectors;
-        } else {
-            Objects.requireNonNull(validatorSelectors, "validatorSelectors");
-
-            final List<ValidatorSelector> copy = Lists.array();
-            for (final ValidatorSelector validatorSelector : validatorSelectors) {
-                this.elementCheck(validatorSelector);
-                copy.add(validatorSelector);
-            }
-
-            validatorSelectorList = this.equals(copy) ?
-                this :
-                this.replaceValidatorSelectors(copy);
-        }
-
-        return validatorSelectorList;
+    public ValidatorSelectorList setElements(final Collection<ValidatorSelector> elements) {
+        return (ValidatorSelectorList)
+            this.setElementsMaybeCreate(
+                elements,
+                (final Collection<ValidatorSelector> collection) -> collection instanceof ValidatorSelectorList,
+                this::elementCheck,
+                this::replaceValidatorSelectors
+            );
     }
 
     @Override
