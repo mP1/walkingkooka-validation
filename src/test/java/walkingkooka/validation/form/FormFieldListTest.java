@@ -31,9 +31,10 @@ import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
+import walkingkooka.validation.HasOptionalValueTypeTesting;
 import walkingkooka.validation.TestValidationReference;
 import walkingkooka.validation.ValueType;
-import walkingkooka.validation.provider.ValidatorSelector;
+import walkingkooka.validation.provider.HasOptionalValidatorSelectorTesting;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,9 +44,36 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class FormFieldListTest implements ImmutableListTesting<FormFieldList<TestValidationReference>, FormField<TestValidationReference>>,
     TreePrintableTesting,
     ClassTesting<FormFieldList<TestValidationReference>>,
+    HasOptionalValueTypeTesting,
+    HasOptionalValidatorSelectorTesting,
     JsonNodeMarshallerTesting<FormFieldList<TestValidationReference>>,
     ThrowableTesting {
 
+    private final static FormField<TestValidationReference> FIELD1 = FormField.with(
+        new TestValidationReference("Reference111")
+    ).setLabel("Label111")
+        .setType(OPTIONAL_VALUE_TYPE)
+        .setValidator(OPTIONAL_VALIDATOR_SELECTOR)
+        .setValue(
+            Optional.of("Value111")
+        );
+
+    private final static FormField<TestValidationReference> FIELD2 = FormField.with(
+        new TestValidationReference("Hello222")
+    ).setLabel("Label222");
+
+    private final static FormField<TestValidationReference> FIELD3 = FormField.with(
+        new TestValidationReference("Hello333")
+    ).setLabel("Label333");
+
+    private final static FormField<TestValidationReference> FIELD4 = FormField.with(
+        new TestValidationReference("Hello444")
+    ).setLabel("Label444");
+
+    private final static FormField<TestValidationReference> FIELD5 = FormField.with(
+        new TestValidationReference("Hello555")
+    ).setLabel("Label555");
+    
     @Test
     public void testSetElementsWithListIncludesNullFails() {
         this.getMessageAndCheck(
@@ -54,9 +82,7 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                 () -> FormFieldList.<TestValidationReference>empty()
                     .setElements(
                         Lists.of(
-                            FormField.with(
-                                new TestValidationReference("Hello")
-                            ).setLabel("Label1"),
+                            FIELD1,
                             null
                         )
                     )
@@ -91,25 +117,69 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
         );
     }
 
+    // subList..........................................................................................................
+
+    private final static List<FormField<TestValidationReference>> ELEMENTS = Lists.of(
+        FIELD1,
+        FIELD2,
+        FIELD3,
+        FIELD4,
+        FIELD5
+    );
+
+    @Test
+    public void testSubList() {
+        this.subListAndCheck(
+            new FormFieldList<>(ELEMENTS),
+            0,
+            2,
+            new FormFieldList<>(
+                Lists.of(
+                    FIELD1,
+                    FIELD2
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSubList2() {
+        this.subListAndCheck(
+            new FormFieldList<>(ELEMENTS),
+            2,
+            4,
+            new FormFieldList<>(
+                Lists.of(
+                    FIELD3,
+                    FIELD4
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSubListSubList() {
+        this.subListAndCheck(
+            new FormFieldList<>(ELEMENTS)
+                .subList(
+                    1,
+                    4
+                ), // 2, 3, 4
+            1,
+            3,
+            new FormFieldList<>(
+                Lists.of(
+                    FIELD3,
+                    FIELD4
+                )
+            )
+        );
+    }
+
     @Override
     public FormFieldList<TestValidationReference> createList() {
         return FormFieldList.<TestValidationReference>empty()
-            .concat(
-                FormField.with(
-                        new TestValidationReference("Hello")
-                    ).setLabel("Label111")
-                    .setType(
-                        Optional.of(
-                            ValueType.TEXT
-                        )
-                    ).setValue(
-                        Optional.of("Value333")
-                    ).setValidator(
-                        Optional.of(
-                            ValidatorSelector.parse("validator-4444")
-                        )
-                    )
-            );
+            .concat(FIELD1);
     }
 
     // Json.............................................................................................................
@@ -122,12 +192,12 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                 "  {\n" +
                 "    \"reference\": {\n" +
                 "      \"type\": \"test-validation-reference\",\n" +
-                "      \"value\": \"Hello\"\n" +
+                "      \"value\": \"Reference111\"\n" +
                 "    },\n" +
                 "    \"label\": \"Label111\",\n" +
                 "    \"type\": \"Text\",\n" +
-                "    \"value\": \"Value333\",\n" +
-                "    \"validator\": \"validator-4444\"\n" +
+                "    \"value\": \"Value111\",\n" +
+                "    \"validator\": \"absolute-url\"\n" +
                 "  }\n" +
                 "]"
         );
@@ -140,12 +210,12 @@ public final class FormFieldListTest implements ImmutableListTesting<FormFieldLi
                 "  {\n" +
                 "    \"reference\": {\n" +
                 "      \"type\": \"test-validation-reference\",\n" +
-                "      \"value\": \"Hello\"\n" +
+                "      \"value\": \"Reference111\"\n" +
                 "    },\n" +
                 "    \"label\": \"Label111\",\n" +
-                "    \"type\": \"text/Text\",\n" +
-                "    \"value\": \"Value333\",\n" +
-                "    \"validator\": \"validator-4444\"\n" +
+                "    \"type\": \"Text\",\n" +
+                "    \"value\": \"Value111\",\n" +
+                "    \"validator\": \"absolute-url\"\n" +
                 "  }\n" +
                 "]",
             this.createJsonNodeMarshallingValue()

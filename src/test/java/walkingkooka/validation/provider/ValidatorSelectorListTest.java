@@ -12,6 +12,7 @@ import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -124,6 +125,71 @@ public final class ValidatorSelectorListTest implements ImmutableListTesting<Val
             ),
             Lists.empty(),
             ValidatorSelectorList.EMPTY
+        );
+    }
+
+    // subList..........................................................................................................
+
+    private final static ValidatorSelector VALIDATOR_SELECTOR1 = VALIDATOR_SELECTOR;
+    private final static ValidatorSelector VALIDATOR_SELECTOR2 = DIFFERENT_VALIDATOR_SELECTOR;
+    private final static ValidatorSelector VALIDATOR_SELECTOR3 = ValidatorSelector.parse("test-validator-333");
+    private final static ValidatorSelector VALIDATOR_SELECTOR4 = ValidatorSelector.parse("test-validator-444");
+    private final static ValidatorSelector VALIDATOR_SELECTOR5 = ValidatorSelector.parse("test-validator-555");
+
+    private final static List<ValidatorSelector> ELEMENTS = Lists.of(
+        VALIDATOR_SELECTOR1,
+        VALIDATOR_SELECTOR2,
+        VALIDATOR_SELECTOR3,
+        VALIDATOR_SELECTOR4,
+        VALIDATOR_SELECTOR5
+    );
+
+    @Test
+    public void testSubList() {
+        this.subListAndCheck(
+            new ValidatorSelectorList(ELEMENTS),
+            0,
+            2,
+            new ValidatorSelectorList(
+                Lists.of(
+                    VALIDATOR_SELECTOR1,
+                    VALIDATOR_SELECTOR2
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSubList2() {
+        this.subListAndCheck(
+            new ValidatorSelectorList(ELEMENTS),
+            2,
+            4,
+            new ValidatorSelectorList(
+                Lists.of(
+                    VALIDATOR_SELECTOR3,
+                    VALIDATOR_SELECTOR4
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSubListSubList() {
+        this.subListAndCheck(
+            new ValidatorSelectorList(ELEMENTS)
+                .subList(
+                    1,
+                    4
+                ), // 2, 3, 4
+            1,
+            3,
+            new ValidatorSelectorList(
+                Lists.of(
+                    VALIDATOR_SELECTOR3,
+                    VALIDATOR_SELECTOR4
+                )
+            )
         );
     }
 

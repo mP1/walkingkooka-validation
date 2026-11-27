@@ -52,31 +52,45 @@ public final class ValidatorSelectorList extends AbstractList<ValidatorSelector>
     }
 
     @Override
-    public ValidatorSelectorList setElements(final Collection<ValidatorSelector> collection) {
-        final ValidatorSelectorList currencyList;
+    public ValidatorSelectorList setElements(final Collection<ValidatorSelector> validatorSelectors) {
+        final ValidatorSelectorList validatorSelectorList;
 
-        if (collection instanceof ValidatorSelectorList) {
-            currencyList = (ValidatorSelectorList) collection;
+        if (validatorSelectors instanceof ValidatorSelectorList) {
+            validatorSelectorList = (ValidatorSelectorList) validatorSelectors;
         } else {
-            Objects.requireNonNull(collection, "collection");
+            Objects.requireNonNull(validatorSelectors, "validatorSelectors");
 
             final List<ValidatorSelector> copy = Lists.array();
-            for (final ValidatorSelector validatorSelector : collection) {
+            for (final ValidatorSelector validatorSelector : validatorSelectors) {
                 this.elementCheck(validatorSelector);
-
                 copy.add(validatorSelector);
             }
 
-            if (copy.equals(this)) {
-                currencyList = this;
-            } else {
-                currencyList = copy.isEmpty() ?
-                    EMPTY :
-                    new ValidatorSelectorList(copy);
-            }
+            validatorSelectorList = this.equals(copy) ?
+                this :
+                this.replaceValidatorSelectors(copy);
         }
 
-        return currencyList;
+        return validatorSelectorList;
+    }
+
+    @Override
+    public ValidatorSelectorList subList(final int from,
+                                         final int to) {
+        return 0 == from && this.size() == to ?
+            this :
+            this.replaceValidatorSelectors(
+                this.list.subList(
+                    from,
+                    to
+                )
+            );
+    }
+
+    private ValidatorSelectorList replaceValidatorSelectors(final List<ValidatorSelector> validatorSelectors) {
+        return validatorSelectors.isEmpty() ?
+            EMPTY :
+            new ValidatorSelectorList(validatorSelectors);
     }
 
     @Override
