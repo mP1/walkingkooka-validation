@@ -28,7 +28,11 @@ public final class ValidatorSelectorList extends AbstractList<ValidatorSelector>
 
         return EMPTY.setElements(
             stringLikeList.stream()
-                .map(ValidatorSelector::parse)
+                .map(
+                    (final String string) -> string.isEmpty() ?
+                        null :
+                        ValidatorSelector.parse(string)
+                )
                 .collect(Collectors.toList())
         );
     }
@@ -95,7 +99,7 @@ public final class ValidatorSelectorList extends AbstractList<ValidatorSelector>
 
     @Override
     public void elementCheck(final ValidatorSelector validatorSelector) {
-        Objects.requireNonNull(validatorSelector, "validatorSelector");
+        // allow null
     }
 
     private final List<ValidatorSelector> list;

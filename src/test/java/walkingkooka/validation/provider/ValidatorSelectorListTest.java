@@ -1,17 +1,16 @@
 package walkingkooka.validation.provider;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.EmptyTextException;
 import walkingkooka.collect.list.CsvStringList;
 import walkingkooka.collect.list.HasCsvStringListTsvStringListTesting2;
 import walkingkooka.collect.list.ImmutableListTesting;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.list.StringList;
+import walkingkooka.text.HasTextTesting;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -19,7 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public final class ValidatorSelectorListTest implements ImmutableListTesting<ValidatorSelectorList, ValidatorSelector>,
     HasCsvStringListTsvStringListTesting2<ValidatorSelectorList>,
     HasOptionalValidatorSelectorTesting,
-    JsonNodeMarshallerTesting<ValidatorSelectorList> {
+    JsonNodeMarshallerTesting<ValidatorSelectorList>,
+    HasTextTesting {
 
     // fromStringLikeList................................................................................................
 
@@ -46,12 +46,16 @@ public final class ValidatorSelectorListTest implements ImmutableListTesting<Val
     }
 
     @Test
-    public void testFromStringLikeListWithEmptyStringFails() {
-        assertThrows(
-            EmptyTextException.class,
-            () -> ValidatorSelectorList.fromStringLikeList(
-                StringList.EMPTY.concat(VALIDATOR_SELECTOR.text())
-                    .concat("")
+    public void testFromStringLikeListWithEmptyString() {
+        this.fromStringLikeListAndCheck(
+            StringList.EMPTY.concat(VALIDATOR_SELECTOR.text())
+                .concat("")
+                .csvStringList(),
+            new ValidatorSelectorList(
+                Lists.of(
+                    VALIDATOR_SELECTOR,
+                    null
+                )
             )
         );
     }
@@ -74,6 +78,18 @@ public final class ValidatorSelectorListTest implements ImmutableListTesting<Val
         );
     }
 
+    @Test
+    public void testFromStringLikeListWithIncludesEmpty() {
+        this.fromStringLikeListAndCheck(
+            CsvStringList.EMPTY.concat(VALIDATOR_SELECTOR.text())
+                .concat("")
+                .concat(DIFFERENT_VALIDATOR_SELECTOR.text()),
+            ValidatorSelectorList.EMPTY.concat(VALIDATOR_SELECTOR)
+                .concat(null)
+                .concat(DIFFERENT_VALIDATOR_SELECTOR)
+        );
+    }
+
     private void fromStringLikeListAndCheck(final CsvStringList csvStringList,
                                             final ValidatorSelectorList expected) {
         this.checkEquals(
@@ -85,22 +101,30 @@ public final class ValidatorSelectorListTest implements ImmutableListTesting<Val
     // concat...........................................................................................................
 
     @Test
-    public void testConcatWithNullFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> ValidatorSelectorList.EMPTY.concat(null)
+    public void testConcatWithNull() {
+        concatAndCheck(
+            ValidatorSelectorList.EMPTY,
+            null,
+            new ValidatorSelectorList(
+                Lists.of((ValidatorSelector) null)
+            )
         );
     }
 
     // setElements......................................................................................................
 
     @Test
-    public void testSetElementsWithNullElementFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> ValidatorSelectorList.EMPTY.setElements(
-                Arrays.asList((ValidatorSelector) null)
-            )
+    public void testSetElementsWithListIncludesNullElement() {
+        final List<ValidatorSelector> list = Lists.of(
+            VALIDATOR_SELECTOR,
+            null,
+            DIFFERENT_VALIDATOR_SELECTOR
+        );
+
+        this.setElementsAndCheck(
+            ValidatorSelectorList.EMPTY,
+            list,
+            ValidatorSelectorList.EMPTY.setElements(list)
         );
     }
 
