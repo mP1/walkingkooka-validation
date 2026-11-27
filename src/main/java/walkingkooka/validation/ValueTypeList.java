@@ -60,25 +60,45 @@ public final class ValueTypeList extends AbstractList<ValueType>
     }
 
     @Override
-    public ValueTypeList setElements(final Collection<ValueType> collection) {
-        ValueTypeList valueTypeList;
+    public ValueTypeList setElements(final Collection<ValueType> valueTypes) {
+        final ValueTypeList valueTypeList;
 
-        if (collection instanceof ValueTypeList) {
-            valueTypeList = (ValueTypeList) collection;
+        if (valueTypes instanceof ValueTypeList) {
+            valueTypeList = (ValueTypeList) valueTypes;
         } else {
-            final List<ValueType> copy = Lists.array();
-            copy.addAll(collection);
+            Objects.requireNonNull(valueTypes, "valueTypes");
 
-            if (copy.equals(this)) {
-                valueTypeList = this;
-            } else {
-                valueTypeList = copy.isEmpty() ?
-                    EMPTY :
-                    new ValueTypeList(copy);
+            final List<ValueType> copy = Lists.array();
+            for (final ValueType valueType : valueTypes) {
+                this.elementCheck(valueType);
+                copy.add(valueType);
             }
+
+            valueTypeList = this.equals(copy) ?
+                this :
+                this.replaceValueTypes(copy);
         }
 
         return valueTypeList;
+    }
+
+    @Override
+    public ValueTypeList subList(final int from,
+                                 final int to) {
+        return 0 == from && this.size() == to ?
+            this :
+            this.replaceValueTypes(
+                this.list.subList(
+                    from,
+                    to
+                )
+            );
+    }
+
+    private ValueTypeList replaceValueTypes(final List<ValueType> valueTypes) {
+        return valueTypes.isEmpty() ?
+            EMPTY :
+            new ValueTypeList(valueTypes);
     }
 
     @Override

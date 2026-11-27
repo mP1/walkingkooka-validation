@@ -63,38 +63,49 @@ public final class ValidationChoiceList extends AbstractList<ValidationChoice>
 
     @Override
     public void elementCheck(final ValidationChoice choice) {
-        Objects.requireNonNull(choice, "choice");
+        Objects.requireNonNull(choice, "Includes null ValidationChoice");
     }
 
     @Override
-    public ValidationChoiceList setElements(final Collection<ValidationChoice> choices) {
-        Objects.requireNonNull(choices, "choices");
+    public ValidationChoiceList setElements(final Collection<ValidationChoice> validationChoices) {
+        final ValidationChoiceList validationChoiceList;
 
-        ValidationChoiceList validationChoiceList;
-
-        if (choices instanceof ValidationChoiceList) {
-            validationChoiceList = (ValidationChoiceList) choices;
+        if (validationChoices instanceof ValidationChoiceList) {
+            validationChoiceList = (ValidationChoiceList) validationChoices;
         } else {
+            Objects.requireNonNull(validationChoices, "validationChoices");
+
             final List<ValidationChoice> copy = Lists.array();
-            for (final ValidationChoice choice : choices) {
-                copy.add(
-                    Objects.requireNonNull(choice, "includes null " + ValidationChoice.class.getSimpleName())
-                );
+            for (final ValidationChoice validationChoice : validationChoices) {
+                this.elementCheck(validationChoice);
+                copy.add(validationChoice);
             }
 
-            switch (choices.size()) {
-                case 0:
-                    validationChoiceList = EMPTY;
-                    break;
-                default:
-                    validationChoiceList = new ValidationChoiceList(copy);
-                    break;
-            }
+            validationChoiceList = this.equals(copy) ?
+                this :
+                this.replaceValidationChoice(copy);
         }
 
-        return this.equals(validationChoiceList) ?
+        return validationChoiceList;
+    }
+
+    @Override
+    public ValidationChoiceList subList(final int from,
+                                        final int to) {
+        return 0 == from && this.size() == to ?
             this :
-            validationChoiceList;
+            this.replaceValidationChoice(
+                this.choices.subList(
+                    from,
+                    to
+                )
+            );
+    }
+
+    private ValidationChoiceList replaceValidationChoice(final List<ValidationChoice> validationChoices) {
+        return validationChoices.isEmpty() ?
+            EMPTY :
+            new ValidationChoiceList(validationChoices);
     }
 
     // json.............................................................................................................

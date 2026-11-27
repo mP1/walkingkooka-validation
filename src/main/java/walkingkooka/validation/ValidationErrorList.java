@@ -45,22 +45,22 @@ public final class ValidationErrorList<T extends ValidationReference> extends Ab
     }
 
     private static final ValidationErrorList<?> EMPTY = new ValidationErrorList<>(
-        new ValidationError[0]
+        Lists.empty()
     );
 
     // @VisibleForTesting
-    ValidationErrorList(final ValidationError<T>[] errors) {
+    ValidationErrorList(final List<ValidationError<T>> errors) {
         this.errors = errors;
     }
 
     @Override
     public ValidationError<T> get(final int index) {
-        return this.errors[index];
+        return this.errors.get(index);
     }
 
     @Override
     public int size() {
-        return this.errors.length;
+        return this.errors.size();
     }
 
     @Override
@@ -69,42 +69,48 @@ public final class ValidationErrorList<T extends ValidationReference> extends Ab
     }
 
     @Override
-    public ValidationErrorList<T> setElements(final Collection<ValidationError<T>> errors) {
-        Objects.requireNonNull(errors, "errors");
+    public ValidationErrorList<T> setElements(final Collection<ValidationError<T>> validationErrors) {
+        final ValidationErrorList<T> validationErrorList;
 
-        ValidationErrorList<T> validationErrorList;
-
-        if (errors instanceof ValidationErrorList) {
-            validationErrorList = (ValidationErrorList<T>) errors;
+        if (validationErrors instanceof ValidationErrorList) {
+            validationErrorList = (ValidationErrorList<T>) validationErrors;
         } else {
+            Objects.requireNonNull(validationErrors, "validationErrors");
+
             final List<ValidationError<T>> copy = Lists.array();
-            for (final ValidationError<T> error : errors) {
-                copy.add(
-                    Objects.requireNonNull(error, "includes null " + ValidationError.class.getSimpleName())
-                );
+            for (final ValidationError<T> validationError : validationErrors) {
+                this.elementCheck(validationError);
+                copy.add(validationError);
             }
 
-            final int size = copy.size();
-            switch (size) {
-                case 0:
-                    validationErrorList = empty();
-                    break;
-                default:
-                    validationErrorList = new ValidationErrorList<>(
-                        copy.toArray(
-                            new ValidationError[size]
-                        )
-                    );
-                    break;
-            }
+            validationErrorList = this.equals(copy) ?
+                this :
+                this.replaceValidationErrors(copy);
         }
 
-        return this.equals(validationErrorList) ?
-            this :
-            validationErrorList;
+        return validationErrorList;
     }
 
-    private final ValidationError<T>[] errors;
+    @Override
+    public ValidationErrorList<T> subList(final int from,
+                                          final int to) {
+        return 0 == from && this.size() == to ?
+            this :
+            this.replaceValidationErrors(
+                this.errors.subList(
+                    from,
+                    to
+                )
+            );
+    }
+
+    private ValidationErrorList<T> replaceValidationErrors(final List<ValidationError<T>> validationErrors) {
+        return validationErrors.isEmpty() ?
+            empty() :
+            new ValidationErrorList<T>(validationErrors);
+    }
+
+    private final List<ValidationError<T>> errors;
 
     // Json.............................................................................................................
 

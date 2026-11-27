@@ -27,6 +27,7 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -39,13 +40,28 @@ public class ValidationChoiceListTest implements ListTesting2<ValidationChoiceLi
     ThrowableTesting {
 
     private final static ValidationChoice CHOICE1 = ValidationChoice.with(
-        "Label1",
-        Optional.of(1)
+        "Label111",
+        Optional.of(111)
     );
 
     private final static ValidationChoice CHOICE2 = ValidationChoice.with(
-        "Label2",
+        "Label222",
         Optional.empty()
+    );
+
+    private final static ValidationChoice CHOICE3 = ValidationChoice.with(
+        "Label333",
+        Optional.of(333)
+    );
+
+    private final static ValidationChoice CHOICE4 = ValidationChoice.with(
+        "Label444",
+        Optional.of(444)
+    );
+
+    private final static ValidationChoice CHOICE5 = ValidationChoice.with(
+        "Label555",
+        Optional.of(555)
     );
 
     // list.............................................................................................................
@@ -113,7 +129,7 @@ public class ValidationChoiceListTest implements ListTesting2<ValidationChoiceLi
         );
         this.getMessageAndCheck(
             thrown,
-            "includes null ValidationChoice"
+            "Includes null ValidationChoice"
         );
     }
 
@@ -138,6 +154,65 @@ public class ValidationChoiceListTest implements ListTesting2<ValidationChoiceLi
         );
     }
 
+    // subList..........................................................................................................
+
+    private final static List<ValidationChoice> ELEMENTS = Lists.of(
+        CHOICE1,
+        CHOICE2,
+        CHOICE3,
+        CHOICE4,
+        CHOICE5
+    );
+
+    @Test
+    public void testSubList() {
+        this.subListAndCheck(
+            new ValidationChoiceList(ELEMENTS),
+            0,
+            2,
+            new ValidationChoiceList(
+                Lists.of(
+                    CHOICE1,
+                    CHOICE2
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSubList2() {
+        this.subListAndCheck(
+            new ValidationChoiceList(ELEMENTS),
+            2,
+            4,
+            new ValidationChoiceList(
+                Lists.of(
+                    CHOICE3,
+                    CHOICE4
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSubListSubList() {
+        this.subListAndCheck(
+            new ValidationChoiceList(ELEMENTS)
+                .subList(
+                    1,
+                    4
+                ), // 2, 3, 4
+            1,
+            3,
+            new ValidationChoiceList(
+                Lists.of(
+                    CHOICE3,
+                    CHOICE4
+                )
+            )
+        );
+    }
+
     @Override
     public ValidationChoiceList createList() {
         return new ValidationChoiceList(
@@ -156,14 +231,14 @@ public class ValidationChoiceListTest implements ListTesting2<ValidationChoiceLi
             this.createList(),
             "[\n" +
                 "  {\n" +
-                "    \"label\": \"Label1\",\n" +
+                "    \"label\": \"Label111\",\n" +
                 "    \"value\": {\n" +
                 "      \"type\": \"int\",\n" +
-                "      \"value\": 1\n" +
+                "      \"value\": 111\n" +
                 "    }\n" +
                 "  },\n" +
                 "  {\n" +
-                "    \"label\": \"Label2\"\n" +
+                "    \"label\": \"Label222\"\n" +
                 "  }\n" +
                 "]"
         );

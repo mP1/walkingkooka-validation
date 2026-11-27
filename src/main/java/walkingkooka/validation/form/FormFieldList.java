@@ -68,29 +68,45 @@ public final class FormFieldList<T extends ValidationReference> extends Abstract
     }
 
     @Override
-    public FormFieldList<T> setElements(final Collection<FormField<T>> collection) {
+    public FormFieldList<T> setElements(final Collection<FormField<T>> formFields) {
         final FormFieldList<T> formFieldList;
 
-        if (collection instanceof FormFieldList) {
-            formFieldList = (FormFieldList<T>) collection;
+        if (formFields instanceof FormFieldList) {
+            formFieldList = (FormFieldList<T>) formFields;
         } else {
-            Objects.requireNonNull(collection, "collection");
+            Objects.requireNonNull(formFields, "formFields");
 
             final List<FormField<T>> copy = Lists.array();
-            for (final FormField<T> formField : collection) {
+            for (final FormField<T> formField : formFields) {
                 this.elementCheck(formField);
-
                 copy.add(formField);
             }
 
-            formFieldList = copy.isEmpty() ?
-                empty() :
-                copy.equals(this) ?
-                    this :
-                    new FormFieldList<>(copy);
+            formFieldList = this.equals(copy) ?
+                this :
+                this.replaceFormFields(copy);
         }
 
         return formFieldList;
+    }
+
+    @Override
+    public FormFieldList<T> subList(final int from,
+                                    final int to) {
+        return 0 == from && this.size() == to ?
+            this :
+            this.replaceFormFields(
+                this.list.subList(
+                    from,
+                    to
+                )
+            );
+    }
+
+    private FormFieldList<T> replaceFormFields(final List<FormField<T>> formFields) {
+        return formFields.isEmpty() ?
+            empty() :
+            new FormFieldList<>(formFields);
     }
 
     private final List<FormField<T>> list;

@@ -29,6 +29,7 @@ import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallerTesting;
 import walkingkooka.tree.json.marshall.JsonNodeUnmarshallContext;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -39,17 +40,33 @@ public final class ValidationErrorListTest implements ImmutableListTesting<Valid
     PublicClassTesting<ValidationErrorList<TestValidationReference>>,
     JsonNodeMarshallerTesting<ValidationErrorList<TestValidationReference>> {
 
+    private final static ValidationError<TestValidationReference> ERROR1 = ValidationError.with(
+        new TestValidationReference("Error111")
+    );
+    
+    private final static ValidationError<TestValidationReference> ERROR2 = ValidationError.with(
+        new TestValidationReference("Error222")
+    );
+    
+    private final static ValidationError<TestValidationReference> ERROR3 = ValidationError.with(
+        new TestValidationReference("Error333")
+    );
+    
+    private final static ValidationError<TestValidationReference> ERROR4 = ValidationError.with(
+        new TestValidationReference("Error444")
+    );
+    
+    private final static ValidationError<TestValidationReference> ERROR5 = ValidationError.with(
+        new TestValidationReference("Error555")
+    );
+
     @Test
     public void testConcatErrorWithoutMessageAndWithoutValue() {
-        final ValidationError<TestValidationReference> error = ValidationError.with(
-            new TestValidationReference("Hello")
-        );
-
         this.getAndCheck(
             ValidationErrorList.<TestValidationReference>empty()
-                .concat(error),
+                .concat(ERROR1),
             0,
-            error
+            ERROR1
         );
     }
 
@@ -88,6 +105,65 @@ public final class ValidationErrorListTest implements ImmutableListTesting<Valid
                         )
                     )
                 )
+        );
+    }
+
+    // subList..........................................................................................................
+
+    private final static List<ValidationError<TestValidationReference>> ELEMENTS = Lists.of(
+        ERROR1,
+        ERROR2,
+        ERROR3,
+        ERROR4,
+        ERROR5
+    );
+
+    @Test
+    public void testSubList() {
+        this.subListAndCheck(
+            new ValidationErrorList(ELEMENTS),
+            0,
+            2,
+            new ValidationErrorList(
+                Lists.of(
+                    ERROR1,
+                    ERROR2
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSubList2() {
+        this.subListAndCheck(
+            new ValidationErrorList(ELEMENTS),
+            2,
+            4,
+            new ValidationErrorList(
+                Lists.of(
+                    ERROR3,
+                    ERROR4
+                )
+            )
+        );
+    }
+
+    @Test
+    public void testSubListSubList() {
+        this.subListAndCheck(
+            new ValidationErrorList(ELEMENTS)
+                .subList(
+                    1,
+                    4
+                ), // 2, 3, 4
+            1,
+            3,
+            new ValidationErrorList(
+                Lists.of(
+                    ERROR3,
+                    ERROR4
+                )
+            )
         );
     }
 
@@ -210,20 +286,11 @@ public final class ValidationErrorListTest implements ImmutableListTesting<Valid
 
     @Test
     public void testFirstOrEmptyWhenNotEmpty() {
-        final ValidationError<TestValidationReference> first = ValidationError.with(
-            new TestValidationReference("Hello")
-        );
-
         this.firstOrEmptyAndCheck(
             ValidationErrorList.<TestValidationReference>empty()
-                .concat(
-                    first
-                ).concat(
-                    ValidationError.with(
-                        new TestValidationReference("222")
-                    )
-                ),
-            first
+                .concat(ERROR1)
+                .concat(ERROR2),
+            ERROR1
         );
     }
 
