@@ -5,6 +5,7 @@ import walkingkooka.collect.list.HasCsvStringListTsvStringList;
 import walkingkooka.collect.list.ImmutableListDefaults;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.list.StringLikeList;
+import walkingkooka.text.CharSequences;
 import walkingkooka.tree.json.JsonNode;
 import walkingkooka.tree.json.marshall.JsonNodeContext;
 import walkingkooka.tree.json.marshall.JsonNodeMarshallContext;
@@ -29,11 +30,10 @@ public final class ValidatorSelectorList extends AbstractList<ValidatorSelector>
         return EMPTY.setElements(
             stringLikeList.stream()
                 .map(
-                    (final String string) -> string.isEmpty() ?
+                    (final String string) -> CharSequences.isNullOrEmpty(string) ?
                         null :
                         ValidatorSelector.parse(string)
-                )
-                .collect(Collectors.toList())
+                ).collect(Collectors.toList())
         );
     }
 
@@ -101,7 +101,9 @@ public final class ValidatorSelectorList extends AbstractList<ValidatorSelector>
     public CsvStringList csvStringList() {
         return CsvStringList.makeCsvStringList(
             this.list,
-            ValidatorSelector::text
+            (final ValidatorSelector validatorSelector) -> null != validatorSelector ?
+                validatorSelector.text() :
+                ""
         );
     }
 

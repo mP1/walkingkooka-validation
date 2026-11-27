@@ -31,16 +31,17 @@ public final class ValidatorSelectorListTest implements ImmutableListTesting<Val
         );
     }
 
-
     @Test
-    public void testFromStringLikeListWithNullElementFails() {
-        assertThrows(
-            NullPointerException.class,
-            () -> ValidatorSelectorList.fromStringLikeList(
-                StringList.EMPTY.concat(VALIDATOR_SELECTOR.text())
-                    .concat(null)
-                    .concat(DIFFERENT_VALIDATOR_SELECTOR.text()
-                    )
+    public void testFromStringLikeListWithNullString() {
+        this.fromStringLikeListAndCheck(
+            StringList.EMPTY.concat(VALIDATOR_SELECTOR.text())
+                .concat(null)
+                .csvStringList(),
+            new ValidatorSelectorList(
+                Lists.of(
+                    VALIDATOR_SELECTOR,
+                    null
+                )
             )
         );
     }
@@ -238,6 +239,18 @@ public final class ValidatorSelectorListTest implements ImmutableListTesting<Val
             ValidatorSelectorList.EMPTY.concat(VALIDATOR_SELECTOR)
                 .concat(DIFFERENT_VALIDATOR_SELECTOR),
             "\"absolute-url\"\n" +
+                "\"email-address\""
+        );
+    }
+
+    @Test
+    public void testCsvStringListWithNotEmptyListIncludesNull() {
+        this.csvStringListAndCheck(
+            ValidatorSelectorList.EMPTY.concat(VALIDATOR_SELECTOR)
+                .concat(null)
+                .concat(DIFFERENT_VALIDATOR_SELECTOR),
+            "\"absolute-url\"\n" +
+                "\n" +
                 "\"email-address\""
         );
     }
