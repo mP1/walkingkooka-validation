@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * A {@link List} that holds non-null {@link ValidatorSelector validatorSelector}.
+ * A {@link List} that holds nullable {@link ValidatorSelector validatorSelector}.
  */
 public final class ValidatorSelectorList extends AbstractList<ValidatorSelector>
     implements ImmutableListDefaults<ValidatorSelectorList, ValidatorSelector>,
