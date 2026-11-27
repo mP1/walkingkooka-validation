@@ -67,26 +67,14 @@ public final class ValidationChoiceList extends AbstractList<ValidationChoice>
     }
 
     @Override
-    public ValidationChoiceList setElements(final Collection<ValidationChoice> validationChoices) {
-        final ValidationChoiceList validationChoiceList;
-
-        if (validationChoices instanceof ValidationChoiceList) {
-            validationChoiceList = (ValidationChoiceList) validationChoices;
-        } else {
-            Objects.requireNonNull(validationChoices, "validationChoices");
-
-            final List<ValidationChoice> copy = Lists.array();
-            for (final ValidationChoice validationChoice : validationChoices) {
-                this.elementCheck(validationChoice);
-                copy.add(validationChoice);
-            }
-
-            validationChoiceList = this.equals(copy) ?
-                this :
-                this.replaceValidationChoice(copy);
-        }
-
-        return validationChoiceList;
+    public ValidationChoiceList setElements(final Collection<ValidationChoice> elements) {
+        return (ValidationChoiceList)
+            this.setElementsMaybeCreate(
+                elements,
+                (final Collection<ValidationChoice> collection) -> collection instanceof ValidationChoiceList,
+                this::elementCheck,
+                this::replaceValidationChoices
+            );
     }
 
     @Override
@@ -94,7 +82,7 @@ public final class ValidationChoiceList extends AbstractList<ValidationChoice>
                                         final int to) {
         return 0 == from && this.size() == to ?
             this :
-            this.replaceValidationChoice(
+            this.replaceValidationChoices(
                 this.choices.subList(
                     from,
                     to
@@ -102,7 +90,7 @@ public final class ValidationChoiceList extends AbstractList<ValidationChoice>
             );
     }
 
-    private ValidationChoiceList replaceValidationChoice(final List<ValidationChoice> validationChoices) {
+    private ValidationChoiceList replaceValidationChoices(final List<ValidationChoice> validationChoices) {
         return validationChoices.isEmpty() ?
             EMPTY :
             new ValidationChoiceList(validationChoices);

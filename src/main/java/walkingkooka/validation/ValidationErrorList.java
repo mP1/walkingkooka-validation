@@ -69,26 +69,14 @@ public final class ValidationErrorList<T extends ValidationReference> extends Ab
     }
 
     @Override
-    public ValidationErrorList<T> setElements(final Collection<ValidationError<T>> validationErrors) {
-        final ValidationErrorList<T> validationErrorList;
-
-        if (validationErrors instanceof ValidationErrorList) {
-            validationErrorList = (ValidationErrorList<T>) validationErrors;
-        } else {
-            Objects.requireNonNull(validationErrors, "validationErrors");
-
-            final List<ValidationError<T>> copy = Lists.array();
-            for (final ValidationError<T> validationError : validationErrors) {
-                this.elementCheck(validationError);
-                copy.add(validationError);
-            }
-
-            validationErrorList = this.equals(copy) ?
-                this :
-                this.replaceValidationErrors(copy);
-        }
-
-        return validationErrorList;
+    public ValidationErrorList<T> setElements(final Collection<ValidationError<T>> elements) {
+        return (ValidationErrorList<T>)
+            this.setElementsMaybeCreate(
+                elements,
+                (final Collection<ValidationError<T>> collection) -> collection instanceof ValidationErrorList,
+                this::elementCheck,
+                this::replaceValidationErrors
+            );
     }
 
     @Override
